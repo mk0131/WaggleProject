@@ -10,5 +10,6 @@
 	<h1>Index</h1>
 	<h2>test12345</h2>
 	<h3>error</h3>
+	<a href="/map">map</a>
 </body>
 </html>

@@ -18,5 +18,9 @@ public class WaggleApplication {
 		return "index";
 	}
 
-
+	@RequestMapping("/map")
+	public static String gomap() {
+		return "map";
+	}
+	
 }
