@@ -8,7 +8,6 @@ public class UsersDto {
 	private String user_Gender;
 	private int user_Age;
 	private int user_Grade;
-	private int user_Rating;
 	private String user_Intro;
 	private int user_Point;
 	private String user_Id;
@@ -23,8 +22,8 @@ public class UsersDto {
 	}
 
 	public UsersDto(int user_Code, int user_Pw, String user_Email, String user_Nm, String user_Gender, int user_Age,
-			int user_Grade, int user_Rating, String user_Intro, int user_Point, String user_Id, String user_Kakao,
-			String user_Naver, String user_Google, String user_Pro) {
+			int user_Grade, String user_Intro, int user_Point, String user_Id, String user_Kakao, String user_Naver,
+			String user_Google, String user_Pro) {
 		super();
 		this.user_Code = user_Code;
 		this.user_Pw = user_Pw;
@@ -33,7 +32,6 @@ public class UsersDto {
 		this.user_Gender = user_Gender;
 		this.user_Age = user_Age;
 		this.user_Grade = user_Grade;
-		this.user_Rating = user_Rating;
 		this.user_Intro = user_Intro;
 		this.user_Point = user_Point;
 		this.user_Id = user_Id;
@@ -99,14 +97,6 @@ public class UsersDto {
 		this.user_Grade = user_Grade;
 	}
 
-	public int getUser_Rating() {
-		return user_Rating;
-	}
-
-	public void setUser_Rating(int user_Rating) {
-		this.user_Rating = user_Rating;
-	}
-
 	public String getUser_Intro() {
 		return user_Intro;
 	}
@@ -165,12 +155,13 @@ public class UsersDto {
 
 	@Override
 	public String toString() {
-		return "UserDto [user_Code=" + user_Code + ", user_Pw=" + user_Pw + ", user_Email=" + user_Email + ", user_Nm="
+		return "UsersDto [user_Code=" + user_Code + ", user_Pw=" + user_Pw + ", user_Email=" + user_Email + ", user_Nm="
 				+ user_Nm + ", user_Gender=" + user_Gender + ", user_Age=" + user_Age + ", user_Grade=" + user_Grade
-				+ ", user_Rating=" + user_Rating + ", user_Intro=" + user_Intro + ", user_Point=" + user_Point
-				+ ", user_Id=" + user_Id + ", user_Kakao=" + user_Kakao + ", user_Naver=" + user_Naver
-				+ ", user_Google=" + user_Google + ", user_Pro=" + user_Pro + "]";
+				+ ", user_Intro=" + user_Intro + ", user_Point=" + user_Point + ", user_Id=" + user_Id + ", user_Kakao="
+				+ user_Kakao + ", user_Naver=" + user_Naver + ", user_Google=" + user_Google + ", user_Pro=" + user_Pro
+				+ "]";
 	}
+	
 	
 	
 	
