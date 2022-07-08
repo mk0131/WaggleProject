@@ -1,6 +1,6 @@
 package com.probee.waggle.model.dto;
 
-public class UserDto {
+public class UsersDto {
 	private int user_Code;
 	private int user_Pw;
 	private String user_Email;
@@ -17,12 +17,12 @@ public class UserDto {
 	private String user_Google;
 	private String user_Pro;
 	
-	public UserDto() {
+	public UsersDto() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
-	public UserDto(int user_Code, int user_Pw, String user_Email, String user_Nm, String user_Gender, int user_Age,
+	public UsersDto(int user_Code, int user_Pw, String user_Email, String user_Nm, String user_Gender, int user_Age,
 			int user_Grade, int user_Rating, String user_Intro, int user_Point, String user_Id, String user_Kakao,
 			String user_Naver, String user_Google, String user_Pro) {
 		super();

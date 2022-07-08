@@ -2,18 +2,18 @@ package com.probee.waggle.model.dto;
 
 import java.util.Date;
 
-public class PointDto {
+public class PointsDto {
 	private int po_No;
 	private int po_Code;
 	private int po_Point;
 	private Date po_Date;
 	
-	public PointDto() {
+	public PointsDto() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
-	public PointDto(int po_No, int po_Code, int po_Point, Date po_Date) {
+	public PointsDto(int po_No, int po_Code, int po_Point, Date po_Date) {
 		super();
 		this.po_No = po_No;
 		this.po_Code = po_Code;
