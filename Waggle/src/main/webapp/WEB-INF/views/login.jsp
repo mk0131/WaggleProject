@@ -7,15 +7,18 @@
 <title>Insert title here</title>
 <style type="text/css">
 
-.guideline-all {
-	margin: 10px;
+.middle {
+   margin: 0;
+   padding: 0;
 }
 
-.guideline-all ul {
-	list-style-type: none;
+.guideline {
+   margin: 0 auto;
+   width: 1125px;
 }
 
 .guideline-all i {
+	display: inline-block;
 	color: #151515;
 }
 
@@ -158,7 +161,8 @@ input {
 <body>
   <%@ include file="header.jsp" %>
 	<div id="wrap">
-		<div class="guideline">
+		<div class="middle">
+			<div class="guideline">
 			<ul class="guideline-all">
         		<li><a href="javascript:void(0)">
         		<i class="fa-solid fa-house"></i>
@@ -166,6 +170,7 @@ input {
         		</li>
         		<p>HOME > 로그인</p>
         	</ul>
+		</div>
 		</div>
 		<br/>
 		<section>
