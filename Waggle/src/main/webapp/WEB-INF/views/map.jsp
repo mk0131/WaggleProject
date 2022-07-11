@@ -9,10 +9,26 @@
 	rel="stylesheet" />
 </head>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-
+<script>
+function searchTable(){
+	$('.table-container').show();
+	
+};
+</script>
 <style>
 @import url("https://fonts.googleapis.com/css?family=Sarabun");
+.blank {
+	height: 25px;
+}
 
+.middle {
+	margin: 0;
+	padding: 0;
+}
+.guideline {
+	margin: 0 auto;
+	width: 1000px;
+}
 .home-img, .guide-text {
 	display: inline-block;
 }
@@ -63,21 +79,12 @@
 	opacity: .5;
 }
 
-.middle {
-	margin: 0;
-	padding: 0;
-}
 
-.map {
-	margin: 0 auto;
-	width: 994.2px;
-	height: 500px;
-	background-color: #cbcbcb;
-}
 
 .table-container {
 	margin: 0 auto;
 	width: 1000px;
+	display: none;
 }
 
 .detail-container {
@@ -207,6 +214,13 @@ div {
 	height: 260px;
 	margin: 10px;
 }
+
+.map {
+	margin: 0 auto;
+	width: 994.2px;
+	height: 500px;
+	background-color: #cbcbcb;
+}
 </style>
 <body>
 	<%@ include file="header.jsp"%>
@@ -222,12 +236,17 @@ div {
 				<p>HOME > 지도</p>
 			</div>
 		</div>
-		<div class="container">
+		
+		<div class="container" >
 			<input type="text" maxlength="12" placeholder="주소 검색하기"
 				class="searchbar"> <img
 				src="https://images-na.ssl-images-amazon.com/images/I/41gYkruZM2L.png"
-				alt="Magnifying Glass" class="button">
+				alt="Magnifying Glass" class="button" onclick="searchTable()">
 		</div>
+		
+		<div class="blank">
+		</div>
+		
 		<div class="table-container">
 			<div class="detail-container" data-behaviour="search-on-list">
 				<input type="text" class="input-query" data-search-on-list="search"
@@ -271,6 +290,7 @@ div {
 					</ul>
 				</div>
 			</div>
+			
 			<div class="horizontal-scroll-wrapper squares">
 				<div>item 1</div>
 				<div>item 2</div>
@@ -281,9 +301,14 @@ div {
 				<div>item 7</div>
 				<div>item 8</div>
 			</div>
-		</div>
-		<div class="map">
 			
+			<div class="blank">
+			</div>
+			
+		</div>
+		
+		
+		<div class="map">
 		</div>
 	</div>
 
@@ -435,6 +460,7 @@ div {
 	})();
 
 	SearchOnList.init($('[data-behaviour=search-on-list]'));
+	
 </script>
 </html>
 
