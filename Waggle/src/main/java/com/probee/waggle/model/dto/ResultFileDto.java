@@ -2,19 +2,20 @@ package com.probee.waggle.model.dto;
 
 public class ResultFileDto {
 	private int rf_No;
-	private int rf_FCode;
 	private int rf_UCode;
+	private int rf_FCode;
 	
 	public ResultFileDto() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
-	public ResultFileDto(int rf_No, int rf_FCode, int rf_UCode) {
+	
+	public ResultFileDto(int rf_No, int rf_UCode, int rf_FCode) {
 		super();
 		this.rf_No = rf_No;
-		this.rf_FCode = rf_FCode;
 		this.rf_UCode = rf_UCode;
+		this.rf_FCode = rf_FCode;
 	}
 
 	public int getRf_No() {

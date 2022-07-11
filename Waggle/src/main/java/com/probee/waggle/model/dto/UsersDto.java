@@ -10,10 +10,10 @@ public class UsersDto {
 	private int user_Grade;
 	private String user_Intro;
 	private int user_Point;
-	private String user_Id;
 	private String user_Kakao;
 	private String user_Naver;
 	private String user_Google;
+	private String user_Id;
 	private int user_Pro;
 	
 	public UsersDto() {
@@ -22,8 +22,8 @@ public class UsersDto {
 	}
 
 	public UsersDto(int user_Code, String user_Pw, String user_Email, String user_Nm, String user_Gender, int user_Age,
-			int user_Grade, String user_Intro, int user_Point, String user_Id, String user_Kakao, String user_Naver,
-			String user_Google, int user_Pro) {
+			int user_Grade, String user_Intro, int user_Point, String user_Kakao, String user_Naver, String user_Google,
+			String user_Id, int user_Pro) {
 		super();
 		this.user_Code = user_Code;
 		this.user_Pw = user_Pw;
@@ -34,10 +34,10 @@ public class UsersDto {
 		this.user_Grade = user_Grade;
 		this.user_Intro = user_Intro;
 		this.user_Point = user_Point;
-		this.user_Id = user_Id;
 		this.user_Kakao = user_Kakao;
 		this.user_Naver = user_Naver;
 		this.user_Google = user_Google;
+		this.user_Id = user_Id;
 		this.user_Pro = user_Pro;
 	}
 
