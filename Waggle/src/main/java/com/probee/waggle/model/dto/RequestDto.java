@@ -13,9 +13,8 @@ public class RequestDto {
 	private int req_Point;
 	private String req_Stat;
 	private int req_UCode;
-	private String req_Addr;
-	private String req_DAddr;
 	private int req_FCode;
+	private int req_HCode;
 	
 	public RequestDto() {
 		super();
@@ -23,8 +22,7 @@ public class RequestDto {
 	}
 
 	public RequestDto(int req_No, String req_Title, String req_Link, Date req_WDate, Date req_EDate, String req_Phone,
-			String req_Detail, int req_Point, String req_Stat, int req_UCode, String req_Addr, String req_DAddr,
-			int req_FCode) {
+			String req_Detail, int req_Point, String req_Stat, int req_UCode, int req_FCode, int req_HCode) {
 		super();
 		this.req_No = req_No;
 		this.req_Title = req_Title;
@@ -36,9 +34,8 @@ public class RequestDto {
 		this.req_Point = req_Point;
 		this.req_Stat = req_Stat;
 		this.req_UCode = req_UCode;
-		this.req_Addr = req_Addr;
-		this.req_DAddr = req_DAddr;
 		this.req_FCode = req_FCode;
+		this.req_HCode = req_HCode;
 	}
 
 	public int getReq_No() {
@@ -121,22 +118,6 @@ public class RequestDto {
 		this.req_UCode = req_UCode;
 	}
 
-	public String getReq_Addr() {
-		return req_Addr;
-	}
-
-	public void setReq_Addr(String req_Addr) {
-		this.req_Addr = req_Addr;
-	}
-
-	public String getReq_DAddr() {
-		return req_DAddr;
-	}
-
-	public void setReq_DAddr(String req_DAddr) {
-		this.req_DAddr = req_DAddr;
-	}
-
 	public int getReq_FCode() {
 		return req_FCode;
 	}
@@ -145,13 +126,23 @@ public class RequestDto {
 		this.req_FCode = req_FCode;
 	}
 
+	public int getReq_HCode() {
+		return req_HCode;
+	}
+
+	public void setReq_HCode(int req_HCode) {
+		this.req_HCode = req_HCode;
+	}
+
 	@Override
 	public String toString() {
 		return "RequestDto [req_No=" + req_No + ", req_Title=" + req_Title + ", req_Link=" + req_Link + ", req_WDate="
 				+ req_WDate + ", req_EDate=" + req_EDate + ", req_Phone=" + req_Phone + ", req_Detail=" + req_Detail
-				+ ", req_Point=" + req_Point + ", req_Stat=" + req_Stat + ", req_UCode=" + req_UCode + ", req_Addr="
-				+ req_Addr + ", req_DAddr=" + req_DAddr + ", req_FCode=" + req_FCode + "]";
+				+ ", req_Point=" + req_Point + ", req_Stat=" + req_Stat + ", req_UCode=" + req_UCode + ", req_FCode="
+				+ req_FCode + ", req_HCode=" + req_HCode + "]";
 	}
+
+	
 
 	
 	
