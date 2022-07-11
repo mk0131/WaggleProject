@@ -50,8 +50,6 @@
             top:0; bottom:0; right:0;
 }
 
-
-
 .nav-container {
 	position: relative;
 	float: right;
@@ -106,12 +104,9 @@ nav ul li a:hover, nav ul li a:visited:hover {
 	width: 80%;
 }
 
-
-
 </style>
 </head>
 <body>
-	<div id="wrap">
 		<section class="navigation">
 		<div class="container">
 			<div class="brand-container">

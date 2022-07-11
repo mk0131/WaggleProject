@@ -13,6 +13,7 @@
 <style>
 @charset "UTF-8";
 
+
 .container {
 	max-width: 1000px;
 	margin: 0 auto;
@@ -21,7 +22,7 @@
 .navigation {
 	height: 70px;
 	background: #ffffff;
-	margin: 0 auto;
+	margin: 40px 40px 0 40px;
 	border-bottom: solid;
 	border-width: 1px;
 }
@@ -95,6 +96,7 @@ nav ul li a:hover, nav ul li a:visited:hover {
 	line-height: 70px;
 	font-size: 1em;
 }
+
 </style>
 
 <body>
