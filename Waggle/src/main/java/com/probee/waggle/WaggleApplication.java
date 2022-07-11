@@ -28,4 +28,9 @@ public class WaggleApplication {
 		return "map";
 	}
 	
+	@RequestMapping("/login")
+	public static String gologin() {
+		return "login";
+	}
+	
 }
