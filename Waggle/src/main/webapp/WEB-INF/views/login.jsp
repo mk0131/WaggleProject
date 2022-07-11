@@ -184,15 +184,17 @@ input {
     			<input id="sign-up" type="radio" name="tab_item">
     			<label class="tab_item" for="sign-up">회원가입</label>
     		<div class="tab_content" id="login-content">
-        		<div class="field-wrap1">
-              		<input type="text" placeholder="아이디">
-            	</div>
-            	<div class="field-wrap2">
-              		<input type="text" placeholder="비밀번호">
-            	</div>
+    			<form action="/login/Normal" method="post">
+        			<div class="field-wrap1">
+              			<input type="text" name="user_Id" placeholder="아이디">
+            		</div>
+            		<div class="field-wrap2">
+              			<input type="text" name="user_Pw" placeholder="비밀번호">
+            		</div>
             	<div class="field-wrap-submit">
-              		<button type="button" value="login" onclick="location.href=''">로그인</button>
+              		<button type="submit">로그인</button>
             	</div>
+            	</form>
                <div class="forgot-idpw">
             	<p class="forgot"><a href="#">아이디 찾기</a>&nbsp;|&nbsp;<a href="#">패스워드 찾기</a></p>
                </div>
