@@ -9,11 +9,19 @@
 	rel="stylesheet" />
 </head>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script>
-function searchTable(){
-	$('.table-container').show();
+function kakaopost(){
+    new daum.Postcode({
+        	oncomplete: function(data) {
+        		document.querySelector(".searchbar").value = data.address;
+        	}
+    	}).open();
+	};
+	function searchTable(){
+		$('.table-container').show();
 	
-};
+	};
 </script>
 <style>
 @import url("https://fonts.googleapis.com/css?family=Sarabun");
@@ -22,15 +30,26 @@ function searchTable(){
 }
 
 .middle {
-	margin: 0;
-	padding: 0;
+   margin: 0;
+   padding: 0;
 }
+
 .guideline {
-	margin: 0 auto;
-	width: 1000px;
+   margin: 0 auto;
+   width: 1125px;
 }
-.home-img, .guide-text {
-	display: inline-block;
+
+.guideline-all i {
+   display: inline-block;
+   color: #151515;
+}
+
+.guideline-all li {
+   display: inline-block;
+}
+
+.guideline-all p {
+   display: inline-block;
 }
 
 .container {
@@ -215,31 +234,28 @@ div {
 	margin: 10px;
 }
 
-.map {
+#map {
 	margin: 0 auto;
 	width: 994.2px;
 	height: 500px;
-	background-color: #cbcbcb;
 }
 </style>
 <body>
 	<%@ include file="header.jsp"%>
 	<div class="middle">
-		<div class="guideline">
-			<div class="home-img">
-				<svg width="24" height="24" viewBox="0 0 24 24" fill="none"
-					xmlns="http://www.w3.org/2000/svg">
-				<path d="M10 20V14H14V20H19V12H22L12 3L2 12H5V20H10Z" fill="black" />
-				</svg>
-			</div>
-			<div class="guide-text">
-				<p>HOME > 지도</p>
-			</div>
-		</div>
-		
+        <div class="guideline">
+         	<ul class="guideline-all">
+            	  <li><a href="javascript:void(0)">
+             	 <i class="fa-solid fa-house"></i>
+              	</a>
+              	</li>
+             	 <p>HOME > 지도</p>
+           </ul>
+     	</div>
+			
 		<div class="container" >
 			<input type="text" maxlength="12" placeholder="주소 검색하기"
-				class="searchbar"> <img
+				class="searchbar" onclick="kakaopost()"> <img
 				src="https://images-na.ssl-images-amazon.com/images/I/41gYkruZM2L.png"
 				alt="Magnifying Glass" class="button" onclick="searchTable()">
 		</div>
@@ -308,7 +324,7 @@ div {
 		</div>
 		
 		
-		<div class="map">
+		<div id="map">
 			
 		</div>
 	</div>
@@ -461,7 +477,17 @@ div {
 	})();
 
 	SearchOnList.init($('[data-behaviour=search-on-list]'));
-	
 </script>
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=df487b49cd90a64d7305e577e300f2e4"></script>
+<script>
+	var container = document.getElementById('map'); //지도를 담을 영역의 DOM 레퍼런스
+	var options = { //지도를 생성할 때 필요한 기본 옵션
+		center: new kakao.maps.LatLng(33.450701, 126.570667), //지도의 중심좌표.
+		level: 3 //지도의 레벨(확대, 축소 정도)
+	};
+
+	var map = new kakao.maps.Map(container, options); //지도 생성 및 객체 리턴
+</script>
+
 </html>
 
