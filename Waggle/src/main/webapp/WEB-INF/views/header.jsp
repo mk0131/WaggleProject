@@ -139,7 +139,7 @@ nav ul li a:hover, nav ul li a:visited:hover {
 					</svg>
 					</a>
 					</span>
-					<a href="#!">로그인</a> <span>/</span> <a href="#!">회원가입</a>
+					<a href="/login">로그인</a> <span>/</span> <a href="/login">회원가입</a>
 				</div>
 			</div>
 		</div>

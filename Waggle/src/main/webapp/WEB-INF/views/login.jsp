@@ -27,6 +27,7 @@
 
 .guideline-all p {
 	display: inline-block;
+	font-size: 14px;
 }
 
 .login-form h1 {
@@ -328,12 +329,60 @@ input {
 	<div id="wrap" style="height: 1200px;">
 		<div class="middle">
 			<div class="guideline">
+<<<<<<< HEAD
 				<ul class="guideline-all">
 					<li><a href="javascript:void(0)"> <i
 							class="fa-solid fa-house"></i>
 					</a></li>
 					<p>HOME > 로그인</p>
 				</ul>
+=======
+			<ul class="guideline-all">
+        		<li><a href="javascript:void(0)">
+        		<i class="fa-solid fa-house"></i>
+        		</a>
+        		<p>HOME > 로그인</p>
+        		</li>
+        	</ul>
+		</div>
+		</div>
+		<br/>
+		<section>
+		<div class="login-form">
+			<h1>로그인</h1>
+		</div>
+		<br/><br/>
+		 <div class="tabs">
+    			<input id="login" type="radio" name="tab_item" checked>
+    			<label class="tab_item" for="login">로그인</label>
+    			<input id="sign-up" type="radio" name="tab_item">
+    			<label class="tab_item" for="sign-up">회원가입</label>
+    		<div class="tab_content" id="login-content">
+    			<form action="/login/Normal" method="post">
+        			<div class="field-wrap1">
+              			<input type="text" name="user_Id" placeholder="아이디">
+            		</div>
+            		<div class="field-wrap2">
+              			<input type="text" name="user_Pw" placeholder="비밀번호">
+            		</div>
+            	<div class="field-wrap-submit">
+              		<button type="submit">로그인</button>
+            	</div>
+            	</form>
+               <div class="forgot-idpw">
+            	<p class="forgot"><a href="#">아이디 찾기</a>&nbsp;|&nbsp;<a href="#">패스워드 찾기</a></p>
+               </div>
+               <div class="api-login">
+               		<button type="button" value="naver">네이버 로그인</button>
+               		<button type="button" value="kakao">카카오 로그인</button>
+               		<button type="button" value="google">구글 로그인</button>
+               </div>
+    		</div>
+    		<div class="tab_content" id="sign-up-content">
+    			<div class="sign-up-button">
+        		<button type="button" onclick="location.href=''">통합회원 로그인</button>
+        		</div>
+>>>>>>> c46282067b3301d5e57a6729b54bfaaf92af1e7f
 			</div>
 
 		</div>
