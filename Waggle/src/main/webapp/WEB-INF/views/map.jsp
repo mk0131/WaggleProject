@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -15,6 +17,7 @@ function kakaopost(){
     new daum.Postcode({
         	oncomplete: function(data) {
         		document.querySelector(".searchbar").value = data.address;
+        		document.querySelector("#var1").value = data.zonecode;
         	}
     	}).open();
 	};
@@ -216,7 +219,6 @@ div {
 
 .horizontal-scroll-wrapper>div {
 	display: block;
-	padding: 5px;
 	background: #c7c7c7;
 	transform: rotate(90deg) translateX(200px);
 	transform-origin: right top;
@@ -236,6 +238,12 @@ div {
 	margin: 0 auto;
 	width: 994.2px;
 	height: 500px;
+}
+
+.detail_img, .detail_video{
+	width: 100%;
+	height: 100%;
+	object-fit: fill;
 }
 </style>
 <body>
@@ -267,53 +275,35 @@ div {
 					placeholder="상세주소를 입력하세요." /> <span class="counter"
 					data-search-on-list="counter"></span>
 				<div class="list-wrap">
+					<form action="/map" method="GET">
+						<input id="var1" type="hidden" name="search_post" value="" >
+					</form>	
 					<ul class="list" data-search-on-list="list">
-						<li class="list-item" data-search-on-list="list-item"><a
-							href="" class="list-item-link">Ali <span
-								class="item-list-subtext">Smith</span></a></li>
-						<li class="list-item" data-search-on-list="list-item"><a
-							href="" class="list-item-link">Alia <span
-								class="item-list-subtext">Johnson</span></a></li>
-						<li class="list-item" data-search-on-list="list-item"><a
-							href="" class="list-item-link">Amira<span
-								class="item-list-subtext">Johnson</span></a></li>
-						<li class="list-item" data-search-on-list="list-item"><a
-							href="" class="list-item-link">Omar<span
-								class="item-list-subtext">Davis</span></a></li>
-						<li class="list-item" data-search-on-list="list-item"><a
-							href="" class="list-item-link">Emily<span
-								class="item-list-subtext">García</span></a></li>
-						<li class="list-item" data-search-on-list="list-item"><a
-							href="" class="list-item-link">John<span
-								class="item-list-subtext">Robinson</span></a></li>
-						<li class="list-item" data-search-on-list="list-item"><a
-							href="" class="list-item-link">Emily<span
-								class="item-list-subtext">Clark</span></a></li>
-						<li class="list-item" data-search-on-list="list-item"><a
-							href="" class="list-item-link">Aurora<span
-								class="item-list-subtext">Lewis</span></a></li>
-						<li class="list-item" data-search-on-list="list-item"><a
-							href="" class="list-item-link">Adeline<span
-								class="item-list-subtext">Robinson</span></a></li>
-						<li class="list-item" data-search-on-list="list-item"><a
-							href="" class="list-item-link">John<span
-								class="item-list-subtext">García</span></a></li>
-						<li class="list-item" data-search-on-list="list-item"><a
-							href="" class="list-item-link">Isla<span
-								class="item-list-subtext">Lewis</span></a></li>
+					<c:forEach var="addr" items="${list}">
+					<c:set var="post" value="${addr.getHome_Post()}" />
+					<c:if test="${fn:contains(post, ${search_post})}">
+						<li class="list-item" data-search-on-list="list-item">
+							<a href="" class="list-item-link">${addr.home_DAddr }
+							<span class="item-list-subtext">우편번호: ${addr.home_Post}</span></a>
+						</li>
+					</c:if>
+					</c:forEach>
 					</ul>
 				</div>
 			</div>
 			
 			<div class="horizontal-scroll-wrapper squares">
-				<div>item 1</div>
-				<div>item 2</div>
-				<div>item 3</div>
-				<div>item 4</div>
-				<div>item 5</div>
-				<div>item 6</div>
-				<div>item 7</div>
-				<div>item 8</div>
+			<c:forEach var="media" items="${list}">
+				<div>
+				<c:set var="type" value="${media.getFi_Nm()}" />
+				<c:if test="${fn:contains(type,'jpg')}">
+				<a href=""><img class="detail_img" alt="${media.getFi_Nm()}" src="${media.getFi_Nm()}"></a>
+				</c:if>
+				<c:if test="${fn:contains(type,'mp4')}">
+				<a href=""><video class="detail_video" controls ><source src="${media.getFi_Nm()}">비디오</video></a>
+				</c:if>
+				</div>
+			</c:forEach>
 			</div>
 			
 			<div class="blank">
