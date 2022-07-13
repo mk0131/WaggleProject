@@ -28,6 +28,7 @@
 
 .guideline-all p {
 	display: inline-block;
+	font-size: 14px;
 }
 
 .login-form h1 {
@@ -167,8 +168,8 @@ input {
         		<li><a href="javascript:void(0)">
         		<i class="fa-solid fa-house"></i>
         		</a>
-        		</li>
         		<p>HOME > 로그인</p>
+        		</li>
         	</ul>
 		</div>
 		</div>
