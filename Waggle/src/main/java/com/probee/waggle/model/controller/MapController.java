@@ -23,13 +23,6 @@ public class MapController {
 		model.addAttribute("list", list);
 		model.addAttribute("search_post", search_post);
 		return "map";
+	
 	}
-
 }
-
-01234
-02345
-03456
-
-
-02345

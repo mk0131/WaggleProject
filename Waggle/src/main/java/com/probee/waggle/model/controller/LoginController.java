@@ -27,17 +27,17 @@ public class LoginController {
 		HttpSession session = requst.getSession(); // 세션 초기화
 		UsersDto user = loginService.UserLogin(dto);
 		
-		if( user == null) {
+		if( user == null) { // id, pw 가 일치하지 않으면 user 값은 null 이고 null 값이면 로그인 페이지를 리다이렉트 한다.
 			int result = 0;
 			rttr.addFlashAttribute("result",result);
 			return "redirect:/login";
 			
 		}
 		
-		session.setAttribute("user", user.getUser_Id());
+		session.setAttribute("user_Code", user.getUser_Code());
 		session.setMaxInactiveInterval(-1); // 세션 시간 무한대
 		
-		System.out.println(session.getAttribute("user")); // 세션에 저장된 값 확인
+		System.out.println(session.getAttribute("user_Code")); // 세션에 저장된 값 확인
 		return "redirect:/home";
 	}
 
