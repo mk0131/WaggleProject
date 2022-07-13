@@ -2,7 +2,7 @@ package com.probee.waggle.model.dto;
 
 public class UserAddressDto {
 	private int ua_UCode;
-	private int ua_Post;
+	private String ua_Post;
 	private String ua_Addr;
 	private String ua_DAddr;
 	private Double ua_Lat;
@@ -13,7 +13,7 @@ public class UserAddressDto {
 		// TODO Auto-generated constructor stub
 	}
 
-	public UserAddressDto(int ua_Code, int ua_Post, String ua_Addr, String ua_DAddr, Double ua_Lat, Double ua_Lng) {
+	public UserAddressDto(int ua_Code, String ua_Post, String ua_Addr, String ua_DAddr, Double ua_Lat, Double ua_Lng) {
 		super();
 		this.ua_UCode = ua_Code;
 		this.ua_Post = ua_Post;
@@ -31,11 +31,11 @@ public class UserAddressDto {
 		this.ua_UCode = ua_Code;
 	}
 
-	public int getUa_Post() {
+	public String getUa_Post() {
 		return ua_Post;
 	}
 
-	public void setUa_Post(int ua_Post) {
+	public void setUa_Post(String ua_Post) {
 		this.ua_Post = ua_Post;
 	}
 
