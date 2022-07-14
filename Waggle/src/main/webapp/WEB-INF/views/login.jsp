@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+	<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -162,6 +163,10 @@ input {
 		color : red;
 		display : none;
 	}
+	.id_form_check{
+		color : red;
+		display : none;
+	}
 	
 	.pw_input_re_1{
 		color : green;
@@ -169,6 +174,10 @@ input {
 	}
 	
 	.pw_input_re_2{
+		color : red;
+		display : none;
+	}
+	.pw_form_check{
 		color : red;
 		display : none;
 	}
@@ -185,12 +194,20 @@ input {
 		color : red;
 		display : none;
 	}
+	.email_form_check{
+		color : red;
+		display : none;
+	}
 	.nm_input_re_1{
 		color : green;
 		display : none;
 	}
 	
 	.nm_input_re_2{
+		color : red;
+		display : none;
+	}
+	.nm_form_check{
 		color : red;
 		display : none;
 	}
@@ -215,6 +232,11 @@ input {
 	.final_terms_ck{
 	display: none;
 	}
+	.login_warn{
+    margin-top: 30px;
+    text-align: center;
+    color : red;
+}
 	
  
 
@@ -253,6 +275,9 @@ input {
 			$('.email_input_re_2').css("display", "none");
 			$('.nm_input_re_1').css("display", "none");
 			$('.nm_input_re_2').css("display", "none");
+			$('.id_form_check').css("display","none");
+			$('.pw_form_check').css("display","none");
+			$('.email_form_check').css("display","none");
 			$('#id_input').val(null);
 			$('#pw_input').val(null);
 			$('#pw_chk').val(null);
@@ -364,6 +389,9 @@ input {
 						</div>
 						<div class="field-wrap-submit">
 							<button type="submit">로그인</button>
+							<c:if test = "${result == 0 }">
+								<div class = "login_warn">사용자 ID 또는 비밀번호를 잘못 입력하셨습니다.</div>
+							</c:if>
 						</div>
 					</form>
 					<div class="forgot-idpw">
@@ -401,6 +429,7 @@ input {
 					<br>
 					<br>
 					<form id="regist_join" method="post">
+					 
 					<div>
 						<br>
 						<b style="text-align: left;">아이디</b> <br> 
@@ -410,12 +439,16 @@ input {
 						<span class="id_input_re_1">사용 가능한 아이디입니다.</span>
 						<span class="id_input_re_2">아이디가 이미 존재합니다.</span>
 						<span class="final_id_ck">아이디를 입력해주세요.</span>
+						<span class="id_form_check"></span> 
 					</div>
 					<div>
 						<b style="text-align: left;">비밀번호</b> 
 						<input type="password" id="pw_input" placeholder="  비밀번호"> <br>
-						<span class="final_pw_ck">비밀번호를 입력해주세요.</span> 
-						<b style="text-align: left;">비밀번호 확인</b> 
+						<span class="final_pw_ck">비밀번호를 입력해주세요.</span>
+						<span class="pw_form_check"></span> 
+						<br>
+						<b style="text-align: left;">비밀번호 확인</b>
+						<br> 
 						<input type="password" id="pw_chk" name="user_Pw" placeholder="  비밀번호 확인">
 							<br>
 						<span class="pw_input_re_1">비밀번호가 같습니다.</span>
@@ -433,6 +466,7 @@ input {
 						<span class="email_input_re_2">인증번호를 다시 확인해주세요.</span>
 						<span class="email_input_re_3">이미 등록된 이메일 입니다.</span>
 						<span class="final_mail_ck">이메일을 입력해주세요.</span>
+						<span class="email_form_check"></span>
 					</div>
 					<div>
 						<b style="text-align: left;">닉네임</b> <br> 
@@ -441,7 +475,7 @@ input {
 						<br>
 						<span class="nm_input_re_1">사용 가능한 닉네임입니니다.</span>
 						<span class="nm_input_re_2">닉네임이 이미 존재합니다.</span>
-						<span class="final_name_ck">닉네임을 입력해주세요.</span>
+						<span class="nm_form_check">닉네임을 입력해주세요.</span>
 					</div>
 					<div>
 						<b style="text-align: left;">나이</b> <br> 
@@ -450,7 +484,7 @@ input {
 					<div>
 						<b style="text-align: left;">주소</b> <br> 
 						<input type="text" name="ua_Post" id="post" placeholder="  우편번호"
-							style="width: 200px;" readonly="readonly"> 
+							style="width: 200px;" readonly="readonly">
 							<input type="button" id="address" value="주소찾기" style="width: 100px;">
 						<input type="text" name="ua_Addr" id="addr" placeholder="  주소"
 							style="width: 500px;" readonly="readonly"> 
@@ -770,7 +804,20 @@ input {
 	//아이디 중복검사
 	$('#id_chk').on("click", function(){ // 아이디 입력마다 값을 확인
 		let user_Id = $('#id_input').val();
+		let warnMsg = $(".id_form_check"); // 비밀번호 경고글
 		let data = {user_Id : user_Id}
+		
+		if(idFormCheck(user_Id)){
+	        
+	    } else {
+	        warnMsg.html("5 ~ 20자의 영문과 숫자와 일부 특수문자(._-)만 사용 가능합니다.");
+	        warnMsg.css("color","red");
+	        warnMsg.css("display", "inline-block");
+	        $('.id_input_re_1').css("display", "none");
+	        $('.id_input_re_2').css("display", "none");
+	        $("#id_input").val(null);
+	        return false;
+	    } 
 		
 		$.ajax({
 			type : "post",
@@ -780,10 +827,12 @@ input {
 				if(result != 'fail'){
 					$('.id_input_re_1').css("display","inline-block");
 					$('.id_input_re_2').css("display", "none");
+					warnMsg.css("display", "none");
 					idckCheck = true;
 				} else {
 					$('.id_input_re_2').css("display","inline-block");
 					$('.id_input_re_1').css("display", "none");
+					warnMsg.css("display", "none");
 					$('#id_input').val(null);
 					idckCheck = false;
 				}
@@ -791,11 +840,30 @@ input {
 		})
 
 	});// function 종료
+	
+	$('#pw_input').blur(function(){ // 비밀번호 유형 검사
+		let warnMsg = $(".pw_form_check"); // 비밀번호 경고글
+		let user_Pw = $("#pw_input").val();
+		
+		if(pwFormCheck(user_Pw)){
+	        warnMsg.html("올바른 비밀번호 형식입니다.");
+	        warnMsg.css("color","green");
+	        warnMsg.css("display", "inline-block");
+	    } else {
+	        warnMsg.html("8 ~ 16자 영문, 숫자, 특수문자를 최소 한가지씩 사용하세요");
+	        warnMsg.css("color","red");
+	        warnMsg.css("display", "inline-block");
+	        $("#pw_input").val(null);
+	        return false;
+	    } 
+	})
+	
 	// 비밀번호 확인
 	$('#pw_chk').on("propertychange change keyup paste input", function(){ // 비밀번호 입력마다 값을 확인
 		let pw_input = $('#pw_input').val();
 		let pw_chk = $('#pw_chk').val();
 		$('.final_pwck_ck').css('display', 'none');
+		
 		
 		if(pw_input == pw_chk){
 			$('.pw_input_re_1').css("display","inline-block");
@@ -815,6 +883,19 @@ input {
 	$("#mail_chk").click(function(){
 		let user_Email = $("#email_input").val(); // 입력한 이메일
 		let checkBox = $("#chk_nm"); // 인증번호 입력란
+		let warnMsg = $(".email_form_check"); // 이메일 경고글
+		
+		if(mailFormCheck(user_Email)){
+	        warnMsg.html("이메일이 전송 되었습니다. 이메일을 확인해주세요.");
+	        warnMsg.css("color","green");
+	        warnMsg.css("display", "inline-block");
+	    } else {
+	        warnMsg.html("올바르지 못한 이메일 형식입니다.");
+	        warnMsg.css("color","red");
+	        warnMsg.css("display", "inline-block");
+	        $("#email_input").val(null);
+	        return false;
+	    } 
 		
 		$.ajax({
 			type : "GET",
@@ -827,6 +908,7 @@ input {
 					$('.email_input_re_3').css("display","none");
 				} else {
 					$('.email_input_re_3').css("display","inline-block");
+					warnMsg.css("display", "none");
 				}
 				
 			}
@@ -841,10 +923,12 @@ input {
 		if(inputcode == code){
 			$('.email_input_re_1').css("display","inline-block");
 			$('.email_input_re_2').css("display", "none");
+			$(".email_form_check").css("display","none");
 			emailnumCheck = true;
 		} else{
 			$('.email_input_re_2').css("display","inline-block");
 			$('.email_input_re_1').css("display", "none");
+			$(".email_form_check").css("display","none");
 			emailnumCheck = false;
 			
 		}
@@ -853,6 +937,19 @@ input {
 	$('#nm_chk').on("click", function(){ // 버튼클릭 시
 		let user_Nm = $('#nm_input').val();
 		let data = {user_Nm : user_Nm}
+		let warnMsg = $(".nm_form_check"); // 닉네임 경고글
+		
+		if(nmFormCheck(user_Nm)){
+	        
+	    	} else {
+	        	warnMsg.html("2 ~ 16자의 영어, 숫자, 한글만 사용 가능합니다.");
+	        	warnMsg.css("color","red");
+	        	warnMsg.css("display", "inline-block");
+	        	$('.nm_input_re_1').css("display", "none");
+	        	$('.nm_input_re_2').css("display", "none");
+	        	$("#nm_input").val(null);
+	        	return false;
+	    	} 
 		
 		$.ajax({
 			type : "post",
@@ -862,10 +959,12 @@ input {
 				if(result != 'fail'){
 					$('.nm_input_re_1').css("display","inline-block");
 					$('.nm_input_re_2').css("display", "none");
+					warnMsg.css("display", "none");
 					nmCheck = true;
 				} else {
 					$('.nm_input_re_2').css("display","inline-block");
 					$('.nm_input_re_1').css("display", "none");
+					warnMsg.css("display", "none");
 					$('#nm_input').val(null);
 					nmCheck = false;
 				}
@@ -944,6 +1043,26 @@ input {
         }
         return false;
 	})
+	
+	function mailFormCheck(email){
+		var form = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i;
+		return form.test(email);
+	}
+	
+	function pwFormCheck(pw){
+		var form = /^(?=.*[a-zA-z])(?=.*[0-9])(?=.*[$`~!@$!%*#^?&\\(\\)\-_=+]).{8,16}$/;
+		return form.test(pw);
+	}
+	
+	function idFormCheck(id){
+		var form = /^(?=.*[a-zA-Z])[-a-zA-Z0-9_.]{5,20}$/;
+		return form.test(id);
+	}
+	
+	function nmFormCheck(nm){
+		var form = /^(?=.*[a-z0-9가-힣])[a-z0-9가-힣]{2,16}$/;
+		return form.test(nm);
+	}
 	
 })
 	</script>
