@@ -27,6 +27,12 @@
 // 		} 
 		$("#data-container").append("<li><div class='data-contents'>"+listAll[0]+"</div></li>");
 	});
+	
+	$(".pagination").click(function(){
+		
+		
+	});
+	
 
 	
 	
@@ -36,10 +42,10 @@
 <style type="text/css">
 
 .board {
-	list-style : none;
   	width: 800px;
   	margin-left: auto;
   	margin-right: auto;
+  	position: relative;
 }
 
 .data-contents{
@@ -99,25 +105,44 @@
 	left: 450px;
 }
 
+.page_box{
+	height: 50px; width: 300px;
+	margin-left: auto;
+  	margin-right: auto;
+  	position: absolute;
+  	bottom: -40px; right: 0;
+}
+
+#pagination{
+	margin-right: 20px;
+}
+
+#pagination li{
+  list-style: none; display:inline; margin-left: 5px;
+}
+
 </style>
 
 </head>
 <body>
 	<%@ include file="header.jsp"%>
-	<div class="middle">
 	
-    	<div class="guideline">
-    		<ul class="guideline-all">
-				<li>
-					<a href="javascript:void(0)">
-						<i class="fa-solid fa-house"></i>
-					</a>
-					<p>HOME > 꿀단지</p>
-				</li>
-    		</ul>
-    	</div>
-    	
+   	<div class="guideline">
+   		<ul class="guideline-all">
+			<li>
+				<a href="javascript:void(0)">
+					<i class="fa-solid fa-house"></i>
+				</a>
+				<p>HOME > 꿀단지</p>
+			</li>
+   		</ul>
+   	</div>
+   	
+	<div class="middle">	
 		<div class="board">
+			<div>
+				<a href='/board/requestform'>요청하기</a>
+			</div>
 
 				<c:forEach var="dto" items="${list}">
 					<div class="data-contents">
@@ -143,7 +168,15 @@
 					</div>
 				</c:forEach>
 
-        	<div id="pagination"></div>
+        	<div class="page_box">
+	        	<ul id="pagination">
+	        		<li><a>prev</a></li>
+	        		<c:forEach var="i" begin="${start }" end="${end }">
+	        			<li><c:out value="${i}" /></li>
+	        		</c:forEach>
+	        		<li><a>next</a></li>
+	        	</ul>
+        	</div>
 		</div>
 		
     </div>

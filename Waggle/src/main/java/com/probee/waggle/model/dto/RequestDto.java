@@ -133,6 +133,16 @@ public class RequestDto {
 		this.req_HCode = req_HCode;
 	}
 
+	@Override
+	public String toString() {
+		return "RequestDto [req_No=" + req_No + ", req_Title=" + req_Title + ", req_Link=" + req_Link + ", req_WDate="
+				+ req_WDate + ", req_EDate=" + req_EDate + ", req_Phone=" + req_Phone + ", req_Detail=" + req_Detail
+				+ ", req_Point=" + req_Point + ", req_Stat=" + req_Stat + ", req_UCode=" + req_UCode + ", req_FCode="
+				+ req_FCode + ", req_HCode=" + req_HCode + "]";
+	}
+	
+	
+
 	
 	
 }
