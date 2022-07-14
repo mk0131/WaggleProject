@@ -12,4 +12,7 @@ public interface MapMapper {
 
 	@Select("select home_Post, home_Addr, home_DAddr, rf_No, fi_Nm from RESULTFILE join REQUEST on RESULTFILE.RF_NO = REQUEST.REQ_NO join HOME on REQUEST.REQ_HCODE = HOME.home_Code join FILE on RESULTFILE.rf_FCode = FILE.fi_Code ")
 	public List<MapDto> selectList();
+	
+	@Select("select home_Post, home_Addr, home_DAddr, rf_No, fi_Nm from RESULTFILE join REQUEST on RESULTFILE.RF_NO = REQUEST.REQ_NO join HOME on REQUEST.REQ_HCODE = HOME.home_Code join FILE on RESULTFILE.rf_FCode = FILE.fi_Code where home_Post = #{search_post}")
+	public List<MapDto> selectSearchList(String search_post);
 }

@@ -13,11 +13,16 @@
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script>
+
 function kakaopost(){
+
     new daum.Postcode({
         	oncomplete: function(data) {
-        		document.querySelector(".searchbar").value = data.address;
-        		document.querySelector("#var1").value = data.zonecode;
+        		var a = data.address;
+        		var p = data.zonecode;
+        		document.querySelector("#var1").value = p.toString();
+        		document.querySelector(".searchbar").value = a;
+        		document.getElementById('submit').click();
         	}
     	}).open();
 	};
@@ -261,10 +266,16 @@ div {
 			
 		<div class="container" >
 			<input type="text" maxlength="12" placeholder="주소 검색하기"
-				class="searchbar" onclick="kakaopost()"> <img
+				class="searchbar" onclick="kakaopost()"> 
+				<img
 				src="https://images-na.ssl-images-amazon.com/images/I/41gYkruZM2L.png"
 				alt="Magnifying Glass" class="button" onclick="searchLngLat()">
 		</div>
+		
+		<form id="addr_filter" method="post">
+		<input type="button" style="display:none" id="submit">
+		<input id="var1" type="hidden" name="search_post" value="" >
+		</form>
 		
 		<div class="blank">
 		</div>
@@ -275,24 +286,13 @@ div {
 					placeholder="상세주소를 입력하세요." /> <span class="counter"
 					data-search-on-list="counter"></span>
 				<div class="list-wrap">
-					<form action="/map" method="GET">
-						<input id="var1" type="hidden" name="search_post" value="" >
-					</form>	
 					<ul class="list" data-search-on-list="list">
-					<c:forEach var="addr" items="${list}">
-					<c:set var="post" value="${addr.getHome_Post()}" />
-					<c:if test="${fn:contains(post, ${search_post})}">
-						<li class="list-item" data-search-on-list="list-item">
-							<a href="" class="list-item-link">${addr.home_DAddr }
-							<span class="item-list-subtext">우편번호: ${addr.home_Post}</span></a>
-						</li>
-					</c:if>
-					</c:forEach>
 					</ul>
 				</div>
 			</div>
 			
 			<div class="horizontal-scroll-wrapper squares">
+			<!-- 
 			<c:forEach var="media" items="${list}">
 				<div>
 				<c:set var="type" value="${media.getFi_Nm()}" />
@@ -304,6 +304,7 @@ div {
 				</c:if>
 				</div>
 			</c:forEach>
+			-->
 			</div>
 			
 			<div class="blank">
@@ -315,6 +316,7 @@ div {
 		<div id="map">
 			
 		</div>
+		
 	</div>
 
 	<%@ include file="footer.jsp"%>
@@ -332,6 +334,7 @@ var map = new kakao.maps.Map(mapContainer, mapOption);
 
 	function searchLngLat(){
 		$('.table-container').show();
+
 		var gap = document.querySelector(".searchbar").value;
 
 		// 주소-좌표 변환 객체를 생성합니다
@@ -359,7 +362,42 @@ var map = new kakao.maps.Map(mapContainer, mapOption);
 		});    
 	}
 	
-	
+ 	
+	//주소창에 검색시 상세주소와 해당 영상들 나오게 하기
+	$('#submit').on("click", function(){ // #submit버튼은 kakaopost() 함수에서 click되도록 구성
+		let search_post = $('#var1').val();
+		let data = {search_post : search_post}
+		
+		$.ajax({
+			type : "post",
+			url : "/search",
+			data : data,
+			success : function(result){
+					$('.table-container').show();
+		
+					for(let i=0; i<result.length; i++){
+						$(".list").append('<li class="list-item" data-search-on-list="list-item"><a href="" class="list-item-link">'+result[i].home_DAddr+'<span class="item-list-subtext">우편번호: '+result[i].home_Post+'</span></a></li>');
+						
+						if(result[i].fi_Nm.includes('jpg')){
+							$(".horizontal-scroll-wrapper").append('<div><a href=""><img class="detail_img" src='+result[i].fi_Nm+'></a></div>');
+						}else if(result[i].fi_Nm.includes('mp4')){
+							$(".horizontal-scroll-wrapper").append('<div><a href=""><video class="detail_video" controls ><source src='+result[i].fi_Nm+'></video></a></div>');
+						}
+						
+						if(result[i].fi_Nm.includes('jpg')){
+							console.log(result[i].fi_Nm + '사진');
+						}else if(result[i].fi_Nm.includes('mp4')){
+							console.log(result[i].fi_Nm + '영상');
+						}
+						
+					}
+			},
+			error : function(){
+				console.log("ajax 에러");
+			}
+		})
+
+	});// function 종료
 	</script>
 </body>
 <script>

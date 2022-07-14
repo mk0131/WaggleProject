@@ -19,5 +19,11 @@ public class MapServiceImpl implements MapService{
 		return mapMapper.selectList();
 	}
 	
+	@Override
+	public List<MapDto> selectSearchList(String search_post){
+		return mapMapper.selectSearchList(search_post);
+	}
 
 }
+
+
