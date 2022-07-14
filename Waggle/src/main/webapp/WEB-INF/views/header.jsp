@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -124,7 +125,7 @@ nav ul li a:hover, nav ul li a:visited:hover {
 			<div class="nav-container">
 				<nav>
 					<ul class="nav-list">
-						<li><a href="#!">지도</a></li>
+						<li><a href="/map">지도</a></li>
 						<li><a href="#!">꿀단지</a></li>
 						<li><a href="#!">마이페이지</a></li>
 						<li><a href="#!">이용내역</a></li>
@@ -139,7 +140,12 @@ nav ul li a:hover, nav ul li a:visited:hover {
 					</svg>
 					</a>
 					</span>
-					<a href="#!">로그인</a> <span>/</span> <a href="#!">회원가입</a>
+					<c:if test="${user_Code == null }">
+					<a href="/login">로그인</a> <span>/</span> <a href="/login">회원가입</a>
+					</c:if>
+					<c:if test="${user_Code != null }">
+					 <b>${user_Nm } 님 환영합니다</b>/<a href="/login/logout">로그아웃</a>
+					</c:if>
 				</div>
 			</div>
 		</div>

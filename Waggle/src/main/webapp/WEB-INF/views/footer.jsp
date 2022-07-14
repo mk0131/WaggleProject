@@ -5,6 +5,9 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap" rel="stylesheet">
 <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" 
 	rel="stylesheet"/>
 <link href="https://fonts.googleapis.com/css?family=Inter&display=swap"
@@ -14,6 +17,10 @@
 html, body {
 	margin: 0;
 	padding: 0;
+}
+
+body {
+	font-family: 'Noto Sans KR', 'Helvetica Neue', Helvetica, Arial, sans-serif;
 }
 
 #wrap {
@@ -27,7 +34,7 @@ footer {
   border-top: 1px solid #151515;
   margin: 40px;
   position: relative;
-  font-size: 14px;
+  font-size: 12px;
 }
 
 footer .footer-left {
@@ -76,7 +83,7 @@ footer .footer-right i {
 }
 
 footer .footer-right h4 {
-  font-size: 16px;
+  font-size: 13px;
   text-align: center;
 }
 
