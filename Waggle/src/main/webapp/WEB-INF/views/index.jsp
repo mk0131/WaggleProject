@@ -15,5 +15,6 @@
 	<h3><a href="/login">login</a></h3>
 	<h3><a href="/board/list">board</a></h3>
 	<h3><a href="/inquiry/list">inquiry</a></h3>
+	<h3><a href="/point">inquiry</a></h3>
 </body>
 </html>

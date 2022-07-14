@@ -38,4 +38,9 @@ public class WaggleApplication {
 		return "inquiry";
 	}
 	
+	@RequestMapping("/point")
+	public static String gopoint() {
+		return "point";
+	}
+	
 }
