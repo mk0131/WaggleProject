@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -11,10 +13,16 @@
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script>
+
 function kakaopost(){
+
     new daum.Postcode({
         	oncomplete: function(data) {
-        		document.querySelector(".searchbar").value = data.address;
+        		var a = data.address;
+        		var p = data.zonecode;
+        		document.querySelector("#var1").value = p.toString();
+        		document.querySelector(".searchbar").value = a;
+        		document.getElementById('submit').click();
         	}
     	}).open();
 	};
@@ -216,7 +224,6 @@ div {
 
 .horizontal-scroll-wrapper>div {
 	display: block;
-	padding: 5px;
 	background: #c7c7c7;
 	transform: rotate(90deg) translateX(200px);
 	transform-origin: right top;
@@ -237,6 +244,12 @@ div {
 	width: 994.2px;
 	height: 500px;
 }
+
+.detail_img, .detail_video{
+	width: 100%;
+	height: 100%;
+	object-fit: fill;
+}
 </style>
 <body>
 	<%@ include file="header.jsp"%>
@@ -253,10 +266,16 @@ div {
 			
 		<div class="container" >
 			<input type="text" maxlength="12" placeholder="주소 검색하기"
-				class="searchbar" onclick="kakaopost()"> <img
+				class="searchbar" onclick="kakaopost()"> 
+				<img
 				src="https://images-na.ssl-images-amazon.com/images/I/41gYkruZM2L.png"
 				alt="Magnifying Glass" class="button" onclick="searchLngLat()">
 		</div>
+		
+		<form id="addr_filter" method="post">
+		<input type="button" style="display:none" id="submit">
+		<input id="var1" type="hidden" name="search_post" value="" >
+		</form>
 		
 		<div class="blank">
 		</div>
@@ -268,52 +287,24 @@ div {
 					data-search-on-list="counter"></span>
 				<div class="list-wrap">
 					<ul class="list" data-search-on-list="list">
-						<li class="list-item" data-search-on-list="list-item"><a
-							href="" class="list-item-link">Ali <span
-								class="item-list-subtext">Smith</span></a></li>
-						<li class="list-item" data-search-on-list="list-item"><a
-							href="" class="list-item-link">Alia <span
-								class="item-list-subtext">Johnson</span></a></li>
-						<li class="list-item" data-search-on-list="list-item"><a
-							href="" class="list-item-link">Amira<span
-								class="item-list-subtext">Johnson</span></a></li>
-						<li class="list-item" data-search-on-list="list-item"><a
-							href="" class="list-item-link">Omar<span
-								class="item-list-subtext">Davis</span></a></li>
-						<li class="list-item" data-search-on-list="list-item"><a
-							href="" class="list-item-link">Emily<span
-								class="item-list-subtext">García</span></a></li>
-						<li class="list-item" data-search-on-list="list-item"><a
-							href="" class="list-item-link">John<span
-								class="item-list-subtext">Robinson</span></a></li>
-						<li class="list-item" data-search-on-list="list-item"><a
-							href="" class="list-item-link">Emily<span
-								class="item-list-subtext">Clark</span></a></li>
-						<li class="list-item" data-search-on-list="list-item"><a
-							href="" class="list-item-link">Aurora<span
-								class="item-list-subtext">Lewis</span></a></li>
-						<li class="list-item" data-search-on-list="list-item"><a
-							href="" class="list-item-link">Adeline<span
-								class="item-list-subtext">Robinson</span></a></li>
-						<li class="list-item" data-search-on-list="list-item"><a
-							href="" class="list-item-link">John<span
-								class="item-list-subtext">García</span></a></li>
-						<li class="list-item" data-search-on-list="list-item"><a
-							href="" class="list-item-link">Isla<span
-								class="item-list-subtext">Lewis</span></a></li>
 					</ul>
 				</div>
 			</div>
 			
 			<div class="horizontal-scroll-wrapper squares">
-				<div>item 1</div>
-				<div>item 2</div>
-				<div>item 3</div>
-				<div>item 4</div>
-				<div>item 5</div>
-				<div>item 6</div>
-				<div>item 7</div>
-				<div>item 8</div>
+			<!-- 
+			<c:forEach var="media" items="${list}">
+				<div>
+				<c:set var="type" value="${media.getFi_Nm()}" />
+				<c:if test="${fn:contains(type,'jpg')}">
+				<a href=""><img class="detail_img" alt="${media.getFi_Nm()}" src="${media.getFi_Nm()}"></a>
+				</c:if>
+				<c:if test="${fn:contains(type,'mp4')}">
+				<a href=""><video class="detail_video" controls ><source src="${media.getFi_Nm()}">비디오</video></a>
+				</c:if>
+				</div>
+			</c:forEach>
+			-->
 			</div>
 			
 			<div class="blank">
@@ -325,6 +316,7 @@ div {
 		<div id="map">
 			
 		</div>
+		
 	</div>
 
 	<%@ include file="footer.jsp"%>
@@ -342,6 +334,7 @@ var map = new kakao.maps.Map(mapContainer, mapOption);
 
 	function searchLngLat(){
 		$('.table-container').show();
+
 		var gap = document.querySelector(".searchbar").value;
 
 		// 주소-좌표 변환 객체를 생성합니다
@@ -369,7 +362,42 @@ var map = new kakao.maps.Map(mapContainer, mapOption);
 		});    
 	}
 	
-	
+ 	
+	//주소창에 검색시 상세주소와 해당 영상들 나오게 하기
+	$('#submit').on("click", function(){ // #submit버튼은 kakaopost() 함수에서 click되도록 구성
+		let search_post = $('#var1').val();
+		let data = {search_post : search_post}
+		
+		$.ajax({
+			type : "post",
+			url : "/search",
+			data : data,
+			success : function(result){
+					$('.table-container').show();
+		
+					for(let i=0; i<result.length; i++){
+						$(".list").append('<li class="list-item" data-search-on-list="list-item"><a href="" class="list-item-link">'+result[i].home_DAddr+'<span class="item-list-subtext">우편번호: '+result[i].home_Post+'</span></a></li>');
+						
+						if(result[i].fi_Nm.includes('jpg')){
+							$(".horizontal-scroll-wrapper").append('<div><a href=""><img class="detail_img" src='+result[i].fi_Nm+'></a></div>');
+						}else if(result[i].fi_Nm.includes('mp4')){
+							$(".horizontal-scroll-wrapper").append('<div><a href=""><video class="detail_video" controls ><source src='+result[i].fi_Nm+'></video></a></div>');
+						}
+						
+						if(result[i].fi_Nm.includes('jpg')){
+							console.log(result[i].fi_Nm + '사진');
+						}else if(result[i].fi_Nm.includes('mp4')){
+							console.log(result[i].fi_Nm + '영상');
+						}
+						
+					}
+			},
+			error : function(){
+				console.log("ajax 에러");
+			}
+		})
+
+	});// function 종료
 	</script>
 </body>
 <script>
