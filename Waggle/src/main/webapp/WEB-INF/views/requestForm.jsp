@@ -53,7 +53,7 @@
 	    <div><span>심부름 비용:</span><input type="text" placeholder="최소금액 5000포인트" name="req_Point" required="required"></div>
 	    <div>
 	    	<input type="submit" value="작성">
-	    	<input type="button" value="취소">	    	
+	    	<input type="button" value="취소" onclick="location.href='/board/list'">	    	
 	    </div>
 	    </form>
 	</div>
