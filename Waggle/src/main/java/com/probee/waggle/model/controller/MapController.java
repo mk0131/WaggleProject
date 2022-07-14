@@ -20,6 +20,7 @@ public class MapController {
 	@Autowired
 	private MapService mapService;
 
+	/*
 	@GetMapping("/map")
 	public String selectList(Model model) {
 		List<MapDto> list = mapService.selectList();
@@ -27,6 +28,7 @@ public class MapController {
 		return "map";
 	
 	}
+	*/
 	
 	@RequestMapping(value="/search", method=RequestMethod.POST)
 	@ResponseBody
