@@ -1,13 +1,11 @@
 package com.probee.waggle.model.dto;
 
-import java.util.Date;
-
 public class RequestDto {
 	private int req_No;
 	private String req_Title;
 	private String req_Link;
-	private Date req_WDate;
-	private Date req_EDate;
+	private String req_WDate;
+	private String req_EDate;
 	private String req_Phone;
 	private String req_Detail;
 	private int req_Point;
@@ -21,8 +19,9 @@ public class RequestDto {
 		// TODO Auto-generated constructor stub
 	}
 
-	public RequestDto(int req_No, String req_Title, String req_Link, Date req_WDate, Date req_EDate, String req_Phone,
-			String req_Detail, int req_Point, String req_Stat, int req_UCode, int req_FCode, int req_HCode) {
+	public RequestDto(int req_No, String req_Title, String req_Link, String req_WDate, String req_EDate,
+			String req_Phone, String req_Detail, int req_Point, String req_Stat, int req_UCode, int req_FCode,
+			int req_HCode) {
 		super();
 		this.req_No = req_No;
 		this.req_Title = req_Title;
@@ -62,19 +61,19 @@ public class RequestDto {
 		this.req_Link = req_Link;
 	}
 
-	public Date getReq_WDate() {
+	public String getReq_WDate() {
 		return req_WDate;
 	}
 
-	public void setReq_WDate(Date req_WDate) {
+	public void setReq_WDate(String req_WDate) {
 		this.req_WDate = req_WDate;
 	}
 
-	public Date getReq_EDate() {
+	public String getReq_EDate() {
 		return req_EDate;
 	}
 
-	public void setReq_EDate(Date req_EDate) {
+	public void setReq_EDate(String req_EDate) {
 		this.req_EDate = req_EDate;
 	}
 
@@ -133,16 +132,6 @@ public class RequestDto {
 	public void setReq_HCode(int req_HCode) {
 		this.req_HCode = req_HCode;
 	}
-
-	@Override
-	public String toString() {
-		return "RequestDto [req_No=" + req_No + ", req_Title=" + req_Title + ", req_Link=" + req_Link + ", req_WDate="
-				+ req_WDate + ", req_EDate=" + req_EDate + ", req_Phone=" + req_Phone + ", req_Detail=" + req_Detail
-				+ ", req_Point=" + req_Point + ", req_Stat=" + req_Stat + ", req_UCode=" + req_UCode + ", req_FCode="
-				+ req_FCode + ", req_HCode=" + req_HCode + "]";
-	}
-
-	
 
 	
 	

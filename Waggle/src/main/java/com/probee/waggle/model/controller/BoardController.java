@@ -22,6 +22,9 @@ public class BoardController {
 	public String selectList(Model model) {
 		List<RequestDto> list = boardService.selectList();
 		model.addAttribute("list", list);
+		model.addAttribute("list_length",list.size());
 		return "board";
 	}
+	
+	
 }

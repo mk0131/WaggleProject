@@ -119,7 +119,7 @@ nav ul li a:hover, nav ul li a:visited:hover {
 						</svg>
 					</a>
 				</span>	
-				<a href="#!">Logo</a>
+				<a href="#!">Waggle</a>
 			</div>
 			<div class="nav-container">
 				<nav>
