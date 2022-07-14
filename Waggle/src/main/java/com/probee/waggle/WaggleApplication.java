@@ -33,5 +33,9 @@ public class WaggleApplication {
 		return "login";
 	}
 
+	@RequestMapping("/inquiry")
+	public static String goinquiry() {
+		return "inquiry";
+	}
 	
 }

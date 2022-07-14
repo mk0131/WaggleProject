@@ -23,9 +23,12 @@ function kakaopost(){
         		document.querySelector("#var1").value = p.toString();
         		document.querySelector(".searchbar").value = a;
         		document.getElementById('submit').click();
+   				searchLngLat();
         	}
     	}).open();
+    
 	};
+	
 	
 
 </script>
@@ -269,7 +272,7 @@ div {
 				class="searchbar" onclick="kakaopost()"> 
 				<img
 				src="https://images-na.ssl-images-amazon.com/images/I/41gYkruZM2L.png"
-				alt="Magnifying Glass" class="button" onclick="searchLngLat()">
+				alt="Magnifying Glass" class="button" onclick="kakaopost()">
 		</div>
 		
 		<form id="addr_filter" method="post">
@@ -325,16 +328,14 @@ div {
 	<script>
 	var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
     mapOption = {
-        center: new kakao.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
+        center: new kakao.maps.LatLng(37.5012767241426, 127.039600248343), // 지도의 중심좌표
         level: 3 // 지도의 확대 레벨
     };  
 
-// 지도를 생성합니다    
-var map = new kakao.maps.Map(mapContainer, mapOption); 
+	// 지도를 생성합니다    
+	var map = new kakao.maps.Map(mapContainer, mapOption); 
 
 	function searchLngLat(){
-		$('.table-container').show();
-
 		var gap = document.querySelector(".searchbar").value;
 
 		// 주소-좌표 변환 객체를 생성합니다
@@ -347,7 +348,6 @@ var map = new kakao.maps.Map(mapContainer, mapOption);
 		     if (status === kakao.maps.services.Status.OK) {
 
 		        var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
-
 		        // 결과값으로 받은 위치를 마커로 표시합니다
 		        var marker = new kakao.maps.Marker({
 		            map: map,
@@ -374,23 +374,37 @@ var map = new kakao.maps.Map(mapContainer, mapOption);
 			data : data,
 			success : function(result){
 					$('.table-container').show();
-		
-					for(let i=0; i<result.length; i++){
-						$(".list").append('<li class="list-item" data-search-on-list="list-item"><a href="" class="list-item-link">'+result[i].home_DAddr+'<span class="item-list-subtext">우편번호: '+result[i].home_Post+'</span></a></li>');
-						
-						if(result[i].fi_Nm.includes('jpg')){
-							$(".horizontal-scroll-wrapper").append('<div><a href=""><img class="detail_img" src='+result[i].fi_Nm+'></a></div>');
-						}else if(result[i].fi_Nm.includes('mp4')){
-							$(".horizontal-scroll-wrapper").append('<div><a href=""><video class="detail_video" controls ><source src='+result[i].fi_Nm+'></video></a></div>');
+					if(result.length == 0){
+						$(".horizontal-scroll-wrapper").empty();
+						$(".list").empty();
+						$(".horizontal-scroll-wrapper").append('<div>해당 매물에 대한 정보가 없습니다.</div>');
+						$(".horizontal-scroll-wrapper").append('<div>해당 매물에 대한 정보가 없습니다.</div>');
+						$(".horizontal-scroll-wrapper").append('<div>해당 매물에 대한 정보가 없습니다.</div>');
+					}else{
+						//중복되는 상세주소 없앤 새로운 배열 만들기
+						$(".horizontal-scroll-wrapper").empty();
+						$(".list").empty();
+						let DAddr = new Array();
+						for(let i=0; i<result.length; i++){
+							DAddr.push(result[i].home_DAddr);
 						}
 						
-						if(result[i].fi_Nm.includes('jpg')){
-							console.log(result[i].fi_Nm + '사진');
-						}else if(result[i].fi_Nm.includes('mp4')){
-							console.log(result[i].fi_Nm + '영상');
+						let unique_DAddr = Array.from(new Set(DAddr));
+						//중복제거한 상세주소 페이지에 뿌리기
+						for(let i=0; i<unique_DAddr.length; i++){
+							$(".list").append('<li class="list-item" data-search-on-list="list-item"><a href="" class="list-item-link">'+unique_DAddr[i]+'<span class="item-list-subtext">우편번호: '+result[i].home_Post+'</span></a></li>');
 						}
-						
+					
+						//검색 주소에 해당하는 영상들 페이지에 뿌려주기
+						for(let i=0; i<result.length; i++){
+							if(result[i].fi_Nm.includes('jpg')){
+								$(".horizontal-scroll-wrapper").append('<div><a href=""><img class="detail_img" src='+result[i].fi_Nm+'></a></div>');
+							}else if(result[i].fi_Nm.includes('mp4')){
+								$(".horizontal-scroll-wrapper").append('<div><a href=""><video class="detail_video" controls ><source src='+result[i].fi_Nm+'></video></a></div>');
+							}
+						}
 					}
+					
 			},
 			error : function(){
 				console.log("ajax 에러");
