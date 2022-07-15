@@ -3,8 +3,9 @@ package com.probee.waggle.model.dto;
 import java.util.Date;
 
 public class ResultDto {
+	private int res_Code;
 	private int res_No;
-	private int res_UCode;
+	private int user_UCode;
 	private String res_Attr1;
 	private String res_Attr2;
 	private String res_Attr3;
@@ -21,11 +22,13 @@ public class ResultDto {
 		// TODO Auto-generated constructor stub
 	}
 
-	public ResultDto(int res_No, int res_Code, String res_Attr1, String res_Attr2, String res_Attr3, String res_Attr4,
-			String res_Attr5, String res_Attr6, String res_Detail, Double res_Rate, Date res_WDate, String res_Stat) {
+	public ResultDto(int res_Code, int res_No, int user_UCode, String res_Attr1, String res_Attr2, String res_Attr3,
+			String res_Attr4, String res_Attr5, String res_Attr6, String res_Detail, Double res_Rate, Date res_WDate,
+			String res_Stat) {
 		super();
+		this.res_Code = res_Code;
 		this.res_No = res_No;
-		this.res_UCode = res_Code;
+		this.user_UCode = user_UCode;
 		this.res_Attr1 = res_Attr1;
 		this.res_Attr2 = res_Attr2;
 		this.res_Attr3 = res_Attr3;
@@ -38,6 +41,14 @@ public class ResultDto {
 		this.res_Stat = res_Stat;
 	}
 
+	public int getRes_Code() {
+		return res_Code;
+	}
+
+	public void setRes_Code(int res_Code) {
+		this.res_Code = res_Code;
+	}
+
 	public int getRes_No() {
 		return res_No;
 	}
@@ -46,12 +57,12 @@ public class ResultDto {
 		this.res_No = res_No;
 	}
 
-	public int getRes_UCode() {
-		return res_UCode;
+	public int getUser_UCode() {
+		return user_UCode;
 	}
 
-	public void setRes_UCode(int res_Code) {
-		this.res_UCode = res_Code;
+	public void setUser_UCode(int user_UCode) {
+		this.user_UCode = user_UCode;
 	}
 
 	public String getRes_Attr1() {
@@ -136,11 +147,12 @@ public class ResultDto {
 
 	@Override
 	public String toString() {
-		return "ResultDto [res_No=" + res_No + ", res_Code=" + res_UCode + ", res_Attr1=" + res_Attr1 + ", res_Attr2="
-				+ res_Attr2 + ", res_Attr3=" + res_Attr3 + ", res_Attr4=" + res_Attr4 + ", res_Attr5=" + res_Attr5
-				+ ", res_Attr6=" + res_Attr6 + ", res_Detail=" + res_Detail + ", res_Rate=" + res_Rate + ", res_WDate="
-				+ res_WDate + ", res_Stat=" + res_Stat + "]";
+		return "ResultDto [res_Code=" + res_Code + ", res_No=" + res_No + ", user_UCode=" + user_UCode + ", res_Attr1="
+				+ res_Attr1 + ", res_Attr2=" + res_Attr2 + ", res_Attr3=" + res_Attr3 + ", res_Attr4=" + res_Attr4
+				+ ", res_Attr5=" + res_Attr5 + ", res_Attr6=" + res_Attr6 + ", res_Detail=" + res_Detail + ", res_Rate="
+				+ res_Rate + ", res_WDate=" + res_WDate + ", res_Stat=" + res_Stat + "]";
 	}
 
+	
 
 }

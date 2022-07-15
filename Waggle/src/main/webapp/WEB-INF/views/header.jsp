@@ -80,7 +80,7 @@ nav ul li a, nav ul li a:visited {
 	display: block;
 	padding: 0 20px;
 	line-height: 70px;
-	background: #ffffff;
+	background: transparent;
 	color: #000000;
 	text-decoration: none;
 }

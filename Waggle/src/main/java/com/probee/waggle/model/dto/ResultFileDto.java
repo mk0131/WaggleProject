@@ -1,29 +1,18 @@
 package com.probee.waggle.model.dto;
 
 public class ResultFileDto {
-	private int rf_No;
-	private int rf_UCode;
 	private int rf_FCode;
+	private int rf_RCode;
 	
 	public ResultFileDto() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
-	
-	public ResultFileDto(int rf_No, int rf_UCode, int rf_FCode) {
+	public ResultFileDto(int rf_FCode, int rf_RCode) {
 		super();
-		this.rf_No = rf_No;
-		this.rf_UCode = rf_UCode;
 		this.rf_FCode = rf_FCode;
-	}
-
-	public int getRf_No() {
-		return rf_No;
-	}
-
-	public void setRf_No(int rf_No) {
-		this.rf_No = rf_No;
+		this.rf_RCode = rf_RCode;
 	}
 
 	public int getRf_FCode() {
@@ -34,18 +23,20 @@ public class ResultFileDto {
 		this.rf_FCode = rf_FCode;
 	}
 
-	public int getRf_UCode() {
-		return rf_UCode;
+	public int getRf_RCode() {
+		return rf_RCode;
 	}
 
-	public void setRf_UCode(int rf_UCode) {
-		this.rf_UCode = rf_UCode;
+	public void setRf_RCode(int rf_RCode) {
+		this.rf_RCode = rf_RCode;
 	}
 
 	@Override
 	public String toString() {
-		return "ResultFileDto [rf_No=" + rf_No + ", rf_FCode=" + rf_FCode + ", rf_UCode=" + rf_UCode + "]";
+		return "ResultFileDto [rf_FCode=" + rf_FCode + ", rf_RCode=" + rf_RCode + "]";
 	}
+
+	
 	
 	
 	
