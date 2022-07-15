@@ -7,9 +7,8 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<h2>detail11</h2>
+	<h2>detail12</h2>
 	<p>${req_dto }</p>
 	<hr>
-	<p>${vol }</p>
 </body>
 </html>

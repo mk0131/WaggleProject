@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.probee.waggle.model.dto.HomeDto;
 import com.probee.waggle.model.dto.RequestDto;
 import com.probee.waggle.model.dto.RequestDto2;
+import com.probee.waggle.model.dto.ResultDto;
 import com.probee.waggle.model.service.BoardService;
 import com.probee.waggle.model.service.HomeService;
 
@@ -63,7 +64,8 @@ public class BoardController {
 		model.addAttribute("start",start/5+1);
 		model.addAttribute("end",end/5+1);
 		model.addAttribute("All_pages",All_pages);
-		model.addAttribute("list", list.subList(start, end));
+		model.addAttribute("list", list);
+//		model.addAttribute("list", list.subList(start, end));
 		return "board";
 	}
 	
@@ -105,17 +107,18 @@ public class BoardController {
 			user_Code = (int) storedValue;
 		}
 		
-		RequestDto dto = boardService.selectRequest(req_No);
-		model.addAttribute("dto", dto);
+		RequestDto req_dto = boardService.selectRequest(req_No);
+		model.addAttribute("req_dto", req_dto);
 		
-		int req_UCode = dto.getReq_UCode();
-		String req_Stat = dto.getReq_Stat();
+		int req_UCode = req_dto.getReq_UCode();
+		String req_Stat = req_dto.getReq_Stat();
 		
 		if(req_Stat.equals("모집중")) {
 			if(user_Code==req_UCode) {
-				return "detail/detail_11";				
+				model.addAttribute("vol",boardService.selectVolunteer(req_No));
+				return "detail/detail_11";	
 			} else {
-				return "detail/detail_13";
+				return "detail/detail_12";
 			}
 			
 		} else if(req_Stat.equals("취소")) {
@@ -136,19 +139,39 @@ public class BoardController {
 			}
 			
 		} else {
-			//int bee_Code = 
+			// 모집중, 취소 상태가 아니라면 무조건 Result 생성되어있고 수행자도 null이 아님
+			ResultDto res_dto = boardService.selectResult(req_dto.getReq_No());
+			int bee_Code = res_dto.getRes_UCode();
 			
-		}
-		
-		
-		if(req_Stat.equals("진행중")) {
+			System.out.println(res_dto);
+
+			String who = null;
+			if(user_Code==req_UCode) {
+				who = "작성자";
+			} else if(user_Code==bee_Code) {
+				who = "수행자";
+			} else {
+				who = "제3자";
+			}
+			model.addAttribute("who", who);
 			
+			if(req_Stat.equals("진행중")) {
+				return "detail/detail_21";
+
+			} else if(req_Stat.equals("확인중")) {
+				if(who.equals("작성자")) {
+					return "detail/detail_31";
+				} else if(who.equals("수행자")) {
+					return "detail/detail_32";
+				} else {
+					return "detail/detail_21";
+				}
+				
+			} else { //완료
+				return "detail/detail_41";
+			}			
 		}
-		
-		
-		System.out.println(req_No+ "/" + req_UCode + "/" + user_Code);
-		
-		return null;
+
 	}
 	
 	

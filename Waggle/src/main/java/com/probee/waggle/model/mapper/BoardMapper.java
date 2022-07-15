@@ -9,6 +9,7 @@ import org.apache.ibatis.annotations.Select;
 import com.probee.waggle.model.dto.RequestDto;
 import com.probee.waggle.model.dto.RequestDto2;
 import com.probee.waggle.model.dto.ResultDto;
+import com.probee.waggle.model.dto.VolunteerDto;
 
 @Mapper
 public interface BoardMapper {
@@ -22,8 +23,11 @@ public interface BoardMapper {
 	@Insert(" INSERT INTO Request values (null,#{req_Title},#{req_Link},NOW(),#{req_EDate},#{req_Phone},#{req_Detail},#{req_Point},'모집중',#{req_UCode},null,#{req_HCode}) ")
 	public int insertRequest(RequestDto2 dto);
 	
-	@Select(" select * from Result where res_No=#{res_No} ")
+	@Select(" select * from Result where res_No=#{res_No} and res_Stat in ('진행중','완료') ")
 	public ResultDto selectResult(int res_No);
+	
+	@Select(" select * from Volunteer where vo_No=#{req_No} ")
+	public List<VolunteerDto> selectVolunteer(int req_No);
 	
 	
 }
