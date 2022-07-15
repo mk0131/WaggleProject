@@ -43,4 +43,9 @@ public class WaggleApplication {
 		return "point";
 	}
 	
+	@RequestMapping("/mypage_me")
+	public static String gomypageme() {
+		return "mypage_me";
+	}
+	
 }
