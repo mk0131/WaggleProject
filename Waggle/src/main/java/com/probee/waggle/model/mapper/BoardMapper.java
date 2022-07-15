@@ -9,6 +9,7 @@ import org.apache.ibatis.annotations.Select;
 import com.probee.waggle.model.dto.RequestDto;
 import com.probee.waggle.model.dto.RequestDto2;
 import com.probee.waggle.model.dto.ResultDto;
+import com.probee.waggle.model.dto.UsersDto;
 import com.probee.waggle.model.dto.VolunteerDto;
 
 @Mapper
@@ -28,6 +29,9 @@ public interface BoardMapper {
 	
 	@Select(" select * from Volunteer where vo_No=#{req_No} ")
 	public List<VolunteerDto> selectVolunteer(int req_No);
+	
+	@Select(" select * from Users where user_Code in (#{user_Code}) ")
+	public List<UsersDto> selectUsers(String user_Code);
 	
 	
 }

@@ -9,6 +9,7 @@ import com.probee.waggle.model.dto.HomeDto;
 import com.probee.waggle.model.dto.RequestDto;
 import com.probee.waggle.model.dto.RequestDto2;
 import com.probee.waggle.model.dto.ResultDto;
+import com.probee.waggle.model.dto.UsersDto;
 import com.probee.waggle.model.dto.VolunteerDto;
 import com.probee.waggle.model.mapper.BoardMapper;
 
@@ -53,6 +54,12 @@ public class BoardServiceImpl implements BoardService{
 	@Override
 	public List<VolunteerDto> selectVolunteer(int req_No) {
 		return boardMapper.selectVolunteer(req_No);
+	}
+
+	@Override
+	public List<UsersDto> selectUsers(List<String> code_list) {
+		String code_string = String.join(",", code_list);
+		return boardMapper.selectUsers(code_string);
 	}
 
 

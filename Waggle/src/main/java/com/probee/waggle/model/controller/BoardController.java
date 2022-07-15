@@ -2,6 +2,7 @@ package com.probee.waggle.model.controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletResponse;
@@ -18,6 +19,7 @@ import com.probee.waggle.model.dto.HomeDto;
 import com.probee.waggle.model.dto.RequestDto;
 import com.probee.waggle.model.dto.RequestDto2;
 import com.probee.waggle.model.dto.ResultDto;
+import com.probee.waggle.model.dto.VolunteerDto;
 import com.probee.waggle.model.service.BoardService;
 import com.probee.waggle.model.service.HomeService;
 
@@ -115,7 +117,14 @@ public class BoardController {
 		
 		if(req_Stat.equals("모집중")) {
 			if(user_Code==req_UCode) {
-				model.addAttribute("vol",boardService.selectVolunteer(req_No));
+				List<VolunteerDto> vol_dto = boardService.selectVolunteer(req_No);
+				List<String> code_list = new ArrayList<String>();
+				
+				for(VolunteerDto dto : vol_dto) {
+					code_list.add(Integer.toString(dto.getVo_UCode()));
+				}
+
+				model.addAttribute("vol", boardService.selectUsers(code_list));
 				return "detail/detail_11";	
 			} else {
 				return "detail/detail_12";
@@ -124,15 +133,16 @@ public class BoardController {
 		} else if(req_Stat.equals("취소")) {
 			response.setContentType("text/html; charset=UTF-8");
 			PrintWriter out;
+
 			try {
 				out = response.getWriter();
 				out.println("<script language='javascript'>");
 				out.println("alert('취소된 글입니다.')");
 				out.println("history.back()");
 				out.println("</script>");
-				
 				out.flush();
-				return "redirect:/board/list";
+				return null;
+				
 			} catch (IOException e) {
 				e.printStackTrace();
 				return "redirect:/board/list";
@@ -142,8 +152,6 @@ public class BoardController {
 			// 모집중, 취소 상태가 아니라면 무조건 Result 생성되어있고 수행자도 null이 아님
 			ResultDto res_dto = boardService.selectResult(req_dto.getReq_No());
 			int bee_Code = res_dto.getRes_UCode();
-			
-			System.out.println(res_dto);
 
 			String who = null;
 			if(user_Code==req_UCode) {
