@@ -1,10 +1,10 @@
 package com.probee.waggle.model.dto;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 public class ChatRoomDto {
 	private int room_No;
-	private Date room_Birth;
+	private LocalDate room_Birth;
 	private int room_UCode1;
 	private int room_UCode2;
 	
@@ -15,7 +15,7 @@ public class ChatRoomDto {
 	}
 
 
-	public ChatRoomDto(int room_No, Date room_Birth, int room_UCode1, int room_UCode2) {
+	public ChatRoomDto(int room_No, LocalDate room_Birth, int room_UCode1, int room_UCode2) {
 		super();
 		this.room_No = room_No;
 		this.room_Birth = room_Birth;
@@ -34,12 +34,12 @@ public class ChatRoomDto {
 	}
 
 
-	public Date getRoom_Birth() {
+	public LocalDate getRoom_Birth() {
 		return room_Birth;
 	}
 
 
-	public void setRoom_Birth(Date room_Birth) {
+	public void setRoom_Birth(LocalDate room_Birth) {
 		this.room_Birth = room_Birth;
 	}
 
@@ -69,6 +69,9 @@ public class ChatRoomDto {
 		return "ChatRoomDto [room_No=" + room_No + ", room_Birth=" + room_Birth + ", room_UCode1=" + room_UCode1
 				+ ", room_UCode2=" + room_UCode2 + "]";
 	}
+
+
+	
 
 	
 }
