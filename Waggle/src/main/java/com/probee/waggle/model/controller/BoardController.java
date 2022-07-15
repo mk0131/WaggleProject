@@ -1,9 +1,10 @@
 package com.probee.waggle.model.controller;
 
-import java.lang.ProcessBuilder.Redirect;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.List;
 
-import javax.mail.Session;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -75,8 +76,8 @@ public class BoardController {
 	@PostMapping("/request")
 	public String updateRequest(RequestDto2 req_dto, HomeDto home_dto) {
 		
-		System.out.println(req_dto);
-		System.out.println(home_dto);
+//		System.out.println(req_dto);
+//		System.out.println(home_dto);
 		
 		HomeDto find_home = homeService.findHome(home_dto);
 		
@@ -93,6 +94,61 @@ public class BoardController {
 		} else {
 			return "redirect:/board/request";
 		}
+	}
+	
+	@GetMapping("/detail")
+	public String goDetailPage(Model model, HttpSession session, HttpServletResponse response, int req_No) {
+		
+		int user_Code = 0;
+		Object storedValue = session.getAttribute("user_Code");
+		if (storedValue instanceof Integer) {
+			user_Code = (int) storedValue;
+		}
+		
+		RequestDto dto = boardService.selectRequest(req_No);
+		model.addAttribute("dto", dto);
+		
+		int req_UCode = dto.getReq_UCode();
+		String req_Stat = dto.getReq_Stat();
+		
+		if(req_Stat.equals("모집중")) {
+			if(user_Code==req_UCode) {
+				return "detail/detail_11";				
+			} else {
+				return "detail/detail_13";
+			}
+			
+		} else if(req_Stat.equals("취소")) {
+			response.setContentType("text/html; charset=UTF-8");
+			PrintWriter out;
+			try {
+				out = response.getWriter();
+				out.println("<script language='javascript'>");
+				out.println("alert('취소된 글입니다.')");
+				out.println("history.back()");
+				out.println("</script>");
+				
+				out.flush();
+				return "redirect:/board/list";
+			} catch (IOException e) {
+				e.printStackTrace();
+				return "redirect:/board/list";
+			}
+			
+		} else {
+			//int bee_Code = 
+			
+		}
+		
+		
+		if(req_Stat.equals("진행중")) {
+			
+		}
+		
+		
+		System.out.println(req_No+ "/" + req_UCode + "/" + user_Code);
+		
+		return null;
 	}
 	
 	

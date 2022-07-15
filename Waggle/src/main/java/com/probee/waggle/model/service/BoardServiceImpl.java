@@ -22,9 +22,8 @@ public class BoardServiceImpl implements BoardService{
 	}
 
 	@Override
-	public RequestDto selectRequest(RequestDto dto) {
-		// TODO Auto-generated method stub
-		return null;
+	public RequestDto selectRequest(int req_No) {
+		return boardMapper.selectRequest(req_No);
 	}
 
 	@Override

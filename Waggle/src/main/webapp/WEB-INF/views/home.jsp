@@ -172,6 +172,7 @@ nav ul li a:hover, nav ul li a:visited:hover {
 		let url = new URL(window.location.href);
 		let urlParams = url.searchParams;
 		let data = urlParams.get('code');
+		
 		if( data != null){
 			$.ajax({
 				type : "get",
