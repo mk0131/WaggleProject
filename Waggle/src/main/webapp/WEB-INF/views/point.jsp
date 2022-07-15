@@ -12,7 +12,15 @@
 .middle {
 	margin: 0;
 	padding: 0;
+}
+.middle-top{
+	margin: 0;
+	padding: 0;
 	background-color: #ECECEC;
+}
+.middle-bottom{
+	margin: 0;
+	padding: 0;
 }
 
 .guideline {
@@ -103,13 +111,17 @@ input:focus ~ .bar:before, input:focus ~ .bar:after {
 	margin: 0 auto;
 	width: 600px;
 }
+.charge-button{
+	margin: 0 auto;
+	width: 600px;
+}
 .button {
   background: transparent;
   width: 110px;
   border-radius: 10px;
   border: 3px solid;
   display: inline-block;
-  margin: 0 10px 0 10px;
+  margin: 0 10px 15px 10px;
   height: 35px;
 }
 
@@ -127,73 +139,153 @@ input:focus ~ .bar:before, input:focus ~ .bar:after {
   cursor: pointer;
 }
 
+.blank{
+	margin:0 auto;
+	width: 50px;
+	height: 50px;
+}
+
+.point-history{
+	margin: 0 auto;
+	width: 1125px;
+}
+
+.history-title p{
+	padding-left:40px;
+	font-size: 30px;
+}
+
+/*
+#pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+*/
 </style>
 </head>
 <body>
 	<%@ include file="header.jsp"%>
 
 	<div class="middle">
-		<div class="guideline">
-			<ul class="guideline-all">
-				<li><a href="javascript:void(0)"> <i
-						class="fa-solid fa-house"></i>
-				</a></li>
-				<p>HOME > 포인트 충전하기</p>
-			</ul>
-		</div>
-
-		<div class="money-container">
-			<div class="money-title">포인트 충전</div>
-			<form>
-				<div class="money">
-					<div class="img-x">
-					<input type="text" style="background-color:transparent;" required placeholder="금액을 입력해주세요"><span class="bar"></span>
+		<div class="middle-top">
+			<div class="guideline">
+				<ul class="guideline-all">
+					<li><a href="javascript:void(0)"> <i
+							class="fa-solid fa-house"></i>
+					</a></li>
+					<p>HOME > 포인트 충전하기</p>
+				</ul>
+			</div>
+	
+			<div class="money-container">
+				<div class="money-title">포인트 충전</div>
+				<form>
+					<div class="money">
+						<div class="img-x">
+						<input class="point-amount" type="text" style="background-color:transparent;" required placeholder="금액을 입력해주세요"><span class="bar"></span>
+						</div>
+						<div class="img-x" >
+						<svg width="45" height="45" viewBox="0 0 42 42" fill="none"
+							xmlns="http://www.w3.org/2000/svg"
+							xmlns:xlink="http://www.w3.org/1999/xlink">
+							<rect width="42" height="42" fill="url(#pattern0)" fill-opacity="0.7" />
+							<defs>
+							<pattern id="pattern0" patternContentUnits="objectBoundingBox" width="1"
+							height="1">
+							<use xlink:href="#image0_79_2524" transform="scale(0.0104167)" />
+							</pattern>
+							<image id="image0_79_2524" width="96" height="96"
+								xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGAAAABgCAYAAADimHc4AAAABmJLR0QA/wD/AP+gvaeTAAAFMklEQVR4nO2d3Y9eQxzHP9ZFd/ch9fJYN+iLBGkTSZPGlQRrcWNDCcKFay8laRr8FZW00gghwqU7b2kIdddgN0qQ6tIqum1Rdp9qSy/scTHnSR+rPWfmzG/md3Z2Psk3e7M58z3fOZkzz7wdyGQymUwmk8lkMsuNC7QN1DAGbACuH9AY0AEuLf8CnALmyr+/ADPAt8B+4Avg16iuHWhbBXSAO4HbSq3H32MBfAPsBj4GPgBOe14zKYaAm4GXgBOYwELqNPAmMAlcGOH+WssIsBk4RPjQz6cfgCdLL8uGDvAscAy94BfrKPAMZ98pyTKJ7hNfp8PAo8HuXpG1wC70A7bVe8CaIEkocB+mi6gdqqtOAA8HyCMaw8B29IP01RvAqHA2wbkCmEI/PCl9CnRFEwrIKsyvUO3QpPU9cK1gTkFYD8yiH1YoHQbWiaUlzNXAT+iHFFqzwGqhzMTokmazcz59B1wpkpwAI6T1wrXVJ5ienjovox+GlnYK5OfFg+iHoK1HvFNsyFriDB+3XfMoDVu828BsqtrlmaUz9wsZT0n3eCXqQAfZ/v4cMEHcntRUWabkIOEhIo0ZPSdoeh64qbzuSsyYS+jwPwcuK8vcAPwueO2tjRJ1YBg4ImR2MPw+oSthMPw+kpVwlMDTm08JGT1X+H1CVcK5wu8jWQmPV+TnxRAy04lzwMaasi5B9p0wVV6zio3IvBMOllmJc7uAuQLz8rNBqhJswu8zIXSPt1qW58TrQuaqmoLF+DZHMcsa1KuWZVrTQfZXb4xgtMIvgB7CXdJNgub6cmkaXJujkNe21aRl+VbsCGAw1FOq+eQP6nlLD1Z8HcikdGBtCb/ArMoWYQxYCGi0QKbJaEOzM6gFhFZS3BXYqMTT26Ynf1C2Xe5Kno5ktmmQbQ2/wKy89mZnRMMF7k1Jm5qdxXrB0lslH0Y27VoJNmiEX2B243jzlYLxArempYrYzc6gvhTwr7qe37cSNMMvMANz3khOWMSsBO3wC+C3Br7/xxnlm2hSCW0IvwD+rjMaZNw6I0tugpSboPwSbi6Rl3DuhjZXbTfU5h1wzOYuhZkGxoE/BK7Vw4xnTQtcy5Xa7GwqYL+AERemgTswKyfqsB2KmC+vGbsSarOzqYAZASO27MU8rTbhrwTexxzCYdNUzWNGJz9r7M4dkYc3D0c3l8hwdJ6QaaZ/ENzaGrInlOqU5F5LH1aE2vGe8qT8NksPVtwbwGDqy1LutizfilHywiwX9QiwSvo1IXPLYWniK5ZlOjEuZG45LM69xbI8J4YwZ6z5mkt9efoBAg7zbxYwWJD2Bo3HKvLzJm9RqlbwLUpgTjyUCiS1TXpbGiXqSAf4UdB0KttUDxLx/NEQ+wWWukT3A9jwjpDxFPSWZ5aNWIP5xad989qaw5yTp8IDFgZTl/rZoi+iH4KWdgjk580w+utvNLQHWCGQnwhdYB/6ocTSDGamsFVchezvg7ZqFsWXbh3rMIebaocUSq0+uLXPKtJsjvYB1wjmFJQu5lxN7dCktAe4XDShCKwgnePrl/Q3ZjZh1nhqB+mqHvBQgDxUWM3SGjt6mxb3dHyYRGZaM5R+xgyvJM0o5nRBqZk1Cc1iJlOW3KdKfBgGnsBMZGgFfwBzyF5rhhQ06H/KcDtwnPCh9zA9mwlasEmxbR/zHMEEM475mOeN+HtcwCwu3l3qI+Avz2uK0bYKWEwXM3F+HXADZz9nezFmnc9F5f+dxEzw/8l/P2c7g1mlfDyq60wmk8lkMplMJpOp4F8DOMbRbjuvWwAAAABJRU5ErkJggg==" />
+							</defs>
+						</svg>
+						</div>
 					</div>
-					<div class="img-x" >
-					<svg width="45" height="45" viewBox="0 0 42 42" fill="none"
-						xmlns="http://www.w3.org/2000/svg"
-						xmlns:xlink="http://www.w3.org/1999/xlink">
-						<rect width="42" height="42" fill="url(#pattern0)" fill-opacity="0.7" />
-						<defs>
-						<pattern id="pattern0" patternContentUnits="objectBoundingBox" width="1"
-						height="1">
-						<use xlink:href="#image0_79_2524" transform="scale(0.0104167)" />
-						</pattern>
-						<image id="image0_79_2524" width="96" height="96"
-							xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGAAAABgCAYAAADimHc4AAAABmJLR0QA/wD/AP+gvaeTAAAFMklEQVR4nO2d3Y9eQxzHP9ZFd/ch9fJYN+iLBGkTSZPGlQRrcWNDCcKFay8laRr8FZW00gghwqU7b2kIdddgN0qQ6tIqum1Rdp9qSy/scTHnSR+rPWfmzG/md3Z2Psk3e7M58z3fOZkzz7wdyGQymUwmk8lkMsuNC7QN1DAGbACuH9AY0AEuLf8CnALmyr+/ADPAt8B+4Avg16iuHWhbBXSAO4HbSq3H32MBfAPsBj4GPgBOe14zKYaAm4GXgBOYwELqNPAmMAlcGOH+WssIsBk4RPjQz6cfgCdLL8uGDvAscAy94BfrKPAMZ98pyTKJ7hNfp8PAo8HuXpG1wC70A7bVe8CaIEkocB+mi6gdqqtOAA8HyCMaw8B29IP01RvAqHA2wbkCmEI/PCl9CnRFEwrIKsyvUO3QpPU9cK1gTkFYD8yiH1YoHQbWiaUlzNXAT+iHFFqzwGqhzMTokmazcz59B1wpkpwAI6T1wrXVJ5ienjovox+GlnYK5OfFg+iHoK1HvFNsyFriDB+3XfMoDVu828BsqtrlmaUz9wsZT0n3eCXqQAfZ/v4cMEHcntRUWabkIOEhIo0ZPSdoeh64qbzuSsyYS+jwPwcuK8vcAPwueO2tjRJ1YBg4ImR2MPw+oSthMPw+kpVwlMDTm08JGT1X+H1CVcK5wu8jWQmPV+TnxRAy04lzwMaasi5B9p0wVV6zio3IvBMOllmJc7uAuQLz8rNBqhJswu8zIXSPt1qW58TrQuaqmoLF+DZHMcsa1KuWZVrTQfZXb4xgtMIvgB7CXdJNgub6cmkaXJujkNe21aRl+VbsCGAw1FOq+eQP6nlLD1Z8HcikdGBtCb/ArMoWYQxYCGi0QKbJaEOzM6gFhFZS3BXYqMTT26Ynf1C2Xe5Kno5ktmmQbQ2/wKy89mZnRMMF7k1Jm5qdxXrB0lslH0Y27VoJNmiEX2B243jzlYLxArempYrYzc6gvhTwr7qe37cSNMMvMANz3khOWMSsBO3wC+C3Br7/xxnlm2hSCW0IvwD+rjMaZNw6I0tugpSboPwSbi6Rl3DuhjZXbTfU5h1wzOYuhZkGxoE/BK7Vw4xnTQtcy5Xa7GwqYL+AERemgTswKyfqsB2KmC+vGbsSarOzqYAZASO27MU8rTbhrwTexxzCYdNUzWNGJz9r7M4dkYc3D0c3l8hwdJ6QaaZ/ENzaGrInlOqU5F5LH1aE2vGe8qT8NksPVtwbwGDqy1LutizfilHywiwX9QiwSvo1IXPLYWniK5ZlOjEuZG45LM69xbI8J4YwZ6z5mkt9efoBAg7zbxYwWJD2Bo3HKvLzJm9RqlbwLUpgTjyUCiS1TXpbGiXqSAf4UdB0KttUDxLx/NEQ+wWWukT3A9jwjpDxFPSWZ5aNWIP5xad989qaw5yTp8IDFgZTl/rZoi+iH4KWdgjk580w+utvNLQHWCGQnwhdYB/6ocTSDGamsFVchezvg7ZqFsWXbh3rMIebaocUSq0+uLXPKtJsjvYB1wjmFJQu5lxN7dCktAe4XDShCKwgnePrl/Q3ZjZh1nhqB+mqHvBQgDxUWM3SGjt6mxb3dHyYRGZaM5R+xgyvJM0o5nRBqZk1Cc1iJlOW3KdKfBgGnsBMZGgFfwBzyF5rhhQ06H/KcDtwnPCh9zA9mwlasEmxbR/zHMEEM475mOeN+HtcwCwu3l3qI+Avz2uK0bYKWEwXM3F+HXADZz9nezFmnc9F5f+dxEzw/8l/P2c7g1mlfDyq60wmk8lkMplMJpOp4F8DOMbRbjuvWwAAAABJRU5ErkJggg==" />
-						</defs>
-					</svg>
-					</div>
+				</form>
+			</div>
+			<div class="money-buttons">
+				<div class="button">
+	 				<p>+1천원</p>
 				</div>
-			</form>
+				<div class="button">
+	 				<p>+5천원</p>
+				</div>
+				<div class="button">
+	 				<p>+1만원</p>
+				</div>
+				<div class="button">
+	 				<p>+5만원</p>
+				</div>
+			</div>
+			<div class="charge-button">
+				<div class="button" style="width:530px">
+					<p>포인트 충전하기</p>
+				</div>
+			</div>
+			<div class="blank"></div>
 		</div>
-		<div class="money-buttons">
-			<div class="button">
- 				<p>+1천원</p>
+		<div class="middle-bottom">
+			<div class="point-history">
+			
+				<div class="history-title"><p>포인트 이용 내역</p>
+				</div>
+				
+				<div class="history-main">
+				</div>
+			
+			<!-- 
+				<div class="history_pagination">
+					<div class="container my-4">
+				      <ul id="list" class="list-group">
+				      </ul>
+				      <div id="pagination" class="my-4"></div>
+				    </div>
+				</div>
+				-->
+				
 			</div>
-			<div class="button">
- 				<p>+5천원</p>
-			</div>
-			<div class="button">
- 				<p>+1만원</p>
-			</div>
-			<div class="button">
- 				<p>+5만원</p>
-			</div>
+			
 		</div>
-
+		
+		
+		
+		
 	</div>
 
 	<%@ include file="footer.jsp"%>
-<script>
-var $button = document.querySelector('.button');
-$button.addEventListener('click', function() {
-  var duration = 0.3,
-      delay = 0.08;
-  TweenMax.to($button, duration, {scaleY: 1.6, ease: Expo.easeOut});
-  TweenMax.to($button, duration, {scaleX: 1.2, scaleY: 1, ease: Back.easeOut, easeParams: [3], delay: delay});
-  TweenMax.to($button, duration * 1.25, {scaleX: 1, scaleY: 1, ease: Back.easeOut, easeParams: [6], delay: delay * 3 });
-});
-</script>
+
+	<script src="/js/easyPagination.js"></script>
+    <script>
+
+      let items = [];
+
+      for (let i=0; i<100; i++) {
+        items.push("Item " + i);
+      }
+
+      const pagination = easyPagination({
+        items,
+        rows: 5,
+        buttonsWrapper: "#pagination",
+        handlePaginatedItems: (items) => {
+        	/*
+          const list = document.getElementById("list");
+          
+          list.innerHTML = "";
+          items.forEach((item) => {
+            list.innerHTML += '<li class="list-group-item">${item}</li>';
+          });
+          */
+		  const list = document.getElementById("list");
+          list.innerHTML = "";
+          for(let i=0; i<items.length; i++){
+        	  $("#list").append('<li class="list-group-item">'+items[i]+'</li>');
+          }
+        }
+      });
+
+      pagination.paginate();
+
+    </script>
 </body>
 </html>
