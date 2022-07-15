@@ -32,10 +32,15 @@ public class WaggleApplication {
 	public static String gologin() {
 		return "login";
 	}
+
+	@RequestMapping("/inquiry")
+	public static String goinquiry() {
+		return "inquiry";
+	}
 	
-	@RequestMapping("/board")
-	public static String goboard() {
-		return "board";
+	@RequestMapping("/point")
+	public static String gopoint() {
+		return "point";
 	}
 	
 }

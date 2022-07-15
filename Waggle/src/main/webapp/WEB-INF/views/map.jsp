@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -11,13 +13,22 @@
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script>
+
 function kakaopost(){
+
     new daum.Postcode({
         	oncomplete: function(data) {
-        		document.querySelector(".searchbar").value = data.address;
+        		var a = data.address;
+        		var p = data.zonecode;
+        		document.querySelector("#var1").value = p.toString();
+        		document.querySelector(".searchbar").value = a;
+        		document.getElementById('submit').click();
+   				searchLngLat();
         	}
     	}).open();
+    
 	};
+	
 	
 
 </script>
@@ -216,7 +227,6 @@ div {
 
 .horizontal-scroll-wrapper>div {
 	display: block;
-	padding: 5px;
 	background: #c7c7c7;
 	transform: rotate(90deg) translateX(200px);
 	transform-origin: right top;
@@ -237,6 +247,12 @@ div {
 	width: 994.2px;
 	height: 500px;
 }
+
+.detail_img, .detail_video{
+	width: 100%;
+	height: 100%;
+	object-fit: fill;
+}
 </style>
 <body>
 	<%@ include file="header.jsp"%>
@@ -253,10 +269,16 @@ div {
 			
 		<div class="container" >
 			<input type="text" maxlength="12" placeholder="주소 검색하기"
-				class="searchbar" onclick="kakaopost()"> <img
+				class="searchbar" onclick="kakaopost()"> 
+				<img
 				src="https://images-na.ssl-images-amazon.com/images/I/41gYkruZM2L.png"
-				alt="Magnifying Glass" class="button" onclick="searchLngLat()">
+				alt="Magnifying Glass" class="button" onclick="kakaopost()">
 		</div>
+		
+		<form id="addr_filter" method="post">
+		<input type="button" style="display:none" id="submit">
+		<input id="var1" type="hidden" name="search_post" value="" >
+		</form>
 		
 		<div class="blank">
 		</div>
@@ -268,52 +290,24 @@ div {
 					data-search-on-list="counter"></span>
 				<div class="list-wrap">
 					<ul class="list" data-search-on-list="list">
-						<li class="list-item" data-search-on-list="list-item"><a
-							href="" class="list-item-link">Ali <span
-								class="item-list-subtext">Smith</span></a></li>
-						<li class="list-item" data-search-on-list="list-item"><a
-							href="" class="list-item-link">Alia <span
-								class="item-list-subtext">Johnson</span></a></li>
-						<li class="list-item" data-search-on-list="list-item"><a
-							href="" class="list-item-link">Amira<span
-								class="item-list-subtext">Johnson</span></a></li>
-						<li class="list-item" data-search-on-list="list-item"><a
-							href="" class="list-item-link">Omar<span
-								class="item-list-subtext">Davis</span></a></li>
-						<li class="list-item" data-search-on-list="list-item"><a
-							href="" class="list-item-link">Emily<span
-								class="item-list-subtext">García</span></a></li>
-						<li class="list-item" data-search-on-list="list-item"><a
-							href="" class="list-item-link">John<span
-								class="item-list-subtext">Robinson</span></a></li>
-						<li class="list-item" data-search-on-list="list-item"><a
-							href="" class="list-item-link">Emily<span
-								class="item-list-subtext">Clark</span></a></li>
-						<li class="list-item" data-search-on-list="list-item"><a
-							href="" class="list-item-link">Aurora<span
-								class="item-list-subtext">Lewis</span></a></li>
-						<li class="list-item" data-search-on-list="list-item"><a
-							href="" class="list-item-link">Adeline<span
-								class="item-list-subtext">Robinson</span></a></li>
-						<li class="list-item" data-search-on-list="list-item"><a
-							href="" class="list-item-link">John<span
-								class="item-list-subtext">García</span></a></li>
-						<li class="list-item" data-search-on-list="list-item"><a
-							href="" class="list-item-link">Isla<span
-								class="item-list-subtext">Lewis</span></a></li>
 					</ul>
 				</div>
 			</div>
 			
 			<div class="horizontal-scroll-wrapper squares">
-				<div>item 1</div>
-				<div>item 2</div>
-				<div>item 3</div>
-				<div>item 4</div>
-				<div>item 5</div>
-				<div>item 6</div>
-				<div>item 7</div>
-				<div>item 8</div>
+			<!-- 
+			<c:forEach var="media" items="${list}">
+				<div>
+				<c:set var="type" value="${media.getFi_Nm()}" />
+				<c:if test="${fn:contains(type,'jpg')}">
+				<a href=""><img class="detail_img" alt="${media.getFi_Nm()}" src="${media.getFi_Nm()}"></a>
+				</c:if>
+				<c:if test="${fn:contains(type,'mp4')}">
+				<a href=""><video class="detail_video" controls ><source src="${media.getFi_Nm()}">비디오</video></a>
+				</c:if>
+				</div>
+			</c:forEach>
+			-->
 			</div>
 			
 			<div class="blank">
@@ -325,6 +319,7 @@ div {
 		<div id="map">
 			
 		</div>
+		
 	</div>
 
 	<%@ include file="footer.jsp"%>
@@ -333,15 +328,14 @@ div {
 	<script>
 	var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
     mapOption = {
-        center: new kakao.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
+        center: new kakao.maps.LatLng(37.5012767241426, 127.039600248343), // 지도의 중심좌표
         level: 3 // 지도의 확대 레벨
     };  
 
-// 지도를 생성합니다    
-var map = new kakao.maps.Map(mapContainer, mapOption); 
+	// 지도를 생성합니다    
+	var map = new kakao.maps.Map(mapContainer, mapOption); 
 
 	function searchLngLat(){
-		$('.table-container').show();
 		var gap = document.querySelector(".searchbar").value;
 
 		// 주소-좌표 변환 객체를 생성합니다
@@ -354,7 +348,6 @@ var map = new kakao.maps.Map(mapContainer, mapOption);
 		     if (status === kakao.maps.services.Status.OK) {
 
 		        var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
-
 		        // 결과값으로 받은 위치를 마커로 표시합니다
 		        var marker = new kakao.maps.Marker({
 		            map: map,
@@ -369,7 +362,56 @@ var map = new kakao.maps.Map(mapContainer, mapOption);
 		});    
 	}
 	
-	
+ 	
+	//주소창에 검색시 상세주소와 해당 영상들 나오게 하기
+	$('#submit').on("click", function(){ // #submit버튼은 kakaopost() 함수에서 click되도록 구성
+		let search_post = $('#var1').val();
+		let data = {search_post : search_post}
+		
+		$.ajax({
+			type : "post",
+			url : "/search",
+			data : data,
+			success : function(result){
+					$('.table-container').show();
+					if(result.length == 0){
+						$(".horizontal-scroll-wrapper").empty();
+						$(".list").empty();
+						$(".horizontal-scroll-wrapper").append('<div>해당 매물에 대한 정보가 없습니다.</div>');
+						$(".horizontal-scroll-wrapper").append('<div>해당 매물에 대한 정보가 없습니다.</div>');
+						$(".horizontal-scroll-wrapper").append('<div>해당 매물에 대한 정보가 없습니다.</div>');
+					}else{
+						//중복되는 상세주소 없앤 새로운 배열 만들기
+						$(".horizontal-scroll-wrapper").empty();
+						$(".list").empty();
+						let DAddr = new Array();
+						for(let i=0; i<result.length; i++){
+							DAddr.push(result[i].home_DAddr);
+						}
+						
+						let unique_DAddr = Array.from(new Set(DAddr));
+						//중복제거한 상세주소 페이지에 뿌리기
+						for(let i=0; i<unique_DAddr.length; i++){
+							$(".list").append('<li class="list-item" data-search-on-list="list-item"><a href="" class="list-item-link">'+unique_DAddr[i]+'<span class="item-list-subtext">우편번호: '+result[i].home_Post+'</span></a></li>');
+						}
+					
+						//검색 주소에 해당하는 영상들 페이지에 뿌려주기
+						for(let i=0; i<result.length; i++){
+							if(result[i].fi_Nm.includes('jpg')){
+								$(".horizontal-scroll-wrapper").append('<div><a href=""><img class="detail_img" src='+result[i].fi_Nm+'></a></div>');
+							}else if(result[i].fi_Nm.includes('mp4')){
+								$(".horizontal-scroll-wrapper").append('<div><a href=""><video class="detail_video" controls ><source src='+result[i].fi_Nm+'></video></a></div>');
+							}
+						}
+					}
+					
+			},
+			error : function(){
+				console.log("ajax 에러");
+			}
+		})
+
+	});// function 종료
 	</script>
 </body>
 <script>

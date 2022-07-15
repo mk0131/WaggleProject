@@ -105,7 +105,7 @@ nav ul li a:hover, nav ul li a:visited:hover {
 		<div class="container">
 			<div class="brand-container">
 				<span class="img01">
-					<a href="#!"> 
+					<a href="/home"> 
 						<svg width="45" height="45"
 							fill="none" xmlns="http://www.w3.org/2000/svg"
 							xmlns:xlink="http://www.w3.org/1999/xlink">
@@ -120,13 +120,13 @@ nav ul li a:hover, nav ul li a:visited:hover {
 						</svg>
 					</a>
 				</span>	
-				<a href="#!">Logo</a>
+				<a href="/home">Waggle</a>
 			</div>
 			<div class="nav-container">
 				<nav>
 					<ul class="nav-list">
 						<li><a href="/map">지도</a></li>
-						<li><a href="#!">꿀단지</a></li>
+						<li><a href="/board/list">꿀단지</a></li>
 						<li><a href="#!">마이페이지</a></li>
 						<li><a href="#!">이용내역</a></li>
 						<li><a href="#!">채팅</a></li>

@@ -13,6 +13,8 @@
 	<h3><a href="/home">home</a></h3>
 	<a href="/map">map</a>
 	<h3><a href="/login">login</a></h3>
-	<h3><a href="/board">board</a></h3>
+	<h3><a href="/board/list">board</a></h3>
+	<h3><a href="/inquiry/list">inquiry</a></h3>
+	<h3><a href="/point">point</a></h3>
 </body>
 </html>

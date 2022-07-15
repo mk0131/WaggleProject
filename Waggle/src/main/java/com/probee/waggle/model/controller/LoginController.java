@@ -60,7 +60,6 @@ public class LoginController {
 	public String NaverLogin(HttpServletRequest request, UsersDto dto) {
 
 		HttpSession session = request.getSession();
-		System.out.println(dto);
 		UsersDto user = loginService.Naver(dto);
 
 		if (user == null) { // 동일한 이메일이 없으면 회원가입
