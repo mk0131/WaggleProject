@@ -1,13 +1,13 @@
 package com.probee.waggle.model.dto;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 public class RequestDto {
 	private int req_No;
 	private String req_Title;
 	private String req_Link;
-	private Date req_WDate;
-	private Date req_EDate;
+	private LocalDate req_WDate;
+	private LocalDate req_EDate;
 	private String req_Phone;
 	private String req_Detail;
 	private int req_Point;
@@ -21,8 +21,9 @@ public class RequestDto {
 		// TODO Auto-generated constructor stub
 	}
 
-	public RequestDto(int req_No, String req_Title, String req_Link, Date req_WDate, Date req_EDate, String req_Phone,
-			String req_Detail, int req_Point, String req_Stat, int req_UCode, int req_FCode, int req_HCode) {
+	public RequestDto(int req_No, String req_Title, String req_Link, LocalDate req_WDate, LocalDate req_EDate,
+			String req_Phone, String req_Detail, int req_Point, String req_Stat, int req_UCode, int req_FCode,
+			int req_HCode) {
 		super();
 		this.req_No = req_No;
 		this.req_Title = req_Title;
@@ -62,19 +63,19 @@ public class RequestDto {
 		this.req_Link = req_Link;
 	}
 
-	public Date getReq_WDate() {
+	public LocalDate getReq_WDate() {
 		return req_WDate;
 	}
 
-	public void setReq_WDate(Date req_WDate) {
+	public void setReq_WDate(LocalDate req_WDate) {
 		this.req_WDate = req_WDate;
 	}
 
-	public Date getReq_EDate() {
+	public LocalDate getReq_EDate() {
 		return req_EDate;
 	}
 
-	public void setReq_EDate(Date req_EDate) {
+	public void setReq_EDate(LocalDate req_EDate) {
 		this.req_EDate = req_EDate;
 	}
 
@@ -142,6 +143,7 @@ public class RequestDto {
 				+ req_FCode + ", req_HCode=" + req_HCode + "]";
 	}
 
+	
 	
 
 	

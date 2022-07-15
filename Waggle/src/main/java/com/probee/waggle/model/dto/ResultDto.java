@@ -1,6 +1,6 @@
 package com.probee.waggle.model.dto;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 public class ResultDto {
 	private int res_Code;
@@ -14,7 +14,7 @@ public class ResultDto {
 	private String res_Attr6;
 	private String res_Detail;
 	private Double res_Rate;
-	private Date res_WDate;
+	private LocalDate res_WDate;
 	private String res_Stat;
 	
 	public ResultDto() {
@@ -23,8 +23,8 @@ public class ResultDto {
 	}
 
 	public ResultDto(int res_Code, int res_No, int res_UCode, String res_Attr1, String res_Attr2, String res_Attr3,
-			String res_Attr4, String res_Attr5, String res_Attr6, String res_Detail, Double res_Rate, Date res_WDate,
-			String res_Stat) {
+			String res_Attr4, String res_Attr5, String res_Attr6, String res_Detail, Double res_Rate,
+			LocalDate res_WDate, String res_Stat) {
 		super();
 		this.res_Code = res_Code;
 		this.res_No = res_No;
@@ -129,11 +129,11 @@ public class ResultDto {
 		this.res_Rate = res_Rate;
 	}
 
-	public Date getRes_WDate() {
+	public LocalDate getRes_WDate() {
 		return res_WDate;
 	}
 
-	public void setRes_WDate(Date res_WDate) {
+	public void setRes_WDate(LocalDate res_WDate) {
 		this.res_WDate = res_WDate;
 	}
 
@@ -152,10 +152,6 @@ public class ResultDto {
 				+ ", res_Attr5=" + res_Attr5 + ", res_Attr6=" + res_Attr6 + ", res_Detail=" + res_Detail + ", res_Rate="
 				+ res_Rate + ", res_WDate=" + res_WDate + ", res_Stat=" + res_Stat + "]";
 	}
-
-	
-
-
 	
 
 }
