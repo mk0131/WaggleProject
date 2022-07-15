@@ -16,4 +16,19 @@ public class LoginServiceImpl  implements LoginService{
 		return loginMapper.UserLogin(dto);
 	}
 
+	@Override
+	public UsersDto Naver(UsersDto dto) {
+		return loginMapper.Naver(dto);
+	}
+
+	@Override
+	public int NaverRegist(UsersDto dto) {
+		return loginMapper.NaverRegist(dto);
+	}
+
+	@Override
+	public int KakaoRegist(UsersDto dto) {
+		return loginMapper.KakaoRegist(dto);
+	}
+
 }

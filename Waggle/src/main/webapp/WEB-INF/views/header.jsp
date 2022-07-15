@@ -145,6 +145,7 @@ nav ul li a:hover, nav ul li a:visited:hover {
 					</c:if>
 					<c:if test="${user_Code != null }">
 					 <b>${user_Nm } 님 환영합니다</b>/<a href="/login/logout">로그아웃</a>
+					 <input type="hidden" name="in_Code" value="${user_Code }">
 					</c:if>
 				</div>
 			</div>

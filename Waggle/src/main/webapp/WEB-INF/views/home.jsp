@@ -10,6 +10,7 @@
 	rel="stylesheet"/>
 <link href="https://fonts.googleapis.com/css?family=Inter&display=swap"
 	rel="stylesheet" />
+	<script type="text/javascript" src="https://static.nid.naver.com/js/naverLogin_implicit-1.0.3.js" charset="utf-8"></script>
 <style type="text/css">
 
 .container {
@@ -105,6 +106,31 @@ nav ul li a:hover, nav ul li a:visited:hover {
 }
 
 </style>
+<script type="text/javascript">
+  var naver_id_login = new naver_id_login("xDkhcqAWvvHzWB6YfVIG", "http://localhost:8787/home");
+  // 접근 토큰 값 출력
+  console.log(naver_id_login.oauthParams.access_token);
+  // 네이버 사용자 프로필 조회
+  naver_id_login.get_naver_userprofile("naverSignInCallback()");
+  // 네이버 사용자 프로필 조회 이후 프로필 정보를 처리할 callback function
+  function naverSignInCallback() {
+	  
+    let data = {user_Email : naver_id_login.getProfileData('email'), user_Naver : naver_id_login.getProfileData('id'),
+    		user_Nm : naver_id_login.getProfileData('nickname'), user_Gender : naver_id_login.getProfileData('gender')}
+    
+    $.ajax({
+		type : "post",
+		url : "/login/naver",
+		data : data,
+		success : function(result){
+			location.href ="/home";
+		}
+	})
+    
+    
+  }
+</script>
+
 </head>
 <body>
 		<%@ include file="header.jsp"%>
@@ -139,5 +165,26 @@ nav ul li a:hover, nav ul li a:visited:hover {
 			});
 		}); // end DOM ready
 	})(jQuery); // end jQuery
+</script>
+<script type="text/javascript">
+	$(function(){
+		
+		let url = new URL(window.location.href);
+		let urlParams = url.searchParams;
+		let data = urlParams.get('code');
+		if( data != null){
+			$.ajax({
+				type : "get",
+				url : "/login/kakao?code=" + data,
+				data : data,
+				success : function(result){
+					location.href ="/home";
+				}
+				
+			})
+		}
+		
+	})
+
 </script>
 </html>

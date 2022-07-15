@@ -4,6 +4,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <style type="text/css">
@@ -251,6 +252,7 @@ input {
 	src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="https://static.nid.naver.com/js/naverLogin_implicit-1.0.3.js" charset="utf-8"></script>
 <script type="text/javascript">
 	$(function(){
 		
@@ -263,6 +265,7 @@ input {
 		$("#login").on("click",function(){
 			$("#title").html("로그인");
 			$("#regist").hide();
+			$(".login_warn").css("display","none");
 		})
 		$("#regist_in").on("click",function(){
 			$("#sign-up-content").hide();
@@ -273,6 +276,7 @@ input {
 			$('.pw_input_re_2').css("display", "none");
 			$('.email_input_re_1').css("display", "none");
 			$('.email_input_re_2').css("display", "none");
+			$('.email_input_re_3').css("display","none");
 			$('.nm_input_re_1').css("display", "none");
 			$('.nm_input_re_2').css("display", "none");
 			$('.id_form_check').css("display","none");
@@ -294,6 +298,7 @@ input {
 		})
 		$("#modal").on("click",function(){
 			$("#terms").prop("checked",true);
+			$(".final_terms_ck").css("display","none");
 		})
 		/* 다음 주소 연동*/
 		$("#address").on("click",function(){
@@ -401,8 +406,21 @@ input {
 					</div>
 					<h3 style="text-align: center;">SNS 간편 로그인</h3>
 					<div class="api-login">
-						<button type="button" value="naver">네이버 로그인</button>
-						<button type="button" value="kakao">카카오 로그인</button>
+						<!-- 네이버 로그인 버튼 노출 영역 -->
+                	<div id="naver_id_login"></div>
+						<!-- //네이버 로그인 버튼 노출 영역 -->
+					<script type="text/javascript">
+						var naver_id_login = new naver_id_login("xDkhcqAWvvHzWB6YfVIG", "http://localhost:8787/home");
+						var state = naver_id_login.getUniqState();
+						naver_id_login.setButton("green", 4,60);
+						naver_id_login.setDomain("http://localhost:8787");
+						naver_id_login.setState(state);
+						naver_id_login.init_naver_id_login();
+					</script>
+  						<br>
+						<a class="p-2" href="https://kauth.kakao.com/oauth/authorize?client_id=6271ae3b4283fa56e846863ed3a4f7be&redirect_uri=http://localhost:8787/home&response_type=code">
+							<img src="/images/login/kakao_login_medium_narrow.png" style="width:280px; height:60px;">
+							</a>
 						<button type="button" value="google">구글 로그인</button>
 
 					</div>
@@ -417,7 +435,7 @@ input {
 						</div>
 						<h3 style="text-align: center;">SNS 간편 회원가입</h3>
 						<div class="api-login">
-							<button type="button" value="naver">네이버 간편 회원가입</button>
+							
 							<button type="button" value="kakao">카카오 간편 회원가입</button>
 							<button type="button" value="google">구글 간편 회원가입</button>
 
@@ -475,7 +493,8 @@ input {
 						<br>
 						<span class="nm_input_re_1">사용 가능한 닉네임입니니다.</span>
 						<span class="nm_input_re_2">닉네임이 이미 존재합니다.</span>
-						<span class="nm_form_check">닉네임을 입력해주세요.</span>
+						<span class="final_name_ck">닉네임을 입력해주세요.</span>
+						<span class="nm_form_check"></span>
 					</div>
 					<div>
 						<b style="text-align: left;">나이</b> <br> 
@@ -938,6 +957,7 @@ input {
 		let user_Nm = $('#nm_input').val();
 		let data = {user_Nm : user_Nm}
 		let warnMsg = $(".nm_form_check"); // 닉네임 경고글
+		$(".final_name_ck").css("display","none");
 		
 		if(nmFormCheck(user_Nm)){
 	        
