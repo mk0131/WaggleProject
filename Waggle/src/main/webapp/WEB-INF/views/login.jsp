@@ -212,6 +212,10 @@ input {
 		color : red;
 		display : none;
 	}
+	.age_form_check{
+		color : red;
+		display : none;
+	}
 	.final_id_ck{
     display: none;
 	}
@@ -254,6 +258,7 @@ input {
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js"></script>
 	<script type="text/javascript" src="https://static.nid.naver.com/js/naverLogin_implicit-1.0.3.js" charset="utf-8"></script>
 <script type="text/javascript">
+
 	$(function(){
 		
 		
@@ -282,6 +287,8 @@ input {
 			$('.id_form_check').css("display","none");
 			$('.pw_form_check').css("display","none");
 			$('.email_form_check').css("display","none");
+			$('.nm_form_check').css("display","none");
+			$('.age_form_check').css("display","none");
 			$('#id_input').val(null);
 			$('#pw_input').val(null);
 			$('#pw_chk').val(null);
@@ -353,10 +360,13 @@ input {
 		
 	})
 </script>
+
 </head>
+
 <body>
+
 	<%@ include file="header.jsp"%>
-	<div id="wrap" style="height: 1200px;">
+	<div id="wrap" style="height: 1300px;">
 		<div class="middle">
 			<div class="guideline">
 
@@ -421,7 +431,11 @@ input {
 						<a class="p-2" href="https://kauth.kakao.com/oauth/authorize?client_id=6271ae3b4283fa56e846863ed3a4f7be&redirect_uri=http://localhost:8787/home&response_type=code">
 							<img src="/images/login/kakao_login_medium_narrow.png" style="width:280px; height:60px;">
 							</a>
-						<button type="button" value="google">구글 로그인</button>
+							<br>
+							<br>
+						
+						
+						
 
 					</div>
 				</div>
@@ -433,13 +447,7 @@ input {
 								이미회원이신가요?&nbsp;|&nbsp;<a href="/login">로그인</a>
 							</p>
 						</div>
-						<h3 style="text-align: center;">SNS 간편 회원가입</h3>
-						<div class="api-login">
-							
-							<button type="button" value="kakao">카카오 간편 회원가입</button>
-							<button type="button" value="google">구글 간편 회원가입</button>
-
-						</div>
+						
 					</div>
 				</div>
 				<div class="tab_content" id="sign-up-form-content"></div>
@@ -499,6 +507,8 @@ input {
 					<div>
 						<b style="text-align: left;">나이</b> <br> 
 						<input type="text" id="age_input" name="user_Age" placeholder="  나이" style="width: 500px;">
+						<br>
+						<span class="age_form_check"></span>
 					</div>
 					<div>
 						<b style="text-align: left;">주소</b> <br> 
@@ -790,7 +800,7 @@ input {
 								</div>
 							</div>
 						</div>
-						<br><br>
+						<br><br><br><br>
 						 <input type="button" value="회원가입" id="regist_com" 
 							style="width: 120px;"> 
 							<input type="button" value="회원가입 취소"
@@ -824,6 +834,7 @@ input {
 	$('#id_chk').on("click", function(){ // 아이디 입력마다 값을 확인
 		let user_Id = $('#id_input').val();
 		let warnMsg = $(".id_form_check"); // 비밀번호 경고글
+		 $('.final_id_ck').css('display', 'none');
 		let data = {user_Id : user_Id}
 		
 		if(idFormCheck(user_Id)){
@@ -863,6 +874,7 @@ input {
 	$('#pw_input').blur(function(){ // 비밀번호 유형 검사
 		let warnMsg = $(".pw_form_check"); // 비밀번호 경고글
 		let user_Pw = $("#pw_input").val();
+		 $('.final_pw_ck').css('display', 'none');
 		
 		if(pwFormCheck(user_Pw)){
 	        warnMsg.html("올바른 비밀번호 형식입니다.");
@@ -903,6 +915,7 @@ input {
 		let user_Email = $("#email_input").val(); // 입력한 이메일
 		let checkBox = $("#chk_nm"); // 인증번호 입력란
 		let warnMsg = $(".email_form_check"); // 이메일 경고글
+		 $('.final_mail_ck').css('display', 'none');
 		
 		if(mailFormCheck(user_Email)){
 	        warnMsg.html("이메일이 전송 되었습니다. 이메일을 확인해주세요.");
@@ -993,6 +1006,21 @@ input {
 
 	});// function 종료
 	
+	$('#age_input').blur(function(){ // 비밀번호 유형 검사
+		let warnMsg = $(".age_form_check"); // 비밀번호 경고글
+		let user_Age = $("#age_input").val();
+		
+		if(ageFormCheck(user_Age)){
+	        warnMsg.css("display", "none");
+	    } else {
+	        warnMsg.html("숫자만 입력해 주세요");
+	        warnMsg.css("color","red");
+	        warnMsg.css("display", "inline-block");
+	        $("#age_input").val(null);
+	        return false;
+	    } 
+	})
+	
 	$('#regist_com').on("click" , function(){ // 회원가입 버튼
 		var id = $('#id_input').val();                 // id 입력란
         var pw = $('#pw_input').val();                // 비밀번호 입력란
@@ -1000,6 +1028,7 @@ input {
         var name = $('#nm_input').val();            // 이름 입력란
         var mail = $('#email_input').val();            // 이메일 입력란
         var addr = $('#daddr').val();        // 상세 주소 입력란
+        var age = $('#age_input').val();
         
         if(id == ""){
             $('.final_id_ck').css('display','block');
@@ -1082,6 +1111,11 @@ input {
 	function nmFormCheck(nm){
 		var form = /^(?=.*[a-z0-9가-힣])[a-z0-9가-힣]{2,16}$/;
 		return form.test(nm);
+	}
+	
+	function ageFormCheck(age){
+		var form = /^([0-9]){2,3}$/;
+		return form.test(age);
 	}
 	
 })

@@ -15,10 +15,10 @@ public interface LoginMapper {
 	@Select(" SELECT user_Code , user_Nm ,user_Email FROM Users WHERE user_Email = #{user_Email} ")
 	UsersDto Naver(UsersDto dto);
 	
-	@Insert(" INSERT INTO USERS (user_Code, user_Pw, user_Email, user_Nm, user_Gender, user_Naver) VALUES(null,1234,#{user_Email},#{user_Nm},#{user_Gender},#{user_Naver}) ")
+	@Insert(" INSERT INTO USERS (user_Code, user_Email, user_Nm, user_Gender, user_Naver) VALUES(null,#{user_Email},#{user_Nm},#{user_Gender},#{user_Naver}) ")
 	int NaverRegist(UsersDto dto);
 	
-	@Insert(" INSERT INTO USERS (user_Code, user_Pw, user_Email, user_Nm, user_Gender, user_Kakao) VALUES(null,1234,#{user_Email},#{user_Nm},#{user_Gender},#{user_Kakao}) ")
+	@Insert(" INSERT INTO USERS (user_Code, user_Email, user_Nm, user_Gender, user_Kakao) VALUES(null,#{user_Email},#{user_Nm},#{user_Gender},#{user_Kakao}) ")
 	int KakaoRegist(UsersDto dto);
 	
 	
