@@ -150,7 +150,7 @@ tr {
 						</tr>
 						<tr>
 						<th>제목</th>
-						<td><input type="text" id="title" name="title"></td>
+						<td><input type="text" id="title" name="title" placeholder="제목을 입력해주세요."></td>
 						</tr>
 						<tr>
 						<th>작성자</th>

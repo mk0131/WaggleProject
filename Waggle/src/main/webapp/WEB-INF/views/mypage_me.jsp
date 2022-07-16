@@ -223,7 +223,7 @@ textarea {
 			</div>
 
 			<div class="middle-profile">
-				<div class="profile" style="text-align: center">
+				<div class="profile" style="text-align: center; display: flex; justify-content: center;">
 					<div class="profile-left" style="display: inline-block">
 						<img src="/images/profile/profile_default.jpg"
 							style="width: 100px; height: 100px">
@@ -286,12 +286,12 @@ textarea {
 								style="font-size: 11pt; color: #2d7eac; margin-left: 5px">인증하기</a></span>
 						</div>
 					</div>
-					<div class="profile-bottom">
+				</div>
+				<div class="profile-bottom">
 						<div class="button">
 							<p>회원정보 수정</p>
 						</div>
 					</div>
-				</div>
 				<div class="description" style="text-align: center">
 					<div class="desc-nav">
 						<ul class="desc-list">
