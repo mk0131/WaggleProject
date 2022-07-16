@@ -33,10 +33,6 @@
 		
 	});
 	
-
-	
-	
-	
 </script>
 
 <style type="text/css">
@@ -146,25 +142,24 @@
 
 				<c:forEach var="dto" items="${list}">
 					<div class="data-contents">
-					
-						<div class="left_box">
-							<div class="left_box1">
-								<img src="${dto.req_Link }" alt="방사진">
+						<div onclick="location.href='/board/detail?req_No=${dto.req_No}'">
+							<div class="left_box">
+								<div class="left_box1">
+									<img src="${dto.req_Link }" alt="방사진">
+								</div>
+								<div class="left_box2">
+									<span>${dto.req_Stat }</span>
+								</div>
 							</div>
-							<div class="left_box2">
-								<span>${dto.req_Stat }</span>
+							
+							<div class="right_box">
+								<div class="right_box1">기한: ${dto.req_EDate }</div>
+								<div class="right_box2">위치</div>
+								<div class="right_box3"><span>${dto.req_Title}</span></div>
+								<div class="right_box4">예상거리</div>
+								<div class="right_box5">${dto.req_Point }</div>
 							</div>
 						</div>
-						
-						<div class="right_box">
-							<input type="hidden" value="${dto.req_No}">
-							<div class="right_box1">기한: ${dto.req_EDate }</div>
-							<div class="right_box2">위치</div>
-							<div class="right_box3"><span>${dto.req_Title}</span></div>
-							<div class="right_box4">예상거리</div>
-							<div class="right_box5">${dto.req_Point }</div>
-						</div>
-						
 					</div>
 				</c:forEach>
 

@@ -1,7 +1,6 @@
 package com.probee.waggle.model.dto;
 
 import java.time.LocalDate;
-import java.util.Date;
 
 public class InquiryDto {
 	private int in_Code;

@@ -8,6 +8,9 @@ import org.springframework.stereotype.Service;
 import com.probee.waggle.model.dto.HomeDto;
 import com.probee.waggle.model.dto.RequestDto;
 import com.probee.waggle.model.dto.RequestDto2;
+import com.probee.waggle.model.dto.ResultDto;
+import com.probee.waggle.model.dto.UsersDto;
+import com.probee.waggle.model.dto.VolunteerDto;
 import com.probee.waggle.model.mapper.BoardMapper;
 
 @Service
@@ -22,9 +25,8 @@ public class BoardServiceImpl implements BoardService{
 	}
 
 	@Override
-	public RequestDto selectRequest(RequestDto dto) {
-		// TODO Auto-generated method stub
-		return null;
+	public RequestDto selectRequest(int req_No) {
+		return boardMapper.selectRequest(req_No);
 	}
 
 	@Override
@@ -42,6 +44,22 @@ public class BoardServiceImpl implements BoardService{
 	public int updateRequest(RequestDto dto) {
 		// TODO Auto-generated method stub
 		return 0;
+	}
+
+	@Override
+	public ResultDto selectResult(int res_No) {
+		return boardMapper.selectResult(res_No);
+	}
+
+	@Override
+	public List<VolunteerDto> selectVolunteer(int req_No) {
+		return boardMapper.selectVolunteer(req_No);
+	}
+
+	@Override
+	public List<UsersDto> selectUsers(List<String> code_list) {
+		String code_string = String.join(",", code_list);
+		return boardMapper.selectUsers(code_string);
 	}
 
 

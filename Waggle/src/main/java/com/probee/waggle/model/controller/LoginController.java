@@ -101,19 +101,19 @@ public class LoginController {
 		users.setUser_Nm(user[1]);
 		users.setUser_Email(user[2]);
 		users.setUser_Gender(user[3]);
-
+		
 		UsersDto dto2 = loginService.Naver(users);
-
+		
 		if (dto2 == null) {
 			loginService.KakaoRegist(users);
 			UsersDto kakao = loginService.Naver(users);
-
+			System.out.println(kakao);
 			session.setAttribute("user_Code", kakao.getUser_Code());
 			session.setAttribute("user_Nm", kakao.getUser_Nm());
 			session.setMaxInactiveInterval(-1);
 			return "redirect:/home";
 		} else {
-
+			System.out.println(dto2);
 			session.setAttribute("user_Code", dto2.getUser_Code());
 			session.setAttribute("user_Nm", dto2.getUser_Nm());
 			session.setMaxInactiveInterval(-1);
