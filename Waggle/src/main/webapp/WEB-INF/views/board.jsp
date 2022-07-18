@@ -8,33 +8,6 @@
 <title>꿀단지</title>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <link rel="stylesheet" href="/css/guideline.css">
-
-<script type="text/javascript">
-
-	$(function(){
-		var listAll = new Array();
-
-	    <c:forEach var="dto" items="${list}">
-	    listAll.push("${dto}");
-	    </c:forEach>
-	    
-		console.log(listAll);		
-		console.log(listAll[0]);
-
-		
-// 		for(let i=0; i<listAll.length; i++) {
-// 			$("#data-container").append("<li><div class='data-contents'>"+listAll[i]+"</div></li>");
-// 		} 
-		$("#data-container").append("<li><div class='data-contents'>"+listAll[0]+"</div></li>");
-	});
-	
-	$(".pagination").click(function(){
-		
-		
-	});
-	
-</script>
-
 <style type="text/css">
 
 .board {
@@ -44,76 +17,7 @@
   	position: relative;
 }
 
-.data-contents{
-	width: 700px; height: 150px; margin-bottom: 20px; border: 1px solid;
-}
-
-.left_box{
-	float: left; height: 150px; width: 120px;
-}
-
-.left_box1{
-	height: 120px; width: 120px; border:
-}
-
-.left_box2{
-	height: 25px; width: 120px; border:
-}
-
-.right_box{
-	float: right; height: 150px; width: 550px; position: relative;
-}
-
-.right_box1{
-	height: 75px; width: 100px;
-	position: absolute;
-	top: 0px;
-	left: 0px;
-}
-
-.right_box2{
-	height: 75px; width: 100px;
-	position: absolute;
-	top: 75px;
-	left: 0px;
-}
-
-.right_box3{
-	height: 150px; width: 350px;
-	position: absolute;
-	top: 0px;
-	left: 100px;
-	text-align: center;
-	line-height: 150px;
-}
-
-.right_box4{
-	height: 50px; width: 100px;
-	position: absolute;
-	top: 0px;
-	left: 450px;
-}
-
-.right_box5{
-	height: 100px; width: 100px;
-	position: absolute;
-	top: 50px;
-	left: 450px;
-}
-
-.page_box{
-	height: 50px; width: 300px;
-	margin-left: auto;
-  	margin-right: auto;
-  	position: absolute;
-  	bottom: -40px; right: 0;
-}
-
-#pagination{
-	margin-right: 20px;
-}
-
-#pagination li{
+#js-pagination li{
   list-style: none; display:inline; margin-left: 5px;
 }
 
@@ -136,45 +40,144 @@
    	
 	<div class="middle">	
 		<div class="board">
-			<div>
-				<a href='/board/requestform'>요청하기</a>
-			</div>
-
-				<c:forEach var="dto" items="${list}">
-					<div class="data-contents">
-						<div onclick="location.href='/board/detail?req_No=${dto.req_No}'">
-							<div class="left_box">
-								<div class="left_box1">
-									<img src="${dto.req_Link }" alt="방사진">
-								</div>
-								<div class="left_box2">
-									<span>${dto.req_Stat }</span>
-								</div>
-							</div>
-							
-							<div class="right_box">
-								<div class="right_box1">기한: ${dto.req_EDate }</div>
-								<div class="right_box2">위치</div>
-								<div class="right_box3"><span>${dto.req_Title}</span></div>
-								<div class="right_box4">예상거리</div>
-								<div class="right_box5">${dto.req_Point }</div>
-							</div>
-						</div>
-					</div>
-				</c:forEach>
-
-        	<div class="page_box">
-	        	<ul id="pagination">
-	        		<li><a>prev</a></li>
-	        		<c:forEach var="i" begin="${start }" end="${end }">
-	        			<li><c:out value="${i}" /></li>
-	        		</c:forEach>
-	        		<li><a>next</a></li>
-	        	</ul>
-        	</div>
+			<div><a href='/board/requestform'>요청하기</a></div>
+			<div id="data-contents"></div>
+        	<div id="js-pagination"></div>
 		</div>
 		
     </div>
 	<%@ include file="footer.jsp" %>
 </body>
+
+<script type="text/javascript">
+
+	var list = ${List}
+	var current_page = ${Current_page}
+	var _totalCount = list.length
+
+	function renderPagination(currentPage) {
+		// 페이지에 들어갈 게시글 갯수와 한번에 볼수 있는 페이지 그룹 수
+		var content_num = 2;
+		var group_num = 3;
+		
+		var totalPage = Math.ceil(_totalCount / content_num);
+		var pageGroup = Math.ceil(currentPage / group_num);
+		
+		var last = pageGroup * group_num;
+		if (last > totalPage) last = totalPage;
+		var first = last - (group_num - 1) <= 0 ? 1 : last - (group_num - 1);
+		var next = last + 1;
+		var prev = first - 1;
+		
+		// 현재 게시물의 전체 개수가 content_num개 이하면 pagination을 숨김
+		if (_totalCount <= content_num) return; 
+
+		const fragmentPage = document.createDocumentFragment();
+		if (prev > 0) {
+			var allpreli = document.createElement('li');
+			allpreli.insertAdjacentHTML("beforeend", `<a href='#js-bottom' id='allprev'><i class="fa fa-angle-double-left" aria-hidden="true"></i></a>`);
+			
+			var preli = document.createElement('li');
+			preli.insertAdjacentHTML("beforeend", `<a href='#js-bottom' id='prev'><i class="fa fa-angle-left" aria-hidden="true"></i></a>`);
+			
+			fragmentPage.appendChild(allpreli);
+			fragmentPage.appendChild(preli);
+		}
+
+		for (var i = first; i <= last; i++) {
+			const li = document.createElement("li");
+			li.insertAdjacentHTML("beforeend", "<a href='#js-bottom' id='page-"+i+"' data-num='"+i+"'>"+i+"</a>");
+			fragmentPage.appendChild(li);
+		}
+
+		if (last < totalPage) {
+			var allendli = document.createElement('li');
+			allendli.insertAdjacentHTML("beforeend", `<a href='#js-bottom'  id='allnext'><i class="fa fa-angle-double-right" aria-hidden="true"></i></a>`);
+			
+			var endli = document.createElement('li');
+			endli.insertAdjacentHTML("beforeend", `<a  href='#js-bottom'  id='next'><i class="fa fa-angle-right" aria-hidden="true"></i></a>`);
+			
+			fragmentPage.appendChild(endli);
+			fragmentPage.appendChild(allendli);
+		}
+
+		document.getElementById('js-pagination').appendChild(fragmentPage);
+		
+		
+		$(function() {
+			$(`#js-pagination a`).removeClass("active");
+			$(`#js-pagination a#page-${currentPage}`).addClass("active");
+			
+			$("#js-pagination a").click(function (e) {
+				e.preventDefault();
+				var $item = $(this);
+				var $id = $item.attr("id");
+				var selectedPage = $item.text();
+		
+				if ($id == "next") selectedPage = next;
+				if ($id == "prev") selectedPage = prev;
+				if ($id == "allprev") selectedPage = 1;
+				if ($id == "allnext") selectedPage = totalPage;
+				
+				location.href="/board/list?num="+selectedPage;
+			});
+		});
+		
+		$(function(){
+			
+			var start_page = (currentPage-1)*content_num;
+			var end_page = currentPage*content_num-1;
+			if (_totalCount-1 < end_page) {
+				end_page = _totalCount-1;
+			}
+			
+			var data_contents = document.getElementById('data-contents');
+
+			for(i=start_page; i<=end_page; i++) {
+				var dto = list[i]
+				var tmp_node = document.createElement('div');
+				tmp_node.insertAdjacentHTML("beforeend", `
+						<div class="desc-content-finishlist" style="margin: 0 auto; width: 900px; height: 300px;">
+						<div class="finish-top" style="float: right; width: 900px">
+							<div style="float: right">예상거리: ??km</div>
+						</div>
+						<div class="finish-mid" style="width: 900px">
+							<div class="finish-mid-left" onclick="location.href='/board/detail?req_No=`+dto.req_No+`'" style="display: inline-block; width: 200px; height: 200px; float: left; border:3px solid #80808075; border-radius: 10px">
+								<div class="room-img">img</div>
+							</div>
+							<div class="finish-mid-right"  onclick="location.href='/board/detail?req_No=`+dto.req_No+`'"  style="display: inline-block; width: 670px; height: 200px; float: right; border:3px solid #80808075; border-radius: 10px">
+								<div class="req-desc"
+									style="display: inline-block; float: left; height: 200px">
+									<p style="margin: 5px 10px; font-size: 16pt">기한 : `+dto.req_EDate+`</p>
+									<p style="margin: 95px 10px 0 10px; font-size: 16pt; text-align: left">?시간 전</p>
+									<p style="margin: 0 10px; font-size: 16pt">서울특별시 ??동</p>
+								</div>
+								<div class="req-title" style="display: inline-block">
+									<p style="line-height: 150px; font-size: 20pt">`+dto.req_Title+`</p>
+								</div>
+								<div class="req-point"
+									style="display: inline-block; float: right; height: 200px">
+									<p style="font-size: 20pt; line-height: 200px; margin: 0 18px">`+dto.req_Point+`P</p>
+								</div>
+							</div>
+						</div>
+						<div class="finish-bot" style="width: 900px;">
+							<div style="float: left; width: 80px; margin-top: 10px; margin-left: 55px; border-radius: 30px">
+								<p style="margin: 5px">`+dto.req_Stat+`</p>
+							</div>
+						</div>
+					</div>
+						`);
+				data_contents.appendChild(tmp_node);
+			}
+			
+		});
+	}
+	
+	
+	renderPagination(current_page);
+
+	
+</script>
+
 </html>
