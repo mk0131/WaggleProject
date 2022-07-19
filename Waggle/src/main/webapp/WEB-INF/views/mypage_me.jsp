@@ -602,8 +602,8 @@ textarea {
 					</div>
 				</div>
 				<div class="profile-bottom">
-						<div class="button">
-							<a href="/profileEdit"><p style="margin:5px">회원정보 수정</p></a>
+						<div class="button" onclick="location.href='/mypage/profileEdit?ua_UCode=${user_Code}'">
+							<a><p style="margin:5px">회원정보 수정</p></a>
 						</div>
 					</div>
 				<div class="description" style="text-align: center">

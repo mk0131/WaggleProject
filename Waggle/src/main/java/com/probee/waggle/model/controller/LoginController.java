@@ -41,6 +41,7 @@ public class LoginController {
 
 		session.setAttribute("user_Code", user.getUser_Code());
 		session.setAttribute("user_Nm", user.getUser_Nm());
+		session.setAttribute("user_Email", user.getUser_Email());
 		session.setAttribute("user_Gender", user.getUser_Gender());
 		session.setAttribute("user_Age", user.getUser_Age());
 		session.setAttribute("user_Grade", user.getUser_Grade());

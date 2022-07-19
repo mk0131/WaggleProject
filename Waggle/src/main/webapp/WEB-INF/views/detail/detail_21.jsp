@@ -146,7 +146,7 @@ button:active {
 	      </tr>
 	      <tr>
 	       <th>내가 본 집 링크 첨부</th>
-	       <td><a id="yellow" href="${req_dto.req_Link }">${req_dto.req_Link }</a></td>
+	       <td><a style="color: #f48c06;" id="link" href="">${req_dto.req_Link }</a></td>
 	      </tr>
 	      <tr>
 	       <th>방문기한</th>
@@ -196,5 +196,15 @@ button:active {
 	   
 	 </div>
 	<%@ include file="../footer.jsp" %>
+	<script type="text/javascript">
+		$(function(){
+			let link = $("#link").text();
+			console.log(link);
+			console.log($("#link").attr("href"));
+			console.log("실행");
+			$("#link").attr('href',"https://"+link);
+			console.log($("#link").attr("href"));
+		})
+	</script>
 </body>
 </html>

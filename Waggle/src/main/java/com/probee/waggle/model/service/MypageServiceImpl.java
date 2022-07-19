@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.probee.waggle.model.dto.MypageFinishlistDto;
+import com.probee.waggle.model.dto.UserAddressDto;
 import com.probee.waggle.model.mapper.MypageMapper;
 
 @Service
@@ -27,6 +28,11 @@ public class MypageServiceImpl implements MypageService{
 	@Override
 	public List<MypageFinishlistDto> SelectReqRoom(String stat, int ucode) {
 		return mypageMapper.SelectReqRoom(stat, ucode);
+	}
+
+	@Override
+	public UserAddressDto SelectAddr(int ua_UCode) {
+		return mypageMapper.SelectAddr(ua_UCode);
 	}
 
 }

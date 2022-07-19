@@ -12,6 +12,7 @@ import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -84,5 +85,14 @@ public class MypageController {
 		List<MypageFinishlistDto> finishlist = mypageService.SelectReqRoom(stat, ucode);
 		
 		return finishlist;
+	}
+	
+	@GetMapping("/profileEdit")
+	public String ProfileEdit(int ua_UCode, UserAddressDto dto, Model model) {
+		UserAddressDto user = mypageService.SelectAddr(ua_UCode);
+		
+		model.addAttribute("dto",user);
+		
+		return "profileEdit";
 	}
 }

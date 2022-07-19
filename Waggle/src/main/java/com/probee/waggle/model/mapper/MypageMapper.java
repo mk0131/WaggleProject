@@ -7,6 +7,7 @@ import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 
 import com.probee.waggle.model.dto.MypageFinishlistDto;
+import com.probee.waggle.model.dto.UserAddressDto;
 
 @Mapper
 public interface MypageMapper {
@@ -19,5 +20,8 @@ public interface MypageMapper {
 	
 	@Select(" select req_No, req_Title, req_EDate, req_Point, req_Stat, home_Addr, fi_Nm, RES_UCODE from request join HOME on REQUEST.REQ_HCODE = HOME.home_Code join FILE on REQUEST.REQ_FCODE = FILE.FI_CODE JOIN RESULT ON REQUEST.REQ_NO = RESULT.RES_NO JOIN USERS ON RESULT.RES_UCODE = USERS.USER_CODE WHERE REQ_STAT = #{stat} AND RES_UCODE = #{ucode} ")
 	public List<MypageFinishlistDto> SelectReqRoom(String stat, int ucode);
+	
+	@Select(" SELECT * FROM USERADDRESS WHERE ua_UCode = #{ua_UCode} ")
+	public UserAddressDto SelectAddr(int ua_Ucode);
 	
 }
