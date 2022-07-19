@@ -134,7 +134,7 @@ button:active {
 	     <p id="w-date">${req_dto.req_WDate }</p>
 	    <div class="ongoing21-user-name">
 	     <p id="username">작성자</p>
-	      <p id="userrealname">${user_Code }</p>
+	      <p id="userrealname">${user_dto.user_Nm}</p>
 	       </div>
 	    <div class="ongoing21-all">
 	   <input type="hidden" name="req_dto.req_No" value="${req_dto.req_No }">
@@ -146,7 +146,8 @@ button:active {
 	      </tr>
 	      <tr>
 	       <th>내가 본 집 링크 첨부</th>
-	       <td><a id="yellow" href="${req_dto.req_Link }">${req_dto.req_Link }</a></td>
+	       <td><a style="color: #f48c06;" id="link" href="">${req_dto.req_Link }</a></td>
+
 	      </tr>
 	      <tr>
 	       <th>방문기한</th>
@@ -154,11 +155,11 @@ button:active {
 	      </tr>
 	      <tr>
 	       <th>내가 본 집 주소</th>
-	       <td id="yellow"></td>
+	       <td id="yellow">${req_dto.home_Addr }</td>
 	      </tr>
 	      <tr>
 	       <th>상세주소</th>
-	       <td></td>
+	       <td>${req_dto.home_DAddr }</td>
 	      </tr>
 	      <tr id="phone-number">
 	       <th>공인중개사 연락처</th>	
@@ -197,4 +198,17 @@ button:active {
 	 </div>
 	<%@ include file="../footer.jsp" %>
 </body>
+<script type="text/javascript">
+	
+	$(function() {
+		let link = $("#link").text();
+		console.log(link);
+		console.log($("#link").attr("href"));
+		console.log("실행");
+		$("#link").attr('href', "https://" + link);
+		console.log($("#link").attr("href"));
+	})
+	
+</script>
+
 </html>
