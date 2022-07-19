@@ -37,5 +37,8 @@ public interface BoardMapper {
 	@Select(" select * from Users where user_Code in (#{user_Code}) ")
 	public List<UsersDto> selectUsers(String user_Code);
 	
+	@Select(" select * from Users where user_Code = #{user_Code} ")
+	public UsersDto selectUser(int user_Code);
+	
 	
 }

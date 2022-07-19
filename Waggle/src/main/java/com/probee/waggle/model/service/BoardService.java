@@ -18,5 +18,6 @@ public interface BoardService {
 	public ResultDto selectResult(int res_No);
 	public List<VolunteerDto> selectVolunteer(int req_No);
 	public List<UsersDto> selectUsers(List<String> code_list);
+	public UsersDto selectUser(int user_Code);
 
 }

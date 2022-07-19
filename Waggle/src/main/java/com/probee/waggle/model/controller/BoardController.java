@@ -20,6 +20,7 @@ import com.probee.waggle.model.dto.HomeDto;
 import com.probee.waggle.model.dto.RequestDto;
 import com.probee.waggle.model.dto.RequestDto2;
 import com.probee.waggle.model.dto.ResultDto;
+import com.probee.waggle.model.dto.UsersDto;
 import com.probee.waggle.model.dto.VolunteerDto;
 import com.probee.waggle.model.service.BoardService;
 import com.probee.waggle.model.service.HomeService;
@@ -100,9 +101,12 @@ public class BoardController {
 		if (storedValue instanceof Integer) {
 			user_Code = (int) storedValue;
 		}
-
+		// 요청글 정보
 		RequestDto2 req_dto = boardService.selectRequest(req_No);
 		model.addAttribute("req_dto", req_dto);
+		// 사용자 정보
+		UsersDto user_dto = boardService.selectUser(req_dto.getReq_UCode());
+		model.addAttribute("user_dto", user_dto);
 		
 		int req_UCode = req_dto.getReq_UCode();
 		String req_Stat = req_dto.getReq_Stat();

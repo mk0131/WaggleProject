@@ -62,5 +62,10 @@ public class BoardServiceImpl implements BoardService{
 		return boardMapper.selectUsers(code_string);
 	}
 
+	@Override
+	public UsersDto selectUser(int user_Code) {
+		return boardMapper.selectUser(user_Code);
+	}
+
 
 }
