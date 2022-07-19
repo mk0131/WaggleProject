@@ -57,4 +57,9 @@ public class WaggleApplication {
 	public static String gohistory() {
 		return "history";
 	}
+	
+	@RequestMapping("/chatbot")
+	public static String gochatbot() {
+		return "chatbot";
+	}
 }
