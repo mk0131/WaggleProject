@@ -104,7 +104,7 @@ button:active {
 
 </head>
 <body>
-	<%@ include file="header.jsp" %>
+	<%@ include file="../header.jsp" %>
 	 <div id="wrap">
 	  <div class="middle">
 		<div class="guideline">
@@ -182,10 +182,7 @@ button:active {
 	   
 	   
 	   
-	   
-
-	   
 	 </div>
-	<%@ include file="footer.jsp" %>
+	<%@ include file="../footer.jsp" %>
 </body>
 </html>

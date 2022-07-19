@@ -162,7 +162,7 @@
 							</div>
 						</div>
 						<div class="finish-bot" style="width: 900px;">
-							<div style="float: left; width: 80px; margin-top: 10px; margin-left: 55px; border-radius: 30px">
+							<div style="float: left; width: 80px; margin-top: 10px; margin-left: 55px; border-radius: 30px; border: 2px solid #092C4C; text-align: center;">
 								<p style="margin: 5px">`+dto.req_Stat+`</p>
 							</div>
 						</div>
