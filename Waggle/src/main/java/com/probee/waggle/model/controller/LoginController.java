@@ -41,6 +41,12 @@ public class LoginController {
 
 		session.setAttribute("user_Code", user.getUser_Code());
 		session.setAttribute("user_Nm", user.getUser_Nm());
+		session.setAttribute("user_Gender", user.getUser_Gender());
+		session.setAttribute("user_Age", user.getUser_Age());
+		session.setAttribute("user_Grade", user.getUser_Grade());
+		session.setAttribute("user_Intro", user.getUser_Intro());
+		session.setAttribute("user_Point", user.getUser_Point());
+		session.setAttribute("user_Pro", user.getUser_Pro());
 		session.setMaxInactiveInterval(-1); // 세션 시간 무한대
 
 		return "redirect:/home";
@@ -67,12 +73,24 @@ public class LoginController {
 			UsersDto naver = loginService.Naver(dto);
 			session.setAttribute("user_Code", naver.getUser_Code());
 			session.setAttribute("user_Nm", naver.getUser_Nm());
+			session.setAttribute("user_Gender", naver.getUser_Gender());
+			session.setAttribute("user_Age", naver.getUser_Age());
+			session.setAttribute("user_Grade", naver.getUser_Grade());
+			session.setAttribute("user_Intro", naver.getUser_Intro());
+			session.setAttribute("user_Point", naver.getUser_Point());
+			session.setAttribute("user_Pro", naver.getUser_Pro());
 			session.setMaxInactiveInterval(-1);
 			return "redirect:/home";
 
 		} else { // 동일한 이메일이 있으면 회원정보 불러오기
 			session.setAttribute("user_Code", user.getUser_Code());
 			session.setAttribute("user_Nm", user.getUser_Nm());
+			session.setAttribute("user_Gender", user.getUser_Gender());
+			session.setAttribute("user_Age", user.getUser_Age());
+			session.setAttribute("user_Grade", user.getUser_Grade());
+			session.setAttribute("user_Intro", user.getUser_Intro());
+			session.setAttribute("user_Point", user.getUser_Point());
+			session.setAttribute("user_Pro", user.getUser_Pro());
 			session.setMaxInactiveInterval(-1);
 			return "redirect:/home";
 
@@ -110,12 +128,24 @@ public class LoginController {
 			System.out.println(kakao);
 			session.setAttribute("user_Code", kakao.getUser_Code());
 			session.setAttribute("user_Nm", kakao.getUser_Nm());
+			session.setAttribute("user_Gender", kakao.getUser_Gender());
+			session.setAttribute("user_Age", kakao.getUser_Age());
+			session.setAttribute("user_Grade", kakao.getUser_Grade());
+			session.setAttribute("user_Intro", kakao.getUser_Intro());
+			session.setAttribute("user_Point", kakao.getUser_Point());
+			session.setAttribute("user_Pro", kakao.getUser_Pro());
 			session.setMaxInactiveInterval(-1);
 			return "redirect:/home";
 		} else {
 			System.out.println(dto2);
 			session.setAttribute("user_Code", dto2.getUser_Code());
 			session.setAttribute("user_Nm", dto2.getUser_Nm());
+			session.setAttribute("user_Gender", dto2.getUser_Gender());
+			session.setAttribute("user_Age", dto2.getUser_Age());
+			session.setAttribute("user_Grade", dto2.getUser_Grade());
+			session.setAttribute("user_Intro", dto2.getUser_Intro());
+			session.setAttribute("user_Point", dto2.getUser_Point());
+			session.setAttribute("user_Pro", dto2.getUser_Pro());
 			session.setMaxInactiveInterval(-1);
 			return "redirect:/home";
 		}
