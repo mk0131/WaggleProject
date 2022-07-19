@@ -11,12 +11,13 @@ import com.probee.waggle.model.dto.VolunteerDto;
 public interface BoardService {
 
 	public List<RequestDto2> selectList();
-	public RequestDto selectRequest(int req_No);
+	public RequestDto2 selectRequest(int req_No);
 	public int insertRequest(RequestDto2 dto);
 	public int deleteRequest(RequestDto dto);
 	public int updateRequest(RequestDto dto);
 	public ResultDto selectResult(int res_No);
 	public List<VolunteerDto> selectVolunteer(int req_No);
 	public List<UsersDto> selectUsers(List<String> code_list);
+	public UsersDto selectUser(int user_Code);
 
 }

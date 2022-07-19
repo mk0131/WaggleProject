@@ -1,6 +1,5 @@
 package com.probee.waggle.model.dto;
 
-import java.util.Date;
 
 public class MapDto {
 	private int home_Post;

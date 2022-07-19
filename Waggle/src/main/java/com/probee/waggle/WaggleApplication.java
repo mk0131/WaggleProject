@@ -48,4 +48,8 @@ public class WaggleApplication {
 		return "mypage_me";
 	}
 	
+	@RequestMapping("/profileEdit")
+	public static String goprofileedit() {
+		return "profileEdit";
+	}
 }

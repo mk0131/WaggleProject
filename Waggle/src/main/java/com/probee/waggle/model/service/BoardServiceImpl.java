@@ -25,7 +25,7 @@ public class BoardServiceImpl implements BoardService{
 	}
 
 	@Override
-	public RequestDto selectRequest(int req_No) {
+	public RequestDto2 selectRequest(int req_No) {
 		return boardMapper.selectRequest(req_No);
 	}
 
@@ -60,6 +60,11 @@ public class BoardServiceImpl implements BoardService{
 	public List<UsersDto> selectUsers(List<String> code_list) {
 		String code_string = String.join(",", code_list);
 		return boardMapper.selectUsers(code_string);
+	}
+
+	@Override
+	public UsersDto selectUser(int user_Code) {
+		return boardMapper.selectUser(user_Code);
 	}
 
 

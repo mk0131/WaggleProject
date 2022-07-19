@@ -15,10 +15,12 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.google.gson.Gson;
 import com.probee.waggle.model.dto.HomeDto;
 import com.probee.waggle.model.dto.RequestDto;
 import com.probee.waggle.model.dto.RequestDto2;
 import com.probee.waggle.model.dto.ResultDto;
+import com.probee.waggle.model.dto.UsersDto;
 import com.probee.waggle.model.dto.VolunteerDto;
 import com.probee.waggle.model.service.BoardService;
 import com.probee.waggle.model.service.HomeService;
@@ -34,54 +36,45 @@ public class BoardController {
 	private HomeService homeService;
 	
 	@GetMapping("/list")
-	public String selectList(Model model, int ... page) {
+	public String selectList(Model model, int ...num) {
 		List<RequestDto2> list = boardService.selectList();
+		List<String> res_list = new ArrayList<String>();
+		Gson gson = new Gson();
 		
-		int All_pages = (int)Math.ceil(list.size()/5.0);
-		int Last_pages = list.size()-5*(All_pages-1);
-		
-		int start=0;
-		int end=0;
+		int current_page;
 		
 		try {
-			model.addAttribute("page", page);
-			
-			if(page[0] == All_pages) {
-				start = list.size()-Last_pages;
-				end = list.size()-1;
-			} else {
-				start = 5*(page[0]-1);
-				end = 5*(page[0])-1;
-			}
-			
-		} catch(Exception e) {
-			model.addAttribute("page", 1);
-			start = 0;
-			if(All_pages <= 1) {
-				end = list.size()-1;
-			} else {
-				end = 4;
-			}
+			current_page = num[0];
+		} catch (Exception e) {
+			current_page = 1;
 		}
-		model.addAttribute("start",start/5+1);
-		model.addAttribute("end",end/5+1);
-		model.addAttribute("All_pages",All_pages);
-		model.addAttribute("list", list);
-//		model.addAttribute("list", list.subList(start, end));
+		
+		for(int i=0; i<list.size(); i++) {
+			String tmp = gson.toJson(list.get(i));
+			res_list.add(tmp);
+		}
+		
+		model.addAttribute("List",res_list);
+		model.addAttribute("Current_page",current_page);
+		
 		return "board";
 	}
 	
 	@GetMapping("/requestform")
 	public String goRequestForm(Model model, HttpSession session) {
-		model.addAttribute("user_Code",session.getAttribute("user_Code"));
-		return "requestForm";
+		int id = 0;
+		try {
+			id = (int)session.getAttribute("user_Code");
+			model.addAttribute("user_Code",id);
+			return "requestForm";
+		} catch (Exception e) {
+			return "redirect:/board/list";
+		}
+
 	}
 	
 	@PostMapping("/request")
 	public String updateRequest(RequestDto2 req_dto, HomeDto home_dto) {
-		
-//		System.out.println(req_dto);
-//		System.out.println(home_dto);
 		
 		HomeDto find_home = homeService.findHome(home_dto);
 		
@@ -102,19 +95,22 @@ public class BoardController {
 	
 	@GetMapping("/detail")
 	public String goDetailPage(Model model, HttpSession session, HttpServletResponse response, int req_No) {
-		
+
 		int user_Code = 0;
 		Object storedValue = session.getAttribute("user_Code");
 		if (storedValue instanceof Integer) {
 			user_Code = (int) storedValue;
 		}
-		
-		RequestDto req_dto = boardService.selectRequest(req_No);
+		// 요청글 정보
+		RequestDto2 req_dto = boardService.selectRequest(req_No);
 		model.addAttribute("req_dto", req_dto);
+		// 사용자 정보
+		UsersDto user_dto = boardService.selectUser(req_dto.getReq_UCode());
+		model.addAttribute("user_dto", user_dto);
 		
 		int req_UCode = req_dto.getReq_UCode();
 		String req_Stat = req_dto.getReq_Stat();
-		
+
 		if(req_Stat.equals("모집중")) {
 			if(user_Code==req_UCode) {
 				List<VolunteerDto> vol_dto = boardService.selectVolunteer(req_No);
@@ -179,8 +175,8 @@ public class BoardController {
 				return "detail/detail_41";
 			}			
 		}
-
 	}
 	
+
 	
 }
