@@ -101,7 +101,7 @@ public class BoardController {
 			user_Code = (int) storedValue;
 		}
 		
-		RequestDto req_dto = boardService.selectRequest(req_No);
+		RequestDto2 req_dto = boardService.selectRequest(req_No);
 		model.addAttribute("req_dto", req_dto);
 		
 		int req_UCode = req_dto.getReq_UCode();

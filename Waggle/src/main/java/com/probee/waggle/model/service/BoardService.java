@@ -11,7 +11,7 @@ import com.probee.waggle.model.dto.VolunteerDto;
 public interface BoardService {
 
 	public List<RequestDto2> selectList();
-	public RequestDto selectRequest(int req_No);
+	public RequestDto2 selectRequest(int req_No);
 	public int insertRequest(RequestDto2 dto);
 	public int deleteRequest(RequestDto dto);
 	public int updateRequest(RequestDto dto);

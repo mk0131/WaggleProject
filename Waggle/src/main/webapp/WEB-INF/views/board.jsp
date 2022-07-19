@@ -143,16 +143,17 @@
 						</div>
 						<div class="finish-mid" style="width: 900px">
 							<div class="finish-mid-left" onclick="location.href='/board/detail?req_No=`+dto.req_No+`'" style="display: inline-block; width: 200px; height: 200px; float: left; border:3px solid #80808075; border-radius: 10px">
-								<div class="room-img">img</div>
+								<div class="room-img">
+									<img src="`+dto.fi_Nm+`" alt="🐝Waggle" height="200px" width="200px" style="border-radius: 10px;" />
+								</div>
 							</div>
-							<div class="finish-mid-right"  onclick="location.href='/board/detail?req_No=`+dto.req_No+`'"  style="display: inline-block; width: 670px; height: 200px; float: right; border:3px solid #80808075; border-radius: 10px">
+							<div class="finish-mid-right"  onclick="location.href='/board/detail?req_No=`+dto.req_No+`'"  style="position: relative; display: inline-block; width: 670px; height: 200px; float: right; border:3px solid #80808075; border-radius: 10px">
 								<div class="req-desc"
 									style="display: inline-block; float: left; height: 200px">
 									<p style="margin: 5px 10px; font-size: 16pt">기한 : `+dto.req_EDate+`</p>
-									<p style="margin: 95px 10px 0 10px; font-size: 16pt; text-align: left">?시간 전</p>
-									<p style="margin: 0 10px; font-size: 16pt">서울특별시 ??동</p>
+									<p style="margin: 125px 10px; font-size: 16pt">`+dto.home_Addr+`</p>
 								</div>
-								<div class="req-title" style="display: inline-block">
+								<div class="req-title" style="position: absolute; left:250px; ">
 									<p style="line-height: 150px; font-size: 20pt">`+dto.req_Title+`</p>
 								</div>
 								<div class="req-point"

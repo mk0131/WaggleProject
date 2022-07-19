@@ -25,7 +25,7 @@ public class BoardServiceImpl implements BoardService{
 	}
 
 	@Override
-	public RequestDto selectRequest(int req_No) {
+	public RequestDto2 selectRequest(int req_No) {
 		return boardMapper.selectRequest(req_No);
 	}
 

@@ -15,11 +15,15 @@ import com.probee.waggle.model.dto.VolunteerDto;
 @Mapper
 public interface BoardMapper {
 	
-	@Select(" select req_No,req_Title,req_Link,date_format(req_WDate,'%Y/%m/%d') req_WDate,date_format(req_EDate,'%Y/%m/%d') req_EDate,req_Phone,req_Detail,req_Point,req_Stat,req_UCode,req_FCode,req_HCode from Request order by req_No desc ")
+	@Select(" select req_No,req_Title,req_Link,date_format(req_WDate,'%Y-%m-%d') req_WDate,date_format(req_EDate,'%Y-%m-%d') req_EDate,req_Phone,req_Detail,req_Point,req_Stat,req_UCode,req_FCode,req_HCode,fi_Nm,home_Addr,home_DAddr,home_Lat,home_Lng "
+			+ "from request r left outer join file f on r.req_FCode = f.fi_Code left outer join home h on r.req_HCode = h.home_Code "
+			+ "order by req_No desc ")
 	public List<RequestDto2> selectList();
 	
-	@Select(" select * from Request where req_No=#{req_No} ")
-	public RequestDto selectRequest(int req_NO);
+	@Select(" select req_No,req_Title,req_Link,date_format(req_WDate,'%Y-%m-%d') req_WDate,date_format(req_EDate,'%Y-%m-%d') req_EDate,req_Phone,req_Detail,req_Point,req_Stat,req_UCode,req_FCode,req_HCode,fi_Nm,home_Addr,home_DAddr,home_Lat,home_Lng "
+			+ "from request r left outer join file f on r.req_FCode = f.fi_Code left outer join home h on r.req_HCode = h.home_Code "
+			+ "where req_No=#{req_No} ")
+	public RequestDto2 selectRequest(int req_NO);
 	
 	@Insert(" INSERT INTO Request values (null,#{req_Title},#{req_Link},NOW(),#{req_EDate},#{req_Phone},#{req_Detail},#{req_Point},'모집중',#{req_UCode},null,#{req_HCode}) ")
 	public int insertRequest(RequestDto2 dto);
