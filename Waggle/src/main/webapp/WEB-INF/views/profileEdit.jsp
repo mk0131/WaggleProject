@@ -192,6 +192,7 @@
             </div>
          </div>
          <div class="edit-profile-info" style="margin:0 auto; width:500px">
+
             <div>
             <p style="margin:0; margin-bottom:5px; margin-top: 10px; margin-left:5px">비밀번호</p>
             <input type="password" id="pw_input" style="width:500px; height:50px; border:1px solid; border-radius:15px; line-height:3; padding-left:15px">
@@ -245,7 +246,9 @@
             <p style="margin:0; margin-bottom:5px; margin-top: 20px; margin-left:5px">성별</p>
             </div>
             <div class="select">
+
                <input type="radio" id="select" name="gender" value="남자" checked="checked"><label for="select" >남자</label>
+
                <input type="radio" id="select2" name="gender" value="여자"><label for="select2">여자</label>
             </div>
             
@@ -290,7 +293,6 @@ $('#pw_input').blur(function(){ // 비밀번호 유형 검사
    let warnMsg = $(".pw_form_check"); // 비밀번호 경고글
    let user_Pw = $("#pw_input").val();
    
-   
    if(pwFormCheck(user_Pw)){
         warnMsg.html("올바른 비밀번호 형식입니다.");
         warnMsg.css("color","green");
@@ -308,7 +310,9 @@ $('#pw_input').blur(function(){ // 비밀번호 유형 검사
 $('#pw_chk').on("propertychange change keyup paste input", function(){ // 비밀번호 입력마다 값을 확인
    let pw_input = $('#pw_input').val();
    let pw_chk = $('#pw_chk').val();
+
   
+
    
    
    if(pw_input == pw_chk){
@@ -483,6 +487,7 @@ $("#address").on("click",function(){
 		        }
 		    }).open();
 		})
+
 
 
 

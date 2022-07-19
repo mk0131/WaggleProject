@@ -154,13 +154,13 @@ a {
       <ul class="service-center">
         <h4>고객센터</h4>
         <li>
-          <a href="javascript:void(0)">
+          <a href="javascript:void(0)" onclick="location.href='/inquiry/list'">
             <i class="fa-solid fa-headset"></i>
             <p>문의</p>
           </a>
         </li>
         <li>
-          <a href="javascript:void(0)">
+          <a href="javascript:void(0)" onclick="location.href='/inquiry/list'">
             <i class="fa-solid fa-book"></i>
             <p>도움말</p>
           </a>

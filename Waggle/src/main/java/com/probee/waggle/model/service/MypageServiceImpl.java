@@ -31,8 +31,21 @@ public class MypageServiceImpl implements MypageService{
 	}
 
 	@Override
+
 	public UserAddressDto SelectAddr(int ua_UCode) {
 		return mypageMapper.SelectAddr(ua_UCode);
 	}
+
+
+	public List<MypageFinishlistDto> SelectMyRequest(int ucode) {
+		return mypageMapper.SelectMyRequest(ucode);
+	}
+
+	@Override
+	public List<MypageFinishlistDto> SelectMyPerform(int ucode) {
+		return mypageMapper.SelectMyPerform(ucode);
+	}
+	
+	
 
 }

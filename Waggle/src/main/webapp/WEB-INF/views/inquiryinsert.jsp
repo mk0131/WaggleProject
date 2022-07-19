@@ -146,7 +146,8 @@ tr {
 						  <option>결제 관련 문의</option> 
 						  <option>환불 관련 문의</option>
 						  <option>회원 신고 하기</option>
-						  </select></td>
+						  </select>
+						</td>
 						</tr>
 						<tr>
 						<th>제목</th>

@@ -13,5 +13,11 @@ public interface MypageService {
 	
 	public List<MypageFinishlistDto> SelectReqRoom(String stat, int ucode);
 	
+
 	public UserAddressDto SelectAddr(int ua_UCode);
+
+	public List<MypageFinishlistDto> SelectMyRequest(int ucode);
+	
+	public List<MypageFinishlistDto> SelectMyPerform(int ucode);
+
 }
