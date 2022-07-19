@@ -528,7 +528,7 @@ textarea {
 				<div class="profile" style="text-align: center; display: flex; justify-content: center;">
 					<div class="profile-left" style="display: inline-block">
 						<c:if test = "${user_Pro == null}">
-						<img src="/images/profile/profile_default.jpg"
+						<img src="/images/importToJsp/profile_default.jpg"
 							style="width: 100px; height: 100px">
 						</c:if>
 						<c:if test = "${user_Pro != null }">
@@ -602,7 +602,7 @@ textarea {
 				</div>
 				<div class="profile-bottom">
 						<div class="button">
-							<p style="margin:5px">회원정보 수정</p>
+							<a href="/profileEdit"><p style="margin:5px">회원정보 수정</p></a>
 						</div>
 					</div>
 				<div class="description" style="text-align: center">

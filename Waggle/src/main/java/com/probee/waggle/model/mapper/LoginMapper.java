@@ -9,7 +9,7 @@ import com.probee.waggle.model.dto.UsersDto;
 @Mapper
 public interface LoginMapper {
 	
-	@Select(" SELECT * FROM Users WHERE user_Id=#{user_Id} AND user_Pw=#{user_Pw} ")
+	@Select(" SELECT * FROM Users WHERE user_Id=#{user_Id} AND user_Pw=#{user_Pw}")
 	UsersDto UserLogin(UsersDto dto);
 	
 	@Select(" SELECT * FROM Users WHERE user_Email = #{user_Email} ")
