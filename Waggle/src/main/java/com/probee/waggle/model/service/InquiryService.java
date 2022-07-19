@@ -3,6 +3,7 @@ package com.probee.waggle.model.service;
 import java.util.List;
 
 import com.probee.waggle.model.dto.InquiryDto;
+import com.probee.waggle.model.dto.UsersDto;
 
 public interface InquiryService {
 
