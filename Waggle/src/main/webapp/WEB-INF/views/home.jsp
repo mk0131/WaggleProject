@@ -95,6 +95,10 @@ nav ul li a:hover, nav ul li a:visited:hover {
 	font-size: 1em;
 }
 
+#wrap {
+	padding-top: 50px;
+}
+
 .home-image {
 	display: flex;
 	justify-content: center;
@@ -134,21 +138,12 @@ nav ul li a:hover, nav ul li a:visited:hover {
 </head>
 <body>
 		<%@ include file="header.jsp"%>
+	<div id="wrap">
 		<section>
 			<div class="home-image">
 				<img src="https://images.unsplash.com/photo-1479839672679-a46483c0e7c8?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2020&q=80">
 			</div>
 		</section>
-<!-- 		<section>
-			<div class="home-image">
-				<img src="https://images.unsplash.com/photo-1515263487990-61b07816b324?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80">
-			</div>
-		</section>
-		<section>
-			<div class="home-image">
-				<img src="https://images.unsplash.com/photo-1465804575741-338df8554e02?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1473&q=80">
-			</div>
-		</section> -->
 	</div>
   <%@ include file="footer.jsp" %>
 </body>

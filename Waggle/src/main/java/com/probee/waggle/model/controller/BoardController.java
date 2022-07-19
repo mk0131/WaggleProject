@@ -94,19 +94,19 @@ public class BoardController {
 	
 	@GetMapping("/detail")
 	public String goDetailPage(Model model, HttpSession session, HttpServletResponse response, int req_No) {
-		
+
 		int user_Code = 0;
 		Object storedValue = session.getAttribute("user_Code");
 		if (storedValue instanceof Integer) {
 			user_Code = (int) storedValue;
 		}
-		
+
 		RequestDto2 req_dto = boardService.selectRequest(req_No);
 		model.addAttribute("req_dto", req_dto);
 		
 		int req_UCode = req_dto.getReq_UCode();
 		String req_Stat = req_dto.getReq_Stat();
-		
+
 		if(req_Stat.equals("모집중")) {
 			if(user_Code==req_UCode) {
 				List<VolunteerDto> vol_dto = boardService.selectVolunteer(req_No);

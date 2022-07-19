@@ -73,6 +73,17 @@
 	box-shadow: rgba(67, 71, 85, 0.27) 0px 0px 0.25em, rgba(90, 125, 188, 0.05) 0px 0.25em 1em;
 }
 
+#userrealname {
+	font-weight: bold;
+}
+
+#w-date {
+	display: flex;
+    justify-content: flex-end;
+    max-width: 1280px;
+    font-weight: bold;
+}
+
 button {
  background-color: #151515;
  border-radius: 8px;
@@ -119,26 +130,27 @@ button:active {
 	  </div>
 	  
 	   <div class="ongoing21-all">
-	    <h4 id="ongoing-detail">요청 상세 페이지(모집중)</h4>
+	    <h3 id="ongoing-detail">요청 상세 페이지(${req_dto.req_Stat })</h3>
+	     <p id="w-date">${req_dto.req_WDate }</p>
 	    <div class="ongoing21-user-name">
 	     <p id="username">작성자</p>
-	      <p>${user_Code }</p>
+	      <p id="userrealname">${user_Code }</p>
 	       </div>
 	    <div class="ongoing21-all">
-	   <input type="hidden" name="req_No" value="${dto.req_No }">
+	   <input type="hidden" name="req_dto.req_No" value="${req_dto.req_No }">
 	    <table class="ongoing21-content">
 	     <tbody style="border-bottom: 1px solid;">
 	      <tr>
 	       <th>제목</th>
-	       <td>${dto.req_title }</td>
+	       <td>${req_dto.req_Title }</td>
 	      </tr>
 	      <tr>
 	       <th>내가 본 집 링크 첨부</th>
-	       <td><a id="yellow" href="${dto.req_Link }"></a></td>
+	       <td><a id="yellow" href="${req_dto.req_Link }">${req_dto.req_Link }</a></td>
 	      </tr>
 	      <tr>
 	       <th>방문기한</th>
-	       <td id="yellow">${dto.req_EDate }</td>
+	       <td id="yellow">${req_dto.req_EDate }</td>
 	      </tr>
 	      <tr>
 	       <th>내가 본 집 주소</th>
@@ -150,30 +162,30 @@ button:active {
 	      </tr>
 	      <tr id="phone-number">
 	       <th>공인중개사 연락처</th>	
-	       <td>010-1234-5678</td>
+	       <td>${req_dto.req_Phone }</td>
 	      </tr>
 	      </tbody>
 	     </table>
 	     <div class="ongoing21-content-bottom">
 	       <h4>디테일 요구사항</h4>
-	       <textarea id="incontent" rows="14" cols="70" name="content" placeholder="요구사항을 입력해주세요"></textarea>
+	       <textarea id="incontent" rows="14" cols="80" name="content" placeholder="요구사항을 입력해주세요" readonly="readonly">${req_dto.req_Detail }</textarea>
 	       <br/><br/><br/>
-	    <c:if test = "">
+	    <c:if test="${who eq '제3자'}">
 	     <div class="btn1" id="btn1">
-	      <button type="button" value="목록" onclick="location.href=''">목록으로 돌아가기</button>
+	      <button type="button" value="목록" onclick="location.href='/board/list'">목록으로 돌아가기</button>
 	     </div>
 	    </c:if>
-	    <c:if test = "">
+	    <c:if test="${who eq '작성자'}">
 	     <div class="btn2" id="btn2">
 	      <button type="button" value="요청취소" onclick="location.href=''">요청 취소하기(24시간 이내)</button>
-	      <button type="button" value="목록" onclick="location.href=''">목록으로 돌아가기</button>
+	      <button type="button" value="목록" onclick="location.href='/board/list'">목록으로 돌아가기</button>
 	     </div>
 	    </c:if>
-	    <c:if test = "">
+	    <c:if test="${who eq '수행자'}">
 	     <div class="btn3" id="btn3">
-	      <button type="button" value="요청취소" onclick="location.href=''">목록으로 돌아가기</button>
+	      <button type="button" value="요청취소" onclick="location.href=''">요청취소</button>
 	      <button type="button" value="심부름완료" onclick="location.href=''">심부름 완료하기</button>
-	      <button type="button" value="목록" onclick="location.href=''">목록으로 돌아가기</button>
+	      <button type="button" value="목록" onclick="location.href='/board/list'">목록으로 돌아가기</button>
 	     </div>
 	    </c:if>
 	     </div>
