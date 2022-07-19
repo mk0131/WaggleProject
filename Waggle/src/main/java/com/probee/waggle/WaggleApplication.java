@@ -52,4 +52,9 @@ public class WaggleApplication {
 	public static String goprofileedit() {
 		return "profileEdit";
 	}
+	
+	@RequestMapping("/history")
+	public static String gohistory() {
+		return "history";
+	}
 }

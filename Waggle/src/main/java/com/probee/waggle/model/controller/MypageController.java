@@ -78,11 +78,27 @@ public class MypageController {
 		return "redirect:/mypage_me";
 	}
 	
+	//마이페이지 완료된리스트 컨트롤러
 	@RequestMapping(value="/reqroom", method=RequestMethod.POST)
 	@ResponseBody
 	public List<MypageFinishlistDto> requestFinish(String stat, int ucode) {
 		List<MypageFinishlistDto> finishlist = mypageService.SelectReqRoom(stat, ucode);
 		
 		return finishlist;
+	}
+	
+	//이용내역페이지 나의 요청 컨트롤러
+	@RequestMapping(value="/reqhistory", method=RequestMethod.POST)
+	@ResponseBody
+	public List<MypageFinishlistDto> reqhistory(int ucode) {
+		List<MypageFinishlistDto> myReqList = mypageService.SelectMyRequest(ucode);
+		return myReqList;
+	}
+	
+	@RequestMapping(value="/performhistory", method=RequestMethod.POST)
+	@ResponseBody
+	public List<MypageFinishlistDto> performhistory(int ucode) {
+		List<MypageFinishlistDto> myPerformList = mypageService.SelectMyPerform(ucode);
+		return myPerformList;
 	}
 }

@@ -29,4 +29,16 @@ public class MypageServiceImpl implements MypageService{
 		return mypageMapper.SelectReqRoom(stat, ucode);
 	}
 
+	@Override
+	public List<MypageFinishlistDto> SelectMyRequest(int ucode) {
+		return mypageMapper.SelectMyRequest(ucode);
+	}
+
+	@Override
+	public List<MypageFinishlistDto> SelectMyPerform(int ucode) {
+		return mypageMapper.SelectMyPerform(ucode);
+	}
+	
+	
+
 }
