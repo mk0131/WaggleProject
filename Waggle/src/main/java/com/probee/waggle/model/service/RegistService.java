@@ -12,7 +12,11 @@ public interface RegistService {
 	
 	public int Join(UsersDto dto);
 	
-	public UsersDto SelectOne(String user_Id);
+	public UsersDto SelectOne(String user_Email);
 	
 	public int AddressJoin(UserAddressDto dto);
+	
+	public UsersDto naverChk(String user_Email);
+	
+	public UsersDto kakaoChk(String user_Email);
 }

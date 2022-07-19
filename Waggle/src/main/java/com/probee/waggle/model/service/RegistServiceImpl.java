@@ -29,12 +29,20 @@ public class RegistServiceImpl implements RegistService{
 		return registMapper.Join(dto);
 	}
 	@Override
-	public UsersDto SelectOne(String user_Id) {
-		return registMapper.SelectOne(user_Id);
+	public UsersDto SelectOne(String user_Email) {
+		return registMapper.SelectOne(user_Email);
 	}
 	@Override
 	public int AddressJoin(UserAddressDto dto) {
 		return registMapper.AdressJoin(dto);
+	}
+	@Override
+	public UsersDto naverChk(String user_Email) {
+		return registMapper.naverChk(user_Email);
+	}
+	@Override
+	public UsersDto kakaoChk(String user_Email) {
+		return registMapper.kakaoChk(user_Email);
 	}
 
 }
