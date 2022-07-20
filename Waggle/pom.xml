@@ -74,7 +74,13 @@
 		    <artifactId>webdrivermanager</artifactId>
 		    <version>5.2.1</version>
 		</dependency>
-		
+		<!-- https://mvnrepository.com/artifact/org.jsoup/jsoup -->
+		<dependency>
+		    <groupId>org.jsoup</groupId>
+		    <artifactId>jsoup</artifactId>
+		    <version>1.15.2</version>
+		</dependency>
+
     	
 		
 		<!-- RabbitMQ Starter Dependency (Not required if you're using the simple in-memory broker for STOMP) -->
