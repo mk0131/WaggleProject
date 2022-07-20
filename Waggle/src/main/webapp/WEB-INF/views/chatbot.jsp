@@ -75,7 +75,7 @@
 		let message = $("#msg").val()
 		showMessage("보낸 메시지: " + message);
 
-		stompClient.send("/app/sendChatbotMessage", {}, JSON.stringify(message));  //서버에 보낼 메시지
+		stompClient.send("/app/sendMessage", {}, JSON.stringify(message));  //서버에 보낼 메시지
 	}
 
 	function showMessage(message) {
