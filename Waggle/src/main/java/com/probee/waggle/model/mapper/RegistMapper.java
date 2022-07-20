@@ -24,9 +24,15 @@ public interface RegistMapper {
 			+ "#{user_Pw},#{user_Email},#{user_Nm},#{user_Gender},#{user_Age},#{user_Id} ) ")
 	 int Join(UsersDto dto);
 	
-	@Select(" SELECT * FROM USERS WHERE user_Id = #{user_Id}")
-	 UsersDto SelectOne(String user_Id);
+	@Select(" SELECT * FROM USERS WHERE user_Email = #{user_Email}")
+	 UsersDto SelectOne(String user_Email);
 	
 	@Insert(" INSERT INTO USERADDRESS (ua_UCode, ua_Post, ua_Addr, ua_DAddr) VALUES(#{ua_UCode},#{ua_Post},#{ua_Addr},#{ua_DAddr} )")
 	 int AdressJoin(UserAddressDto dto);
+	
+	@Select("SELECT user_Naver FROM USERS Where user_Email = #{user_Email}")
+	UsersDto naverChk(String user_Email);
+	
+	@Select("SELECT user_Kakao FROM USERS Where user_Email = #{user_Email}")
+	UsersDto kakaoChk(String user_Email);
 }

@@ -154,6 +154,23 @@ input {
 	color: #ffffff;
 	margin: 20px;
 }
+	.find_input_re_1{
+		color : green;
+		display : none;
+	}
+	
+	.find_input_re_2{
+		color : red;
+		display : none;
+	}
+	.find_input_re_3{
+		color : red;
+		display : none;
+	}
+	.find_form_check{
+		color : red;
+		display : none;
+	}
 
 	.id_input_re_1{
 		color : green;
@@ -212,6 +229,10 @@ input {
 		color : red;
 		display : none;
 	}
+	.age_form_check{
+		color : red;
+		display : none;
+	}
 	.final_id_ck{
     display: none;
 	}
@@ -225,6 +246,9 @@ input {
     display: none;
 	}
 	.final_mail_ck{
+    display: none;
+	}
+	.final_find_ck{
     display: none;
 	}
 	.final_addr_ck{
@@ -254,9 +278,8 @@ input {
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js"></script>
 	<script type="text/javascript" src="https://static.nid.naver.com/js/naverLogin_implicit-1.0.3.js" charset="utf-8"></script>
 <script type="text/javascript">
+
 	$(function(){
-		
-		
 		$("#sign-up").on("click",function(){
 			$("#title").html("회원가입");
 			$("#sign-up-content").show();
@@ -282,6 +305,8 @@ input {
 			$('.id_form_check').css("display","none");
 			$('.pw_form_check').css("display","none");
 			$('.email_form_check').css("display","none");
+			$('.nm_form_check').css("display","none");
+			$('.age_form_check').css("display","none");
 			$('#id_input').val(null);
 			$('#pw_input').val(null);
 			$('#pw_chk').val(null);
@@ -353,10 +378,13 @@ input {
 		
 	})
 </script>
+
 </head>
+
 <body>
+
 	<%@ include file="header.jsp"%>
-	<div id="wrap" style="height: 1200px;">
+	<div id="wrap" style="height: 1300px;">
 		<div class="middle">
 			<div class="guideline">
 
@@ -401,9 +429,261 @@ input {
 					</form>
 					<div class="forgot-idpw">
 						<p class="forgot">
-							<a href="#">아이디 찾기</a>&nbsp;|&nbsp;<a href="#">패스워드 찾기</a>
-						</p>
+							<!-- Button trigger modal -->
+					<a  data-toggle="modal" data-target="#staticBackdrop">
+  					아이디 찾기
+					</a>&nbsp;|&nbsp;<a  data-toggle="modal" data-target="#staticBackdrop2">패스워드 찾기</a>
+					<!-- Modal -->
+	<div class="modal fade" id="staticBackdrop" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  	<div class="modal-dialog">
+    	<div class="modal-content">
+      	<div class="modal-header">
+        	<h5 class="modal-title" id="staticBackdropLabel">아이디 찾기</h5>
+        	<button type="button" class="close" data-dismiss="modal" aria-label="Close" onclick="allclose()">
+          	<span aria-hidden="true">&times;</span>
+        	</button>
+      	</div>
+     	 <div class="modal-body">
+        	<b style="text-align: left;">이메일 인증</b> <br>
+        			<form action="/regist/findId" method="get" id="getid"> 
+						<input type="text" id="find_id" name="user_Email" placeholder="  이메일"
+							style="width: 300px;"> 
+						<input type="button" id="find_id_chk" value="이메일 인증" style="width: 100px;">
+						<input type="text" id="chk_find" placeholder="인증번호를 입력해 주세요" disabled="disabled" style="width: 300px;">
+						<input type="submit" value="아이디 메일 받기" style="width: 150px;" disabled="disabled" id="id_submit"> 
+						<br>
+						<span class="find_input_re_1">인증번호가 일치합니다.</span>
+						<span class="find_input_re_2">인증번호를 다시 확인해주세요.</span>
+						<span class="find_input_re_3">등록이 되지않은 이메일 입니다.</span>
+						<span class="final_find_ck">이메일을 입력해주세요.</span>
+						<span class="find_form_check"></span>
+						<br>
+				</form>
+      	</div>
+      	<div class="modal-footer">
+        	<button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="allclose()">닫기</button>
+      	</div>
+    	</div>
+  	</div>
+	</div>
+	<div class="modal fade" id="staticBackdrop2" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  	<div class="modal-dialog">
+    	<div class="modal-content">
+      	<div class="modal-header">
+        	<h5 class="modal-title" id="staticBackdropLabel">패스워드 찾기</h5>
+        	<button type="button" class="close" data-dismiss="modal" aria-label="Close" onclick="allclose()">
+          	<span aria-hidden="true">&times;</span>
+        	</button>
+      	</div>
+     	 <div class="modal-body">
+     	 	<b style="text-align: left;">아이디</b> <br> 
+						<input type="text" id="id_input" name="user_Id" placeholder="  아이디" style="width: 300px;">
+						<input type="button" id="find_pw" value="아이디 확인" style="width: 100px;">
+						<br>
+						<span class="id_input_re_1">가입된 아이디 입니다.</span>
+						<span class="id_input_re_2">가입되지 않은 아이디 입니다.</span>
+						<span class="id_form_check"></span> 
+						<br>
+        	<b style="text-align: left;">이메일 인증</b> <br> 
+        					<form action="/regist/findPw" method="get" id="getpw">
+						<input type="text" id="find_pw_input" name="user_Email" placeholder="  이메일"
+							style="width: 300px;">
+							<input type="button" id="find_pw_chk" value="이메일 인증" style="width: 100px;">
+						
+						<input type="text" id="chk_find_pw" placeholder="인증번호를 입력해 주세요" disabled="disabled" style="width: 300px;">
+						<input type="submit" value="비밀번호 메일 받기" style="width: 150px;" disabled="disabled" id="pw_submit"> 
+						<br>
+						<span class="find_input_re_1">인증번호가 일치합니다.</span>
+						<span class="find_input_re_2">인증번호를 다시 확인해주세요.</span>
+						<span class="find_input_re_3">등록이 되지않은 이메일 입니다.</span>
+						<span class="final_find_ck">이메일을 입력해주세요.</span>
+						<span class="find_form_check"></span>
+						<br>
+						</form>
+      	</div>
+      	<div class="modal-footer">
+        	<button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="allclose()">닫기</button>
+      	</div>
+    	</div>
+  	</div>
+	</div>
 					</div>
+					<script type="text/javascript">
+					 var code = "";
+					$("#find_id_chk").click(function(){
+						let user_Email = $("#find_id").val();
+						let checkBox = $("#chk_find");
+						let warnMsg = $(".find_form_check");
+						$('.final_find_ck').css('display', 'none');
+						
+						if(mailFormCheck(user_Email)){
+					        warnMsg.html("이메일이 전송 되었습니다. 이메일을 확인해주세요.");
+					        warnMsg.css("color","green");
+					        warnMsg.css("display", "inline-block");
+					    } else {
+					        warnMsg.html("올바르지 못한 이메일 형식입니다.");
+					        warnMsg.css("color","red");
+					        warnMsg.css("display", "inline-block");
+					        $("#find_id").val(null);
+					        return false;
+					    } 
+						$.ajax({
+							type : "GET",
+							url : "/regist/findEmail?user_Email=" + user_Email,
+							success:function(data){
+								
+								if(data == 'naver'){
+									warnMsg.html("네이버 아이디로 가입된 이메일 입니다. 네이버 간편 로그인 해주세요.");
+								} else if(data == 'kakao'){
+									warnMsg.html("카카오 아이디로 가입된 이메일 입니다. 카카오 간편 로그인 해주세요.");
+								} else if(data == 'fail'){
+									warnMsg.html("가입되지 않은 이메일 입니다.");
+									 warnMsg.css("color","red");
+									 $("#find_id").val(null);
+									
+								} else {
+									checkBox.attr("disabled", false);
+									code = data;
+									$('.find_input_re_3').css("display","none");
+								}
+								
+							}
+							
+						})
+						
+					})
+					
+					$("#chk_find").on("propertychange change keyup paste input",function(){ // 인증번호 입력할때 마다
+					let inputcode = $("#chk_find").val(); // 입력한 인증번호
+		
+					if(inputcode == code){
+					$('.find_input_re_1').css("display","inline-block");
+					$('.find_input_re_2').css("display", "none");
+					$(".find_form_check").css("display","none");
+					$("#id_submit").attr("disabled",false);
+					emailnumCheck = true;
+						} else{
+					$('.find_input_re_2').css("display","inline-block");
+					$('.find_input_re_1').css("display", "none");
+					$(".find_form_check").css("display","none");
+					emailnumCheck = false;
+			
+					}
+					})
+					
+					function mailFormCheck(email){
+					var form = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i;
+					return form.test(email);
+					}
+						
+					function allclose(){
+						$("#find_id").val(null);
+						$("#chk_find").val(null);
+						$(".find_inpur_re_1").css("display","none");
+						$(".find_inpur_re_2").css("display","none");
+						$(".find_inpur_re_3").css("display","none");
+						$(".final_find_ck").css("display","none");
+						$(".find_form_check").css("display","none");
+						$("#id_input").val(null);
+						$(".id_input_re_1").css("display","none");
+						$(".id_input_re_2").css("display","none");
+						$("#find_pw_input").val(null);
+						
+					}
+					
+					$('#find_pw').on("click", function(){ // 아이디 입력마다 값을 확인
+						let user_Id = $('#id_input').val();
+						let warnMsg = $(".id_form_check"); // 비밀번호 경고글
+						 $('.final_id_ck').css('display', 'none');
+						let data = {user_Id : user_Id}
+						
+						
+						$.ajax({
+							type : "post",
+							url : "/regist/idChk",
+							data : data,
+							success : function(result){
+								if(result != 'fail'){
+									$('.id_input_re_2').css("display","inline-block");
+									$('.id_input_re_1').css("display", "none");
+									warnMsg.css("display", "none");
+									$('#id_input').val(null);
+									idckCheck = false;
+								} else {
+									
+									$('.id_input_re_1').css("display","inline-block");
+									$('.id_input_re_2').css("display", "none");
+									warnMsg.css("display", "none");
+									idckCheck = true;
+								}
+							}
+						})
+
+					});// function 종료
+					$("#find_pw_chk").click(function(){
+						let user_Email = $("#find_pw_input").val();
+						let checkBox = $("#chk_find_pw");
+						let warnMsg = $(".find_form_check");
+						$('.final_find_ck').css('display', 'none');
+						
+						if(mailFormCheck(user_Email)){
+					        warnMsg.html("이메일이 전송 되었습니다. 이메일을 확인해주세요.");
+					        warnMsg.css("color","green");
+					        warnMsg.css("display", "inline-block");
+					    } else {
+					        warnMsg.html("올바르지 못한 이메일 형식입니다.");
+					        warnMsg.css("color","red");
+					        warnMsg.css("display", "inline-block");
+					        $("#find_pw_input").val(null);
+					        return false;
+					    } 
+						$.ajax({
+							type : "GET",
+							url : "/regist/findEmail?user_Email=" + user_Email,
+							success:function(data){
+								
+								if(data == 'naver'){
+									warnMsg.html("네이버 아이디로 가입된 이메일 입니다. 네이버 간편 로그인 해주세요.");
+								} else if(data == 'kakao'){
+									warnMsg.html("카카오 아이디로 가입된 이메일 입니다. 카카오 간편 로그인 해주세요.");
+								} else if(data == 'fail'){
+									warnMsg.html("가입되지 않은 이메일 입니다.");
+									 warnMsg.css("color","red");
+									 $("#find_pw_input").val(null);
+									
+								} else {
+									checkBox.attr("disabled", false);
+									code = data;
+									$('.find_input_re_3').css("display","none");
+								}
+								
+							}
+							
+						})
+						
+					})
+					
+					$("#chk_find_pw").on("propertychange change keyup paste input",function(){ // 인증번호 입력할때 마다
+					let user_Email = $("#find_pw_input").val();
+					let inputcode = $("#chk_find_pw").val(); // 입력한 인증번호
+		
+					if(inputcode == code){
+					$('.find_input_re_1').css("display","inline-block");
+					$('.find_input_re_2').css("display", "none");
+					$(".find_form_check").css("display","none");
+					if($("#id_input").val() != null){
+						$("#pw_submit").attr("disabled",false);
+						}
+					} else{
+					$('.find_input_re_2').css("display","inline-block");
+					$('.find_input_re_1').css("display", "none");
+					$(".find_form_check").css("display","none");
+					emailnumCheck = false;
+			
+					}
+					})
+					
+					</script>
 					<h3 style="text-align: center;">SNS 간편 로그인</h3>
 					<div class="api-login">
 						<!-- 네이버 로그인 버튼 노출 영역 -->
@@ -421,7 +701,11 @@ input {
 						<a class="p-2" href="https://kauth.kakao.com/oauth/authorize?client_id=6271ae3b4283fa56e846863ed3a4f7be&redirect_uri=http://localhost:8787/home&response_type=code">
 							<img src="/images/login/kakao_login_medium_narrow.png" style="width:280px; height:60px;">
 							</a>
-						<button type="button" value="google">구글 로그인</button>
+							<br>
+							<br>
+						
+						
+						
 
 					</div>
 				</div>
@@ -433,13 +717,7 @@ input {
 								이미회원이신가요?&nbsp;|&nbsp;<a href="/login">로그인</a>
 							</p>
 						</div>
-						<h3 style="text-align: center;">SNS 간편 회원가입</h3>
-						<div class="api-login">
-							
-							<button type="button" value="kakao">카카오 간편 회원가입</button>
-							<button type="button" value="google">구글 간편 회원가입</button>
-
-						</div>
+						
 					</div>
 				</div>
 				<div class="tab_content" id="sign-up-form-content"></div>
@@ -499,6 +777,8 @@ input {
 					<div>
 						<b style="text-align: left;">나이</b> <br> 
 						<input type="text" id="age_input" name="user_Age" placeholder="  나이" style="width: 500px;">
+						<br>
+						<span class="age_form_check"></span>
 					</div>
 					<div>
 						<b style="text-align: left;">주소</b> <br> 
@@ -790,7 +1070,7 @@ input {
 								</div>
 							</div>
 						</div>
-						<br><br>
+						<br><br><br><br>
 						 <input type="button" value="회원가입" id="regist_com" 
 							style="width: 120px;"> 
 							<input type="button" value="회원가입 취소"
@@ -824,6 +1104,7 @@ input {
 	$('#id_chk').on("click", function(){ // 아이디 입력마다 값을 확인
 		let user_Id = $('#id_input').val();
 		let warnMsg = $(".id_form_check"); // 비밀번호 경고글
+		 $('.final_id_ck').css('display', 'none');
 		let data = {user_Id : user_Id}
 		
 		if(idFormCheck(user_Id)){
@@ -863,6 +1144,7 @@ input {
 	$('#pw_input').blur(function(){ // 비밀번호 유형 검사
 		let warnMsg = $(".pw_form_check"); // 비밀번호 경고글
 		let user_Pw = $("#pw_input").val();
+		 $('.final_pw_ck').css('display', 'none');
 		
 		if(pwFormCheck(user_Pw)){
 	        warnMsg.html("올바른 비밀번호 형식입니다.");
@@ -903,6 +1185,7 @@ input {
 		let user_Email = $("#email_input").val(); // 입력한 이메일
 		let checkBox = $("#chk_nm"); // 인증번호 입력란
 		let warnMsg = $(".email_form_check"); // 이메일 경고글
+		 $('.final_mail_ck').css('display', 'none');
 		
 		if(mailFormCheck(user_Email)){
 	        warnMsg.html("이메일이 전송 되었습니다. 이메일을 확인해주세요.");
@@ -993,6 +1276,21 @@ input {
 
 	});// function 종료
 	
+	$('#age_input').blur(function(){ // 비밀번호 유형 검사
+		let warnMsg = $(".age_form_check"); // 비밀번호 경고글
+		let user_Age = $("#age_input").val();
+		
+		if(ageFormCheck(user_Age)){
+	        warnMsg.css("display", "none");
+	    } else {
+	        warnMsg.html("숫자만 입력해 주세요");
+	        warnMsg.css("color","red");
+	        warnMsg.css("display", "inline-block");
+	        $("#age_input").val(null);
+	        return false;
+	    } 
+	})
+	
 	$('#regist_com').on("click" , function(){ // 회원가입 버튼
 		var id = $('#id_input').val();                 // id 입력란
         var pw = $('#pw_input').val();                // 비밀번호 입력란
@@ -1000,6 +1298,7 @@ input {
         var name = $('#nm_input').val();            // 이름 입력란
         var mail = $('#email_input').val();            // 이메일 입력란
         var addr = $('#daddr').val();        // 상세 주소 입력란
+        var age = $('#age_input').val();
         
         if(id == ""){
             $('.final_id_ck').css('display','block');
@@ -1082,6 +1381,11 @@ input {
 	function nmFormCheck(nm){
 		var form = /^(?=.*[a-z0-9가-힣])[a-z0-9가-힣]{2,16}$/;
 		return form.test(nm);
+	}
+	
+	function ageFormCheck(age){
+		var form = /^([0-9]){2,3}$/;
+		return form.test(age);
 	}
 	
 })

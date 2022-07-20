@@ -145,6 +145,10 @@ tr {
 	              <input type="hidden" name="in_Code" value="${user_Code }">
 					<table class="Inquiry-detail">
 						<tr>
+						<th>문의 유형</th>
+						<td>${dto.in_Type }</td>
+						</tr>
+						<tr>
 						<th>제목</th>
 						<td>${dto.in_Title }</td>
 						</tr>

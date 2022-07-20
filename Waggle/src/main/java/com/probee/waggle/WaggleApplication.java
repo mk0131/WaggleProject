@@ -48,4 +48,18 @@ public class WaggleApplication {
 		return "mypage_me";
 	}
 	
+	@RequestMapping("/profileEdit")
+	public static String goprofileedit() {
+		return "profileEdit";
+	}
+	
+	@RequestMapping("/history")
+	public static String gohistory() {
+		return "history";
+	}
+	
+	@RequestMapping("/chatbot")
+	public static String gochatbot() {
+		return "chatbot";
+	}
 }
