@@ -147,10 +147,6 @@ button:active {
 	      <tr>
 	       <th>내가 본 집 링크 첨부</th>
 	       <td><a style="color: #f48c06;" id="link" href="">${req_dto.req_Link }</a></td>
-<<<<<<< HEAD
-=======
-
->>>>>>> 39d4259f57b8781eaf017ffd9e416bfcb4d39dc2
 	      </tr>
 	      <tr>
 	       <th>방문기한</th>
@@ -187,7 +183,7 @@ button:active {
 	    </c:if>
 	    <c:if test="${who eq '수행자'}">
 	     <div class="btn3" id="btn3">
-	      <button type="button" value="요청취소" onclick="location.href=''">요청취소</button>
+	      <button type="button" value="요청취소" onclick="location.href=''">수행취소(24시간 이내)</button>
 	      <button type="button" value="심부름완료" onclick="location.href=''">심부름 완료하기</button>
 	      <button type="button" value="목록" onclick="location.href='/board/list'">목록으로 돌아가기</button>
 	     </div>
@@ -200,24 +196,11 @@ button:active {
 	   
 	 </div>
 	<%@ include file="../footer.jsp" %>
-	<script type="text/javascript">
-		$(function(){
-			let link = $("#link").text();
-			console.log(link);
-			console.log($("#link").attr("href"));
-			console.log("실행");
-			$("#link").attr('href',"https://"+link);
-			console.log($("#link").attr("href"));
-		})
-	</script>
 </body>
 <script type="text/javascript">
 	
 	$(function() {
 		let link = $("#link").text();
-		console.log(link);
-		console.log($("#link").attr("href"));
-		console.log("실행");
 		$("#link").attr('href', "https://" + link);
 		console.log($("#link").attr("href"));
 	})
