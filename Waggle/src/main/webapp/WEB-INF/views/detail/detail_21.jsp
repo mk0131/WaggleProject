@@ -196,15 +196,11 @@ button:active {
 	   
 	 </div>
 	<%@ include file="../footer.jsp" %>
+	<script type="text/javascript">
+		$(function(){
+			let link = $("#link").text();
+			$("#link").attr('href',"https://"+link);
+		})
+	</script>
 </body>
-<script type="text/javascript">
-	
-	$(function() {
-		let link = $("#link").text();
-		$("#link").attr('href', "https://" + link);
-		console.log($("#link").attr("href"));
-	})
-	
-</script>
-
 </html>
