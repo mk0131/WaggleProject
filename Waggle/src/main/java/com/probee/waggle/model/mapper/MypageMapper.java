@@ -33,5 +33,22 @@ public interface MypageMapper {
 	@Select("select req_No, req_Title, req_EDate, req_Point, req_Stat, home_Addr, fi_Nm, RES_UCODE from request join HOME on REQUEST.REQ_HCODE = HOME.home_Code join FILE on REQUEST.REQ_FCODE = FILE.FI_CODE JOIN RESULT ON REQUEST.REQ_NO = RESULT.RES_NO JOIN USERS ON RESULT.RES_UCODE = USERS.USER_CODE WHERE RES_UCODE = #{ucode} ")
 	public List<MypageFinishlistDto> SelectMyPerform(int ucode);
 
+	@Update(" UPDATE USERS SET User_PW = #{user_Pw} WHERE user_Code = #{user_Code} ")
+	public int PwChange(String user_Pw, int user_Code);
+	
+	@Update(" UPDATE USERS SET User_Email = #{user_Email} WHERE user_Code = #{user_Code} ")
+	public int EmailChange(String user_Email, int user_Code);
+	
+	@Update(" UPDATE USERS SET User_Nm = #{user_Nm} WHERE user_Code = #{user_Code} ")
+	public int NmChange(String user_Nm, int user_Code);
+	
+	@Update(" UPDATE USERS SET User_Age = #{user_Age} WHERE user_Code = #{user_Code} ")
+	public int AgeChange(int user_Age, int user_Code);
+	
+	@Update(" UPDATE UserAddress SET ua_Post = #{ua_Post}, ua_Addr =#{ua_Addr}, ua_DAddr =#{ua_DAddr} WHERE ua_UCode = #{ua_UCode} ")
+	public int AddrChange(String ua_Post, String ua_Addr, String ua_DAddr, int ua_UCode);
+	
+	@Update(" UPDATE USERS SET User_Gender = #{user_Gender} WHERE user_Code = #{user_Code} ")
+	public int GenderChange(String user_Gender, int user_Code);
 	
 }

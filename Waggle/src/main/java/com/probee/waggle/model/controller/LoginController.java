@@ -74,6 +74,7 @@ public class LoginController {
 			UsersDto naver = loginService.Naver(dto);
 			session.setAttribute("user_Code", naver.getUser_Code());
 			session.setAttribute("user_Nm", naver.getUser_Nm());
+			session.setAttribute("user_Email", naver.getUser_Email());
 			session.setAttribute("user_Gender", naver.getUser_Gender());
 			session.setAttribute("user_Age", naver.getUser_Age());
 			session.setAttribute("user_Grade", naver.getUser_Grade());
@@ -86,6 +87,7 @@ public class LoginController {
 		} else { // 동일한 이메일이 있으면 회원정보 불러오기
 			session.setAttribute("user_Code", user.getUser_Code());
 			session.setAttribute("user_Nm", user.getUser_Nm());
+			session.setAttribute("user_Email", user.getUser_Email());
 			session.setAttribute("user_Gender", user.getUser_Gender());
 			session.setAttribute("user_Age", user.getUser_Age());
 			session.setAttribute("user_Grade", user.getUser_Grade());
@@ -129,6 +131,7 @@ public class LoginController {
 			System.out.println(kakao);
 			session.setAttribute("user_Code", kakao.getUser_Code());
 			session.setAttribute("user_Nm", kakao.getUser_Nm());
+			session.setAttribute("user_Email", kakao.getUser_Email());
 			session.setAttribute("user_Gender", kakao.getUser_Gender());
 			session.setAttribute("user_Age", kakao.getUser_Age());
 			session.setAttribute("user_Grade", kakao.getUser_Grade());
@@ -141,6 +144,7 @@ public class LoginController {
 			System.out.println(dto2);
 			session.setAttribute("user_Code", dto2.getUser_Code());
 			session.setAttribute("user_Nm", dto2.getUser_Nm());
+			session.setAttribute("user_Email", dto2.getUser_Email());
 			session.setAttribute("user_Gender", dto2.getUser_Gender());
 			session.setAttribute("user_Age", dto2.getUser_Age());
 			session.setAttribute("user_Grade", dto2.getUser_Grade());

@@ -13,6 +13,7 @@ import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -21,95 +22,175 @@ import com.probee.waggle.model.dto.MypageFinishlistDto;
 import com.probee.waggle.model.dto.UserAddressDto;
 import com.probee.waggle.model.dto.UsersDto;
 import com.probee.waggle.model.service.MypageService;
+import com.probee.waggle.model.service.RegistService;
 
 @Controller
 @RequestMapping("/mypage") // 회원가입
 public class MypageController {
-	
+
 	@Autowired
 	MypageService mypageService;
-	
-	@RequestMapping(value="/descInsert", method=RequestMethod.POST)
+
+	@Autowired
+	RegistService registService;
+
+	@RequestMapping(value = "/descInsert", method = RequestMethod.POST)
 	public String InsertUserInfo(HttpServletRequest request, int code, String description) {
-		
-		//자기소개 db에 삽입
-		int res=0;
+
+		// 자기소개 db에 삽입
+		int res = 0;
 		res = mypageService.DescUpdate(description, code);
-		if (res>0) {
+		if (res > 0) {
 			System.out.println("수정 성공");
-		}else {
+		} else {
 			System.out.println("수정 실패");
 		}
-		
-		
-		//세션에 자기소개 저장
+
+		// 세션에 자기소개 저장
 		HttpSession session = request.getSession();
 		String editDesc = mypageService.SelectDesc(code);
 		session.setAttribute("user_Intro", editDesc);
 		session.setMaxInactiveInterval(-1);
-		
-		
+
 		return "redirect:/mypage_me";
 	}
-	
-	@RequestMapping(value="/descEdit", method=RequestMethod.POST)
+
+	@RequestMapping(value = "/descEdit", method = RequestMethod.POST)
 	public String selectUserInfo(HttpServletRequest request, int code, String description) {
-		
-		//기존에 자기소개 저장되어있는거 삭제
+
+		// 기존에 자기소개 저장되어있는거 삭제
 		HttpSession session = request.getSession();
 		session.removeAttribute("user_Intro");
-		
-		
-		//자기소개 수정
-		int res=0;
+
+		// 자기소개 수정
+		int res = 0;
 		res = mypageService.DescUpdate(description, code);
-		if (res>0) {
+		if (res > 0) {
 			System.out.println("수정 성공");
-		}else {
+		} else {
 			System.out.println("수정 실패");
 		}
-		
-		
-		//수정된 자기소개 세션에 다시 저장
+
+		// 수정된 자기소개 세션에 다시 저장
 		String editDesc = mypageService.SelectDesc(code);
 		session.setAttribute("user_Intro", editDesc);
 		session.setMaxInactiveInterval(-1);
-		
-		
+
 		return "redirect:/mypage_me";
 	}
-	
-	//마이페이지 완료된리스트 컨트롤러
-	@RequestMapping(value="/reqroom", method=RequestMethod.POST)
+
+	// 마이페이지 완료된리스트 컨트롤러
+	@RequestMapping(value = "/reqroom", method = RequestMethod.POST)
 	@ResponseBody
 	public List<MypageFinishlistDto> requestFinish(String stat, int ucode) {
 		List<MypageFinishlistDto> finishlist = mypageService.SelectReqRoom(stat, ucode);
-		
+
 		return finishlist;
 	}
-	
 
 	@GetMapping("/profileEdit")
 	public String ProfileEdit(int ua_UCode, UserAddressDto dto, Model model) {
 		UserAddressDto user = mypageService.SelectAddr(ua_UCode);
-		
-		model.addAttribute("dto",user);
-	
+
+		model.addAttribute("dto", user);
+
 		return "profileEdit";
 	}
-	//이용내역페이지 나의 요청 컨트롤러
-	@RequestMapping(value="/reqhistory", method=RequestMethod.POST)
+
+	// 이용내역페이지 나의 요청 컨트롤러
+	@RequestMapping(value = "/reqhistory", method = RequestMethod.POST)
 	@ResponseBody
 	public List<MypageFinishlistDto> reqhistory(int ucode) {
 		List<MypageFinishlistDto> myReqList = mypageService.SelectMyRequest(ucode);
 		return myReqList;
 	}
-	
-	@RequestMapping(value="/performhistory", method=RequestMethod.POST)
+
+	@RequestMapping(value = "/performhistory", method = RequestMethod.POST)
 	@ResponseBody
 	public List<MypageFinishlistDto> performhistory(int ucode) {
 		List<MypageFinishlistDto> myPerformList = mypageService.SelectMyPerform(ucode);
 		return myPerformList;
 
+	}
+
+	@PostMapping("/pwchange")
+	public String PwChange(int user_Code, String user_Pw) {
+
+		mypageService.PwChange(user_Pw, user_Code);
+
+		return "redirect:/mypage/profileEdit?ua_UCode=" + user_Code;
+	}
+
+	@PostMapping("/emailchange")
+	public String EmailChange(int user_Code, String user_Email, HttpServletRequest request) {
+
+		HttpSession session = request.getSession();
+		session.removeAttribute("user_Email");
+
+		mypageService.EmailChange(user_Email, user_Code);
+
+		session.setAttribute("user_Email", user_Email);
+		session.setMaxInactiveInterval(-1);
+
+		return "redirect:/mypage/profileEdit?ua_UCode=" + user_Code;
+	}
+
+	@PostMapping("/nmchange")
+	public String NmChange(int user_Code, String user_Nm, HttpServletRequest request) {
+
+		HttpSession session = request.getSession();
+		session.removeAttribute("user_Nm");
+
+		mypageService.NmChange(user_Nm, user_Code);
+
+		session.setAttribute("user_Nm", user_Nm);
+		session.setMaxInactiveInterval(-1);
+
+		return "redirect:/mypage/profileEdit?ua_UCode=" + user_Code;
+	}
+
+	@PostMapping("/agechange")
+	public String AgeChange(int user_Code, int user_Age, HttpServletRequest request) {
+
+		HttpSession session = request.getSession();
+		session.removeAttribute("user_Age");
+
+		mypageService.AgeChange(user_Age, user_Code);
+
+		session.setAttribute("user_Age", user_Age);
+		session.setMaxInactiveInterval(-1);
+
+		return "redirect:/mypage/profileEdit?ua_UCode=" + user_Code;
+	}
+
+	@GetMapping("/addrchange")
+	public String AddrChange(int ua_UCode, UserAddressDto dto, Model model, String ua_Post, String ua_Addr,
+			String ua_DAddr) {
+
+		UserAddressDto user = mypageService.SelectAddr(ua_UCode);
+		if (user == null) {
+			registService.AddressJoin(dto);
+			UserAddressDto users = mypageService.SelectAddr(ua_UCode);
+			model.addAttribute("dto", users);
+		} else {
+			mypageService.AddrChange(ua_Post, ua_Addr, ua_DAddr, ua_UCode);
+			model.addAttribute("dto", user);
+		}
+
+		return "redirect:/mypage/profileEdit?ua_UCode=" + ua_UCode;
+	}
+
+	@PostMapping("/genderchange")
+	public String GenderChange(int user_Code, String user_Gender, HttpServletRequest request) {
+
+		HttpSession session = request.getSession();
+		session.removeAttribute("user_Gender");
+
+		mypageService.GenderChange(user_Gender, user_Code);
+
+		session.setAttribute("user_Gender", user_Gender);
+		session.setMaxInactiveInterval(-1);
+
+		return "redirect:/mypage/profileEdit?ua_UCode=" + user_Code;
 	}
 }

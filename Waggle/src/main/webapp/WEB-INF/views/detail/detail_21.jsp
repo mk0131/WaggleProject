@@ -147,10 +147,7 @@ button:active {
 	      <tr>
 	       <th>내가 본 집 링크 첨부</th>
 	       <td><a style="color: #f48c06;" id="link" href="">${req_dto.req_Link }</a></td>
-<<<<<<< HEAD
-=======
 
->>>>>>> 39d4259f57b8781eaf017ffd9e416bfcb4d39dc2
 	      </tr>
 	      <tr>
 	       <th>방문기한</th>
@@ -203,25 +200,8 @@ button:active {
 	<script type="text/javascript">
 		$(function(){
 			let link = $("#link").text();
-			console.log(link);
-			console.log($("#link").attr("href"));
-			console.log("실행");
 			$("#link").attr('href',"https://"+link);
-			console.log($("#link").attr("href"));
 		})
 	</script>
 </body>
-<script type="text/javascript">
-	
-	$(function() {
-		let link = $("#link").text();
-		console.log(link);
-		console.log($("#link").attr("href"));
-		console.log("실행");
-		$("#link").attr('href', "https://" + link);
-		console.log($("#link").attr("href"));
-	})
-	
-</script>
-
 </html>

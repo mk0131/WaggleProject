@@ -19,5 +19,17 @@ public interface MypageService {
 	public List<MypageFinishlistDto> SelectMyRequest(int ucode);
 	
 	public List<MypageFinishlistDto> SelectMyPerform(int ucode);
+	
+	public int PwChange(String user_Pw, int user_Code);
+	
+	public int EmailChange(String user_Email, int user_Code);
+	
+	public int NmChange(String user_Nm, int user_Code);
+	
+	public int AgeChange(int user_Age, int user_Code);
+	
+	public int AddrChange(String ua_Post, String ua_Addr, String ua_DAddr, int ua_UCode);
+	
+	public int GenderChange(String user_Gender, int user_Code);
 
 }
