@@ -15,7 +15,7 @@
 	<h3><a href="/login">login</a></h3>
 	<h3><a href="/board/list">board</a></h3>
 	<h3><a href="/inquiry/list">inquiry</a></h3>
-	<h3><a href="/point">point</a></h3>
+	<h3><a href="/point/use">point</a></h3>
 	<h3><a href="/mypage_me">mypage_me</a></h3>
 	<h3><a href="/chatbot">chatbot</a></h3>
 	

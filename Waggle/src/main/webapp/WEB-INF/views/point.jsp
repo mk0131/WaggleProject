@@ -131,6 +131,7 @@ input:focus ~ .bar:before, input:focus ~ .bar:after {
   text-transform: uppercase;
   color: #2e2e2e;
   user-select: none;
+  line-height:0.6;
   font-size: 15px;
   font-weight: bold;
 }
@@ -170,7 +171,7 @@ input:focus ~ .bar:before, input:focus ~ .bar:after {
 	<div class="middle">
 		<div class="middle-top">
 			<div class="guideline">
-				<ul class="guideline-all">
+				<ul class="guideline-all" style="margin-top:0">
 					<li><a href="javascript:void(0)"> <i
 							class="fa-solid fa-house"></i>
 					</a></li>
@@ -230,19 +231,30 @@ input:focus ~ .bar:before, input:focus ~ .bar:after {
 				<div class="history-title"><p>포인트 이용 내역</p>
 				</div>
 				
-				<div class="history-main">
+				<div class="history-main" style="margin:0 auto; width:1000px">
+					<div class="pointcharge">
+					</div>
+						<c:forEach var="list" items="${use}">
+							<div class="pointuse" style="border-bottom: 1px solid #898989; width:1000px; height:130px; margin-top:18px">
+								<div class="use-left"  style="width:110px; height:110px; display:inline-block">
+									<div style="width:100px; height:100px; border:5px solid #898989; border-radius:150px; color:#898989; font-size:20pt; text-align:center; line-height:100px; float:left">
+									사용
+									</div>
+								</div>
+								<div class="use-middle" style="width:650px; height:110px; padding-left:35px; display:inline-block">
+									<div>${list.po_Date}</div>
+									<div style="font-size:20pt">포인트 사용</div>
+									<div style="padding-top:30px">현재 포인트: ${user_Point }원</div>
+								</div>
+								<div class="use-right" style="width:200px; height:110px; display:inline-block; text-align:center; float:right">
+									<div style="font-size:30pt">-${list.po_Point} 원</div>
+									<div style="border:1px solid #3a3a3a; border-radius:10px; width:100px; height:30px; text-align:center; line-height:30px; margin-left:55px; color:#3a3a3a">내역삭제</div>						
+								</div>
+							</div>
+						</c:forEach>
 				</div>
 			
-			<!-- 
-				<div class="history_pagination">
-					<div class="container my-4">
-				      <ul id="list" class="list-group">
-				      </ul>
-				      <div id="pagination" class="my-4"></div>
-				    </div>
-				</div>
-				-->
-				
+		
 			</div>
 			
 		</div>
@@ -254,38 +266,12 @@ input:focus ~ .bar:before, input:focus ~ .bar:after {
 
 	<%@ include file="footer.jsp"%>
 
-	<script src="/js/easyPagination.js"></script>
     <script>
-
-      let items = [];
-
-      for (let i=0; i<100; i++) {
-        items.push("Item " + i);
-      }
-
-      const pagination = easyPagination({
-        items,
-        rows: 5,
-        buttonsWrapper: "#pagination",
-        handlePaginatedItems: (items) => {
-        	/*
-          const list = document.getElementById("list");
-          
-          list.innerHTML = "";
-          items.forEach((item) => {
-            list.innerHTML += '<li class="list-group-item">${item}</li>';
-          });
-          */
-		  const list = document.getElementById("list");
-          list.innerHTML = "";
-          for(let i=0; i<items.length; i++){
-        	  $("#list").append('<li class="list-group-item">'+items[i]+'</li>');
-          }
-        }
-      });
-
-      pagination.paginate();
-
+	$(document).ready(function(){
+		$("fo")
+		
+	})
+	
     </script>
 </body>
 </html>
