@@ -5,6 +5,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 
 import com.probee.waggle.model.dto.RequestDto;
 import com.probee.waggle.model.dto.RequestDto2;
@@ -24,6 +25,12 @@ public interface BoardMapper {
 			+ "from request r left outer join file f on r.req_FCode = f.fi_Code left outer join home h on r.req_HCode = h.home_Code "
 			+ "where req_No=#{req_No} ")
 	public RequestDto2 selectRequest(int req_NO);
+	
+	@Select(" select max(req_No) from request r ")
+	public int selectLastRequestNo();
+	
+	@Update(" update request set req_FCode=#{req_FCode} where req_No=#{req_No} ")
+	public int updateFCode(int req_No, int req_FCode);
 	
 	@Insert(" INSERT INTO Request values (null,#{req_Title},#{req_Link},NOW(),#{req_EDate},#{req_Phone},#{req_Detail},#{req_Point},'모집중',#{req_UCode},null,#{req_HCode}) ")
 	public int insertRequest(RequestDto2 dto);
