@@ -1,22 +1,22 @@
 package com.probee.waggle.model.dto;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 public class PointsDto {
 	private int po_No;
 	private int po_UCode;
 	private int po_Point;
-	private Date po_Date;
+	private LocalDate po_Date;
 	
 	public PointsDto() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
-	public PointsDto(int po_No, int po_Code, int po_Point, Date po_Date) {
+	public PointsDto(int po_No, int po_UCode, int po_Point, LocalDate po_Date) {
 		super();
 		this.po_No = po_No;
-		this.po_UCode = po_Code;
+		this.po_UCode = po_UCode;
 		this.po_Point = po_Point;
 		this.po_Date = po_Date;
 	}
@@ -33,8 +33,8 @@ public class PointsDto {
 		return po_UCode;
 	}
 
-	public void setPo_UCode(int po_Code) {
-		this.po_UCode = po_Code;
+	public void setPo_UCode(int po_UCode) {
+		this.po_UCode = po_UCode;
 	}
 
 	public int getPo_Point() {
@@ -45,19 +45,20 @@ public class PointsDto {
 		this.po_Point = po_Point;
 	}
 
-	public Date getPo_Date() {
+	public LocalDate getPo_Date() {
 		return po_Date;
 	}
 
-	public void setPo_Date(Date po_Date) {
+	public void setPo_Date(LocalDate po_Date) {
 		this.po_Date = po_Date;
 	}
 
 	@Override
 	public String toString() {
-		return "PointDto [po_No=" + po_No + ", po_Code=" + po_UCode + ", po_Point=" + po_Point + ", po_Date=" + po_Date
-				+ "]";
+		return "PointsDto [po_No=" + po_No + ", po_UCode=" + po_UCode + ", po_Point=" + po_Point + "]";
 	}
+
+	
 	
 	
 }
