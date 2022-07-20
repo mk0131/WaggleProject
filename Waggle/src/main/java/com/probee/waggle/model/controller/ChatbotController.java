@@ -24,23 +24,25 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Controller
 public class ChatbotController {
 	
-		@GetMapping("/chatbot")
-			public String ChatbotTest() {
-				return "chatbot";
-			}
-	  
-	  	private static String secretKey = "SXBYTk9Ma1BJWGZVR0dIUG1VbVpRZXB4ZEpkZnJwaVY=";
-	    private static String apiUrl = "https://dzf7sonaej.apigw.ntruss.com/custom/v1/7318/e1217c5d30f5097debc2f53187dab419f6f241f6782509c92987a1a4fac04fe9";
+	@GetMapping("/chatbot")
+	public String Chatbot() {
+		return "chatbot";
+	}
 
-	    @MessageMapping("/sendChatbotMessage")
+	private static String secretKey = "V2xtWE9FaXdzT3RnZmJZRHZXRlNzSXVVV1hWZXV2S1k=";
+    private static String apiUrl = "https://2udht0boyu.apigw.ntruss.com/custom/v1/7343/97973071c34ba996597def31945148e5fef8e4649ad7507720b9701a07c3e416";
+    
+	    @MessageMapping("/sendMessage")
 	    @SendTo("/topic/public")
-	    public String sendMessage(@Payload String chatbotMessage) throws IOException {
-   
+	  public String sendMessage(@Payload String chatMessage) throws IOException {
+	    	{
+
             URL url = new URL(apiUrl);
+            
 
-            String message = getReqMessage(chatbotMessage);
+            String message =  getReqMessage(chatMessage);
             String encodeBase64String = makeSignature(message, secretKey);
-
+            
             HttpURLConnection con = (HttpURLConnection)url.openConnection();
             con.setRequestMethod("POST");
             con.setRequestProperty("Content-Type", "application/json;UTF-8");
@@ -49,11 +51,9 @@ public class ChatbotController {
             // post request
             con.setDoOutput(true);
             DataOutputStream wr = new DataOutputStream(con.getOutputStream());
-            
             wr.write(message.getBytes("UTF-8"));
             wr.flush();
             wr.close();
-            
             int responseCode = con.getResponseCode();
 
             BufferedReader br;
@@ -69,8 +69,8 @@ public class ChatbotController {
                 while ((decodedString = in.readLine()) != null) {
                 	jsonString = decodedString;
                 }
-                
                 //chatbotMessage = decodedString;
+                
                 JSONParser jsonparser = new JSONParser();
     			try {
 
@@ -80,20 +80,21 @@ public class ChatbotController {
     				JSONObject data = (JSONObject)bubbles.get("data");
     				String description = "";
     				description = (String)data.get("description");
-    				chatbotMessage = description;
+    				chatMessage = description;
     			} catch (Exception e) {
     				System.out.println("error");
     				e.printStackTrace();
+    				
     			}
-                
+    			
                 in.close();
 
             } else {  // Error occurred
-                chatbotMessage = con.getResponseMessage();
+                chatMessage = con.getResponseMessage();
             }
-            
-        return chatbotMessage;
-        
+        }
+	    	
+        return chatMessage;
     }
 
     public static String makeSignature(String message, String secretKey) {
@@ -111,7 +112,6 @@ public class ChatbotController {
             encodeBase64String = Base64.encodeBase64String(rawHmac);
 
             return encodeBase64String;
-
         } catch (Exception e){
             System.out.println(e);
         }
@@ -122,46 +122,61 @@ public class ChatbotController {
 
     public static String getReqMessage(String voiceMessage) {
 
-		String requestBody = "";
+        String requestBody = "";
 
-		try {
+        try {
 
-			JSONObject obj = new JSONObject();
+        	JSONObject obj = new JSONObject();
 
-			long timestamp = new Date().getTime();
+            long timestamp = new Date().getTime();
 
-			System.out.println("##"+timestamp);
+            if(voiceMessage.length() == 2) {
+            	obj.put("version", "v2");
+                obj.put("userId", "U47b00b58c90f8e47428af8b7bddc1231heo2");
+                obj.put("timestamp", timestamp);
 
-			obj.put("version", "v2");
-			obj.put("userId", "U47b00b58c90f8e47428af8b7bddc1231heo2");
-			obj.put("timestamp", timestamp);
 
-			JSONObject bubbles_obj = new JSONObject();
+                JSONObject data_obj = new JSONObject();
+                data_obj.put("description", "");
 
-			bubbles_obj.put("type", "text");
+                JSONObject bubbles_obj = new JSONObject();
+                bubbles_obj.put("type", "text");
+                bubbles_obj.put("data", data_obj);
 
-			JSONObject data_obj = new JSONObject();
-			data_obj.put("description", voiceMessage);
+                JSONArray bubbles_array = new JSONArray();
+                bubbles_array.add(bubbles_obj);
 
-			bubbles_obj.put("type", "text");
-			bubbles_obj.put("data", data_obj);
+                obj.put("bubbles", bubbles_array);
+                obj.put("event", "open");
 
-			JSONArray bubbles_array = new JSONArray();
-			bubbles_array.add(bubbles_obj);
+                requestBody = obj.toString();
+            }else if(voiceMessage != "") {
+            	obj.put("version", "v2");
+                obj.put("userId", "U47b00b58c90f8e47428af8b7bddc1231heo2");
+                obj.put("timestamp", timestamp);
 
-			obj.put("bubbles", bubbles_array);
-			obj.put("event", "send");
 
-			requestBody = obj.toString();
+                JSONObject data_obj = new JSONObject();
+                data_obj.put("description", voiceMessage);
 
-		} catch (Exception e){
-			System.out.println("## Exception : " + e);
-		}
+                JSONObject bubbles_obj = new JSONObject();
+                bubbles_obj.put("type", "text");
+                bubbles_obj.put("data", data_obj);
 
-		return requestBody;
+                JSONArray bubbles_array = new JSONArray();
+                bubbles_array.add(bubbles_obj);
 
-	}
-    
-    
-    
+                obj.put("bubbles", bubbles_array);
+                obj.put("event", "send");
+
+                requestBody = obj.toString();
+            }
+            
+        } catch (Exception e){
+            System.out.println("## Exception : " + e);
+        }
+
+        return requestBody;
+
+    }
 }

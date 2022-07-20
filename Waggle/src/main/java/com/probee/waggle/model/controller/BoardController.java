@@ -86,11 +86,38 @@ public class BoardController {
 		req_dto.setReq_HCode(find_home.getHome_Code()); 
 		int res = boardService.insertRequest(req_dto);
 		
-		if(res>0) {
-			return "redirect:/board/list";
-		} else {
+		if(res == 0) {
+			System.out.println("not saved...");
 			return "redirect:/board/request";
 		}
+		
+		System.out.println("success saved!");
+		
+		// 직방 url에서 사진 crawling 
+		String img_url = boardService.crawlImgUrl(req_dto.getReq_Link());
+		
+		// DB 저장, req_FCode return
+		if(img_url != null) {
+			System.out.println("img_url 발견!");
+
+			int req_num = boardService.selectLastRequestNo();
+			
+			String path = "/images/request/home"+find_home.getHome_Code()+"_"+req_num+".jpg";
+			
+			int res_savecode = boardService.saveImg(img_url, path);
+			
+			if(res_savecode != 0) {
+				// update req
+				int res2 = boardService.updateFCode(req_num,res_savecode);
+				if(res2>0) {
+					System.out.println("success update!");
+				} else {
+					System.out.println("fail update...");
+				}
+			}
+		}
+		return "redirect:/board/list";
+		
 	}
 	
 	@GetMapping("/detail")
@@ -176,6 +203,8 @@ public class BoardController {
 			}			
 		}
 	}
+	
+
 	
 
 	
