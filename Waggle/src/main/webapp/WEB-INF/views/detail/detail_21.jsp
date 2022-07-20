@@ -147,7 +147,6 @@ button:active {
 	      <tr>
 	       <th>내가 본 집 링크 첨부</th>
 	       <td><a style="color: #f48c06;" id="link" href="">${req_dto.req_Link }</a></td>
-
 	      </tr>
 	      <tr>
 	       <th>방문기한</th>
@@ -184,7 +183,7 @@ button:active {
 	    </c:if>
 	    <c:if test="${who eq '수행자'}">
 	     <div class="btn3" id="btn3">
-	      <button type="button" value="요청취소" onclick="location.href=''">요청취소</button>
+	      <button type="button" value="요청취소" onclick="location.href=''">수행취소(24시간 이내)</button>
 	      <button type="button" value="심부름완료" onclick="location.href=''">심부름 완료하기</button>
 	      <button type="button" value="목록" onclick="location.href='/board/list'">목록으로 돌아가기</button>
 	     </div>
