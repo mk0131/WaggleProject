@@ -42,7 +42,7 @@ public class ChatbotController {
 
             String message =  getReqMessage(chatMessage);
             String encodeBase64String = makeSignature(message, secretKey);
-
+            
             HttpURLConnection con = (HttpURLConnection)url.openConnection();
             con.setRequestMethod("POST");
             con.setRequestProperty("Content-Type", "application/json;UTF-8");
@@ -93,7 +93,7 @@ public class ChatbotController {
                 chatMessage = con.getResponseMessage();
             }
         }
-
+	    	
         return chatMessage;
     }
 
@@ -112,7 +112,6 @@ public class ChatbotController {
             encodeBase64String = Base64.encodeBase64String(rawHmac);
 
             return encodeBase64String;
-
         } catch (Exception e){
             System.out.println(e);
         }
@@ -131,32 +130,48 @@ public class ChatbotController {
 
             long timestamp = new Date().getTime();
 
-            System.out.println("##"+timestamp);
+            if(voiceMessage.length() == 2) {
+            	obj.put("version", "v2");
+                obj.put("userId", "U47b00b58c90f8e47428af8b7bddc1231heo2");
+                obj.put("timestamp", timestamp);
 
-            obj.put("version", "v2");
-            obj.put("userId", "U47b00b58c90f8e47428af8b7bddc1231heo2");
-            obj.put("timestamp", timestamp);
 
-            JSONObject bubbles_obj = new JSONObject();
+                JSONObject data_obj = new JSONObject();
+                data_obj.put("description", "");
 
-            bubbles_obj.put("type", "text");
+                JSONObject bubbles_obj = new JSONObject();
+                bubbles_obj.put("type", "text");
+                bubbles_obj.put("data", data_obj);
 
-            JSONObject data_obj = new JSONObject();
-            data_obj.put("description", voiceMessage);
-            data_obj.put("description", "");
+                JSONArray bubbles_array = new JSONArray();
+                bubbles_array.add(bubbles_obj);
 
-            bubbles_obj.put("type", "text");
-            bubbles_obj.put("data", data_obj);
+                obj.put("bubbles", bubbles_array);
+                obj.put("event", "open");
 
-            JSONArray bubbles_array = new JSONArray();
-            bubbles_array.add(bubbles_obj);
+                requestBody = obj.toString();
+            }else if(voiceMessage != "") {
+            	obj.put("version", "v2");
+                obj.put("userId", "U47b00b58c90f8e47428af8b7bddc1231heo2");
+                obj.put("timestamp", timestamp);
 
-            obj.put("bubbles", bubbles_array);
-            obj.put("event", "send");
-            obj.put("event", "open");
 
-            requestBody = obj.toString();
+                JSONObject data_obj = new JSONObject();
+                data_obj.put("description", voiceMessage);
 
+                JSONObject bubbles_obj = new JSONObject();
+                bubbles_obj.put("type", "text");
+                bubbles_obj.put("data", data_obj);
+
+                JSONArray bubbles_array = new JSONArray();
+                bubbles_array.add(bubbles_obj);
+
+                obj.put("bubbles", bubbles_array);
+                obj.put("event", "send");
+
+                requestBody = obj.toString();
+            }
+            
         } catch (Exception e){
             System.out.println("## Exception : " + e);
         }

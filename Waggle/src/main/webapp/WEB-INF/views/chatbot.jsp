@@ -10,6 +10,7 @@
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 <body>
+	<form action="/app/sendMessage" method="post">
 	<div class="form-group">
         <label for="connect">챗봇 : </label>
         <button id="connect" class="btn btn-default" type="submit">연결</button>
@@ -32,7 +33,7 @@
             </tbody>
         </table>
     </div>
-	
+	</form>
 </body>
 <script>
 
@@ -61,6 +62,7 @@
 				showMessage("받은 메시지: " + message.body); //서버에 메시지 전달 후 리턴받는 메시지
 			});
 		});
+		
 	}
 
 	function disconnect() {
@@ -74,13 +76,15 @@
 	function sendMessage() {
 		let message = $("#msg").val()
 		showMessage("보낸 메시지: " + message);
-
+		console.log("sendMessage()실행");
 		stompClient.send("/app/sendMessage", {}, JSON.stringify(message));  //서버에 보낼 메시지
 	}
+	
 
 	function showMessage(message) {
 		$("#communicate").append("<tr><td>" + message + "</td></tr>");
 	}
+	
 
 	$(function() {
 		$("form").on('submit', function(e) {
