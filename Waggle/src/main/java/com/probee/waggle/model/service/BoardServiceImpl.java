@@ -11,6 +11,7 @@ import com.probee.waggle.model.dto.FileDto;
 import com.probee.waggle.model.dto.RequestDto;
 import com.probee.waggle.model.dto.RequestDto2;
 import com.probee.waggle.model.dto.ResultDto;
+import com.probee.waggle.model.dto.UserRatingDto;
 import com.probee.waggle.model.dto.UsersDto;
 import com.probee.waggle.model.dto.VolunteerDto;
 import com.probee.waggle.model.mapper.BoardMapper;
@@ -59,19 +60,8 @@ public class BoardServiceImpl implements BoardService{
 	}
 
 	@Override
-	public ResultDto selectResult(int res_No) {
-		return boardMapper.selectResult(res_No);
-	}
-
-	@Override
-	public List<VolunteerDto> selectVolunteer(int req_No) {
-		return boardMapper.selectVolunteer(req_No);
-	}
-
-	@Override
-	public List<UsersDto> selectUsers(List<String> code_list) {
-		String code_string = String.join(",", code_list);
-		return boardMapper.selectUsers(code_string);
+	public ResultDto selectResult(int req_No) {
+		return boardMapper.selectResult(req_No);
 	}
 
 	@Override
@@ -123,6 +113,11 @@ public class BoardServiceImpl implements BoardService{
 	@Override
 	public List<UsersDto> FindVol(int vo_No) {
 		return boardMapper.FindVol(vo_No);
+	}
+
+	@Override
+	public List<UserRatingDto> selectUserRating(int req_No) {
+		return boardMapper.selectUserRating(req_No);
 	}
 
 
