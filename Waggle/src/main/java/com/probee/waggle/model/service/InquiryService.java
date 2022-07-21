@@ -7,8 +7,8 @@ import com.probee.waggle.model.dto.UsersDto;
 
 public interface InquiryService {
 
-	public List<InquiryDto> selectList();
-	public List<InquiryDto> selectuserList();
+	public List<InquiryDto> selectList(int user_Code);
+	public UsersDto selectuser(int user_Code);
 	public InquiryDto selectOne(int in_Code);
 	public int insert(InquiryDto dto);
 	public int update(InquiryDto dto);
