@@ -24,6 +24,7 @@ import com.probee.waggle.model.dto.UsersDto;
 import com.probee.waggle.model.dto.VolunteerDto;
 import com.probee.waggle.model.service.BoardService;
 import com.probee.waggle.model.service.HomeService;
+import com.probee.waggle.model.service.VolunteerService;
 
 @Controller
 @RequestMapping("/board")
@@ -34,6 +35,9 @@ public class BoardController {
 	
 	@Autowired
 	private HomeService homeService;
+	
+	@Autowired
+	VolunteerService volunteerService;
 	
 	@GetMapping("/list")
 	public String selectList(Model model, int ...num) {
@@ -140,16 +144,18 @@ public class BoardController {
 
 		if(req_Stat.equals("모집중")) {
 			if(user_Code==req_UCode) {
-				List<VolunteerDto> vol_dto = boardService.selectVolunteer(req_No);
-				List<String> code_list = new ArrayList<String>();
 				
-				
-				for(VolunteerDto dto : vol_dto) {
-					code_list.add(Integer.toString(dto.getVo_UCode()));
-				}
 				model.addAttribute("vol", boardService.FindVol(req_No));
 				return "detail/detail_11";	
 			} else {
+				VolunteerDto vols = volunteerService.SelectOne(req_No, user_Code);
+				
+				if(vols != null) {
+					session.setAttribute("vo_UCode", vols.getVo_UCode());
+				} else {
+					session.setAttribute("vo_UCode", -1);
+				}
+				
 				return "detail/detail_12";
 			}
 			

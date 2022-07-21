@@ -202,6 +202,7 @@ button:active {
 					<c:otherwise>
 						<c:forEach items="${vol }" var="dto">
 							<form>
+							<input type="hidden" value="${dto.user_Code }">
 								<tr >
 									
 									<td><b>${dto.user_Pro }</b></td>
