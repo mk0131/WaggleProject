@@ -18,7 +18,48 @@
 }
 
 #js-pagination li{
-  list-style: none; display:inline; margin-left: 5px;
+	list-style: none; display:inline; margin-left: 5px;
+}
+
+#js-pagination li a{
+	color: black;
+	float: left;
+	padding: 8px 16px;
+	text-decoration: none;
+	border-radius: 0.9em;
+	transition: all ease-in-out 0.2s;
+}
+
+#js-pagination li a:hover {
+  background-color: black;
+  color: white;
+}
+
+.active {
+  background-color: #FFFF99;
+  color: black;
+}
+
+.req-btn {
+	background: white;
+	font-family: inherit;
+	padding: 0.6em 1.3em;
+	font-weight: 500;
+	font-size: 14px;
+	border: 3px solid black;
+	border-radius: 0.4em;
+	box-shadow: 0.1em 0.1em;
+	font-style: italic;
+}
+
+.req-btn:hover {
+	transform: translate(-0.05em, -0.05em);
+	box-shadow: 0.15em 0.15em;
+}
+
+.req-btn:active {
+	transform: translate(0.05em, 0.05em);
+	box-shadow: 0.05em 0.05em;
 }
 
 </style>
@@ -40,7 +81,7 @@
    	
 	<div class="middle">	
 		<div class="board">
-			<div><a href='/board/requestform'>요청하기</a></div>
+			<button class="req-btn" onclick="location.href='/board/requestform'">요청하기</button>
 			<div id="data-contents"></div>
         	<div id="js-pagination"></div>
 		</div>
@@ -103,11 +144,10 @@
 
 		document.getElementById('js-pagination').appendChild(fragmentPage);
 		
+		$(`#js-pagination li a`).removeClass("active");
+		$(`#js-pagination li a#page-${Current_page}`).addClass("active");
 		
 		$(function() {
-			$(`#js-pagination a`).removeClass("active");
-			$(`#js-pagination a#page-${currentPage}`).addClass("active");
-			
 			$("#js-pagination a").click(function (e) {
 				e.preventDefault();
 				var $item = $(this);
@@ -154,7 +194,7 @@
 									<p style="margin: 125px 10px; font-size: 16pt">`+dto.home_Addr+`</p>
 								</div>
 								<div class="req-title" style="position: absolute; left:250px; ">
-									<p style="line-height: 150px; width: 200px; font-size: 20pt; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">`+dto.req_Title+`</p>
+									<p style="line-height: 150px; width: 300px; font-size: 20pt; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">`+dto.req_Title+`</p>
 								</div>
 								<div class="req-point"
 									style="display: inline-block; float: right; height: 200px">
