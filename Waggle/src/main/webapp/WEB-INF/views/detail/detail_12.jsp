@@ -166,15 +166,15 @@ button:active {
 	      </tr>
 	      </tbody>
 	     </table>
-	     <div class="ongoing21-content-bottom">
+	     <div class="ongoing21-content-bottom" style="width: 900px; margin: 0 auto;">
 	       <h4>디테일 요구사항</h4>
 	       <textarea id="incontent" rows="14" cols="80" name="content" placeholder="요구사항을 입력해주세요" readonly="readonly">${req_dto.req_Detail }</textarea>
 	       <br/><br/><br/>
-	       <div style="text-align: right; width: 800px;"><b>심부름 비용: ${req_dto.req_Point }원</b> </div>
+	       <div style="text-align: right; width: 750px; font-size: 16pt;"><b>심부름 비용: ${req_dto.req_Point }원</b> </div>
 	       <br>
 	     <div class="btn2" id="btn2">
-	      <button type="button" value="요청취소" onclick="location.href=''" style="width: 150px;">지원하기</button>
-	      <button type="button" value="목록" onclick="location.href='/board/list'" style="width: 150px;">목록으로 돌아가기</button>
+	      <button type="button" value="요청취소" onclick="location.href=''" style="width: 200px; margin-right: 100px;">지원하기</button>
+	      <button type="button" value="목록" onclick="location.href='/board/list'" style="width: 200px;">목록으로 돌아가기</button>
 	     </div>
 	     </div>
 	    </div>
