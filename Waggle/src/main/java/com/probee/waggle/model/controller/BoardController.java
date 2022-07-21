@@ -88,7 +88,7 @@ public class BoardController {
 		
 		if(res == 0) {
 			System.out.println("not saved...");
-			return "redirect:/board/request";
+			return "redirect:/board/requestform";
 		}
 		
 		System.out.println("success saved!");
