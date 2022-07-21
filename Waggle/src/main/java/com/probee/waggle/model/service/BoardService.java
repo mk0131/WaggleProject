@@ -2,6 +2,7 @@ package com.probee.waggle.model.service;
 
 import java.util.List;
 
+import com.probee.waggle.model.dto.FileDto;
 import com.probee.waggle.model.dto.RequestDto;
 import com.probee.waggle.model.dto.RequestDto2;
 import com.probee.waggle.model.dto.ResultDto;
@@ -23,9 +24,8 @@ public interface BoardService {
 	public String crawlImgUrl(String url);
 	public int saveImg(String img_url, String path);
 	public List<UserRatingDto> selectUserRating(int req_No);
-	
 	public int CreateRes(int res_No, int res_UCode);
-	
 	public int Progress(int req_No);
+	public List<FileDto> selectResultFile(int res_Code);
 
 }

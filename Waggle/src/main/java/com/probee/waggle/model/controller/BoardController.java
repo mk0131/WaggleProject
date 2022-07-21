@@ -196,7 +196,11 @@ public class BoardController {
 				return "detail/detail_21";
 			} 
 			// 글 번호에 맞는 result 데이터
-			model.addAttribute("result", boardService.selectResult(req_No));
+			ResultDto result = boardService.selectResult(req_No);
+			Gson gson = new Gson();
+			model.addAttribute("res_dto", gson.toJson(result));
+			// result 관련 file
+			model.addAttribute("file", boardService.selectResultFile(result.getRes_Code()));
 			if(req_Stat.equals("확인중")) {
 				if(who.equals("작성자")) {
 					return "detail/detail_31";
@@ -209,14 +213,13 @@ public class BoardController {
 			} else { //완료
 				// 글 번호에 맞는 유저평가 데이터 json으로 변환하여 넣기
 				List<UserRatingDto> list = boardService.selectUserRating(req_No);
-				List<String> res_list = new ArrayList<String>();
-				Gson gson = new Gson();
+				List<String> rate_list = new ArrayList<String>();
 				
 				for(int i=0; i<list.size(); i++) {
 					String tmp = gson.toJson(list.get(i));
-					res_list.add(tmp);
+					rate_list.add(tmp);
 				}
-				model.addAttribute("user_rating", res_list);
+				model.addAttribute("user_rating", rate_list);
 				
 				return "detail/detail_41";
 			}			

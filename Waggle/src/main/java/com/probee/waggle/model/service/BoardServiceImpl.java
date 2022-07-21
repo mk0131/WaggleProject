@@ -130,5 +130,10 @@ public class BoardServiceImpl implements BoardService{
 		return boardMapper.Progress(req_No);
 	}
 
+	@Override
+	public List<FileDto> selectResultFile(int res_Code) {
+		return boardMapper.selectResultFile(res_Code);
+	}
+
 
 }

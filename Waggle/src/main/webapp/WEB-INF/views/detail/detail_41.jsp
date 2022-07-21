@@ -83,6 +83,13 @@
 	box-shadow: rgba(67, 71, 85, 0.27) 0px 0px 0.25em, rgba(90, 125, 188, 0.05) 0px 0.25em 1em;
 }
 
+#revcontent {
+	outline: none;
+    resize: none;
+    border-radius: 5px;
+	box-shadow: rgba(67, 71, 85, 0.27) 0px 0px 0.25em, rgba(90, 125, 188, 0.05) 0px 0.25em 1em;
+}
+
 #userrealname {
 	font-weight: bold;
 }
@@ -129,6 +136,41 @@ button:active {
 	border: 0 none;
 }
 
+div#file_container img {
+	width: 400px;
+	height: 250px;
+}
+
+div#detail_container {
+	display:inline-block;
+  	align-items: center;
+  	justify-content: center;
+    padding: 5px;
+    border-spacing: 30px;
+    font-size: 14px;
+    width: 800px;
+    margin-top: 20px;
+    
+}
+
+div#file_container {
+	float: left;
+	width: 400px;
+}
+
+div#review_containser{
+	width: 400px;
+	float: right;
+	margin-top: 20px;
+}
+
+#revcontent {
+	margin-top: 10px;
+ 	font-size:15px;
+	line-height: 150%;
+	padding: 10px;
+}
+
 /* 게이지 바 */
 div#loader_container {
   width: 300px;
@@ -157,11 +199,11 @@ div#progress_bar {
     color-stop(0%, #9fbff4),
     color-stop(100%, #555bb4)
   );
-  background-image: -webkit-linear-gradient(top, #ffed8a 0%, #b89b00 100%);
-  background-image: -moz-linear-gradient(top, #ffed8a 0%, #b89b00 100%);
-  background-image: -ms-linear-gradient(top, #ffed8a 0%, #b89b00 100%);
-  background-image: -o-linear-gradient(top, #ffed8a 0%, #b89b00 100%);
-  background-image: linear-gradient(to bottom, #ffed8a 0%, #b89b00 100%);
+  background-image: -webkit-linear-gradient(top, #ffed8a 0%, orange 100%);
+  background-image: -moz-linear-gradient(top, #ffed8a 0%, orange 100%);
+  background-image: -ms-linear-gradient(top, #ffed8a 0%, orange 100%);
+  background-image: -o-linear-gradient(top, #ffed8a 0%, orange 100%);
+  background-image: linear-gradient(to bottom, #ffed8a 0%, orange 100%);
   height: 110%;
   position: absolute;
   top: -3px;
@@ -201,8 +243,18 @@ div#progress_percentage::after {
   bottom: -10px;
 }
 
+/* 라디오버튼 disabled */
+[type="radio"]:disabled:checked {
+	border: 4px solid;
+	border-color: #FFFF66 !important;
+	background-color: orange !important;
+    appearance: none;
+    width: 16px;
+	height: 16px;
+	border-radius: 50%;
+}
+
 /* 별 */
-/* use display:inline-flex to prevent whitespace issues. alternatively, you can put all the children of .rating-group on a single line */
 .rating-group {
   display: inline-flex;
 }
@@ -241,25 +293,22 @@ div#progress_percentage::after {
 }
 
 /* make all stars orange on rating group hover */
+/*
 .rating-group:hover .rating__label .rating__icon--star {
   color: orange;
 }
-
+*/
 /* make hovered input's following siblings grey on hover */
+/*
 .rating__input:hover ~ .rating__label .rating__icon--star {
   color: #ddd;
 }
-
+*/
 
 
 </style>
 </head>
 <body>
-	<p>${req_dto }</p>
-	<p>${who }</p>
-	<p>${result }</p>
-	<p>${user_rating }</p>
-	<hr>
 	<%@ include file="../header.jsp" %>
 	 <div id="wrap">
 	  <div class="middle">
@@ -336,12 +385,12 @@ div#progress_percentage::after {
 		       	</tr>
 		       	<tr>
 		       	 <td>
-		       	  <input type="radio" name="ur_Attr1">
-		       	  <span>좋아요</span>
-		       	  <input type="radio" name="ur_Attr1">
-		       	  <span>보통이에요</span>
-		       	  <input type="radio" name="ur_Attr1">
-		       	  <span>별로에요</span>
+		       	  <input type="radio" id="ur_Attr1_1" name="ur_Attr1">
+		       	  <label for="ur_Attr1_1">좋아요</label>
+		       	  <input type="radio" id="ur_Attr1_2" name="ur_Attr1">
+		       	  <label for="ur_Attr1_2">보통이에요</label>
+		       	  <input type="radio" id="ur_Attr1_3" name="ur_Attr1">
+		       	  <label for="ur_Attr1_3">별로에요</label>
 		       	 <td>
 		       	</tr>
 		       	<tr>
@@ -351,12 +400,12 @@ div#progress_percentage::after {
 		       	</tr>
 		        <tr>
 		       	 <td>
-		       	  <input type="radio" name="ur_Attr2">
-		       	  <span>좋아요</span>
-		       	  <input type="radio" name="ur_Attr2">
-		       	  <span>보통이에요</span>
-		       	  <input type="radio" name="ur_Attr2">
-		       	  <span>별로에요</span>
+		       	  <input type="radio" id="ur_Attr2_1" name="ur_Attr2">
+		       	  <label for="ur_Attr2_1">좋아요</label>
+		       	  <input type="radio" id="ur_Attr2_2" name="ur_Attr2">
+		       	  <label for="ur_Attr2_2">보통이에요</label>
+		       	  <input type="radio" id="ur_Attr2_3" name="ur_Attr2">
+		       	  <label for="ur_Attr2_3">별로에요</label>
 		       	 <td>
 		       	</tr>
 		       	<tr>
@@ -366,12 +415,12 @@ div#progress_percentage::after {
 		       	</tr>
 		       	<tr>
 		       	 <td>
-		       	  <input type="radio" name="ur_Attr3">
-		       	  <span>좋아요</span>
-		       	  <input type="radio" name="ur_Attr3">
-		       	  <span>보통이에요</span>
-		       	  <input type="radio" name="ur_Attr3">
-		       	  <span>별로에요</span>
+		       	  <input type="radio" id="ur_Attr3_1" name="ur_Attr3">
+		       	  <label for="ur_Attr3_1">좋아요</label>
+		       	  <input type="radio" id="ur_Attr3_2" name="ur_Attr3">
+		       	  <label for="ur_Attr3_2">보통이에요</label>
+		       	  <input type="radio" id="ur_Attr3_3" name="ur_Attr3">
+		       	  <label for="ur_Attr3_3">별로에요</label>
 		       	 <td>
 		       	</tr>
 		       </tbody>
@@ -389,12 +438,12 @@ div#progress_percentage::after {
 	       	</tr>
 	       	<tr>
 	       	 <td>
-	       	  <input type="radio" name="res_Attr1">
-	       	  <span>좋아요</span>
-	       	  <input type="radio" name="res_Attr1">
-	       	  <span>보통이에요</span>
-	       	  <input type="radio" name="res_Attr1">
-	       	  <span>별로에요</span>
+	       	  <input type="radio" id="res_Attr1_1" name="res_Attr1">
+	       	  <label for="res_Attr1_1">좋아요</label>
+	       	  <input type="radio" id="res_Attr1_2" name="res_Attr1">
+	       	  <label for="res_Attr1_2">보통이에요</label>
+	       	  <input type="radio" id="res_Attr1_3" name="res_Attr1">
+	       	  <label for="res_Attr1_3">별로에요</label>
 	       	 <td>
 	       	</tr>
 	       	<tr>
@@ -404,12 +453,12 @@ div#progress_percentage::after {
 	       	</tr>
 	        <tr>
 	       	 <td>
-	       	  <input type="radio" name="res_Attr2">
-	       	  <span>좋아요</span>
-	       	  <input type="radio" name="res_Attr2">
-	       	  <span>보통이에요</span>
-	       	  <input type="radio" name="res_Attr2">
-	       	  <span>별로에요</span>
+	       	  <input type="radio" id="res_Attr2_1" name="res_Attr2">
+	       	  <label for="res_Attr2_1">좋아요</label>
+	       	  <input type="radio" id="res_Attr2_2" name="res_Attr2">
+	       	  <label for="res_Attr2_2">보통이에요</label>
+	       	  <input type="radio" id="res_Attr2_3" name="res_Attr2">
+	       	  <label for="res_Attr2_3">별로에요</label>
 	       	 <td>
 	       	</tr>
 	       	<tr>
@@ -419,12 +468,12 @@ div#progress_percentage::after {
 	       	</tr>
 	       	<tr>
 	       	 <td>
-	       	  <input type="radio" name="res_Attr3">
-	       	  <span>좋아요</span>
-	       	  <input type="radio" name="res_Attr3">
-	       	  <span>보통이에요</span>
-	       	  <input type="radio" name="res_Attr3">
-	       	  <span>별로에요</span>
+	       	  <input type="radio" id="res_Attr3_1" name="res_Attr3">
+	       	  <label for="res_Attr3_1">좋아요</label>
+	       	  <input type="radio" id="res_Attr3_2" name="res_Attr3">
+	       	  <label for="res_Attr3_2">보통이에요</label>
+	       	  <input type="radio" id="res_Attr3_3" name="res_Attr3">
+	       	  <label for="res_Attr3_3">별로에요</label>
 	       	 <td>
 	       	</tr>
 	       	<tr>
@@ -434,12 +483,12 @@ div#progress_percentage::after {
 	       	</tr>
 	       	<tr>
 	       	 <td>
-	       	  <input type="radio" name="res_Attr4">
-	       	  <span>좋아요</span>
-	       	  <input type="radio" name="res_Attr4">
-	       	  <span>보통이에요</span>
-	       	  <input type="radio" name="res_Attr4">
-	       	  <span>별로에요</span>
+	       	  <input type="radio" id="res_Attr4_1" name="res_Attr4">
+	       	  <label for="res_Attr4_1">좋아요</label>
+	       	  <input type="radio" id="res_Attr4_2" name="res_Attr4">
+	       	  <label for="res_Attr4_2">보통이에요</label>
+	       	  <input type="radio" id="res_Attr4_3" name="res_Attr4">
+	       	  <label for="res_Attr4_3">별로에요</label>
 	       	 <td>
 	       	</tr>
 	       	<tr>
@@ -449,12 +498,12 @@ div#progress_percentage::after {
 	       	</tr>
 	       	<tr>
 	       	 <td>
-	       	  <input type="radio" name="res_Attr5">
-	       	  <span>좋아요</span>
-	       	  <input type="radio" name="res_Attr5">
-	       	  <span>보통이에요</span>
-	       	  <input type="radio" name="res_Attr5">
-	       	  <span>별로에요</span>
+	       	  <input type="radio" id="res_Attr5_1" name="res_Attr5">
+	       	  <label for="res_Attr5_1">좋아요</label>
+	       	  <input type="radio" id="res_Attr5_2" name="res_Attr5">
+	       	  <label for="res_Attr5_2">보통이에요</label>
+	       	  <input type="radio" id="res_Attr5_3" name="res_Attr5">
+	       	  <label for="res_Attr5_3">별로에요</label>
 	       	 <td>
 	       	</tr>
 	       	<tr>
@@ -464,24 +513,44 @@ div#progress_percentage::after {
 	       	</tr>
 	       	<tr>
 	       	 <td>
-	       	  <input type="radio" name="res_Attr6">
-	       	  <span>좋아요</span>
-	       	  <input type="radio" name="res_Attr6">
-	       	  <span>보통이에요</span>
-	       	  <input type="radio" name="res_Attr6">
-	       	  <span>별로에요</span>
+	       	  <input type="radio" id="res_Attr6_1" name="res_Attr6">
+	       	  <label for="res_Attr6_1">좋아요</label>
+	       	  <input type="radio" id="res_Attr6_2" name="res_Attr6">
+	       	  <label for="res_Attr6_2">보통이에요</label>
+	       	  <input type="radio" id="res_Attr6_3" name="res_Attr6">
+	       	  <label for="res_Attr6_3">별로에요</label>
 	       	 <td>
 	       	</tr>
 	       	</tbody>
 	       </table>
 	       
 		   <br/><br/><hr class="my-hr">
+		   
 		   <br><h4>디테일 요청사항</h4>
+		   <div id="detail_container">
+		    <div id="file_container">
+		    <c:forEach items="${file }" var="dto">
+		   	 <c:choose>
+		   	  <c:when test="${dto.fi_Type eq 'img' }">
+		   	   <img src="${dto.fi_Nm }" alt="방사진">
+		   	  </c:when>
+		   	  <c:otherwise>
+		   	   <video controls width="400px"><source src="${dto.fi_Nm }"> </video>
+		   	  </c:otherwise>
+		   	 </c:choose>
+		    </c:forEach>
+		    </div>
+		    <div id="review_containser">
+		     <span style="font-size: 12pt;">간단한 집 평가</span><br>
+		     <textarea id="revcontent" rows="30" cols="40"  placeholder="디테일 리뷰가 없습니다." readonly="readonly">${result.res_Detail }</textarea>
+		    </div>
+		   </div>
 		   
 		   <br/><br/><hr class="my-hr">
-		   <br><h4>집이 어땠나요?</h4>
+		   
+		   <br><h4>집 평가를 이렇게 받았어요!</h4>
 			<div id="full-stars-example-two">
-				<div class="rating-group">
+			    <div class="rating-group">
 			        <input disabled checked class="rating__input rating__input--none" name="rating3" id="rating3-none" value="0" type="radio">
 			        <label aria-label="1 star" class="rating__label" for="rating3-1"><i class="rating__icon rating__icon--star fa fa-star"></i></label>
 			        <input class="rating__input" name="rating3" id="rating3-1" value="1" type="radio">
@@ -520,22 +589,53 @@ div#progress_percentage::after {
 	<%@ include file="../footer.jsp" %>
 </body>
 <script type="text/javascript">
+	var res_content = ${res_dto}
 	var user_rate = ${user_rating};
 	var rate_last = user_rate[user_rate.length - 1];
 	var percent_val = ((rate_last.ur_Rate + 3)/6)*100;
-	console.log(percent_val);
+
 	$(function(){
 		let link = $("#link").text();
-		$("#link").attr('href',"https://"+link);
-		
-		$("input[type='radio']").attr('disabled', true);
+		if (link.includes("https://")) {
+			$("#link").attr('href',link);
+		} else {
+			$("#link").attr('href',"https://"+link);			
+		}
 		
 		$("#progress_bar").css({
 		    width: percent_val+"%"
-		  });
+		});
 		
-	})
-	
-	
+		$("input[type='radio']").attr('disabled', true);
+		// $(".rating-group input[type='radio']").attr('disabled', false);
+		
+		for (var i=1; i<4; i++) {
+			var attr = eval('rate_last.ur_Attr'+i);
+			if (attr === "좋아요") {
+				$("input[id='ur_Attr"+i+"_1']").prop('checked', true);
+			} else if (attr === "그냥 그래요") {
+				$("input[id='ur_Attr"+i+"_2']").prop('checked', true);
+			} else {
+				$("input[id='ur_Attr"+i+"_3']").prop('checked', true);
+			}
+		}
+		
+		for (var i=1; i<7; i++) {
+			var attr = eval('res_content.res_Attr'+i);
+			if (attr === "좋아요") {
+				$("input[id='res_Attr"+i+"_1']").prop('checked', true);
+			} else if (attr === "그냥 그래요") {
+				$("input[id='res_Attr"+i+"_2']").prop('checked', true);
+			} else {
+				$("input[id='res_Attr"+i+"_3']").prop('checked', true);
+			}
+		}
+		
+		var num = res_content.res_Rate;
+		$(".rating__input[value='"+num+"']").prop('checked', true);
+		
+		
+	});
 </script>
+
 </html>
