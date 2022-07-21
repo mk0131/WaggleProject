@@ -154,7 +154,7 @@
 									<p style="margin: 125px 10px; font-size: 16pt">`+dto.home_Addr+`</p>
 								</div>
 								<div class="req-title" style="position: absolute; left:250px; ">
-									<p style="line-height: 150px; width: 200px; font-size: 20pt; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">`+dto.req_Title+`</p>
+									<p style="line-height: 150px; width: 300px; font-size: 20pt; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">`+dto.req_Title+`</p>
 								</div>
 								<div class="req-point"
 									style="display: inline-block; float: right; height: 200px">
