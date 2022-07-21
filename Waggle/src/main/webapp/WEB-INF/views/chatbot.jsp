@@ -111,7 +111,7 @@
 
 </body>
 <script>
-
+	//챗봇 이전 버젼 시작
 	var stompClient = null;
 
 	function setConnected(connected) {
@@ -172,6 +172,5 @@
 			sendMessage();
 		});
 	});
-	
 </script>
 </html>

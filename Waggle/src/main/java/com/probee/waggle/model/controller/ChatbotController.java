@@ -29,11 +29,11 @@ public class ChatbotController {
 		return "chatbot";
 	}
 
-	private static String secretKey = "V2xtWE9FaXdzT3RnZmJZRHZXRlNzSXVVV1hWZXV2S1k=";
+	private static String secretKey = "V2xtWE9FaXdzT3RnZmJZRHZXRlNzSXVVV1hWZXV2S1k";
     private static String apiUrl = "https://2udht0boyu.apigw.ntruss.com/custom/v1/7343/97973071c34ba996597def31945148e5fef8e4649ad7507720b9701a07c3e416";
     
-	    @MessageMapping("/sendMessage")
-	    @SendTo("/topic/public")
+	  @MessageMapping("/sendMessage")
+	  @SendTo("/topic/public")
 	  public String sendMessage(@Payload String chatMessage) throws IOException {
 	    	{
 
