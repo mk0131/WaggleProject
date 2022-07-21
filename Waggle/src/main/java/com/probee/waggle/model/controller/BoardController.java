@@ -21,6 +21,7 @@ import com.probee.waggle.model.dto.RequestDto2;
 import com.probee.waggle.model.dto.ResultDto;
 import com.probee.waggle.model.dto.UserRatingDto;
 import com.probee.waggle.model.dto.UsersDto;
+import com.probee.waggle.model.dto.VolunteerDto;
 import com.probee.waggle.model.service.BoardService;
 import com.probee.waggle.model.service.HomeService;
 import com.probee.waggle.model.service.VolunteerService;

@@ -118,6 +118,7 @@ public class BoardServiceImpl implements BoardService{
 	@Override
 	public List<UserRatingDto> selectUserRating(int req_No) {
 		return boardMapper.selectUserRating(req_No);
+	}
 
 	@Override	
 	public int CreateRes(int res_No, int res_UCode) {
