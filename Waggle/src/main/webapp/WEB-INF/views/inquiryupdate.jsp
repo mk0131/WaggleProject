@@ -150,7 +150,7 @@ tr {
 						</tr>
 						<tr>
 						<th>제목</th>
-						<td><input type="text" id="title" name="title" value="${dto.in_Title }"></td>
+						<td><input type="text" id="in_Title" name="in_Title" value="${dto.in_Title }"></td>
 						</tr>
 						<tr>
 						<th>작성자</th>
@@ -158,12 +158,12 @@ tr {
 						</tr>
 						<tr>
 						<th>내용</th>
-						<td><textarea id="incontent" rows="14" cols="70" name="content" placeholder="문의할 내용을 입력해주세요.">${dto.in_Content }</textarea></td>
+						<td><textarea id="incontent" rows="14" cols="70" name="in_Content" placeholder="문의할 내용을 입력해주세요.">${dto.in_Content }</textarea></td>
 						</tr>
 						<tr>         
 				         <td class="btn1" colspan="2" align="right">
 				         	<input type="submit" value="완료">
-				         	<input type="button" value="취소" onclick="location.href='/inquiry/list'">  
+				         	<input type="button" value="취소" onclick="location.href='/inquiry/list?user_Code=${user_Code}'">  
 				         </td>   
 						</tr>
 					</table>

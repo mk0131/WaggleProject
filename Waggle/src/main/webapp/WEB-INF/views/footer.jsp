@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -208,18 +209,43 @@ a {
       </ul>
       <ul class="service-center">
         <h4>고객센터</h4>
+        
+        <c:if test="${user_Code == null }">
         <li>
-          <a href="javascript:void(0)" onclick="location.href='/inquiry/list'">
+          <a href="javascript:void(0)" onclick="location.href='/login'">
             <i class="fa-solid fa-headset"></i>
             <p>문의</p>
           </a>
         </li>
+        </c:if>
+		
+		<c:if test="${user_Code != null }">
+        <li>
+          <a href="javascript:void(0)" onclick="location.href='/inquiry/list?user_Code=${user_Code}'">
+            <i class="fa-solid fa-headset"></i>
+            <p>문의</p>
+          </a>
+        </li>
+        </c:if>
+		
+		<c:if test="${user_Code == null }">  
+        <li>
+          <a href="javascript:void(0)" onclick="location.href='/login'">
+            <i class="fa-solid fa-book"></i>
+            <p>도움말</p>
+          </a>
+        </li>
+        </c:if>
+        
+        <c:if test="${user_Code != null }">  
         <li>
           <a href="javascript:void(0)" onclick="location.href='/inquiry/list'">
             <i class="fa-solid fa-book"></i>
             <p>도움말</p>
           </a>
         </li>
+        </c:if>
+        
         <li>
           <a href="javascript:void(0)" onclick="showPopup();">
           	<i class="fa-brands fa-rocketchat"></i>
