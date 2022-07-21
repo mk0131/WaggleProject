@@ -21,6 +21,28 @@
   list-style: none; display:inline; margin-left: 5px;
 }
 
+.req-btn {
+ background: #FFFF99;
+ font-family: inherit;
+ padding: 0.6em 1.3em;
+ font-weight: 500;
+ font-size: 14px;
+ border: 3px solid black;
+ border-radius: 0.4em;
+ box-shadow: 0.1em 0.1em;
+ font-style: italic;
+}
+
+.req-btn:hover {
+ transform: translate(-0.05em, -0.05em);
+ box-shadow: 0.15em 0.15em;
+}
+
+.req-btn:active {
+ transform: translate(0.05em, 0.05em);
+ box-shadow: 0.05em 0.05em;
+}
+
 </style>
 
 </head>
@@ -40,7 +62,7 @@
    	
 	<div class="middle">	
 		<div class="board">
-			<div><a href='/board/requestform'>요청하기</a></div>
+			<button class="req-btn" onclick="location.href='/board/requestform'">요청하기</button>
 			<div id="data-contents"></div>
         	<div id="js-pagination"></div>
 		</div>
