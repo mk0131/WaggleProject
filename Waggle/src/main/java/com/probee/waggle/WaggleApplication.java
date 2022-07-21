@@ -23,11 +23,6 @@ public class WaggleApplication {
 		return "home";
 	}
 	
-	@RequestMapping("/map")
-	public static String gomap() {
-		return "map";
-	}
-	
 	@RequestMapping("/login")
 	public static String gologin() {
 		return "login";
