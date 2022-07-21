@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>datail_11</title>
 </head>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <style type="text/css">
@@ -111,10 +111,21 @@ button:active {
  outline: none;
  border: 1px solid #ffffff;
 }
+#progress_bar {
+  background-color: #dcf1c6;
+  height: 110%;
+  position: absolute;
+  top: -3px;
+  left: 0px;
+  border-top: 1px solid #e5ebf4;
+  border-radius: 20px;
+  box-shadow: 0 3px 10px #717171;
+  width: 0%;
+  transition: all 3s 0s cubic-bezier(0.83, 0, 0.17, 1);;
+}
 
 </style>
 <body>
-	<p>${vol }</p>
 	
 	<%@ include file="../header.jsp" %>
 	 <div id="wrap">
@@ -147,7 +158,7 @@ button:active {
 	      </tr>
 	      <tr>
 	       <th>내가 본 집 링크 첨부</th>
-	       <td><a style="color: #f48c06;" id="link" href="">${req_dto.req_Link }</a></td>
+	       <td><a style="color: #f48c06;" id="link" href="" target="_blank">${req_dto.req_Link }</a></td>
 
 	      </tr>
 	      <tr>
@@ -168,13 +179,52 @@ button:active {
 	      </tr>
 	      </tbody>
 	     </table>
-	     <div class="ongoing21-content-bottom">
+	     <div class="ongoing21-content-bottom" style="width: 900px; margin: 0 auto;">
 	       <h4>디테일 요구사항</h4>
+	      
 	       <textarea id="incontent" rows="14" cols="80" name="content" placeholder="요구사항을 입력해주세요" readonly="readonly">${req_dto.req_Detail }</textarea>
 	       <br/><br/><br/>
+	       <hr>
+	       <h4>지원자</h4>
+	       	<table style="border-spacing:20px">
+			<thead>
+				<tr>
+					<th scope="col" style="width: 200px; "></th>
+					<th scope="col" style="width: 600px; "></th>
+					<th id="order_tr" scope="col" style="width: 200px;"></th>
+				</tr>
+			</thead>
+			<tbody>
+				<c:choose>
+					<c:when test="${empty vol }">
+						<td colspan="4">-------------지원자가 없습니다.-------------</td>
+					</c:when>
+					<c:otherwise>
+						<c:forEach items="${vol }" var="dto">
+							<form>
+								<tr >
+									
+									<td><b>${dto.user_Pro }</b></td>
+									<td style="text-align: left; border-radius: 8px; border: 1px solid;"><P>닉네임 : ${dto.user_Nm }</P> 
+									<P>평점 : ${dto.user_Grade }</P> <P>자기소개 : ${dto.user_Intro }</P></td>
+									<td><button id="order_btn2" type="button" style="width: 100px; height: 100px;">수락하기</button></td>
+									
+								</tr>
+							</form>
+						</c:forEach>
+					</c:otherwise>
+				</c:choose>
+
+			</tbody>
+		</table>
+	       	<br><br><br>
+	        <div style="text-align: right; width: 750px; font-size: 16pt;"><b>심부름 비용: ${req_dto.req_Point }원</b> </div>
+	        <br><br>
+	        
 	     <div class="btn2" id="btn2">
-	      <button type="button" value="요청취소" onclick="location.href=''">요청 취소하기(24시간 이내)</button>
-	      <button type="button" value="목록" onclick="location.href='/board/list'">목록으로 돌아가기</button>
+	     <button type="button" value="요청취소" onclick="location.href=''" style="width: 200px; margin-right: 100px;" >수정하기</button>
+	      <button type="button" value="요청취소" onclick="location.href=''" style="width: 200px; margin-right: 100px;" >요청 취소하기(24시간 이내)</button>
+	      <button type="button" value="목록" onclick="location.href='/board/list'" style="width: 200px;">목록으로 돌아가기</button>
 	     </div>
 	     </div>
 	    </div>

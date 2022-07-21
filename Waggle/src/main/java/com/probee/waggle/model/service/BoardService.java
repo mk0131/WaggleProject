@@ -20,6 +20,7 @@ public interface BoardService {
 	public ResultDto selectResult(int res_No);
 	public List<VolunteerDto> selectVolunteer(int req_No);
 	public List<UsersDto> selectUsers(List<String> code_list);
+	public List<UsersDto> FindVol(int vo_No);
 	public UsersDto selectUser(int user_Code);
 	public String crawlImgUrl(String url);
 	public int saveImg(String img_url, String path);

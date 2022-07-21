@@ -44,6 +44,9 @@ public interface BoardMapper {
 	@Select(" select * from Users where user_Code in (#{user_Code}) ")
 	public List<UsersDto> selectUsers(String user_Code);
 	
+	@Select(" select user_Code, user_Pro, user_Grade, user_Intro, user_Nm from Users u inner join volunteer v on u.user_Code = v.vo_Ucode where v.vo_No = #{vo_No}")
+	public List<UsersDto> FindVol(int vo_No);
+	
 	@Select(" select * from Users where user_Code = #{user_Code} ")
 	public UsersDto selectUser(int user_Code);
 	

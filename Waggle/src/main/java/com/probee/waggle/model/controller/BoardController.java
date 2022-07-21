@@ -143,11 +143,11 @@ public class BoardController {
 				List<VolunteerDto> vol_dto = boardService.selectVolunteer(req_No);
 				List<String> code_list = new ArrayList<String>();
 				
+				
 				for(VolunteerDto dto : vol_dto) {
 					code_list.add(Integer.toString(dto.getVo_UCode()));
 				}
-
-				model.addAttribute("vol", boardService.selectUsers(code_list));
+				model.addAttribute("vol", boardService.FindVol(req_No));
 				return "detail/detail_11";	
 			} else {
 				return "detail/detail_12";

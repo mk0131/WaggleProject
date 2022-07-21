@@ -120,5 +120,10 @@ public class BoardServiceImpl implements BoardService{
 		return boardMapper.updateFCode(req_No, req_FCode);
 	}
 
+	@Override
+	public List<UsersDto> FindVol(int vo_No) {
+		return boardMapper.FindVol(vo_No);
+	}
+
 
 }

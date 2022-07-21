@@ -145,7 +145,7 @@ button:active {
 	      </tr>
 	      <tr>
 	       <th>내가 본 집 링크 첨부</th>
-	       <td><a style="color: #f48c06;" id="link" href="">${req_dto.req_Link }</a></td>
+	       <td><a style="color: #f48c06;" id="link" href="" target="_blank">${req_dto.req_Link }</a></td>
 
 	      </tr>
 	      <tr>
