@@ -50,5 +50,9 @@ public interface BoardMapper {
 	@Select(" select * from Users where user_Code = #{user_Code} ")
 	public UsersDto selectUser(int user_Code);
 	
+	@Insert(" insert into Result (res_Code, res_No, res_UCode, res_Stat ) values (null, #{res_No}, #{res_UCode}, '진행중') ")
+	int CreateRes(int res_No, int res_UCode);
 	
+	@Update(" update Request set req_Stat = '진행중' where req_No = #{req_No} ")
+	int Progress(int req_No);
 }

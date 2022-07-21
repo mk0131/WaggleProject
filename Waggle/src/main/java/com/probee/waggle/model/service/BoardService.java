@@ -24,5 +24,9 @@ public interface BoardService {
 	public UsersDto selectUser(int user_Code);
 	public String crawlImgUrl(String url);
 	public int saveImg(String img_url, String path);
+	
+	public int CreateRes(int res_No, int res_UCode);
+	
+	public int Progress(int req_No);
 
 }

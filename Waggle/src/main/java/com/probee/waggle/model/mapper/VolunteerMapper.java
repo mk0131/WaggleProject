@@ -10,7 +10,7 @@ import com.probee.waggle.model.dto.VolunteerDto;
 @Mapper
 public interface VolunteerMapper {
 	
-	@Insert(" insert into volunteer values(#{user_Code},#{vo_No},0) ")
+	@Insert(" insert into volunteer values(#{user_Code},#{vo_No},false) ")
 	int Submit(int user_Code, int vo_No);
 	
 	@Select(" select vo_UCode from volunteer v where vo_No = #{vo_No} and vo_UCode = #{vo_UCode} ")

@@ -208,7 +208,7 @@ button:active {
 									<td><b>${dto.user_Pro }</b></td>
 									<td style="text-align: left; border-radius: 8px; border: 1px solid;"><P>닉네임 : ${dto.user_Nm }</P> 
 									<P>평점 : ${dto.user_Grade }</P> <P>자기소개 : ${dto.user_Intro }</P></td>
-									<td><button id="order_btn2" type="button" style="width: 100px; height: 100px;">수락하기</button></td>
+									<td><button onclick="location.href='/board/accept?req_UCode=${user_Code}&res_UCode=${dto.user_Code }&req_No=${req_dto.req_No }'" type="button" style="width: 100px; height: 100px;">수락하기</button></td>
 									
 								</tr>
 							</form>

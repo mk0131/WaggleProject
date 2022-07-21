@@ -210,7 +210,18 @@ public class BoardController {
 		}
 	}
 	
-
+	
+	@GetMapping("/accept")
+	public String Accept(int req_UCode, int res_UCode, int req_No) {
+		
+		int res =  boardService.CreateRes(req_No, res_UCode);
+		
+		if(res >0 ) {
+			boardService.Progress(req_No);
+		}
+		
+		return "redirect:/board/detail?req_No=" +req_No;
+	}
 	
 
 	
