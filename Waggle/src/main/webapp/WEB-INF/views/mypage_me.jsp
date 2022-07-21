@@ -537,7 +537,7 @@ textarea {
 						</c:if>
 						<div style="font-weight: bold; font-size: 20pt">${user_Point } P</div>
 						<div>
-							<a href="/point" style="color: #2d7eac">포인트 충전하기</a>
+							<a href="/point/use" style="color: #2d7eac">포인트 충전하기</a>
 						</div>
 					</div>
 					<div class="profile-right"

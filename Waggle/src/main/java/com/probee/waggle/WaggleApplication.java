@@ -38,10 +38,6 @@ public class WaggleApplication {
 		return "inquiry";
 	}
 	
-	@RequestMapping("/point")
-	public static String gopoint() {
-		return "point";
-	}
 	
 	@RequestMapping("/mypage_me")
 	public static String gomypageme() {
