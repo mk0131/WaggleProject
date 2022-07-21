@@ -155,7 +155,7 @@ tr {
 						</tr>
 						<tr>
 						<th>작성자</th>
-						<td>${dto.in_UCode }</td>						
+						<td>${user_Nm }</td>						
 						</tr>
 						<tr>
 						<th>내용</th>
