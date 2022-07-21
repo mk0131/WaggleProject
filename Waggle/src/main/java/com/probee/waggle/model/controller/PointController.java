@@ -24,8 +24,6 @@ public class PointController {
 	public String PointUse(Model model, HttpSession session){
 		int ucode = (int)session.getAttribute("user_Code");
 		model.addAttribute("use", pointService.selectPointUse(ucode));
-		System.out.println(pointService.selectPointUse(ucode).size());
-		System.out.println("hello");
 		return "point";
 	}
 	
