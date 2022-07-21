@@ -10,8 +10,8 @@ import org.apache.ibatis.annotations.Update;
 import com.probee.waggle.model.dto.RequestDto;
 import com.probee.waggle.model.dto.RequestDto2;
 import com.probee.waggle.model.dto.ResultDto;
+import com.probee.waggle.model.dto.UserRatingDto;
 import com.probee.waggle.model.dto.UsersDto;
-import com.probee.waggle.model.dto.VolunteerDto;
 
 @Mapper
 public interface BoardMapper {
@@ -35,14 +35,8 @@ public interface BoardMapper {
 	@Insert(" INSERT INTO Request values (null,#{req_Title},#{req_Link},NOW(),#{req_EDate},#{req_Phone},#{req_Detail},#{req_Point},'모집중',#{req_UCode},null,#{req_HCode}) ")
 	public int insertRequest(RequestDto2 dto);
 	
-	@Select(" select * from Result where res_No=#{res_No} and res_Stat in ('진행중','완료') ")
-	public ResultDto selectResult(int res_No);
-	
-	@Select(" select * from Volunteer where vo_No=#{req_No} ")
-	public List<VolunteerDto> selectVolunteer(int req_No);
-	
-	@Select(" select * from Users where user_Code in (#{user_Code}) ")
-	public List<UsersDto> selectUsers(String user_Code);
+	@Select(" select * from Result where res_No=#{req_No} and res_Stat in ('진행중','완료') ")
+	public ResultDto selectResult(int req_No);
 	
 	@Select(" select user_Code, user_Pro, user_Grade, user_Intro, user_Nm from Users u inner join volunteer v on u.user_Code = v.vo_Ucode where v.vo_No = #{vo_No}")
 	public List<UsersDto> FindVol(int vo_No);
@@ -50,5 +44,13 @@ public interface BoardMapper {
 	@Select(" select * from Users where user_Code = #{user_Code} ")
 	public UsersDto selectUser(int user_Code);
 	
+	// 평가 가져오기
+	@Select(" select * from UserRating where ur_Code = #{req_No} ")
+	public List<UserRatingDto> selectUserRating(int req_No);
 	
+	@Insert(" insert into Result (res_Code, res_No, res_UCode, res_Stat ) values (null, #{res_No}, #{res_UCode}, '진행중') ")
+	int CreateRes(int res_No, int res_UCode);
+	
+	@Update(" update Request set req_Stat = '진행중' where req_No = #{req_No} ")
+	int Progress(int req_No);
 }

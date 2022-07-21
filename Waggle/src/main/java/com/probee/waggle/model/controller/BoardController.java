@@ -17,13 +17,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.google.gson.Gson;
 import com.probee.waggle.model.dto.HomeDto;
-import com.probee.waggle.model.dto.RequestDto;
 import com.probee.waggle.model.dto.RequestDto2;
 import com.probee.waggle.model.dto.ResultDto;
+import com.probee.waggle.model.dto.UserRatingDto;
 import com.probee.waggle.model.dto.UsersDto;
 import com.probee.waggle.model.dto.VolunteerDto;
 import com.probee.waggle.model.service.BoardService;
 import com.probee.waggle.model.service.HomeService;
+import com.probee.waggle.model.service.VolunteerService;
 
 @Controller
 @RequestMapping("/board")
@@ -34,6 +35,9 @@ public class BoardController {
 	
 	@Autowired
 	private HomeService homeService;
+	
+	@Autowired
+	VolunteerService volunteerService;
 	
 	@GetMapping("/list")
 	public String selectList(Model model, int ...num) {
@@ -140,16 +144,18 @@ public class BoardController {
 
 		if(req_Stat.equals("모집중")) {
 			if(user_Code==req_UCode) {
-				List<VolunteerDto> vol_dto = boardService.selectVolunteer(req_No);
-				List<String> code_list = new ArrayList<String>();
 				
-				
-				for(VolunteerDto dto : vol_dto) {
-					code_list.add(Integer.toString(dto.getVo_UCode()));
-				}
 				model.addAttribute("vol", boardService.FindVol(req_No));
 				return "detail/detail_11";	
 			} else {
+				VolunteerDto vols = volunteerService.SelectOne(req_No, user_Code);
+				
+				if(vols != null) {
+					session.setAttribute("vo_UCode", vols.getVo_UCode());
+				} else {
+					session.setAttribute("vo_UCode", -1);
+				}
+				
 				return "detail/detail_12";
 			}
 			
@@ -188,8 +194,10 @@ public class BoardController {
 			
 			if(req_Stat.equals("진행중")) {
 				return "detail/detail_21";
-
-			} else if(req_Stat.equals("확인중")) {
+			} 
+			// 글 번호에 맞는 result 데이터
+			model.addAttribute("result", boardService.selectResult(req_No));
+			if(req_Stat.equals("확인중")) {
 				if(who.equals("작성자")) {
 					return "detail/detail_31";
 				} else if(who.equals("수행자")) {
@@ -199,12 +207,34 @@ public class BoardController {
 				}
 				
 			} else { //완료
+				// 글 번호에 맞는 유저평가 데이터 json으로 변환하여 넣기
+				List<UserRatingDto> list = boardService.selectUserRating(req_No);
+				List<String> res_list = new ArrayList<String>();
+				Gson gson = new Gson();
+				
+				for(int i=0; i<list.size(); i++) {
+					String tmp = gson.toJson(list.get(i));
+					res_list.add(tmp);
+				}
+				model.addAttribute("user_rating", res_list);
+				
 				return "detail/detail_41";
 			}			
 		}
 	}
 	
-
+	
+	@GetMapping("/accept")
+	public String Accept(int req_UCode, int res_UCode, int req_No) {
+		
+		int res =  boardService.CreateRes(req_No, res_UCode);
+		
+		if(res >0 ) {
+			boardService.Progress(req_No);
+		}
+		
+		return "redirect:/board/detail?req_No=" +req_No;
+	}
 	
 
 	

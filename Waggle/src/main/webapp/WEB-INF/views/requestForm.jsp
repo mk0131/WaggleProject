@@ -208,7 +208,7 @@ input[type="date"] {
 		    	</table>
 				<div class="ongoing21-content-bottom">
 					<h4>디테일 요구사항</h4>
-					<textarea id="incontent" rows="12" cols="70" name="content" placeholder="요구사항을 입력해주세요" name="req_Detail"></textarea>
+					<textarea id="incontent" rows="12" cols="70"  placeholder="요구사항을 입력해주세요" name="req_Detail"></textarea>
 					<br><br>
 					<div class="btn1" id="btn1">
 						<button type="submit" value="작성">작성 완료</button>
