@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.probee.waggle.model.dto.InquiryDto;
+import com.probee.waggle.model.dto.UsersDto;
 import com.probee.waggle.model.mapper.InquiryMapper;
 
 @Service
@@ -15,13 +16,13 @@ public class InquiryServiceImpl implements InquiryService {
 	private InquiryMapper inquiryMapper;
 	
 	@Override
-	public List<InquiryDto> selectList() {
-		return inquiryMapper.selectList();
+	public List<InquiryDto> selectList(int user_Code) {
+		return inquiryMapper.selectList(user_Code);
 	}
 	
 	@Override
-	public List<InquiryDto> selectuserList() {
-		return inquiryMapper.selectuserList();
+	public UsersDto selectuser(int user_Code) {
+		return inquiryMapper.selectUser(user_Code);
 	}
 	
 	@Override
@@ -43,5 +44,6 @@ public class InquiryServiceImpl implements InquiryService {
 	public int delete(int in_Code) {
 		return inquiryMapper.delete(in_Code);
 	}
+
 
 }
