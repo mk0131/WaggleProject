@@ -67,8 +67,8 @@ public class ChatbotController {
                 String decodedString;
                 String jsonString = "";
                 while ((decodedString = in.readLine()) != null) {
-                	//jsonString = decodedString;
-                	chatMessage = decodedString;
+                	jsonString = decodedString;
+                	//chatMessage = decodedString;
                 }
                 //chatbotMessage = decodedString;
                 
