@@ -159,7 +159,7 @@ public class BoardController {
 				return "detail/detail_12";
 			}
 			
-		} else if(req_Stat.equals("취소")) {
+		} else if(req_Stat.equals("취소") || req_Stat.equals("취소(0)")) {
 			response.setContentType("text/html; charset=UTF-8");
 			PrintWriter out;
 

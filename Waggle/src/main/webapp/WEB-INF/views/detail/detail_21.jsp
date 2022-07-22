@@ -133,7 +133,7 @@ button:active {
 	    <h3 id="ongoing-detail">요청 상세 페이지(${req_dto.req_Stat })</h3>
 	     <p id="w-date">${req_dto.req_WDate }</p>
 	    <div class="ongoing21-user-name">
-	     <p id="username">작성자</p>
+	     <p id="username">작성자 </p>&nbsp;
 	      <p id="userrealname">${user_dto.user_Nm}</p>
 	       </div>
 	    <div class="ongoing21-all">
