@@ -171,6 +171,11 @@ div#review_containser{
 	padding: 10px;
 }
 
+td label {
+	margin-left: 3px;
+	margin-right: 50px;
+}
+
 /* 게이지 바 */
 div#loader_container {
   width: 300px;
@@ -542,7 +547,7 @@ div#progress_percentage::after {
 		    </div>
 		    <div id="review_containser">
 		     <span style="font-size: 12pt;">간단한 집 평가</span><br>
-		     <textarea id="revcontent" rows="30" cols="40"  placeholder="디테일 리뷰가 없습니다." readonly="readonly">${result.res_Detail }</textarea>
+		     <textarea id="revcontent" rows="30" cols="40"  placeholder="디테일 리뷰가 없습니다." readonly="readonly"></textarea>
 		    </div>
 		   </div>
 		   
@@ -591,10 +596,15 @@ div#progress_percentage::after {
 <script type="text/javascript">
 	var res_content = ${res_dto}
 	var user_rate = ${user_rating};
+	
+	// 최근 리뷰 가져오기
 	var rate_last = user_rate[user_rate.length - 1];
+	
+	// 꿀벌 평점 -3~3을 0~100로 정규화한 값
 	var percent_val = ((rate_last.ur_Rate + 3)/6)*100;
 
 	$(function(){
+		// 내가본 집 링크 연결
 		let link = $("#link").text();
 		if (link.includes("https://")) {
 			$("#link").attr('href',link);
@@ -602,13 +612,16 @@ div#progress_percentage::after {
 			$("#link").attr('href',"https://"+link);			
 		}
 		
+		// 꿀벌 평가 게이지바
 		$("#progress_bar").css({
 		    width: percent_val+"%"
 		});
 		
+		// 라디오 버튼 사용 불가능하게 만들기
 		$("input[type='radio']").attr('disabled', true);
 		// $(".rating-group input[type='radio']").attr('disabled', false);
 		
+		// 라디오 버튼에 값 넣기(꿀벌 평가)
 		for (var i=1; i<4; i++) {
 			var attr = eval('rate_last.ur_Attr'+i);
 			if (attr === "좋아요") {
@@ -619,7 +632,7 @@ div#progress_percentage::after {
 				$("input[id='ur_Attr"+i+"_3']").prop('checked', true);
 			}
 		}
-		
+		// 라디오 버튼에 값 넣기(집 평가)
 		for (var i=1; i<7; i++) {
 			var attr = eval('res_content.res_Attr'+i);
 			if (attr === "좋아요") {
@@ -631,9 +644,12 @@ div#progress_percentage::after {
 			}
 		}
 		
+		// 디테일 요청사항에 값 넣기
+		$("#revcontent").text(res_content.res_Detail);
+		
+		// 집평가 별점 값 넣기
 		var num = res_content.res_Rate;
 		$(".rating__input[value='"+num+"']").prop('checked', true);
-		
 		
 	});
 </script>

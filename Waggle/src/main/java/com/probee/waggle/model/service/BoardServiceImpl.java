@@ -48,18 +48,6 @@ public class BoardServiceImpl implements BoardService{
 	}
 
 	@Override
-	public int deleteRequest(RequestDto dto) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	@Override
-	public int updateRequest(RequestDto dto) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	@Override
 	public ResultDto selectResult(int req_No) {
 		return boardMapper.selectResult(req_No);
 	}
@@ -98,11 +86,6 @@ public class BoardServiceImpl implements BoardService{
 			return 0;
 		}
 		
-	}
-
-	@Override
-	public int selectLastRequestNo() {
-		return boardMapper.selectLastRequestNo();
 	}
 
 	@Override
@@ -148,6 +131,16 @@ public class BoardServiceImpl implements BoardService{
 	@Override
 	public int Revoke(int req_No) {
 		return boardMapper.Revoke(req_No);
+	}
+
+	public int updateRequest(RequestDto2 dto) {
+		return boardMapper.updateRequest(dto);
+	}
+	
+	@Override
+	public int selectLastRequestNo() {
+		return boardMapper.selectLastRequestNo();
+
 	}
 
 

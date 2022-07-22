@@ -78,7 +78,7 @@ public class BoardController {
 	}
 	
 	@PostMapping("/request")
-	public String updateRequest(RequestDto2 req_dto, HomeDto home_dto) {
+	public String createRequest(RequestDto2 req_dto, HomeDto home_dto) {
 		
 		HomeDto find_home = homeService.findHome(home_dto);
 		
@@ -123,6 +123,35 @@ public class BoardController {
 		return "redirect:/board/list";
 		
 	}
+	
+	@GetMapping("/updateform")
+	public String goUpdateForm(Model model, int req_No) {
+		model.addAttribute("req_dto", boardService.selectRequest(req_No));
+		return "updateForm";
+	}
+	
+	@PostMapping("/update")
+	public String updateRequest(RequestDto2 req_dto, HomeDto home_dto) {		
+		HomeDto find_home = homeService.findHome(home_dto);
+		
+		if(find_home == null) {
+			homeService.insertHome(home_dto);
+			find_home = homeService.findHome(home_dto);
+		}
+		
+		req_dto.setReq_HCode(find_home.getHome_Code()); 
+		
+		int res = boardService.updateRequest(req_dto);
+		
+		if(res == 0) {
+			System.out.println("not saved...");
+			return "redirect:/board/detail?req_No="+req_dto.getReq_No();
+		}
+		
+		System.out.println("saved!");
+		return "redirect:/board/detail?req_No="+req_dto.getReq_No();
+	}
+	
 	
 	@GetMapping("/detail")
 	public String goDetailPage(Model model, HttpSession session, HttpServletResponse response, int req_No) {
