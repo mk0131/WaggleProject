@@ -135,5 +135,20 @@ public class BoardServiceImpl implements BoardService{
 		return boardMapper.selectResultFile(res_Code);
 	}
 
+	@Override
+	public int Cancel(int req_No) {
+		return boardMapper.Cancel(req_No);
+	}
+
+	@Override
+	public int Recruit(int req_No) {
+		return boardMapper.Recruit(req_No);
+	}
+
+	@Override
+	public int Revoke(int req_No) {
+		return boardMapper.Revoke(req_No);
+	}
+
 
 }

@@ -174,11 +174,11 @@ button:active {
 	       <br>
 	     <div class="btn2" id="btn2">
 	     
-	     <c:if test="${user_Code == vo_UCode }">
-	     <button type="button" value="요청취소" onclick="location.href='/vol/cancel?vo_UCode=${user_Code}&vo_No=${req_dto.req_No }'" style="width: 200px; margin-right: 100px;">지원취소</button>
+	     <c:if test="${user_Code == vo_UCode && vo_Block != true }">
+	     <button type="button"  onclick="location.href='/vol/cancel?vo_UCode=${user_Code}&vo_No=${req_dto.req_No }'" style="width: 200px; margin-right: 100px;">지원취소</button>
 	     </c:if>
-	     <c:if test="${user_Code != vo_UCode }">
-	      <button type="button" value="요청취소" onclick="location.href='/vol/submit?vo_UCode=${user_Code}&vo_No=${req_dto.req_No }'" style="width: 200px; margin-right: 100px;">지원하기</button>
+	     <c:if test="${user_Code != vo_UCode  }">
+	      <button type="button"  onclick="location.href='/vol/submit?vo_UCode=${user_Code}&vo_No=${req_dto.req_No }'" style="width: 200px; margin-right: 100px;">지원하기</button>
 	       </c:if>
 	      <button type="button" value="목록" onclick="location.href='/board/list'" style="width: 200px;">목록으로 돌아가기</button>
 	     </div>

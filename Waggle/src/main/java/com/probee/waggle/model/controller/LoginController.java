@@ -102,7 +102,7 @@ public class LoginController {
 	}
 
 	@ResponseBody
-	@GetMapping("/kakao")
+	@GetMapping("/kakao") // 카카오 로그인 & 회원가입
 	public String kakaoCallback(String code, HttpServletRequest request) {
 
 		HttpSession session = request.getSession();
