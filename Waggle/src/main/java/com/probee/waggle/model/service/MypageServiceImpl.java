@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import com.probee.waggle.model.dto.FileDto;
 import com.probee.waggle.model.dto.MypageFinishlistDto;
 import com.probee.waggle.model.dto.UserAddressDto;
+import com.probee.waggle.model.dto.UsersDto;
 import com.probee.waggle.model.mapper.MypageMapper;
 
 @Service
@@ -90,6 +91,11 @@ public class MypageServiceImpl implements MypageService{
 	@Override
 	public List<FileDto> SelectLastFiCode() {
 		return mypageMapper.SelectLastFiCode();
+	}
+
+	@Override
+	public UsersDto SelectUsersInfo(int ucode) {
+		return mypageMapper.SelectUsersInfo(ucode);
 	}
 	
 	

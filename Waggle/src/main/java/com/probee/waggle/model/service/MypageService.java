@@ -5,8 +5,11 @@ import java.util.List;
 import com.probee.waggle.model.dto.FileDto;
 import com.probee.waggle.model.dto.MypageFinishlistDto;
 import com.probee.waggle.model.dto.UserAddressDto;
+import com.probee.waggle.model.dto.UsersDto;
 
 public interface MypageService {
+	
+	public UsersDto SelectUsersInfo(int ucode); 
 	
 	public int DescUpdate(String description, int code);
 	

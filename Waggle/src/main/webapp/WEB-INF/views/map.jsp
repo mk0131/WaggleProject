@@ -386,7 +386,7 @@ div {
 			        
 					//마커 클릭시 해당 꿀벌의 마이페이지로 이동하도록
 				    kakao.maps.event.addListener(marker, 'click', function(){
-				    	window.open("/mypage/other","a",'height=' + screen.height + ',width=' + screen.width + 'fullscreen=yes');
+				    	window.open("/mypage/other?ucode="+userCode[i],"a",'height=' + screen.height + ',width=' + screen.width + 'fullscreen=yes');
 				    });
 			    } else {
 			    	console.log("에러");

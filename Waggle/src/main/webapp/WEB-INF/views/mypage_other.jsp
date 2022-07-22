@@ -524,38 +524,36 @@ textarea {
 					<p>HOME > 나의 프로필</p>
 				</ul>
 			</div>
-
 			<div class="middle-profile">
 				<div class="profile" style="text-align: center; display: flex; justify-content: center;">
+					<!-- 
 					<div class="profile-left" style="display: inline-block">
-						<c:if test = "${user_Pro == null}">
+						<c:if test = "${dto.user_Pro == null}">
 						<img src="/images/importToJsp/profile_default.jpg"
 							style="width: 100px; height: 100px">
 						</c:if>
-						<c:if test = "${user_Pro != null }">
+						<c:if test = "${dto.user_Pro != null }">
 						<img src="${fi_Nm }" style="width:100px; height: 100px">
 						</c:if>
-						<div style="font-weight: bold; font-size: 20pt">${user_Point } P</div>
-						<div>
-							<a href="/point/use" style="color: #2d7eac">포인트 충전하기</a>
-						</div>
+						<div style="font-weight: bold; font-size: 20pt">${dto.user_Point } P</div>
 					</div>
+					-->
 					<div class="profile-right"
 						style="display: inline-block; margin-left: 40px; text-align: left">
 						<c:if test="${user_Code != null }">
 						<div>
 							<span
-								style="font-size: 20pt; margin-bottom: 20px; font-weight: bold">${user_Nm}
+								style="font-size: 20pt; margin-bottom: 20px; font-weight: bold">${dto.user_Nm}
 								님</span>
 						</div>
-						<div style="font-size: 14pt">나이: ${user_Age}</div>
-						<c:if test="${user_Gender == 'M'}">
+						<div style="font-size: 14pt">나이: ${dto.user_Age}</div>
+						<c:if test="${dto.user_Gender == 'M'}">
 						<div style="font-size: 14pt; margin-bottom: 60px">성별: 남</div>
 						</c:if>
-						<c:if test="${user_Gender == 'F'}">
+						<c:if test="${dto.user_Gender == 'F'}">
 						<div style="font-size: 14pt; margin-bottom: 60px">성별: 여</div>
 						</c:if>
-						<div style="font-size: 14pt; font-weight: bold">내가 딴 꿀 수확량: ${user_Grade}</div>
+						<div style="font-size: 14pt; font-weight: bold">${dto.user_Nm}의 꿀 수확량: ${dto.user_Grade}</div>
 							<div id="bar_container">
 								<div id="progress_bar">
 									<div id="progress_percentage" data-percentage="10">
@@ -594,18 +592,10 @@ textarea {
 							</div>
 
 						<!-- div style="margin-bottom:20px">|--------------|</div> -->
-						<div>
-							<span style="font-size: 11pt; color: #898989">공인중개사이신가요?</span>
-							<span style="font-size: 11pt; color: #2d7eac; margin-left: 5px" onclick="showProof();">인증하기</span>
-						</div>
 					</c:if>
 					</div>
 				</div>
-				<div class="profile-bottom">
-						<div class="button" onclick="location.href='/mypage/profileEdit?ua_UCode=${user_Code}'">
-							<a><p style="margin:5px">회원정보 수정</p></a>
-						</div>
-					</div>
+				<!-- 
 				<div class="description" style="text-align: center">
 					<div class="desc-nav">
 						<ul class="desc-list">
@@ -618,42 +608,11 @@ textarea {
 					</div>
 					<div class="desc-content-aboutme">
 						<div class="desc-content">
-							<c:if test="${ user_Intro == null}">
-								<form action="/mypage/descInsert" method="POST">
-								<input type="hidden" name="code" value="${user_Code }">
-								<div class="styled-input">
-									<textarea required name="description"></textarea>
-									<label>자기소개를 입력해주세요.</label>
-								</div>
-								<div></div>
-								<div class="desc-content-button">
-									<input type="submit" class="button" id="desc-edit-finish" value="자기소개 작성완료" style="width:150px; display: inline-block; margin-top:20px; padding:5px; font-size:15px; font-weight:bold">
-								</div>
-								</form>	
-							</c:if>
-							<c:if test="${ user_Intro != null }">
-								<form action="/mypage/descEdit" method="POST">
-								<input type="hidden" name="code" value="${user_Code}">
 								<div class="desc-intro" data-behaviour="search-on-list" style="text-align:initial">
 									<span class="counter"	data-search-on-list="counter">
-										${user_Intro}
+										${dto.user_Intro}
 									</span>
 								</div>
-								<div class="styled-input" id="desc-edit-input" style="display:none">
-										<textarea id="desc-text" required name="description">${user_Intro}</textarea>
-										<label>${user_Intro }</label>
-								</div>
-								<div class="desc-content-button">
-									<div class="button" id="desc-edit" style="display: inline-block; width: 150px; margin-top:20px">
-										<p style="margin: 5px">자기소개 수정하기</p>
-									</div>
-									<input type="submit" class="button" id="desc-edit-finish" value="수정 완료" style="display: inline-block; margin-top:20px; display:none; padding:5px; font-size:15px; font-weight:bold">
-									<div class="button" id="desc-edit-cancel" style="display: inline-block; margin-top:20px; display:none">
-										<p style="margin: 5px">수정 취소</p>
-									</div>
-								</div>
-								</form>
-							</c:if>
 						</div>
 					</div>
 					<div></div>
@@ -662,49 +621,7 @@ textarea {
 					</div>
 					</a>
 				</div>
-						<!-- Upload Area -->
-						<div id="uploadArea" class="upload-area" style="display:none; margin-top:50px">
-						  <div class="upload-area__header">
-						    <h1 class="upload-area__title">Upload your file</h1>
-						    <p class="upload-area__paragraph">
-						      File should be an image
-						      <strong class="upload-area__tooltip">
-						        Like
-						        <span class="upload-area__tooltip-data"></span> <!-- Data Will be Comes From Js -->
-						      </strong>
-						    </p>
-						  </div>
-						  <!-- Drop Zoon -->
-						  <div id="dropZoon" class="upload-area__drop-zoon drop-zoon">
-						    <span class="drop-zoon__icon">
-						      <i class='bx bxs-file-image'></i>
-						    </span>
-						    <p class="drop-zoon__paragraph">Drop your file here or Click to browse</p>
-						    <span id="loadingText" class="drop-zoon__loading-text">Please Wait</span>
-						    <img src="" alt="Preview Image" id="previewImage" class="drop-zoon__preview-image" draggable="false">
-						    <input type="file" id="fileInput" class="drop-zoon__file-input" accept="image/*">
-						  </div>
-						  <!-- End Drop Zoon -->
-						
-						  <!-- File Details -->
-						  <div id="fileDetails" class="upload-area__file-details file-details">
-						    <h3 class="file-details__title">Uploaded File</h3>
-						
-						    <div id="uploadedFile" class="uploaded-file">
-						      <div class="uploaded-file__icon-container">
-						        <i class='bx bxs-file-blank uploaded-file__icon'></i>
-						        <span class="uploaded-file__icon-text"></span> <!-- Data Will be Comes From Js -->
-						      </div>
-						
-						      <div id="uploadedFileInfo" class="uploaded-file__info">
-						        <span class="uploaded-file__name">Project 1</span>
-						        <span class="uploaded-file__counter">0%</span>
-						      </div>
-						    </div>
-						  </div>
-						  <!-- End File Details -->
-						</div>
-						<!-- End Upload Area -->
+				-->
 			</div>
 		</div>
 	</div>
@@ -723,6 +640,7 @@ textarea {
 				this.classList.toggle('active');
 			});
 			$('#wrap').css('min-height','150vh');
+			
 		}); // end DOM ready
 	})(jQuery); // end jQuery
 

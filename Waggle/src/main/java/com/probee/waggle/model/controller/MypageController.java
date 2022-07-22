@@ -18,6 +18,7 @@ import com.probee.waggle.model.component.FileSaver;
 import com.probee.waggle.model.dto.FileDto;
 import com.probee.waggle.model.dto.MypageFinishlistDto;
 import com.probee.waggle.model.dto.UserAddressDto;
+import com.probee.waggle.model.dto.UsersDto;
 import com.probee.waggle.model.service.MypageService;
 import com.probee.waggle.model.service.RegistService;
 
@@ -35,8 +36,9 @@ public class MypageController {
 	FileSaver fileSaver;
 	
 	@GetMapping("/other")
-	public String selectOtherInfo(int ucode) {
-		
+	public String selectOtherInfo(int ucode, Model model) {
+		UsersDto UserList = mypageService.SelectUsersInfo(ucode);
+		model.addAttribute("dto",UserList);
 		return "mypage_other";
 	}
 	
