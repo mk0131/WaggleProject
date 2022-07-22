@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.probee.waggle.model.dto.FileDto;
 import com.probee.waggle.model.dto.MypageFinishlistDto;
 import com.probee.waggle.model.dto.UserAddressDto;
 import com.probee.waggle.model.mapper.MypageMapper;
@@ -74,6 +75,21 @@ public class MypageServiceImpl implements MypageService{
 	@Override
 	public int GenderChange(String user_Gender, int user_Code) {
 		return mypageMapper.GenderChange(user_Gender, user_Code);
+	}
+
+	@Override
+	public int ImageFileInsert(int fi_Code) {
+		return mypageMapper.ImageFileInsert(fi_Code);
+	}
+
+	@Override
+	public int UserProChange(int user_Pro, int ucode) {
+		return mypageMapper.UserProChange(user_Pro, ucode);
+	}
+
+	@Override
+	public List<FileDto> SelectLastFiCode() {
+		return mypageMapper.SelectLastFiCode();
 	}
 	
 	

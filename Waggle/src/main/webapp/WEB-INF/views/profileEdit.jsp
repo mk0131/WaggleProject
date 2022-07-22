@@ -183,13 +183,17 @@
          회원정보 수정하기
          </div>
          <div class="edit-profile-img" style="margin:0 auto; width:1000px; text-align:center">
+         	<form action="/mypage/imageEdit" method="post"> 
             <div class="profile" style="background-image:url(/images/importToJsp/profile_default.jpg)">
               <label class="edit">
                 <span>&#10002;</span>
-                <input type="file" />
+                <input type="file" id="imginput"/>
               </label>
-              <div class="delete" onclick="removePhoto()">&times;</div>
+              <div class="delete" onclick="removeimg()">&times;</div>
             </div>
+            <input type="hidden" id="imgUrl" name="imgUrl" value="">
+            <input type="submit" id="img-input" value="프로필사진 수정하기" style="margin-top:20px">
+            </form>
          </div>
          <div class="edit-profile-info" style="margin:0 auto; width:500px">
 			<form action="/mypage/pwchange" method="post">
@@ -311,31 +315,32 @@
    <%@ include file="footer.jsp"%>
 </body>
 <script>
+function removeimg() {
+	  $(".profile").attr("style","background-image:url(/images/importToJsp/profile_default.jpg)");
+	};
+	
+	
 $(function(){
-	
-	
-	
 
 //프로필 사진 수정 시작
-var input = document.querySelector('input');
+var input = document.getElementById("imginput");
 var image = document.querySelector('.profile');
 
 input.addEventListener('change', function(event){
   var reader = new FileReader();
   reader.onload = function(e){
     setImageUrl(e.target.result);
+    $("#imgUrl").attr("value",e.target.result);
+    console.log($("#imgUrl").val());
   };
   reader.readAsDataURL(event.target.files[0]);
 });
 
 function setImageUrl(url){
   image.style.backgroundImage = 'url('+url+')';
-}
+};
 
-function removePhoto() {
-  setImageUrl('http://gravatar.com/avatar/84dbfd9ab3f7ae68cdeaf705e8816938?s=200&d=mm');
-}
-
+//프로필 사진 수정 끝
 
 $('#pw_input').blur(function(){ // 비밀번호 유형 검사
    let warnMsg = $(".pw_form_check"); // 비밀번호 경고글

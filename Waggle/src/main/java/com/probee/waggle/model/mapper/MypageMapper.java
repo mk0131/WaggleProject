@@ -2,10 +2,12 @@ package com.probee.waggle.model.mapper;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 
+import com.probee.waggle.model.dto.FileDto;
 import com.probee.waggle.model.dto.MypageFinishlistDto;
 import com.probee.waggle.model.dto.UserAddressDto;
 
@@ -50,5 +52,16 @@ public interface MypageMapper {
 	
 	@Update(" UPDATE USERS SET User_Gender = #{user_Gender} WHERE user_Code = #{user_Code} ")
 	public int GenderChange(String user_Gender, int user_Code);
+	
+	@Select("SELECT * FROM file ORDER BY fi_Code DESC LIMIT 1")
+	public List<FileDto> SelectLastFiCode();
+	
+	@Insert("INSERT INTO FILE VALUES(NULL, 'img', CONCAT('/images/profile/profile_',#{fi_Code},'.jpg'))")
+	public int ImageFileInsert(int fi_Code);
+	
+	@Update("UPDATE USERS SET USER_PRO = #{fi_Code} WHERE USER_CODE = #{ucode}")
+	public int UserProChange(int fi_Code, int ucode);
+	
+	
 	
 }

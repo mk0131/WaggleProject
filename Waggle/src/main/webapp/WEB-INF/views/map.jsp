@@ -345,9 +345,11 @@ div {
 		
 		var userAddr = new Array();
 		var userimg = new Array();
+		var userCode = new Array();
 		<c:forEach var="list" items="${uaddr}">
 		userAddr.push("${list.getUa_Addr()}");
-		userimg.push("${list.getFi_Nm()}")
+		userimg.push("${list.getFi_Nm()}");
+		userCode.push("${list.getUser_Code()}");
 		</c:forEach>
 	
 		for(var i=0; i<=3; i++) {
@@ -374,18 +376,27 @@ div {
 	
 			        var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
 			        // 결과값으로 받은 위치를 마커로 표시합니다
-			        var marker = new kakao.maps.Marker({
+			        marker = new kakao.maps.Marker({
 			            position: coords,
-			            image: new kakao.maps.MarkerImage(window['imageSrc'+i], imageSize, imageOption)
+			            image: new kakao.maps.MarkerImage(window['imageSrc'+i], imageSize, imageOption),
+			            clickable: true
 			        });
-					
 			        marker.setMap(map);
+			        map.setCenter(coords);
+			        
+					//마커 클릭시 해당 꿀벌의 마이페이지로 이동하도록
+				    kakao.maps.event.addListener(marker, 'click', function(){
+				    	window.open("/mypage/other","a",'height=' + screen.height + ',width=' + screen.width + 'fullscreen=yes');
+				    });
 			    } else {
 			    	console.log("에러");
 			    }
-			});    
+			});  
+		    
+		 
 		}
 		
+		  
 		
 	});
 		
@@ -409,7 +420,9 @@ div {
 		            map: map,
 		            position: coords
 		        });
-
+				
+		        // 지도 레벨 더 확대
+		        map.setLevel(1);
 		        // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
 		        map.setCenter(coords);
 		    } else {
