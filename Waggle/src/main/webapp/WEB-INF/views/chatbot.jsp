@@ -111,8 +111,6 @@
 
 </body>
 <script>
-
-
 	var stompClient = null;
 
 	function connect() {
@@ -120,7 +118,6 @@
 		var socket = new SockJS('/ws');
 		stompClient = Stomp.over(socket);
 		stompClient.connect({}, onConnected, function(frame) {
-			setConnected(true);
 			console.log('Connected: ' + frame);
 		});
 
@@ -130,13 +127,24 @@
 		stompClient.subscribe('/topic/public', function(message) {
 			showMessage("받은 메시지: " + message.body); //서버에 메시지 전달 후 리턴받는 메시지
 		});
-		sendMessage("");
+		sendMessage2();
+		sendMessage3();
 	}
 
 	function onMessageReceived(payload) {
 		console.log(payload);
 	}
 
+	function sendMessage3(){
+		let message = "persistentmenu"
+		stompClient.send("/app/sendMessage", {}, JSON.stringify(message));
+	}
+	
+	function sendMessage2(){
+		let message = $("#msg").val()
+		stompClient.send("/app/sendMessage", {}, JSON.stringify(message));
+	}
+	
 	function sendMessage() {
 		let message = $("#msg").val()
 		showMessage("보낸 메시지: " + message);

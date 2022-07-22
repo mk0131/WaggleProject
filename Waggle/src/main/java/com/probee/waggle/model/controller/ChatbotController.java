@@ -32,8 +32,8 @@ public class ChatbotController {
 	private static String secretKey = "V2xtWE9FaXdzT3RnZmJZRHZXRlNzSXVVV1hWZXV2S1k=";
     private static String apiUrl = "https://2udht0boyu.apigw.ntruss.com/custom/v1/7343/97973071c34ba996597def31945148e5fef8e4649ad7507720b9701a07c3e416";
     
-	    @MessageMapping("/sendMessage")
-	    @SendTo("/topic/public")
+	  @MessageMapping("/sendMessage")
+	  @SendTo("/topic/public")
 	  public String sendMessage(@Payload String chatMessage) throws IOException {
 	    	{
 
@@ -67,13 +67,14 @@ public class ChatbotController {
                 String decodedString;
                 String jsonString = "";
                 while ((decodedString = in.readLine()) != null) {
-                	jsonString = decodedString;
+                	//jsonString = decodedString;
+                	chatMessage = decodedString;
                 }
                 //chatbotMessage = decodedString;
                 
                 JSONParser jsonparser = new JSONParser();
     			try {
-
+    				System.out.println(jsonString);
     				JSONObject json = (JSONObject)jsonparser.parse(jsonString);
     				JSONArray bubblesArray = (JSONArray)json.get("bubbles");
     				JSONObject bubbles = (JSONObject)bubblesArray.get(0);
@@ -130,48 +131,114 @@ public class ChatbotController {
 
             long timestamp = new Date().getTime();
 
-            if(voiceMessage.length() == 2) {
-            	obj.put("version", "v2");
-                obj.put("userId", "U47b00b58c90f8e47428af8b7bddc1231heo2");
-                obj.put("timestamp", timestamp);
+        	obj.put("version", "v2");
+            obj.put("userId", "U47b00b58c90f8e47428af8b7bddc1231heo2");
+            obj.put("timestamp", timestamp);
 
 
-                JSONObject data_obj = new JSONObject();
-                data_obj.put("description", "");
-
-                JSONObject bubbles_obj = new JSONObject();
-                bubbles_obj.put("type", "text");
-                bubbles_obj.put("data", data_obj);
-
-                JSONArray bubbles_array = new JSONArray();
-                bubbles_array.add(bubbles_obj);
-
-                obj.put("bubbles", bubbles_array);
-                obj.put("event", "open");
-
-                requestBody = obj.toString();
-            }else if(voiceMessage != "") {
-            	obj.put("version", "v2");
-                obj.put("userId", "U47b00b58c90f8e47428af8b7bddc1231heo2");
-                obj.put("timestamp", timestamp);
-
-
-                JSONObject data_obj = new JSONObject();
-                data_obj.put("description", voiceMessage);
-
-                JSONObject bubbles_obj = new JSONObject();
-                bubbles_obj.put("type", "text");
-                bubbles_obj.put("data", data_obj);
-
-                JSONArray bubbles_array = new JSONArray();
-                bubbles_array.add(bubbles_obj);
-
-                obj.put("bubbles", bubbles_array);
-                obj.put("event", "send");
-
-                requestBody = obj.toString();
-            }
+            JSONObject data_obj = new JSONObject();
             
+            if(voiceMessage.length()==2) {
+            	data_obj.put("description", "");
+            }else if(voiceMessage != "") {
+            	data_obj.put("description", voiceMessage);
+            };
+
+            JSONObject bubbles_obj = new JSONObject();
+            bubbles_obj.put("type", "text");
+            bubbles_obj.put("data", data_obj);
+
+            JSONArray bubbles_array = new JSONArray();
+            bubbles_array.add(bubbles_obj);
+
+            obj.put("bubbles", bubbles_array);
+            
+            if(voiceMessage.length()==2) {
+            	obj.put("event", "open");
+            }else if(voiceMessage != "") {
+            	obj.put("event", "send");
+            };
+
+            requestBody = obj.toString();
+            
+            /*
+            }else if(voiceMessage == "persistentmenu") {
+            	obj.put("version", "v2");
+                obj.put("userId", "U47b00b58c90f8e47428af8b7bddc1231heo2");
+                obj.put("timestamp", timestamp);
+                
+                JSONObject data_obj = new JSONObject();
+                data_obj.put("type", "template");
+                data_obj.put("title", "Tap to hide the text menu");
+                
+                JSONObject table_obj = new JSONObject();
+                JSONArray table_array = new JSONArray();
+                
+                JSONObject content1_obj = new JSONObject();
+	                content1_obj.put("colSpan",1);
+	                content1_obj.put("rowSpan",1);
+	                JSONObject con1_data = new JSONObject();
+	                con1_data.put("type", "button");
+	                con1_data.put("title", "이용문의");
+	                JSONObject con1_data_data = new JSONObject();
+	                con1_data_data.put("type", "basic");
+	                JSONObject con1_data_data_action = new JSONObject();
+	                con1_data_data_action.put("type", "postback");
+	                JSONObject con1_data_data_action_data = new JSONObject();
+	                con1_data_data_action_data.put("postback", "이용 안내는 ~~");
+	                con1_data_data_action.put("data", con1_data_data_action_data);
+	                con1_data_data.put("action", con1_data_data_action);
+	                con1_data.put("data", con1_data_data);
+	                content1_obj.put("data", con1_data);
+                
+                JSONObject content2_obj = new JSONObject();
+	                content2_obj.put("colSpan",1);
+	                content2_obj.put("rowSpan",1);
+	                JSONObject con2_data = new JSONObject();
+	                con2_data.put("type", "button");
+	                con2_data.put("title", "환불문의");
+	                JSONObject con2_data_data = new JSONObject();
+	                con2_data_data.put("type", "basic");
+	                JSONObject con2_data_data_action = new JSONObject();
+	                con2_data_data_action.put("type", "postback");
+	                JSONObject con2_data_data_action_data = new JSONObject();
+	                con2_data_data_action_data.put("postback", "환불 안내는 ~~");
+	                con2_data_data_action.put("data", con2_data_data_action_data);
+	                con2_data_data.put("action", con2_data_data_action);
+	                con2_data.put("data", con2_data_data);
+	                content2_obj.put("data", con2_data);
+	                
+                JSONObject content3_obj = new JSONObject();
+	                content3_obj.put("colSpan",1);
+	                content3_obj.put("rowSpan",1);
+	                JSONObject con3_data = new JSONObject();
+	                con3_data.put("type", "button");
+	                con3_data.put("title", "결제문의");
+	                JSONObject con3_data_data = new JSONObject();
+	                con3_data_data.put("type", "basic");
+	                JSONObject con3_data_data_action = new JSONObject();
+	                con3_data_data_action.put("type", "postback");
+	                JSONObject con3_data_data_action_data = new JSONObject();
+	                con3_data_data_action_data.put("postback", "환불 안내는 ~~");
+	                con3_data_data_action.put("data", con3_data_data_action_data);
+	                con3_data_data.put("action", con3_data_data_action);
+	                con3_data.put("data", con3_data_data);
+	                content3_obj.put("data", con3_data);
+                
+                table_array.add(content1_obj);
+                table_array.add(content2_obj);
+                table_array.add(content3_obj);
+                
+                table_obj.put("contentTable", table_array);
+                data_obj.put("data", table_obj);
+                
+                
+                obj.put("persistentMenu", data_obj);
+                obj.put("event", "send");
+                
+                requestBody = obj.toString();
+            
+            */
         } catch (Exception e){
             System.out.println("## Exception : " + e);
         }

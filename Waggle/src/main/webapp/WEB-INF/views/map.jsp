@@ -334,6 +334,62 @@ div {
 
 	// 지도를 생성합니다    
 	var map = new kakao.maps.Map(mapContainer, mapOption); 
+	
+	for(let i=0; i<4; i++){
+		
+	}
+	// 모든 회원들 지도에 뿌려주기
+	$(function(){
+		// 주소-좌표 변환 객체를 생성합니다
+		var geocoder = new kakao.maps.services.Geocoder();
+		
+		var userAddr = new Array();
+		var userimg = new Array();
+		<c:forEach var="list" items="${uaddr}">
+		userAddr.push("${list.getUa_Addr()}");
+		userimg.push("${list.getFi_Nm()}")
+		</c:forEach>
+	
+		for(var i=0; i<=3; i++) {
+			window['imageSrc'+i] = "hello" +i;
+			console.log(window['imageSrc'+i]);
+		}
+		
+		for(let i=0; i<userAddr.length; i++){
+			
+			if(userimg[i] != ""){
+				window['imageSrc'+i] = userimg[i]; // 마커이미지의 주소입니다    
+			}else {
+				window['imageSrc'+i] = '/images/profile/profile_default.jpg';
+			}
+			
+		    var imageSize = new kakao.maps.Size(64, 69); // 마커이미지의 크기입니다
+		    var imageOption = {offset: new kakao.maps.Point(27, 69)}; // 마커이미지의 옵션입니다. 마커의 좌표와 일치시킬 이미지 안에서의 좌표를 설정합니다.
+		    
+			// 주소로 좌표를 검색합니다
+			geocoder.addressSearch(userAddr[i], function(result, status) {
+	
+			    // 정상적으로 검색이 완료됐으면 
+			     if (status === kakao.maps.services.Status.OK) {
+	
+			        var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
+			        // 결과값으로 받은 위치를 마커로 표시합니다
+			        var marker = new kakao.maps.Marker({
+			            position: coords,
+			            image: new kakao.maps.MarkerImage(window['imageSrc'+i], imageSize, imageOption)
+			        });
+					
+			        marker.setMap(map);
+			    } else {
+			    	console.log("에러");
+			    }
+			});    
+		}
+		
+		
+	});
+		
+	
 
 	function searchLngLat(){
 		var gap = document.querySelector(".searchbar").value;
@@ -370,7 +426,7 @@ div {
 		
 		$.ajax({
 			type : "post",
-			url : "/search",
+			url : "/map/search",
 			data : data,
 			success : function(result){
 					$('.table-container').show();

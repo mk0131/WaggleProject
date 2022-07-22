@@ -17,9 +17,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.google.gson.Gson;
 import com.probee.waggle.model.dto.HomeDto;
-import com.probee.waggle.model.dto.RequestDto;
 import com.probee.waggle.model.dto.RequestDto2;
 import com.probee.waggle.model.dto.ResultDto;
+import com.probee.waggle.model.dto.UserRatingDto;
 import com.probee.waggle.model.dto.UsersDto;
 import com.probee.waggle.model.dto.VolunteerDto;
 import com.probee.waggle.model.service.BoardService;
@@ -194,8 +194,14 @@ public class BoardController {
 			
 			if(req_Stat.equals("진행중")) {
 				return "detail/detail_21";
-
-			} else if(req_Stat.equals("확인중")) {
+			} 
+			// 글 번호에 맞는 result 데이터
+			ResultDto result = boardService.selectResult(req_No);
+			Gson gson = new Gson();
+			model.addAttribute("res_dto", gson.toJson(result));
+			// result 관련 file
+			model.addAttribute("file", boardService.selectResultFile(result.getRes_Code()));
+			if(req_Stat.equals("확인중")) {
 				if(who.equals("작성자")) {
 					return "detail/detail_31";
 				} else if(who.equals("수행자")) {
@@ -205,6 +211,16 @@ public class BoardController {
 				}
 				
 			} else { //완료
+				// 글 번호에 맞는 유저평가 데이터 json으로 변환하여 넣기
+				List<UserRatingDto> list = boardService.selectUserRating(req_No);
+				List<String> rate_list = new ArrayList<String>();
+				
+				for(int i=0; i<list.size(); i++) {
+					String tmp = gson.toJson(list.get(i));
+					rate_list.add(tmp);
+				}
+				model.addAttribute("user_rating", rate_list);
+				
 				return "detail/detail_41";
 			}			
 		}

@@ -142,7 +142,7 @@ tr {
 			 </div>
 			<div class="notice-container">
 	 			<div class="conbox con3">
-	              <input type="hidden" name="in_Code" value="${user_Code }">
+	              <input type="hidden" name="user_Code" value="${user_Code }">
 					<table class="Inquiry-detail">
 						<tr>
 						<th>문의 유형</th>
@@ -154,7 +154,7 @@ tr {
 						</tr>
 						<tr>
 						<th>작성자</th>
-						<td>${dto.in_UCode }</td>						
+						<td>${user_Nm}</td>						
 						</tr>
 						<tr>
 						<th>작성일</th>
@@ -170,8 +170,9 @@ tr {
 						</tr>
 						<tr>         
 				         <td class="btn1" colspan="2" align="right">
-				         	<button type="button" value="문의" onclick="location.href='/inquiry/userlist?in_Code=${dto.in_Code }'">목록</button>
-				         	<button type="button" value="삭제" onclick="location.href='/inquiry/delete?in_Code=${dto.in_Code}'">삭제</button>  
+				         	<button type="button" value="문의" onclick="location.href='/inquiry/list?user_Code=${user_Code}'">목록</button>
+				         	<button type="button" value="수정" onclick="location.href='/inquiry/updateform?in_Code=${dto.in_Code}'">수정</button>
+				         	<button type="button" value="삭제" onclick="location.href='/inquiry/delete?in_Code=${dto.in_Code}&user_Code=${user_Code }'">삭제</button>  
 				         </td>   
 						</tr>
 					</table>

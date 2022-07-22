@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.probee.waggle.model.dto.InquiryDto;
+import com.probee.waggle.model.dto.UsersDto;
 import com.probee.waggle.model.service.InquiryService;
 
 @Controller
@@ -20,15 +21,16 @@ public class InquiryController {
 	private InquiryService inquiryService;
 	
 	@GetMapping("/list")
-	public String selectList(Model model) {
-		List<InquiryDto> list = inquiryService.selectList();
+	public String selectList(Model model, int user_Code) {
+		List<InquiryDto> list = inquiryService.selectList(user_Code);
 		model.addAttribute("list", list);
+		System.out.println(list);
 		return "inquirylist";
 	}
 	
 	@GetMapping("/userlist")
-	public String selectuserList(Model model) {
-		List<InquiryDto> userlist = inquiryService.selectList();
+	public String selectuserList(Model model, int user_Code) {
+		UsersDto userlist = inquiryService.selectuser(user_Code);
 		model.addAttribute("userlist", userlist);
 		return "inquiryuserlist";
 	}
@@ -36,6 +38,9 @@ public class InquiryController {
 	@GetMapping("/detail") 
 	public String selectOne(Model model, int in_Code) {
 		model.addAttribute("dto", inquiryService.selectOne(in_Code));
+		
+		UsersDto user_dto = inquiryService.selectuser(in_Code);
+		model.addAttribute("user_dto", user_dto);
 		return "inquirydetail";
 	}
 	
@@ -45,9 +50,10 @@ public class InquiryController {
 	}
 	
 	@PostMapping("/insert")
-	public String insert(InquiryDto dto) {
+	public String insert(InquiryDto dto, int in_UCode) {
+		System.out.println(dto);
 		if(inquiryService.insert(dto) > 0) {
-			return "redirect:/inquiry/list";
+			return "redirect:/inquiry/list?user_Code="+dto.getIn_UCode();
 		} else {
 			return "redirect:/inquiry/insert";
 		}
@@ -64,17 +70,17 @@ public class InquiryController {
 	@PostMapping("/update")
 	public String update(InquiryDto dto) {
 		if(inquiryService.update(dto) > 0) {
-			return "redirect:/inquiry/in_Code=" + dto.getIn_Code();
+			return "redirect:/inquiry/detail?in_Code=" + dto.getIn_Code();
 		} else {
-			return "redirect:/inquiry/updateform?in_Code=" + dto.getIn_Code();
+			return "redirect:/inquiry/update?in_Code=" + dto.getIn_Code();
 		}
 		
 	}
 	
 	@GetMapping("/delete")
-	public String delete(int in_Code, InquiryDto dto) {
+	public String delete(int in_Code, InquiryDto dto, int user_Code) {
 		if(inquiryService.delete(in_Code) > 0) {
-			return "redirect:/inquiry/list";
+			return "redirect:/inquiry/list?user_Code="+user_Code;
 		} else {
 			return "redirect:/inquiry/detail?in_Code=" + dto.getIn_Code();
 		}
