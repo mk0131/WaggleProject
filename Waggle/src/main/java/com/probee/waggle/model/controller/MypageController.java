@@ -128,7 +128,7 @@ public class MypageController {
 		return finishlist;
 	}
 
-	@GetMapping("/profileEdit")
+	@GetMapping("/profileEdit") // 회원정보 수정 버튼
 	public String ProfileEdit(int ua_UCode, UserAddressDto dto, Model model) {
 		UserAddressDto user = mypageService.SelectAddr(ua_UCode);
 
@@ -153,7 +153,7 @@ public class MypageController {
 
 	}
 
-	@PostMapping("/pwchange")
+	@PostMapping("/pwchange") // 비밀번호 변경
 	public String PwChange(int user_Code, String user_Pw) {
 
 		mypageService.PwChange(user_Pw, user_Code);
@@ -161,7 +161,7 @@ public class MypageController {
 		return "redirect:/mypage/profileEdit?ua_UCode=" + user_Code;
 	}
 
-	@PostMapping("/emailchange")
+	@PostMapping("/emailchange") // 이메일 변경
 	public String EmailChange(int user_Code, String user_Email, HttpServletRequest request) {
 
 		HttpSession session = request.getSession();
@@ -175,7 +175,7 @@ public class MypageController {
 		return "redirect:/mypage/profileEdit?ua_UCode=" + user_Code;
 	}
 
-	@PostMapping("/nmchange")
+	@PostMapping("/nmchange") // 닉네임 변경
 	public String NmChange(int user_Code, String user_Nm, HttpServletRequest request) {
 
 		HttpSession session = request.getSession();
@@ -189,7 +189,7 @@ public class MypageController {
 		return "redirect:/mypage/profileEdit?ua_UCode=" + user_Code;
 	}
 
-	@PostMapping("/agechange")
+	@PostMapping("/agechange") // 나이 변경
 	public String AgeChange(int user_Code, int user_Age, HttpServletRequest request) {
 
 		HttpSession session = request.getSession();
@@ -203,7 +203,7 @@ public class MypageController {
 		return "redirect:/mypage/profileEdit?ua_UCode=" + user_Code;
 	}
 
-	@GetMapping("/addrchange")
+	@GetMapping("/addrchange") // 주소 변경
 	public String AddrChange(int ua_UCode, UserAddressDto dto, Model model, String ua_Post, String ua_Addr,
 			String ua_DAddr) {
 
@@ -220,7 +220,7 @@ public class MypageController {
 		return "redirect:/mypage/profileEdit?ua_UCode=" + ua_UCode;
 	}
 
-	@PostMapping("/genderchange")
+	@PostMapping("/genderchange") // 성별 변경
 	public String GenderChange(int user_Code, String user_Gender, HttpServletRequest request) {
 
 		HttpSession session = request.getSession();

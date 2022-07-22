@@ -27,4 +27,24 @@ public class VolunteerServiceImpl implements VolunteerService{
 		return volunteerMapper.Cancel(vo_No, vo_UCode);
 	}
 
+	@Override
+	public int delete(int vo_No) {
+		return volunteerMapper.delete(vo_No);
+	}
+
+	@Override
+	public int Block(int vo_No, int vo_UCode) {
+		return volunteerMapper.Block(vo_No, vo_UCode);
+	}
+
+	@Override
+	public int ResCancel(int vo_No, int vo_UCode) {
+		return volunteerMapper.ResCancel(vo_No, vo_UCode);
+	}
+
+	@Override
+	public int Revoke(int req_No) {
+		return volunteerMapper.Revoke(req_No);
+	}
+
 }

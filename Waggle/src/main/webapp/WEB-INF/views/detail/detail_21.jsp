@@ -83,6 +83,12 @@
     max-width: 1280px;
     font-weight: bold;
 }
+#v-date {
+	display: flex;
+    justify-content: flex-end;
+    max-width: 1280px;
+    font-weight: bold;
+}
 
 button {
  background-color: #151515;
@@ -133,7 +139,7 @@ button:active {
 	    <h3 id="ongoing-detail">요청 상세 페이지(${req_dto.req_Stat })</h3>
 	     <p id="w-date">${req_dto.req_WDate }</p>
 	    <div class="ongoing21-user-name">
-	     <p id="username">작성자</p>
+	     <p id="username">작성자 </p>&nbsp;
 	      <p id="userrealname">${user_dto.user_Nm}</p>
 	       </div>
 	    <div class="ongoing21-all">
@@ -146,7 +152,7 @@ button:active {
 	      </tr>
 	      <tr>
 	       <th>내가 본 집 링크 첨부</th>
-	       <td><a style="color: #f48c06;" id="link" href="">${req_dto.req_Link }</a></td>
+	       <td><a style="color: #f48c06;" id="link" href="" target="_blank">${req_dto.req_Link }</a></td>
 	      </tr>
 	      <tr>
 	       <th>방문기한</th>
@@ -166,6 +172,7 @@ button:active {
 	      </tr>
 	      </tbody>
 	     </table>
+	     <input type="hidden" id="v_Date" value="${res_dto2.res_WDate }">
 	     <div class="ongoing21-content-bottom">
 	       <h4>디테일 요구사항</h4>
 	       <textarea id="incontent" rows="14" cols="80" name="content" placeholder="요구사항을 입력해주세요" readonly="readonly">${req_dto.req_Detail }</textarea>
@@ -177,14 +184,16 @@ button:active {
 	    </c:if>
 	    <c:if test="${who eq '작성자'}">
 	     <div class="btn2" id="btn2">
-	      <button type="button" value="요청취소" onclick="location.href=''">요청 취소하기(24시간 이내)</button>
+	      <button type="button" id="cancel" value="요청취소" onclick="location.href='/board/revoke?req_No=${req_dto.req_No}'">요청 취소(24시간 이내)</button>
+	      <button type="button" id="cancel2" value="요청취소" onclick="location.href=''">요청 취소</button>
 	      <button type="button" value="목록" onclick="location.href='/board/list'">목록으로 돌아가기</button>
 	     </div>
 	    </c:if>
 	    <c:if test="${who eq '수행자'}">
 	     <div class="btn3" id="btn3">
-	      <button type="button" value="요청취소" onclick="location.href=''">수행취소(24시간 이내)</button>
-	      <button type="button" value="심부름완료" onclick="location.href=''">심부름 완료하기</button>
+	      <button type="button" id="vol1" onclick="location.href='/vol/undo?vo_UCode=${user_Code}&vo_No=${req_dto.req_No }'">수행취소(24시간 이내)</button>
+	      <button type="button" id="vol2" onclick="location.href=''">수행취소</button>
+	      <button type="button"  onclick="location.href=''">심부름 완료하기</button>
 	      <button type="button" value="목록" onclick="location.href='/board/list'">목록으로 돌아가기</button>
 	     </div>
 	    </c:if>
@@ -200,6 +209,34 @@ button:active {
 		$(function(){
 			let link = $("#link").text();
 			$("#link").attr('href',"https://"+link);
+			
+			var start = new Date($("#w-date").html());
+			var end = new Date();
+			var diffTime = (end.getTime() - start.getTime()) / (1000*60*60*24);
+			
+			if(diffTime >= 1 ){
+				
+				$("#cancel").hide();
+				$("#cancel2").show();
+				
+			}else {
+				$("#cancel").show();
+				$("#cancel2").hide();
+			}
+			
+			var start2 = new Date($("#v_Date").val());
+			var end2 = new Date();
+			var diffTime2 = (end2.getTime() - start2.getTime()) / (1000*60*60*24);
+			if(diffTime2 >= 1 ){
+				
+				$("#vol1").hide();
+				$("#vol2").show();
+				
+			}else {
+				$("#vol1").show();
+				$("#vol2").hide();
+			}
+			
 		})
 	</script>
 </body>
