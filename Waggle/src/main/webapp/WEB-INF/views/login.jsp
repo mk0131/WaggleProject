@@ -384,21 +384,19 @@ input {
 <body>
 
 	<%@ include file="header.jsp"%>
-	<div id="wrap" style="height: 1300px;">
+	<div id="wrap">
 		<div class="middle">
 			<div class="guideline">
-
-				<ul class="guideline-all">
-					<li><a href="javascript:void(0)"> <i
-							class="fa-solid fa-house"></i>
-					</a></li>
-					<p>HOME > 로그인</p>
-				</ul>
-
-			
-			</div>
-
+			<ul class="guideline-all">
+        		<li><a href="javascript:void(0)">
+        		<i class="fa-solid fa-house"></i>
+        		</a>
+        		<p>HOME > 공지사항</p>
+        		</li>	
+        	</ul>
 		</div>
+	</div>
+		
 		<br />
 		<section>
 			<div class="login-form">
