@@ -13,11 +13,8 @@ public interface BoardService {
 
 	public List<RequestDto2> selectList();
 	public RequestDto2 selectRequest(int req_No);
-	public int selectLastRequestNo();
 	public int updateFCode(int req_No, int req_FCode);
 	public int insertRequest(RequestDto2 dto);
-	public int deleteRequest(RequestDto dto);
-	public int updateRequest(RequestDto dto);
 	public ResultDto selectResult(int req_No);
 	public List<UsersDto> FindVol(int vo_No);
 	public UsersDto selectUser(int user_Code);
@@ -27,5 +24,7 @@ public interface BoardService {
 	public int CreateRes(int res_No, int res_UCode);
 	public int Progress(int req_No);
 	public List<FileDto> selectResultFile(int res_Code);
+	public int updateRequest(RequestDto2 dto);
+	public int selectLastRequestNo();
 
 }
