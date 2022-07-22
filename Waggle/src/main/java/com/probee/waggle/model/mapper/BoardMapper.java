@@ -8,11 +8,11 @@ import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 
 import com.probee.waggle.model.dto.FileDto;
-import com.probee.waggle.model.dto.RequestDto;
 import com.probee.waggle.model.dto.RequestDto2;
 import com.probee.waggle.model.dto.ResultDto;
 import com.probee.waggle.model.dto.UserRatingDto;
 import com.probee.waggle.model.dto.UsersDto;
+import com.probee.waggle.model.dto.UsersDto2;
 
 @Mapper
 public interface BoardMapper {
@@ -41,8 +41,8 @@ public interface BoardMapper {
 	@Select(" select * from Result where res_No=#{req_No} and res_Stat in ('진행중','완료') ")
 	public ResultDto selectResult(int req_No);
 	
-	@Select(" select user_Code, user_Pro, user_Grade, user_Intro, user_Nm from Users u inner join volunteer v on u.user_Code = v.vo_Ucode where v.vo_No = #{vo_No}")
-	public List<UsersDto> FindVol(int vo_No);
+	@Select(" select user_Code, user_Pro, user_Grade, user_Intro, user_Nm, fi_Nm from Users u inner join volunteer v on u.user_Code = v.vo_Ucode left outer join File f on u.user_Pro=f.fi_Code where v.vo_No = #{vo_No}")
+	public List<UsersDto2> FindVol(int vo_No);
 	
 	// 유저정보 가져오기
 	@Select(" select * from Users where user_Code = #{user_Code} ")

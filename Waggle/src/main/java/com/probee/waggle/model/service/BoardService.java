@@ -3,11 +3,11 @@ package com.probee.waggle.model.service;
 import java.util.List;
 
 import com.probee.waggle.model.dto.FileDto;
-import com.probee.waggle.model.dto.RequestDto;
 import com.probee.waggle.model.dto.RequestDto2;
 import com.probee.waggle.model.dto.ResultDto;
 import com.probee.waggle.model.dto.UserRatingDto;
 import com.probee.waggle.model.dto.UsersDto;
+import com.probee.waggle.model.dto.UsersDto2;
 
 public interface BoardService {
 
@@ -16,7 +16,7 @@ public interface BoardService {
 	public int updateFCode(int req_No, int req_FCode);
 	public int insertRequest(RequestDto2 dto);
 	public ResultDto selectResult(int req_No);
-	public List<UsersDto> FindVol(int vo_No);
+	public List<UsersDto2> FindVol(int vo_No);
 	public UsersDto selectUser(int user_Code);
 	public String crawlImgUrl(String url);
 	public int saveImg(String img_url, String path);

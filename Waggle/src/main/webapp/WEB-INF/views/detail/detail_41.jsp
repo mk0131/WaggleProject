@@ -596,7 +596,7 @@ div#progress_percentage::after {
 <script type="text/javascript">
 	var res_content = ${res_dto}
 	var user_rate = ${user_rating};
-	
+
 	// 최근 리뷰 가져오기
 	var rate_last = user_rate[user_rate.length - 1];
 	
