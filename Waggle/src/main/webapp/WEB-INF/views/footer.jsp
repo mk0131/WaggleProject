@@ -119,60 +119,6 @@ a {
 	text-decoration: none;
 }
 
-#modal {
-	display: none;
-}
-
-.modal-wrapper {
-	position: fixed;
-	top: 0;
-	left: 0;
-	width: 100vw;
-	height: 100vh;
-	display: flex;
-	justify-content: center;
-	align-items: center;
-}
-
-.modal-inner {
-	width: calc(100%-48px);
-	background-color: white;
-	border-radius: 6px;
- 	padding: 24px;
-	box-sizing: border-box; 
-}
-
-.bottom-info .title {
-	font-size: 14px;
-}
-
-.bottom-info .description {
-	margin-top: 45px;
-	line-height: 19px;
-	font-size: 12px;
-}
-
-.bottom-info button {
-	padding: 5px 10px;
-	position: absolute;
-	right: 0px;
-	top: 0px;
-}
-
-.bottom-info {
-	height: 212px;
-	position: relative;
-}
-
-.overlay {
-	width: 100vw;
-	height: 100vh;
-	position: fixed;
-	top: 0;
-	left: 0;
-	background-color: rgba(0, 0, 0, 0.7);
-}
-
 </style>
 </head>
 <body>
@@ -239,7 +185,7 @@ a {
         
         <c:if test="${user_Code != null }">  
         <li>
-          <a href="javascript:void(0)" onclick="location.href='/inquiry/list'">
+          <a href="javascript:void(0)" onclick="location.href='/inquiry/list?user_Code=${user_Code}'">
             <i class="fa-solid fa-book"></i>
             <p>도움말</p>
           </a>
@@ -254,26 +200,6 @@ a {
         </li>
       </ul>
     </div>
-    
-   <div id="modal">
-    <div class="overlay"></div>
-    
-    <div class="modal-wrapper">
-    	<div class="modal-inner">
-    		<div class="thumb"></div>
-    		<div class="bottom-info">
-    			<div class="title">챗봇에게 질문하기</div>
-    			<div class="description">
-    				Lorem Ipsum is simply dummy text of the
-    				printing and typesetting
-    				industry. It has been the industry's
-    				standard.
-    			</div>
-    			<button class="closeBtn">Close</button>
-    		</div>
-    	</div>
-    </div>
-   </div>
     
   </footer>
 </body>
