@@ -131,7 +131,13 @@ public class BoardServiceImpl implements BoardService{
 	public int Revoke(int req_No) {
 		return boardMapper.Revoke(req_No);
 	}
-
+	
+	@Override
+	public int complete(int req_No) {
+		return boardMapper.complete(req_No);
+	}
+	
+	@Override
 	public int updateRequest(RequestDto2 dto) {
 		return boardMapper.updateRequest(dto);
 	}
@@ -140,6 +146,11 @@ public class BoardServiceImpl implements BoardService{
 	public int selectLastRequestNo() {
 		return boardMapper.selectLastRequestNo();
 
+	}
+
+	@Override
+	public int insertRatingBee(UserRatingDto userRating_dto) {
+		return boardMapper.insertRatingBee(userRating_dto);
 	}
 
 
