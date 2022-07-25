@@ -82,10 +82,6 @@
 	box-shadow: rgba(67, 71, 85, 0.27) 0px 0px 0.25em, rgba(90, 125, 188, 0.05) 0px 0.25em 1em;
 }
 
-#userrealname {
-	font-weight: bold;
-}
-
 #w-date {
 	display: flex;
     justify-content: flex-end;
@@ -93,22 +89,18 @@
     font-weight: bold;
 }
 
-#choice-name {
-	text-align: center;
-}
-
-#choice-option {
-	text-align: center;
-}
-
 #choice-option-all {
 	display: flex;
+	padding: 15px;
 }
 
 #choice-option-all div {
 	width: 200px;
 }
 
+#btn2 {
+	display: inline-block;
+}
 
 button {
  background-color: #151515;
@@ -581,7 +573,7 @@ div#review_containser{
 					<label for="res_Attr1_3">별로에요</label>
 				</div>
 			   </div>
-	       	 <td>
+	       	 </td>
 	       	</tr>
 	       	<tr id="choice-name">
 	       	 <th>
@@ -604,7 +596,7 @@ div#review_containser{
 					<label for="res_Attr2_3">별로에요</label>
 				</div>
 			   </div>
-	       	 <td>
+	       	 </td>
 	       	</tr>
 	       	<tr id="choice-name">
 	       	 <th>
@@ -627,7 +619,7 @@ div#review_containser{
 					<label for="res_Attr3_3">별로에요</label>
 				</div>
 			   </div>
-	       	 <td>
+	       	 </td>
 	       	</tr>
 	       	<tr id="choice-name">
 	       	 <th>
@@ -650,7 +642,7 @@ div#review_containser{
 					<label for="res_Attr4_3">별로에요</label>
 				</div>
 			  </div>
-	       	 <td>
+	       	 </td>
 	       	</tr>
 	       	<tr id="choice-name">
 	       	 <th>
@@ -673,7 +665,7 @@ div#review_containser{
 					<label for="res_Attr5_3">별로에요</label>
 				</div>
 			  </div>
-	       	 <td>
+	       	 </td>
 	       	</tr>
 	       	<tr id="choice-name">
 	       	 <th>
