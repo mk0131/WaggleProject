@@ -13,6 +13,7 @@ import com.probee.waggle.model.dto.RequestDto2;
 import com.probee.waggle.model.dto.ResultDto;
 import com.probee.waggle.model.dto.UserRatingDto;
 import com.probee.waggle.model.dto.UsersDto;
+import com.probee.waggle.model.dto.UsersDto2;
 
 @Mapper
 public interface BoardMapper {
@@ -41,8 +42,8 @@ public interface BoardMapper {
 	@Select(" select * from Result where res_No=#{req_No} and res_Stat in ('진행중','완료') ")
 	public ResultDto selectResult(int req_No);
 	
-	@Select(" select user_Code, user_Pro, user_Grade, user_Intro, user_Nm from Users u inner join volunteer v on u.user_Code = v.vo_Ucode where v.vo_No = #{vo_No} and v.vo_Block = false")
-	public List<UsersDto> FindVol(int vo_No);
+	@Select(" select user_Code, user_Pro, user_Grade, user_Intro, user_Nm, fi_Nm from Users u inner join volunteer v on u.user_Code = v.vo_Ucode left outer join File f on u.user_Pro=f.fi_Code where v.vo_No = #{vo_No}")
+	public List<UsersDto2> FindVol(int vo_No);
 	
 	// 유저정보 가져오기
 	@Select(" select * from Users where user_Code = #{user_Code} ")
@@ -66,16 +67,28 @@ public interface BoardMapper {
 	@Update(" update Request set req_Stat = '모집중' where req_No = #{req_No} ")
 	int Recruit(int req_No);
 	
-	@Update(" update Request set req_Stat = '취소(0)' where req_No = #{req_No} ")
+	@Update(" update Request set req_Stat = '취소' where req_No = #{req_No} ")
 	int Revoke(int req_No);
 	
 	@Delete(" delete from request where req_No  = #{req_No} ")
 	int Cancel(int req_No);
+	
+	@Update(" update Request set req_Stat = '완료' where req_No = #{req_No} ")
+	int complete(int req_No);
 
 	@Update(" update Request set req_Title=#{req_Title}, req_Link=#{req_Link}, req_EDate=#{req_EDate}, req_Phone=#{req_Phone}, req_Detail=#{req_Detail}, req_Point=#{req_Point}, req_HCode=#{req_HCode} where req_No=#{req_No} ")
 	public int updateRequest(RequestDto2 dto);
 	
 	@Select(" select max(req_No) from request r ")
 	public int selectLastRequestNo();
+	
+	// 꿀벌 평가 DB 삽입
+	@Insert(" insert into UserRating values (#{ur_UCode}, #{ur_Rate}, #{ur_Attr1}, #{ur_Attr2}, #{ur_Attr3}, 'false') ")
+	public int insertRatingBee(UserRatingDto userRating_dto);
+	
+	// 꿀벌 재평가 DB 삽입
+	@Insert(" insert into UserRating values (#{ur_UCode}, #{ur_Rate}, #{ur_Attr1}, #{ur_Attr2}, #{ur_Attr3}, 'true') ")
+	public int insertReRatingBee(UserRatingDto userRating_dto);
+	
 
 }

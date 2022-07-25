@@ -5,17 +5,19 @@ import java.util.List;
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 
+import com.probee.waggle.model.dto.Criteria;
 import com.probee.waggle.model.dto.InquiryDto;
 import com.probee.waggle.model.dto.UsersDto;
 
 @Mapper
 public interface InquiryMapper {
 	
-	@Select(" SELECT IN_CODE, IN_UCODE, IN_TYPE, IN_TITLE, IN_DATE, IN_CONTENT, IN_STAT, IN_ANSWER, in_CHK FROM INQUIRY left join USERS on IN_UCODE = USER_CODE where IN_UCODE = #{user_Code} order by IN_CODE desc ")
-	public List<InquiryDto> selectList(int user_Code);
+	@Select(" SELECT IN_CODE, IN_UCODE, IN_TYPE, IN_TITLE, IN_DATE, IN_CONTENT, IN_STAT, IN_ANSWER, in_CHK FROM INQUIRY left join USERS on IN_UCODE = USER_CODE where IN_UCODE = #{user_Code} order by IN_CODE desc LIMIT #{cri.pageStart}, #{cri.perPageNum} ")
+	public List<InquiryDto> selectList(int user_Code, @Param("cri") Criteria cri);
 	
 //	@Select(" SELECT IN_CODE, IN_UCODE, IN_TYPE, IN_TITLE, IN_DATE, IN_CONTENT, IN_STAT, IN_ANSWER, in_CHK FROM INQUIRY join USERS on(IN_UCODE = USER_CODE) order by IN_CODE DESC ")
 //	public List<InquiryDto> selectuserList();
@@ -34,5 +36,8 @@ public interface InquiryMapper {
 	
 	@Select(" select * from Users where user_Code in (#{user_Code}) ")
 	public UsersDto selectUser(int user_Code);
+	
+	@Select(" SELECT COUNT(*) FROM INQUIRY left join USERS on IN_UCODE = USER_CODE where in_UCode = '2' order by IN_CODE DESC ")
+	public int inquiryListCnt();
 	
 }

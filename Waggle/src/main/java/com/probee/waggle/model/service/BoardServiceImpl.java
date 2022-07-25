@@ -8,12 +8,11 @@ import org.springframework.stereotype.Service;
 import com.probee.waggle.model.component.FileSaver;
 import com.probee.waggle.model.component.SeleniumCrawler;
 import com.probee.waggle.model.dto.FileDto;
-import com.probee.waggle.model.dto.RequestDto;
 import com.probee.waggle.model.dto.RequestDto2;
 import com.probee.waggle.model.dto.ResultDto;
 import com.probee.waggle.model.dto.UserRatingDto;
 import com.probee.waggle.model.dto.UsersDto;
-import com.probee.waggle.model.dto.VolunteerDto;
+import com.probee.waggle.model.dto.UsersDto2;
 import com.probee.waggle.model.mapper.BoardMapper;
 import com.probee.waggle.model.mapper.FileMapper;
 
@@ -94,7 +93,7 @@ public class BoardServiceImpl implements BoardService{
 	}
 
 	@Override
-	public List<UsersDto> FindVol(int vo_No) {
+	public List<UsersDto2> FindVol(int vo_No) {
 		return boardMapper.FindVol(vo_No);
 	}
 
@@ -132,7 +131,13 @@ public class BoardServiceImpl implements BoardService{
 	public int Revoke(int req_No) {
 		return boardMapper.Revoke(req_No);
 	}
-
+	
+	@Override
+	public int complete(int req_No) {
+		return boardMapper.complete(req_No);
+	}
+	
+	@Override
 	public int updateRequest(RequestDto2 dto) {
 		return boardMapper.updateRequest(dto);
 	}
@@ -141,6 +146,16 @@ public class BoardServiceImpl implements BoardService{
 	public int selectLastRequestNo() {
 		return boardMapper.selectLastRequestNo();
 
+	}
+
+	@Override
+	public int insertRatingBee(UserRatingDto userRating_dto) {
+		return boardMapper.insertRatingBee(userRating_dto);
+	}
+	
+	@Override
+	public int insertReRatingBee(UserRatingDto userRating_dto) {
+		return boardMapper.insertReRatingBee(userRating_dto);
 	}
 
 

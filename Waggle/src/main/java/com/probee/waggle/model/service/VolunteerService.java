@@ -17,5 +17,7 @@ public interface VolunteerService {
 	public int ResCancel(int vo_No, int vo_UCode);
 	
 	public int Revoke(int req_No);
+	
+	public int ResRevoke(int vo_No, int vo_UCode);
 
 }

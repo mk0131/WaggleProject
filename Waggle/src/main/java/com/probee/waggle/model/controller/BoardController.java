@@ -229,7 +229,6 @@ public class BoardController {
 			
 			model.addAttribute("res_dto", gson.toJson(result));
 			model.addAttribute("res_dto2", result);
-			System.out.println(result);
 			
 			if(req_Stat.equals("진행중")) {
 				
@@ -281,22 +280,108 @@ public class BoardController {
 	@GetMapping("/cancel") // 모집중 일때 작성자가 취소하기
 	public String Cancel(int req_No) {
 		
-		volunteerService.delete(req_No);
-		boardService.Cancel(req_No);
+		volunteerService.delete(req_No); // 지원자목록 삭제
+		boardService.Cancel(req_No); // 요청글 삭제
 		
 		
 		return "redirect:/board/list";
 	}
 	
-	@GetMapping("/revoke") // 모집중 일때 작성자가 취소하기
+	@GetMapping("/revoke") // 진행중 일때 작성자가 취소하기
 	public String Revoke(int req_No) {
 		
-		boardService.Revoke(req_No); // 요청글 취소(0)
+		boardService.Revoke(req_No); // 요청글 취소
 		volunteerService.delete(req_No); // 지원자들 삭제
-		volunteerService.Revoke(req_No); // 결과물 취소(0)
+		volunteerService.Revoke(req_No); // 모든 결과물 취소(0)
 		
 		return "redirect:/board/list";
 	}
+	
+	@PostMapping("/rating") // 확인중 페이지에서 작성자가 수행자 평가했을시 업데이트 진행
+	public String ratingBee(int req_No, UserRatingDto userRating_dto) {
+		userRating_dto.setUr_UCode(req_No);
+		
+		// 1, 0, -1 -> '좋아요', '보통이에요', '별로에요' 값변환
+		List<String> indexArray = new ArrayList<String>();
+		indexArray.add("별로에요");
+		indexArray.add("보통이에요");
+		indexArray.add("좋아요");
+		int tmp1 = Integer.parseInt(userRating_dto.getUr_Attr1());
+		userRating_dto.setUr_Attr1(indexArray.get(tmp1+1));
+		
+		int tmp2 = Integer.parseInt(userRating_dto.getUr_Attr2());
+		userRating_dto.setUr_Attr2(indexArray.get(tmp2+1));
+		
+		int tmp3 = Integer.parseInt(userRating_dto.getUr_Attr3());
+		userRating_dto.setUr_Attr3(indexArray.get(tmp3+1));
+
+		int res = boardService.insertRatingBee(userRating_dto);
+		
+		if(res>0) {
+			System.out.println("꿀벌 평가 DB 저장 성공");
+		} else {
+			System.out.println("꿀벌 평가 DB 저장 실패...");
+			return "redirect:/board/detail?req_No="+req_No;
+		}
+		// 확인중 -> 완료로 업데이트
+		boardService.complete(req_No);
+		
+		return "redirect:/board/detail?req_No="+req_No;
+	}
+	
+	@PostMapping("/reRatingForm") // 완료 게시글에서 작성자가 꿀벌을 다시한번 평가하는 폼으로 이동시켜줌
+	public String goReRatingForm(int req_No, Model model) {
+		List<UserRatingDto> tmplist = boardService.selectUserRating(req_No);
+		UserRatingDto userRating_dto = tmplist.get(0);
+		
+		System.out.println(userRating_dto);
+		// 요청글 정보
+		RequestDto2 req_dto = boardService.selectRequest(req_No);
+		model.addAttribute("req_dto", req_dto);
+		
+		// 요청 결과값
+		ResultDto res_dto = boardService.selectResult(req_No);
+		
+		Gson gson = new Gson();
+		
+		model.addAttribute("res_dto", gson.toJson(res_dto));
+		model.addAttribute("user_rating", gson.toJson(userRating_dto));
+		return "reRatingForm";
+	}
+	
+	@PostMapping("/rerating")
+	public String reratingBee(int req_No, UserRatingDto userRating_dto) {
+		userRating_dto.setUr_UCode(req_No);
+		
+		// 1, 0, -1 -> '좋아요', '보통이에요', '별로에요' 값변환
+		List<String> indexArray = new ArrayList<String>();
+		indexArray.add("별로에요");
+		indexArray.add("보통이에요");
+		indexArray.add("좋아요");
+		int tmp1 = Integer.parseInt(userRating_dto.getUr_Attr1());
+		userRating_dto.setUr_Attr1(indexArray.get(tmp1+1));
+		
+		int tmp2 = Integer.parseInt(userRating_dto.getUr_Attr2());
+		userRating_dto.setUr_Attr2(indexArray.get(tmp2+1));
+		
+		int tmp3 = Integer.parseInt(userRating_dto.getUr_Attr3());
+		userRating_dto.setUr_Attr3(indexArray.get(tmp3+1));
+
+		boardService.insertReRatingBee(userRating_dto);
+		
+		return "redirect:/board/detail?req_No="+req_No;
+	}
+	
+	@GetMapping("/completeform")
+	public String goCompleteForm(String userName, int req_No, Model model) {
+		// 요청글 정보
+		RequestDto2 req_dto = boardService.selectRequest(req_No);
+		model.addAttribute("req_dto", req_dto);
+		model.addAttribute("userName", userName);
+		return null;
+	}
+	
+	
 	
 
 	
