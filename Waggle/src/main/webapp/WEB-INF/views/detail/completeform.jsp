@@ -179,6 +179,44 @@ div#review_containser{
 	padding: 10px;
 }
 
+/* 별 */
+.rating-group {
+  display: inline-flex;
+}
+
+/* make hover effect work properly in IE */
+.rating__icon {
+  pointer-events: none;
+}
+
+/* hide radio inputs */
+.rating__input {
+ position: absolute !important;
+ left: -9999px !important;
+}
+
+/* hide 'none' input from screenreaders */
+.rating__input--none {
+  display: none
+}
+
+/* set icon padding and size */
+.rating__label {
+  cursor: pointer;
+  padding: 0 0.1em;
+  font-size: 2rem;
+}
+
+/* set default star color */
+.rating__icon--star {
+  color: orange;
+}
+
+/* if any input is checked, make its following siblings grey */
+.rating__input:checked ~ .rating__label .rating__icon--star {
+  color: #ddd;
+}
+
 /* 파일 업로드 css */
 .file-uploader {
   background-color: #e9e9e9;
@@ -302,8 +340,7 @@ div#review_containser{
   color: white;
 }
 
-ul,
-li {
+ul,li {
   margin: 0;
   padding: 0;
 }
