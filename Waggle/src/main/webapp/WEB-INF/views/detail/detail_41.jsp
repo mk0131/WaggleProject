@@ -357,14 +357,6 @@ div#progress_percentage::after {
         #modal .title h2 {
             display: inline;
         }
-        #modal .close-area {
-            display: inline;
-            float: right;
-            padding-right: 10px;
-            cursor: pointer;
-            text-shadow: 1px 1px 2px gray;
-            color: white;
-        }
         
         #modal .content {
             margin-top: 20px;
@@ -387,7 +379,7 @@ div#progress_percentage::after {
             <div class="title">
                 <h2>100 P 지불하고 후기 내용 보기</h2>
             </div>
-            <div class="close-area" onclick="location.href='/board/list'">X</div>
+            
             <div class="content">
                 <input type="button" id="modalbtn" value="100 P 소모" onclick="">
                 
@@ -743,13 +735,19 @@ div#progress_percentage::after {
 		$(".rating__input[value='"+num+"']").prop('checked', true);
 		
 		console.log('${req_dto.req_UCode}');
-		console.log('${user_Code}');
-	 	if(${req_dto.req_UCode} != ${user_Code}){
+		console.log(typeof(${user_Code}));
+		console.log(typeof(${res}))
+		console.log(${user_Code});
+		console.log(${res});
+		console.log(${po});
+	 	if(${req_dto.req_UCode} != ${user_Code} && ${res} != ${user_Code} && ${po} != ${user_Code}){
 	 	 $(".ongoing21-content2").hide();	
 	 	 $("#detail_container").hide();
 	 	 $("#full-stars-example-two").hide();
 	 	 $("#modal").css("display","flex");
 	 	}
+	 	
+	 	
 		
 	});
 </script>

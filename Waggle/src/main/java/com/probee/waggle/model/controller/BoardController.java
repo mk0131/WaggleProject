@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.google.gson.Gson;
 import com.probee.waggle.model.dto.HomeDto;
+import com.probee.waggle.model.dto.PointsDto;
 import com.probee.waggle.model.dto.RequestDto2;
 import com.probee.waggle.model.dto.ResultDto;
 import com.probee.waggle.model.dto.UserRatingDto;
@@ -251,12 +252,24 @@ public class BoardController {
 				// 글 번호에 맞는 유저평가 데이터 json으로 변환하여 넣기
 				List<UserRatingDto> list = boardService.selectUserRating(req_No);
 				List<String> rate_list = new ArrayList<String>();
+				ResultDto result2 = boardService.selectResult(req_No);
 				
 				for(int i=0; i<list.size(); i++) {
 					String tmp = gson.toJson(list.get(i));
 					rate_list.add(tmp);
 				}
+				
+				PointsDto po = boardService.selectPoint(req_No, user_Code);
+				System.out.println(po);
+				if(po != null) {
+					model.addAttribute("po",po.getPo_UCode());	
+				}else {
+					model.addAttribute("po",-1);
+				}
+					
 				model.addAttribute("user_rating", rate_list);
+				model.addAttribute("res", result2.getRes_UCode());
+				
 				
 				return "detail/detail_41";
 			}			

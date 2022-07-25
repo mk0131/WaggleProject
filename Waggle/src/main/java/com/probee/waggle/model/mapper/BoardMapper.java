@@ -9,6 +9,7 @@ import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 
 import com.probee.waggle.model.dto.FileDto;
+import com.probee.waggle.model.dto.PointsDto;
 import com.probee.waggle.model.dto.RequestDto2;
 import com.probee.waggle.model.dto.ResultDto;
 import com.probee.waggle.model.dto.UserRatingDto;
@@ -90,5 +91,7 @@ public interface BoardMapper {
 	@Insert(" insert into UserRating values (#{ur_UCode}, #{ur_Rate}, #{ur_Attr1}, #{ur_Attr2}, #{ur_Attr3}, 'true') ")
 	public int insertReRatingBee(UserRatingDto userRating_dto);
 	
-
+	// 포인트 사용여부 검사
+	@Select(" select * from points p where po_No = #{req_No} and po_UCode = #{user_Code} ")
+	PointsDto selectPoint(int req_No, int user_Code);
 }
