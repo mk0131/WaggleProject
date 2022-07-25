@@ -18,13 +18,13 @@ public class InquiryServiceImpl implements InquiryService {
 	private InquiryMapper inquiryMapper;
 	
 	@Override
-	public List<InquiryDto> selectList(int user_Code, @Param("Criteria cri") Criteria cri) {
+	public List<InquiryDto> selectList(int user_Code, Criteria cri) {
 		return inquiryMapper.selectList(user_Code, cri);
 	}
 	
 	@Override
-	public int inquiryListCnt() {
-		return inquiryMapper.inquiryListCnt();
+	public int inquiryListCnt(int user_Code) {
+		return inquiryMapper.inquiryListCnt(user_Code);
 	}
 	
 	@Override

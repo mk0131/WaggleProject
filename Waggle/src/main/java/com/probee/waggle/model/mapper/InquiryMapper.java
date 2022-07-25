@@ -37,7 +37,7 @@ public interface InquiryMapper {
 	@Select(" select * from Users where user_Code in (#{user_Code}) ")
 	public UsersDto selectUser(int user_Code);
 	
-	@Select(" SELECT COUNT(*) FROM INQUIRY left join USERS on IN_UCODE = USER_CODE where in_UCode = '2' order by IN_CODE DESC ")
-	public int inquiryListCnt();
+	@Select(" SELECT COUNT(*) FROM INQUIRY left join USERS on IN_UCODE = USER_CODE where in_UCode = #{user_Code} order by IN_CODE DESC ")
+	public int inquiryListCnt(int user_Code);
 	
 }

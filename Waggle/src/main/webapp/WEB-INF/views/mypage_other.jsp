@@ -607,6 +607,11 @@ textarea {
 						</c:if>
 					</div>
 				</div>
+				<div class="profile-bottom">
+						<div class="button" onclick="">
+							<a><p style="margin:5px">채팅하기</p></a>
+						</div>
+					</div>
 				<div class="description" style="text-align: center">
 					<div class="desc-nav">
 						<ul class="desc-list">
