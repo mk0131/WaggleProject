@@ -55,6 +55,14 @@
     font-size: 14px;
 }
 
+.ongoing21-content1 {
+	display:flex;
+  	align-items: center;
+  	justify-content: center;
+    padding: 5px;
+    border-spacing: 30px;
+    font-size: 14px;
+}
 .ongoing21-content2 {
 	display:flex;
   	align-items: center;
@@ -309,13 +317,86 @@ div#progress_percentage::after {
   color: #ddd;
 }
 */
-
+#modal.modal-overlay {
+            width: 100%;
+            height: 400px;
+            position: absolute;
+            left: 0;
+            top: 1490px;
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background: rgba(255, 255, 255, 0.25);
+            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+            backdrop-filter: blur(1.5px);
+            -webkit-backdrop-filter: blur(1.5px);
+            border-radius: 10px;
+            border: 1px solid rgba(255, 255, 255, 0.18);
+        }
+        #modal .modal-window {
+            background: rgba( 69, 139, 197, 0.70 );
+            box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );
+            backdrop-filter: blur( 13.5px );
+            -webkit-backdrop-filter: blur( 13.5px );
+            border-radius: 10px;
+            border: 1px solid rgba( 255, 255, 255, 0.18 );
+            width: 400px;
+            height: 100px;
+            position: relative;
+            top: -0px;
+            padding: 10px;
+        }
+        #modal .title {
+            padding-left: 10px;
+            display: inline;
+            text-shadow: 1px 1px 2px gray;
+            color: white;
+            
+        }
+        #modal .title h2 {
+            display: inline;
+        }
+        #modal .close-area {
+            display: inline;
+            float: right;
+            padding-right: 10px;
+            cursor: pointer;
+            text-shadow: 1px 1px 2px gray;
+            color: white;
+        }
+        
+        #modal .content {
+            margin-top: 20px;
+            padding: 0px 10px;
+            text-shadow: 1px 1px 2px gray;
+            color: white;
+        }
+ 		#modalbtn{
+ 		 	width: 380px;
+ 		 	height: 50px;
+ 		 	border-radius: 8px;
+ 		}
 
 </style>
+
 </head>
 <body>
+<div id="modal" class="modal-overlay">
+        <div class="modal-window">
+            <div class="title">
+                <h2>100 P 지불하고 후기 내용 보기</h2>
+            </div>
+            <div class="close-area" onclick="location.href='/board/list'">X</div>
+            <div class="content">
+                <input type="button" id="modalbtn" value="100 P 소모" onclick="">
+                
+            </div>
+        </div>
+    </div>
 	<%@ include file="../header.jsp" %>
 	 <div id="wrap">
+	 
 	  <div class="middle">
 		<div class="guideline">
 			<ul class="guideline-all">
@@ -327,7 +408,7 @@ div#progress_percentage::after {
         	</ul>
 		</div>
 	  </div>
-	  
+	    
 	   <div class="ongoing21-all">
 	    <h3 id="ongoing-detail">요청 상세 페이지(${req_dto.req_Stat })</h3>
 	     <p id="w-date">요청날짜 : ${req_dto.req_WDate }</p>
@@ -381,7 +462,7 @@ div#progress_percentage::after {
 			    </div>
 			 </div>
 			 
-	       <table class="ongoing21-content2">
+	       <table class="ongoing21-content1">
 		       <tbody>
 		        <tr>
 		       	 <th>
@@ -657,6 +738,15 @@ div#progress_percentage::after {
 		// 집평가 별점 값 넣기
 		var num = res_content.res_Rate;
 		$(".rating__input[value='"+num+"']").prop('checked', true);
+		
+		console.log('${req_dto.req_UCode}');
+		console.log('${user_Code}');
+	 	if(${req_dto.req_UCode} != ${user_Code}){
+	 	 $(".ongoing21-content2").hide();	
+	 	 $("#detail_container").hide();
+	 	 $("#full-stars-example-two").hide();
+	 	 $("#modal").css("display","flex");
+	 	}
 		
 	});
 </script>
