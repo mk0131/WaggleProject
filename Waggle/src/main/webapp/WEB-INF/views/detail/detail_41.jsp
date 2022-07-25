@@ -335,7 +335,7 @@ div#progress_percentage::after {
 	      <p id="userrealname">작성자 : ${user_dto.user_Nm}</p>
 	     </div>
 	    <div class="ongoing21-all">
-	   <input type="hidden" name="req_dto.req_No" value="${req_dto.req_No }">
+	   <input type="hidden" name="req_No" value="${req_dto.req_No }">
 	    <table class="ongoing21-content">
 	     <tbody>
 	      <tr>
@@ -633,7 +633,7 @@ div#progress_percentage::after {
 			var attr = eval('rate_last.ur_Attr'+i);
 			if (attr === "좋아요") {
 				$("input[id='ur_Attr"+i+"_1']").prop('checked', true);
-			} else if (attr === "그냥 그래요") {
+			} else if (attr === "보통이에요") {
 				$("input[id='ur_Attr"+i+"_2']").prop('checked', true);
 			} else {
 				$("input[id='ur_Attr"+i+"_3']").prop('checked', true);
@@ -644,7 +644,7 @@ div#progress_percentage::after {
 			var attr = eval('res_content.res_Attr'+i);
 			if (attr === "좋아요") {
 				$("input[id='res_Attr"+i+"_1']").prop('checked', true);
-			} else if (attr === "그냥 그래요") {
+			} else if (attr === "보통이에요") {
 				$("input[id='res_Attr"+i+"_2']").prop('checked', true);
 			} else {
 				$("input[id='res_Attr"+i+"_3']").prop('checked', true);

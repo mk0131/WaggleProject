@@ -229,7 +229,6 @@ public class BoardController {
 			
 			model.addAttribute("res_dto", gson.toJson(result));
 			model.addAttribute("res_dto2", result);
-			System.out.println(result);
 			
 			if(req_Stat.equals("진행중")) {
 				
@@ -296,6 +295,14 @@ public class BoardController {
 		volunteerService.Revoke(req_No); // 결과물 취소(0)
 		
 		return "redirect:/board/list";
+	}
+	
+	@PostMapping("/rating") // 확인중 페이지에서 작성자가 수행자 평가했을시 업데이트 진행
+	public String ratingBee(int req_No, UserRatingDto userRating_dto) {
+		System.out.println(req_No);
+		System.out.println(userRating_dto);
+		
+		return null;
 	}
 	
 

@@ -78,5 +78,8 @@ public interface BoardMapper {
 	
 	@Select(" select max(req_No) from request r ")
 	public int selectLastRequestNo();
+	
+	@Insert(" insert into UserRating values (#{ur_Code}, #{ur_Rate}, #{ur_Attr1}, #{ur_Attr2}, #{ur_Attr3}, 'false') ")
+	public int insertRatingBee(UserRatingDto userRating_dto);
 
 }
