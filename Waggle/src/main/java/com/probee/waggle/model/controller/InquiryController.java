@@ -25,7 +25,7 @@ public class InquiryController {
 	@GetMapping("/list")
 	public String selectList(Model model, int user_Code, Criteria cri) {
 		
-		int inquiryListCnt = inquiryService.inquiryListCnt();
+		int inquiryListCnt = inquiryService.inquiryListCnt(user_Code);
 		
 		// 페이징 객체
 		Paging paging = new Paging();

@@ -542,7 +542,7 @@ li {
 		   <br/><br/>
 		   <br/><br/>
 		     <div class="btn2" id="btn2">
-			   <button type="button" value="완료하기" onclick="location.href='">완료하기</button>
+			   <button type="button" value="완료하기" onclick="location.href=''">완료하기</button>
 		      <button type="button" value="취소" onclick="location.href='/board/list'">취소</button>
 		     </div>
 	     </div>

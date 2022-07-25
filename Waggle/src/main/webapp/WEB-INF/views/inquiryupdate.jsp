@@ -136,7 +136,7 @@ tr {
 			<div class="notice-container">
 	 			<div class="conbox con3">
 	 			 <form action="/inquiry/update" method="post">
-	              <input type="hidden" name="in_Code" value="${user_Code }">
+	              <input type="hidden" name="in_Code" value="${param.in_Code}">
 					<table class="Inquiry-update">
 						<tr>
 						<th>문의유형</th>
@@ -154,7 +154,7 @@ tr {
 						</tr>
 						<tr>
 						<th>작성자</th>
-						<td>${dto.in_UCode }</td>						
+                  		<td>${user_Nm }</td>					
 						</tr>
 						<tr>
 						<th>내용</th>
