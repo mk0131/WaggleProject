@@ -9,5 +9,13 @@ public interface VolunteerService {
 	VolunteerDto SelectOne(int vo_No, int vo_UCode);
 	
 	public int Cancel(int vo_No, int vo_UCode);
+	
+	public int delete(int vo_No);
+	
+	public int Block(int vo_No, int vo_UCode);
+	
+	public int ResCancel(int vo_No, int vo_UCode);
+	
+	public int Revoke(int req_No);
 
 }

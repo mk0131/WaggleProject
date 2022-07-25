@@ -534,16 +534,23 @@ div#progress_percentage::after {
 		   <br><h4>디테일 요청사항</h4>
 		   <div id="detail_container">
 		    <div id="file_container">
-		    <c:forEach items="${file }" var="dto">
-		   	 <c:choose>
-		   	  <c:when test="${dto.fi_Type eq 'img' }">
-		   	   <img src="${dto.fi_Nm }" alt="방사진">
-		   	  </c:when>
-		   	  <c:otherwise>
-		   	   <video controls width="400px"><source src="${dto.fi_Nm }"> </video>
-		   	  </c:otherwise>
-		   	 </c:choose>
-		    </c:forEach>
+		    <c:choose>
+		    	<c:when test="${file eq '[null]' }">
+		    		<div>디테일 사진이 존재하지 않습니다.</div>
+		    	</c:when>
+		    	<c:otherwise>
+				    <c:forEach items="${file }" var="dto">
+				   	 <c:choose>
+				   	  <c:when test="${dto.fi_Type eq 'img' }">
+				   	   <img src="${dto.fi_Nm }" alt="방사진">
+				   	  </c:when>
+				   	  <c:otherwise>
+				   	   <video controls width="400px"><source src="${dto.fi_Nm }"> </video>
+				   	  </c:otherwise>
+				   	 </c:choose>
+				    </c:forEach>		    	
+		    	</c:otherwise>
+		    </c:choose>
 		    </div>
 		    <div id="review_containser">
 		     <span style="font-size: 12pt;">간단한 집 평가</span><br>

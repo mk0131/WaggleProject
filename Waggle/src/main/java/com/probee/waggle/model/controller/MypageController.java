@@ -1,15 +1,11 @@
 package com.probee.waggle.model.controller;
 
 import java.util.List;
-import java.util.Random;
 
-import javax.mail.internet.MimeMessage;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.mail.javamail.JavaMailSender;
-import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,6 +14,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.probee.waggle.model.component.FileSaver;
+import com.probee.waggle.model.dto.FileDto;
 import com.probee.waggle.model.dto.MypageFinishlistDto;
 import com.probee.waggle.model.dto.UserAddressDto;
 import com.probee.waggle.model.dto.UsersDto;
@@ -33,7 +31,51 @@ public class MypageController {
 
 	@Autowired
 	RegistService registService;
-
+	
+	@Autowired
+	FileSaver fileSaver;
+	
+	@GetMapping("/other")
+	public String selectOtherInfo(int ucode, Model model) {
+		UsersDto UserList = mypageService.SelectUsersInfo(ucode);
+		model.addAttribute("dto",UserList);
+		return "mypage_other";
+	}
+	
+	@PostMapping(value="/imageEdit")
+	public String ImageEdit(HttpServletRequest request, String imgUrl) {
+		HttpSession session = request.getSession();
+		int user_Code = (int)session.getAttribute("user_Code");
+		List<FileDto> lastFileLowList = mypageService.SelectLastFiCode();
+		
+		int new_Fi_Code = lastFileLowList.get(0).getFi_Code() + 1;
+		
+		int res = 0;
+		res = mypageService.ImageFileInsert(new_Fi_Code);
+		if (res > 0) {
+			System.out.println("이미지 파일 insert 성공");
+		} else {
+			System.out.println("이미지 파일 insert 실패");
+		}
+		
+		int res1 = 0;
+		res1 = mypageService.UserProChange(new_Fi_Code, user_Code);
+		if (res1 > 0) {
+			System.out.println("수정 성공");
+		} else {
+			System.out.println("수정 실패");
+		}
+		
+		int res2 =fileSaver.saveCrawlImg(imgUrl, "/images/profile/profile_"+new_Fi_Code);
+		if(res2 >0) {
+			System.out.println("로컬에 이미지 저장 성공");
+		}else {
+			System.out.println("로컬에 이미지 저장 실패");
+		}
+		return "redirect:/mypage/profileEdit?ua_UCode=" + user_Code;
+	}
+	
+	
 	@RequestMapping(value = "/descInsert", method = RequestMethod.POST)
 	public String InsertUserInfo(HttpServletRequest request, int code, String description) {
 
@@ -88,7 +130,7 @@ public class MypageController {
 		return finishlist;
 	}
 
-	@GetMapping("/profileEdit")
+	@GetMapping("/profileEdit") // 회원정보 수정 버튼
 	public String ProfileEdit(int ua_UCode, UserAddressDto dto, Model model) {
 		UserAddressDto user = mypageService.SelectAddr(ua_UCode);
 
@@ -113,7 +155,7 @@ public class MypageController {
 
 	}
 
-	@PostMapping("/pwchange")
+	@PostMapping("/pwchange") // 비밀번호 변경
 	public String PwChange(int user_Code, String user_Pw) {
 
 		mypageService.PwChange(user_Pw, user_Code);
@@ -121,7 +163,7 @@ public class MypageController {
 		return "redirect:/mypage/profileEdit?ua_UCode=" + user_Code;
 	}
 
-	@PostMapping("/emailchange")
+	@PostMapping("/emailchange") // 이메일 변경
 	public String EmailChange(int user_Code, String user_Email, HttpServletRequest request) {
 
 		HttpSession session = request.getSession();
@@ -135,7 +177,7 @@ public class MypageController {
 		return "redirect:/mypage/profileEdit?ua_UCode=" + user_Code;
 	}
 
-	@PostMapping("/nmchange")
+	@PostMapping("/nmchange") // 닉네임 변경
 	public String NmChange(int user_Code, String user_Nm, HttpServletRequest request) {
 
 		HttpSession session = request.getSession();
@@ -149,7 +191,7 @@ public class MypageController {
 		return "redirect:/mypage/profileEdit?ua_UCode=" + user_Code;
 	}
 
-	@PostMapping("/agechange")
+	@PostMapping("/agechange") // 나이 변경
 	public String AgeChange(int user_Code, int user_Age, HttpServletRequest request) {
 
 		HttpSession session = request.getSession();
@@ -163,7 +205,7 @@ public class MypageController {
 		return "redirect:/mypage/profileEdit?ua_UCode=" + user_Code;
 	}
 
-	@GetMapping("/addrchange")
+	@GetMapping("/addrchange") // 주소 변경
 	public String AddrChange(int ua_UCode, UserAddressDto dto, Model model, String ua_Post, String ua_Addr,
 			String ua_DAddr) {
 
@@ -180,7 +222,7 @@ public class MypageController {
 		return "redirect:/mypage/profileEdit?ua_UCode=" + ua_UCode;
 	}
 
-	@PostMapping("/genderchange")
+	@PostMapping("/genderchange") // 성별 변경
 	public String GenderChange(int user_Code, String user_Gender, HttpServletRequest request) {
 
 		HttpSession session = request.getSession();

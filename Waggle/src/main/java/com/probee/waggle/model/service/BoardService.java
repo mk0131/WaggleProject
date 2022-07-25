@@ -24,7 +24,13 @@ public interface BoardService {
 	public int CreateRes(int res_No, int res_UCode);
 	public int Progress(int req_No);
 	public List<FileDto> selectResultFile(int res_Code);
+
+	public int Cancel(int req_No);
+	public int Recruit(int req_No);
+	public int Revoke(int req_No);
+
 	public int updateRequest(RequestDto2 dto);
 	public int selectLastRequestNo();
+
 
 }

@@ -181,8 +181,10 @@ public class BoardController {
 				
 				if(vols != null) {
 					session.setAttribute("vo_UCode", vols.getVo_UCode());
+					session.setAttribute("vo_Block", vols.getVo_Block());
 				} else {
 					session.setAttribute("vo_UCode", -1);
+					
 				}
 				
 				return "detail/detail_12";
@@ -219,15 +221,22 @@ public class BoardController {
 			} else {
 				who = "제3자";
 			}
+			
 			model.addAttribute("who", who);
 			
-			if(req_Stat.equals("진행중")) {
-				return "detail/detail_21";
-			} 
-			// 글 번호에 맞는 result 데이터
 			ResultDto result = boardService.selectResult(req_No);
 			Gson gson = new Gson();
+			
 			model.addAttribute("res_dto", gson.toJson(result));
+			model.addAttribute("res_dto2", result);
+			System.out.println(result);
+			
+			if(req_Stat.equals("진행중")) {
+				
+				return "detail/detail_21";
+			} 
+			
+			
 			// result 관련 file
 			model.addAttribute("file", boardService.selectResultFile(result.getRes_Code()));
 			if(req_Stat.equals("확인중")) {
@@ -256,7 +265,7 @@ public class BoardController {
 	}
 	
 	
-	@GetMapping("/accept")
+	@GetMapping("/accept")  // 수락하기
 	public String Accept(int req_UCode, int res_UCode, int req_No) {
 		
 		int res =  boardService.CreateRes(req_No, res_UCode);
@@ -266,6 +275,27 @@ public class BoardController {
 		}
 		
 		return "redirect:/board/detail?req_No=" +req_No;
+	}
+	
+
+	@GetMapping("/cancel") // 모집중 일때 작성자가 취소하기
+	public String Cancel(int req_No) {
+		
+		volunteerService.delete(req_No);
+		boardService.Cancel(req_No);
+		
+		
+		return "redirect:/board/list";
+	}
+	
+	@GetMapping("/revoke") // 모집중 일때 작성자가 취소하기
+	public String Revoke(int req_No) {
+		
+		boardService.Revoke(req_No); // 요청글 취소(0)
+		volunteerService.delete(req_No); // 지원자들 삭제
+		volunteerService.Revoke(req_No); // 결과물 취소(0)
+		
+		return "redirect:/board/list";
 	}
 	
 

@@ -45,7 +45,7 @@ public class RegistController {
 
 	@RequestMapping(value = "/mailChk", method = RequestMethod.GET)
 	@ResponseBody
-	public String MailChk(String user_Email) {
+	public String MailChk(String user_Email) { // 중복 이메일 확인
 
 		int result = registService.EmailChk(user_Email);
 
@@ -112,7 +112,7 @@ public class RegistController {
 
 	}
 	
-	@RequestMapping(value = "/findEmail", method = RequestMethod.GET) // 이메일로 아이디 찾기
+	@RequestMapping(value = "/findEmail", method = RequestMethod.GET) // 가입된 이메일 확인
 	@ResponseBody
 	public String FindEmail(String user_Email, Model model, HttpServletRequest request) {
 
@@ -166,7 +166,7 @@ public class RegistController {
 		}
 
 	}
-	@RequestMapping(value = "/findPw", method = RequestMethod.GET) // 이메일로 아이디 찾기
+	@RequestMapping(value = "/findPw", method = RequestMethod.GET) // 이메일로 비밀번호 찾기
 	public String FindPw(String user_Email, Model model, HttpServletRequest request) {
 				System.out.println(user_Email);
 				UsersDto user = registService.SelectOne(user_Email);

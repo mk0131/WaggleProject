@@ -9,7 +9,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.probee.waggle.model.dto.Criteria;
 import com.probee.waggle.model.dto.InquiryDto;
+import com.probee.waggle.model.dto.Paging;
 import com.probee.waggle.model.dto.UsersDto;
 import com.probee.waggle.model.service.InquiryService;
 
@@ -21,10 +23,22 @@ public class InquiryController {
 	private InquiryService inquiryService;
 	
 	@GetMapping("/list")
-	public String selectList(Model model, int user_Code) {
-		List<InquiryDto> list = inquiryService.selectList(user_Code);
+	public String selectList(Model model, int user_Code, Criteria cri) {
+		
+		int inquiryListCnt = inquiryService.inquiryListCnt();
+		
+		// 페이징 객체
+		Paging paging = new Paging();
+		paging.setCri(cri);
+		paging.setTotalCount(inquiryListCnt);
+		
+		List<InquiryDto> list = inquiryService.selectList(user_Code, cri);
+		
 		model.addAttribute("list", list);
-		System.out.println(list);
+		model.addAttribute("paging", paging);
+		
+		System.out.println(paging);
+		
 		return "inquirylist";
 	}
 	

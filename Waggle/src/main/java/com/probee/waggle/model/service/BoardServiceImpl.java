@@ -118,6 +118,20 @@ public class BoardServiceImpl implements BoardService{
 	}
 
 	@Override
+	public int Cancel(int req_No) {
+		return boardMapper.Cancel(req_No);
+	}
+
+	@Override
+	public int Recruit(int req_No) {
+		return boardMapper.Recruit(req_No);
+	}
+
+	@Override
+	public int Revoke(int req_No) {
+		return boardMapper.Revoke(req_No);
+	}
+
 	public int updateRequest(RequestDto2 dto) {
 		return boardMapper.updateRequest(dto);
 	}
@@ -125,6 +139,7 @@ public class BoardServiceImpl implements BoardService{
 	@Override
 	public int selectLastRequestNo() {
 		return boardMapper.selectLastRequestNo();
+
 	}
 
 
