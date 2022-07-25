@@ -1,15 +1,11 @@
 package com.probee.waggle.model.controller;
 
 import java.util.List;
-import java.util.Random;
 
-import javax.mail.internet.MimeMessage;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.mail.javamail.JavaMailSender;
-import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,6 +14,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.probee.waggle.model.component.FileSaver;
+import com.probee.waggle.model.dto.FileDto;
 import com.probee.waggle.model.dto.MypageFinishlistDto;
 import com.probee.waggle.model.dto.UserAddressDto;
 import com.probee.waggle.model.dto.UsersDto;
@@ -33,7 +31,51 @@ public class MypageController {
 
 	@Autowired
 	RegistService registService;
-
+	
+	@Autowired
+	FileSaver fileSaver;
+	
+	@GetMapping("/other")
+	public String selectOtherInfo(int ucode, Model model) {
+		UsersDto UserList = mypageService.SelectUsersInfo(ucode);
+		model.addAttribute("dto",UserList);
+		return "mypage_other";
+	}
+	
+	@PostMapping(value="/imageEdit")
+	public String ImageEdit(HttpServletRequest request, String imgUrl) {
+		HttpSession session = request.getSession();
+		int user_Code = (int)session.getAttribute("user_Code");
+		List<FileDto> lastFileLowList = mypageService.SelectLastFiCode();
+		
+		int new_Fi_Code = lastFileLowList.get(0).getFi_Code() + 1;
+		
+		int res = 0;
+		res = mypageService.ImageFileInsert(new_Fi_Code);
+		if (res > 0) {
+			System.out.println("이미지 파일 insert 성공");
+		} else {
+			System.out.println("이미지 파일 insert 실패");
+		}
+		
+		int res1 = 0;
+		res1 = mypageService.UserProChange(new_Fi_Code, user_Code);
+		if (res1 > 0) {
+			System.out.println("수정 성공");
+		} else {
+			System.out.println("수정 실패");
+		}
+		
+		int res2 =fileSaver.saveCrawlImg(imgUrl, "/images/profile/profile_"+new_Fi_Code);
+		if(res2 >0) {
+			System.out.println("로컬에 이미지 저장 성공");
+		}else {
+			System.out.println("로컬에 이미지 저장 실패");
+		}
+		return "redirect:/mypage/profileEdit?ua_UCode=" + user_Code;
+	}
+	
+	
 	@RequestMapping(value = "/descInsert", method = RequestMethod.POST)
 	public String InsertUserInfo(HttpServletRequest request, int code, String description) {
 

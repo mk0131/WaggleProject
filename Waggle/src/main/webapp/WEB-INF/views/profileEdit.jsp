@@ -31,6 +31,31 @@
    display: inline-block;
 }
 
+.inputbutton {
+	background-color: #f2f2f2;
+	border: none;
+	border-radius: 8px;
+	box-sizing: border-box;
+	color: #000000;
+	font-size: 13px;
+	font-weight: 500;
+	font-family: inherit;
+	letter-spacing: .25px;
+	line-height: normal;
+	padding: 5px 5px;
+}
+
+.inputbutton:hover {
+	background: #E6E6E6;
+	color: #000000;
+}
+
+.inputbutton:active {
+	outline: none;
+	border: 1px solid #ffffff;
+}
+
+
 /* 프로필 사진 수정 시작 */
 .profile {
     background-size: cover;
@@ -179,32 +204,36 @@
             </ul>
          </div>
         </div>
-         <div class="edit-Title" style="margin:0 auto; width:1000px; text-align:center; font-size:22pt">
+         <div class="edit-Title" style="margin:0 auto; width:1000px; text-align:center; font-size:16pt">
          회원정보 수정하기
          </div>
          <div class="edit-profile-img" style="margin:0 auto; width:1000px; text-align:center">
+         	<form action="/mypage/imageEdit" method="post"> 
             <div class="profile" style="background-image:url(/images/importToJsp/profile_default.jpg)">
               <label class="edit">
                 <span>&#10002;</span>
-                <input type="file" />
+                <input type="file" id="imginput"/>
               </label>
-              <div class="delete" onclick="removePhoto()">&times;</div>
+              <div class="delete" onclick="removeimg()">&times;</div>
             </div>
+            <input type="hidden" id="imgUrl" name="imgUrl" value="">
+            <input type="submit" id="img-input" value="프로필사진 수정하기" style="margin-top:20px">
+            </form>
          </div>
          <div class="edit-profile-info" style="margin:0 auto; width:500px">
 			<form action="/mypage/pwchange" method="post">
             <div>
             <p style="margin:0; margin-bottom:5px; margin-top: 10px; margin-left:5px">비밀번호</p>
-            <input type="password" id="pw_input" style="width:500px; height:50px; border:1px solid; border-radius:15px; line-height:3; padding-left:15px">
+            <input type="password" id="pw_input" style="width:500px; height:30px; border:1px solid; border-radius:6px; line-height:3; padding-left:15px">
             <br>
             <span class="pw_form_check"></span> 
             </div>
             <div>
             <p style="margin:0; margin-bottom:5px; margin-top: 10px; margin-left:5px">비밀번호 확인</p>
-            <input type="password" id="pw_chk" name="user_Pw" style="width:300px; height:50px; border:1px solid; border-radius:15px; line-height:3; padding-left:15px">
+            <input type="password" id="pw_chk" name="user_Pw" style="width:300px; height:30px; border:1px solid; border-radius:6px; line-height:3; padding-left:15px">
            
             <input type="hidden" name="user_Code" value="${user_Code }">
-            <input type="submit" id="change_pw" value="비밀번호 수정" disabled="disabled">
+            <input type="submit" id="change_pw" value="비밀번호 수정" disabled="disabled" class="inputbutton">
             
             <br>
             <span class="pw_input_re_1">비밀번호가 같습니다.</span>
@@ -214,11 +243,11 @@
             <form action="/mypage/emailchange" method="post">
             <div>
             <p style="margin:0; margin-bottom:5px; margin-top: 10px; margin-left:5px">이메일</p>
-            <input type="text" id="email_input" name="user_Email" value="${user_Email }" style="width:500px; height:50px; border:1px solid; border-radius:15px; line-height:3; padding-left:15px">
-            <input type="button" id="mail_chk" value="이메일 인증" style="width: 100px;">
+            <input type="text" id="email_input" name="user_Email" value="${user_Email }" style="width:500px; height:30px; border:1px solid; border-radius:6px; line-height:3; padding-left:15px">
+            <input type="button" id="mail_chk" value="이메일 인증" style="width: 100px;" class="inputbutton">
 						<input type="text" id="chk_nm" placeholder="인증번호를 입력해 주세요" disabled="disabled">
 						<input type="hidden" name="user_Code" value="${user_Code }">
-						<input type="submit" id="change_email" value="이메일 수정" disabled="disabled">
+						<input type="submit" id="change_email" value="이메일 수정" disabled="disabled" class="inputbutton">
 						<br>
 						<span class="email_input_re_1">인증번호가 일치합니다.</span>
 						<span class="email_input_re_2">인증번호를 다시 확인해주세요.</span>
@@ -229,10 +258,10 @@
             <form action="/mypage/nmchange" method="post">
             <div>
             <p style="margin:0; margin-bottom:5px; margin-top: 10px; margin-left:5px">닉네임</p>
-            <input type="text" id="nm_input" name="user_Nm" value="${user_Nm }" style="width:500px; height:50px; border:1px solid; border-radius:15px; line-height:3; padding-left:15px">
-            <input type="button" id="nm_chk" value="중복 확인" style="width: 80px;">
+            <input type="text" id="nm_input" name="user_Nm" value="${user_Nm }" style="width:500px; height:30px; border:1px solid; border-radius:6px; line-height:3; padding-left:15px">
+            <input type="button" id="nm_chk" value="중복 확인" style="width: 80px;" class="inputbutton">
             <input type="hidden" name="user_Code" value="${user_Code }">
-            <input type="submit" id="change_nm" value="닉네임 수정" disabled="disabled">
+            <input type="submit" id="change_nm" value="닉네임 수정" disabled="disabled" class="inputbutton">
 						<br>
 						<span class="nm_input_re_1">사용 가능한 닉네임입니니다.</span>
 						<span class="nm_input_re_2">닉네임이 이미 존재합니다.</span>
@@ -242,9 +271,9 @@
             <form action="/mypage/agechange" method="post">
             <div>
             <p style="margin:0; margin-bottom:5px; margin-top: 10px; margin-left:5px">나이</p>
-            <input type="text" id="age_input" name="user_Age" value="${user_Age }" style="width:500px; height:50px; border:1px solid; border-radius:15px; line-height:3; padding-left:15px">
+            <input type="text" id="age_input" name="user_Age" value="${user_Age }" style="width:500px; height:30px; border:1px solid; border-radius:6px; line-height:3; padding-left:15px">
             <input type="hidden" name="user_Code" value="${user_Code }">
-            <input type="submit" id="change_age" value="나이 수정" disabled="disabled">
+            <input type="submit" id="change_age" value="나이 수정" disabled="disabled" class="inputbutton">
             <br>
             <span class="age_form_check"></span>
             </div>
@@ -253,12 +282,12 @@
             <div>
             <p style="margin:0; margin-bottom:5px; margin-top: 10px; margin-left:5px">주소</p>
             <c:if test="${user_Code == param.ua_UCode}">
-            <input type="text" id="post" name="ua_Post" value="${dto.ua_Post }" readonly="readonly" style="width:150px; height:50px; border:1px solid; border-radius:15px; line-height:3; padding-left:15px; display:inline-block">
-            <input type="button" id="address" value="우편번호 찾기" style="width: 95px; ">
-            <input type="text" id="addr" name="ua_Addr" value="${dto.ua_Addr }" readonly="readonly" style="width:500px; height:50px; border:1px solid; border-radius:15px; line-height:3; padding-left:15px; margin-top:5px;">
-            <input type="text" id="daddr" name="ua_DAddr" value="${dto.ua_DAddr }" style="width:500px; height:50px; border:1px solid; border-radius:15px; line-height:3; padding-left:15px; margin-top:5px" placeholder="상세주소">
+            <input type="text" id="post" name="ua_Post" value="${dto.ua_Post }" readonly="readonly" style="width:150px; height:30px; border:1px solid; border-radius:6px; line-height:3; padding-left:15px; display:inline-block">
+            <input type="button" id="address" value="우편번호 찾기" style="width: 95px;" class="inputbutton">
+            <input type="text" id="addr" name="ua_Addr" value="${dto.ua_Addr }" readonly="readonly" style="width:500px; height:30px; border:1px solid; border-radius:6px; line-height:3; padding-left:15px; margin-top:5px;">
+            <input type="text" id="daddr" name="ua_DAddr" value="${dto.ua_DAddr }" style="width:500px; height:30px; border:1px solid; border-radius:6px; line-height:3; padding-left:15px; margin-top:5px" placeholder="상세주소">
             <input type="hidden" name="ua_UCode" value="${user_Code }">
-            <input type="submit" id="change_addr" value="주소 수정" disabled="disabled">
+            <input type="submit" id="change_addr" value="주소 수정" disabled="disabled" class="inputbutton">
             </c:if>
             </div>
             </form>
@@ -295,7 +324,7 @@
             </div>
             
             </c:if>
-            <input type="submit" id="change_gender" value="성별 수정" >
+            <input type="submit" id="change_gender" value="성별 수정" class="inputbutton">
             </form>
             <div style="width:500px; margin-top:100px; border-bottom:2px solid #898989; height:10px"></div>
             
@@ -311,31 +340,32 @@
    <%@ include file="footer.jsp"%>
 </body>
 <script>
+function removeimg() {
+	  $(".profile").attr("style","background-image:url(/images/importToJsp/profile_default.jpg)");
+	};
+	
+	
 $(function(){
-	
-	
-	
 
 //프로필 사진 수정 시작
-var input = document.querySelector('input');
+var input = document.getElementById("imginput");
 var image = document.querySelector('.profile');
 
 input.addEventListener('change', function(event){
   var reader = new FileReader();
   reader.onload = function(e){
     setImageUrl(e.target.result);
+    $("#imgUrl").attr("value",e.target.result);
+    console.log($("#imgUrl").val());
   };
   reader.readAsDataURL(event.target.files[0]);
 });
 
 function setImageUrl(url){
   image.style.backgroundImage = 'url('+url+')';
-}
+};
 
-function removePhoto() {
-  setImageUrl('http://gravatar.com/avatar/84dbfd9ab3f7ae68cdeaf705e8816938?s=200&d=mm');
-}
-
+//프로필 사진 수정 끝
 
 $('#pw_input').blur(function(){ // 비밀번호 유형 검사
    let warnMsg = $(".pw_form_check"); // 비밀번호 경고글

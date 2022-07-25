@@ -239,6 +239,11 @@ button:active {
     right: 19%;
 }
 
+.paging li {
+	list-style: none;
+	display: inline-block;
+
+}
 
 </style>
 </head>
@@ -483,11 +488,19 @@ button:active {
 				         </td>   
 				           </tr>    
 				          	</table>
-				          
-	 	 				
-	 	 			
-  				
-  
+				          	
+				          	<ul class="paging">
+	 	 						<c:if test="${paging.prev}">        
+	 	 							<li id="paging">
+	 	 								<a href='<c:url value="/inquiry/list?user_Code=${user_Code }&page=${paging.startPage-1}"/>'>이전</a>
+	 	 							</li>    
+	 	 						</c:if>
+	 	 						<c:forEach begin="${paging.startPage}" end="${paging.endPage}" var="num">
+	 	 							<li>
+	 	 								<a href='<c:url value="/inquiry/list?user_Code=${user_Code }&page=${num}"/>'>${num}</a>
+	 	 							</li>    
+	 	 						</c:forEach>
+	 	 					</ul>
 		 </div>
  	</div>
  	</div>
