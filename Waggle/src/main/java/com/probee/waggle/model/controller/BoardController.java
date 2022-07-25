@@ -378,7 +378,8 @@ public class BoardController {
 		RequestDto2 req_dto = boardService.selectRequest(req_No);
 		model.addAttribute("req_dto", req_dto);
 		model.addAttribute("userName", userName);
-		return null;
+		
+		return "detail/completeform";
 	}
 	
 	
