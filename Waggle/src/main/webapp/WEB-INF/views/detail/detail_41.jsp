@@ -44,10 +44,7 @@
     border-spacing: 30px;
     font-size: 14px;
 }
-<<<<<<< HEAD
-=======
 
->>>>>>> cee26d0241abed78cfefd73acebacc3cc5ba6ede
 .ongoing21-content1 {
 	display:flex;
   	align-items: center;
@@ -337,10 +334,7 @@ div#progress_percentage::after {
  		 	height: 50px;
  		 	border-radius: 8px;
  		}
-<<<<<<< HEAD
-=======
 
->>>>>>> cee26d0241abed78cfefd73acebacc3cc5ba6ede
 </style>
 
 </head>
