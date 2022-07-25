@@ -260,7 +260,6 @@ public class BoardController {
 				}
 				
 				PointsDto po = boardService.selectPoint(req_No, user_Code);
-				System.out.println(po);
 				if(po != null) {
 					model.addAttribute("po",po.getPo_UCode());	
 				}else {
