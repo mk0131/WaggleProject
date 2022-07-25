@@ -67,7 +67,7 @@ public interface BoardMapper {
 	@Update(" update Request set req_Stat = '모집중' where req_No = #{req_No} ")
 	int Recruit(int req_No);
 	
-	@Update(" update Request set req_Stat = '취소(0)' where req_No = #{req_No} ")
+	@Update(" update Request set req_Stat = '취소' where req_No = #{req_No} ")
 	int Revoke(int req_No);
 	
 	@Delete(" delete from request where req_No  = #{req_No} ")

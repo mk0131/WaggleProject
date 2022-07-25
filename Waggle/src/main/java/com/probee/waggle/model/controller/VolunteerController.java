@@ -43,8 +43,22 @@ public class VolunteerController {
 		return "redirect:/board/detail?req_No=" +vo_No;
 	}
 	
-	@GetMapping("/undo") // 수행취소
+	@GetMapping("/undo") // 24시간전 수행취소
 	public String Undo(int vo_UCode, int vo_No , HttpSession session) {
+		
+		int res = volunteerService.Block(vo_No,vo_UCode); // 수행자 차단
+		volunteerService.ResCancel(vo_No, vo_UCode); // 결과물 취소(0) 상태
+		
+		if(res>0) {
+			session.setAttribute("vo_UCode", -1);
+			boardService.Recruit(vo_No); // 모집중으로 변환
+			return "redirect:/board/detail?req_No=" +vo_No;
+		}
+		return "redirect:/board/detail?req_No=" +vo_No;
+	}
+	
+	@GetMapping("/lateundo") // 24시간후 수행취소
+	public String LateUndo(int vo_UCode, int vo_No , HttpSession session) {
 		
 		int res = volunteerService.Block(vo_No,vo_UCode); // 수행자 차단
 		volunteerService.ResCancel(vo_No, vo_UCode); // 결과물 취소 상태

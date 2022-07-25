@@ -233,7 +233,7 @@ button:active {
 	        
 	     <div class="btn2" id="btn2">
 
-	      <button type="button" value="요청취소" onclick="location.href='/board/cancel?req_No=${req_dto.req_No}'" style="width: 200px; margin-right: 100px;" >요청 취소하기(24시간 이내)</button>
+	      <button type="button" value="요청취소" onclick="location.href='/board/cancel?req_No=${req_dto.req_No}'" style="width: 200px; margin-right: 100px;" >요청 취소하기</button>
 
 	     <button type="button" value="수정하기" onclick="location.href='/board/updateform?req_No=${req_dto.req_No }'" style="width: 200px; margin-right: 100px;" >수정하기</button>
 

@@ -47,4 +47,9 @@ public class VolunteerServiceImpl implements VolunteerService{
 		return volunteerMapper.Revoke(req_No);
 	}
 
+	@Override
+	public int ResRevoke(int vo_No, int vo_UCode) {
+		return volunteerMapper.ResRevoke(vo_No, vo_UCode);
+	}
+
 }

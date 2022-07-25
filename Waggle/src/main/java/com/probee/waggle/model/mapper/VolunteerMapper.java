@@ -29,6 +29,9 @@ public interface VolunteerMapper {
 	@Update(" update Result set res_Stat = '취소(0)' where res_No = #{vo_No} and res_UCode = #{vo_UCode} ")
 	int ResCancel(int vo_No, int vo_UCode);
 	
+	@Update(" update Result set res_Stat = '취소' where res_No = #{vo_No} and res_UCode = #{vo_UCode} ")
+	int ResRevoke(int vo_No, int vo_UCode);
+	
 	@Update(" update Result set res_Stat = '취소(0)' where res_No = #{req_No}  ")
 	int Revoke(int req_No);
 	
