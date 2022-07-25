@@ -89,7 +89,7 @@ public class MypageController {
 	}
 
 	@GetMapping("/profileEdit") // 회원정보 수정 버튼
-	public String ProfileEdit(int ua_UCode, UserAddressDto dto, Model model) {
+	public String ProfileEdit(int ua_UCode,  Model model) {
 		UserAddressDto user = mypageService.SelectAddr(ua_UCode);
 
 		model.addAttribute("dto", user);

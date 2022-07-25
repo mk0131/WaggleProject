@@ -281,23 +281,22 @@ public class BoardController {
 	@GetMapping("/cancel") // 모집중 일때 작성자가 취소하기
 	public String Cancel(int req_No) {
 		
-		volunteerService.delete(req_No);
-		boardService.Cancel(req_No);
+		volunteerService.delete(req_No); // 지원자목록 삭제
+		boardService.Cancel(req_No); // 요청글 삭제
 		
 		
 		return "redirect:/board/list";
 	}
 	
-	@GetMapping("/revoke") // 모집중 일때 작성자가 취소하기
+	@GetMapping("/revoke") // 진행중 일때 작성자가 취소하기
 	public String Revoke(int req_No) {
 		
-		boardService.Revoke(req_No); // 요청글 취소(0)
+		boardService.Revoke(req_No); // 요청글 취소
 		volunteerService.delete(req_No); // 지원자들 삭제
-		volunteerService.Revoke(req_No); // 결과물 취소(0)
+		volunteerService.Revoke(req_No); // 모든 결과물 취소(0)
 		
 		return "redirect:/board/list";
 	}
-	
 
 	
 }

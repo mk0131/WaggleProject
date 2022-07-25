@@ -184,15 +184,14 @@ button:active {
 	    </c:if>
 	    <c:if test="${who eq '작성자'}">
 	     <div class="btn2" id="btn2">
-	      <button type="button" id="cancel" value="요청취소" onclick="location.href='/board/revoke?req_No=${req_dto.req_No}'">요청 취소(24시간 이내)</button>
-	      <button type="button" id="cancel2" value="요청취소" onclick="location.href=''">요청 취소</button>
+	      <button type="button" id="cancel" value="요청취소" onclick="location.href='/board/revoke?req_No=${req_dto.req_No}'">요청 취소</button>
 	      <button type="button" value="목록" onclick="location.href='/board/list'">목록으로 돌아가기</button>
 	     </div>
 	    </c:if>
 	    <c:if test="${who eq '수행자'}">
 	     <div class="btn3" id="btn3">
 	      <button type="button" id="vol1" onclick="location.href='/vol/undo?vo_UCode=${user_Code}&vo_No=${req_dto.req_No }'">수행취소(24시간 이내)</button>
-	      <button type="button" id="vol2" onclick="location.href=''">수행취소</button>
+	      <button type="button" id="vol2" onclick="location.href='/vol/lateundo?vo_UCode=${user_Code}&vo_No=${req_dto.req_No }'">수행취소</button>
 	      <button type="button"  onclick="location.href=''">심부름 완료하기</button>
 	      <button type="button" value="목록" onclick="location.href='/board/list'">목록으로 돌아가기</button>
 	     </div>
@@ -207,22 +206,6 @@ button:active {
 	<%@ include file="../footer.jsp" %>
 	<script type="text/javascript">
 		$(function(){
-			let link = $("#link").text();
-			$("#link").attr('href',"https://"+link);
-			
-			var start = new Date($("#w-date").html());
-			var end = new Date();
-			var diffTime = (end.getTime() - start.getTime()) / (1000*60*60*24);
-			
-			if(diffTime >= 1 ){
-				
-				$("#cancel").hide();
-				$("#cancel2").show();
-				
-			}else {
-				$("#cancel").show();
-				$("#cancel2").hide();
-			}
 			
 			var start2 = new Date($("#v_Date").val());
 			var end2 = new Date();
