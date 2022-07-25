@@ -211,7 +211,7 @@ div#review_containser{
 
 /* 파일 업로드 css */
 .file-uploader {
-  background-color: #e9e9e9;
+  background-color: rgb(251 252 252);
   border-radius: 3px;
   color: #242424;
 }
@@ -268,6 +268,7 @@ div#review_containser{
   max-width: 400px;
   height: 410px;
   margin-top: 30px;
+  box-shadow: rgb(0 0 0 / 2%) 0px 1px 3px 0px, rgb(27 31 35 / 15%) 0px 0px 0px 1px;
 }
 .file-uploader * {
   display: block;
@@ -307,11 +308,12 @@ div#review_containser{
   border: none;
   font-size: 1.5em;
   padding: 1em;
-  background-color: #72bfa7;
+  background-color: #e1e1e1;
+  font-weight: bold;
   color: white;
 }
 .file-uploader__submit-button:hover {
-  background-color: #a7d7c8;
+  background-color: #d3d3d3;
 }
 
 .file-list li:after, .file-uploader:after {
