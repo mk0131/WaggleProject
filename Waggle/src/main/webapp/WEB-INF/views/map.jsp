@@ -397,7 +397,7 @@ div {
 	});
 		
 	
-
+	//검색한 주소 지도에 핀 설정
 	function searchLngLat(){
 		var gap = document.querySelector(".searchbar").value;
 
@@ -457,7 +457,7 @@ div {
 						let unique_DAddr = Array.from(new Set(DAddr));
 						//중복제거한 상세주소 페이지에 뿌리기
 						for(let i=0; i<unique_DAddr.length; i++){
-							$(".list").append('<li class="list-item" data-search-on-list="list-item"><a href="" class="list-item-link">'+unique_DAddr[i]+'<span class="item-list-subtext">우편번호: '+result[i].home_Post+'</span></a></li>');
+							$(".list").append('<li class="list-item" onclick="clickDAddr('+unique_DAddr[i]+');" data-search-on-list="list-item"><a href="#" class="list-item-link">'+unique_DAddr[i]+'<span class="item-list-subtext">우편번호: '+result[i].home_Post+'</span></a></li>');
 						}
 					
 						//검색 주소에 해당하는 영상들 페이지에 뿌려주기
