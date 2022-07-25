@@ -145,10 +145,6 @@ button:active {
 	border: 0 none;
 }
 
-div#file_container img {
-	width: 400px;
-	height: 250px;
-}
 
 div#detail_container {
 	display:inline-flex;
@@ -727,7 +723,7 @@ div#review_containser{
 			    <p class="drop-zoon__paragraph">Drop your file here or Click to browse</p>
 			    <span id="loadingText" class="drop-zoon__loading-text">Please Wait</span>
 			    <img src="" alt="Preview Image" id="previewImage" class="drop-zoon__preview-image" draggable="false">
-			    <input type="file" id="fileInput" class="drop-zoon__file-input" accept="image/*">
+			    <input type="file" id="fileInput" class="drop-zoon__file-input" accept="image/*, video/*" multiple="multiple">
 			  </div>
 			  <!-- End Drop Zoon -->
 			
