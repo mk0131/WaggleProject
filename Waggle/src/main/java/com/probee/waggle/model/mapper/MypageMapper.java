@@ -9,15 +9,15 @@ import org.apache.ibatis.annotations.Update;
 
 import com.probee.waggle.model.dto.FileDto;
 import com.probee.waggle.model.dto.MypageFinishlistDto;
+import com.probee.waggle.model.dto.MypageOtherDto;
 import com.probee.waggle.model.dto.UserAddressDto;
-import com.probee.waggle.model.dto.UsersDto;
 
 @Mapper
 public interface MypageMapper {
 	
 	//유저정보 가져오기
-	@Select( "SELECT * FROM USERS WHERE USER_CODE = #{ucode}")
-	public UsersDto SelectUsersInfo(int ucode);
+	@Select( "SELECT * FROM USERS LEFT OUTER JOIN CONFIRM ON USERS.USER_CODE=CONFIRM.CO_UCODE WHERE USER_CODE = #{ucode}")
+	public MypageOtherDto SelectUsersInfo(int ucode);
 	
 	//자기소개 수정
 	@Update(" UPDATE USERS SET USER_INTRO = #{description} WHERE USER_CODE = #{code}")

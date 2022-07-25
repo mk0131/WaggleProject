@@ -152,6 +152,11 @@ public class BoardServiceImpl implements BoardService{
 	public int insertRatingBee(UserRatingDto userRating_dto) {
 		return boardMapper.insertRatingBee(userRating_dto);
 	}
+	
+	@Override
+	public int insertReRatingBee(UserRatingDto userRating_dto) {
+		return boardMapper.insertReRatingBee(userRating_dto);
+	}
 
 
 }

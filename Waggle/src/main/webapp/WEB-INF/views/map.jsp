@@ -248,11 +248,16 @@ div {
 	height: 500px;
 }
 
+#map img[src*=profile]{
+	border-radius:1000px;
+}
 .detail_img, .detail_video{
 	width: 100%;
 	height: 100%;
 	object-fit: fill;
 }
+
+
 </style>
 <body>
 	<%@ include file="header.jsp"%>
@@ -335,9 +340,6 @@ div {
 	// 지도를 생성합니다    
 	var map = new kakao.maps.Map(mapContainer, mapOption); 
 	
-	for(let i=0; i<4; i++){
-		
-	}
 	// 모든 회원들 지도에 뿌려주기
 	$(function(){
 		// 주소-좌표 변환 객체를 생성합니다
@@ -352,11 +354,6 @@ div {
 		userCode.push("${list.getUser_Code()}");
 		</c:forEach>
 	
-		for(var i=0; i<=3; i++) {
-			window['imageSrc'+i] = "hello" +i;
-			console.log(window['imageSrc'+i]);
-		}
-		
 		for(let i=0; i<userAddr.length; i++){
 			
 			if(userimg[i] != ""){
@@ -382,11 +379,10 @@ div {
 			            clickable: true
 			        });
 			        marker.setMap(map);
-			        map.setCenter(coords);
 			        
 					//마커 클릭시 해당 꿀벌의 마이페이지로 이동하도록
 				    kakao.maps.event.addListener(marker, 'click', function(){
-				    	window.open("/mypage/other?ucode="+userCode[i],"a",'height=' + screen.height + ',width=' + screen.width + 'fullscreen=yes');
+				    	window.open("/mypage/other?ucode="+userCode[i],"a",'height=' + 1300 + ',width=' + 1100 + 'fullscreen=yes');
 				    });
 			    } else {
 			    	console.log("에러");

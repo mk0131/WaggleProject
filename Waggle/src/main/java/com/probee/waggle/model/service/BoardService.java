@@ -34,6 +34,7 @@ public interface BoardService {
 	public int selectLastRequestNo();
 	
 	public int insertRatingBee(UserRatingDto userRating_dto);
+	public int insertReRatingBee(UserRatingDto userRating_dto);
 
 
 }
