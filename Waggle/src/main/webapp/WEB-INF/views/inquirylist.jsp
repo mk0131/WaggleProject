@@ -500,6 +500,11 @@ button:active {
 	 	 								<a href='<c:url value="/inquiry/list?user_Code=${user_Code }&page=${num}"/>'>${num}</a>
 	 	 							</li>    
 	 	 						</c:forEach>
+	 	 						<%-- <c:if test="${paging.next && paging.endPage>0}">        
+	 	 							<li>
+	 	 								<a href='<c:url value="/inquiry/list?page=${paging.endPage+1}"/>'>다음</a>
+	 	 							</li>    
+	 	 						</c:if>  --%>
 	 	 					</ul>
 		 </div>
  	</div>
