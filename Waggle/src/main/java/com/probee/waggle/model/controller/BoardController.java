@@ -314,7 +314,7 @@ public class BoardController {
 		
 		int tmp3 = Integer.parseInt(userRating_dto.getUr_Attr3());
 		userRating_dto.setUr_Attr3(indexArray.get(tmp3+1));
-		System.out.println(userRating_dto);
+
 		int res = boardService.insertRatingBee(userRating_dto);
 		
 		if(res>0) {
@@ -329,6 +329,49 @@ public class BoardController {
 		return "redirect:/board/detail?req_No="+req_No;
 	}
 	
+	@PostMapping("/reRatingForm") // 완료 게시글에서 작성자가 꿀벌을 다시한번 평가하는 폼으로 이동시켜줌
+	public String goReRatingForm(int req_No, Model model) {
+		List<UserRatingDto> tmplist = boardService.selectUserRating(req_No);
+		UserRatingDto userRating_dto = tmplist.get(0);
+		
+		System.out.println(userRating_dto);
+		// 요청글 정보
+		RequestDto2 req_dto = boardService.selectRequest(req_No);
+		model.addAttribute("req_dto", req_dto);
+		
+		// 요청 결과값
+		ResultDto res_dto = boardService.selectResult(req_No);
+		
+		Gson gson = new Gson();
+		
+		model.addAttribute("res_dto", gson.toJson(res_dto));
+		model.addAttribute("user_rating", gson.toJson(userRating_dto));
+		return "reRatingForm";
+	}
+	
+	@PostMapping("/rerating")
+	public String reratingBee(int req_No, UserRatingDto userRating_dto) {
+		userRating_dto.setUr_UCode(req_No);
+		
+		// 1, 0, -1 -> '좋아요', '보통이에요', '별로에요' 값변환
+		List<String> indexArray = new ArrayList<String>();
+		indexArray.add("별로에요");
+		indexArray.add("보통이에요");
+		indexArray.add("좋아요");
+		int tmp1 = Integer.parseInt(userRating_dto.getUr_Attr1());
+		userRating_dto.setUr_Attr1(indexArray.get(tmp1+1));
+		
+		int tmp2 = Integer.parseInt(userRating_dto.getUr_Attr2());
+		userRating_dto.setUr_Attr2(indexArray.get(tmp2+1));
+		
+		int tmp3 = Integer.parseInt(userRating_dto.getUr_Attr3());
+		userRating_dto.setUr_Attr3(indexArray.get(tmp3+1));
+
+		boardService.insertReRatingBee(userRating_dto);
+		
+		return "redirect:/board/detail?req_No="+req_No;
+	}
+	
 	@GetMapping("/completeform")
 	public String goCompleteForm(String userName, int req_No, Model model) {
 		// 요청글 정보
@@ -337,6 +380,8 @@ public class BoardController {
 		model.addAttribute("userName", userName);
 		return null;
 	}
+	
+	
 	
 
 	

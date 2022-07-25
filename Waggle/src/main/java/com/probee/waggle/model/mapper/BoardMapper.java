@@ -86,5 +86,9 @@ public interface BoardMapper {
 	@Insert(" insert into UserRating values (#{ur_UCode}, #{ur_Rate}, #{ur_Attr1}, #{ur_Attr2}, #{ur_Attr3}, 'false') ")
 	public int insertRatingBee(UserRatingDto userRating_dto);
 	
+	// 꿀벌 재평가 DB 삽입
+	@Insert(" insert into UserRating values (#{ur_UCode}, #{ur_Rate}, #{ur_Attr1}, #{ur_Attr2}, #{ur_Attr3}, 'true') ")
+	public int insertReRatingBee(UserRatingDto userRating_dto);
+	
 
 }
