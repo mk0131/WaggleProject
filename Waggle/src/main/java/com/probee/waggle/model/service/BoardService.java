@@ -3,6 +3,7 @@ package com.probee.waggle.model.service;
 import java.util.List;
 
 import com.probee.waggle.model.dto.FileDto;
+import com.probee.waggle.model.dto.PointsDto;
 import com.probee.waggle.model.dto.RequestDto2;
 import com.probee.waggle.model.dto.ResultDto;
 import com.probee.waggle.model.dto.UserRatingDto;
@@ -35,6 +36,8 @@ public interface BoardService {
 	
 	public int insertRatingBee(UserRatingDto userRating_dto);
 	public int insertReRatingBee(UserRatingDto userRating_dto);
+	
+	public PointsDto selectPoint(int req_No, int user_Code);
 
 
 }

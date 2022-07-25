@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import com.probee.waggle.model.component.FileSaver;
 import com.probee.waggle.model.component.SeleniumCrawler;
 import com.probee.waggle.model.dto.FileDto;
+import com.probee.waggle.model.dto.PointsDto;
 import com.probee.waggle.model.dto.RequestDto2;
 import com.probee.waggle.model.dto.ResultDto;
 import com.probee.waggle.model.dto.UserRatingDto;
@@ -156,6 +157,11 @@ public class BoardServiceImpl implements BoardService{
 	@Override
 	public int insertReRatingBee(UserRatingDto userRating_dto) {
 		return boardMapper.insertReRatingBee(userRating_dto);
+	}
+
+	@Override
+	public PointsDto selectPoint(int req_No, int user_Code) {
+		return boardMapper.selectPoint(req_No, user_Code);
 	}
 
 
