@@ -14,6 +14,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.google.gson.Gson;
 import com.probee.waggle.model.dto.HomeDto;
@@ -393,6 +395,14 @@ public class BoardController {
 		model.addAttribute("userName", userName);
 		
 		return "detail/completeform";
+	}
+	
+	@PostMapping("/complete")
+	public String complete(int req_No, ResultDto res_dto, MultipartHttpServletRequest request) {
+		MultipartFile file = request.getFile("myfile");
+		System.out.println(file.toString());
+		System.out.println(res_dto);
+		return "redirect:/board/detail?req_No="+req_No;
 	}
 	
 	
