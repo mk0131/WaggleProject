@@ -40,5 +40,14 @@ public class MapController {
 		
 	}
 	
+	//클릭한 상세주소에 해당하는 결과 파일만 보여줌
+	@RequestMapping(value="/clickDAddr", method=RequestMethod.POST)
+	@ResponseBody
+	public List<MapDto> clickList(String search_post, String DAddr) {
+		List<MapDto> clicklist = mapService.selectClickList(search_post, DAddr);
+		return clicklist;
+		
+	}
+	
 	
 }

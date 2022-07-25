@@ -12,26 +12,6 @@
 </head>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
-<script>
-
-function kakaopost(){
-
-    new daum.Postcode({
-        	oncomplete: function(data) {
-        		var a = data.address;
-        		var p = data.zonecode;
-        		document.querySelector("#var1").value = p.toString();
-        		document.querySelector(".searchbar").value = a;
-        		document.getElementById('submit').click();
-   				searchLngLat();
-        	}
-    	}).open();
-    
-	};
-	
-	
-
-</script>
 <style>
 @import url("https://fonts.googleapis.com/css?family=Sarabun");
 .blank {
@@ -289,30 +269,16 @@ div {
 		</div>
 		
 		<div class="table-container">
-			<div class="detail-container" data-behaviour="search-on-list">
-				<input type="text" class="input-query" data-search-on-list="search"
-					placeholder="상세주소를 입력하세요." /> <span class="counter"
-					data-search-on-list="counter"></span>
+			<div class="detail-container" >
+				<input type="text" id="search" class="input-query" onkeyup="filter()" placeholder="상세주소를 입력하세요." /> 
+				<span class="counter"></span>
 				<div class="list-wrap">
-					<ul class="list" data-search-on-list="list">
+					<ul class="list" >
 					</ul>
 				</div>
 			</div>
 			
 			<div class="horizontal-scroll-wrapper squares">
-			<!-- 
-			<c:forEach var="media" items="${list}">
-				<div>
-				<c:set var="type" value="${media.getFi_Nm()}" />
-				<c:if test="${fn:contains(type,'jpg')}">
-				<a href=""><img class="detail_img" alt="${media.getFi_Nm()}" src="${media.getFi_Nm()}"></a>
-				</c:if>
-				<c:if test="${fn:contains(type,'mp4')}">
-				<a href=""><video class="detail_video" controls ><source src="${media.getFi_Nm()}">비디오</video></a>
-				</c:if>
-				</div>
-			</c:forEach>
-			-->
 			</div>
 			
 			<div class="blank">
@@ -331,6 +297,35 @@ div {
 	
 	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=df487b49cd90a64d7305e577e300f2e4&libraries=services,clusterer,drawing"></script>
 	<script>
+	function kakaopost(){
+		hideMarkers();
+	    new daum.Postcode({
+	        	oncomplete: function(data) {
+	        		var a = data.address;
+	        		var p = data.zonecode;
+	        		document.querySelector("#var1").value = p.toString();
+	        		document.querySelector(".searchbar").value = a;
+	        		document.getElementById('submit').click();
+	   				searchLngLat();
+	        	}
+	    	}).open();
+    
+	};
+
+	function filter() {
+        let search = document.getElementById("search").value.toLowerCase();
+        let listInner = document.getElementsByClassName("list-item");
+
+        for (let i = 0; i < listInner.length; i++) {
+          city = listInner[i].getElementsByClassName("list-item-link");
+          if (city[0].innerHTML.toLowerCase().indexOf(search) != -1) {
+            listInner[i].style.display = "flex"
+          } else {
+            listInner[i].style.display = "none"
+          }
+        }
+      }
+	
 	var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
     mapOption = {
         center: new kakao.maps.LatLng(37.5012767241426, 127.039600248343), // 지도의 중심좌표
@@ -397,19 +392,20 @@ div {
 	});
 		
 	
+	//검색된 마커 담는 리스트
+	var markers = [];
 	//검색한 주소 지도에 핀 설정
 	function searchLngLat(){
 		var gap = document.querySelector(".searchbar").value;
 
 		// 주소-좌표 변환 객체를 생성합니다
 		var geocoder = new kakao.maps.services.Geocoder();
-
+		
 		// 주소로 좌표를 검색합니다
 		geocoder.addressSearch(gap, function(result, status) {
 
 		    // 정상적으로 검색이 완료됐으면 
 		     if (status === kakao.maps.services.Status.OK) {
-
 		        var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
 		        // 결과값으로 받은 위치를 마커로 표시합니다
 		        var marker = new kakao.maps.Marker({
@@ -421,13 +417,20 @@ div {
 		        map.setLevel(1);
 		        // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
 		        map.setCenter(coords);
+		        markers.push(marker);
 		    } else {
 		    	console.log("에러");
 		    }
 		});    
 	}
 	
- 	
+	//주소 검색 창 클릭시 지도에 검색되었던 마커들 안보이게 하는 함수
+	function hideMarkers() {
+	    for (var i = 0; i < markers.length; i++) {
+	        markers[i].setMap(null);
+	    }            
+	};
+	
 	//주소창에 검색시 상세주소와 해당 영상들 나오게 하기
 	$('#submit').on("click", function(){ // #submit버튼은 kakaopost() 함수에서 click되도록 구성
 		let search_post = $('#var1').val();
@@ -454,19 +457,24 @@ div {
 							DAddr.push(result[i].home_DAddr);
 						}
 						
-						let unique_DAddr = Array.from(new Set(DAddr));
+						let unique_DAddr = Array.from(new Set(DAddr.sort()));
 						//중복제거한 상세주소 페이지에 뿌리기
 						for(let i=0; i<unique_DAddr.length; i++){
-							$(".list").append('<li class="list-item" onclick="clickDAddr('+unique_DAddr[i]+');" data-search-on-list="list-item"><a href="#" class="list-item-link">'+unique_DAddr[i]+'<span class="item-list-subtext">우편번호: '+result[i].home_Post+'</span></a></li>');
+							$(".list").append('<li class="list-item" onclick="clickDAddr(\''+unique_DAddr[i]+'\');" data-search-on-list="list-item"><a href="#" class="list-item-link">'+unique_DAddr[i]+'<span class="item-list-subtext">우편번호: '+result[i].home_Post+'</span></a></li>');
 						}
 					
 						//검색 주소에 해당하는 영상들 페이지에 뿌려주기
 						for(let i=0; i<result.length; i++){
 							if(result[i].fi_Nm.includes('jpg')){
-								$(".horizontal-scroll-wrapper").append('<div><a href=""><img class="detail_img" src='+result[i].fi_Nm+'></a></div>');
+								$(".horizontal-scroll-wrapper").append('<div><a href="/board/detail?req_No='+result[i].rf_No+'"><img class="detail_img" src='+result[i].fi_Nm+'></a></div>');
 							}else if(result[i].fi_Nm.includes('mp4')){
-								$(".horizontal-scroll-wrapper").append('<div><a href=""><video class="detail_video" controls ><source src='+result[i].fi_Nm+'></video></a></div>');
+								$(".horizontal-scroll-wrapper").append('<div><a href="/board/detail?req_No='+result[i].rf_No+'"><video class="detail_video" controls ><source src='+result[i].fi_Nm+'></video></a></div>');
 							}
+						}
+						
+						if(result.length < 3){
+							$(".horizontal-scroll-wrapper").append('<div>추가 정보가 없습니다.</div>');
+							$(".horizontal-scroll-wrapper").append('<div>추가 정보가 없습니다.</div>');
 						}
 					}
 					
@@ -477,156 +485,40 @@ div {
 		})
 
 	});// function 종료
-	</script>
-</body>
-<script>
-	(function() {
-		// TODO: be more elegant here
-		function format(text) {
-			return text.replace(/ /g, '').replace(/(<([^>]+)>)/ig, '')
-					.toLowerCase();
-		}
-
-		var SearchOnList = {
-			$LIST : '[data-search-on-list=list]',
-			$SEARCH : '[data-search-on-list=search]',
-			$LIST_ITEM : '[data-search-on-list=list-item]',
-			$COUNTER : '[data-search-on-list=counter]',
-			TEMPLATE_EMTPY : '<li class="list-item list-item--disable">No results found</li>',
-
-			init : function($element) {
-				this.items = [];
-				this.itemsMatched = [];
-
-				this.$element = $element;
-				this.$list = this.$element.find(this.$LIST);
-				this.$search = this.$element.find(this.$SEARCH);
-				this.$counter = this.$element.find(this.$COUNTER);
-
-				this.items = this._getAllItems();
-				this.itemsMatched = this.items;
-
-				this._updateCounter();
-				this._handleResults();
-				this._setEventListeners();
-			},
-
-			_setEventListeners : function() {
-				this.$search.on('keyup', $.proxy(this._onKeyup, this)).on(
-						'query:changed',
-						$.proxy(this._handleQueryChanged, this)).on(
-						'query:results:some',
-						$.proxy(this._handleResults, this)).on(
-						'query:results:none',
-						$.proxy(this._handleNoResults, this))
-			},
-
-			_onKeyup : function() {
-				var query = this.$search.val(), previousQuery = this.$search
-						.data('previousQuery', query);
-
-				// TODO: Decide when query actually changed
-				if (this._queryChanged()) {
-					this.$search.trigger('query:changed', {
-						query : query,
-						previousQuery : previousQuery
-					});
-				}
-			},
-
-			_queryChanged : function() {
-				var query = this.$search.val();
-				if ($.trim(query).length === 0
-						&& this.$search.data('previousQuery') === undefined) {
-					return false;
-				}
-				return true;
-			},
-
-			_handleQueryChanged : function(e, data) {
-				this.itemsMatched = this.items.map(function(item) {
-					if (format(item.name).match(format(data.query))) {
-						return {
-							name : item.name,
-							visible : true
+	
+	//상세주소 리스트에서 특정 호수 클릭시 해당하는 호수의 결과파일들만 나오도록 하는 함수
+	function clickDAddr(DAddr) {
+		let search_post = $('#var1').val();
+		let data = {DAddr : DAddr, search_post:search_post}
+		$(".horizontal-scroll-wrapper").empty();
+		$.ajax({
+			type : "post",
+			url : "/map/clickDAddr",
+			data : data,
+			success : function(result){
+					//검색 주소에 해당하는 영상들 페이지에 뿌려주기
+					for(let i=0; i<result.length; i++){
+						if(result[i].fi_Nm.includes('jpg')){
+							$(".horizontal-scroll-wrapper").append('<div><a href="/board/detail?req_No='+result[i].rf_No+'"><img class="detail_img" src='+result[i].fi_Nm+'></a></div>');
+						}else if(result[i].fi_Nm.includes('mp4')){
+							$(".horizontal-scroll-wrapper").append('<div><a href="/board/detail?req_No='+result[i].rf_No+'"><video class="detail_video" controls ><source src='+result[i].fi_Nm+'></video></a></div>');
 						}
 					}
-					return {
-						name : item.name,
-						visible : false
+					
+					if(result.length < 3){
+						$(".horizontal-scroll-wrapper").append('<div>추가 정보가 없습니다.</div>');
+						$(".horizontal-scroll-wrapper").append('<div>추가 정보가 없습니다.</div>');
 					}
-				});
-
-				this._render();
-				this._updateCounter();
-			},
-
-			_handleNoResults : function() {
-				this.$list.html(this.TEMPLATE_EMTPY);
-			},
-
-			_handleResults : function() {
-				this.$list.empty().append(this._renderItemsVisible())
-			},
-
-			_someItemsVisible : function() {
-				return this.itemsMatched.some(function(item) {
-					return item.visible;
-				});
-			},
-
-			_render : function() {
-				(this._someItemsVisible()) ? this.$search
-						.trigger('query:results:some') : this.$search
-						.trigger('query:results:none');
-			},
-
-			_updateCounter : function() {
-				(this._someItemsVisible()) ? this.$counter.text(this
-						._renderItemsVisible().length) : this.$counter.text('');
-			},
-
-			_getAllItems : function() {
-				var $items = this.$list.find(this.$LIST_ITEM);
-
-				return $items.map(function() {
-					var $item = $(this);
-
-					return {
-						name : $item.html(),
-						visible : true
-					};
-				}).toArray();
-			},
-
-			_renderItemsVisible : function() {
-				var itemInTemplate;
-				return this.itemsMatched
-						.sort(function(a, b) {
-							if (a.name < b.name)
-								return -1
-							if (a.name > b.name)
-								return 1;
-							return 0;
-						})
-						.reduce(
-								function(items, item) {
-									itemInTemplate = '<li class="list-item" data-search-on-list="list-item">'
-											+ item.name + '</li>';
-									if (item.visible) {
-										items.push(itemInTemplate);
-									}
-									return items;
-								}, []);
+				},
+			error : function(){
+				console.log("ajax 에러");
 			}
-		};
-
-		window.SearchOnList = SearchOnList;
-	})();
-
-	SearchOnList.init($('[data-behaviour=search-on-list]'));
-</script>
-
+		})
+	};
+	
+	
+	</script>
+</body>
 
 </html>
 

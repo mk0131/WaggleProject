@@ -9,4 +9,6 @@ public interface MapService {
 	public List<MapUserInfoDto> selectUserAddress();
 	
 	public List<MapDto> selectSearchList(String search_post);
+	
+	public List<MapDto> selectClickList(String search_post, String DAddr);
 }

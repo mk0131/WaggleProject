@@ -26,6 +26,11 @@ public class MapServiceImpl implements MapService{
 		return mapMapper.selectUserAddress();
 	}
 
+	@Override
+	public List<MapDto> selectClickList(String search_post, String DAddr) {
+		return mapMapper.selectClickList(search_post, DAddr);
+	}
+
 }
 
 
