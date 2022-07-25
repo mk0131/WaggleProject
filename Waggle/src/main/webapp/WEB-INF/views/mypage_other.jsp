@@ -512,8 +512,8 @@ textarea {
 
 
 </head>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <body>
-	<%@ include file="header.jsp"%>
 	<div id="wrap">
 		<div class="middle">
 			<div class="guideline">
@@ -521,26 +521,25 @@ textarea {
 					<li><a href="javascript:void(0)"> <i
 							class="fa-solid fa-house"></i>
 					</a></li>
-					<p>HOME > 나의 프로필</p>
+					<p>${dto.user_Nm} 님의 마이페이지</p>
 				</ul>
 			</div>
 			<div class="middle-profile">
 				<div class="profile" style="text-align: center; display: flex; justify-content: center;">
-					<!-- 
+					
 					<div class="profile-left" style="display: inline-block">
 						<c:if test = "${dto.user_Pro == null}">
 						<img src="/images/importToJsp/profile_default.jpg"
-							style="width: 100px; height: 100px">
+							style="width: 200px; height: 200px">
 						</c:if>
 						<c:if test = "${dto.user_Pro != null }">
-						<img src="${fi_Nm }" style="width:100px; height: 100px">
+						<img src="${fi_Nm }" style="width:200px; height: 200px">
 						</c:if>
 						<div style="font-weight: bold; font-size: 20pt">${dto.user_Point } P</div>
 					</div>
-					-->
+					
 					<div class="profile-right"
-						style="display: inline-block; margin-left: 40px; text-align: left">
-						<c:if test="${user_Code != null }">
+						style="display: inline-block; margin-left: 80px; text-align: left">
 						<div>
 							<span
 								style="font-size: 20pt; margin-bottom: 20px; font-weight: bold">${dto.user_Nm}
@@ -590,12 +589,24 @@ textarea {
 									</div>
 								</div>
 							</div>
-
-						<!-- div style="margin-bottom:20px">|--------------|</div> -->
-					</c:if>
+						<c:if test="${dto.co_Confirm == NULL }">
+						<div>
+							<span style="font-size: 11pt; color: #898989">공인중개사 신청여부: X</span>
+						</div>
+						</c:if>
+						<c:if test="${dto.co_Confirm == '미확인' }">
+						<div>
+							<span style="font-size: 11pt; color: #898989">공인중개사 신청여부: O</span>
+							<span style="font-size: 11pt; color: #2d7eac; margin-left: 5px">인증 확인중</span>
+						</div>
+						</c:if>
+						<c:if test="${dto.co_Confirm == '확인' }">
+						<div>
+							<span style="font-size: 11pt; color: #898989">${dto.user_Nm}은 인증 완료된 공인중개사입니다.</span>
+						</div>
+						</c:if>
 					</div>
 				</div>
-				<!-- 
 				<div class="description" style="text-align: center">
 					<div class="desc-nav">
 						<ul class="desc-list">
@@ -616,12 +627,9 @@ textarea {
 						</div>
 					</div>
 					<div></div>
-					<a class="req_No" href="/board/detail?req_No=4"><div class="desc-content-finishlist"
-						style="margin: 0 auto; width: 900px; display: none">
+					<div class="desc-content-finishlist" style="margin: 0 auto; width: 900px; display: none">
 					</div>
-					</a>
 				</div>
-				-->
 			</div>
 		</div>
 	</div>
@@ -629,21 +637,6 @@ textarea {
 </body>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
-	(function($) { // Begin jQuery
-		$(function() { // DOM ready
-			// Toggle open and close nav styles on click
-			$('#nav-toggle').click(function() {
-				$('nav ul').slideToggle();
-			});
-			// Hamburger to X toggle
-			$('#nav-toggle').on('click', function() {
-				this.classList.toggle('active');
-			});
-			$('#wrap').css('min-height','150vh');
-			
-		}); // end DOM ready
-	})(jQuery); // end jQuery
-
 	//자기소개 보여줌
 	function showDescMe() {
 		$(".desc-content-aboutme").show();
@@ -663,37 +656,41 @@ textarea {
 		$(".desc-list2").css("color", "#000000");
 		
 		let stat = "완료"
-		let ucode = ${user_Code};
+		let ucode = ${dto.user_Code};
 		let data = {stat : stat, ucode : ucode};
 		
 		$.ajax({
 			type: "post",
-			url: "mypage/reqroom",
+			url: "/mypage/reqroom",
 			data : data,
 			success : function(result){
 				$(".desc-content-finishlist").empty();
-				for(let i=0; i<result.length; i++){
-					$(".desc-content-finishlist").append('<div class="finish-top" style="float: right; width: 900px; height:20px">'
-														+'<div style="float: right"></div></div>'
-														+'<div class="finish-mid" style="width: 900px">'
-														+'<div class="finish-mid-left" style="display: inline-block; width: 200px; height: 200px; float: left; border:3px solid #80808075; border-radius: 10px">'
-														+'<div class="room-img"><img style="width:203px; height:203px; border-radius:10px" src='+result[i].fi_Nm+'></div></div>'
-														+'<div class="finish-mid-right" style="display: inline-block; width: 670px; height: 200px; float: right; border:3px solid #80808075; border-radius: 10px">'
-														+'<div class="req-desc" style="display: inline-block; float: left; height: 200px">'
-														+'<p style="margin: 5px 10px; font-size: 16pt; text-align:left">기한 :'+result[i].req_EDate+'</p>'
-														+'<p style="margin: 135px 10px 0 10px; font-size: 12pt">'+result[i].home_Addr+'</p>'
-														+'</div>'
-														+'<div class="req-title" style="display: inline-block">'
-														+'<p style="line-height: 150px; font-size: 20pt">'+result[i].req_Title+'</p>'
-														+'</div>'
-														+'<div class="req-point" style="display: inline-block; float: right; height: 200px">'
-														+'<p style="font-size: 20pt; line-height: 200px; margin: 0 18px">'+result[i].req_Point+'P</p>'
-														+'</div></div></div>'
-														+'<div class="finish-bot" style="width: 900px;">'
-														+'<div class="button" style="float: left; width: 80px; margin-top: 10px; margin-left: 55px; border-radius: 30px">'
-														+'<p style="margin: 5px">완료</p>'
-														+'</div></div>');
-					$(".req_No").attr("href","/board/detail?req_No="+result[i].req_No);
+				if(result.length == 0){
+					$(".desc-content-finishlist").append('<div style="width:900px;height:300px;padding-top:130px">완료한 수행내역이 없습니다.</div>');
+				}else{
+					for(let i=0; i<result.length; i++){
+						$(".desc-content-finishlist").append('<a href ="/board/detail?req_No='+result[i].req_No+'">'
+															+'<div class="finish-top" style="float: right; width: 900px; height:20px">'
+															+'<div style="float: right"></div></div>'
+															+'<div class="finish-mid" style="width: 900px">'
+															+'<div class="finish-mid-left" style="display: inline-block; width: 200px; height: 200px; float: left; border:3px solid #80808075; border-radius: 10px">'
+															+'<div class="room-img"><img style="width:203px; height:203px; border-radius:10px" src='+result[i].fi_Nm+'></div></div>'
+															+'<div class="finish-mid-right" style="display: inline-block; width: 670px; height: 200px; float: right; border:3px solid #80808075; border-radius: 10px">'
+															+'<div class="req-desc" style="display: inline-block; float: left; height: 200px">'
+															+'<p style="margin: 5px 10px; font-size: 16pt; text-align:left">기한 :'+result[i].req_EDate+'</p>'
+															+'<p style="margin: 135px 10px 0 10px; font-size: 12pt">'+result[i].home_Addr+'</p>'
+															+'</div>'
+															+'<div class="req-title" style="display: inline-block">'
+															+'<p style="line-height: 150px; font-size: 20pt">'+result[i].req_Title+'</p>'
+															+'</div>'
+															+'<div class="req-point" style="display: inline-block; float: right; height: 200px">'
+															+'<p style="font-size: 20pt; line-height: 200px; margin: 0 18px">'+result[i].req_Point+'P</p>'
+															+'</div></div></div>'
+															+'<div class="finish-bot" style="width: 900px;">'
+															+'<div class="button" style="float: left; width: 80px; margin-top: 10px; margin-left: 55px; border-radius: 30px">'
+															+'<p style="margin: 5px">완료</p>'
+															+'</div></div></a>');
+					}
 				}
 			},
 			error: function(){

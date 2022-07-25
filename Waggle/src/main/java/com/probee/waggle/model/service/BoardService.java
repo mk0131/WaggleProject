@@ -28,9 +28,13 @@ public interface BoardService {
 	public int Cancel(int req_No);
 	public int Recruit(int req_No);
 	public int Revoke(int req_No);
+	public int complete(int req_No);
 
 	public int updateRequest(RequestDto2 dto);
 	public int selectLastRequestNo();
+	
+	public int insertRatingBee(UserRatingDto userRating_dto);
+	public int insertReRatingBee(UserRatingDto userRating_dto);
 
 
 }

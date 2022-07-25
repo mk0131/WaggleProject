@@ -72,6 +72,9 @@ public interface BoardMapper {
 	
 	@Delete(" delete from request where req_No  = #{req_No} ")
 	int Cancel(int req_No);
+	
+	@Update(" update Request set req_Stat = '완료' where req_No = #{req_No} ")
+	int complete(int req_No);
 
 	@Update(" update Request set req_Title=#{req_Title}, req_Link=#{req_Link}, req_EDate=#{req_EDate}, req_Phone=#{req_Phone}, req_Detail=#{req_Detail}, req_Point=#{req_Point}, req_HCode=#{req_HCode} where req_No=#{req_No} ")
 	public int updateRequest(RequestDto2 dto);
@@ -79,7 +82,13 @@ public interface BoardMapper {
 	@Select(" select max(req_No) from request r ")
 	public int selectLastRequestNo();
 	
-	@Insert(" insert into UserRating values (#{ur_Code}, #{ur_Rate}, #{ur_Attr1}, #{ur_Attr2}, #{ur_Attr3}, 'false') ")
+	// 꿀벌 평가 DB 삽입
+	@Insert(" insert into UserRating values (#{ur_UCode}, #{ur_Rate}, #{ur_Attr1}, #{ur_Attr2}, #{ur_Attr3}, 'false') ")
 	public int insertRatingBee(UserRatingDto userRating_dto);
+	
+	// 꿀벌 재평가 DB 삽입
+	@Insert(" insert into UserRating values (#{ur_UCode}, #{ur_Rate}, #{ur_Attr1}, #{ur_Attr2}, #{ur_Attr3}, 'true') ")
+	public int insertReRatingBee(UserRatingDto userRating_dto);
+	
 
 }

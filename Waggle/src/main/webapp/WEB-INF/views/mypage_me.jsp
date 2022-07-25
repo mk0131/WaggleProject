@@ -657,10 +657,8 @@ textarea {
 						</div>
 					</div>
 					<div></div>
-					<a class="req_No" href="/board/detail?req_No=4"><div class="desc-content-finishlist"
-						style="margin: 0 auto; width: 900px; display: none">
+					<div class="desc-content-finishlist" style="margin: 0 auto; width: 900px; display: none">
 					</div>
-					</a>
 				</div>
 						<!-- Upload Area -->
 						<div id="uploadArea" class="upload-area" style="display:none; margin-top:50px">
@@ -754,28 +752,32 @@ textarea {
 			data : data,
 			success : function(result){
 				$(".desc-content-finishlist").empty();
-				for(let i=0; i<result.length; i++){
-					$(".desc-content-finishlist").append('<div class="finish-top" style="float: right; width: 900px; height:20px">'
-														+'<div style="float: right"></div></div>'
-														+'<div class="finish-mid" style="width: 900px">'
-														+'<div class="finish-mid-left" style="display: inline-block; width: 200px; height: 200px; float: left; border:3px solid #80808075; border-radius: 10px">'
-														+'<div class="room-img"><img style="width:203px; height:203px; border-radius:10px" src='+result[i].fi_Nm+'></div></div>'
-														+'<div class="finish-mid-right" style="display: inline-block; width: 670px; height: 200px; float: right; border:3px solid #80808075; border-radius: 10px">'
-														+'<div class="req-desc" style="display: inline-block; float: left; height: 200px">'
-														+'<p style="margin: 5px 10px; font-size: 16pt; text-align:left">기한 :'+result[i].req_EDate+'</p>'
-														+'<p style="margin: 135px 10px 0 10px; font-size: 12pt">'+result[i].home_Addr+'</p>'
-														+'</div>'
-														+'<div class="req-title" style="display: inline-block">'
-														+'<p style="line-height: 150px; font-size: 20pt">'+result[i].req_Title+'</p>'
-														+'</div>'
-														+'<div class="req-point" style="display: inline-block; float: right; height: 200px">'
-														+'<p style="font-size: 20pt; line-height: 200px; margin: 0 18px">'+result[i].req_Point+'P</p>'
-														+'</div></div></div>'
-														+'<div class="finish-bot" style="width: 900px;">'
-														+'<div class="button" style="float: left; width: 80px; margin-top: 10px; margin-left: 55px; border-radius: 30px">'
-														+'<p style="margin: 5px">완료</p>'
-														+'</div></div>');
-					$(".req_No").attr("href","/board/detail?req_No="+result[i].req_No);
+				if(result.length == 0){
+					$(".desc-content-finishlist").append('<div style="width:900px;height:300px;padding-top:130px">완료한 수행내역이 없습니다.</div>');
+				}else{
+					for(let i=0; i<result.length; i++){
+						$(".desc-content-finishlist").append('<a href ="/board/detail?req_No='+result[i].req_No+'">'
+															+'<div class="finish-top" style="float: right; width: 900px; height:20px">'
+															+'<div style="float: right"></div></div>'
+															+'<div class="finish-mid" style="width: 900px">'
+															+'<div class="finish-mid-left" style="display: inline-block; width: 200px; height: 200px; float: left; border:3px solid #80808075; border-radius: 10px">'
+															+'<div class="room-img"><img style="width:203px; height:203px; border-radius:10px" src='+result[i].fi_Nm+'></div></div>'
+															+'<div class="finish-mid-right" style="display: inline-block; width: 670px; height: 200px; float: right; border:3px solid #80808075; border-radius: 10px">'
+															+'<div class="req-desc" style="display: inline-block; float: left; height: 200px">'
+															+'<p style="margin: 5px 10px; font-size: 16pt; text-align:left">기한 :'+result[i].req_EDate+'</p>'
+															+'<p style="margin: 135px 10px 0 10px; font-size: 12pt">'+result[i].home_Addr+'</p>'
+															+'</div>'
+															+'<div class="req-title" style="display: inline-block">'
+															+'<p style="line-height: 150px; font-size: 20pt">'+result[i].req_Title+'</p>'
+															+'</div>'
+															+'<div class="req-point" style="display: inline-block; float: right; height: 200px">'
+															+'<p style="font-size: 20pt; line-height: 200px; margin: 0 18px">'+result[i].req_Point+'P</p>'
+															+'</div></div></div>'
+															+'<div class="finish-bot" style="width: 900px;">'
+															+'<div class="button" style="float: left; width: 80px; margin-top: 10px; margin-left: 55px; border-radius: 30px">'
+															+'<p style="margin: 5px">완료</p>'
+															+'</div></div></a>');
+					}
 				}
 			},
 			error: function(){
