@@ -255,6 +255,7 @@ div {
 		<div class="container" >
 			<input type="text" maxlength="12" placeholder="주소 검색하기"
 				class="searchbar" onclick="kakaopost()"> 
+			<input type="text" maxlength="12" class="searchbar2" style="display:none"> 
 				<img
 				src="https://images-na.ssl-images-amazon.com/images/I/41gYkruZM2L.png"
 				alt="Magnifying Glass" class="button" onclick="kakaopost()">
@@ -301,10 +302,12 @@ div {
 		hideMarkers();
 	    new daum.Postcode({
 	        	oncomplete: function(data) {
-	        		var a = data.address;
+	        		console.log(data);
+	        		var a = data.jibunAddress;
+	        		var b = data.roadAddress;
 	        		var p = data.zonecode;
-	        		document.querySelector("#var1").value = p.toString();
-	        		document.querySelector(".searchbar").value = a;
+	        		document.querySelector("#var1").value = a;
+	        		document.querySelector(".searchbar2").value = b;
 	        		document.getElementById('submit').click();
 	   				searchLngLat();
 	        	}
@@ -396,7 +399,7 @@ div {
 	var markers = [];
 	//검색한 주소 지도에 핀 설정
 	function searchLngLat(){
-		var gap = document.querySelector(".searchbar").value;
+		var gap = document.querySelector(".searchbar2").value;
 
 		// 주소-좌표 변환 객체를 생성합니다
 		var geocoder = new kakao.maps.services.Geocoder();
@@ -433,8 +436,9 @@ div {
 	
 	//주소창에 검색시 상세주소와 해당 영상들 나오게 하기
 	$('#submit').on("click", function(){ // #submit버튼은 kakaopost() 함수에서 click되도록 구성
-		let search_post = $('#var1').val();
-		let data = {search_post : search_post}
+		let searchbar1 = $('#var1').val();
+		let searchbar2 = $('.searchbar2').val();
+		let data = {jibunAddr : searchbar1, roadAddr : searchbar2};
 		
 		$.ajax({
 			type : "post",
@@ -466,9 +470,9 @@ div {
 						//검색 주소에 해당하는 영상들 페이지에 뿌려주기
 						for(let i=0; i<result.length; i++){
 							if(result[i].fi_Nm.includes('jpg')){
-								$(".horizontal-scroll-wrapper").append('<div><a href="/board/detail?req_No='+result[i].rf_No+'"><img class="detail_img" src='+result[i].fi_Nm+'></a></div>');
+								$(".horizontal-scroll-wrapper").append('<div><a href="/board/detail?req_No='+result[i].req_No+'"><img class="detail_img" src='+result[i].fi_Nm+'></a></div>');
 							}else if(result[i].fi_Nm.includes('mp4')){
-								$(".horizontal-scroll-wrapper").append('<div><a href="/board/detail?req_No='+result[i].rf_No+'"><video class="detail_video" controls ><source src='+result[i].fi_Nm+'></video></a></div>');
+								$(".horizontal-scroll-wrapper").append('<div><a href="/board/detail?req_No='+result[i].req_No+'"><video class="detail_video" controls ><source src='+result[i].fi_Nm+'></video></a></div>');
 							}
 						}
 						
@@ -488,8 +492,9 @@ div {
 	
 	//상세주소 리스트에서 특정 호수 클릭시 해당하는 호수의 결과파일들만 나오도록 하는 함수
 	function clickDAddr(DAddr) {
-		let search_post = $('#var1').val();
-		let data = {DAddr : DAddr, search_post:search_post}
+		let searchbar1 = $('#var1').val();
+		let searchbar2 = $('.searchbar2').val();
+		let data = {jibunAddr : searchbar1, roadAddr : searchbar2, DAddr : DAddr};
 		$(".horizontal-scroll-wrapper").empty();
 		$.ajax({
 			type : "post",
@@ -499,9 +504,9 @@ div {
 					//검색 주소에 해당하는 영상들 페이지에 뿌려주기
 					for(let i=0; i<result.length; i++){
 						if(result[i].fi_Nm.includes('jpg')){
-							$(".horizontal-scroll-wrapper").append('<div><a href="/board/detail?req_No='+result[i].rf_No+'"><img class="detail_img" src='+result[i].fi_Nm+'></a></div>');
+							$(".horizontal-scroll-wrapper").append('<div><a href="/board/detail?req_No='+result[i].req_No+'"><img class="detail_img" src='+result[i].fi_Nm+'></a></div>');
 						}else if(result[i].fi_Nm.includes('mp4')){
-							$(".horizontal-scroll-wrapper").append('<div><a href="/board/detail?req_No='+result[i].rf_No+'"><video class="detail_video" controls ><source src='+result[i].fi_Nm+'></video></a></div>');
+							$(".horizontal-scroll-wrapper").append('<div><a href="/board/detail?req_No='+result[i].req_No+'"><video class="detail_video" controls ><source src='+result[i].fi_Nm+'></video></a></div>');
 						}
 					}
 					

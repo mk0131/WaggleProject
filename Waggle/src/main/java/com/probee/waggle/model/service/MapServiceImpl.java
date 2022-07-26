@@ -17,8 +17,8 @@ public class MapServiceImpl implements MapService{
 	
 	
 	@Override
-	public List<MapDto> selectSearchList(String search_post){
-		return mapMapper.selectSearchList(search_post);
+	public List<MapDto> selectSearchList(String jibunAddr, String roadAddr){
+		return mapMapper.selectSearchList(jibunAddr, roadAddr);
 	}
 
 	@Override
@@ -27,8 +27,8 @@ public class MapServiceImpl implements MapService{
 	}
 
 	@Override
-	public List<MapDto> selectClickList(String search_post, String DAddr) {
-		return mapMapper.selectClickList(search_post, DAddr);
+	public List<MapDto> selectClickList(String jibunAddr, String roadAddr, String DAddr) {
+		return mapMapper.selectClickList(jibunAddr, roadAddr , DAddr);
 	}
 
 }

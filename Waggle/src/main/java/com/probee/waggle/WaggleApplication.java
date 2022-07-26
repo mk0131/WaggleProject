@@ -33,11 +33,6 @@ public class WaggleApplication {
 		return "inquiry";
 	}
 	
-	@RequestMapping("/mypage_me")
-	public static String gomypageme() {
-		return "mypage_me";
-	}
-	
 	@RequestMapping("/profileEdit")
 	public static String goprofileedit() {
 		return "profileEdit";

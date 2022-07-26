@@ -33,8 +33,12 @@ public class MapController {
 	
 	@RequestMapping(value="/search", method=RequestMethod.POST)
 	@ResponseBody
-	public List<MapDto> selectList(String search_post) {
-		List<MapDto> searchlist = mapService.selectSearchList(search_post);
+	public List<MapDto> selectList(String jibunAddr, String roadAddr) {
+		List<MapDto> searchlist = mapService.selectSearchList(jibunAddr, roadAddr);
+		System.out.println(jibunAddr);
+		System.out.println(roadAddr);
+		System.out.println(searchlist);
+		
 		
 		return searchlist;
 		
@@ -43,8 +47,8 @@ public class MapController {
 	//클릭한 상세주소에 해당하는 결과 파일만 보여줌
 	@RequestMapping(value="/clickDAddr", method=RequestMethod.POST)
 	@ResponseBody
-	public List<MapDto> clickList(String search_post, String DAddr) {
-		List<MapDto> clicklist = mapService.selectClickList(search_post, DAddr);
+	public List<MapDto> clickList(String jibunAddr, String roadAddr, String DAddr) {
+		List<MapDto> clicklist = mapService.selectClickList(jibunAddr, roadAddr, DAddr);
 		return clicklist;
 		
 	}

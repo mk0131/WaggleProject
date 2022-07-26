@@ -508,6 +508,76 @@ textarea {
   font-size: 1rem;
   color: var(--clr-light-gray);
 }
+
+/* 이용횟수 통계 그림 */
+@keyframes bar-fill {
+  0% {
+    width: 0;
+  }
+}
+@-webkit-keyframes bar-fill {
+  0% {
+    width: 0;
+  }
+}
+@-moz-keyframes bar-fill {
+  0% {
+    width: 0;
+  }
+}
+@-o-keyframes bar-fill {
+  0% {
+    width: 0;
+  }
+}
+.bar-graph {
+  list-style: none;
+  margin: 50px 0px auto;
+}
+
+.bar-wrap {
+  -moz-border-radius: 10px 10px 10px 10px;
+  -webkit-border-radius: 10px 10px 10px 10px;
+  -ms-border-radius: 10px 10px 10px 10px;
+  border-radius: 10px 10px 10px 10px;
+  background-color: rgba(149, 149, 149, 0.2);
+  margin-bottom: 10px;
+  height: 27px;
+}
+
+.bar-fill {
+  -moz-border-radius: 10px 10px 10px 10px;
+  -webkit-border-radius: 10px 10px 10px 10px;
+  -ms-border-radius: 10px 10px 10px 10px;
+  border-radius: 10px 10px 10px 10px;
+  -moz-animation: bar-fill 1s;
+  -webkit-animation: bar-fill 1s;
+  -ms-animation: bar-fill 1s;
+  animation: bar-fill 1s;
+  background-color: #979797;
+  display: block;
+  height: 27px;
+  width: 0px;
+}
+
+.bar-graph p {
+  text-align:left;
+  color: #000000;
+  font-family: "Helvetica";
+  font-size: 16px;
+  font-weight: 100;
+  text-transform: uppercase;
+}
+
+.star{
+  display: flex;
+}
+.star svg{
+  height: 30px;
+  width: 30px;
+  fill: blue;
+}
+/* 이용횟수 통계 그림 끝 */
 </style>
 
 
@@ -609,11 +679,9 @@ textarea {
 				<div class="description" style="text-align: center">
 					<div class="desc-nav">
 						<ul class="desc-list">
-							<li><a href="#!" onclick="showDescMe();"
-								style="color: #000000" class="desc-list1">자기소개</a></li>
-							<li><a href="#!" onclick="showFinishlist();"
-								class="desc-list2">완료된 리스트</a></li>
-							<li><a href="#!" class="desc-list3">이용 횟수</a></li>
+							<li><a href="#!" onclick="showDescMe();" style="color: #000000" class="desc-list1">자기소개</a></li>
+							<li><a href="#!" onclick="showFinishlist();" class="desc-list2">완료된 리스트</a></li>
+							<li><a href="#!" onclick="showUsage();" class="desc-list3">이용 횟수</a></li>
 						</ul>
 					</div>
 					<div class="desc-content-aboutme">
@@ -659,7 +727,38 @@ textarea {
 					<div></div>
 					<div class="desc-content-finishlist" style="margin: 0 auto; width: 900px; display: none">
 					</div>
+					<div class="desc-usage" style="margin: 0 auto; width: 900px; padding-top: 60px; display: none">
+						<ul class="bar-graph">
+							<li>
+								<p>의뢰수락 24시간 후 취소 비율</p>
+								<div class="bar-wrap">
+									<span class="bar-fill" style="width: 20%;">20%</span>
+								</div>
+							</li>
+							<li>
+								<p>Statistic</p>
+								<div class="bar-wrap">
+									<span class="bar-fill" style="width: 80%;"></span>
+								</div>
+							</li>
+							<li>
+								<p>Statistic</p>
+								<div class="bar-wrap">
+									<span class="bar-fill" style="width: 60%;"></span>
+								</div>
+							</li>
+							<li>
+								<p>Statistic</p>
+								<div class="bar-wrap">
+									<span class="bar-fill" style="width: 50%;"></span>
+								</div>
+							</li>
+						</ul>
+						<div class="stars">
+						</div>
+					</div>
 				</div>
+				
 						<!-- Upload Area -->
 						<div id="uploadArea" class="upload-area" style="display:none; margin-top:50px">
 						  <div class="upload-area__header">
@@ -728,9 +827,23 @@ textarea {
 	function showDescMe() {
 		$(".desc-content-aboutme").show();
 		$(".upload-area").hide();
+		$(".desc-usage").hide();
 		$(".desc-content-finishlist").hide();
 		$(".desc-list1").css("color", "#000000");
 		$(".desc-list2").css("color", "#898989");
+		$(".desc-list3").css("color", "#898989");
+
+	}
+	
+	//이용횟수 보여줌
+	function showUsage() {
+		$(".desc-content-aboutme").hide();
+		$(".upload-area").hide();
+		$(".desc-usage").show();
+		$(".desc-content-finishlist").hide();
+		$(".desc-list1").css("color", "#898989");
+		$(".desc-list2").css("color", "#898989");
+		$(".desc-list3").css("color", "#000000");
 
 	}
 
@@ -738,9 +851,11 @@ textarea {
 	function showFinishlist() {
 		$(".desc-content-aboutme").hide();
 		$(".upload-area").hide();
+		$(".desc-usage").hide();
 		$(".desc-content-finishlist").show();
 		$(".desc-list1").css("color", "#898989");
 		$(".desc-list2").css("color", "#000000");
+		$(".desc-list3").css("color", "#898989");
 		
 		let stat = "완료"
 		let ucode = ${user_Code};
@@ -791,9 +906,11 @@ textarea {
 	function showProof(){
 		$(".desc-content-aboutme").hide();
 		$(".desc-content-finishlist").hide();
+		$(".desc-usage").hide();
 		$(".upload-area").show();
 		$(".desc-list1").css("color", "#898989");
 		$(".desc-list2").css("color", "#898989");
+		$(".desc-list3").css("color", "#898989");
 		
 	}
 	//내가 딴 꿀 수확량 구현
@@ -1052,5 +1169,31 @@ textarea {
 	})
 	
 </script>
+<script>
+	var star_empty, star_filled;
+	star_empty = ' <svg xmlns="http://www.w3.org/2000/svg"  viewBox="0 0 531.6 531.6"><path d="M531.2 205.2c-1-3.1-3.6-5.4-6.9-6.1l-168-32.3L273.7 17.1c-3.2-5.7-12.6-5.7-15.8 0l-82.6 149.8 -168 32.3c-3.2 0.6-5.9 3-6.9 6.1s-0.3 6.5 2 8.9l117 124.9L98.2 508.8c-0.4 3.2 1 6.5 3.6 8.4s6.1 2.3 9.1 0.9l154.9-72.7L420.7 518c1.2 0.6 2.5 0.8 3.8 0.8 1.9 0 3.7-0.6 5.3-1.7 2.6-1.9 4-5.1 3.6-8.4L412.2 339l117-124.9C531.4 211.7 532.2 208.3 531.2 205.2zM396.2 329.7c-1.8 2-2.7 4.6-2.4 7.3l19.7 157.8 -143.9-67.5c-1.2-0.6-2.5-0.8-3.8-0.8s-2.6 0.3-3.9 0.8L118 494.8 137.7 337c0.3-2.7-0.5-5.3-2.4-7.3l-108.7-116 156.1-30c2.6-0.5 4.9-2.2 6.2-4.5L265.8 40l76.8 139.2c1.3 2.3 3.6 4 6.2 4.5l156.1 30L396.2 329.7z"/></svg>';
+	
+	star_filled = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 531.6 531.6"><path d="M531.2 205.2c-1-3.1-3.6-5.4-6.9-6.1l-168-32.3L273.7 17.1c-3.2-5.7-12.6-5.7-15.8 0l-82.6 149.8 -168 32.3c-3.2 0.6-5.9 3-6.9 6.1 -1 3.1-0.3 6.5 2 8.9l117 124.9L98.2 508.8c-0.4 3.2 1 6.5 3.6 8.4 2.6 1.9 6.1 2.3 9.1 0.9l154.9-72.7L420.7 518c1.2 0.6 2.5 0.8 3.8 0.8 1.9 0 3.7-0.6 5.3-1.7 2.6-1.9 4-5.1 3.6-8.4L412.2 339l117-124.9C531.4 211.7 532.2 208.3 531.2 205.2z"/></svg>';
+	
+	var notes = [
+	  {"note":4.5, "name":"Test"},
+	  {"note":3.2, "name":"Test 2"}
+	];
+	
+	notes.forEach(function(answer, index){
+	  note = Math.round(answer.note);
+	  var star_tpl = '<div class="answer"><div class="answer-name">'+answer.name+'</div><div class="star">';
+	  for(i=1; i<=5; i++){
+	    if(i<=note){
+	      star_tpl += star_filled;
+	    }else{
+	      star_tpl += star_empty;
+	    }
+	  }
+	  star_tpl += '</div></div>';
+	  $('.stars').append(star_tpl);
+	})
 
+
+</script>
 </html>
