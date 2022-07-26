@@ -5,6 +5,7 @@ import java.util.List;
 import com.probee.waggle.model.dto.FileDto;
 import com.probee.waggle.model.dto.MypageFinishlistDto;
 import com.probee.waggle.model.dto.MypageOtherDto;
+import com.probee.waggle.model.dto.MypageUsageDto;
 import com.probee.waggle.model.dto.UserAddressDto;
 
 public interface MypageService {
@@ -40,5 +41,13 @@ public interface MypageService {
 	public int AddrChange(String ua_Post, String ua_Addr, String ua_DAddr, int ua_UCode);
 	
 	public int GenderChange(String user_Gender, int user_Code);
+	
+	public MypageUsageDto reqCancel(int ucode);
+	
+	public MypageUsageDto reqTotal(int ucode);
+	
+	public MypageUsageDto resCancel(int ucode);
+	
+	public MypageUsageDto resTotal(int ucode);
 
 }
