@@ -1,9 +1,14 @@
 package com.probee.waggle.model.service;
 
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.probee.waggle.model.component.FileSaver;
 import com.probee.waggle.model.component.SeleniumCrawler;
@@ -11,6 +16,7 @@ import com.probee.waggle.model.dto.FileDto;
 import com.probee.waggle.model.dto.PointsDto;
 import com.probee.waggle.model.dto.RequestDto2;
 import com.probee.waggle.model.dto.ResultDto;
+import com.probee.waggle.model.dto.ResultFileDto;
 import com.probee.waggle.model.dto.UserRatingDto;
 import com.probee.waggle.model.dto.UsersDto;
 import com.probee.waggle.model.dto.UsersDto2;
@@ -139,6 +145,11 @@ public class BoardServiceImpl implements BoardService{
 	}
 	
 	@Override
+	public int confirm(int req_No) {
+		return boardMapper.confirm(req_No);
+	}
+	
+	@Override
 	public int updateRequest(RequestDto2 dto) {
 		return boardMapper.updateRequest(dto);
 	}
@@ -163,6 +174,58 @@ public class BoardServiceImpl implements BoardService{
 	public PointsDto selectPoint(int req_No, int user_Code) {
 		return boardMapper.selectPoint(req_No, user_Code);
 	}
+
+	@Override
+	public int saveLocal(int req_No, List<MultipartFile> files, int res_Code, HttpServletRequest request) {
+		List<Integer> fileCodes = new ArrayList<Integer>();
+		List<String> res_saveLocal = new ArrayList<String>();
+		
+		// 이미지 동영상 로컬 저장
+		try {
+			res_saveLocal = fileSaver.saveLocal(files, req_No, request);
+			System.out.println("파일 저장 성공");
+		} catch (IOException e) {
+			e.printStackTrace();
+			System.out.println("파일 저장 실패...");
+			return 0;
+		}
+		
+		// return 된 path list를 통해 File DB에 데이터 추가
+		for(String fi_nm: res_saveLocal) {
+			FileDto fi_dto = new FileDto();
+			
+			fi_dto.setFi_Nm(fi_nm);
+			
+			int pos = fi_nm.lastIndexOf(".");
+			String ext = fi_nm.substring(pos + 1);
+			
+			if(ext.equals("mp4")) {
+				fi_dto.setFi_Type("video");				
+			} else {
+				fi_dto.setFi_Type("img");
+			}
+			// DB 저장
+			fileMapper.insertFile(fi_dto);
+			
+			// DB에서 파일코드 가져오기
+			FileDto tmp_dto = fileMapper.selectFile(fi_nm);
+			fileCodes.add(tmp_dto.getFi_Code());
+		}
+		
+		// 파일코드와 탐색결과 코드를 통해 ResultFile DB 데이터 추가
+		for(int file_code: fileCodes) {
+			ResultFileDto rf_dto = new ResultFileDto(file_code, res_Code);
+			fileMapper.insertResultFile(rf_dto);
+		}
+		
+		return 1;
+	}
+
+	@Override
+	public int updateResult(ResultDto dto) {
+		return boardMapper.updateResult(dto);
+	}
+	
 
 
 }

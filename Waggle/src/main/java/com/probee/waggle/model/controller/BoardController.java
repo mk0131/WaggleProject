@@ -399,9 +399,21 @@ public class BoardController {
 	
 	@PostMapping("/complete")
 	public String complete(int req_No, ResultDto res_dto, MultipartHttpServletRequest request) {
-		MultipartFile file = request.getFile("myfile");
-		System.out.println(file.toString());
-		System.out.println(res_dto);
+		// 글번호로 result dto 가져오기
+		ResultDto dto = boardService.selectResult(req_No);
+		
+		// result dto 내용 업데이트
+		res_dto.setRes_Code(dto.getRes_Code());
+		boardService.updateResult(res_dto);
+		
+		// 파일 서버에 업로드 및 DB 업데이트(File, ResultFile) 
+		List<MultipartFile> files = request.getFiles("myfile");
+		int dto_code = dto.getRes_Code();
+		boardService.saveLocal(req_No, files, dto_code, request);
+
+		// 최종 업데이트 후 글 상태 확인중으로 변경
+		boardService.confirm(req_No);
+		
 		return "redirect:/board/detail?req_No="+req_No;
 	}
 	

@@ -409,7 +409,7 @@ div#review_containser{
 		   <br><h4>디테일 요청사항</h4>
 		   <div id="detail_container">
 		    <div id="file_container">
-		     <input type="file" name="myfile" multiple="multiple">
+		     <input type="file" name="myfile" multiple="multiple" data-max-file-size="20MB">
 		    </div>
 		    <div id="review_containser">
 		     <span style="font-size: 12pt;">간단한 집 평가</span>
@@ -452,5 +452,24 @@ div#review_containser{
 	<%@ include file="../footer.jsp" %>
 
 </body>
+<script type="text/javascript">
+
+	$("input[name=myfile]").off().on("change", function(){
+	
+		if (this.files && this.files[0]) {
+	
+			var maxSize = 20 * 1024 * 1024;
+			var fileSize = this.files[0].size;
+	
+			if(fileSize > maxSize){
+				alert("첨부파일 사이즈는 5MB 이내로 등록 가능합니다.");
+				$(this).val('');
+				return false;
+			}
+		}
+	});
+
+</script>
+
 
 </html>
