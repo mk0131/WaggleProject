@@ -112,6 +112,7 @@ public class FileSaver {
 		String path = null;
 		String staticpath1 = Path.of(resourceLoader.getResource("classpath:static").getURI()).toString().replace("\\", "/");
 		String staticpath2 = request.getSession().getServletContext().getRealPath("/");
+		System.out.println(staticpath1);
 
 		staticpath2 = staticpath2.substring(0, staticpath2.lastIndexOf("\\"));
 		staticpath2 = staticpath2.substring(0, staticpath2.lastIndexOf("\\"));

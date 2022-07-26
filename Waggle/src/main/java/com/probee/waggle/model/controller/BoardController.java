@@ -412,7 +412,7 @@ public class BoardController {
 
 		// 최종 업데이트 후 글 상태 확인중으로 변경
 		RequestDto2 req_dto = boardService.selectRequest(req_No);
-		if(req_dto.equals("진행중")) {
+		if(req_dto.getReq_Stat().equals("진행중")) {
 			boardService.confirm(req_No);			
 		}
 		
