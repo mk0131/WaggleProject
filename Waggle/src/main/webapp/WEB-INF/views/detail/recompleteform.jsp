@@ -468,6 +468,32 @@ div#review_containser{
 			}
 		}
 	});
+	
+	var res_content = ${res_dto}
+
+	$(function(){
+		// 라디오 버튼에 값 넣기(집 평가)
+		for (var i=1; i<7; i++) {
+			var attr = eval('res_content.res_Attr'+i);
+			if (attr === "좋아요") {
+				$("input[id='res_Attr"+i+"_1']").prop('checked', true);
+			} else if (attr === "보통이에요") {
+				$("input[id='res_Attr"+i+"_2']").prop('checked', true);
+			} else {
+				$("input[id='res_Attr"+i+"_3']").prop('checked', true);
+			}
+		}
+		
+		// 디테일 요청사항에 값 넣기 & 높이 조정
+		$("#revcontent").text(res_content.res_Detail);
+		
+		
+		// 집평가 별점 값 넣기
+		var num = res_content.res_Rate;
+		$(".rating__input[value='"+num+"']").prop('checked', true);
+		
+		
+	});
 
 </script>
 

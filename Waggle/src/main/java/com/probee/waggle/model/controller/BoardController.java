@@ -14,6 +14,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.google.gson.Gson;
 import com.probee.waggle.model.dto.HomeDto;
@@ -394,7 +396,43 @@ public class BoardController {
 		return "detail/completeform";
 	}
 	
+	@PostMapping("/complete")
+	public String complete(int req_No, ResultDto res_dto, MultipartHttpServletRequest request) {
+		// 글번호로 result dto 가져오기
+		ResultDto dto = boardService.selectResult(req_No);
+		
+		// result dto 내용 업데이트
+		res_dto.setRes_Code(dto.getRes_Code());
+		boardService.updateResult(res_dto);
+		
+		// 파일 서버에 업로드 및 DB 업데이트(File, ResultFile) 
+		List<MultipartFile> files = request.getFiles("myfile");
+		int dto_code = dto.getRes_Code();
+		boardService.saveLocal(req_No, files, dto_code, request);
+
+		// 최종 업데이트 후 글 상태 확인중으로 변경
+		RequestDto2 req_dto = boardService.selectRequest(req_No);
+		if(req_dto.equals("진행중")) {
+			boardService.confirm(req_No);			
+		}
+		
+		return "redirect:/board/detail?req_No="+req_No;
+	}
 	
+	@PostMapping("/reCompleteForm")
+	public String goReCompleteForm(String userName, int req_No, Model model) {
+		// 요청글 정보
+		RequestDto2 req_dto = boardService.selectRequest(req_No);
+		model.addAttribute("req_dto", req_dto);
+		model.addAttribute("userName", userName);
+		
+		ResultDto result = boardService.selectResult(req_No);
+		Gson gson = new Gson();
+		
+		model.addAttribute("res_dto", gson.toJson(result));
+		
+		return "detail/recompleteform";
+	}
 	
 
 	

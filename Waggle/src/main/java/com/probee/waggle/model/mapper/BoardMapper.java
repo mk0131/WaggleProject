@@ -63,7 +63,6 @@ public interface BoardMapper {
 	
 	@Update(" update Request set req_Stat = '진행중' where req_No = #{req_No} ")
 	int Progress(int req_No);
-	
 
 	@Update(" update Request set req_Stat = '모집중' where req_No = #{req_No} ")
 	int Recruit(int req_No);
@@ -71,11 +70,14 @@ public interface BoardMapper {
 	@Update(" update Request set req_Stat = '취소' where req_No = #{req_No} ")
 	int Revoke(int req_No);
 	
-	@Delete(" delete from request where req_No  = #{req_No} ")
+	@Delete(" delete from request where req_No = #{req_No} ")
 	int Cancel(int req_No);
 	
 	@Update(" update Request set req_Stat = '완료' where req_No = #{req_No} ")
 	int complete(int req_No);
+	
+	@Update(" update Request set req_Stat = '확인중' where req_No = #{req_No} ")
+	public int confirm(int req_No);
 
 	@Update(" update Request set req_Title=#{req_Title}, req_Link=#{req_Link}, req_EDate=#{req_EDate}, req_Phone=#{req_Phone}, req_Detail=#{req_Detail}, req_Point=#{req_Point}, req_HCode=#{req_HCode} where req_No=#{req_No} ")
 	public int updateRequest(RequestDto2 dto);
@@ -94,4 +96,17 @@ public interface BoardMapper {
 	// 포인트 사용여부 검사
 	@Select(" select * from points p where po_No = #{req_No} and po_UCode = #{user_Code} ")
 	PointsDto selectPoint(int req_No, int user_Code);
+	
+	// result 업데이트
+	@Update(" update Result set "
+			+ "res_Attr1=#{res_Attr1}, res_Attr2=#{res_Attr2}, res_Attr3=#{res_Attr3}, "
+			+ "res_Attr4=#{res_Attr4}, res_Attr5=#{res_Attr5}, res_Attr6=#{res_Attr6}, "
+			+ "res_Detail=#{res_Detail}, res_Rate=#{res_Rate}, res_WDate=NOW(), res_Stat='완료' "
+			+ "where res_Code=#{res_Code} ")
+	public int updateResult(ResultDto dto);
+	
+
+
+	
+	
 }
