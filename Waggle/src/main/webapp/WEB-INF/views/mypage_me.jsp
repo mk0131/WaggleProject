@@ -569,14 +569,6 @@ textarea {
   text-transform: uppercase;
 }
 
-.star{
-  display: flex;
-}
-.star svg{
-  height: 30px;
-  width: 30px;
-  fill: blue;
-}
 /* 이용횟수 통계 그림 끝 */
 </style>
 
@@ -728,33 +720,27 @@ textarea {
 					<div class="desc-content-finishlist" style="margin: 0 auto; width: 900px; display: none">
 					</div>
 					<div class="desc-usage" style="margin: 0 auto; width: 900px; padding-top: 60px; display: none">
-						<ul class="bar-graph">
+						<div class="usage-left" style="width:400px; display:inline-block; float: right; padding-top:15px">
+						<ul class="bar-graph" style="width: 400px; padding:0">
 							<li>
-								<p>의뢰수락 24시간 후 취소 비율</p>
+								<p>[의뢰인]의뢰수락 24시간 후 취소 비율</p>
+								<p>-> 의뢰 수행 횟수 총 ${resTotal }건 중 취소횟수 ${resCancel}건</p>
 								<div class="bar-wrap">
-									<span class="bar-fill" style="width: 20%;">20%</span>
-								</div>
-							</li>
-							<li>
-								<p>Statistic</p>
-								<div class="bar-wrap">
-									<span class="bar-fill" style="width: 80%;"></span>
-								</div>
-							</li>
-							<li>
-								<p>Statistic</p>
-								<div class="bar-wrap">
-									<span class="bar-fill" style="width: 60%;"></span>
-								</div>
-							</li>
-							<li>
-								<p>Statistic</p>
-								<div class="bar-wrap">
-									<span class="bar-fill" style="width: 50%;"></span>
+									<span class="bar-fill" style="width:${ratio2}%;">${ratio2 }%</span>
 								</div>
 							</li>
 						</ul>
-						<div class="stars">
+						</div>
+						<div class="usage-right" style="width: 400px; display: inline-block">
+							<ul class="bar-graph" style="width: 400px; padding: 0">
+								<li>
+									<p>[꿀벌]진행중 상태 의뢰 요청취소 비율</p>
+									<p>-> 의뢰글 총 ${reqTotal }건 중 취소횟수 ${reqCancel }건</p>
+									<div class="bar-wrap">
+										<span class="bar-fill" style="width: ${ratio}%;">${ratio }%</span>
+									</div>
+								</li>
+							</ul>
 						</div>
 					</div>
 				</div>
@@ -863,7 +849,7 @@ textarea {
 		
 		$.ajax({
 			type: "post",
-			url: "mypage/reqroom",
+			url: "/mypage/reqroom",
 			data : data,
 			success : function(result){
 				$(".desc-content-finishlist").empty();
@@ -1170,29 +1156,6 @@ textarea {
 	
 </script>
 <script>
-	var star_empty, star_filled;
-	star_empty = ' <svg xmlns="http://www.w3.org/2000/svg"  viewBox="0 0 531.6 531.6"><path d="M531.2 205.2c-1-3.1-3.6-5.4-6.9-6.1l-168-32.3L273.7 17.1c-3.2-5.7-12.6-5.7-15.8 0l-82.6 149.8 -168 32.3c-3.2 0.6-5.9 3-6.9 6.1s-0.3 6.5 2 8.9l117 124.9L98.2 508.8c-0.4 3.2 1 6.5 3.6 8.4s6.1 2.3 9.1 0.9l154.9-72.7L420.7 518c1.2 0.6 2.5 0.8 3.8 0.8 1.9 0 3.7-0.6 5.3-1.7 2.6-1.9 4-5.1 3.6-8.4L412.2 339l117-124.9C531.4 211.7 532.2 208.3 531.2 205.2zM396.2 329.7c-1.8 2-2.7 4.6-2.4 7.3l19.7 157.8 -143.9-67.5c-1.2-0.6-2.5-0.8-3.8-0.8s-2.6 0.3-3.9 0.8L118 494.8 137.7 337c0.3-2.7-0.5-5.3-2.4-7.3l-108.7-116 156.1-30c2.6-0.5 4.9-2.2 6.2-4.5L265.8 40l76.8 139.2c1.3 2.3 3.6 4 6.2 4.5l156.1 30L396.2 329.7z"/></svg>';
-	
-	star_filled = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 531.6 531.6"><path d="M531.2 205.2c-1-3.1-3.6-5.4-6.9-6.1l-168-32.3L273.7 17.1c-3.2-5.7-12.6-5.7-15.8 0l-82.6 149.8 -168 32.3c-3.2 0.6-5.9 3-6.9 6.1 -1 3.1-0.3 6.5 2 8.9l117 124.9L98.2 508.8c-0.4 3.2 1 6.5 3.6 8.4 2.6 1.9 6.1 2.3 9.1 0.9l154.9-72.7L420.7 518c1.2 0.6 2.5 0.8 3.8 0.8 1.9 0 3.7-0.6 5.3-1.7 2.6-1.9 4-5.1 3.6-8.4L412.2 339l117-124.9C531.4 211.7 532.2 208.3 531.2 205.2z"/></svg>';
-	
-	var notes = [
-	  {"note":4.5, "name":"Test"},
-	  {"note":3.2, "name":"Test 2"}
-	];
-	
-	notes.forEach(function(answer, index){
-	  note = Math.round(answer.note);
-	  var star_tpl = '<div class="answer"><div class="answer-name">'+answer.name+'</div><div class="star">';
-	  for(i=1; i<=5; i++){
-	    if(i<=note){
-	      star_tpl += star_filled;
-	    }else{
-	      star_tpl += star_empty;
-	    }
-	  }
-	  star_tpl += '</div></div>';
-	  $('.stars').append(star_tpl);
-	})
 
 
 </script>

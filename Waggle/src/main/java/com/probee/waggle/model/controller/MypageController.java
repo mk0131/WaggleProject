@@ -18,6 +18,7 @@ import com.probee.waggle.model.component.FileSaver;
 import com.probee.waggle.model.dto.FileDto;
 import com.probee.waggle.model.dto.MypageFinishlistDto;
 import com.probee.waggle.model.dto.MypageOtherDto;
+import com.probee.waggle.model.dto.MypageUsageDto;
 import com.probee.waggle.model.dto.UserAddressDto;
 import com.probee.waggle.model.service.MypageService;
 import com.probee.waggle.model.service.RegistService;
@@ -43,8 +44,33 @@ public class MypageController {
 	}
 	
 	@GetMapping("/me")
-	public String selectUsage(Model model) {
-		model.addAttribute("dto", "sts");
+	public String selectUsage(Model model, HttpServletRequest request) {
+		HttpSession session = request.getSession();
+		int ucode = (int)session.getAttribute("user_Code");
+		MypageUsageDto reqCancel = mypageService.reqCancel(ucode);
+		MypageUsageDto reqTotal = mypageService.reqTotal(ucode);
+		MypageUsageDto resCancel = mypageService.resCancel(ucode);
+		MypageUsageDto resTotal = mypageService.resTotal(ucode);
+		double reqRatio = 0;
+		double resRatio = 0;
+		
+		if (reqTotal.getReqTotal() != 0) {
+			reqRatio = (double)(reqCancel.getReqCancel()/reqTotal.getReqTotal())*100;
+		}else {
+			reqRatio = 0;
+		}
+		if(resTotal.getResTotal() != 0) {
+			resRatio = (double)(resCancel.getResCancel()/resTotal.getResTotal())*100;
+		}else {
+			resRatio = 0;
+		}
+		model.addAttribute("reqCancel", reqCancel.getReqCancel());
+		model.addAttribute("reqTotal", reqTotal.getReqTotal());
+		model.addAttribute("resCancel", resCancel.getResCancel());
+		model.addAttribute("resTotal", resTotal.getResTotal());
+		model.addAttribute("ratio", Math.round(resRatio));
+		model.addAttribute("ratio2", Math.round(resRatio));
+		
 		return "mypage_me";
 	}
 	

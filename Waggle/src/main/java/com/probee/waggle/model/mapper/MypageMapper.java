@@ -10,6 +10,7 @@ import org.apache.ibatis.annotations.Update;
 import com.probee.waggle.model.dto.FileDto;
 import com.probee.waggle.model.dto.MypageFinishlistDto;
 import com.probee.waggle.model.dto.MypageOtherDto;
+import com.probee.waggle.model.dto.MypageUsageDto;
 import com.probee.waggle.model.dto.UserAddressDto;
 
 @Mapper
@@ -69,6 +70,16 @@ public interface MypageMapper {
 	@Update("UPDATE USERS SET USER_PRO = #{fi_Code} WHERE USER_CODE = #{ucode}")
 	public int UserProChange(int fi_Code, int ucode);
 	
+	@Select("select count(*) as reqCancel from request where req_ucode=#{ucode} and req_stat='취소'")
+	public MypageUsageDto reqCancel(int ucode);
 	
+	@Select("select count(*) as reqTotal from request where req_UCode = #{ucode}")
+	public MypageUsageDto reqTotal(int ucode);
+	
+	@Select("select count(*) as resCancel from result where res_ucode=#{ucode} and res_stat='취소'")
+	public MypageUsageDto resCancel(int ucode);
+	
+	@Select("select count(*) as resTotal from result where res_ucode=#{ucode}")
+	public MypageUsageDto resTotal(int ucode);
 	
 }
