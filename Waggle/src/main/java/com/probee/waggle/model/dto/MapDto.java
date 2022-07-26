@@ -5,7 +5,7 @@ public class MapDto {
 	private int home_Post;
 	private String home_Addr;
 	private String home_DAddr;
-	private int rf_No;
+	private int req_No;
 	private String fi_Nm;
 	
 	public MapDto() {
@@ -13,12 +13,12 @@ public class MapDto {
 		// TODO Auto-generated constructor stub
 	}
 
-	public MapDto(int home_Post, String home_Addr, String home_DAddr, int rf_No, String fi_Nm) {
+	public MapDto(int home_Post, String home_Addr, String home_DAddr, int req_No, String fi_Nm) {
 		super();
 		this.home_Post = home_Post;
 		this.home_Addr = home_Addr;
 		this.home_DAddr = home_DAddr;
-		this.rf_No = rf_No;
+		this.req_No = req_No;
 		this.fi_Nm = fi_Nm;
 	}
 
@@ -46,12 +46,12 @@ public class MapDto {
 		this.home_DAddr = home_DAddr;
 	}
 
-	public int getRf_No() {
-		return rf_No;
+	public int getReq_No() {
+		return req_No;
 	}
 
-	public void setRf_No(int rf_No) {
-		this.rf_No = rf_No;
+	public void setReq_No(int req_No) {
+		this.req_No = req_No;
 	}
 
 	public String getFi_Nm() {
@@ -64,9 +64,11 @@ public class MapDto {
 
 	@Override
 	public String toString() {
-		return "MapDto [home_Post=" + home_Post + ", home_Addr=" + home_Addr + ", home_DAddr=" + home_DAddr + ", rf_No="
-				+ rf_No + ", fi_Nm=" + fi_Nm + "]";
+		return "MapDto [home_Post=" + home_Post + ", home_Addr=" + home_Addr + ", home_DAddr=" + home_DAddr
+				+ ", req_No=" + req_No + ", fi_Nm=" + fi_Nm + "]";
 	}
+
+	
 	
 	
 

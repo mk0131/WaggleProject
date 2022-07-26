@@ -14,6 +14,6 @@ public interface InquiryService {
 	public int insert(InquiryDto dto);
 	public int update(InquiryDto dto);
 	public int delete(int in_Code);
-	public int inquiryListCnt();
+	public int inquiryListCnt(int user_Code);
 	
 }

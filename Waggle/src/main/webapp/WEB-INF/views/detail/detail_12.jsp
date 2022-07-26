@@ -133,7 +133,7 @@ button:active {
 	     <p id="w-date">${req_dto.req_WDate }</p>
 	    <div class="ongoing21-user-name">
 	     <p id="username">작성자</p>&nbsp;
-	      <p id="userrealname">${user_dto.user_Nm}</p>
+	      <p id="userrealname" onclick="window.open('/mypage/other?ucode=${user_dto.user_Code}')">${user_dto.user_Nm}</p>
 	       </div>
 	    <div class="ongoing21-all">
 	   <input type="hidden" name="req_dto.req_No" value="${req_dto.req_No }">

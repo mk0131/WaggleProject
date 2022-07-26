@@ -42,6 +42,13 @@ public class MypageController {
 		return "mypage_other";
 	}
 	
+	@GetMapping("/me")
+	public String selectUsage(Model model) {
+		model.addAttribute("dto", "sts");
+		return "mypage_me";
+	}
+	
+	
 	@PostMapping(value="/imageEdit")
 	public String ImageEdit(HttpServletRequest request, String imgUrl) {
 		HttpSession session = request.getSession();

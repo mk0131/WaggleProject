@@ -44,10 +44,7 @@
     border-spacing: 30px;
     font-size: 14px;
 }
-<<<<<<< HEAD
-=======
 
->>>>>>> cee26d0241abed78cfefd73acebacc3cc5ba6ede
 .ongoing21-content1 {
 	display:flex;
   	align-items: center;
@@ -337,10 +334,7 @@ div#progress_percentage::after {
  		 	height: 50px;
  		 	border-radius: 8px;
  		}
-<<<<<<< HEAD
-=======
 
->>>>>>> cee26d0241abed78cfefd73acebacc3cc5ba6ede
 </style>
 
 </head>
@@ -775,12 +769,6 @@ div#progress_percentage::after {
 		var num = res_content.res_Rate;
 		$(".rating__input[value='"+num+"']").prop('checked', true);
 		
-		console.log('${req_dto.req_UCode}');
-		console.log(typeof(${user_Code}));
-		console.log(typeof(${res}))
-		console.log(${user_Code});
-		console.log(${res});
-		console.log(${po});
 	 	if(${req_dto.req_UCode} != ${user_Code} && ${res} != ${user_Code} && ${po} != ${user_Code}){
 	 	 $(".ongoing21-content2").hide();	
 	 	 $("#detail_container").hide();
