@@ -85,7 +85,8 @@ public class BoardServiceImpl implements BoardService{
 		
 		if(res2 > 0) {
 			System.out.println("이미지 경로 DB 저장 성공!");
-			int fi_code = fileMapper.selectFile(path).getFi_Code();
+			List<FileDto> tmp_list = fileMapper.selectFile(path);
+			int fi_code = tmp_list.get(tmp_list.size()-1).getFi_Code();
 			return fi_code;
 		} else {
 			System.out.println("이미지 경로 DB 저장 실패");
@@ -180,6 +181,12 @@ public class BoardServiceImpl implements BoardService{
 		List<Integer> fileCodes = new ArrayList<Integer>();
 		List<String> res_saveLocal = new ArrayList<String>();
 		
+		if(files.size() == 1 && files.get(0).getSize()==0) {
+			System.out.println("저장할 파일이 없습니다.");
+			fileMapper.deleteResultFile(res_Code);
+			return 0;
+		}
+		
 		// 이미지 동영상 로컬 저장
 		try {
 			res_saveLocal = fileSaver.saveLocal(files, req_No, request);
@@ -198,7 +205,7 @@ public class BoardServiceImpl implements BoardService{
 			
 			int pos = fi_nm.lastIndexOf(".");
 			String ext = fi_nm.substring(pos + 1);
-			
+
 			if(ext.equals("mp4")) {
 				fi_dto.setFi_Type("video");				
 			} else {
@@ -208,9 +215,12 @@ public class BoardServiceImpl implements BoardService{
 			fileMapper.insertFile(fi_dto);
 			
 			// DB에서 파일코드 가져오기
-			FileDto tmp_dto = fileMapper.selectFile(fi_nm);
+			List<FileDto> tmp_list = fileMapper.selectFile(fi_nm);
+			FileDto tmp_dto = tmp_list.get(tmp_list.size()-1);
 			fileCodes.add(tmp_dto.getFi_Code());
 		}
+		// ResultFile DB 데이터 추가전에 관련 사진 없애기
+		fileMapper.deleteResultFile(res_Code);
 		
 		// 파일코드와 탐색결과 코드를 통해 ResultFile DB 데이터 추가
 		for(int file_code: fileCodes) {

@@ -119,9 +119,9 @@ public class FileSaver {
 		staticpath2 += "\\resources\\static";
 //		System.out.println(staticpath2);
 		for (MultipartFile file: files) {
-			
+
 			String fileName = file.getOriginalFilename();
-			System.out.println("fileName : " + fileName);
+//			System.out.println("fileName : " + fileName);
 			int pos = fileName.lastIndexOf(".");
 			String ext = fileName.substring(pos + 1);
 //			System.out.println("ext : " + ext);
@@ -131,7 +131,7 @@ public class FileSaver {
 			// 경로가 있는지 확인해서 없으면 경로 생성
 			if(!realFile.exists()) {
 				realFile.createNewFile();
-			}
+			} 
 			file.transferTo(realFile);
 			
 			// 성공하면 경로명 저장
