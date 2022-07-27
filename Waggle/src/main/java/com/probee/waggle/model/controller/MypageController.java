@@ -42,22 +42,17 @@ public class MypageController {
 	@GetMapping("/other")
 	public String selectOtherInfo(int ucode, Model model) {
 		MypageOtherDto UserList = mypageService.SelectUsersInfo(ucode);
-		model.addAttribute("dto",UserList);
-		return "mypage_other";
-	}
-	
-	@GetMapping("/me")
-	public String selectUsage(Model model, HttpServletRequest request) {
-		HttpSession session = request.getSession();
-		int ucode = (int)session.getAttribute("user_Code");
 		MypageUsageDto reqCancel = mypageService.reqCancel(ucode);
 		MypageUsageDto reqTotal = mypageService.reqTotal(ucode);
 		MypageUsageDto resCancel = mypageService.resCancel(ucode);
 		MypageUsageDto resTotal = mypageService.resTotal(ucode);
-		ConfirmDto MyConfirm = mypageService.SelectMyConfirm(ucode);
 		
-		int ConF_Code = MyConfirm.getCo_FCode();
-		FileDto ConfirmFile = mypageService.SelectConfirmFile(ConF_Code);
+		int OtherUserPro = UserList.getUser_Pro();
+		if(OtherUserPro !=0) {
+			FileDto ProfileFile = mypageService.SelectConfirmFile(OtherUserPro);
+			model.addAttribute("Pro_fi_Nm", ProfileFile.getFi_Nm());
+		}
+		
 		double reqRatio = 0;
 		double resRatio = 0;
 		
@@ -71,13 +66,64 @@ public class MypageController {
 		}else {
 			resRatio = 0;
 		}
-		model.addAttribute("con_file_Name",ConfirmFile.getFi_Nm());
-		model.addAttribute("condto", MyConfirm.getCo_UCode());
+		
+		model.addAttribute("dto",UserList);
 		model.addAttribute("reqCancel", reqCancel.getReqCancel());
 		model.addAttribute("reqTotal", reqTotal.getReqTotal());
 		model.addAttribute("resCancel", resCancel.getResCancel());
 		model.addAttribute("resTotal", resTotal.getResTotal());
-		model.addAttribute("ratio", Math.round(resRatio));
+		model.addAttribute("ratio", Math.round(reqRatio));
+		model.addAttribute("ratio2", Math.round(resRatio));
+		return "mypage_other";
+	}
+	
+	@GetMapping("/me")
+	public String selectUsage(Model model, HttpServletRequest request) {
+		HttpSession session = request.getSession();
+		int ucode = (int)session.getAttribute("user_Code");
+		int user_Pro = (int)session.getAttribute("user_Pro");
+		
+		MypageUsageDto reqCancel = mypageService.reqCancel(ucode);
+		MypageUsageDto reqTotal = mypageService.reqTotal(ucode);
+		MypageUsageDto resCancel = mypageService.resCancel(ucode);
+		MypageUsageDto resTotal = mypageService.resTotal(ucode);
+		ConfirmDto MyConfirm = mypageService.SelectMyConfirm(ucode);
+		
+		if (MyConfirm != null) {
+			int ConF_Code = MyConfirm.getCo_FCode();
+			//공인중개사 사진 파일 이름 db에서 가져오기 위함.
+			FileDto ConfirmFile = mypageService.SelectConfirmFile(ConF_Code);
+			model.addAttribute("con_file_Name",ConfirmFile.getFi_Nm());
+			model.addAttribute("condto", MyConfirm.getCo_UCode());
+		} else {
+			model.addAttribute("condto",0);
+		}
+		
+		if(user_Pro != 0) {
+			//프로필 사진 파일 이름 db에서 가져오기 위함
+			FileDto ProfileFile = mypageService.SelectConfirmFile(user_Pro);
+			model.addAttribute("Pro_fi_Nm", ProfileFile.getFi_Nm());
+		}
+		
+		double reqRatio = 0;
+		double resRatio = 0;
+		
+		if (reqTotal.getReqTotal() != 0) {
+			reqRatio = (double)(reqCancel.getReqCancel()/reqTotal.getReqTotal())*100;
+		}else {
+			reqRatio = 0;
+		}
+		if(resTotal.getResTotal() != 0) {
+			resRatio = (double)(resCancel.getResCancel()/resTotal.getResTotal())*100;
+		}else {
+			resRatio = 0;
+		}
+
+		model.addAttribute("reqCancel", reqCancel.getReqCancel());
+		model.addAttribute("reqTotal", reqTotal.getReqTotal());
+		model.addAttribute("resCancel", resCancel.getResCancel());
+		model.addAttribute("resTotal", resTotal.getResTotal());
+		model.addAttribute("ratio", Math.round(reqRatio));
 		model.addAttribute("ratio2", Math.round(resRatio));
 		
 		return "mypage_me";
@@ -88,14 +134,20 @@ public class MypageController {
 	@PostMapping(value="/imageEdit")
 	public String ImageEdit(HttpServletRequest request, MultipartHttpServletRequest request2) {
 		HttpSession session = request.getSession();
+		
 		int user_Code = (int)session.getAttribute("user_Code");
 		List<FileDto> lastFileLowList = mypageService.SelectLastFiCode();
 		
 		int new_Fi_Code = lastFileLowList.get(0).getFi_Code() + 1;
 		
+		MultipartFile file = request2.getFile("myfile");
+		String fileName = file.getOriginalFilename();
+		int pos = fileName.lastIndexOf(".");
+		String ext = fileName.substring(pos + 1);
+		
 		// 프로필 사진 수정하기 버튼 누를때 fileDB에 형식 맞춰서 INSERT 됨.
 		int res = 0;
-		res = mypageService.ImageFileInsert(new_Fi_Code);
+		res = mypageService.ImageFileInsert(new_Fi_Code, ext);
 		if (res > 0) {
 			System.out.println("이미지 파일 insert 성공");
 		} else {
@@ -112,7 +164,6 @@ public class MypageController {
 		}
 		
 		// 업로드 된 이미지를 로컬에 저장하는 코드
-		MultipartFile file = request2.getFile("myfile");
 		int res2 = mypageService.saveLocalProfile(new_Fi_Code, file, request2);
 		if(res2 >0) {
 			System.out.println("로컬에 이미지 저장 성공");
@@ -243,9 +294,14 @@ public class MypageController {
 	}
 
 	@GetMapping("/profileEdit") // 회원정보 수정 버튼
-	public String ProfileEdit(int ua_UCode,  Model model) {
+	public String ProfileEdit(int ua_UCode,  Model model, HttpServletRequest request) {
 		UserAddressDto user = mypageService.SelectAddr(ua_UCode);
-
+		HttpSession session = request.getSession();
+		
+		int user_Pro = (int)session.getAttribute("user_Pro");
+		FileDto ProfileFile = mypageService.SelectConfirmFile(user_Pro);
+		
+		model.addAttribute("Pro_Fi_Nm", ProfileFile.getFi_Nm());
 		model.addAttribute("dto", user);
 
 		return "profileEdit";

@@ -89,8 +89,8 @@ public class MypageServiceImpl implements MypageService{
 	}
 
 	@Override
-	public int ImageFileInsert(int fi_Code) {
-		return mypageMapper.ImageFileInsert(fi_Code);
+	public int ImageFileInsert(int fi_Code, String ext) {
+		return mypageMapper.ImageFileInsert(fi_Code, ext);
 	}
 
 	@Override

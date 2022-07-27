@@ -65,8 +65,8 @@ public interface MypageMapper {
 	@Select("SELECT * FROM file ORDER BY fi_Code DESC LIMIT 1")
 	public List<FileDto> SelectLastFiCode();
 	
-	@Insert("INSERT INTO FILE VALUES(NULL, 'img', CONCAT('/images/profile/profile_',#{fi_Code},'.jpg'))")
-	public int ImageFileInsert(int fi_Code);
+	@Insert("INSERT INTO FILE VALUES(NULL, 'img', CONCAT('/images/profile/profile_',#{fi_Code},'.',#{ext}))")
+	public int ImageFileInsert(int fi_Code, String ext);
 	
 	@Update("UPDATE USERS SET USER_PRO = #{fi_Code} WHERE USER_CODE = #{ucode}")
 	public int UserProChange(int fi_Code, int ucode);

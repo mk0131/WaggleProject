@@ -25,7 +25,7 @@ public interface MypageService {
 	
 	public List<FileDto> SelectLastFiCode();
 	
-	public int ImageFileInsert(int fi_Code);
+	public int ImageFileInsert(int fi_Code, String ext);
 	
 	public int UserProChange(int user_Pro, int ucode);
 	

@@ -345,7 +345,7 @@ span {
             <div class="profile" style="background-image:url(/images/importToJsp/profile_default.jpg)">
             </c:if>
             <c:if test="${user_Pro != 0 }">
-            <div class="profile" style="background-image:url(/images/profile/profile_${user_Pro}.jpg)">
+            <div class="profile" style="background-image:url(${Pro_Fi_Nm})">
             </c:if>
               <label class="edit">
                 <span>&#10002;</span>

@@ -595,7 +595,7 @@ textarea {
 							style="width: 100px; height: 100px">
 						</c:if>
 						<c:if test = "${user_Pro != 0 }">
-						<img src="/images/profile/profile_${user_Pro }.jpg" style="width:200px; height: 200px; border-radius:200px">
+						<img src="${Pro_fi_Nm }" style="width:200px; height: 200px; border-radius:200px">
 						</c:if>
 						<div style="font-weight: bold; font-size: 20pt">${user_Point } P</div>
 						<div>
@@ -729,7 +729,7 @@ textarea {
 						<div class="usage-left" style="width:400px; display:inline-block; float: right; padding-top:15px">
 						<ul class="bar-graph" style="width: 400px; padding:0">
 							<li>
-								<p>[의뢰인]의뢰수락 24시간 후 취소 비율</p>
+								<p>[꿀벌]의뢰수락 24시간 후 취소 비율</p>
 								<p>-> 의뢰 수행 횟수 총 ${resTotal }건 중 취소횟수 ${resCancel}건</p>
 								<div class="bar-wrap">
 									<span class="bar-fill" style="width:${ratio2}%;">${ratio2 }%</span>
@@ -740,7 +740,7 @@ textarea {
 						<div class="usage-right" style="width: 400px; display: inline-block">
 							<ul class="bar-graph" style="width: 400px; padding: 0">
 								<li>
-									<p>[꿀벌]진행중 상태 의뢰 요청취소 비율</p>
+									<p>[의뢰인]진행중 상태 의뢰 요청취소 비율</p>
 									<p>-> 의뢰글 총 ${reqTotal }건 중 취소횟수 ${reqCancel }건</p>
 									<div class="bar-wrap">
 										<span class="bar-fill" style="width: ${ratio}%;">${ratio }%</span>
