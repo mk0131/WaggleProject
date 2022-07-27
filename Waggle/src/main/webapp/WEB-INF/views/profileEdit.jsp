@@ -228,8 +228,12 @@ span {
 }
 
 #back-btn {
-	display: flex;
-    justify-content: center;
+	text-align: center;
+    display: block;
+}
+
+#back-btn-inner {
+	display: inline-block;
 }
 
 #back-btn-inner-text {
@@ -469,7 +473,7 @@ span {
             
             <br/><br/>
             <div id="back-btn">
-               <div id="back-btn-inner" onclick="location.href='/mypage_me'">
+               <div id="back-btn-inner" onclick="location.href='/mypage/me'">
                 <i class="fa-solid fa-arrow-left-long"></i>
                  <h5 id="back-btn-inner-text">돌아가기</h5>
                </div>
