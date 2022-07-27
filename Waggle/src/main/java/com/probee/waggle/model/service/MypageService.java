@@ -2,6 +2,11 @@ package com.probee.waggle.model.service;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
+import org.springframework.web.multipart.MultipartFile;
+
+import com.probee.waggle.model.dto.ConfirmDto;
 import com.probee.waggle.model.dto.FileDto;
 import com.probee.waggle.model.dto.MypageFinishlistDto;
 import com.probee.waggle.model.dto.MypageOtherDto;
@@ -49,5 +54,18 @@ public interface MypageService {
 	public MypageUsageDto resCancel(int ucode);
 	
 	public MypageUsageDto resTotal(int ucode);
-
+	
+	public int saveLocalProfile(int new_Fi_Code, MultipartFile file, HttpServletRequest request);
+	
+	public ConfirmDto SelectMyConfirm(int ucode);
+	
+	public int saveLocalConfirm(int user_Code, MultipartFile file, HttpServletRequest request);
+	
+	public int FileUpdate(int ucode, String ext, int fi_code);
+	
+	public int InsertFileConfirm(int new_fi_Code, int ucode, String ext);
+	
+	public int InsertConfirm(int ucode, int new_fi_Code);
+	
+	public FileDto SelectConfirmFile(int fi_code);
 }

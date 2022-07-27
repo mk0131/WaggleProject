@@ -7,6 +7,7 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 
+import com.probee.waggle.model.dto.ConfirmDto;
 import com.probee.waggle.model.dto.FileDto;
 import com.probee.waggle.model.dto.MypageFinishlistDto;
 import com.probee.waggle.model.dto.MypageOtherDto;
@@ -81,5 +82,20 @@ public interface MypageMapper {
 	
 	@Select("select count(*) as resTotal from result where res_ucode=#{ucode}")
 	public MypageUsageDto resTotal(int ucode);
+	
+	@Select("Select * from Confirm where co_UCode = #{ucode}")
+	public ConfirmDto SelectMyConfirm(int ucode);
+	
+	@Update("update FILE set FI_NM = CONCAT('/images/confirm/confirm_',#{ucode},'.',#{ext}) where fi_code=#{fi_code}")
+	public int FileUpdate(int ucode, String ext, int fi_code);
+	
+	@Insert("insert into file values(#{new_fi_Code},'img',concat('/images/confirm/confirm_',#{ucode},'.',#{ext}))")
+	public int InsertFileConfirm(int new_fi_Code, int ucode, String ext);
+	
+	@Insert("insert into confirm values(#{ucode}, #{new_fi_Code}, '미확인', null, null)")
+	public int InsertConfirm(int ucode, int new_fi_Code);
+	
+	@Select("select * from file where fi_code = #{fi_code}")
+	public FileDto SelectConfirmFile(int fi_code);
 	
 }

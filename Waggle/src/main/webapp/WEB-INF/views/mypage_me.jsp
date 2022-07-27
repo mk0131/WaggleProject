@@ -590,12 +590,12 @@ textarea {
 			<div class="middle-profile">
 				<div class="profile" style="text-align: center; display: flex; justify-content: center;">
 					<div class="profile-left" style="display: inline-block">
-						<c:if test = "${user_Pro == null}">
+						<c:if test = "${user_Pro == 0}">
 						<img src="/images/importToJsp/profile_default.jpg"
 							style="width: 100px; height: 100px">
 						</c:if>
-						<c:if test = "${user_Pro != null }">
-						<img src="${fi_Nm }" style="width:100px; height: 100px">
+						<c:if test = "${user_Pro != 0 }">
+						<img src="/images/profile/profile_${user_Pro }.jpg" style="width:200px; height: 200px; border-radius:200px">
 						</c:if>
 						<div style="font-weight: bold; font-size: 20pt">${user_Point } P</div>
 						<div>
@@ -656,10 +656,16 @@ textarea {
 							</div>
 
 						<!-- div style="margin-bottom:20px">|--------------|</div> -->
+						<c:if test="${condto != 0}">
+							<span style="font-size: 11pt; color: #898989">업로드한 자격증을 확인중입니다.</span>
+							<span style="font-size: 11pt; color: #2d7eac; margin-left: 5px" onclick="showProof();">파일 다시 업로드하기</span>
+						</c:if>
+						<c:if test="${condto == 0}">
 						<div>
 							<span style="font-size: 11pt; color: #898989">공인중개사이신가요?</span>
 							<span style="font-size: 11pt; color: #2d7eac; margin-left: 5px" onclick="showProof();">인증하기</span>
 						</div>
+						</c:if>
 					</c:if>
 					</div>
 				</div>
@@ -744,11 +750,16 @@ textarea {
 						</div>
 					</div>
 				</div>
-				
+					<form action="/mypage/confirm" method="post" enctype="multipart/form-data">
 						<!-- Upload Area -->
 						<div id="uploadArea" class="upload-area" style="display:none; margin-top:50px">
 						  <div class="upload-area__header">
+						  	<c:if test="${condto == 0}">
 						    <h1 class="upload-area__title">Upload your file</h1>
+						   	</c:if>
+						   	<c:if test="${condto != 0}">
+						   	<h1 class="upload-area__title">Change your file</h1>
+						   	</c:if>
 						    <p class="upload-area__paragraph">
 						      File should be an image
 						      <strong class="upload-area__tooltip">
@@ -765,7 +776,7 @@ textarea {
 						    <p class="drop-zoon__paragraph">Drop your file here or Click to browse</p>
 						    <span id="loadingText" class="drop-zoon__loading-text">Please Wait</span>
 						    <img src="" alt="Preview Image" id="previewImage" class="drop-zoon__preview-image" draggable="false">
-						    <input type="file" id="fileInput" class="drop-zoon__file-input" accept="image/*">
+						    <input type="file" name="myfile" data-max-file-size="5MB" id="fileInput" class="drop-zoon__file-input" accept="image/*">
 						  </div>
 						  <!-- End Drop Zoon -->
 						
@@ -781,13 +792,19 @@ textarea {
 						
 						      <div id="uploadedFileInfo" class="uploaded-file__info">
 						        <span class="uploaded-file__name">Project 1</span>
-						        <span class="uploaded-file__counter">0%</span>
+						        <button type="submit">자격증 업로드하기</button>
 						      </div>
 						    </div>
 						  </div>
 						  <!-- End File Details -->
+							<c:if test="${condto != 0}">
+								<br>
+								<div style="text-align:left">이전 업로드된 파일:</div>
+								<img src="${con_file_Name }" style="width:380px; height:380px">
+							</c:if>
 						</div>
 						<!-- End Upload Area -->
+				</form>
 			</div>
 		</div>
 	</div>

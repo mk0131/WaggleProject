@@ -469,9 +469,9 @@ div {
 					
 						//검색 주소에 해당하는 영상들 페이지에 뿌려주기
 						for(let i=0; i<result.length; i++){
-							if(result[i].fi_Nm.includes('jpg')){
+							if(result[i].fi_Nm.includes('jpg') || result[i].fi_Nm.includes('png') || result[i].fi_Nm.includes('jpeg') || result[i].fi_Nm.includes('tiff')){
 								$(".horizontal-scroll-wrapper").append('<div><a href="/board/detail?req_No='+result[i].req_No+'"><img class="detail_img" src='+result[i].fi_Nm+'></a></div>');
-							}else if(result[i].fi_Nm.includes('mp4')){
+							}else if(result[i].fi_Nm.includes('mp4') || result[i].fi_Nm.includes('avi')){
 								$(".horizontal-scroll-wrapper").append('<div><a href="/board/detail?req_No='+result[i].req_No+'"><video class="detail_video" controls ><source src='+result[i].fi_Nm+'></video></a></div>');
 							}
 						}

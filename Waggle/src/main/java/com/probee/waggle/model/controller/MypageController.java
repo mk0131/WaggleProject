@@ -13,8 +13,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.probee.waggle.model.component.FileSaver;
+import com.probee.waggle.model.dto.ConfirmDto;
 import com.probee.waggle.model.dto.FileDto;
 import com.probee.waggle.model.dto.MypageFinishlistDto;
 import com.probee.waggle.model.dto.MypageOtherDto;
@@ -51,6 +54,10 @@ public class MypageController {
 		MypageUsageDto reqTotal = mypageService.reqTotal(ucode);
 		MypageUsageDto resCancel = mypageService.resCancel(ucode);
 		MypageUsageDto resTotal = mypageService.resTotal(ucode);
+		ConfirmDto MyConfirm = mypageService.SelectMyConfirm(ucode);
+		
+		int ConF_Code = MyConfirm.getCo_FCode();
+		FileDto ConfirmFile = mypageService.SelectConfirmFile(ConF_Code);
 		double reqRatio = 0;
 		double resRatio = 0;
 		
@@ -64,6 +71,8 @@ public class MypageController {
 		}else {
 			resRatio = 0;
 		}
+		model.addAttribute("con_file_Name",ConfirmFile.getFi_Nm());
+		model.addAttribute("condto", MyConfirm.getCo_UCode());
 		model.addAttribute("reqCancel", reqCancel.getReqCancel());
 		model.addAttribute("reqTotal", reqTotal.getReqTotal());
 		model.addAttribute("resCancel", resCancel.getResCancel());
@@ -75,14 +84,16 @@ public class MypageController {
 	}
 	
 	
+	//프로필 사진 수정 컨트롤러
 	@PostMapping(value="/imageEdit")
-	public String ImageEdit(HttpServletRequest request, String imgUrl) {
+	public String ImageEdit(HttpServletRequest request, MultipartHttpServletRequest request2) {
 		HttpSession session = request.getSession();
 		int user_Code = (int)session.getAttribute("user_Code");
 		List<FileDto> lastFileLowList = mypageService.SelectLastFiCode();
 		
 		int new_Fi_Code = lastFileLowList.get(0).getFi_Code() + 1;
 		
+		// 프로필 사진 수정하기 버튼 누를때 fileDB에 형식 맞춰서 INSERT 됨.
 		int res = 0;
 		res = mypageService.ImageFileInsert(new_Fi_Code);
 		if (res > 0) {
@@ -91,6 +102,7 @@ public class MypageController {
 			System.out.println("이미지 파일 insert 실패");
 		}
 		
+		// 프로필 사진 수정하기 버튼 누를때 USERS DB의 프로필 코드 수정됨.
 		int res1 = 0;
 		res1 = mypageService.UserProChange(new_Fi_Code, user_Code);
 		if (res1 > 0) {
@@ -99,13 +111,80 @@ public class MypageController {
 			System.out.println("수정 실패");
 		}
 		
-		int res2 =fileSaver.saveCrawlImg(imgUrl, "/images/profile/profile_"+new_Fi_Code);
+		// 업로드 된 이미지를 로컬에 저장하는 코드
+		MultipartFile file = request2.getFile("myfile");
+		int res2 = mypageService.saveLocalProfile(new_Fi_Code, file, request2);
 		if(res2 >0) {
 			System.out.println("로컬에 이미지 저장 성공");
 		}else {
 			System.out.println("로컬에 이미지 저장 실패");
 		}
+		session.removeAttribute("user_Pro");
+		session.setAttribute("user_Pro", new_Fi_Code);
 		return "redirect:/mypage/profileEdit?ua_UCode=" + user_Code;
+	}
+	
+	//공인중개사 인증 업로드 컨트롤러
+	@PostMapping(value="/confirm")
+	public String Confirm(HttpServletRequest request, MultipartHttpServletRequest request2) {
+		HttpSession session = request.getSession();
+		int user_Code = (int)session.getAttribute("user_Code");
+		List<FileDto> lastFileLowList = mypageService.SelectLastFiCode();
+		
+		int new_Fi_Code = lastFileLowList.get(0).getFi_Code() + 1;
+		
+		ConfirmDto MyConfirm = mypageService.SelectMyConfirm(user_Code);
+		
+		MultipartFile file = request2.getFile("myfile");
+		String fileName = file.getOriginalFilename();
+		int pos = fileName.lastIndexOf(".");
+		String ext = fileName.substring(pos + 1);
+		
+		if(MyConfirm == null) {
+			//Confirm DB에 파일 없으면 파일 db 먼저 INSERT
+			int res = mypageService.InsertFileConfirm(new_Fi_Code, user_Code, ext);
+			if (res>0) {
+				System.out.println("파일DB INSERT 성공");
+			}else {
+				System.out.println("파일DB INSERT 실패");
+			};
+			
+			//file db insert 후 confirm db insert
+			int res1 = mypageService.InsertConfirm(user_Code, new_Fi_Code);
+			if (res1>0) {
+				System.out.println("CONFIRM DB INSERT 성공");
+			}else {
+				System.out.println("CONFIRM DB INSERT 실패");
+			};
+			
+			//로컬에 이미지 저장
+			int res2 = mypageService.saveLocalConfirm(user_Code, file, request);
+			if(res2>0) {
+				System.out.println("로컬에 자격증 이미지 저장 성공");
+			}else {
+				System.out.println("로컬에 자격증 이미지 저장 실패");
+			};
+			
+		} else {
+			int co_Fcode = MyConfirm.getCo_FCode();
+			// 업로드 된 이미지를 로컬에 저장하는 코드
+			int res2 = mypageService.saveLocalConfirm(user_Code, file, request);
+			if(res2>0) {
+				System.out.println("로컬에 자격증 이미지 저장 성공");
+			}else {
+				System.out.println("로컬에 자격증 이미지 저장 실패");
+			}
+			
+			// File DB에 Fi_Nm 업데이트
+			int res1 = mypageService.FileUpdate(user_Code, ext, co_Fcode);
+			if(res1>0) {
+				System.out.println("FI_NM 수정 성공");
+			}else {
+				System.out.println("FI_NM 수정 실패");
+			}
+			
+		}
+		return "redirect:/mypage/me";
 	}
 	
 	

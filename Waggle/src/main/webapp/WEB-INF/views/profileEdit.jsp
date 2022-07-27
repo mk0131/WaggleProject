@@ -208,16 +208,20 @@
          회원정보 수정하기
          </div>
          <div class="edit-profile-img" style="margin:0 auto; width:1000px; text-align:center">
-         	<form action="/mypage/imageEdit" method="post"> 
+         	<form action="/mypage/imageEdit" method="post" enctype="multipart/form-data">
+         	<c:if test="${user_Pro == 0 }">
             <div class="profile" style="background-image:url(/images/importToJsp/profile_default.jpg)">
+            </c:if>
+            <c:if test="${user_Pro != 0 }">
+            <div class="profile" style="background-image:url(/images/profile/profile_${user_Pro}.jpg)">
+            </c:if>
               <label class="edit">
                 <span>&#10002;</span>
-                <input type="file" id="imginput"/>
+                <input type="file" name="myfile" data-max-file-size="5MB">
               </label>
               <div class="delete" onclick="removeimg()">&times;</div>
             </div>
-            <input type="hidden" id="imgUrl" name="imgUrl" value="">
-            <input type="submit" id="img-input" value="프로필사진 수정하기" style="margin-top:20px">
+            <input type="submit" value="프로필사진 수정하기" style="margin-top:20px">
             </form>
          </div>
          <div class="edit-profile-info" style="margin:0 auto; width:500px">
@@ -348,22 +352,33 @@ function removeimg() {
 $(function(){
 
 //프로필 사진 수정 시작
-var input = document.getElementById("imginput");
 var image = document.querySelector('.profile');
-
-input.addEventListener('change', function(event){
-  var reader = new FileReader();
-  reader.onload = function(e){
-    setImageUrl(e.target.result);
-    $("#imgUrl").attr("value",e.target.result);
-    console.log($("#imgUrl").val());
-  };
-  reader.readAsDataURL(event.target.files[0]);
-});
 
 function setImageUrl(url){
   image.style.backgroundImage = 'url('+url+')';
 };
+
+$("input[name=myfile]").off().on("change", function(){
+	  var reader = new FileReader();
+	  reader.onload = function(e){
+	    setImageUrl(e.target.result);
+	  };
+	  reader.readAsDataURL(event.target.files[0]);
+	
+		if (this.files && this.files[0]) {
+	
+			var maxSize = 20 * 1024 * 1024;
+			var fileSize = this.files[0].size;
+	
+			if(fileSize > maxSize){
+				alert("첨부파일 사이즈는 5MB 이내로 등록 가능합니다.");
+				$(this).val('');
+				return false;
+			}
+		}
+		
+		
+	});
 
 //프로필 사진 수정 끝
 
