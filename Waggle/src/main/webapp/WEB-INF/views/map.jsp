@@ -357,7 +357,7 @@ div {
 			if(userimg[i] != ""){
 				window['imageSrc'+i] = userimg[i]; // 마커이미지의 주소입니다    
 			}else {
-				window['imageSrc'+i] = '/images/profile/profile_default.jpg';
+				window['imageSrc'+i] = '/images/importToJsp/profile_default.jpg';
 			}
 			
 		    var imageSize = new kakao.maps.Size(64, 69); // 마커이미지의 크기입니다
