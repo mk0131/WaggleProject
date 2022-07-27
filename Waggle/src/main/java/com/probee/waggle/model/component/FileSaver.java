@@ -8,6 +8,8 @@ import java.io.IOException;
 import java.net.URL;
 import java.nio.file.Path;
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 
 import javax.imageio.ImageIO;
@@ -16,7 +18,10 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ResourceLoader;
 import org.springframework.stereotype.Component;
+import org.springframework.util.FileCopyUtils;
 import org.springframework.web.multipart.MultipartFile;
+
+import com.google.common.io.Files;
 
 @Component
 public class FileSaver {
@@ -107,32 +112,41 @@ public class FileSaver {
 		// 파일 각각 저장하고 path list를 리턴
 		List<String> answer = new ArrayList<String>();
 		
+		
 		int cnt = 1;
 		
-		String path = null;
 		String staticpath1 = Path.of(resourceLoader.getResource("classpath:static").getURI()).toString().replace("\\", "/");
-		String staticpath2 = request.getSession().getServletContext().getRealPath("/");
-		System.out.println(staticpath1);
+		String staticpath2 = request.getSession().getServletContext().getRealPath("/").replace("\\", "/");
 
-		staticpath2 = staticpath2.substring(0, staticpath2.lastIndexOf("\\"));
-		staticpath2 = staticpath2.substring(0, staticpath2.lastIndexOf("\\"));
-		staticpath2 += "\\resources\\static";
+		staticpath2 = staticpath2.substring(0, staticpath2.lastIndexOf("/"));
+		staticpath2 = staticpath2.substring(0, staticpath2.lastIndexOf("/"));
+		staticpath2 += "/resources/static";
 
 		for (MultipartFile file: files) {
 
 			String fileName = file.getOriginalFilename();
-
+			// 파일 경로생성
 			int pos = fileName.lastIndexOf(".");
 			String ext = fileName.substring(pos + 1);
+			String path = "/images/result/result"+req_No+"_"+cnt+"."+ext;
+			// 파일 생성
+			File realFile2 = new File(staticpath2 + path);
 
-			path = "\\images\\result\\result"+req_No+"_"+cnt+"."+ext;
-
-			File realFile = new File(staticpath2 + path);
 			// 경로가 있는지 확인해서 없으면 경로 생성
-			if(!realFile.exists()) {
-				realFile.createNewFile();
+			if(!realFile2.exists()) {
+				realFile2.createNewFile();
 			} 
-			file.transferTo(realFile);
+			file.transferTo(realFile2);
+			
+			// target 위치에 파일 복사
+			File realFile1 = new File(staticpath1 + path);
+
+			// 경로가 있는지 확인해서 없으면 경로 생성
+			if(!realFile1.exists()) {
+				realFile1.createNewFile();
+			}
+			
+			FileCopyUtils.copy(realFile2, realFile1);
 			
 			// 성공하면 경로명 저장
 			answer.add(path);
@@ -140,7 +154,9 @@ public class FileSaver {
 			cnt += 1;
 		}
 		
+		
 		return answer;
 	}
+	
 	
 }
