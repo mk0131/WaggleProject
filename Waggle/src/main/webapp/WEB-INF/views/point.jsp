@@ -7,7 +7,35 @@
 <head>
 <link rel="stylesheet" href="//brick.a.ssl.fastly.net/Roboto:400"/>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>포인트 충전</title>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<!-- iamport.payment.js -->
+<script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.2.0.js"></script>
+<script type="text/javascript">
+	var IMP = window.IMP;
+	IMP.init("TC0ONETIME");  
+	
+	function requestPay() {
+        IMP.request_pay({
+            pg : 'kakaopay',
+            pay_method : 'card',
+            merchant_uid: "57008833-33004", 
+            name : '당근 10kg',
+            amount : 1004,
+            buyer_email : 'Iamport@chai.finance',
+            buyer_name : '아임포트 기술지원팀',
+            buyer_tel : '010-1234-5678',
+            buyer_addr : '서울특별시 강남구 삼성동',
+            buyer_postcode : '123-456'
+        }, function (rsp) { // callback
+            if (rsp.success) {
+                console.log(rsp);
+            } else {
+                console.log(rsp);
+            }
+        });
+    }
+</script>
 <style>
 .middle {
 	margin: 0;
@@ -156,6 +184,12 @@ input:focus ~ .bar:before, input:focus ~ .bar:after {
 	font-size: 30px;
 }
 
+.paging li {
+	list-style: none;
+	display: inline-block;
+
+}
+
 /*
 #pagination {
   display: flex;
@@ -175,12 +209,12 @@ input:focus ~ .bar:before, input:focus ~ .bar:after {
 					<li><a href="javascript:void(0)"> <i
 							class="fa-solid fa-house"></i>
 					</a></li>
-					<p>HOME > 포인트 충전하기</p>
+					<p>HOME > 포인트 충전</p>
 				</ul>
 			</div>
 	
 			<div class="money-container">
-				<div class="money-title">포인트 충전</div>
+				<div class="money-title"><p>포인트 충전</p></div>
 				<form>
 					<div class="money">
 						<div class="img-x">
@@ -225,6 +259,7 @@ input:focus ~ .bar:before, input:focus ~ .bar:after {
 			</div>
 			<div class="blank"></div>
 		</div>
+		
 		<div class="middle-bottom">
 			<div class="point-history">
 			
@@ -234,44 +269,62 @@ input:focus ~ .bar:before, input:focus ~ .bar:after {
 				<div class="history-main" style="margin:0 auto; width:1000px">
 					<div class="pointcharge">
 					</div>
-						<c:forEach var="list" items="${use}">
+						<c:forEach var="dto" items="${list}">
 							<div class="pointuse" style="border-bottom: 1px solid #898989; width:1000px; height:130px; margin-top:18px">
 								<div class="use-left"  style="width:110px; height:110px; display:inline-block">
 									<div style="width:100px; height:100px; border:5px solid #898989; border-radius:150px; color:#898989; font-size:20pt; text-align:center; line-height:100px; float:left">
-									사용
+									${dto.type}
 									</div>
 								</div>
 								<div class="use-middle" style="width:650px; height:110px; padding-left:35px; display:inline-block">
-									<div>${list.po_Date}</div>
-									<div style="font-size:20pt">포인트 사용</div>
-									<div style="padding-top:30px">현재 포인트: ${user_Point }원</div>
+									<div>${dto.date}</div>
+									<div style="font-size:20pt">포인트 ${dto.type}</div>
+									<div style="padding-top:30px">잔여 포인트: &nbsp;${dto.price_Sum}&nbsp;P</div>
 								</div>
 								<div class="use-right" style="width:200px; height:110px; display:inline-block; text-align:center; float:right">
-									<div style="font-size:30pt">-${list.po_Point} 원</div>
+									<c:choose>
+										<c:when test="${dto.type eq '사용'}">
+											<div style="font-size:30pt">-${dto.price} P</div>
+										</c:when>
+										<c:otherwise>
+											<div style="font-size:30pt">+${dto.price} P</div>
+										</c:otherwise>
+									</c:choose>
 									<div style="border:1px solid #3a3a3a; border-radius:10px; width:100px; height:30px; text-align:center; line-height:30px; margin-left:55px; color:#3a3a3a">내역삭제</div>						
 								</div>
 							</div>
 						</c:forEach>
 				</div>
+				<div>
+					<ul class="paging">
+						<c:if test="${paging.prev}">        
+							<li id="paging">
+								<a href='<c:url value="/point/use?page=${paging.startPage-1}"/>'>이전</a>
+							</li>    
+						</c:if>
+						<c:forEach begin="${paging.startPage}" end="${paging.endPage}" var="num">
+							<li>
+								<a href='<c:url value="/point/use?page=${num}"/>'>${num}</a>
+							</li>    
+						</c:forEach>
+						<c:if test="${paging.next && paging.endPage > 0}">        
+							<li>
+								<a href='<c:url value="/point/use?page=${paging.endPage+1}"/>'>다음</a>
+							</li>    
+						</c:if>
+					</ul>
+				</div>
 			
 		
 			</div>
-			
 		</div>
-		
-		
-		
 		
 	</div>
 
 	<%@ include file="footer.jsp"%>
-
-    <script>
-	$(document).ready(function(){
-		$("fo")
-		
-	})
-	
-    </script>
 </body>
+<script>
+
+
+</script>
 </html>

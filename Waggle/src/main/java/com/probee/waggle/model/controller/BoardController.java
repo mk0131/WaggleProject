@@ -18,6 +18,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.google.gson.Gson;
+import com.probee.waggle.model.dto.FileDto;
 import com.probee.waggle.model.dto.HomeDto;
 import com.probee.waggle.model.dto.PointsDto;
 import com.probee.waggle.model.dto.RequestDto2;
@@ -427,9 +428,12 @@ public class BoardController {
 		model.addAttribute("userName", userName);
 		
 		ResultDto result = boardService.selectResult(req_No);
+		List<FileDto> fi_list = boardService.selectResultFile(result.getRes_Code());
+
 		Gson gson = new Gson();
 		
 		model.addAttribute("res_dto", gson.toJson(result));
+		model.addAttribute("fi_list", fi_list);
 		
 		return "detail/recompleteform";
 	}
