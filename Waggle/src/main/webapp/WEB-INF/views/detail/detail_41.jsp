@@ -284,10 +284,10 @@ div#progress_percentage::after {
 */
 #modal.modal-overlay {
             width: 100%;
-            height: 400px;
+            height: 500px;
             position: absolute;
             left: 0;
-            top: 1490px;
+            top: 1500px;
             display: none;
             flex-direction: column;
             align-items: center;
@@ -492,8 +492,20 @@ div#progress_percentage::after {
 		       	</tr>
 		       </tbody>
 	       </table>
-	       
+			<div id="modal" class="modal-overlay">
+        <div class="modal-window">
+            <div class="title">
+                <h2>100 P 지불하고 후기 내용 보기</h2>
+            </div>
+            
+            <div class="content">
+                <input type="button" id="modalbtn" value="100 P 소모" onclick="">
+                
+            </div>
+        </div>
+    </div>       
 		   <br/><br/><hr class="my-hr">
+		 
 		   
 		   <br><h4>기본 선택사항</h4>
 		   <table class="ongoing21-content2">

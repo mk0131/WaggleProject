@@ -277,6 +277,7 @@ input {
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js"></script>
 	<script type="text/javascript" src="https://static.nid.naver.com/js/naverLogin_implicit-1.0.3.js" charset="utf-8"></script>
+	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=df487b49cd90a64d7305e577e300f2e4&libraries=services,clusterer,drawing"></script>
 <script type="text/javascript">
 
 	$(function(){
@@ -307,7 +308,7 @@ input {
 			$('.email_form_check').css("display","none");
 			$('.nm_form_check').css("display","none");
 			$('.age_form_check').css("display","none");
-			$('#id_input').val(null);
+			$('#id_input2').val(null);
 			$('#pw_input').val(null);
 			$('#pw_chk').val(null);
 			$('#user_Email').val(null);
@@ -327,6 +328,8 @@ input {
 		})
 		/* 다음 주소 연동*/
 		$("#address").on("click",function(){
+			var width = 500; //팝업의 너비
+			var height = 600; //팝업의 높이
 			new daum.Postcode({
 		        oncomplete: function(data) {
 		        	// 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
@@ -372,7 +375,11 @@ input {
 	                $("#daddr").attr("readonly",false);
 	                $("#daddr").focus();
 		        }
-		    }).open();
+		    }).open({
+		    	left: (window.screen.width / 2) - (width / 2),
+	    	    top: (window.screen.height / 2) - (height / 2),
+	    		popupName: 'AddrSearch'
+		    });
 		})
 		
 		
@@ -384,7 +391,7 @@ input {
 <body>
 
 	<%@ include file="header.jsp"%>
-	<div id="wrap">
+	<div id="wrap" >
 		<div class="middle">
 			<div class="guideline">
 			<ul class="guideline-all">
@@ -542,6 +549,7 @@ input {
 								} else {
 									checkBox.attr("disabled", false);
 									code = data;
+									console.log(code);
 									$('.find_input_re_3').css("display","none");
 								}
 								
@@ -652,6 +660,7 @@ input {
 								} else {
 									checkBox.attr("disabled", false);
 									code = data;
+									console.log(code);
 									$('.find_input_re_3').css("display","none");
 								}
 								
@@ -727,7 +736,7 @@ input {
 					<div>
 						<br>
 						<b style="text-align: left;">아이디</b> <br> 
-						<input type="text" id="id_input" name="user_Id" placeholder="  아이디" style="width: 400px;">
+						<input type="text" id="id_input2" name="user_Id" placeholder="  아이디" style="width: 400px;">
 						<input type="button" id="id_chk" value="중복 확인" style="width: 80px;">
 						<br>
 						<span class="id_input_re_1">사용 가능한 아이디입니다.</span>
@@ -785,6 +794,8 @@ input {
 							<input type="button" id="address" value="주소찾기" style="width: 100px;">
 						<input type="text" name="ua_Addr" id="addr" placeholder="  주소"
 							style="width: 500px;" readonly="readonly"> 
+							<input type="hidden" name="ua_Lat" id="ua_Lat">
+							<input type="hidden" name="ua_Lng" id="ua_Lng">
 							<input type="text" name="ua_DAddr" id="daddr" placeholder="  상세주소"
 							style="width: 500px;" readonly="readonly">
 							<br>
@@ -1100,8 +1111,9 @@ input {
 	
 	//아이디 중복검사
 	$('#id_chk').on("click", function(){ // 아이디 입력마다 값을 확인
-		let user_Id = $('#id_input').val();
-		let warnMsg = $(".id_form_check"); // 비밀번호 경고글
+		let user_Id = $('#id_input2').val();
+		console.log(user_Id);
+		let warnMsg = $(".id_form_check"); 
 		 $('.final_id_ck').css('display', 'none');
 		let data = {user_Id : user_Id}
 		
@@ -1113,7 +1125,7 @@ input {
 	        warnMsg.css("display", "inline-block");
 	        $('.id_input_re_1').css("display", "none");
 	        $('.id_input_re_2').css("display", "none");
-	        $("#id_input").val(null);
+	        $("#id_input2").val(null);
 	        return false;
 	    } 
 		
@@ -1131,7 +1143,7 @@ input {
 					$('.id_input_re_2').css("display","inline-block");
 					$('.id_input_re_1').css("display", "none");
 					warnMsg.css("display", "none");
-					$('#id_input').val(null);
+					$('#id_input2').val(null);
 					idckCheck = false;
 				}
 			}
@@ -1205,6 +1217,7 @@ input {
 				if(data != 'fail'){
 					checkBox.attr("disabled", false);
 					code = data;
+					console.log(code);
 					$('.email_input_re_3').css("display","none");
 				} else {
 					$('.email_input_re_3').css("display","inline-block");
@@ -1290,13 +1303,28 @@ input {
 	})
 	
 	$('#regist_com').on("click" , function(){ // 회원가입 버튼
-		var id = $('#id_input').val();                 // id 입력란
+		var id = $('#id_input2').val();                 // id 입력란
         var pw = $('#pw_input').val();                // 비밀번호 입력란
         var pwck = $('#pw_chk').val();            // 비밀번호 확인 입력란
         var name = $('#nm_input').val();            // 이름 입력란
         var mail = $('#email_input').val();            // 이메일 입력란
-        var addr = $('#daddr').val();        // 상세 주소 입력란
+        var daddr = $('#daddr').val();        // 상세 주소 입력란
         var age = $('#age_input').val();
+        
+        //받은 주소값을 위도 경도로 바꿔서 input hidden 값에 value값으로 넣어주기
+        var geocoder = new kakao.maps.services.Geocoder();
+        var addr = $('#addr').val();
+        geocoder.addressSearch(addr, function(result, status) {
+        	
+		    // 정상적으로 검색이 완료됐으면 
+		     if (status === kakao.maps.services.Status.OK) {
+				$("#ua_Lat").attr('value',result[0].y);
+				$("#ua_Lng").attr('value',result[0].x);
+		    } else {
+		    	console.log("에러");
+		    }
+		});  
+        
         
         if(id == ""){
             $('.final_id_ck').css('display','block');
@@ -1338,7 +1366,7 @@ input {
             emailCheck = true;
         }
         
-        if(addr == ""){
+        if(daddr == ""){
             $('.final_addr_ck').css('display','block');
             addressCheck = false;
         }else{
