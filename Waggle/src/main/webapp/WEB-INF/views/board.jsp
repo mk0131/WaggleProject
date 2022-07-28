@@ -36,7 +36,161 @@
 	font-size: 14px;
 }
 
+/* .board {
+  	width: 800px;
+  	margin-left: auto;
+  	margin-right: auto;
+  	position: relative;
+}
 
+#js-pagination li{
+	list-style: none; display:inline; margin-left: 5px;
+}
+
+#js-pagination li a{
+	color: black;
+	float: left;
+	padding: 8px 16px;
+	text-decoration: none;
+	border-radius: 0.9em;
+	transition: all ease-in-out 0.2s;
+}
+
+#js-pagination li a:hover {
+  background-color: black;
+  color: white;
+}
+
+.active {
+  background-color: #FFFF99;
+  color: black;
+}
+
+.req-btn {
+	background: white;
+	font-family: inherit;
+	padding: 0.6em 1.3em;
+	font-weight: 500;
+	font-size: 14px;
+	border: 3px solid black;
+	border-radius: 0.4em;
+	box-shadow: 0.1em 0.1em;
+	font-style: italic;
+}
+
+.req-btn:hover {
+	transform: translate(-0.05em, -0.05em);
+	box-shadow: 0.15em 0.15em;
+}
+
+.req-btn:active {
+	transform: translate(0.05em, 0.05em);
+	box-shadow: 0.05em 0.05em;
+} */
+
+
+
+/* 여기가 찐!!!!!!!!!!!!!!  
+
+.paging {
+	text-align: center;
+}
+
+.paging li {
+	list-style: none;
+	display: inline-block;
+}
+
+.board-all {
+
+}
+
+#board-img {
+	border-radius: 18px;
+	position: relative;
+}
+
+.board-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    width: 60%;
+    margin: 0 auto;
+    
+}
+
+#content-all {
+	padding: 20px;
+	/* text-align: center;
+}
+
+img {
+	width: 495px;
+    height: 465px;
+    border-radius: 6px;
+    object-fit: cover;
+}
+
+#req-stat {
+	background-color: #fff;
+	border-radius: 18px;
+	border-style: none;
+	color: #222;
+	font-size: 12px;
+	padding: 4px 12px;
+}
+
+#req-stat {
+	position: absolute;
+    font-weight: bold;
+    left: 20px;
+    top: 17px;
+}
+
+.req-btn {
+	border-radius: 8px;
+    box-sizing: border-box;
+    font-size: 13px;
+    font-weight: 600;
+    font-family: inherit;
+    letter-spacing: .25px;
+    line-height: normal;
+    padding: 5px 5px;
+    background-color: #fff;
+    border: 1px solid #d3d3d3;
+    color: #222222;
+    padding: 10px;
+    width: 120px;
+}
+
+.req-btn:disabled {
+	 pointer-events: none;
+}
+
+.req-btn:hover {
+	 color: #fff;
+	 background-color: #1A1A1A;
+	 box-shadow: rgba(0, 0, 0, 0.25) 0 8px 15px;
+	 transform: translateY(-2px);
+}
+
+.req-btn:active {
+	 box-shadow: none;
+	 transform: translateY(0);
+}
+
+.board {
+	display: flex;
+    justify-content: flex-end;
+    max-width: 80%;
+    font-weight: bold;
+}
+
+#board-point {
+	font-weight: bold;
+}
+
+ */
+ 
 .paging {
 	text-align: center;
 }
@@ -60,14 +214,11 @@
 	color: #878787;
 }
 
-#board-content-nothing {
-	text-align: center;
-}
-
 img {
 	width: 310px;
     height: 300px;
     object-fit: cover;
+    border-radius: 10px;
 }
  
 #board-img {
@@ -125,6 +276,8 @@ img {
  
 #board-ltd-box {
 	padding: 0 12px;
+/* 	padding-left: 0;
+	padding-right: 0; */
 	flex: 1;
 } 
 
@@ -208,25 +361,27 @@ img {
    	 <div class="board-content">
           <c:choose>
              <c:when test="${empty list }">
-                   <p id="board-content-nothing">문의 내용이 없습니다.</p>
+                <tr>
+                   <td colspan="4" class="board-content">문의 내용이 없습니다.</td>
+                </tr>
              </c:when>
              <c:otherwise>
                 <c:forEach items="${list }" var="dto">
                 	<div class="board-content-all" id="content-all">
 
-					 <div class="board-content-inner" id="board-img">
+					 <div class="board-content-inner" id="board-img" onclick="location.href='/board/detail?req_No=${dto.req_No}'">
 					  <img src=${dto.fi_Nm }>
 					 </div>
 					 
 					  <div id="board-text">
-					   <div class="board-content-inner" id="board-stat">
+					   <div class="board-content-inner" id="board-stat" onclick="location.href='/board/detail?req_No=${dto.req_No}'">
 					    <label id="req-stat">${dto.req_Stat }</label>
 					   </div>
-					    <div class="board-content-inner" id="board-title">${dto.req_Title }</div>
-					     <div class="board-content-inner" id="board-point">${dto.req_Point }&nbsp;<i class="fa-solid fa-p"></i></div>
+					    <div class="board-content-inner" id="board-title" onclick="location.href='/board/detail?req_No=${dto.req_No}'">${dto.req_Title }</div>
+					     <div class="board-content-inner" id="board-point" onclick="location.href='/board/detail?req_No=${dto.req_No}'">${dto.req_Point }&nbsp;<i class="fa-solid fa-p"></i></div>
 						
-						 <h4 class="board-content-inner" id="board-ltd-title">요청 정보</h4>
-						  <div class="board-content-inner" id="board-dl-dt-dd">	
+						 <h4 class="board-content-inner" id="board-ltd-title" onclick="location.href='/board/detail?req_No=${dto.req_No}'">요청 정보</h4>
+						  <div class="board-content-inner" id="board-dl-dt-dd" onclick="location.href='/board/detail?req_No=${dto.req_No}'">	
 							<dl id="board-dl">
 							  <div id="board-ltd-box">
 								<dt id="board-dt">주소</dt>
@@ -275,4 +430,5 @@ img {
     
 	<%@ include file="footer.jsp" %>
 </body>
+
 </html>

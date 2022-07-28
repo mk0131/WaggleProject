@@ -12,6 +12,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.probee.waggle.model.component.FileSaver;
 import com.probee.waggle.model.component.SeleniumCrawler;
+import com.probee.waggle.model.dto.Criteria;
 import com.probee.waggle.model.dto.FileDto;
 import com.probee.waggle.model.dto.PointsDto;
 import com.probee.waggle.model.dto.RequestDto2;
@@ -39,8 +40,8 @@ public class BoardServiceImpl implements BoardService{
 	FileSaver fileSaver;
 	
 	@Override
-	public List<RequestDto2> selectList() {
-		return boardMapper.selectList();
+	public List<RequestDto2> selectList(Criteria cri) {
+		return boardMapper.selectList(cri);
 	}
 
 	@Override
@@ -236,6 +237,9 @@ public class BoardServiceImpl implements BoardService{
 		return boardMapper.updateResult(dto);
 	}
 	
-
+	@Override
+	public int boardListCnt() {
+		return boardMapper.boardListCnt();
+	}
 
 }
