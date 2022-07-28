@@ -6,6 +6,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.web.multipart.MultipartFile;
 
+import com.probee.waggle.model.dto.Criteria;
 import com.probee.waggle.model.dto.FileDto;
 import com.probee.waggle.model.dto.PointsDto;
 import com.probee.waggle.model.dto.RequestDto2;
@@ -16,7 +17,7 @@ import com.probee.waggle.model.dto.UsersDto2;
 
 public interface BoardService {
 
-	public List<RequestDto2> selectList();
+	public List<RequestDto2> selectList(Criteria cri);
 	public RequestDto2 selectRequest(int req_No);
 	public int updateFCode(int req_No, int req_FCode);
 	public int insertRequest(RequestDto2 dto);
@@ -47,5 +48,5 @@ public interface BoardService {
 	public int saveLocal(int req_No, List<MultipartFile> files, int res_Code, HttpServletRequest request);
 	public int updateResult(ResultDto dto);
 
-
+	public int boardListCnt();
 }
