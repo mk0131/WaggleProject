@@ -206,7 +206,7 @@ public class BoardServiceImpl implements BoardService{
 			int pos = fi_nm.lastIndexOf(".");
 			String ext = fi_nm.substring(pos + 1);
 
-			if(ext.equals("mp4")) {
+			if(ext.equals("mp4") || ext.equals("avi")) {
 				fi_dto.setFi_Type("video");				
 			} else {
 				fi_dto.setFi_Type("img");

@@ -147,6 +147,7 @@ div#detail_container {
     font-size: 14px;
     width: 800px;
     margin-top: 20px;
+    padding-right:80px;
     
 }
 
@@ -158,6 +159,8 @@ div#file_container img {
 div#file_container {
 	float: left;
 	width: 400px;
+	height:450px;
+	padding-top: 50px;
 }
 
 div#review_containser{
@@ -209,6 +212,157 @@ div#review_containser{
 .rating__input:checked ~ .rating__label .rating__icon--star {
   color: #ddd;
 }
+
+
+/* 파일 업로드 css 시작 */
+#upload{
+	float: left;
+	clear: both;
+	width: 100%;
+	padding: 2rem 1.5rem;
+	text-align: center;
+	background: #fff;
+	border-radius: 7px;
+	border: 3px solid #eee;
+	box-sizing: border-box;
+	transition: all .2s ease;
+	user-select: none;
+	color: #5f6982;
+}
+
+#upload:hover{
+	border-color: #454cad;
+}
+
+#file-upload{
+	display: none;
+}
+
+#error{
+	display: none;
+	color: red;
+	margin-bottom: 5px;
+}
+
+#warning{
+	display: none;
+	color: orange;
+	margin-bottom: 5px;
+}
+
+#files{
+	display: block;
+}
+
+#files .file-thumb{
+	display: inline-block;
+	margin: 5px;
+	position: relative;
+	border-radius: 5px;
+	border: 1px solid black;
+}
+
+#files img{
+	height: 7.5em;
+	object-fit: cover;
+}
+
+#files .file-thumb .fa-times{
+	position: absolute;
+	right: 0;
+	top: 0;
+	color: black;
+	margin: 3px;
+}
+
+#files .progress{
+	display: none;
+	position: absolute;
+	top: 0;
+	left: 0;
+	height: 100%;
+	width: 100%;
+	background-color: rgba(0, 0, 0, 0.3);
+}
+
+#files .progress .fill{
+	position: absolute;
+	top: 0;
+	left: 0;
+	height: 100%;
+	width: 0%;
+	background-color: rgba(0, 0, 0, 0.5);
+	transition: width 0.2s ease;
+}
+
+#files .progress .value{
+	position: absolute;
+	top: 0;
+	left: 0;
+	height: 100%;
+	width: 100%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	color: white;
+}
+
+#files .file-thumb .status{
+	position: absolute;
+	height: 1em;
+	width: 1em;
+	border-radius: 2px;
+	border: 1px solid black;
+	background-color: white;
+	bottom: -0.3em;
+	right: -0.3em;
+	color: green;
+}
+
+#icon{
+	font-size: 4rem;
+	margin-bottom: 1rem;
+	transition: all .2s ease-in-out;
+}
+
+.hover{
+	border: 3px solid #454cad !important;
+	box-shadow: inset 0 0 0 6px #eee;
+}
+
+.hover #icon{
+	transform: scale(0.8);
+	opacity: 0.3;
+}
+
+#btn{
+	display: inline-block;
+	background-color: #454cad;
+	color: white;
+	padding: 8px 12px;
+	margin: 10px 0;
+	border-radius: 5px;
+}
+
+#upload-btn{
+	display: none;
+	color: white;
+	height: 3em;
+	width: 15em;
+	border-radius: 5px;
+	background-color: #4564ad;
+}
+
+#upload-btn:focus{
+	outline: none;
+}
+
+/*style rules for the page*/
+#multi-file-upload{
+	text-align: center;
+	margin: auto 25%;
+}
+/*파일 업로드 css 끝 */
 
 </style>
 </head>
@@ -414,6 +568,7 @@ div#review_containser{
 		   <br><h4>디테일 요청사항</h4>
 		   <div id="detail_container">
 		    <div id="file_container">
+		    	<!-- 
 		     <c:forEach items="${fi_list}" var="fi_dto">
 		     	<c:choose>
 		     		<c:when test="${fi_dto.fi_Type eq 'img' }">
@@ -425,6 +580,8 @@ div#review_containser{
 		     	</c:choose>
 		     </c:forEach>
 		     <input type="file" name="myfile" multiple="multiple" data-max-file-size="20MB">
+		      -->
+		       <div id="multi-file-upload"></div>
 		    </div>
 		    <div id="review_containser">
 		     <span style="font-size: 12pt;">간단한 집 평가</span>
@@ -473,11 +630,11 @@ div#review_containser{
 	
 		if (this.files && this.files[0]) {
 	
-			var maxSize = 20 * 1024 * 1024;
+			var maxSize = 100 * 1024 * 1024;
 			var fileSize = this.files[0].size;
 	
 			if(fileSize > maxSize){
-				alert("첨부파일 사이즈는 5MB 이내로 등록 가능합니다.");
+				alert("첨부파일 사이즈는 100MB 이내로 등록 가능합니다.");
 				$(this).val('');
 				return false;
 			}
@@ -511,6 +668,278 @@ div#review_containser{
 	});
 
 </script>
+<script>
+class Upload{
+	constructor(selector){
+		this.root = document.querySelector(selector);
+		//container upload
+		this.obj = document.createElement('div');
+		this.obj.setAttribute('id', 'upload');
+		this.obj.setAttribute('style','width:300px');
+		this.root.appendChild(this.obj);
+		//input object
+		this.input = document.createElement('input');
+		this.input.setAttribute('type', 'file');
+		this.input.setAttribute('multiple', 'multiple');
+		this.input.setAttribute('name', 'myfile');
+		this.input.setAttribute('data-max-file-size', '100MB');
+		this.input.setAttribute('id', 'file-upload');
+		this.obj.appendChild(this.input);
+		//error div
+		this.error = document.createElement('div');
+		this.error.setAttribute('id', 'error');
+		this.obj.appendChild(this.error);
+		//warning div
+		this.warning = document.createElement('div');
+		this.warning.setAttribute('id', 'warning');
+		this.obj.appendChild(this.warning);
+		//thumbs container
+		this.thumbs = document.createElement('div');
+		this.thumbs.setAttribute('id', 'files');
+		this.obj.appendChild(this.thumbs);
+		//download icon
+		this.icon = document.createElement('i');
+		this.icon.setAttribute('class', 'fa fa-download');
+		this.icon.setAttribute('id', 'icon');
+		this.obj.appendChild(this.icon);
+		//message div
+		this.message = document.createElement('div');
+		this.message.setAttribute('id', 'message');
+		this.message.innerText = '업로드할 이미지를 클릭하거나 드래그 해주세요';
+		this.obj.appendChild(this.message);
+		//button
+		this.btn = document.createElement('div');
+		this.btn.setAttribute('id', 'btn');
+		this.btn.innerText = '파일 찾기';
+		this.obj.appendChild(this.btn);
+		//adding event listeners
+		this.input.addEventListener('change', this.__fileSelectHandler__, false);
+		this.obj.addEventListener('click', () => {this.input.click()}, false);
+		this.obj.addEventListener('dragover', this.__fileDragHover__, false);
+		this.obj.addEventListener('dragleave', this.__fileDragHover__, false);
+		this.obj.addEventListener('drop', this.__fileSelectHandler__, false);
+		this.upload.addEventListener('click', this.__upload__, false);
+		//file list
+		this.files = [];
+		this.sizeLimit = this.root.dataset.maxsize?parseFloat(this.root.dataset.maxsize):5;
+		this.aboveLimit = [];
+	}
 
+	__fileDragHover__  = (e) => {
+		e.stopPropagation();
+		e.preventDefault();
+
+		this.obj.className = (e.type === 'dragover' ? 'hover' : '');
+	}
+
+	__fileSelectHandler__ = (e) => {
+		var files = e.target.files || e.dataTransfer.files;
+		this.__fileDragHover__(e);
+		this.error.style.display = 'none';
+		this.message.style.display = 'none';
+
+		var name;
+
+		for (var i = 0, file; file = files[i]; i++) {
+			name = this.__parseFile__(file);
+			if (name != undefined) {this.aboveLimit.push(name)}
+		}
+		this.__warning__();
+		e.stopPropagation();
+		e.preventDefault();
+		this.input.value = "";
+	}
+
+
+	__parseFile__ (file){
+		var isGood = file.type.indexOf('image')!=-1?true:false;
+		var isGood2 = file.type.indexOf('video')!=-1?true:false;
+		var isEmpty = () => {
+			if (!this.thumbs.childElementCount){
+				this.icon.style.display = "block";
+				this.message.style.display = "block";
+				this.btn.innerText = 'Select a file';
+				this.upload.style.display = "none";
+			}
+		}
+		if (isGood){
+			this.icon.style.display = "none";
+			this.message.style.display = "none";
+			this.btn.innerText = "파일 추가하기";
+			//creating thumbnail
+			var div = document.createElement('div');
+			div.setAttribute('class', 'file-thumb');
+			div.setAttribute('style', 'width:240px');
+			this.thumbs.appendChild(div);
+			var img = document.createElement('img');
+			img.setAttribute('width','100%');
+			img.src = URL.createObjectURL(file);
+			div.appendChild(img);
+			var prog = document.createElement('div');
+			prog.setAttribute('class', 'progress');
+			div.appendChild(prog);
+			var fill = document.createElement('div');
+			fill.setAttribute('class', 'fill');
+			prog.appendChild(fill);
+			var val = document.createElement('div');
+			val.setAttribute('class', 'value');
+			val.innerText = '0%';
+			prog.appendChild(val);
+			var i = document.createElement('i');
+			i.setAttribute('class', 'fa fa-times');
+			div.appendChild(i);
+			//append file to the list
+			var obj = {
+				file: file,
+				node: div,
+			};
+			//binding click event to close
+			i.addEventListener('click', (event) => {
+				event.stopPropagation();
+				event.preventDefault();
+				this.thumbs.removeChild(div);
+				var index = this.files.indexOf(obj);
+				if (index >= 0){
+					this.files.splice(index, 1);
+				}
+				isEmpty();
+			}, false);
+		}else if(isGood2){
+			this.icon.style.display = "none";
+			this.message.style.display = "none";
+			this.btn.innerText = "파일 추가하기";
+			//creating thumbnail
+			var div = document.createElement('div');
+			div.setAttribute('class', 'file-thumb');
+			div.setAttribute('style', 'width:240px');
+			this.thumbs.appendChild(div);
+			var video = document.createElement('video');
+			video.setAttribute('width','100%');
+			video.setAttribute('height','100%');
+			video.setAttribute('controls','controls');
+			div.appendChild(video);
+			var source = document.createElement('source');
+			source.src = URL.createObjectURL(file);
+			video.appendChild(source);
+			var prog = document.createElement('div');
+			prog.setAttribute('class', 'progress');
+			div.appendChild(prog);
+			var fill = document.createElement('div');
+			fill.setAttribute('class', 'fill');
+			prog.appendChild(fill);
+			var val = document.createElement('div');
+			val.setAttribute('class', 'value');
+			val.innerText = '0%';
+			prog.appendChild(val);
+			var i = document.createElement('i');
+			i.setAttribute('class', 'fa fa-times');
+			div.appendChild(i);
+			//append file to the list
+			var obj = {
+				file: file,
+				node: div,
+			};
+			//binding click event to close
+			i.addEventListener('click', (event) => {
+				event.stopPropagation();
+				event.preventDefault();
+				this.thumbs.removeChild(div);
+				var index = this.files.indexOf(obj);
+				if (index >= 0){
+					this.files.splice(index, 1);
+				}
+				isEmpty();
+			}, false);
+		}else{
+			var i = document.createElement('i');
+			i.setAttribute('class', 'fa fa-exclamation-circle');
+			this.error.textContent = "";
+			this.error.appendChild(i);
+			this.error.appendChild(document.createTextNode(' Invalid file type'));
+			this.error.style.display = "block";
+			isEmpty();
+		}
+	}
+
+	__upload__ = () => {
+		var xhr;
+		this.error.style.display = "";
+		for(var i = 0, file; file = this.files[i]; i++){
+			this.__uploadFile__(file);
+		}
+	}
+
+	__uploadFile__ = (obj) => {
+		var xhr = new XMLHttpRequest();
+		xhr.upload.addEventListener('loadstart', function(e){
+			obj.node.querySelector('.progress').style.display = "block";
+			obj.node.querySelector('.fill').style.width = '0%';
+			obj.node.querySelector('.value').innerText = "0%";
+			obj.node.querySelector('i').style.display = ""
+		}, false);
+		xhr.upload.addEventListener('progress', (event) => {
+			var width = Math.floor((event.loaded/event.total)*100) + '%'
+			obj.node.querySelector('.fill').style.width = width;
+			obj.node.querySelector('.value').innerText = width;
+		}, false);
+		xhr.onreadystatechange = (event) => {
+			obj.node.querySelector('.progress').style.display = "";
+			console.log(xhr.status)
+			if (xhr.status == 200){
+				if (xhr.status == 200){
+					var box = obj.node.querySelector('.status');
+					if (box){
+						var icon = box.querySelector('i');
+						icon.classList.remove('fa-exclamation-circle');
+						icon.classList.add('fa-check');
+						icon.style.color = 'green';
+					} else {
+						box = document.createElement('div');
+						box.setAttribute('class', 'status');
+						var icon = document.createElement('i');
+						obj.node.appendChild(box);
+						box.appendChild(icon);
+						icon.setAttribute('class', 'fa fa-check');
+						icon.style.color = 'green';
+					}
+					this.files.splice(this.files.indexOf(obj), 1);
+				} else{
+					xhr.abort();
+					var box = obj.node.querySelector('.status');
+					if (box){
+						var icon = box.querySelector('i');
+						icon.classList.remove('fa-check');
+						icon.classList.add('fa-exclamation-circle');
+						icon.style.color = 'red';
+					} else {
+						box = document.createElement('div');
+						box.setAttribute('class', 'status');
+						var icon = document.createElement('i');
+						obj.node.appendChild(box);
+						box.appendChild(icon);
+						icon.setAttribute('class', 'fa fa-exclamation-circle');
+						icon.style.color = 'red';
+					}
+					var i = document.createElement('i');
+					i.setAttribute('class', 'fa fa-exclamation-circle');
+					this.error.textContent = "";
+					this.error.appendChild(i);
+					this.error.appendChild(document.createTextNode(' Some uploads failed. Click "Upload" to try again.'));
+					this.error.style.display = "block";
+				}
+			}
+		}
+		xhr.open('POST', '', true);
+		xhr.setRequestHeader('X-File-Name', obj.file.name);
+		xhr.setRequestHeader('X-File-Size', obj.file.size);
+        xhr.setRequestHeader('Content-Type', 'multipart/form-data; boundary=----------');
+        //If backend requires use of csrf-token for POST
+        // xhr.setRequestHeader("X-CSRFToken", CSRF_TOKEN);
+        xhr.send(obj.file);
+	}
+}
+
+var upload = new Upload('#multi-file-upload');
+</script>
 
 </html>
