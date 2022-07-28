@@ -300,9 +300,10 @@ div {
 	<script>
 	function kakaopost(){
 		hideMarkers();
+		var width = 500; //팝업의 너비
+		var height = 600; //팝업의 높이
 	    new daum.Postcode({
 	        	oncomplete: function(data) {
-	        		console.log(data);
 	        		var a = data.jibunAddress;
 	        		var b = data.roadAddress;
 	        		var p = data.zonecode;
@@ -311,7 +312,11 @@ div {
 	        		document.getElementById('submit').click();
 	   				searchLngLat();
 	        	}
-	    	}).open();
+	    	}).open({
+	    		left: (window.screen.width / 2) - (width / 2),
+	    	    top: (window.screen.height / 2) - (height / 2),
+	    		popupName: 'AddrSearch'
+	    	});
     
 	};
 
