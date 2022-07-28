@@ -151,6 +151,11 @@ div#detail_container {
     
 }
 
+div#file_container img {
+	width: 400px;
+	height: 250px;
+}
+
 div#file_container {
 	float: left;
 	width: 400px;
@@ -564,6 +569,16 @@ div#review_containser{
 		   <div id="detail_container">
 		    <div id="file_container">
 		    	<!-- 
+		     <c:forEach items="${fi_list}" var="fi_dto">
+		     	<c:choose>
+		     		<c:when test="${fi_dto.fi_Type eq 'img' }">
+		     			<img alt="" src="${fi_dto.fi_Nm }">
+		     		</c:when>
+		     		<c:otherwise>
+		     			<video controls width="400px"><source src="${fi_dto.fi_Nm }"></video>
+		     		</c:otherwise>
+		     	</c:choose>
+		     </c:forEach>
 		     <input type="file" name="myfile" multiple="multiple" data-max-file-size="20MB">
 		      -->
 		       <div id="multi-file-upload"></div>
@@ -596,7 +611,7 @@ div#review_containser{
 		   <br/><br/>
 		     <div class="btn2" id="btn2">
 			   <button type="submit" value="완료하기">완료하기</button>
-		      <button type="button" value="취소" onclick="location.href='/board/list'">취소</button>
+		      <button type="button" value="취소" onclick="location.href='/board/detail?req_No=${req_dto.req_No}'">취소</button>
 		     </div>
 	     </div>
 	    </div>

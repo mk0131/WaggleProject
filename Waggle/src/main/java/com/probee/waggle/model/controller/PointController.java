@@ -1,5 +1,7 @@
 package com.probee.waggle.model.controller;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -10,7 +12,11 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.probee.waggle.model.dto.Criteria;
+import com.probee.waggle.model.dto.Paging;
+import com.probee.waggle.model.dto.PayDto;
 import com.probee.waggle.model.dto.PointsDto;
+import com.probee.waggle.model.dto.PointsDto2;
 import com.probee.waggle.model.service.PointService;
 
 @Controller
@@ -21,9 +27,59 @@ public class PointController {
 	PointService pointService;
 	
 	@GetMapping("/use")
-	public String PointUse(Model model, HttpSession session){
+	public String PointUse(Model model, HttpSession session, Criteria cri){
 		int ucode = (int)session.getAttribute("user_Code");
-		model.addAttribute("use", pointService.selectPointUse(ucode));
+		
+		List<PointsDto> list1 = pointService.selectPointUse(ucode);
+		List<PayDto> list2 = pointService.selectpay(ucode);
+		
+		List<PointsDto2> list = new ArrayList<PointsDto2>();
+		
+		for(PointsDto dto: list1) {
+			PointsDto2 tmp = new PointsDto2();
+			tmp.setDate(dto.getPo_Date());
+			tmp.setPrice(dto.getPo_Point());
+			tmp.setType("사용");
+			list.add(tmp);
+		}
+		
+		for(PayDto dto: list2) {
+			PointsDto2 tmp = new PointsDto2();
+			tmp.setDate(dto.getPay_Date());
+			tmp.setPrice(dto.getPay_Price());
+			tmp.setType("충전");
+			list.add(tmp);
+		}
+
+		int price_sum = 0;
+		Collections.sort(list, Collections.reverseOrder());
+		for(PointsDto2 dto: list) {
+			if(dto.getType().equals("사용")) {
+				price_sum -= dto.getPrice();				
+			} else {
+				price_sum += dto.getPrice();
+			}
+			dto.setPrice_Sum(price_sum);
+		}
+		
+		Collections.reverse(list);
+		
+		cri.setPerPageNum(5);
+		// 페이징 객체
+		Paging paging = new Paging();
+		paging.setCri(cri);
+		paging.setTotalCount(list.size());
+		
+		int end_val = cri.getPageStart()+cri.getPerPageNum();
+		if(end_val > paging.getTotalCount()) {
+			end_val = paging.getTotalCount();
+		}
+		
+		List<PointsDto2> list_sub = list.subList(cri.getPageStart(), end_val);
+		
+		model.addAttribute("point", pointService.selectUserPoint(ucode));
+		model.addAttribute("list", list_sub);
+		model.addAttribute("paging", paging);
 		return "point";
 	}
 	
