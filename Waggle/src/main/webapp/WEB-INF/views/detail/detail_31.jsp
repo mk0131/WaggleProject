@@ -626,8 +626,9 @@ div#progress_percentage::after {
 			}
 		}
 		
-		// 디테일 요청사항에 값 넣기
+		// 디테일 요청사항에 값 넣기 & 높이 조정
 		$("#revcontent").text(res_content.res_Detail);
+		
 		
 		// 집평가 별점 값 넣기
 		var num = res_content.res_Rate;

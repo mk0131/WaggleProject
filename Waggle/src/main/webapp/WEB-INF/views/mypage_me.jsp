@@ -508,6 +508,68 @@ textarea {
   font-size: 1rem;
   color: var(--clr-light-gray);
 }
+
+/* 이용횟수 통계 그림 */
+@keyframes bar-fill {
+  0% {
+    width: 0;
+  }
+}
+@-webkit-keyframes bar-fill {
+  0% {
+    width: 0;
+  }
+}
+@-moz-keyframes bar-fill {
+  0% {
+    width: 0;
+  }
+}
+@-o-keyframes bar-fill {
+  0% {
+    width: 0;
+  }
+}
+.bar-graph {
+  list-style: none;
+  margin: 50px 0px auto;
+}
+
+.bar-wrap {
+  -moz-border-radius: 10px 10px 10px 10px;
+  -webkit-border-radius: 10px 10px 10px 10px;
+  -ms-border-radius: 10px 10px 10px 10px;
+  border-radius: 10px 10px 10px 10px;
+  background-color: rgba(149, 149, 149, 0.2);
+  margin-bottom: 10px;
+  height: 27px;
+}
+
+.bar-fill {
+  -moz-border-radius: 10px 10px 10px 10px;
+  -webkit-border-radius: 10px 10px 10px 10px;
+  -ms-border-radius: 10px 10px 10px 10px;
+  border-radius: 10px 10px 10px 10px;
+  -moz-animation: bar-fill 1s;
+  -webkit-animation: bar-fill 1s;
+  -ms-animation: bar-fill 1s;
+  animation: bar-fill 1s;
+  background-color: #979797;
+  display: block;
+  height: 27px;
+  width: 0px;
+}
+
+.bar-graph p {
+  text-align:left;
+  color: #000000;
+  font-family: "Helvetica";
+  font-size: 16px;
+  font-weight: 100;
+  text-transform: uppercase;
+}
+
+/* 이용횟수 통계 그림 끝 */
 </style>
 
 
@@ -528,12 +590,12 @@ textarea {
 			<div class="middle-profile">
 				<div class="profile" style="text-align: center; display: flex; justify-content: center;">
 					<div class="profile-left" style="display: inline-block">
-						<c:if test = "${user_Pro == null}">
+						<c:if test = "${user_Pro == 0}">
 						<img src="/images/importToJsp/profile_default.jpg"
 							style="width: 100px; height: 100px">
 						</c:if>
-						<c:if test = "${user_Pro != null }">
-						<img src="${fi_Nm }" style="width:100px; height: 100px">
+						<c:if test = "${user_Pro != 0 }">
+						<img src="${Pro_fi_Nm }" style="width:200px; height: 200px; border-radius:200px">
 						</c:if>
 						<div style="font-weight: bold; font-size: 20pt">${user_Point } P</div>
 						<div>
@@ -594,10 +656,16 @@ textarea {
 							</div>
 
 						<!-- div style="margin-bottom:20px">|--------------|</div> -->
+						<c:if test="${condto != 0}">
+							<span style="font-size: 11pt; color: #898989">업로드한 자격증을 확인중입니다.</span>
+							<span style="font-size: 11pt; color: #2d7eac; margin-left: 5px" onclick="showProof();">파일 다시 업로드하기</span>
+						</c:if>
+						<c:if test="${condto == 0}">
 						<div>
 							<span style="font-size: 11pt; color: #898989">공인중개사이신가요?</span>
 							<span style="font-size: 11pt; color: #2d7eac; margin-left: 5px" onclick="showProof();">인증하기</span>
 						</div>
+						</c:if>
 					</c:if>
 					</div>
 				</div>
@@ -609,11 +677,9 @@ textarea {
 				<div class="description" style="text-align: center">
 					<div class="desc-nav">
 						<ul class="desc-list">
-							<li><a href="#!" onclick="showDescMe();"
-								style="color: #000000" class="desc-list1">자기소개</a></li>
-							<li><a href="#!" onclick="showFinishlist();"
-								class="desc-list2">완료된 리스트</a></li>
-							<li><a href="#!" class="desc-list3">이용 횟수</a></li>
+							<li><a href="#!" onclick="showDescMe();" style="color: #000000" class="desc-list1">자기소개</a></li>
+							<li><a href="#!" onclick="showFinishlist();" class="desc-list2">완료된 리스트</a></li>
+							<li><a href="#!" onclick="showUsage();" class="desc-list3">이용 횟수</a></li>
 						</ul>
 					</div>
 					<div class="desc-content-aboutme">
@@ -659,11 +725,41 @@ textarea {
 					<div></div>
 					<div class="desc-content-finishlist" style="margin: 0 auto; width: 900px; display: none">
 					</div>
+					<div class="desc-usage" style="margin: 0 auto; width: 900px; padding-top: 60px; display: none">
+						<div class="usage-left" style="width:400px; display:inline-block; float: right; padding-top:15px">
+						<ul class="bar-graph" style="width: 400px; padding:0">
+							<li>
+								<p>[꿀벌]의뢰수락 24시간 후 취소 비율</p>
+								<p>-> 의뢰 수행 횟수 총 ${resTotal }건 중 취소횟수 ${resCancel}건</p>
+								<div class="bar-wrap">
+									<span class="bar-fill" style="width:${ratio2}%;">${ratio2 }%</span>
+								</div>
+							</li>
+						</ul>
+						</div>
+						<div class="usage-right" style="width: 400px; display: inline-block">
+							<ul class="bar-graph" style="width: 400px; padding: 0">
+								<li>
+									<p>[의뢰인]진행중 상태 의뢰 요청취소 비율</p>
+									<p>-> 의뢰글 총 ${reqTotal }건 중 취소횟수 ${reqCancel }건</p>
+									<div class="bar-wrap">
+										<span class="bar-fill" style="width: ${ratio}%;">${ratio }%</span>
+									</div>
+								</li>
+							</ul>
+						</div>
+					</div>
 				</div>
+					<form action="/mypage/confirm" method="post" enctype="multipart/form-data">
 						<!-- Upload Area -->
 						<div id="uploadArea" class="upload-area" style="display:none; margin-top:50px">
 						  <div class="upload-area__header">
+						  	<c:if test="${condto == 0}">
 						    <h1 class="upload-area__title">Upload your file</h1>
+						   	</c:if>
+						   	<c:if test="${condto != 0}">
+						   	<h1 class="upload-area__title">Change your file</h1>
+						   	</c:if>
 						    <p class="upload-area__paragraph">
 						      File should be an image
 						      <strong class="upload-area__tooltip">
@@ -680,7 +776,7 @@ textarea {
 						    <p class="drop-zoon__paragraph">Drop your file here or Click to browse</p>
 						    <span id="loadingText" class="drop-zoon__loading-text">Please Wait</span>
 						    <img src="" alt="Preview Image" id="previewImage" class="drop-zoon__preview-image" draggable="false">
-						    <input type="file" id="fileInput" class="drop-zoon__file-input" accept="image/*">
+						    <input type="file" name="myfile" data-max-file-size="5MB" id="fileInput" class="drop-zoon__file-input" accept="image/*">
 						  </div>
 						  <!-- End Drop Zoon -->
 						
@@ -696,13 +792,19 @@ textarea {
 						
 						      <div id="uploadedFileInfo" class="uploaded-file__info">
 						        <span class="uploaded-file__name">Project 1</span>
-						        <span class="uploaded-file__counter">0%</span>
+						        <button type="submit">자격증 업로드하기</button>
 						      </div>
 						    </div>
 						  </div>
 						  <!-- End File Details -->
+							<c:if test="${condto != 0}">
+								<br>
+								<div style="text-align:left">이전 업로드된 파일:</div>
+								<img src="${con_file_Name }" style="width:380px; height:380px">
+							</c:if>
 						</div>
 						<!-- End Upload Area -->
+				</form>
 			</div>
 		</div>
 	</div>
@@ -728,9 +830,23 @@ textarea {
 	function showDescMe() {
 		$(".desc-content-aboutme").show();
 		$(".upload-area").hide();
+		$(".desc-usage").hide();
 		$(".desc-content-finishlist").hide();
 		$(".desc-list1").css("color", "#000000");
 		$(".desc-list2").css("color", "#898989");
+		$(".desc-list3").css("color", "#898989");
+
+	}
+	
+	//이용횟수 보여줌
+	function showUsage() {
+		$(".desc-content-aboutme").hide();
+		$(".upload-area").hide();
+		$(".desc-usage").show();
+		$(".desc-content-finishlist").hide();
+		$(".desc-list1").css("color", "#898989");
+		$(".desc-list2").css("color", "#898989");
+		$(".desc-list3").css("color", "#000000");
 
 	}
 
@@ -738,9 +854,11 @@ textarea {
 	function showFinishlist() {
 		$(".desc-content-aboutme").hide();
 		$(".upload-area").hide();
+		$(".desc-usage").hide();
 		$(".desc-content-finishlist").show();
 		$(".desc-list1").css("color", "#898989");
 		$(".desc-list2").css("color", "#000000");
+		$(".desc-list3").css("color", "#898989");
 		
 		let stat = "완료"
 		let ucode = ${user_Code};
@@ -748,7 +866,7 @@ textarea {
 		
 		$.ajax({
 			type: "post",
-			url: "mypage/reqroom",
+			url: "/mypage/reqroom",
 			data : data,
 			success : function(result){
 				$(".desc-content-finishlist").empty();
@@ -791,9 +909,11 @@ textarea {
 	function showProof(){
 		$(".desc-content-aboutme").hide();
 		$(".desc-content-finishlist").hide();
+		$(".desc-usage").hide();
 		$(".upload-area").show();
 		$(".desc-list1").css("color", "#898989");
 		$(".desc-list2").css("color", "#898989");
+		$(".desc-list3").css("color", "#898989");
 		
 	}
 	//내가 딴 꿀 수확량 구현
@@ -1052,5 +1172,8 @@ textarea {
 	})
 	
 </script>
+<script>
 
+
+</script>
 </html>

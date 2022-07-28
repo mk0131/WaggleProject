@@ -137,10 +137,6 @@ button:active {
 	border: 0 none;
 }
 
-div#file_container img {
-	width: 400px;
-	height: 250px;
-}
 
 div#detail_container {
 	display:inline-flex;
@@ -151,12 +147,15 @@ div#detail_container {
     font-size: 14px;
     width: 800px;
     margin-top: 20px;
+    padding-right:100px;
     
 }
 
 div#file_container {
 	float: left;
 	width: 400px;
+	height:450px;
+	padding-top: 50px;
 }
 
 div#review_containser{
@@ -209,137 +208,155 @@ div#review_containser{
   color: #ddd;
 }
 
-/* 파일 업로드 css */
-.file-uploader {
-  background-color: #e9e9e9;
-  border-radius: 3px;
-  color: #242424;
+/* 파일 업로드 css 시작 */
+#upload{
+	float: left;
+	clear: both;
+	width: 100%;
+	padding: 2rem 1.5rem;
+	text-align: center;
+	background: #fff;
+	border-radius: 7px;
+	border: 3px solid #eee;
+	box-sizing: border-box;
+	transition: all .2s ease;
+	user-select: none;
+	color: #5f6982;
 }
 
-.file-uploader__message-area {
-  font-size: 18px;
-  padding: 1em;
-  text-align: center;
-  color: #000000;
+#upload:hover{
+	border-color: #454cad;
 }
 
-.file-list {
-  background-color: white;
-  font-size: 16px;
+#file-upload{
+	display: none;
 }
 
-.file-list__name {
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
+#error{
+	display: none;
+	color: red;
+	margin-bottom: 5px;
 }
 
-.file-list li {
-  height: 50px;
-  line-height: 50px;
-  margin-left: 0.5em;
-  border: none;
-  overflow: hidden;
+#warning{
+	display: none;
+	color: orange;
+	margin-bottom: 5px;
 }
 
-.removal-button {
-  width: 20%;
-  border: none;
-  background-color: #d65d38;
-  color: white;
-}
-.removal-button::before {
-  content: "X";
-}
-.removal-button:focus {
-  outline: 0;
+#files{
+	display: block;
 }
 
-.file-chooser {
-  padding: 1em;
-  transition: background-color 1s, height 1s;
-}
-.file-chooser p {
-  font-size: 18px;
-  padding-top: 1em;
-}
-
-.file-uploader {
-  max-width: 400px;
-  height: 410px;
-  margin-top: 30px;
-}
-.file-uploader * {
-  display: block;
-}
-.file-uploader input[type=submit] {
-  margin-top: 2em;
-  float: right;
+#files .file-thumb{
+	display: inline-block;
+	margin: 5px;
+	position: relative;
+	border-radius: 5px;
+	border: 1px solid black;
 }
 
-.file-list {
-  margin: 0 auto;
-  max-width: 90%;
+#files img{
+	height: 7.5em;
+	object-fit: cover;
 }
 
-.file-list__name {
-  max-width: 70%;
-  float: left;
+#files .file-thumb .fa-times{
+	position: absolute;
+	right: 0;
+	top: 0;
+	color: black;
+	margin: 3px;
 }
 
-.removal-button {
-  display: inline-block;
-  height: 100%;
-  float: right;
+#files .progress{
+	display: none;
+	position: absolute;
+	top: 0;
+	left: 0;
+	height: 100%;
+	width: 100%;
+	background-color: rgba(0, 0, 0, 0.3);
 }
 
-.file-chooser {
-  width: 90%;
-  margin: 0.5em auto;
+#files .progress .fill{
+	position: absolute;
+	top: 0;
+	left: 0;
+	height: 100%;
+	width: 0%;
+	background-color: rgba(0, 0, 0, 0.5);
+	transition: width 0.2s ease;
 }
 
-.file-chooser__input {
-  margin: 0 auto;
+#files .progress .value{
+	position: absolute;
+	top: 0;
+	left: 0;
+	height: 100%;
+	width: 100%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	color: white;
 }
 
-.file-uploader__submit-button {
-  width: 100%;
-  border: none;
-  font-size: 1.5em;
-  padding: 1em;
-  background-color: #72bfa7;
-  color: white;
-}
-.file-uploader__submit-button:hover {
-  background-color: #a7d7c8;
-}
-
-.file-list li:after, .file-uploader:after {
-  content: "";
-  display: table;
-  clear: both;
+#files .file-thumb .status{
+	position: absolute;
+	height: 1em;
+	width: 1em;
+	border-radius: 2px;
+	border: 1px solid black;
+	background-color: white;
+	bottom: -0.3em;
+	right: -0.3em;
+	color: green;
 }
 
-.hidden {
-  display: none;
-}
-.hidden input {
-  display: none;
-}
-
-.error {
-  background-color: #d65d38;
-  color: white;
+#icon{
+	font-size: 4rem;
+	margin-bottom: 1rem;
+	transition: all .2s ease-in-out;
 }
 
-ul,li {
-  margin: 0;
-  padding: 0;
+.hover{
+	border: 3px solid #454cad !important;
+	box-shadow: inset 0 0 0 6px #eee;
 }
 
-/* 파일 업로드 css 끝 */
+.hover #icon{
+	transform: scale(0.8);
+	opacity: 0.3;
+}
 
+#btn{
+	display: inline-block;
+	background-color: #454cad;
+	color: white;
+	padding: 8px 12px;
+	margin: 10px 0;
+	border-radius: 5px;
+}
 
+#upload-btn{
+	display: none;
+	color: white;
+	height: 3em;
+	width: 15em;
+	border-radius: 5px;
+	background-color: #4564ad;
+}
+
+#upload-btn:focus{
+	outline: none;
+}
+
+/*style rules for the page*/
+#multi-file-upload{
+	text-align: center;
+	margin: auto 25%;
+}
+/*파일 업로드 css 끝 */
 </style>
 </head>
 <body>
@@ -362,7 +379,6 @@ ul,li {
 	    <h3 id="ongoing-detail">${userName}님이 요청한 리스트 상세</h3>
 	     <p id="w-date">요청날짜 : ${req_dto.req_WDate }</p>
 	    <div class="ongoing21-all">
-	   <input type="hidden" name="req_dto.req_No" value="${req_dto.req_No }">
 	    <table class="ongoing21-content">
 	     <tbody>
 	      <tr>
@@ -388,10 +404,13 @@ ul,li {
 	     </table>
 	     <div class="ongoing21-content-bottom">
 	       <textarea id="incontent" rows="12" cols="70" name="content" placeholder="요구사항을 입력해주세요" readonly="readonly">${req_dto.req_Detail }</textarea>
-	       <br/><br/><hr class="my-hr">
+	       <br/><br/><hr class="my-hr"><br>
 	       		      
-		   <br>
 		   
+	<form action="/board/complete" method="post" enctype="multipart/form-data">
+	 <input type="hidden" name="req_No" value="${req_dto.req_No }">
+	 <input type="hidden" name="res_No" value="${req_dto.req_No }">
+	 <input type="hidden" name="res_UCode" value="${user_Code }">
 		   <h4>기본 선택사항</h4>
 		   <table class="ongoing21-content2">
 	       <tbody>
@@ -404,15 +423,15 @@ ul,li {
 	       	 <td>
 	       	  <div id="choice-option-all">
 				<div>
-					<input type="radio" id="res_Attr1_1" name="res_Attr1">
+					<input type="radio" id="res_Attr1_1" name="res_Attr1" value="좋아요" required>
 					<label for="res_Attr1_1">좋아요</label>
 				</div>
 				<div>
-					<input type="radio" id="res_Attr1_2" name="res_Attr1">
+					<input type="radio" id="res_Attr1_2" name="res_Attr1" value="보통이에요">
 					<label for="res_Attr1_2">보통이에요</label>
 				</div>
 				<div>
-					<input type="radio" id="res_Attr1_3" name="res_Attr1">
+					<input type="radio" id="res_Attr1_3" name="res_Attr1" value="별로에요">
 					<label for="res_Attr1_3">별로에요</label>
 				</div>
 			   </div>
@@ -427,15 +446,15 @@ ul,li {
 	       	 <td>
 	       	  <div id="choice-option-all">
 	       	  	<div>
-					<input type="radio" id="res_Attr2_1" name="res_Attr2">
+					<input type="radio" id="res_Attr2_1" name="res_Attr2" value="좋아요" required>
 					<label for="res_Attr2_1">좋아요</label>
 				</div>
 				<div>
-					<input type="radio" id="res_Attr2_2" name="res_Attr2">
+					<input type="radio" id="res_Attr2_2" name="res_Attr2" value="보통이에요">
 					<label for="res_Attr2_2">보통이에요</label>
 				</div>
 				<div>
-					<input type="radio" id="res_Attr2_3" name="res_Attr2">
+					<input type="radio" id="res_Attr2_3" name="res_Attr2" value="별로에요">
 					<label for="res_Attr2_3">별로에요</label>
 				</div>
 			   </div>
@@ -450,15 +469,15 @@ ul,li {
 	       	 <td>
 	       	   <div id="choice-option-all">
 	       	  	<div>
-					<input type="radio" id="res_Attr3_1" name="res_Attr3">
+					<input type="radio" id="res_Attr3_1" name="res_Attr3" value="좋아요" required>
 					<label for="res_Attr3_1">좋아요</label>
 				</div>
 				<div>
-					<input type="radio" id="res_Attr3_2" name="res_Attr3">
+					<input type="radio" id="res_Attr3_2" name="res_Attr3" value="보통이에요">
 					<label for="res_Attr3_2">보통이에요</label>
 				</div>
 				<div>
-					<input type="radio" id="res_Attr3_3" name="res_Attr3">
+					<input type="radio" id="res_Attr3_3" name="res_Attr3" value="별로에요">
 					<label for="res_Attr3_3">별로에요</label>
 				</div>
 			   </div>
@@ -473,15 +492,15 @@ ul,li {
 	       	 <td>
 	       	   <div id="choice-option-all">
 	       	  	<div>
-					<input type="radio" id="res_Attr4_1" name="res_Attr4">
+					<input type="radio" id="res_Attr4_1" name="res_Attr4" value="좋아요" required>
 					<label for="res_Attr4_1">좋아요</label>
 				</div>
 				<div>
-					<input type="radio" id="res_Attr4_2" name="res_Attr4">
+					<input type="radio" id="res_Attr4_2" name="res_Attr4" value="보통이에요">
 					<label for="res_Attr4_2">보통이에요</label>
 				</div>
 				<div>
-					<input type="radio" id="res_Attr4_3" name="res_Attr4">
+					<input type="radio" id="res_Attr4_3" name="res_Attr4" value="별로에요">
 					<label for="res_Attr4_3">별로에요</label>
 				</div>
 			  </div>
@@ -496,15 +515,15 @@ ul,li {
 	       	 <td>
 	       	  <div id="choice-option-all">
 	       	  	<div>
-					<input type="radio" id="res_Attr5_1" name="res_Attr5">
+					<input type="radio" id="res_Attr5_1" name="res_Attr5" value="좋아요" required>
 					<label for="res_Attr5_1">좋아요</label>
 				</div>
 				<div>
-					<input type="radio" id="res_Attr5_2" name="res_Attr5">
+					<input type="radio" id="res_Attr5_2" name="res_Attr5" value="보통이에요">
 					<label for="res_Attr5_2">보통이에요</label>
 				</div>
 				<div>
-					<input type="radio" id="res_Attr5_3" name="res_Attr5">
+					<input type="radio" id="res_Attr5_3" name="res_Attr5" value="별로에요">
 					<label for="res_Attr5_3">별로에요</label>
 				</div>
 			  </div>
@@ -519,15 +538,15 @@ ul,li {
 	       	 <td>
 	       	  <div id="choice-option-all">
 	       	  	<div>
-					<input type="radio" id="res_Attr6_1" name="res_Attr6">
+					<input type="radio" id="res_Attr6_1" name="res_Attr6" value="좋아요" required>
 					<label for="res_Attr6_1">좋아요</label>
 				</div>
 				<div>
-					<input type="radio" id="res_Attr6_2" name="res_Attr6">
+					<input type="radio" id="res_Attr6_2" name="res_Attr6" value="보통이에요">
 					<label for="res_Attr6_2">보통이에요</label>
 				</div>
 				<div>
-					<input type="radio" id="res_Attr6_3" name="res_Attr6">
+					<input type="radio" id="res_Attr6_3" name="res_Attr6" value="별로에요">
 					<label for="res_Attr6_3">별로에요</label>
 				</div>
 			  </div>
@@ -542,19 +561,14 @@ ul,li {
 		   <br><h4>디테일 요청사항</h4>
 		   <div id="detail_container">
 		    <div id="file_container">
-			    <form method="post" class="file-uploader" action="" enctype="multipart/form-data">
-				  <div class="file-uploader__message-area">
-				    <p>Select a file to upload</p>
-				  </div>
-				  <div class="file-chooser">
-				    <input class="file-chooser__input" type="file" multiple>
-				  </div>
-				  <input class="file-uploader__submit-button" type="submit" value="Upload">
-				</form>
+		    	<!-- 
+		     <input type="file" name="myfile" multiple="multiple" data-max-file-size="20MB">
+		      -->
+		     <div id="multi-file-upload"></div>
 		    </div>
 		    <div id="review_containser">
 		     <span style="font-size: 12pt;">간단한 집 평가</span>
-		     <textarea id="revcontent" rows="18" cols="40"  placeholder="디테일 리뷰가 없습니다."></textarea>
+		     <textarea id="revcontent" rows="18" cols="40" name="res_Detail" placeholder="디테일 리뷰가 없습니다."></textarea>
 		    </div>
 		   </div>
 		    <br/><br/>
@@ -563,27 +577,29 @@ ul,li {
 		    <br><h4>집이 어땠나요?</h4>
 			<div id="full-stars-example-two">
 			    <div class="rating-group">
-			        <input disabled checked class="rating__input rating__input--none" name="rating3" id="rating3-none" value="0" type="radio">
+			        <input disabled checked class="rating__input rating__input--none" name="res_Rate" id="rating3-none" value="0" type="radio">
 			        <label aria-label="1 star" class="rating__label" for="rating3-1"><i class="rating__icon rating__icon--star fa fa-star"></i></label>
-			        <input class="rating__input" name="rating3" id="rating3-1" value="1" type="radio">
+			        <input class="rating__input" name="res_Rate" id="rating3-1" value="1" type="radio">
 			        <label aria-label="2 stars" class="rating__label" for="rating3-2"><i class="rating__icon rating__icon--star fa fa-star"></i></label>
-			        <input class="rating__input" name="rating3" id="rating3-2" value="2" type="radio">
+			        <input class="rating__input" name="res_Rate" id="rating3-2" value="2" type="radio">
 			        <label aria-label="3 stars" class="rating__label" for="rating3-3"><i class="rating__icon rating__icon--star fa fa-star"></i></label>
-			        <input class="rating__input" name="rating3" id="rating3-3" value="3" type="radio">
+			        <input class="rating__input" name="res_Rate" id="rating3-3" value="3" type="radio">
 			        <label aria-label="4 stars" class="rating__label" for="rating3-4"><i class="rating__icon rating__icon--star fa fa-star"></i></label>
-			        <input class="rating__input" name="rating3" id="rating3-4" value="4" type="radio">
+			        <input class="rating__input" name="res_Rate" id="rating3-4" value="4" type="radio">
 			        <label aria-label="5 stars" class="rating__label" for="rating3-5"><i class="rating__icon rating__icon--star fa fa-star"></i></label>
-			        <input class="rating__input" name="rating3" id="rating3-5" value="5" type="radio">
+			        <input class="rating__input" name="res_Rate" id="rating3-5" value="5" type="radio">
 			    </div>
 			</div>
 		   <br/><br/>
 		   <br/><br/>
 		     <div class="btn2" id="btn2">
-			   <button type="button" value="완료하기" onclick="location.href=''">완료하기</button>
+			   <button type="submit" value="완료하기">완료하기</button>
 		      <button type="button" value="취소" onclick="location.href='/board/list'">취소</button>
 		     </div>
 	     </div>
 	    </div>
+	</form>
+ 
 	   </div>
 	   
 	   
@@ -591,185 +607,297 @@ ul,li {
 	<%@ include file="../footer.jsp" %>
 
 </body>
-<!-- 파일 업로드 js -->
-<script>
-(function ($) {
-	  $.fn.uploader = function (options) {
-	    var settings = $.extend(
-	      {
-	        MessageAreaText: "No files selected.",
-	        MessageAreaTextWithFiles: "File List:",
-	        DefaultErrorMessage: "Unable to open this file.",
-	        BadTypeErrorMessage: "We cannot accept this file type at this time.",
-	        acceptedFileTypes: [
-	          "pdf",
-	          "jpg",
-	          "gif",
-	          "jpeg",
-	          "bmp",
-	          "tif",
-	          "tiff",
-	          "png",
-	          "xps",
-	          "doc",
-	          "docx",
-	          "fax",
-	          "wmp",
-	          "ico",
-	          "txt",
-	          "cs",
-	          "rtf",
-	          "xls",
-	          "xlsx",
-	          "mp4"
-	        ]
-	      },
-	      options
-	    );
+<script type="text/javascript">
 
-	    var uploadId = 1;
-	    //update the messaging
-	    $(".file-uploader__message-area p").text(
-	      options.MessageAreaText || settings.MessageAreaText
-	    );
-
-	    //create and add the file list and the hidden input list
-	    var fileList = $('<ul class="file-list"></ul>');
-	    var hiddenInputs = $('<div class="hidden-inputs hidden"></div>');
-	    $(".file-uploader__message-area").after(fileList);
-	    $(".file-list").after(hiddenInputs);
-
-	    //when choosing a file, add the name to the list and copy the file input into the hidden inputs
-	    $(".file-chooser__input").on("change", function () {
-	      var files = document.querySelector(".file-chooser__input").files;
-
-	      for (var i = 0; i < files.length; i++) {
-	        console.log(files[i]);
-
-	        var file = files[i];
-	        var fileName = file.name.match(/([^\\\/]+)$/)[0];
-
-	        //clear any error condition
-	        $(".file-chooser").removeClass("error");
-	        $(".error-message").remove();
-
-	        //validate the file
-	        var check = checkFile(fileName);
-	        if (check === "valid") {
-	          // move the 'real' one to hidden list
-	          $(".hidden-inputs").append($(".file-chooser__input"));
-
-	          //insert a clone after the hiddens (copy the event handlers too)
-	          $(".file-chooser").append(
-	            $(".file-chooser__input").clone({ withDataAndEvents: true })
-	          );
-
-	          //add the name and a remove button to the file-list
-	          $(".file-list").append(
-	            '<li style="display: none;"><span class="file-list__name">' +
-	              fileName +
-	              '</span><button class="removal-button" data-uploadid="' +
-	              uploadId +
-	              '"></button></li>'
-	          );
-	          $(".file-list").find("li:last").show(800);
-
-	          //removal button handler
-	          $(".removal-button").on("click", function (e) {
-	            e.preventDefault();
-
-	            //remove the corresponding hidden input
-	            $(
-	              '.hidden-inputs input[data-uploadid="' +
-	                $(this).data("uploadid") +
-	                '"]'
-	            ).remove();
-
-	            //remove the name from file-list that corresponds to the button clicked
-	            $(this)
-	              .parent()
-	              .hide("puff")
-	              .delay(10)
-	              .queue(function () {
-	                $(this).remove();
-	              });
-
-	            //if the list is now empty, change the text back
-	            if ($(".file-list li").length === 0) {
-	              $(".file-uploader__message-area").text(
-	                options.MessageAreaText || settings.MessageAreaText
-	              );
-	            }
-	          });
-
-	          //so the event handler works on the new "real" one
-	          $(".hidden-inputs .file-chooser__input")
-	            .removeClass("file-chooser__input")
-	            .attr("data-uploadId", uploadId);
-
-	          //update the message area
-	          $(".file-uploader__message-area").text(
-	            options.MessageAreaTextWithFiles ||
-	              settings.MessageAreaTextWithFiles
-	          );
-
-	          uploadId++;
-	        } else {
-	          //indicate that the file is not ok
-	          $(".file-chooser").addClass("error");
-	          var errorText =
-	            options.DefaultErrorMessage || settings.DefaultErrorMessage;
-
-	          if (check === "badFileName") {
-	            errorText =
-	              options.BadTypeErrorMessage || settings.BadTypeErrorMessage;
-	          }
-
-	          $(".file-chooser__input").after(
-	            '<p class="error-message">' + errorText + "</p>"
-	          );
-	        }
-	      }
-	    });
-
-	    var checkFile = function (fileName) {
-	      var accepted = "invalid",
-	        acceptedFileTypes =
-	          this.acceptedFileTypes || settings.acceptedFileTypes,
-	        regex;
-
-	      for (var i = 0; i < acceptedFileTypes.length; i++) {
-	        regex = new RegExp("\\." + acceptedFileTypes[i] + "$", "i");
-
-	        if (regex.test(fileName)) {
-	          accepted = "valid";
-	          break;
-	        } else {
-	          accepted = "badFileName";
-	        }
-	      }
-
-	      return accepted;
-	    };
-	  };
-	})($);
-
-	//init
-	$(document).ready(function () {
-	  console.log("hi");
-	  $(".fileUploader").uploader({
-	    MessageAreaText: "No files selected. Please select a file."
-	  });
+	$("input[name=myfile]").off().on("change", function(){
+	
+		if (this.files && this.files[0]) {
+	
+			var maxSize = 100 * 1024 * 1024;
+			var fileSize = this.files[0].size;
+	
+			if(fileSize > maxSize){
+				alert("첨부파일 사이즈는 100MB 이내로 등록 가능합니다.");
+				$(this).val('');
+				return false;
+			}
+		}
 	});
 
 </script>
-<!-- 파일 업로드 js 끝 -->
-<script type="text/javascript">
+<script>
+class Upload{
+	constructor(selector){
+		this.root = document.querySelector(selector);
+		//container upload
+		this.obj = document.createElement('div');
+		this.obj.setAttribute('id', 'upload');
+		this.obj.setAttribute('style','width:300px');
+		this.root.appendChild(this.obj);
+		//input object
+		this.input = document.createElement('input');
+		this.input.setAttribute('type', 'file');
+		this.input.setAttribute('multiple', 'multiple');
+		this.input.setAttribute('name', 'myfile');
+		this.input.setAttribute('data-max-file-size', '100MB');
+		this.input.setAttribute('id', 'file-upload');
+		this.obj.appendChild(this.input);
+		//error div
+		this.error = document.createElement('div');
+		this.error.setAttribute('id', 'error');
+		this.obj.appendChild(this.error);
+		//warning div
+		this.warning = document.createElement('div');
+		this.warning.setAttribute('id', 'warning');
+		this.obj.appendChild(this.warning);
+		//thumbs container
+		this.thumbs = document.createElement('div');
+		this.thumbs.setAttribute('id', 'files');
+		this.obj.appendChild(this.thumbs);
+		//download icon
+		this.icon = document.createElement('i');
+		this.icon.setAttribute('class', 'fa fa-download');
+		this.icon.setAttribute('id', 'icon');
+		this.obj.appendChild(this.icon);
+		//message div
+		this.message = document.createElement('div');
+		this.message.setAttribute('id', 'message');
+		this.message.innerText = '업로드할 이미지를 클릭하거나 드래그 해주세요';
+		this.obj.appendChild(this.message);
+		//button
+		this.btn = document.createElement('div');
+		this.btn.setAttribute('id', 'btn');
+		this.btn.innerText = '파일 찾기';
+		this.obj.appendChild(this.btn);
+		//adding event listeners
+		this.input.addEventListener('change', this.__fileSelectHandler__, false);
+		this.obj.addEventListener('click', () => {this.input.click()}, false);
+		this.obj.addEventListener('dragover', this.__fileDragHover__, false);
+		this.obj.addEventListener('dragleave', this.__fileDragHover__, false);
+		this.obj.addEventListener('drop', this.__fileSelectHandler__, false);
+		this.upload.addEventListener('click', this.__upload__, false);
+		//file list
+		this.files = [];
+		this.sizeLimit = this.root.dataset.maxsize?parseFloat(this.root.dataset.maxsize):5;
+		this.aboveLimit = [];
+	}
 
-		// 집평가 별점 값 넣기
-		var num = res_content.res_Rate;
-		$(".rating__input[value='"+num+"']").prop('checked', true);
+	__fileDragHover__  = (e) => {
+		e.stopPropagation();
+		e.preventDefault();
+
+		this.obj.className = (e.type === 'dragover' ? 'hover' : '');
+	}
+
+	__fileSelectHandler__ = (e) => {
+		var files = e.target.files || e.dataTransfer.files;
+		this.__fileDragHover__(e);
+		this.error.style.display = 'none';
+		this.message.style.display = 'none';
+
+		var name;
+
+		for (var i = 0, file; file = files[i]; i++) {
+			name = this.__parseFile__(file);
+			if (name != undefined) {this.aboveLimit.push(name)}
+		}
+		this.__warning__();
+		e.stopPropagation();
+		e.preventDefault();
+		this.input.value = "";
+	}
 
 
+	__parseFile__ (file){
+		var isGood = file.type.indexOf('image')!=-1?true:false;
+		var isGood2 = file.type.indexOf('video')!=-1?true:false;
+		var isEmpty = () => {
+			if (!this.thumbs.childElementCount){
+				this.icon.style.display = "block";
+				this.message.style.display = "block";
+				this.btn.innerText = 'Select a file';
+				this.upload.style.display = "none";
+			}
+		}
+		if (isGood){
+			this.icon.style.display = "none";
+			this.message.style.display = "none";
+			this.btn.innerText = "파일 추가하기";
+			//creating thumbnail
+			var div = document.createElement('div');
+			div.setAttribute('class', 'file-thumb');
+			div.setAttribute('style', 'width:240px');
+			this.thumbs.appendChild(div);
+			var img = document.createElement('img');
+			img.setAttribute('width','100%');
+			img.src = URL.createObjectURL(file);
+			div.appendChild(img);
+			var prog = document.createElement('div');
+			prog.setAttribute('class', 'progress');
+			div.appendChild(prog);
+			var fill = document.createElement('div');
+			fill.setAttribute('class', 'fill');
+			prog.appendChild(fill);
+			var val = document.createElement('div');
+			val.setAttribute('class', 'value');
+			val.innerText = '0%';
+			prog.appendChild(val);
+			var i = document.createElement('i');
+			i.setAttribute('class', 'fa fa-times');
+			div.appendChild(i);
+			//append file to the list
+			var obj = {
+				file: file,
+				node: div,
+			};
+			//binding click event to close
+			i.addEventListener('click', (event) => {
+				event.stopPropagation();
+				event.preventDefault();
+				this.thumbs.removeChild(div);
+				var index = this.files.indexOf(obj);
+				if (index >= 0){
+					this.files.splice(index, 1);
+				}
+				isEmpty();
+			}, false);
+		}else if(isGood2){
+			this.icon.style.display = "none";
+			this.message.style.display = "none";
+			this.btn.innerText = "파일 추가하기";
+			//creating thumbnail
+			var div = document.createElement('div');
+			div.setAttribute('class', 'file-thumb');
+			div.setAttribute('style', 'width:240px');
+			this.thumbs.appendChild(div);
+			var video = document.createElement('video');
+			video.setAttribute('width','100%');
+			video.setAttribute('height','100%');
+			video.setAttribute('controls','controls');
+			div.appendChild(video);
+			var source = document.createElement('source');
+			source.src = URL.createObjectURL(file);
+			video.appendChild(source);
+			var prog = document.createElement('div');
+			prog.setAttribute('class', 'progress');
+			div.appendChild(prog);
+			var fill = document.createElement('div');
+			fill.setAttribute('class', 'fill');
+			prog.appendChild(fill);
+			var val = document.createElement('div');
+			val.setAttribute('class', 'value');
+			val.innerText = '0%';
+			prog.appendChild(val);
+			var i = document.createElement('i');
+			i.setAttribute('class', 'fa fa-times');
+			div.appendChild(i);
+			//append file to the list
+			var obj = {
+				file: file,
+				node: div,
+			};
+			//binding click event to close
+			i.addEventListener('click', (event) => {
+				event.stopPropagation();
+				event.preventDefault();
+				this.thumbs.removeChild(div);
+				var index = this.files.indexOf(obj);
+				if (index >= 0){
+					this.files.splice(index, 1);
+				}
+				isEmpty();
+			}, false);
+		}else{
+			var i = document.createElement('i');
+			i.setAttribute('class', 'fa fa-exclamation-circle');
+			this.error.textContent = "";
+			this.error.appendChild(i);
+			this.error.appendChild(document.createTextNode(' Invalid file type'));
+			this.error.style.display = "block";
+			isEmpty();
+		}
+	}
+
+	__upload__ = () => {
+		var xhr;
+		this.error.style.display = "";
+		for(var i = 0, file; file = this.files[i]; i++){
+			this.__uploadFile__(file);
+		}
+	}
+
+	__uploadFile__ = (obj) => {
+		var xhr = new XMLHttpRequest();
+		xhr.upload.addEventListener('loadstart', function(e){
+			obj.node.querySelector('.progress').style.display = "block";
+			obj.node.querySelector('.fill').style.width = '0%';
+			obj.node.querySelector('.value').innerText = "0%";
+			obj.node.querySelector('i').style.display = ""
+		}, false);
+		xhr.upload.addEventListener('progress', (event) => {
+			var width = Math.floor((event.loaded/event.total)*100) + '%'
+			obj.node.querySelector('.fill').style.width = width;
+			obj.node.querySelector('.value').innerText = width;
+		}, false);
+		xhr.onreadystatechange = (event) => {
+			obj.node.querySelector('.progress').style.display = "";
+			console.log(xhr.status)
+			if (xhr.status == 200){
+				if (xhr.status == 200){
+					var box = obj.node.querySelector('.status');
+					if (box){
+						var icon = box.querySelector('i');
+						icon.classList.remove('fa-exclamation-circle');
+						icon.classList.add('fa-check');
+						icon.style.color = 'green';
+					} else {
+						box = document.createElement('div');
+						box.setAttribute('class', 'status');
+						var icon = document.createElement('i');
+						obj.node.appendChild(box);
+						box.appendChild(icon);
+						icon.setAttribute('class', 'fa fa-check');
+						icon.style.color = 'green';
+					}
+					this.files.splice(this.files.indexOf(obj), 1);
+				} else{
+					xhr.abort();
+					var box = obj.node.querySelector('.status');
+					if (box){
+						var icon = box.querySelector('i');
+						icon.classList.remove('fa-check');
+						icon.classList.add('fa-exclamation-circle');
+						icon.style.color = 'red';
+					} else {
+						box = document.createElement('div');
+						box.setAttribute('class', 'status');
+						var icon = document.createElement('i');
+						obj.node.appendChild(box);
+						box.appendChild(icon);
+						icon.setAttribute('class', 'fa fa-exclamation-circle');
+						icon.style.color = 'red';
+					}
+					var i = document.createElement('i');
+					i.setAttribute('class', 'fa fa-exclamation-circle');
+					this.error.textContent = "";
+					this.error.appendChild(i);
+					this.error.appendChild(document.createTextNode(' Some uploads failed. Click "Upload" to try again.'));
+					this.error.style.display = "block";
+				}
+			}
+		}
+		xhr.open('POST', '', true);
+		xhr.setRequestHeader('X-File-Name', obj.file.name);
+		xhr.setRequestHeader('X-File-Size', obj.file.size);
+        xhr.setRequestHeader('Content-Type', 'multipart/form-data; boundary=----------');
+        //If backend requires use of csrf-token for POST
+        // xhr.setRequestHeader("X-CSRFToken", CSRF_TOKEN);
+        xhr.send(obj.file);
+	}
+}
+
+var upload = new Upload('#multi-file-upload');
 </script>
+
+
 </html>

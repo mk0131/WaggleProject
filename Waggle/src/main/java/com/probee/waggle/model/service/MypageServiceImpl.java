@@ -1,13 +1,20 @@
 package com.probee.waggle.model.service;
 
+import java.io.IOException;
 import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
+import com.probee.waggle.model.component.FileSaver;
+import com.probee.waggle.model.dto.ConfirmDto;
 import com.probee.waggle.model.dto.FileDto;
 import com.probee.waggle.model.dto.MypageFinishlistDto;
 import com.probee.waggle.model.dto.MypageOtherDto;
+import com.probee.waggle.model.dto.MypageUsageDto;
 import com.probee.waggle.model.dto.UserAddressDto;
 import com.probee.waggle.model.mapper.MypageMapper;
 
@@ -16,6 +23,9 @@ public class MypageServiceImpl implements MypageService{
 
 	@Autowired
 	MypageMapper mypageMapper;
+	
+	@Autowired
+	FileSaver fileSaver;
 	
 	@Override
 	public int DescUpdate(String description, int code) {
@@ -79,8 +89,8 @@ public class MypageServiceImpl implements MypageService{
 	}
 
 	@Override
-	public int ImageFileInsert(int fi_Code) {
-		return mypageMapper.ImageFileInsert(fi_Code);
+	public int ImageFileInsert(int fi_Code, String ext) {
+		return mypageMapper.ImageFileInsert(fi_Code, ext);
 	}
 
 	@Override
@@ -96,6 +106,91 @@ public class MypageServiceImpl implements MypageService{
 	@Override
 	public MypageOtherDto SelectUsersInfo(int ucode) {
 		return mypageMapper.SelectUsersInfo(ucode);
+	}
+
+	@Override
+	public MypageUsageDto reqCancel(int ucode) {
+		return mypageMapper.reqCancel(ucode);
+	}
+
+	@Override
+	public MypageUsageDto reqTotal(int ucode) {
+		return mypageMapper.reqTotal(ucode);
+	}
+
+	@Override
+	public MypageUsageDto resCancel(int ucode) {
+		return mypageMapper.resCancel(ucode);
+	}
+
+	@Override
+	public MypageUsageDto resTotal(int ucode) {
+		return mypageMapper.resTotal(ucode);
+	}
+
+	@Override
+	public int saveLocalProfile(int new_Fi_Code, MultipartFile file, HttpServletRequest request) {
+		String pro_saveLocal;
+		
+		if(file.getSize()==0) {
+			System.out.println("저장할 파일이 없습니다.");
+			return 0;
+		}
+		
+		try {
+			pro_saveLocal = fileSaver.saveLocalProfile(file, new_Fi_Code, request);
+			System.out.println("파일 저장 성공");
+		} catch (IOException e) {
+			e.printStackTrace();
+			System.out.println("파일 저장 실패...");
+			return 0;
+		}
+		
+		return 1;
+	}
+
+	@Override
+	public ConfirmDto SelectMyConfirm(int ucode) {
+		return mypageMapper.SelectMyConfirm(ucode);
+	}
+
+	@Override
+	public int saveLocalConfirm(int user_Code, MultipartFile file, HttpServletRequest request) {
+		String con_saveLocal;
+		if(file.getSize()==0) {
+			System.out.println("저장할 파일이 없습니다.");
+			return 0;
+		}
+		
+		try {
+			con_saveLocal = fileSaver.saveLocalConfirm(file, user_Code, request);
+			System.out.println("파일 저장 성공");
+		} catch (IOException e) {
+			e.printStackTrace();
+			System.out.println("파일 저장 실패...");
+			return 0;
+		}
+		return 1;
+	}
+
+	@Override
+	public int FileUpdate(int ucode, String ext, int fi_code) {
+		return mypageMapper.FileUpdate(ucode, ext, fi_code);
+	}
+
+	@Override
+	public int InsertFileConfirm(int new_fi_Code, int ucode, String ext) {
+		return mypageMapper.InsertFileConfirm(new_fi_Code, ucode, ext);
+	}
+
+	@Override
+	public int InsertConfirm(int ucode, int new_fi_Code) {
+		return mypageMapper.InsertConfirm(ucode, new_fi_Code);
+	}
+
+	@Override
+	public FileDto SelectConfirmFile(int fi_code) {
+		return mypageMapper.SelectConfirmFile(fi_code);
 	}
 	
 	

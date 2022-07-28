@@ -2,6 +2,10 @@ package com.probee.waggle.model.service;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
+import org.springframework.web.multipart.MultipartFile;
+
 import com.probee.waggle.model.dto.FileDto;
 import com.probee.waggle.model.dto.PointsDto;
 import com.probee.waggle.model.dto.RequestDto2;
@@ -30,6 +34,7 @@ public interface BoardService {
 	public int Recruit(int req_No);
 	public int Revoke(int req_No);
 	public int complete(int req_No);
+	public int confirm(int req_No);
 
 	public int updateRequest(RequestDto2 dto);
 	public int selectLastRequestNo();
@@ -38,6 +43,9 @@ public interface BoardService {
 	public int insertReRatingBee(UserRatingDto userRating_dto);
 	
 	public PointsDto selectPoint(int req_No, int user_Code);
+	
+	public int saveLocal(int req_No, List<MultipartFile> files, int res_Code, HttpServletRequest request);
+	public int updateResult(ResultDto dto);
 
 
 }

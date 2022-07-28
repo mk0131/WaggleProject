@@ -7,12 +7,21 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.net.URL;
 import java.nio.file.Path;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.List;
 
 import javax.imageio.ImageIO;
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ResourceLoader;
 import org.springframework.stereotype.Component;
+import org.springframework.util.FileCopyUtils;
+import org.springframework.web.multipart.MultipartFile;
+
+import com.google.common.io.Files;
 
 @Component
 public class FileSaver {
@@ -60,43 +69,151 @@ public class FileSaver {
 		return res;
 	}
 	
-	public int saveProfileImg(String IMAGE_URL, String path) {
-		int res = 0;
+	
+	public List<String> saveLocal(List<MultipartFile> files, int req_No, HttpServletRequest request) throws IOException {
+		// 파일 각각 저장하고 path list를 리턴
+		List<String> answer = new ArrayList<String>();
 		
-		try {
-			FileInputStream f_stream = new FileInputStream(IMAGE_URL);
-			BufferedImage image = ImageIO.read(new DataInputStream(f_stream));
-			
-			String staticpath = "./src/main/resources/static";
-			String new_path = staticpath + path;
-			
-			File file = new File(new_path);
+		
+		int cnt = 1;
+		
+		String staticpath1 = Path.of(resourceLoader.getResource("classpath:static").getURI()).toString().replace("\\", "/");
+		String staticpath2 = request.getSession().getServletContext().getRealPath("/").replace("\\", "/");
+
+		staticpath2 = staticpath2.substring(0, staticpath2.lastIndexOf("/"));
+		staticpath2 = staticpath2.substring(0, staticpath2.lastIndexOf("/"));
+		staticpath2 += "/resources/static";
+
+		for (MultipartFile file: files) {
+
+			String fileName = file.getOriginalFilename();
+			// 파일 경로생성
+			int pos = fileName.lastIndexOf(".");
+			String ext = fileName.substring(pos + 1);
+			String path = "/images/result/result"+req_No+"_"+cnt+"."+ext;
+			// 파일 생성
+			File realFile2 = new File(staticpath2 + path);
+
 			// 경로가 있는지 확인해서 없으면 경로 생성
-			if(!file.exists()) {
-				file.createNewFile();
+			if(!realFile2.exists()) {
+				realFile2.createNewFile();
+			} 
+			file.transferTo(realFile2);
+			
+			// target 위치에 파일 복사
+			File realFile1 = new File(staticpath1 + path);
+
+			// 경로가 있는지 확인해서 없으면 경로 생성
+			if(!realFile1.exists()) {
+				realFile1.createNewFile();
 			}
 			
-			ImageIO.write(image, "jpg", file);
+			FileCopyUtils.copy(realFile2, realFile1);
 			
-			BufferedImage image2 = ImageIO.read(new DataInputStream(f_stream));
+			// 성공하면 경로명 저장
+			answer.add(path);
 			
-			String staticpath2 = Path.of(resourceLoader.getResource("classpath:static").getURI()).toString().replace("\\", "/");
-			String new_path2 = staticpath2 + path;
-			
-			File file2 = new File(new_path2);
-			// 경로가 있는지 확인해서 없으면 경로 생성
-			if(!file2.exists()) {
-				file2.createNewFile();
-			}
-					
-			ImageIO.write(image2, "jpg", file2);
-			res = 1;
-		} catch (IOException e) {
-			e.printStackTrace();
-			return 0;
+			cnt += 1;
 		}
 		
-		return res;
+		
+		return answer;
+	}
+	
+	public String saveLocalProfile(MultipartFile file, int new_Fi_Code, HttpServletRequest request) throws IOException {
+		// 파일 각각 저장하고 path list를 리턴
+		String answer;
+		
+		String staticpath1 = Path.of(resourceLoader.getResource("classpath:static").getURI()).toString().replace("\\", "/");
+		String staticpath2 = request.getSession().getServletContext().getRealPath("/").replace("\\", "/");
+
+		staticpath2 = staticpath2.substring(0, staticpath2.lastIndexOf("/"));
+		staticpath2 = staticpath2.substring(0, staticpath2.lastIndexOf("/"));
+		staticpath2 += "/resources/static";
+
+
+			String fileName = file.getOriginalFilename();
+			// 파일 경로생성
+			int pos = fileName.lastIndexOf(".");
+			String ext = fileName.substring(pos + 1);
+			String path = "/images/profile/profile_"+new_Fi_Code+"."+ext;
+			// 파일 생성
+			File realFile2 = new File(staticpath2 + path);
+
+			// 경로가 있는지 확인해서 없으면 경로 생성
+			if(!realFile2.exists()) {
+				realFile2.createNewFile();
+			} 
+			file.transferTo(realFile2);
+			
+			// target 위치에 파일 복사
+			File realFile1 = new File(staticpath1 + path);
+
+			// 경로가 있는지 확인해서 없으면 경로 생성
+			if(!realFile1.exists()) {
+				realFile1.createNewFile();
+			}
+			
+			FileCopyUtils.copy(realFile2, realFile1);
+			
+			// 성공하면 경로명 저장
+			answer = path;
+			
+		
+		
+		return answer;
+	}
+	
+	public String saveLocalConfirm(MultipartFile file, int user_Code, HttpServletRequest request) throws IOException {
+		// 파일 각각 저장하고 path list를 리턴
+		String answer;
+		
+		String staticpath1 = Path.of(resourceLoader.getResource("classpath:static").getURI()).toString().replace("\\", "/");
+		String staticpath2 = request.getSession().getServletContext().getRealPath("/").replace("\\", "/");
+
+		staticpath2 = staticpath2.substring(0, staticpath2.lastIndexOf("/"));
+		staticpath2 = staticpath2.substring(0, staticpath2.lastIndexOf("/"));
+		staticpath2 += "/resources/static";
+
+
+			String fileName = file.getOriginalFilename();
+			// 파일 경로생성
+			int pos = fileName.lastIndexOf(".");
+			String ext = fileName.substring(pos + 1);
+			String path = "/images/confirm/confirm_"+user_Code+"."+ext;
+			// 파일 생성
+			File realFile2 = new File(staticpath2 + path);
+
+			// 경로 있으면 삭제하고 생성, 없으면 생성
+			if(realFile2.exists()) {
+				realFile2.delete();
+				realFile2.createNewFile();
+			} else {
+				realFile2.createNewFile();
+			}
+			
+			//파일을 경로에 저장시킴.
+			file.transferTo(realFile2);
+			
+			// target 위치에 파일 복사
+			File realFile1 = new File(staticpath1 + path);
+
+			// 경로가 있는지 확인해서 없으면 경로 생성
+			if(realFile1.exists()) {
+				realFile1.delete();
+				realFile1.createNewFile();
+			}else {
+				realFile1.createNewFile();
+			}
+			
+			FileCopyUtils.copy(realFile2, realFile1);
+			
+			// 성공하면 경로명 저장
+			answer = path;
+			
+		
+		
+		return answer;
 	}
 	
 }

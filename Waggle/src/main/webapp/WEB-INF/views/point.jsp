@@ -7,7 +7,11 @@
 <head>
 <link rel="stylesheet" href="//brick.a.ssl.fastly.net/Roboto:400"/>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>포인트 충전</title>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<!-- iamport.payment.js -->
+<script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.2.0.js"></script>
+
 <style>
 .middle {
 	margin: 0;
@@ -156,13 +160,19 @@ input:focus ~ .bar:before, input:focus ~ .bar:after {
 	font-size: 30px;
 }
 
-/*
-#pagination {
-  display: flex;
-  justify-content: center;
-  align-items: center;
+.paging li {
+	list-style: none;
+	display: inline-block;
 }
-*/
+
+.img-x:hover {
+	cursor: pointer;
+}
+
+.point-amount {
+	font-size: 1.5em;
+}
+
 </style>
 </head>
 <body>
@@ -175,18 +185,18 @@ input:focus ~ .bar:before, input:focus ~ .bar:after {
 					<li><a href="javascript:void(0)"> <i
 							class="fa-solid fa-house"></i>
 					</a></li>
-					<p>HOME > 포인트 충전하기</p>
+					<p>HOME > 포인트 충전</p>
 				</ul>
 			</div>
 	
 			<div class="money-container">
-				<div class="money-title">포인트 충전</div>
+				<div class="money-title"><p>포인트 충전</p></div>
 				<form>
 					<div class="money">
 						<div class="img-x">
-						<input class="point-amount" type="text" style="background-color:transparent;" required placeholder="금액을 입력해주세요"><span class="bar"></span>
+						<input id="price" class="point-amount" type="text" style="background-color:transparent;" required placeholder="금액을 입력해주세요"><span class="bar"></span>
 						</div>
-						<div class="img-x" >
+						<div class="img-x" onclick="priceReset()">
 						<svg width="45" height="45" viewBox="0 0 42 42" fill="none"
 							xmlns="http://www.w3.org/2000/svg"
 							xmlns:xlink="http://www.w3.org/1999/xlink">
@@ -205,26 +215,30 @@ input:focus ~ .bar:before, input:focus ~ .bar:after {
 				</form>
 			</div>
 			<div class="money-buttons">
-				<div class="button">
+				<div class="button" onclick="pointAdd(1000)">
 	 				<p>+1천원</p>
 				</div>
-				<div class="button">
+				<div class="button" onclick="pointAdd(5000)">
 	 				<p>+5천원</p>
 				</div>
-				<div class="button">
+				<div class="button" onclick="pointAdd(10000)">
 	 				<p>+1만원</p>
 				</div>
-				<div class="button">
+				<div class="button" onclick="pointAdd(50000)">
 	 				<p>+5만원</p>
 				</div>
 			</div>
 			<div class="charge-button">
-				<div class="button" style="width:530px">
-					<p>포인트 충전하기</p>
+				<div class="button" style="width:530px; background-color: #7300e9;" onclick="requestPay()">
+					<p style="color: white;">포인트 충전하기</p>
+				</div>
+				<div class="button" style="width:530px; background-color: #F7E600;" onclick="requestPayK()">
+					<p>포인트 충전하기(카카오페이)</p>
 				</div>
 			</div>
 			<div class="blank"></div>
 		</div>
+		
 		<div class="middle-bottom">
 			<div class="point-history">
 			
@@ -234,44 +248,111 @@ input:focus ~ .bar:before, input:focus ~ .bar:after {
 				<div class="history-main" style="margin:0 auto; width:1000px">
 					<div class="pointcharge">
 					</div>
-						<c:forEach var="list" items="${use}">
+						<c:forEach var="dto" items="${list}">
 							<div class="pointuse" style="border-bottom: 1px solid #898989; width:1000px; height:130px; margin-top:18px">
 								<div class="use-left"  style="width:110px; height:110px; display:inline-block">
 									<div style="width:100px; height:100px; border:5px solid #898989; border-radius:150px; color:#898989; font-size:20pt; text-align:center; line-height:100px; float:left">
-									사용
+									${dto.type}
 									</div>
 								</div>
 								<div class="use-middle" style="width:650px; height:110px; padding-left:35px; display:inline-block">
-									<div>${list.po_Date}</div>
-									<div style="font-size:20pt">포인트 사용</div>
-									<div style="padding-top:30px">현재 포인트: ${user_Point }원</div>
+									<div>${dto.date}</div>
+									<div style="font-size:20pt">포인트 ${dto.type}</div>
+									<div style="padding-top:30px">잔여 포인트: &nbsp;${dto.price_Sum}&nbsp;P</div>
 								</div>
 								<div class="use-right" style="width:200px; height:110px; display:inline-block; text-align:center; float:right">
-									<div style="font-size:30pt">-${list.po_Point} 원</div>
+									<c:choose>
+										<c:when test="${dto.type eq '사용'}">
+											<div style="font-size:30pt">-${dto.price} P</div>
+										</c:when>
+										<c:otherwise>
+											<div style="font-size:30pt">+${dto.price} P</div>
+										</c:otherwise>
+									</c:choose>
 									<div style="border:1px solid #3a3a3a; border-radius:10px; width:100px; height:30px; text-align:center; line-height:30px; margin-left:55px; color:#3a3a3a">내역삭제</div>						
 								</div>
 							</div>
 						</c:forEach>
 				</div>
+				<div>
+					<ul class="paging">
+						<c:if test="${paging.prev}">        
+							<li id="paging">
+								<a href='<c:url value="/point/use?page=${paging.startPage-1}"/>'>이전</a>
+							</li>    
+						</c:if>
+						<c:forEach begin="${paging.startPage}" end="${paging.endPage}" var="num">
+							<li>
+								<a href='<c:url value="/point/use?page=${num}"/>'>${num}</a>
+							</li>    
+						</c:forEach>
+						<c:if test="${paging.next && paging.endPage > 0}">        
+							<li>
+								<a href='<c:url value="/point/use?page=${paging.endPage+1}"/>'>다음</a>
+							</li>    
+						</c:if>
+					</ul>
+				</div>
 			
 		
 			</div>
-			
 		</div>
-		
-		
-		
 		
 	</div>
 
 	<%@ include file="footer.jsp"%>
-
-    <script>
-	$(document).ready(function(){
-		$("fo")
-		
-	})
-	
-    </script>
 </body>
+<script type="text/javascript">
+	var IMP = window.IMP;
+	IMP.init("imp25236148");  
+	
+	function requestPay() {
+	    IMP.request_pay({
+	        pg : 'html5_inicis',
+	        pay_method : 'card',
+	        merchant_uid: "merchan_"+new Date().getTime(), 
+	        name : $("#price").val()+' 포인트',
+	        amount : $("#price").val() ,
+	        buyer_email : '${user_Email}',
+	        buyer_name : '${user_Code}',
+	    }, function (rsp) { // callback
+	        if (rsp.success) {
+	            alert('결제성공');
+	            window.location = '/point/payment?pay_Price='+rsp.paid_amount;
+	        } else {
+	            alert('결제실패');
+	            window.location = '/point/use';
+	        }
+	    });
+	}
+	
+	function requestPayK() {
+	    IMP.request_pay({
+	        pg : 'kakaopay',
+	        pay_method : 'card',
+	        merchant_uid: "merchan_"+new Date().getTime(), 
+	        name : $("#price").val()+' 포인트',
+	        amount : $("#price").val() ,
+	        buyer_email : '${user_Email}',
+	        buyer_name : '${user_Code}',
+	    }, function (rsp) { // callback
+	        if (rsp.success) {
+	            alert('결제성공');
+	            window.location = '/point/payment?pay_Price='+rsp.paid_amount;
+	        } else {
+	            alert('결제실패');
+	            window.location = '/point/use';
+	        }
+	    });
+	}
+	
+	function pointAdd(price) {
+		var new_price = Number($("#price").val()) + Number(price);
+		$("#price").val(new_price);
+	}
+	
+	function priceReset() {
+		$("#price").val('');
+	}
+</script>
 </html>

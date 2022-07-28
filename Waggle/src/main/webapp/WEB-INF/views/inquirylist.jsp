@@ -239,10 +239,36 @@ button:active {
     right: 19%;
 }
 
+#Inquiry-title {
+	text-decoration: none;
+	color: #878787;
+}
+
+#Inquiry-title:visited {
+	color: #878787;
+}
+
+.paging {
+	text-align: center;
+}
+
 .paging li {
 	list-style: none;
 	display: inline-block;
+}
 
+.nowpage {
+	font-weight: bold;
+	color: #000000 !important;
+}
+ 
+#paging-a {
+	text-decoration: none;
+	padding: 8px;
+}
+
+#paging-a:visited {
+	color: #878787;
 }
 
 </style>
@@ -474,7 +500,7 @@ button:active {
 			                        <c:forEach items="${list }" var="dto">
 			                           <tr class="Inquiry-content">
 			                              <td>${dto.in_Type }</td>
-			                              <td><a href="/inquiry/detail?in_Code=${dto.in_Code }">${dto.in_Title }</a></td>
+			                              <td><a id="Inquiry-title" href="/inquiry/detail?in_Code=${dto.in_Code }">${dto.in_Title }</a></td>
 			                              <td>${dto.in_Date }</td>
 			                              <td>${dto.in_Stat }</td>
 			                           </tr>
@@ -492,19 +518,19 @@ button:active {
 				          	<ul class="paging">
 	 	 						<c:if test="${paging.prev}">        
 	 	 							<li id="paging">
-	 	 								<a href='<c:url value="/inquiry/list?user_Code=${user_Code }&page=${paging.startPage-1}"/>'>이전</a>
+	 	 								<a id="paging-a" href='<c:url value="/inquiry/list?user_Code=${user_Code }&page=${paging.startPage-1}"/>'>이전</a>
 	 	 							</li>    
 	 	 						</c:if>
 	 	 						<c:forEach begin="${paging.startPage}" end="${paging.endPage}" var="num">
 	 	 							<li>
-	 	 								<a href='<c:url value="/inquiry/list?user_Code=${user_Code }&page=${num}"/>'>${num}</a>
+	 	 								<a id="paging-a" class="${paging.cri.page == num ? 'nowpage' : null }" href='<c:url value="/inquiry/list?user_Code=${user_Code }&page=${num}"/>'>${num}</a>
 	 	 							</li>    
 	 	 						</c:forEach>
-	 	 						<%-- <c:if test="${paging.next && paging.endPage>0}">        
+	 	 						<c:if test="${paging.next && paging.endPage > 0}">        
 	 	 							<li>
-	 	 								<a href='<c:url value="/inquiry/list?page=${paging.endPage+1}"/>'>다음</a>
+	 	 								<a id="paging-a" href='<c:url value="/inquiry/list?user_Code=${user_Code }&page=${paging.endPage+1}"/>'>다음</a>
 	 	 							</li>    
-	 	 						</c:if>  --%>
+	 	 						</c:if>
 	 	 					</ul>
 		 </div>
  	</div>

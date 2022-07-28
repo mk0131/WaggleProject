@@ -198,6 +198,7 @@ function showMyReq() {
 				}) == idx1;
 			}) ;
 			
+			$(".myReqList").empty();
 			$(".myPerform").empty();
 			for(let i=0; i<unique.length; i++){
 				$(".myReqList").append('<a href="/board/detail?req_No='+unique[i].req_No+'">'

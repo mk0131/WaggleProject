@@ -223,291 +223,67 @@ textarea {
   --clr-light-blue: rgb(171, 202, 255);
 }
 
-/* 공인중개사 인증 태그 css 시작 */
-.upload-area {
-  width: 100%;
-  max-width: 25rem;
-  background-color: var(--clr-white);
-  box-shadow: 0 0 15px #898989;
-  border: 2px solid #898989;
-  border-radius: 24px;
-  padding: 2rem 1.875rem 5rem 1.875rem;
-  margin: 0 auto;
-  text-align: center;
-}
-
-.upload-area--open { /* Slid Down Animation */
-  animation: slidDown 500ms ease-in-out;
-}
-
-@keyframes slidDown {
-  from {
-    height: 28.125rem; /* 450px */
-  }
-
-  to {
-    height: 35rem; /* 560px */
+/* 이용횟수 통계 그림 */
+@keyframes bar-fill {
+  0% {
+    width: 0;
   }
 }
-
-/* Header */
-
-.upload-area__title {
-  font-size: 1.8rem;
-  font-weight: 500;
-  margin-bottom: 0.3125rem;
+@-webkit-keyframes bar-fill {
+  0% {
+    width: 0;
+  }
+}
+@-moz-keyframes bar-fill {
+  0% {
+    width: 0;
+  }
+}
+@-o-keyframes bar-fill {
+  0% {
+    width: 0;
+  }
+}
+.bar-graph {
+  list-style: none;
+  margin: 50px 0px auto;
 }
 
-.upload-area__paragraph {
-  font-size: 0.9375rem;
-  color: var(--clr-light-gray);
-  margin-top: 0;
+.bar-wrap {
+  -moz-border-radius: 10px 10px 10px 10px;
+  -webkit-border-radius: 10px 10px 10px 10px;
+  -ms-border-radius: 10px 10px 10px 10px;
+  border-radius: 10px 10px 10px 10px;
+  background-color: rgba(149, 149, 149, 0.2);
+  margin-bottom: 10px;
+  height: 27px;
 }
 
-.upload-area__tooltip {
-  position: relative;
-  color: var(--clr-light-blue);
-  cursor: pointer;
-  transition: color 300ms ease-in-out;
+.bar-fill {
+  -moz-border-radius: 10px 10px 10px 10px;
+  -webkit-border-radius: 10px 10px 10px 10px;
+  -ms-border-radius: 10px 10px 10px 10px;
+  border-radius: 10px 10px 10px 10px;
+  -moz-animation: bar-fill 1s;
+  -webkit-animation: bar-fill 1s;
+  -ms-animation: bar-fill 1s;
+  animation: bar-fill 1s;
+  background-color: #979797;
+  display: block;
+  height: 27px;
+  width: 0px;
 }
 
-.upload-area__tooltip:hover {
-  color: var(--clr-blue);
-}
-
-.upload-area__tooltip-data {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -125%);
-  min-width: max-content;
-  background-color: var(--clr-white);
-  color: var(--clr-blue);
-  border: 1px solid var(--clr-light-blue);
-  padding: 0.625rem 1.25rem;
-  font-weight: 500;
-  opacity: 0;
-  visibility: hidden;
-  transition: none 300ms ease-in-out;
-  transition-property: opacity, visibility;
-}
-
-.upload-area__tooltip:hover .upload-area__tooltip-data {
-  opacity: 1;
-  visibility: visible;
-}
-
-/* Drop Zoon */
-.upload-area__drop-zoon {
-  position: relative;
-  height: 11.25rem; /* 180px */
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  border: 2px dashed #898989;
-  border-radius: 15px;
-  margin-top: 2.1875rem;
-  cursor: pointer;
-  transition: border-color 300ms ease-in-out;
-}
-
-.upload-area__drop-zoon:hover {
-  border-color: #000000;
-}
-
-.drop-zoon__icon {
-  display: flex;
-  font-size: 3.75rem;
-  color: var(--clr-blue);
-  transition: opacity 300ms ease-in-out;
-}
-
-.drop-zoon__paragraph {
-  font-size: 0.9375rem;
-  color: var(--clr-light-gray);
-  margin: 0;
-  margin-top: 0.625rem;
-  transition: opacity 300ms ease-in-out;
-}
-
-.drop-zoon:hover .drop-zoon__icon,
-.drop-zoon:hover .drop-zoon__paragraph {
-  opacity: 0.7;
-}
-
-.drop-zoon__loading-text {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  display: none;
+.bar-graph p {
+  text-align:left;
   color: #000000;
-  z-index: 10;
+  font-family: "Helvetica";
+  font-size: 16px;
+  font-weight: 100;
+  text-transform: uppercase;
 }
 
-.drop-zoon__preview-image {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
-  border-radius: 10px;
-  display: none;
-  z-index: 1000;
-  transition: opacity 300ms ease-in-out;
-}
-
-.drop-zoon:hover .drop-zoon__preview-image {
-  opacity: 0.8;
-}
-
-.drop-zoon__file-input {
-  display: none;
-}
-
-/* (drop-zoon--over) Modifier Class */
-.drop-zoon--over {
-  border-color: #000000;
-}
-
-.drop-zoon--over .drop-zoon__icon,
-.drop-zoon--over .drop-zoon__paragraph {
-  opacity: 0.7;
-}
-
-/* (drop-zoon--over) Modifier Class */
-.drop-zoon--Uploaded {
-  
-}
-
-.drop-zoon--Uploaded .drop-zoon__icon,
-.drop-zoon--Uploaded .drop-zoon__paragraph {
-  display: none;
-}
-
-/* File Details Area */
-.upload-area__file-details {
-  height: 0;
-  visibility: hidden;
-  opacity: 0;
-  text-align: left;
-  transition: none 500ms ease-in-out;
-  transition-property: opacity, visibility;
-  transition-delay: 500ms;
-}
-
-/* (duploaded-file--open) Modifier Class */
-.file-details--open {
-  height: auto;
-  visibility: visible;
-  opacity: 1;
-}
-
-.file-details__title {
-  font-size: 1.125rem;
-  font-weight: 500;
-  color: var(--clr-light-gray);
-}
-
-/* Uploaded File */
-.uploaded-file {
-  display: flex;
-  align-items: center;
-  padding: 0.625rem 0;
-  visibility: hidden;
-  opacity: 0;
-  transition: none 500ms ease-in-out;
-  transition-property: visibility, opacity;
-}
-
-/* (duploaded-file--open) Modifier Class */
-.uploaded-file--open {
-  visibility: visible;
-  opacity: 1;
-}
-
-.uploaded-file__icon-container {
-  position: relative;
-  margin-right: 0.3125rem;
-}
-
-.uploaded-file__icon {
-  font-size: 3.4375rem;
-  color: var(--clr-blue);
-}
-
-.uploaded-file__icon-text {
-  position: absolute;
-  top: 1.5625rem;
-  left: 50%;
-  transform: translateX(-50%);
-  font-size: 0.9375rem;
-  font-weight: 500;
-  color: var(--clr-white);
-}
-
-.uploaded-file__info {
-  position: relative;
-  top: -0.3125rem;
-  width: 100%;
-  display: flex;
-  justify-content: space-between;
-}
-
-.uploaded-file__info::before,
-.uploaded-file__info::after {
-  content: '';
-  position: absolute;
-  bottom: -0.9375rem;
-  width: 0;
-  height: 0.5rem;
-  background-color: #ffffff;
-  border-radius: 0.625rem;
-}
-
-.uploaded-file__info::before {
-  width: 100%;
-}
-
-.uploaded-file__info::after {
-  width: 100%;
-  background-color: #ffb202;
-}
-
-/* Progress Animation */
-.uploaded-file__info--active::after {
-  animation: progressMove 800ms ease-in-out;
-  animation-delay: 300ms;
-}
-
-@keyframes progressMove {
-  from {
-    width: 0%;
-    background-color: transparent;
-  }
-
-  to {
-    width: 100%;
-    background-color: #ffb202;
-  }
-}
-
-.uploaded-file__name {
-  width: 100%;
-  max-width: 6.25rem; /* 100px */
-  display: inline-block;
-  font-size: 1rem;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
-.uploaded-file__counter {
-  font-size: 1rem;
-  color: var(--clr-light-gray);
-}
+/* 이용횟수 통계 그림 끝 */
 </style>
 
 
@@ -528,12 +304,12 @@ textarea {
 				<div class="profile" style="text-align: center; display: flex; justify-content: center;">
 					
 					<div class="profile-left" style="display: inline-block">
-						<c:if test = "${dto.user_Pro == null}">
+						<c:if test = "${dto.user_Pro == 0}">
 						<img src="/images/importToJsp/profile_default.jpg"
 							style="width: 200px; height: 200px">
 						</c:if>
-						<c:if test = "${dto.user_Pro != null }">
-						<img src="${fi_Nm }" style="width:200px; height: 200px">
+						<c:if test = "${dto.user_Pro != 0 }">
+						<img src="${Pro_fi_Nm }" style="width:200px; height: 200px; border-radius:100px">
 						</c:if>
 						<div style="font-weight: bold; font-size: 20pt">${dto.user_Point } P</div>
 					</div>
@@ -619,7 +395,7 @@ textarea {
 								style="color: #000000" class="desc-list1">자기소개</a></li>
 							<li><a href="#!" onclick="showFinishlist();"
 								class="desc-list2">완료된 리스트</a></li>
-							<li><a href="#!" class="desc-list3">이용 횟수</a></li>
+							<li><a href="#!" onclick="showUsage();" class="desc-list3">이용 횟수</a></li>
 						</ul>
 					</div>
 					<div class="desc-content-aboutme">
@@ -634,6 +410,30 @@ textarea {
 					<div></div>
 					<div class="desc-content-finishlist" style="margin: 0 auto; width: 900px; display: none">
 					</div>
+					<div class="desc-usage" style="margin: 0 auto; width: 900px; padding-top: 60px; display: none">
+						<div class="usage-left" style="width:400px; display:inline-block; float: right; padding-top:15px">
+						<ul class="bar-graph" style="width: 400px; padding:0">
+							<li>
+								<p>[꿀벌]의뢰수락 24시간 후 취소 비율</p>
+								<p>-> 의뢰 수행 횟수 총 ${resTotal }건 중 취소횟수 ${resCancel}건</p>
+								<div class="bar-wrap">
+									<span class="bar-fill" style="width:${ratio2}%;">${ratio2 }%</span>
+								</div>
+							</li>
+						</ul>
+						</div>
+						<div class="usage-right" style="width: 400px; display: inline-block">
+							<ul class="bar-graph" style="width: 400px; padding: 0">
+								<li>
+									<p>[의뢰인]진행중 상태 의뢰 요청취소 비율</p>
+									<p>-> 의뢰글 총 ${reqTotal }건 중 취소횟수 ${reqCancel }건</p>
+									<div class="bar-wrap">
+										<span class="bar-fill" style="width: ${ratio}%;">${ratio }%</span>
+									</div>
+								</li>
+							</ul>
+						</div>
+					</div>
 				</div>
 			</div>
 		</div>
@@ -645,17 +445,28 @@ textarea {
 	//자기소개 보여줌
 	function showDescMe() {
 		$(".desc-content-aboutme").show();
-		$(".upload-area").hide();
+		$(".desc-usage").hide();
 		$(".desc-content-finishlist").hide();
 		$(".desc-list1").css("color", "#000000");
 		$(".desc-list2").css("color", "#898989");
 
 	}
 
+	//이용횟수 보여줌
+	function showUsage() {
+		$(".desc-content-aboutme").hide();
+		$(".desc-usage").show();
+		$(".desc-content-finishlist").hide();
+		$(".desc-list1").css("color", "#898989");
+		$(".desc-list2").css("color", "#898989");
+		$(".desc-list3").css("color", "#000000");
+
+	}
+	
 	//완료된 리스트 보여줌
 	function showFinishlist() {
 		$(".desc-content-aboutme").hide();
-		$(".upload-area").hide();
+		$(".desc-usage").hide();
 		$(".desc-content-finishlist").show();
 		$(".desc-list1").css("color", "#898989");
 		$(".desc-list2").css("color", "#000000");

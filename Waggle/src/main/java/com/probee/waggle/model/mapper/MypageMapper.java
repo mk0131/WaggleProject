@@ -7,9 +7,11 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 
+import com.probee.waggle.model.dto.ConfirmDto;
 import com.probee.waggle.model.dto.FileDto;
 import com.probee.waggle.model.dto.MypageFinishlistDto;
 import com.probee.waggle.model.dto.MypageOtherDto;
+import com.probee.waggle.model.dto.MypageUsageDto;
 import com.probee.waggle.model.dto.UserAddressDto;
 
 @Mapper
@@ -63,12 +65,37 @@ public interface MypageMapper {
 	@Select("SELECT * FROM file ORDER BY fi_Code DESC LIMIT 1")
 	public List<FileDto> SelectLastFiCode();
 	
-	@Insert("INSERT INTO FILE VALUES(NULL, 'img', CONCAT('/images/profile/profile_',#{fi_Code},'.jpg'))")
-	public int ImageFileInsert(int fi_Code);
+	@Insert("INSERT INTO FILE VALUES(NULL, 'img', CONCAT('/images/profile/profile_',#{fi_Code},'.',#{ext}))")
+	public int ImageFileInsert(int fi_Code, String ext);
 	
 	@Update("UPDATE USERS SET USER_PRO = #{fi_Code} WHERE USER_CODE = #{ucode}")
 	public int UserProChange(int fi_Code, int ucode);
 	
+	@Select("select count(*) as reqCancel from request where req_ucode=#{ucode} and req_stat='취소'")
+	public MypageUsageDto reqCancel(int ucode);
 	
+	@Select("select count(*) as reqTotal from request where req_UCode = #{ucode}")
+	public MypageUsageDto reqTotal(int ucode);
+	
+	@Select("select count(*) as resCancel from result where res_ucode=#{ucode} and res_stat='취소'")
+	public MypageUsageDto resCancel(int ucode);
+	
+	@Select("select count(*) as resTotal from result where res_ucode=#{ucode}")
+	public MypageUsageDto resTotal(int ucode);
+	
+	@Select("Select * from Confirm where co_UCode = #{ucode}")
+	public ConfirmDto SelectMyConfirm(int ucode);
+	
+	@Update("update FILE set FI_NM = CONCAT('/images/confirm/confirm_',#{ucode},'.',#{ext}) where fi_code=#{fi_code}")
+	public int FileUpdate(int ucode, String ext, int fi_code);
+	
+	@Insert("insert into file values(#{new_fi_Code},'img',concat('/images/confirm/confirm_',#{ucode},'.',#{ext}))")
+	public int InsertFileConfirm(int new_fi_Code, int ucode, String ext);
+	
+	@Insert("insert into confirm values(#{ucode}, #{new_fi_Code}, '미확인', null, null)")
+	public int InsertConfirm(int ucode, int new_fi_Code);
+	
+	@Select("select * from file where fi_code = #{fi_code}")
+	public FileDto SelectConfirmFile(int fi_code);
 	
 }
