@@ -770,7 +770,9 @@ $("#address").on("click",function(){
 	                $("#daddr").focus();
 	                $("#change_addr").attr("disabled",false);
 		        }
-		    }).open();
+		    }).open({
+		    	popupName: 'AddrSearch'
+		    });
 		})
 
 
