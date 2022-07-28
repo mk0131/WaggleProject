@@ -307,7 +307,7 @@ input {
 			$('.email_form_check').css("display","none");
 			$('.nm_form_check').css("display","none");
 			$('.age_form_check').css("display","none");
-			$('#id_input').val(null);
+			$('#id_input2').val(null);
 			$('#pw_input').val(null);
 			$('#pw_chk').val(null);
 			$('#user_Email').val(null);
@@ -542,6 +542,7 @@ input {
 								} else {
 									checkBox.attr("disabled", false);
 									code = data;
+									console.log(code);
 									$('.find_input_re_3').css("display","none");
 								}
 								
@@ -652,6 +653,7 @@ input {
 								} else {
 									checkBox.attr("disabled", false);
 									code = data;
+									console.log(code);
 									$('.find_input_re_3').css("display","none");
 								}
 								
@@ -727,7 +729,7 @@ input {
 					<div>
 						<br>
 						<b style="text-align: left;">아이디</b> <br> 
-						<input type="text" id="id_input" name="user_Id" placeholder="  아이디" style="width: 400px;">
+						<input type="text" id="id_input2" name="user_Id" placeholder="  아이디" style="width: 400px;">
 						<input type="button" id="id_chk" value="중복 확인" style="width: 80px;">
 						<br>
 						<span class="id_input_re_1">사용 가능한 아이디입니다.</span>
@@ -1100,8 +1102,9 @@ input {
 	
 	//아이디 중복검사
 	$('#id_chk').on("click", function(){ // 아이디 입력마다 값을 확인
-		let user_Id = $('#id_input').val();
-		let warnMsg = $(".id_form_check"); // 비밀번호 경고글
+		let user_Id = $('#id_input2').val();
+		console.log(user_Id);
+		let warnMsg = $(".id_form_check"); 
 		 $('.final_id_ck').css('display', 'none');
 		let data = {user_Id : user_Id}
 		
@@ -1113,7 +1116,7 @@ input {
 	        warnMsg.css("display", "inline-block");
 	        $('.id_input_re_1').css("display", "none");
 	        $('.id_input_re_2').css("display", "none");
-	        $("#id_input").val(null);
+	        $("#id_input2").val(null);
 	        return false;
 	    } 
 		
@@ -1131,7 +1134,7 @@ input {
 					$('.id_input_re_2').css("display","inline-block");
 					$('.id_input_re_1').css("display", "none");
 					warnMsg.css("display", "none");
-					$('#id_input').val(null);
+					$('#id_input2').val(null);
 					idckCheck = false;
 				}
 			}
@@ -1205,6 +1208,7 @@ input {
 				if(data != 'fail'){
 					checkBox.attr("disabled", false);
 					code = data;
+					console.log(code);
 					$('.email_input_re_3').css("display","none");
 				} else {
 					$('.email_input_re_3').css("display","inline-block");
@@ -1290,7 +1294,7 @@ input {
 	})
 	
 	$('#regist_com').on("click" , function(){ // 회원가입 버튼
-		var id = $('#id_input').val();                 // id 입력란
+		var id = $('#id_input2').val();                 // id 입력란
         var pw = $('#pw_input').val();                // 비밀번호 입력란
         var pwck = $('#pw_chk').val();            // 비밀번호 확인 입력란
         var name = $('#nm_input').val();            // 이름 입력란
