@@ -119,6 +119,10 @@ footer .footer-right .service-center li p {
 	text-decoration: none;
 }
 
+a {
+	text-decoration: none;
+}
+
 </style>
 </head>
 <body>
