@@ -219,6 +219,7 @@ img {
     height: 300px;
     object-fit: cover;
     border-radius: 10px;
+    cursor: pointer;
 }
  
 #board-img {
@@ -249,6 +250,7 @@ img {
     height: 60px;
     border: 1px solid #d3d3d3;
     border-radius: 10px;
+    cursor: pointer;
 }
  
 #board-dl {
@@ -276,8 +278,6 @@ img {
  
 #board-ltd-box {
 	padding: 0 12px;
-/* 	padding-left: 0;
-	padding-right: 0; */
 	flex: 1;
 } 
 
@@ -288,6 +288,7 @@ img {
 #board-dl-dt-dd {
 	border-top: 1px solid #ebebeb;
 	border-bottom: 1px solid #ebebeb;
+	cursor: pointer;
 }
 
 #board-ltd-title {
@@ -315,6 +316,7 @@ img {
     font-size: 18px;
     letter-spacing: -.09px;
     font-weight: 400;
+    cursor: pointer;
 }
 
 .middle-btn {
@@ -333,6 +335,7 @@ img {
     border-radius: 12px;
     font-size: 14px;
     letter-spacing: -.14px;
+    cursor: pointer;
     
 }
  

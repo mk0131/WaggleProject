@@ -240,6 +240,22 @@ span {
 	display: inline-block;
 }
 
+#img-edit-btn {
+	margin-top:20px;
+	border-radius: 8px;
+    box-sizing: border-box;
+    font-size: 13px;
+    font-weight: 500;
+    font-family: inherit;
+    letter-spacing: .25px;
+    line-height: normal;
+    padding: 5px 5px;
+    background-color: #fff;
+    border: 1px solid #d3d3d3;
+    color: #222222CC;
+}
+
+
 
 /*성별 라디오*/
 .select input[type=radio]{
@@ -353,7 +369,7 @@ span {
               </label>
               <div class="delete" onclick="removeimg()">&times;</div>
             </div>
-            <input type="submit" value="프로필사진 수정하기" style="margin-top:20px">
+            <input type="submit" value="프로필사진 수정하기" id="img-edit-btn">
             </form>
          </div>
          <div class="edit-profile-info">

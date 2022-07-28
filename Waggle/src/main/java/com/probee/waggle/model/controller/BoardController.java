@@ -254,10 +254,10 @@ public class BoardController {
 				
 			} else { //완료
 				// 글 번호에 맞는 유저평가 데이터 json으로 변환하여 넣기
-				List<UserRatingDto> list = boardService.selectUserRating(req_No);
-				List<String> rate_list = new ArrayList<String>();
 				ResultDto result2 = boardService.selectResult(req_No);
-				
+				List<UserRatingDto> list = boardService.selectUserRating(result2.getRes_Code());
+				List<String> rate_list = new ArrayList<String>();
+
 				for(int i=0; i<list.size(); i++) {
 					String tmp = gson.toJson(list.get(i));
 					rate_list.add(tmp);
@@ -269,7 +269,7 @@ public class BoardController {
 				}else {
 					model.addAttribute("po",-1);
 				}
-					
+
 				model.addAttribute("user_rating", rate_list);
 				model.addAttribute("res", result2.getRes_UCode());
 				
@@ -315,7 +315,8 @@ public class BoardController {
 	
 	@PostMapping("/rating") // 확인중 페이지에서 작성자가 수행자 평가했을시 업데이트 진행
 	public String ratingBee(int req_No, UserRatingDto userRating_dto) {
-		userRating_dto.setUr_UCode(req_No);
+		ResultDto res_dto = boardService.selectResult(req_No);
+		userRating_dto.setUr_Code(res_dto.getRes_Code());
 		
 		// 1, 0, -1 -> '좋아요', '보통이에요', '별로에요' 값변환
 		List<String> indexArray = new ArrayList<String>();
@@ -347,16 +348,15 @@ public class BoardController {
 	
 	@PostMapping("/reRatingForm") // 완료 게시글에서 작성자가 꿀벌을 다시한번 평가하는 폼으로 이동시켜줌
 	public String goReRatingForm(int req_No, Model model) {
-		List<UserRatingDto> tmplist = boardService.selectUserRating(req_No);
+		// 요청 결과값
+		ResultDto res_dto = boardService.selectResult(req_No);
+		List<UserRatingDto> tmplist = boardService.selectUserRating(res_dto.getRes_Code());
 		UserRatingDto userRating_dto = tmplist.get(0);
 		
 		System.out.println(userRating_dto);
 		// 요청글 정보
 		RequestDto2 req_dto = boardService.selectRequest(req_No);
 		model.addAttribute("req_dto", req_dto);
-		
-		// 요청 결과값
-		ResultDto res_dto = boardService.selectResult(req_No);
 		
 		Gson gson = new Gson();
 		
@@ -367,7 +367,8 @@ public class BoardController {
 	
 	@PostMapping("/rerating")
 	public String reratingBee(int req_No, UserRatingDto userRating_dto) {
-		userRating_dto.setUr_UCode(req_No);
+		ResultDto res_dto = boardService.selectResult(req_No);
+		userRating_dto.setUr_Code(res_dto.getRes_Code());
 		
 		// 1, 0, -1 -> '좋아요', '보통이에요', '별로에요' 값변환
 		List<String> indexArray = new ArrayList<String>();
