@@ -11,31 +11,7 @@
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <!-- iamport.payment.js -->
 <script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.2.0.js"></script>
-<script type="text/javascript">
-	var IMP = window.IMP;
-	IMP.init("TC0ONETIME");  
-	
-	function requestPay() {
-        IMP.request_pay({
-            pg : 'kakaopay',
-            pay_method : 'card',
-            merchant_uid: "57008833-33004", 
-            name : '당근 10kg',
-            amount : 1004,
-            buyer_email : 'Iamport@chai.finance',
-            buyer_name : '아임포트 기술지원팀',
-            buyer_tel : '010-1234-5678',
-            buyer_addr : '서울특별시 강남구 삼성동',
-            buyer_postcode : '123-456'
-        }, function (rsp) { // callback
-            if (rsp.success) {
-                console.log(rsp);
-            } else {
-                console.log(rsp);
-            }
-        });
-    }
-</script>
+
 <style>
 .middle {
 	margin: 0;
@@ -187,16 +163,16 @@ input:focus ~ .bar:before, input:focus ~ .bar:after {
 .paging li {
 	list-style: none;
 	display: inline-block;
-
 }
 
-/*
-#pagination {
-  display: flex;
-  justify-content: center;
-  align-items: center;
+.img-x:hover {
+	cursor: pointer;
 }
-*/
+
+.point-amount {
+	font-size: 1.5em;
+}
+
 </style>
 </head>
 <body>
@@ -218,9 +194,9 @@ input:focus ~ .bar:before, input:focus ~ .bar:after {
 				<form>
 					<div class="money">
 						<div class="img-x">
-						<input class="point-amount" type="text" style="background-color:transparent;" required placeholder="금액을 입력해주세요"><span class="bar"></span>
+						<input id="price" class="point-amount" type="text" style="background-color:transparent;" required placeholder="금액을 입력해주세요"><span class="bar"></span>
 						</div>
-						<div class="img-x" >
+						<div class="img-x" onclick="priceReset()">
 						<svg width="45" height="45" viewBox="0 0 42 42" fill="none"
 							xmlns="http://www.w3.org/2000/svg"
 							xmlns:xlink="http://www.w3.org/1999/xlink">
@@ -239,21 +215,21 @@ input:focus ~ .bar:before, input:focus ~ .bar:after {
 				</form>
 			</div>
 			<div class="money-buttons">
-				<div class="button">
+				<div class="button" onclick="pointAdd(1000)">
 	 				<p>+1천원</p>
 				</div>
-				<div class="button">
+				<div class="button" onclick="pointAdd(5000)">
 	 				<p>+5천원</p>
 				</div>
-				<div class="button">
+				<div class="button" onclick="pointAdd(10000)">
 	 				<p>+1만원</p>
 				</div>
-				<div class="button">
+				<div class="button" onclick="pointAdd(50000)">
 	 				<p>+5만원</p>
 				</div>
 			</div>
 			<div class="charge-button">
-				<div class="button" style="width:530px">
+				<div class="button" style="width:530px" onclick="requestPay()">
 					<p>포인트 충전하기</p>
 				</div>
 			</div>
@@ -323,8 +299,37 @@ input:focus ~ .bar:before, input:focus ~ .bar:after {
 
 	<%@ include file="footer.jsp"%>
 </body>
-<script>
-
-
+<script type="text/javascript">
+	var IMP = window.IMP;
+	IMP.init("imp25236148");  
+	
+	function requestPay() {
+	    IMP.request_pay({
+	        pg : 'kakaopay',
+	        pay_method : 'card',
+	        merchant_uid: "merchan_"+new Date().getTime(), 
+	        name : $("#price").val()+' 포인트',
+	        amount : $("#price").val() ,
+	        buyer_email : '${user_Email}',
+	        buyer_name : '${user_Code}',
+	    }, function (rsp) { // callback
+	        if (rsp.success) {
+	            alert('결제성공');
+	            window.location = '/point/payment?pay_Price='+rsp.paid_amount;
+	        } else {
+	            alert('결제실패');
+	            window.location = '/point/use';
+	        }
+	    });
+	}
+	
+	function pointAdd(price) {
+		var new_price = Number($("#price").val()) + Number(price);
+		$("#price").val(new_price);
+	}
+	
+	function priceReset() {
+		$("#price").val('');
+	}
 </script>
 </html>

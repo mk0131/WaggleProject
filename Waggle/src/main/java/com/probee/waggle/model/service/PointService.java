@@ -9,4 +9,6 @@ public interface PointService {
 	public int selectUserPoint(int user_Code);
 	public List<PointsDto> selectPointUse(int ucode);
 	public List<PayDto> selectpay(int pay_UCode);
+	public int insertPay(int pay_Price, int pay_UCode);
+	public int updateUserPoint(int user_Point, int user_Code);
 }

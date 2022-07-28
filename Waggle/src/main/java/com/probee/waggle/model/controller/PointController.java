@@ -83,5 +83,20 @@ public class PointController {
 		return "point";
 	}
 	
+	@GetMapping("/payment")
+	public String sucsessPay(int pay_Price, HttpSession session) {
+		int user_code = (int)session.getAttribute("user_Code");
+		
+		// 유저코드와 금액으로 Pay DB 데이터 추가
+		pointService.insertPay(pay_Price, user_code);
+		// Users DB에서 point 업데이트
+		pointService.updateUserPoint(pay_Price, user_code);
+		// session에 user point 정보 업데이트
+		int point = (int)session.getAttribute("user_Point");
+		session.setAttribute("user_Point", point + pay_Price);
+		
+		return "redirect:/point/use";
+	}
+	
 
 }

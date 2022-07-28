@@ -29,6 +29,16 @@ public class PointServiceImpl implements PointService{
 	public List<PayDto> selectpay(int pay_UCode) {
 		return pointMapper.selectPay(pay_UCode);
 	}
+
+	@Override
+	public int insertPay(int pay_Price, int pay_UCode) {
+		return pointMapper.insertPay(pay_Price, pay_UCode);
+	}
+
+	@Override
+	public int updateUserPoint(int user_Point, int user_Code) {
+		return pointMapper.updateUserPoint(user_Point, user_Code);
+	}
 	
 	
 
