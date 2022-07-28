@@ -26,8 +26,8 @@ public interface PointMapper {
 	public List<PayDto> selectPay(int pay_UCode);
 	
 	// 유저코드와 금액으로 Pay DB 데이터 추가
-	@Insert(" insert into Pay(pay_Price, pay_Date, pay_UCode) values(#{pay_Price}, NOW(), #{pay_UCode}) ")
-	public int insertPay(int pay_Price, int pay_UCode);
+	@Insert(" insert into Pay(pay_Price, pay_Date, pay_UCode, pay_Type) values(#{pay_Price}, NOW(), #{pay_UCode}, #{pay_Type}) ")
+	public int insertPay(int pay_Price, int pay_UCode, String pay_Type);
 	
 	// Users DB에서 point 업데이트
 	@Update(" update Users set user_Point=#{user_Point} where user_Code=#{user_Code} ")

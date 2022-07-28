@@ -31,8 +31,8 @@ public class PointServiceImpl implements PointService{
 	}
 
 	@Override
-	public int insertPay(int pay_Price, int pay_UCode) {
-		return pointMapper.insertPay(pay_Price, pay_UCode);
+	public int insertPay(int pay_Price, int pay_UCode, String pay_Type) {
+		return pointMapper.insertPay(pay_Price, pay_UCode, pay_Type);
 	}
 
 	@Override

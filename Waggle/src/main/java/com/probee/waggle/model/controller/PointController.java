@@ -47,7 +47,11 @@ public class PointController {
 			PointsDto2 tmp = new PointsDto2();
 			tmp.setDate(dto.getPay_Date());
 			tmp.setPrice(dto.getPay_Price());
-			tmp.setType("충전");
+			if(dto.getPay_Type().equals("충전")) {
+				tmp.setType("충전");				
+			} else {
+				tmp.setType("획득");
+			}
 			list.add(tmp);
 		}
 
@@ -88,7 +92,7 @@ public class PointController {
 		int user_code = (int)session.getAttribute("user_Code");
 		
 		// 유저코드와 금액으로 Pay DB 데이터 추가
-		pointService.insertPay(pay_Price, user_code);
+		pointService.insertPay(pay_Price, user_code, "충전");
 		// Users DB에서 point 업데이트
 		pointService.updateUserPoint(pay_Price, user_code);
 		// session에 user point 정보 업데이트

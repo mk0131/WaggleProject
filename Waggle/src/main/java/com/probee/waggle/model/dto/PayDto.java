@@ -7,18 +7,20 @@ public class PayDto {
 	private int pay_Price;
 	private LocalDate pay_Date;
 	private int pay_UCode;
+	private String pay_Type;
 	
 	public PayDto() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
-	public PayDto(int pay_No, int pay_Price, LocalDate pay_Date, int pay_UCode) {
+	public PayDto(int pay_No, int pay_Price, LocalDate pay_Date, int pay_UCode, String pay_Type) {
 		super();
 		this.pay_No = pay_No;
 		this.pay_Price = pay_Price;
 		this.pay_Date = pay_Date;
 		this.pay_UCode = pay_UCode;
+		this.pay_Type = pay_Type;
 	}
 
 	public int getPay_No() {
@@ -53,11 +55,21 @@ public class PayDto {
 		this.pay_UCode = pay_UCode;
 	}
 
+	public String getPay_Type() {
+		return pay_Type;
+	}
+
+	public void setPay_Type(String pay_Type) {
+		this.pay_Type = pay_Type;
+	}
+
 	@Override
 	public String toString() {
 		return "PayDto [pay_No=" + pay_No + ", pay_Price=" + pay_Price + ", pay_Date=" + pay_Date + ", pay_UCode="
-				+ pay_UCode + "]";
+				+ pay_UCode + ", pay_Type=" + pay_Type + "]";
 	}
+
+	
 
 	
 	
