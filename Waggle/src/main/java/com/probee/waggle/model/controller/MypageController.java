@@ -257,7 +257,7 @@ public class MypageController {
 		session.setAttribute("user_Intro", editDesc);
 		session.setMaxInactiveInterval(-1);
 
-		return "redirect:/mypage_me";
+		return "redirect:/mypage/me";
 	}
 
 	@RequestMapping(value = "/descEdit", method = RequestMethod.POST)
@@ -281,7 +281,7 @@ public class MypageController {
 		session.setAttribute("user_Intro", editDesc);
 		session.setMaxInactiveInterval(-1);
 
-		return "redirect:/mypage_me";
+		return "redirect:/mypage/me";
 	}
 
 	// 마이페이지 완료된리스트 컨트롤러
@@ -299,9 +299,12 @@ public class MypageController {
 		HttpSession session = request.getSession();
 		
 		int user_Pro = (int)session.getAttribute("user_Pro");
-		FileDto ProfileFile = mypageService.SelectConfirmFile(user_Pro);
 		
-		model.addAttribute("Pro_Fi_Nm", ProfileFile.getFi_Nm());
+		if(user_Pro != 0) {
+			FileDto ProfileFile = mypageService.SelectConfirmFile(user_Pro);
+			model.addAttribute("Pro_Fi_Nm", ProfileFile.getFi_Nm());
+		}
+		
 		model.addAttribute("dto", user);
 
 		return "profileEdit";

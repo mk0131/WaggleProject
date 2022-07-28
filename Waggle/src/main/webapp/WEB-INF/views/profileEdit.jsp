@@ -349,7 +349,7 @@ span {
             </c:if>
               <label class="edit">
                 <span>&#10002;</span>
-                <input type="file" name="myfile" data-max-file-size="5MB">
+                <input type="file" name="myfile" data-max-file-size="10MB">
               </label>
               <div class="delete" onclick="removeimg()">&times;</div>
             </div>
