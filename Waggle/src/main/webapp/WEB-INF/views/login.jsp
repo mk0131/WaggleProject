@@ -371,6 +371,22 @@ input {
 	                // 우편번호와 주소 정보를 해당 필드에 넣는다.
 	                $("#post").val(data.zonecode);
 	                $("#addr").val(addr);
+	                
+	                //받은 주소값을 위도 경도로 바꿔서 input hidden 값에 value값으로 넣어주기
+	                var geocoder = new kakao.maps.services.Geocoder();
+	                var addr = $('#addr').val();
+	                geocoder.addressSearch(addr, function(result, status) {
+	                	
+	        		    // 정상적으로 검색이 완료됐으면 
+	        		     if (status === kakao.maps.services.Status.OK) {
+	        				$("#ua_Lat").attr('value',result[0].y);
+	        				$("#ua_Lng").attr('value',result[0].x);
+	        				
+	        		    } else {
+	        		    	console.log("에러");
+	        		    }
+	        		});  
+	                
 	                // 커서를 상세주소 필드로 이동한다.
 	                $("#daddr").attr("readonly",false);
 	                $("#daddr").focus();
@@ -1310,20 +1326,6 @@ input {
         var mail = $('#email_input').val();            // 이메일 입력란
         var daddr = $('#daddr').val();        // 상세 주소 입력란
         var age = $('#age_input').val();
-        
-        //받은 주소값을 위도 경도로 바꿔서 input hidden 값에 value값으로 넣어주기
-        var geocoder = new kakao.maps.services.Geocoder();
-        var addr = $('#addr').val();
-        geocoder.addressSearch(addr, function(result, status) {
-        	
-		    // 정상적으로 검색이 완료됐으면 
-		     if (status === kakao.maps.services.Status.OK) {
-				$("#ua_Lat").attr('value',result[0].y);
-				$("#ua_Lng").attr('value',result[0].x);
-		    } else {
-		    	console.log("에러");
-		    }
-		});  
         
         
         if(id == ""){
