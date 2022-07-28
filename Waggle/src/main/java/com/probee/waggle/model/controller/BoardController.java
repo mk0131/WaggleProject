@@ -18,8 +18,10 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.google.gson.Gson;
+import com.probee.waggle.model.dto.Criteria;
 import com.probee.waggle.model.dto.FileDto;
 import com.probee.waggle.model.dto.HomeDto;
+import com.probee.waggle.model.dto.Paging;
 import com.probee.waggle.model.dto.PointsDto;
 import com.probee.waggle.model.dto.RequestDto2;
 import com.probee.waggle.model.dto.ResultDto;
@@ -44,26 +46,25 @@ public class BoardController {
 	VolunteerService volunteerService;
 	
 	@GetMapping("/list")
-	public String selectList(Model model, int ...num) {
-		List<RequestDto2> list = boardService.selectList();
-		List<String> res_list = new ArrayList<String>();
-		Gson gson = new Gson();
+	public String selectList(Model model, Criteria cri) {
 		
-		int current_page;
+		int boardListCnt = boardService.boardListCnt();
 		
-		try {
-			current_page = num[0];
-		} catch (Exception e) {
-			current_page = 1;
-		}
+		// 페이징 객체
+		Paging paging = new Paging();
 		
-		for(int i=0; i<list.size(); i++) {
-			String tmp = gson.toJson(list.get(i));
-			res_list.add(tmp);
-		}
+		cri.setPerPageNum(4);
 		
-		model.addAttribute("List",res_list);
-		model.addAttribute("Current_page",current_page);
+		paging.setCri(cri);
+		paging.setTotalCount(boardListCnt);
+		
+		
+		List<RequestDto2> list = boardService.selectList(cri);
+//		List<String> res_list = new ArrayList<String>();
+		
+		
+		model.addAttribute("list", list);
+		model.addAttribute("paging", paging);
 		
 		return "board";
 	}

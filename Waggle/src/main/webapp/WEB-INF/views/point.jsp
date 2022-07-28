@@ -160,11 +160,6 @@ input:focus ~ .bar:before, input:focus ~ .bar:after {
 	font-size: 30px;
 }
 
-.paging li {
-	list-style: none;
-	display: inline-block;
-}
-
 .img-x:hover {
 	cursor: pointer;
 }
@@ -172,6 +167,33 @@ input:focus ~ .bar:before, input:focus ~ .bar:after {
 .point-amount {
 	font-size: 1.5em;
 }
+
+
+/* 페이징 */
+.paging {
+	text-align: center;
+}
+
+.paging li {
+	list-style: none;
+	display: inline-block;
+}
+
+.nowpage {
+	font-weight: bold;
+	color: #000000 !important;
+}
+ 
+#paging-a {
+	text-decoration: none;
+	padding: 8px;
+}
+
+#paging-a:visited {
+	color: #878787;
+}
+/* 페이징 끝 */
+
 
 </style>
 </head>
@@ -278,17 +300,17 @@ input:focus ~ .bar:before, input:focus ~ .bar:after {
 					<ul class="paging">
 						<c:if test="${paging.prev}">        
 							<li id="paging">
-								<a href='<c:url value="/point/use?page=${paging.startPage-1}"/>'>이전</a>
+								<a id="paging-a" href='<c:url value="/point/use?page=${paging.startPage-1}"/>'>이전</a>
 							</li>    
 						</c:if>
 						<c:forEach begin="${paging.startPage}" end="${paging.endPage}" var="num">
 							<li>
-								<a href='<c:url value="/point/use?page=${num}"/>'>${num}</a>
+								<a class="${paging.cri.page == num ? 'nowpage' : null }"  id="paging-a" href='<c:url value="/point/use?page=${num}"/>'>${num}</a>
 							</li>    
 						</c:forEach>
 						<c:if test="${paging.next && paging.endPage > 0}">        
 							<li>
-								<a href='<c:url value="/point/use?page=${paging.endPage+1}"/>'>다음</a>
+								<a id="paging-a" href='<c:url value="/point/use?page=${paging.endPage+1}"/>'>다음</a>
 							</li>    
 						</c:if>
 					</ul>

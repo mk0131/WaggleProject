@@ -8,6 +8,7 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 
+import com.probee.waggle.model.dto.Criteria;
 import com.probee.waggle.model.dto.FileDto;
 import com.probee.waggle.model.dto.PointsDto;
 import com.probee.waggle.model.dto.RequestDto2;
@@ -22,8 +23,8 @@ public interface BoardMapper {
 	// 전체 request 가져오기
 	@Select(" select req_No,req_Title,req_Link,date_format(req_WDate,'%Y-%m-%d') req_WDate,date_format(req_EDate,'%Y-%m-%d') req_EDate,req_Phone,req_Detail,req_Point,req_Stat,req_UCode,req_FCode,req_HCode,fi_Nm,home_Addr,home_DAddr,home_Lat,home_Lng "
 			+ "from request r left outer join file f on r.req_FCode = f.fi_Code left outer join home h on r.req_HCode = h.home_Code "
-			+ "order by req_No desc ")
-	public List<RequestDto2> selectList();
+			+ "order by req_No desc LIMIT #{pageStart}, #{perPageNum} ")
+	public List<RequestDto2> selectList(Criteria cri);
 	
 	// 글번호로 request 모든 정보 불러오기
 	@Select(" select req_No,req_Title,req_Link,date_format(req_WDate,'%Y-%m-%d') req_WDate,date_format(req_EDate,'%Y-%m-%d') req_EDate,req_Phone,req_Detail,req_Point,req_Stat,req_UCode,req_FCode,req_HCode,fi_Nm,home_Addr,home_DAddr,home_Lat,home_Lng "
@@ -104,9 +105,8 @@ public interface BoardMapper {
 			+ "res_Detail=#{res_Detail}, res_Rate=#{res_Rate}, res_WDate=NOW(), res_Stat='완료' "
 			+ "where res_Code=#{res_Code} ")
 	public int updateResult(ResultDto dto);
-	
 
-
-	
+	@Select(" select count(*) from request order by req_No desc ")
+	public int boardListCnt();
 	
 }

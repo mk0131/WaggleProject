@@ -190,7 +190,11 @@ button:active {
 	<script type="text/javascript">
 		$(function(){
 			let link = $("#link").text();
-			$("#link").attr('href',link);
+			if (link.includes("https://")) {
+				$("#link").attr('href',link);
+			} else {
+				$("#link").attr('href',"https://"+link);			
+			}
 		})
 	</script>
 </body>
