@@ -608,7 +608,7 @@ textarea {
 					</div>
 				</div>
 				<div class="profile-bottom">
-						<div class="button" onclick="">
+						<div class="button" onclick="location.href='/chat/create?room_UCode1=${user_Code}&room_UCode2=${param.ucode}'">
 							<a><p style="margin:5px">채팅하기</p></a>
 						</div>
 					</div>

@@ -384,7 +384,7 @@ input {
 <body>
 
 	<%@ include file="header.jsp"%>
-	<div id="wrap">
+	<div id="wrap" >
 		<div class="middle">
 			<div class="guideline">
 			<ul class="guideline-all">

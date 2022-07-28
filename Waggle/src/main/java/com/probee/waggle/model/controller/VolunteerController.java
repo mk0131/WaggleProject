@@ -61,7 +61,7 @@ public class VolunteerController {
 	public String LateUndo(int vo_UCode, int vo_No , HttpSession session) {
 		
 		int res = volunteerService.Block(vo_No,vo_UCode); // 수행자 차단
-		volunteerService.ResCancel(vo_No, vo_UCode); // 결과물 취소 상태
+		volunteerService.ResRevoke(vo_No, vo_UCode); // 결과물 취소 상태
 		
 		if(res>0) {
 			session.setAttribute("vo_UCode", -1);
