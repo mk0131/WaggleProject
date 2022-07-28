@@ -53,10 +53,15 @@
  
 #paging-a {
 	text-decoration: none;
+	padding: 8px;
 }
 
 #paging-a:visited {
 	color: #878787;
+}
+
+#board-content-nothing {
+	text-align: center;
 }
 
 img {
@@ -203,9 +208,7 @@ img {
    	 <div class="board-content">
           <c:choose>
              <c:when test="${empty list }">
-                <tr>
-                   <td colspan="4" class="board-content">문의 내용이 없습니다.</td>
-                </tr>
+                   <p id="board-content-nothing">문의 내용이 없습니다.</p>
              </c:when>
              <c:otherwise>
                 <c:forEach items="${list }" var="dto">

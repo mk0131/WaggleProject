@@ -114,7 +114,7 @@ footer .footer-right .service-center li p {
   	font-size: 12px;
 }
 
-a {
+#f-btn {
 	color: #878787;
 	text-decoration: none;
 }
@@ -142,14 +142,14 @@ a {
     <div class="footer-right">
       <ul class="follow-us">
         <h4>Follow Us</h4>
-        <li><a href="javascript:void(0)">
+        <li><a id="f-btn" href="javascript:void(0)">
           <i class="fa-brands fa-facebook"></i>
         </a>
         </li>
-        <li><a href="javascript:void(0)">
+        <li><a id="f-btn" href="javascript:void(0)">
           <i class="fa-brands fa-youtube"></i>
         </a></li>
-        <li><a href="javascript:void(0)">
+        <li><a id="f-btn" href="javascript:void(0)">
           <i class="fa-brands fa-instagram"></i>
         </a></li>
       </ul>
@@ -158,7 +158,7 @@ a {
         
         <c:if test="${user_Code == null }">
         <li>
-          <a href="javascript:void(0)" onclick="location.href='/login'">
+          <a id="f-btn" href="javascript:void(0)" onclick="location.href='/login'">
             <i class="fa-solid fa-headset"></i>
             <p>문의</p>
           </a>
@@ -167,7 +167,7 @@ a {
 		
 		<c:if test="${user_Code != null }">
         <li>
-          <a href="javascript:void(0)" onclick="location.href='/inquiry/list?user_Code=${user_Code}'">
+          <a id="f-btn" href="javascript:void(0)" onclick="location.href='/inquiry/list?user_Code=${user_Code}'">
             <i class="fa-solid fa-headset"></i>
             <p>문의</p>
           </a>
@@ -176,7 +176,7 @@ a {
 		
 		<c:if test="${user_Code == null }">  
         <li>
-          <a href="javascript:void(0)" onclick="location.href='/login'">
+          <a id="f-btn" href="javascript:void(0)" onclick="location.href='/login'">
             <i class="fa-solid fa-book"></i>
             <p>도움말</p>
           </a>
@@ -185,7 +185,7 @@ a {
         
         <c:if test="${user_Code != null }">  
         <li>
-          <a href="javascript:void(0)" onclick="location.href='/inquiry/list?user_Code=${user_Code}'">
+          <a id="f-btn" href="javascript:void(0)" onclick="location.href='/inquiry/list?user_Code=${user_Code}'">
             <i class="fa-solid fa-book"></i>
             <p>도움말</p>
           </a>
@@ -193,7 +193,7 @@ a {
         </c:if>
         
         <li>
-          <a href="javascript:void(0)" onclick="showPopup();">
+          <a id="f-btn" href="javascript:void(0)" onclick="showPopup();">
           	<i class="fa-brands fa-rocketchat"></i>
           	<p>챗봇</p>
           </a>
