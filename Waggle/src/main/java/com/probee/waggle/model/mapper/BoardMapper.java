@@ -91,7 +91,7 @@ public interface BoardMapper {
 	public int insertRatingBee(UserRatingDto userRating_dto);
 	
 	// 꿀벌 재평가 DB 삽입
-	@Insert(" insert into UserRating values (#{ur_UCode}, #{ur_Rate}, #{ur_Attr1}, #{ur_Attr2}, #{ur_Attr3}, 'true') ")
+	@Insert(" insert into UserRating values (#{ur_Code}, #{ur_Rate}, #{ur_Attr1}, #{ur_Attr2}, #{ur_Attr3}, 'true') ")
 	public int insertReRatingBee(UserRatingDto userRating_dto);
 	
 	// 포인트 사용여부 검사

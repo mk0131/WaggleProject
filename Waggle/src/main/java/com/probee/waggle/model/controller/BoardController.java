@@ -353,15 +353,18 @@ public class BoardController {
 		List<UserRatingDto> tmplist = boardService.selectUserRating(res_dto.getRes_Code());
 		UserRatingDto userRating_dto = tmplist.get(0);
 		
-		System.out.println(userRating_dto);
 		// 요청글 정보
 		RequestDto2 req_dto = boardService.selectRequest(req_No);
 		model.addAttribute("req_dto", req_dto);
+		
+		List<FileDto> fi_list = boardService.selectResultFile(res_dto.getRes_Code());
 		
 		Gson gson = new Gson();
 		
 		model.addAttribute("res_dto", gson.toJson(res_dto));
 		model.addAttribute("user_rating", gson.toJson(userRating_dto));
+		model.addAttribute("fi_list", fi_list);
+		
 		return "reRatingForm";
 	}
 	
