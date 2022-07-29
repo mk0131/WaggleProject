@@ -391,7 +391,6 @@ public class BoardController {
 		boardService.updateResultWDate(res_dto.getRes_Code());
 		
 		// 꿀벌 포인트 업데이트
-		System.out.println("error1");
 		RequestDto2 req_dto = boardService.selectRequest(req_No);
 		pointService.insertPay(req_dto.getReq_Point(), res_dto.getRes_UCode(), "획득");
 		int user_point = pointService.selectUserPoint(res_dto.getRes_UCode());
