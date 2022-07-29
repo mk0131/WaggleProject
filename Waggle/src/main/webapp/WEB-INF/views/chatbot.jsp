@@ -29,8 +29,8 @@ body {
 #persistent-menu {
 	margin-top: 10px;
 	width:200px;
-	height:70px;
-	font-size:15pt;
+	height:50px;
+	font-size:12pt;
 	border: none;
 	border-top: 1px solid #dbdada;
 	border-bottom: 1px solid #dbdada;
@@ -41,7 +41,7 @@ body {
 	display: flex;
     justify-content: center;
     margin: 10px;
-    padding: 10px;
+    padding: 5px;
 }
 
 
@@ -77,7 +77,7 @@ button:active {
 #msg {
 	border: none;
 	background-color: #f2f2f3;
-	font-size:16pt;
+	font-size:13pt;
 	margin-top: 4px;
 }
 
@@ -97,7 +97,7 @@ input:focus{
 .conversation{
 	display:inline-block;
 	width:80%;
-	font-size:15pt;
+	font-size:12pt;
 	background-color:#f2f2f3;
 	border-radius:25px;
 	padding:20px;
@@ -122,10 +122,10 @@ input:focus{
 <body>
 	<div class="chatbot-header" style="padding:13px">
 		<div class="img01" style="text-align:center">
-		<img src="/images/importToJsp/logo.png" style="width:80px; margin:15px"/>
+		<img src="/images/importToJsp/logo.png" style="width:50px"/>
 		</div>
-		<div style="font-size:30px; text-align:center">Waggle에게 문의하기</div>
-		<div style="color:#898989; text-align:center; margin-top:7px">보러가야하는 집이 있지만 시간이 없을 때! Waggle을 이용하세요!</div>
+		<div style="font-size:20px; text-align:center">Waggle에게 문의하기</div>
+		<div style="color:#898989; text-align:center; margin-top:7px; font-size:10pt">보러가야하는 집이 있지만 시간이 없을 때! Waggle을 이용하세요!</div>
 	</div>
 	<div id="probee-chatbot">
 		<div id="template">
@@ -152,7 +152,7 @@ input:focus{
 			<div class="form-group" style="margin: 10px; width:80%">
 				<input type="text" id="msg" class="form-control" placeholder="문의 메세지를 입력해주세요." style="width:100%">
 			</div>
-			<button type="submit" id="send" style="border:none; background-color:#d2d4f6; border-radius:20px; font-size:15pt; font-weight:bold; color:#4f5bff">전송</button>
+			<button type="submit" id="send" style="border:none; background-color:#d2d4f6; border-radius:20px; font-size:12pt; font-weight:bold; color:#4f5bff">전송</button>
 		</form>
 	</div>
     

@@ -46,6 +46,7 @@
 	position: relative;
 }
 
+
 .searchbar {
 	font-size: 1rem;
 	width: 60rem;
@@ -255,10 +256,10 @@ div {
 		<div class="container" >
 			<input type="text" maxlength="12" placeholder="주소 검색하기"
 				class="searchbar" onclick="kakaopost()"> 
-			<input type="text" maxlength="12" class="searchbar2" style="display:none"> 
 				<img
 				src="https://images-na.ssl-images-amazon.com/images/I/41gYkruZM2L.png"
 				alt="Magnifying Glass" class="button" onclick="kakaopost()">
+			<input type="text" maxlength="12" class="searchbar2" style="display:none"> 
 		</div>
 		
 		<form id="addr_filter" method="post">
