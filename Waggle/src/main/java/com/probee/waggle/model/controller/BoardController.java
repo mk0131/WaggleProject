@@ -25,11 +25,13 @@ import com.probee.waggle.model.dto.Paging;
 import com.probee.waggle.model.dto.PointsDto;
 import com.probee.waggle.model.dto.RequestDto2;
 import com.probee.waggle.model.dto.ResultDto;
+import com.probee.waggle.model.dto.UserAddressDto;
 import com.probee.waggle.model.dto.UserRatingDto;
 import com.probee.waggle.model.dto.UsersDto;
 import com.probee.waggle.model.dto.VolunteerDto;
 import com.probee.waggle.model.service.BoardService;
 import com.probee.waggle.model.service.HomeService;
+import com.probee.waggle.model.service.PointService;
 import com.probee.waggle.model.service.VolunteerService;
 
 @Controller
@@ -45,8 +47,11 @@ public class BoardController {
 	@Autowired
 	VolunteerService volunteerService;
 	
+	@Autowired
+	private PointService pointService;
+	
 	@GetMapping("/list")
-	public String selectList(Model model, Criteria cri) {
+	public String selectList(Model model, Criteria cri, HttpSession session) {
 		
 		int boardListCnt = boardService.boardListCnt();
 		// 페이징 객체
@@ -57,10 +62,36 @@ public class BoardController {
 		paging.setCri(cri);
 		paging.setTotalCount(boardListCnt);
 		
-		List<RequestDto2> list = boardService.selectList(cri);	
+		List<RequestDto2> list = boardService.selectList(cri);
 		
 		model.addAttribute("list", list);
 		model.addAttribute("paging", paging);
+		
+		// 사용자 위치 
+		double user_lat = 0;
+		double user_lng = 0;
+		int user_code = 0;
+		try {
+			user_code = (int)session.getAttribute("user_Code");			
+		} catch (Exception e) {
+			return "redirect:/login";
+		}
+		if(user_code > 0) {
+			// 유저 코드로 좌표 가져오기
+			UserAddressDto add_dto = boardService.selectUserAddr(user_code);
+
+			if(add_dto != null) {
+				model.addAttribute("user_add",add_dto);
+				model.addAttribute("checking",1);
+				
+			} else {
+				UserAddressDto add_dto1 = new UserAddressDto();
+				add_dto1.setUa_Lat(0.0);
+				add_dto1.setUa_Lng(0.0);
+				model.addAttribute("user_add",add_dto1);
+				model.addAttribute("checking",0);
+			}
+		}
 		
 		return "board";
 	}
@@ -277,13 +308,30 @@ public class BoardController {
 	
 	
 	@GetMapping("/accept")  // 수락하기
-	public String Accept(int req_UCode, int res_UCode, int req_No) {
+	public String Accept(int req_UCode, int res_UCode, int req_No, HttpSession session) {
 		
 		int res =  boardService.CreateRes(req_No, res_UCode);
 		
-		if(res >0 ) {
+		if(res > 0) {
 			boardService.Progress(req_No);
 		}
+		
+		// 포인트 부족하면 충전페이지로 이동
+		RequestDto2 req_dto = boardService.selectRequest(req_No);
+		int point = (int)session.getAttribute("user_Point");
+		int po_Point = req_dto.getReq_Point();
+		if(point - po_Point < 0) {
+			return "redirect:/point/use";
+		}
+		
+		// 요청자 포인트 소모
+		int po_No = req_dto.getReq_No();
+		// Points DB 업데이트
+		pointService.insertPoints(po_Point, req_UCode, po_No);
+		// Users DB 업데이트
+		pointService.updateUserPoint(point - po_Point, req_UCode);
+		// session 업데이트
+		session.setAttribute("user_Point", point - po_Point);
 		
 		return "redirect:/board/detail?req_No=" +req_No;
 	}
@@ -313,7 +361,7 @@ public class BoardController {
 	public String ratingBee(int req_No, UserRatingDto userRating_dto) {
 		ResultDto res_dto = boardService.selectResult(req_No);
 		userRating_dto.setUr_Code(res_dto.getRes_Code());
-		
+
 		// 1, 0, -1 -> '좋아요', '보통이에요', '별로에요' 값변환
 		List<String> indexArray = new ArrayList<String>();
 		indexArray.add("별로에요");
@@ -338,6 +386,13 @@ public class BoardController {
 		}
 		// 확인중 -> 완료로 업데이트
 		boardService.complete(req_No);
+		
+		// 꿀벌 포인트 업데이트
+		System.out.println("error1");
+		RequestDto2 req_dto = boardService.selectRequest(req_No);
+		pointService.insertPay(req_dto.getReq_Point(), res_dto.getRes_UCode(), "획득");
+		int user_point = pointService.selectUserPoint(res_dto.getRes_UCode());
+		pointService.updateUserPoint(user_point + req_dto.getReq_Point(), res_dto.getRes_UCode());
 		
 		return "redirect:/board/detail?req_No="+req_No;
 	}

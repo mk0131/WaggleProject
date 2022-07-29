@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.probee.waggle.model.dto.Criteria;
@@ -94,12 +95,31 @@ public class PointController {
 		// 유저코드와 금액으로 Pay DB 데이터 추가
 		pointService.insertPay(pay_Price, user_code, "충전");
 		// Users DB에서 point 업데이트
-		pointService.updateUserPoint(pay_Price, user_code);
-		// session에 user point 정보 업데이트
 		int point = (int)session.getAttribute("user_Point");
+		pointService.updateUserPoint(point + pay_Price, user_code);
+		// session에 user point 정보 업데이트
 		session.setAttribute("user_Point", point + pay_Price);
 		
 		return "redirect:/point/use";
+	}
+	
+	@PostMapping("/consume")
+	public String consumePoint(int req_No, HttpSession session) {// 1000포인트 소모하고 blur 해제
+		// 포인트 부족하면 충전페이지로 이동
+		int point = (int)session.getAttribute("user_Point");
+		if(point - 1000 < 0) {
+			return "redirect:/point/use";
+		}
+		
+		int user_code = (int)session.getAttribute("user_Code");
+		// 1000 포인트 소모 Points DB 업데이트
+		pointService.insertPoints(1000, user_code, req_No);
+		// Users DB 업데이트
+		pointService.updateUserPoint(point - 1000, user_code);
+		// session 업데이트
+		session.setAttribute("user_Point", point - 1000);
+		
+		return "redirect:/board/detail?req_No="+req_No;
 	}
 	
 

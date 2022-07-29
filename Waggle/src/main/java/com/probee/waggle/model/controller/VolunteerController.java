@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.probee.waggle.model.dto.UserAddressDto;
 import com.probee.waggle.model.service.BoardService;
 import com.probee.waggle.model.service.VolunteerService;
 
@@ -21,6 +22,13 @@ public class VolunteerController {
 	
 	@GetMapping("/submit") //지원하기
 	public String Vol(int vo_UCode, int vo_No) {
+		
+		// 지원자의 주소 여부 확인후 없으면 마이페이지 주소 업데이트 폼으로 이동
+		UserAddressDto add_dto = boardService.selectUserAddr(vo_UCode);
+
+		if(add_dto == null) {
+			return "redirect:/mypage/profileEdit?ua_UCode="+vo_UCode;
+		}
 		
 		int res = volunteerService.Submit(vo_UCode, vo_No);
 		
