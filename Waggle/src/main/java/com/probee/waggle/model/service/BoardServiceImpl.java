@@ -248,4 +248,9 @@ public class BoardServiceImpl implements BoardService{
 		return boardMapper.selectUserAddr(ua_Ucode);
 	}
 
+	@Override
+	public int updateResultWDate(int res_Code) {
+		return boardMapper.updateResultWDate(res_Code);
+	}
+
 }

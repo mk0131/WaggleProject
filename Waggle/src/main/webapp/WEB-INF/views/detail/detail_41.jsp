@@ -714,7 +714,7 @@ div#progress_percentage::after {
 	    </div>
 	   </div>
 	   
-	   
+	   <input type="hidden" id="v_Date" value="${res_dto2.res_WDate }">
 	 </div>
 	<%@ include file="../footer.jsp" %>
 </body>
@@ -773,13 +773,20 @@ div#progress_percentage::after {
 		// 집평가 별점 값 넣기
 		var num = res_content.res_Rate;
 		$(".rating__input[value='"+num+"']").prop('checked', true);
+
+		var start2 = new Date($("#v_Date").val());
+		var end2 = new Date();
+		var diffTime2 = (end2.getTime() - start2.getTime()) / (1000*60*60*24);
 		
-	 	if(${req_dto.req_UCode} != ${user_Code} && ${res} != ${user_Code} && ${po} != ${user_Code}){
-	 	 $(".ongoing21-content2").hide();	
-	 	 $("#detail_container").hide();
-	 	 $("#full-stars-example-two").hide();
-	 	 $("#modal").css("display","flex");
-	 	}
+		if(diffTime2 < 1) {
+		 	if(${req_dto.req_UCode} != ${user_Code} && ${res} != ${user_Code} && ${po} != ${user_Code}){
+		 	 $(".ongoing21-content2").hide();	
+		 	 $("#detail_container").hide();
+		 	 $("#full-stars-example-two").hide();
+		 	 $("#modal").css("display","flex");
+		 	}			
+		}
+		
 	 	
 	 	
 		

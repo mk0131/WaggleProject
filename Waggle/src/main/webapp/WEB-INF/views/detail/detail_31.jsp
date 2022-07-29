@@ -530,7 +530,7 @@ div#progress_percentage::after {
 			 
 		  <form action="/board/rating" method="post">
 		   <input type="hidden" name="req_No" value="${req_dto.req_No }">
-		   <input type="hidden" id="bee_rating" name="ur_Rate">
+		   <input type="hidden" id="bee_rating" name="ur_Rate" value="0">
 	       <table class="ongoing21-content2 rate_bee_table">
 		       <tbody>
 		        <tr>
