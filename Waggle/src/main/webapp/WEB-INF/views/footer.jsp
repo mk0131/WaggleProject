@@ -211,7 +211,7 @@ a {
 <script type="text/javascript">
 	var popupX = (document.body.offsetWidth);
 	var popupY = (document.body.offsetHeight);
-	function showPopup() { window.open("/chatbot", "a", "width=400, height=550, left="+popupX+", top="+popupY+"");
+	function showPopup() { window.open("/chatbot", "a", "width=580, height=600, left="+popupX+", top="+popupY+"");
 		
 	}
 	

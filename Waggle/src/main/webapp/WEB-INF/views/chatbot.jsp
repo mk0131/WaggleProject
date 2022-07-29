@@ -96,7 +96,7 @@ input:focus{
 
 .conversation{
 	display:inline-block;
-	width:80%;
+/* 	width:80%; */
 	font-size:12pt;
 	background-color:#f2f2f3;
 	border-radius:25px;
@@ -106,15 +106,65 @@ input:focus{
 }
 
 .send{
-	width:80%;
-	font-size:15pt;
+/* 	width:80%; */
+	font-size:14pt;
 	background-color:#d2d4f6;
 	border-radius:25px;
 	padding:20px;
 	padding-top:10px;
 	padding-bottom:10px;
-	margin-left:70px;
-	text-align:right;
+/* 	margin-left:70px;
+	text-align:right; */
+	display: inline-block;
+	float: right;
+	margin-bottom: 13px;
+}
+
+img {
+	width:30px;
+}
+
+#chatbot-title {
+	font-size:20px; 
+	text-align:center;
+}
+
+#chatbot-middle-title {
+	color:#898989; 
+	text-align:center; 
+	margin-top:7px; 
+	font-size:10pt;
+}
+
+#chatform {
+	 border-radius: 20px; 
+	 background-color:#f2f2f3; 
+	 position:fixed; 
+	 bottom: 0px; 
+	 margin-left:7px; 
+	 margin: 10px; 
+	 width:94%;
+}
+
+.form-group {
+	margin: 10px; 
+}
+
+/* #msg {
+	 width:100%;
+} */
+
+#send {
+	border:none;
+	background-color:#d2d4f6; 
+	border-radius:20px; 
+	font-size:12pt; 
+	font-weight:bold;
+	color:#4f5bff;
+}
+
+#probee-chatbot {
+	padding-bottom: 57px;
 }
 
 </style>
@@ -124,8 +174,8 @@ input:focus{
 		<div class="img01" style="text-align:center">
 		<img src="/images/importToJsp/logo.png" style="width:50px"/>
 		</div>
-		<div style="font-size:20px; text-align:center">Waggle에게 문의하기</div>
-		<div style="color:#898989; text-align:center; margin-top:7px; font-size:10pt">보러가야하는 집이 있지만 시간이 없을 때! Waggle을 이용하세요!</div>
+		<div id="chatbot-title">Waggle에게 문의하기</div>
+		<div id="chatbot-middle-title">보러가야하는 집이 있지만 시간이 없을 때! Waggle을 이용하세요!</div>
 	</div>
 	<div id="probee-chatbot">
 		<div id="template">
@@ -135,27 +185,22 @@ input:focus{
 		</div>
 
 		<div id="chatBox" style="padding:10px">
-			<!-- 
-			<table id="conversation" class="table table-striped">
-				<thead>
-					<tr>
-						<th>메세지</th>
-					</tr>
-				</thead>
-				<tbody id="communicate">
-				</tbody>
-			</table>
-			-->
+			
 		</div>
 		
-		<form id="chatform" style="border-radius: 20px; background-color:#f2f2f3; position:fixed; bottom: 0px; margin-left:7px; width:94%">
-			<div class="form-group" style="margin: 10px; width:80%">
-				<input type="text" id="msg" class="form-control" placeholder="문의 메세지를 입력해주세요." style="width:100%">
-			</div>
-			<button type="submit" id="send" style="border:none; background-color:#d2d4f6; border-radius:20px; font-size:12pt; font-weight:bold; color:#4f5bff">전송</button>
-		</form>
 	</div>
-    
+	
+	
+	
+	
+	<div id="chatform-all">
+	<form id="chatform">
+			<div class="form-group" style="margin: 10px; width:80%">
+				<input type="text" id="msg" class="form-control" placeholder="문의 메세지를 입력해주세요.">
+			</div>
+			<button type="submit" id="send">전송</button>
+	</form>
+    </div>
 </body>
 <script>
 	var stompClient = null;
@@ -196,13 +241,13 @@ input:focus{
 
 	//보낸메시지 보여주는 함수
 	function showSendMessage(message) {
-		$("#chatBox").append("<div class='send'><p style='margin:0'>" + message + "</p></div><br/>");
+		$("#chatBox").append("<div class='send'><div>" + message + "</div></div><br/>");
 	}
 	
 	//받은메시지 보여주는 함수
 	function showReceiveMessage(message){
-		$("#chatBox").append("<div class='logo'><img src='/images/importToJsp/logo.png' style='width:30px'/></div>"
-							+ "<div class='conversation'><p style='margin:0'>" + message + "</p></div><br/><br/>");
+		$("#chatBox").append("<div class='logo'><img src='/images/importToJsp/logo.png'/></div>"
+							+ "<div class='conversation'><div>" + message + "</div></div><br/><br/>");
 	}
 	
 	connect();
