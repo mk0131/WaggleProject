@@ -79,8 +79,8 @@ public class MypageServiceImpl implements MypageService{
 	}
 
 	@Override
-	public int AddrChange(String ua_Post, String ua_Addr, String ua_DAddr, int ua_UCode) {
-		return mypageMapper.AddrChange(ua_Post, ua_Addr, ua_DAddr, ua_UCode);
+	public int AddrChange(String ua_Post, String ua_Addr, String ua_DAddr, int ua_UCode, double ua_Lat, double ua_Lng) {
+		return mypageMapper.AddrChange(ua_Post, ua_Addr, ua_DAddr, ua_UCode, ua_Lat, ua_Lng);
 	}
 
 	@Override

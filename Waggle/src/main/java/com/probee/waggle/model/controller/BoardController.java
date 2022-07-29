@@ -79,13 +79,13 @@ public class BoardController {
 	}
 	
 	@PostMapping("/request")
-	public String createRequest(RequestDto2 req_dto, HomeDto home_dto) {
+	public String createRequest(RequestDto2 req_dto, HomeDto home_dto, String home_Addr, String ji_Addr, String road_Addr, String home_DAddr) {
 		
-		HomeDto find_home = homeService.findHome(home_dto);
+		HomeDto find_home = homeService.findHome(home_Addr, ji_Addr, road_Addr, home_DAddr);
 		
 		if(find_home == null) {
 			homeService.insertHome(home_dto);
-			find_home = homeService.findHome(home_dto);
+			find_home = homeService.findHome(home_Addr, ji_Addr, road_Addr, home_DAddr);
 		}
 		
 		req_dto.setReq_HCode(find_home.getHome_Code()); 
@@ -132,12 +132,12 @@ public class BoardController {
 	}
 	
 	@PostMapping("/update")
-	public String updateRequest(RequestDto2 req_dto, HomeDto home_dto) {		
-		HomeDto find_home = homeService.findHome(home_dto);
+	public String updateRequest(RequestDto2 req_dto, HomeDto home_dto, String home_Addr, String ji_Addr, String road_Addr, String home_DAddr) {		
+		HomeDto find_home = homeService.findHome(home_Addr, ji_Addr, road_Addr, home_DAddr);
 		
 		if(find_home == null) {
 			homeService.insertHome(home_dto);
-			find_home = homeService.findHome(home_dto);
+			find_home = homeService.findHome(home_Addr, ji_Addr, road_Addr, home_DAddr);
 		}
 		
 		req_dto.setReq_HCode(find_home.getHome_Code()); 

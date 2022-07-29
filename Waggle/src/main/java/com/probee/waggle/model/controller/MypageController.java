@@ -378,7 +378,7 @@ public class MypageController {
 
 	@GetMapping("/addrchange") // 주소 변경
 	public String AddrChange(int ua_UCode, UserAddressDto dto, Model model, String ua_Post, String ua_Addr,
-			String ua_DAddr) {
+			String ua_DAddr, double ua_Lat, double ua_Lng) {
 
 		UserAddressDto user = mypageService.SelectAddr(ua_UCode);
 		if (user == null) {
@@ -386,7 +386,7 @@ public class MypageController {
 			UserAddressDto users = mypageService.SelectAddr(ua_UCode);
 			model.addAttribute("dto", users);
 		} else {
-			mypageService.AddrChange(ua_Post, ua_Addr, ua_DAddr, ua_UCode);
+			mypageService.AddrChange(ua_Post, ua_Addr, ua_DAddr, ua_UCode, ua_Lat, ua_Lng);
 			model.addAttribute("dto", user);
 		}
 

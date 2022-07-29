@@ -43,7 +43,7 @@ public interface MypageService {
 	
 	public int AgeChange(int user_Age, int user_Code);
 	
-	public int AddrChange(String ua_Post, String ua_Addr, String ua_DAddr, int ua_UCode);
+	public int AddrChange(String ua_Post, String ua_Addr, String ua_DAddr, int ua_UCode, double ua_Lat, double ua_Lng);
 	
 	public int GenderChange(String user_Gender, int user_Code);
 	

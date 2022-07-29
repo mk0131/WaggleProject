@@ -443,6 +443,8 @@ span {
             <input type="button" id="address" value="우편번호 찾기" style="width: 95px;" class="inputbutton">
             <input type="text" id="addr" name="ua_Addr" value="${dto.ua_Addr }" readonly="readonly">
             <input type="text" id="daddr" name="ua_DAddr" value="${dto.ua_DAddr }" placeholder="상세주소">
+            <input type="hidden" name="ua_Lat" id="ua_Lat">
+            <input type="hidden" name="ua_Lng" id="ua_Lng">
             <input type="hidden" name="ua_UCode" value="${user_Code }">
             <input type="submit" id="change_addr" value="주소 수정" disabled="disabled" class="inputbutton">
             </c:if>
@@ -504,6 +506,7 @@ span {
    
    <%@ include file="footer.jsp"%>
 </body>
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=df487b49cd90a64d7305e577e300f2e4&libraries=services,clusterer,drawing"></script>
 <script>
 function removeimg() {
 	  $(".profile").attr("style","background-image:url(/images/importToJsp/profile_default.jpg)");
@@ -746,12 +749,30 @@ $("#address").on("click",function(){
 	                // 우편번호와 주소 정보를 해당 필드에 넣는다.
 	                $("#post").val(data.zonecode);
 	                $("#addr").val(addr);
+	                
+	              //받은 주소값을 위도 경도로 바꿔서 input hidden 값에 value값으로 넣어주기
+	                var geocoder = new kakao.maps.services.Geocoder();
+	                var addr = $('#addr').val();
+	                geocoder.addressSearch(addr, function(result, status) {
+	                	
+	        		    // 정상적으로 검색이 완료됐으면 
+	        		     if (status === kakao.maps.services.Status.OK) {
+	        				$("#ua_Lat").attr('value',result[0].y);
+	        				$("#ua_Lng").attr('value',result[0].x);
+	        				
+	        		    } else {
+	        		    	console.log("에러");
+	        		    }
+	        		});  
+	                
 	                // 커서를 상세주소 필드로 이동한다.
 	                $("#daddr").attr("readonly",false);
 	                $("#daddr").focus();
 	                $("#change_addr").attr("disabled",false);
 		        }
-		    }).open();
+		    }).open({
+		    	popupName: 'AddrSearch'
+		    });
 		})
 
 
