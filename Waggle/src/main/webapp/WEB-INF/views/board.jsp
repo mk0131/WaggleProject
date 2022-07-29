@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -379,8 +380,11 @@ img {
                 </tr>
              </c:when>
              <c:otherwise>
-                <c:forEach items="${list }" var="dto">
+             	<input id="list_len" type="hidden" value="${fn:length(list) }">
+                <c:forEach items="${list }" var="dto" varStatus="status">
                 	<div class="board-content-all" id="content-all">
+                	 <input id="Lat_${status.index}" type="hidden" value="${dto.home_Lat }">
+                	 <input id="Lng_${status.index}" type="hidden" value="${dto.home_Lng }">
 
 					 <div class="board-content-inner" id="board-img" onclick="location.href='/board/detail?req_No=${dto.req_No}'">
 					  <img src=${dto.fi_Nm }>
@@ -402,7 +406,7 @@ img {
 							  </div>
 							  <div id="board-ltd-box2" class="board-ltd-detail-box">
 								<dt class="board-dt">예상거리</dt>
-								<dd class="board-dd">??km</dd>
+								<dd id="Km_${status.index}" class="board-dd">??km</dd>
 							  </div>
 							  <div id="board-ltd-box3" class="board-ltd-detail-box">
 								<dt class="board-dt">기한</dt>
@@ -438,10 +442,54 @@ img {
 		</ul>
  </div>
 	
-		
-    
     
 	<%@ include file="footer.jsp" %>
 </body>
+<script type="text/javascript">
+	if(${checking} == 0) {
+		var check = false;
+	} else {
+		var check = true;
+		var user_lat = ${user_add.ua_Lat};
+		var user_lng = ${user_add.ua_Lng};		
+	}
 
+	$(function(){
+		var len = $("#list_len").val();
+		for(var i=0; i<len; i++) {
+			var home_lat = $("#Lat_"+i).val();
+			var home_lng = $("#Lng_"+i).val();
+			
+			if(check) {
+				var distance = getDistanceFromLatLonInKm(user_lat,user_lng,home_lat,home_lng);
+				if(distance > 1) {
+					$("#Km_"+i).text(distance.toFixed(1)+' Km');					
+				} else {
+					$("#Km_"+i).text( (distance.toFixed(3) * 1000) + ' m');
+				}
+				
+			} else {
+				$("#Km_"+i).text('주소를 입력해 주세요');
+			}
+			
+		}
+		
+	});
+	
+	function getDistanceFromLatLonInKm(lat1,lng1,lat2,lng2) {
+	    function deg2rad(deg) {
+	        return deg * (Math.PI/180)
+	    }
+
+	    var R = 6371; // Radius of the earth in km
+	    var dLat = deg2rad(lat2-lat1);  // deg2rad below
+	    var dLon = deg2rad(lng2-lng1);
+	    var a = Math.sin(dLat/2) * Math.sin(dLat/2) + Math.cos(deg2rad(lat1)) * Math.cos(deg2rad(lat2)) * Math.sin(dLon/2) * Math.sin(dLon/2);
+	    var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+	    var d = R * c; // Distance in km
+	    return d;
+	}
+
+
+</script>
 </html>

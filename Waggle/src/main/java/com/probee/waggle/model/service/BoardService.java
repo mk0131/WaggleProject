@@ -11,6 +11,7 @@ import com.probee.waggle.model.dto.FileDto;
 import com.probee.waggle.model.dto.PointsDto;
 import com.probee.waggle.model.dto.RequestDto2;
 import com.probee.waggle.model.dto.ResultDto;
+import com.probee.waggle.model.dto.UserAddressDto;
 import com.probee.waggle.model.dto.UserRatingDto;
 import com.probee.waggle.model.dto.UsersDto;
 import com.probee.waggle.model.dto.UsersDto2;
@@ -49,4 +50,8 @@ public interface BoardService {
 	public int updateResult(ResultDto dto);
 
 	public int boardListCnt();
+	
+	public UserAddressDto selectUserAddr(int ua_Ucode);
+	
+	public int updateResultWDate(int res_Code);
 }

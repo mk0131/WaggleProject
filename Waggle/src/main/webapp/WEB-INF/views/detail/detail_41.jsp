@@ -342,12 +342,14 @@ div#progress_percentage::after {
 <div id="modal" class="modal-overlay">
         <div class="modal-window">
             <div class="title">
-                <h2>100 P 지불하고 후기 내용 보기</h2>
+                <h2>1000 P 지불하고 후기 내용 보기</h2>
             </div>
             
             <div class="content">
-                <input type="button" id="modalbtn" value="100 P 소모" onclick="">
-                
+            	<form action="/point/consume" method="post">
+            		<input type="hidden" name="req_No" value="${req_dto.req_No }">
+                	<input type="submit" id="modalbtn" value="1000 P 소모">
+                </form>
             </div>
         </div>
     </div>
@@ -493,16 +495,7 @@ div#progress_percentage::after {
 		       </tbody>
 	       </table>
 			<div id="modal" class="modal-overlay">
-        <div class="modal-window">
-            <div class="title">
-                <h2>100 P 지불하고 후기 내용 보기</h2>
-            </div>
-            
-            <div class="content">
-                <input type="button" id="modalbtn" value="100 P 소모" onclick="">
-                
-            </div>
-        </div>
+
     </div>       
 		   <br/><br/><hr class="my-hr">
 		 
@@ -721,7 +714,7 @@ div#progress_percentage::after {
 	    </div>
 	   </div>
 	   
-	   
+	   <input type="hidden" id="v_Date" value="${res_dto2.res_WDate }">
 	 </div>
 	<%@ include file="../footer.jsp" %>
 </body>
@@ -780,13 +773,20 @@ div#progress_percentage::after {
 		// 집평가 별점 값 넣기
 		var num = res_content.res_Rate;
 		$(".rating__input[value='"+num+"']").prop('checked', true);
+
+		var start2 = new Date($("#v_Date").val());
+		var end2 = new Date();
+		var diffTime2 = (end2.getTime() - start2.getTime()) / (1000*60*60*24);
 		
-	 	if(${req_dto.req_UCode} != ${user_Code} && ${res} != ${user_Code} && ${po} != ${user_Code}){
-	 	 $(".ongoing21-content2").hide();	
-	 	 $("#detail_container").hide();
-	 	 $("#full-stars-example-two").hide();
-	 	 $("#modal").css("display","flex");
-	 	}
+		if(diffTime2 < 1) {
+		 	if(${req_dto.req_UCode} != ${user_Code} && ${res} != ${user_Code} && ${po} != ${user_Code}){
+		 	 $(".ongoing21-content2").hide();	
+		 	 $("#detail_container").hide();
+		 	 $("#full-stars-example-two").hide();
+		 	 $("#modal").css("display","flex");
+		 	}			
+		}
+		
 	 	
 	 	
 		

@@ -13,6 +13,7 @@ import com.probee.waggle.model.dto.FileDto;
 import com.probee.waggle.model.dto.PointsDto;
 import com.probee.waggle.model.dto.RequestDto2;
 import com.probee.waggle.model.dto.ResultDto;
+import com.probee.waggle.model.dto.UserAddressDto;
 import com.probee.waggle.model.dto.UserRatingDto;
 import com.probee.waggle.model.dto.UsersDto;
 import com.probee.waggle.model.dto.UsersDto2;
@@ -87,7 +88,7 @@ public interface BoardMapper {
 	public int selectLastRequestNo();
 	
 	// 꿀벌 평가 DB 삽입
-	@Insert(" insert into UserRating values (#{ur_UCode}, #{ur_Rate}, #{ur_Attr1}, #{ur_Attr2}, #{ur_Attr3}, 'false') ")
+	@Insert(" insert into UserRating values (#{ur_Code}, #{ur_Rate}, #{ur_Attr1}, #{ur_Attr2}, #{ur_Attr3}, 'false') ")
 	public int insertRatingBee(UserRatingDto userRating_dto);
 	
 	// 꿀벌 재평가 DB 삽입
@@ -108,5 +109,13 @@ public interface BoardMapper {
 
 	@Select(" select count(*) from request order by req_No desc ")
 	public int boardListCnt();
+	
+	// 유저코드로 사용자 주소 가져오기
+	@Select(" SELECT * FROM USERADDRESS WHERE ua_UCode = #{ua_UCode} ")
+	public UserAddressDto selectUserAddr(int ua_Ucode);
+	
+	// 요청글 완료 전환시 Result DB 시간 업데이트
+	@Update(" update Result set res_WDate=NOW() where res_Code=#{res_Code} ")
+	public int updateResultWDate(int res_Code);
 	
 }

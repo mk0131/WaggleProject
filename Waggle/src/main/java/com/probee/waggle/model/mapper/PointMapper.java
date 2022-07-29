@@ -33,4 +33,8 @@ public interface PointMapper {
 	@Update(" update Users set user_Point=#{user_Point} where user_Code=#{user_Code} ")
 	public int updateUserPoint(int user_Point, int user_Code);
 	
+	// 글번호와 유저코드, 금액으로 Points DB 데이터 추가
+	@Insert(" insert into Points values(#{po_No}, #{po_UCode}, #{po_Point}, NOW()) ")
+	public int insertPoints(int po_Point, int po_UCode, int po_No);
+	
 }
