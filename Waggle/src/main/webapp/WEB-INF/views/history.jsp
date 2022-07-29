@@ -329,94 +329,86 @@ img {
 				<input id="sign-up" type="radio" name="tab_item" onclick="showMyPerform();"> 
 				<label class="tab_item" for="sign-up">나의 수행</label>
 			</div>
-			<div class="myReqList">
-		  <%--  <div class="my-req-list-content-all" id="my-req-list-content-all">
-				<div class="my-req-list-content-inner" id="my-req-list-img" onclick="location.href='/board/detail?req_No=unique[i].req_No'">
-					<img src=unique[i].fi_Nm>
+			<div class="myReqList" style="display:none">
+				<c:forEach var="Req" items="${Request }">
+				<div class="my-req-list-content-all" id="my-req-list-content-all">
+					<div class="my-req-list-content-inner" id="my-req-list-img"
+						onclick="location.href='/board/detail?req_No=${Req.req_No}'">
+						<img src="${Req.fi_Nm }">
+					</div>
+					<div id="my-req-list-text">
+						<div class="my-req-list-content-inner" id="my-req-list-stat"
+							onclick="location.href='/board/detail?req_No=${Req.req_No}'">
+							<label id="req-stat"> ${Req.req_Stat} </label>
+						</div>
+						<div class="my-req-list-content-inner" id="my-req-list-title"
+							onclick="location.href='/board/detail?req_No=${Req.req_No}'">
+							${Req.req_Title}</div>
+						<div class="my-req-list-content-inner" id="my-req-list-point"
+							onclick="location.href='/board/detail?req_No=${Req.req_No}'">
+							${Req.req_Point}&nbsp; <i class="fa-solid fa-p"> </i>
+						</div>
+						<h4 class="my-req-list-content-inner" id="my-req-list-ltd-title"
+							onclick="location.href='/board/detail?req_No=${Req.req_No}'">
+							요청 정보</h4>
+						<div class="my-req-list-content-inner" id="my-req-list-dl-dt-dd"
+							onclick="location.href='/board/detail?req_No=${Req.req_No}'">
+							<dl id="my-req-list-dl">
+								<div id="my-req-list-ltd-box">
+									<dt id="my-req-list-dt">주소</dt>
+									<dd id="my-req-list-dd">${Req.home_Addr}</dd>
+								</div>
+								<div id="my-req-list-ltd-box" class="my-req-list-ltd-detail-box">
+									<dt id="my-req-list-dt">기한</dt>
+									<dd id="my-req-list-dd">${Req.req_EDate}</dd>
+								</div>
+							</dl>
+						</div>
+					</div>
 				</div>
-				<div id="my-req-list-text">
-				<div class="my-req-list-content-inner" id="my-req-list-stat" onclick="location.href='/board/detail?req_No=unique[i].req_No'">
-				<label id="req-stat">
-				${unique[i].req_Stat}
-				</label>
-				</div>
-				<div class="my-req-list-content-inner" id="my-req-list-title" onclick="location.href='/board/detail?req_No=unique[i].req_No'">
-				${unique[i].req_Title}
-				</div>
-				<div class="my-req-list-content-inner" id="my-req-list-point" onclick="location.href='/board/detail?req_No=unique[i].req_No'">
-				${unique[i].req_Point}&nbsp;
-				<i class="fa-solid fa-p">
-				</i></div>			
-				<h4 class="my-req-list-content-inner" id="my-req-list-ltd-title" onclick="location.href='/board/detail?req_No=unique[i].req_No'">
-				요청 정보
-				</h4>
-				<div class="my-req-list-content-inner" id="my-req-list-dl-dt-dd" onclick="location.href='/board/detail?req_No=unique[i].req_No'">
-				<dl id="my-req-list-dl">
-				<div id="my-req-list-ltd-box">
-				<dt id="my-req-list-dt">주소
-				</dt>
-				<dd id="my-req-list-dd">
-				${unique[i].home_Addr}
-				</dd>
-				</div>
-				<div id="my-req-list-ltd-box" class="my-req-list-ltd-detail-box">'
-				<dt id="my-req-list-dt">기한
-				</dt>
-				<dd id="my-req-list-dd">
-				${unique[i].req_EDate}
-				</dd>
-				</div>
-				</dl>
-				</div>
-				</div>	   
-				</div> --%>
-			
+				</c:forEach>
 			</div>
+			
 			<div class="myReqListPaging"></div>
-			<div class="myPerform">
-				<%-- <div class="my-res-list-content-all" id="my-res-list-content-all">
-				<div class="my-res-list-content-inner" id="my-res-list-img" onclick="location.href=\'/board/detail?req_No=result[i].req_No'">
-				<img src='+result[i].fi_Nm+'>
-				</div>
-				<div id="my-res-list-text">
-				<div class="my-res-list-content-inner" id="my-res-list-stat" onclick="location.href=\'/board/detail?req_No=result[i].req_No'">
-				<label id="res-stat">
-				result[i].req_Stat
-				</label>
-				</div>
-				<div class="my-res-list-content-inner" id="my-res-list-title" onclick="location.href=\'/board/detail?req_No=result[i].req_No'">
-				result[i].req_Title
-				</div>
-				<div class="my-res-list-content-inner" id="my-res-list-point" onclick="location.href=\'/board/detail?req_No=result[i].req_No'">
-				${result[i].req_Point}&nbsp;
-				<i class="fa-solid fa-p">
-				</i></div>				
-				<h4 class="my-res-list-content-inner" id="my-res-list-ltd-title" onclick="location.href=\'/board/detail?req_No=result[i].req_No'">
-				요청 정보
-				</h4>
-				<div class="my-res-list-content-inner" id="my-res-list-dl-dt-dd" onclick="location.href=\'/board/detail?req_No=result[i].req_No'">
-				<dl id="my-res-list-dl">
-				<div id="my-res-list-ltd-box">
-				<dt id="my-res-list-dt">
-				주소
-				</dt>
-				<dd id="my-res-list-dd">
-				result[i].home_Addr 
-				</dd>
-				</div>
-				<div id="my-res-list-ltd-box" class="my-res-list-ltd-detail-box">
-				<dt id="my-res-list-dt">기한
-				</dt>
-				<dd id="my-res-list-dd">
-				result[i].req_EDate
-				</dd>
-				</div>
-				</dl>
-				</div>
-				</div>					   
-				</div> --%>
 			
-			
+			<div class="myPerform" style="display:none">
+				<c:forEach var="per" items="${Perform }">
+				<div class="my-res-list-content-all" id="my-res-list-content-all">
+					<div class="my-res-list-content-inner" id="my-res-list-img"
+						onclick="location.href='/board/detail?req_No=${per.req_No}'">
+						<img src="${per.fi_Nm}">
+					</div>
+					<div id="my-res-list-text">
+						<div class="my-res-list-content-inner" id="my-res-list-stat"
+							onclick="location.href='/board/detail?req_No=${per.req_No}'">
+							<label id="res-stat">${per.req_Stat }</label>
+						</div>
+						<div class="my-res-list-content-inner" id="my-res-list-title"
+							onclick="location.href='/board/detail?req_No=${per.req_No}'">
+							${per.req_Title }</div>
+						<div class="my-res-list-content-inner" id="my-res-list-point"
+							onclick="location.href='/board/detail?req_No=${per.req_No}'">
+							${per.req_Point}&nbsp; <i class="fa-solid fa-p"> </i>
+						</div>
+						<h4 class="my-res-list-content-inner" id="my-res-list-ltd-title"
+							onclick="location.href='/board/detail?req_No=${per.req_No}'">
+							요청 정보</h4>
+						<div class="my-res-list-content-inner" id="my-res-list-dl-dt-dd"
+							onclick="location.href='/board/detail?req_No=${per.req_No}'">
+							<dl id="my-res-list-dl">
+								<div id="my-res-list-ltd-box">
+									<dt id="my-res-list-dt">주소</dt>
+									<dd id="my-res-list-dd">${per.home_Addr }</dd>
+								</div>
+								<div id="my-res-list-ltd-box" class="my-res-list-ltd-detail-box">
+									<dt id="my-res-list-dt">기한</dt>
+									<dd id="my-res-list-dd">${per.req_EDate }</dd>
+								</div>
+							</dl>
+						</div>
+					</div>
+				</div>
+				</c:forEach>
 			</div>
 		</div>
 		
@@ -446,6 +438,9 @@ img {
 <script>
 //요청내역 리스트 보여줌
 $(document).ready(function(){
+	$(".myReqList").show();
+	
+/*
 	let ucode = ${user_Code};
 	let data = {ucode : ucode};
 	
@@ -508,9 +503,13 @@ $(document).ready(function(){
 			console.log("요청내역 ajax 에러");
 		}
 })
-});
+*/
 
+});
 function showMyReq() {
+	$(".myReqList").show();
+	$(".myPerform").hide();
+	/*
 	let ucode = ${user_Code};
 	let data = {ucode : ucode};
 	
@@ -573,10 +572,16 @@ function showMyReq() {
 			console.log("요청내역 ajax 에러");
 		}
 })
+
+*/
 }
 
 //나의 수행 내역 보여주기
 function showMyPerform(){
+	$(".myReqList").hide();
+	$(".myPerform").show();
+	
+	/*
 	let ucode = ${user_Code};
 	let data = {ucode : ucode};
 	
@@ -634,6 +639,8 @@ function showMyPerform(){
 			console.log("완료리스트 ajax 에러");
 		}
 	})
+	
+*/
 }
 </script>
 </html>
