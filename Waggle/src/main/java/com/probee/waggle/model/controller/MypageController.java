@@ -310,6 +310,7 @@ public class MypageController {
 		return "profileEdit";
 	}
 
+/*
 	// 이용내역페이지 나의 요청 컨트롤러
 	@RequestMapping(value = "/reqhistory", method = RequestMethod.POST)
 	@ResponseBody
@@ -325,7 +326,24 @@ public class MypageController {
 		return myPerformList;
 
 	}
+*/
+	@GetMapping("/history")
+	public String history(Model model, HttpServletRequest request) {
+		HttpSession session = request.getSession();
+		int ucode = (int)session.getAttribute("user_Code");
+		
+		//나의 요청
+		List<MypageFinishlistDto> myReqList = mypageService.SelectMyRequest(ucode);
+		
+		//나의 수행
+		List<MypageFinishlistDto> myPerformList = mypageService.SelectMyPerform(ucode);
 
+		model.addAttribute("Request", myReqList);
+		model.addAttribute("Perform", myPerformList);
+		
+		return "history";
+	}
+	
 	@PostMapping("/pwchange") // 비밀번호 변경
 	public String PwChange(int user_Code, String user_Pw) {
 

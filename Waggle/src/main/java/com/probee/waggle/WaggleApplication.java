@@ -33,11 +33,6 @@ public class WaggleApplication {
 		return "inquiry";
 	}
 	
-	@RequestMapping("/history")
-	public static String gohistory() {
-		return "history";
-	}
-	
 	@RequestMapping("/chatbot")
 	public static String gochatbot() {
 		return "chatbot";

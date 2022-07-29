@@ -137,7 +137,7 @@ nav ul li a:hover, nav ul li a:visited:hover {
 						<li><a href="/login">이용내역</a></li>
 						</c:if>
 						<c:if test="${user_Code != null }">
-						<li><a href="/history">이용내역</a></li>
+						<li><a href="/mypage/history">이용내역</a></li>
 						</c:if>
 						<c:if test="${user_Code == null }">
 						<li><a href="/login">채팅</a></li>
