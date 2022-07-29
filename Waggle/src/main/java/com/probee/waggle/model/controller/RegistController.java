@@ -191,7 +191,7 @@ public class RegistController {
 					e.printStackTrace();
 				}
 
-				return "redirect:/login";
+				return "redirect:/login?user_Pw=" +checkNum; // 이메일 해킹당해서 메일을 보낼 수 없음 대신 url 에 비밀번호 출력
 			}
 	
 	@RequestMapping(value = "/findId", method = RequestMethod.GET) // 이메일로 아이디 찾기
@@ -219,6 +219,6 @@ public class RegistController {
 					e.printStackTrace();
 				}
 
-				return "redirect:/login";
+				return "redirect:/login?user_Id=" +checkNum; // 이메일 해킹당해서 메일을 보낼 수 없음 대신 url 에 아이디 출력
 			}
 }

@@ -6,7 +6,7 @@
 <head>
 
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>로그인&회원가입</title>
 <style type="text/css">
 .middle {
 	margin: 0;
@@ -290,9 +290,11 @@ input {
 			$("#title").html("로그인");
 			$("#regist").hide();
 			$(".login_warn").css("display","none");
+			
 		})
 		$("#regist_in").on("click",function(){
 			$("#sign-up-content").hide();
+			
 			$("#regist").show();
 			$('.id_input_re_1').css("display", "none");
 			$('.id_input_re_2').css("display", "none");
@@ -407,7 +409,7 @@ input {
 <body>
 
 	<%@ include file="header.jsp"%>
-	<div id="wrap" >
+	<div id="wrap">
 		<div class="middle">
 			<div class="guideline">
 			<ul class="guideline-all">
@@ -1108,7 +1110,7 @@ input {
 		</section>
 
 	</div>
-
+	<div id="end"><br><br><br><br><br><br><br><br><br><br><br><br><br><br></div>
 	<%@ include file="footer.jsp"%>
 	<script type="text/javascript">
 	

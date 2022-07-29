@@ -35,12 +35,111 @@
 }
 #scroll{
 	--ms-overflow-style: none;
+	background-color: #9bbbd4;
 }
 
 #scroll::-webkit-scrollbar{
   display:none;
 }
 
+#my_chat{
+ width: 100%;
+ display: flex;
+ float: right;
+ text-align: right;
+ align-items: center;
+ justify-content: flex-end;
+ padding: 2px;
+}
+
+#your_chat{
+ width: 100%;
+ text-align: left;
+ float: right;
+ display: flex;
+ align-items: center;
+ padding: 2px;
+}
+
+#my_1{
+display: inline-block;
+align-items: center;
+}
+
+#my_2{
+ width: 100px;
+ font-size: 12px;
+ color: #556677;
+}
+#my_3{
+ width: 100px;
+ font-size: 12px;
+ color: #556677;
+ 
+}
+
+#my_4{
+ display: inline-block;
+ border-radius: 8px;
+ max-width: 600px;
+ font-size: 20px;
+ align-self: center;
+ text-align: left;
+ background-color: #fef01b;
+
+}
+
+#your_1{
+ display: inline-block;
+ border-radius: 8px;
+ max-width: 600px;
+ font-size: 20px;
+ align-self: center;
+ background-color: #ffffff;
+ 
+}
+
+#your_2{
+ display: inline-block;
+ align-items: center;
+}
+
+#your_3{
+ width: 100px;
+ font-size: 12px;
+ color: #556677;
+ 
+}
+
+#scroll{
+position: absolute;
+left: 450px;
+width: 800px;
+height: 700px;
+border: 1px solid;
+overflow: auto;
+}
+
+#input{
+ position: absolute;
+ top: 900px;
+ left: 450px;
+}
+#area{
+ display: flex;
+}
+
+#chat_Content{
+ width: 740px;
+ height: 50px;
+ display: inline-block;
+}
+
+#send{
+width: 50px;
+height: 58px;
+display: inline-block;
+}
 
 </style>
 <body>
@@ -58,14 +157,13 @@
         	</ul>
 		</div>
 	  </div>
-	   <div id="scroll" style="margin:1px; position: absolute; left: 500px; width: 800px; height: 700px; border: 1px solid; overflow: auto;">
-	   
-			
-		
+	   <div id="scroll" >
 	 </div>
-	 <div style="position: absolute; top: 900px; left: 500px;">
+	 <div id="input" >
 	 <form onsubmit="return false">
-	 <input type="text" id="chat_Content" style="width: 740px; height: 50px;" placeholder="메세지를 입력해 주세요"> &nbsp;<input id="send" type="button" style="width:50px; height: 60px;" value="send">
+	 <div  id="area">
+	 <textarea  id="chat_Content" placeholder="메세지를 입력해 주세요"></textarea> &nbsp;<input id="send" type="button" value="send">
+	 </div>
 	 </form>
 	 </div>
 	 </div>
@@ -90,7 +188,7 @@
 		     $.each(data, function(i){
 		    	
 		    	 var time = new Date(data[i].chat_Date).getHours();
-		    	 
+		    	
 		    	 // 오전,오후,시간,분 나오게 설정
 		    	 if(time <=12 && time >=0 ){
 		    		 data[i].chat_Date = "오전 " + new Date(data[i].chat_Date).getHours() + " : " + new Date(data[i].chat_Date).getMinutes();
@@ -99,23 +197,26 @@
 		    	 }
 		    	 
 		    	 if(data[i].chat_Chk == false){
+		    		 
 		    		 data[i].chat_Chk = "";
 		    	 } else {
 		    		 data[i].chat_Chk = "읽음";
 		    	 }
 		    	 
+		    	
+		    	 
 		    	 // 내가 작성하면 오른쪽 상대방이 작성하면 왼쪽
 		    	 if(data[i].chat_UCode == code){
-		    	 $("#scroll").append('<div style="width: 100%; text-align: right;">'
-		    	 +'<P style="display: inline-block;">'+data[i].chat_Date+'&nbsp;</p>'
-		    	 +'<P style="display: inline-block;">'+data[i].chat_Chk+'&nbsp;</p>'
-		    	 +'<p style=" display:inline-block;  border: 1px solid; border-radius: 8px; max-width: 600px;">&nbsp;'+data[i].chat_Content+'&nbsp;</p>'
+		    	 $("#scroll").append('<div id = "my_chat" >'
+		    	 +'<div id="my_1"><div id="my_2" >'+data[i].chat_Chk+'&nbsp;&nbsp;</div>'
+		    	 +'<div id="my_3" >'+data[i].chat_Date+'&nbsp;&nbsp;</div></div>'
+		    	 +'<div id="my_4" >&nbsp;'+data[i].chat_Content+'&nbsp;</div>'
 		    	 +'&nbsp;&nbsp;&nbsp;'+data[i].chat_UCode+' &nbsp;</div>');
 		    	 } else {
-		    	 $("#scroll").append('<div style="width: 100%; text-align: left;">'
-		    	 +'&nbsp; '+data[i].chat_UCode+'&nbsp;&nbsp;&nbsp;<p style=" display:inline-block;  border: 1px solid; border-radius: 8px; max-width: 600px;">&nbsp;'+data[i].chat_Content+'&nbsp;</p>'
-		    	 +'<P style="display: inline-block;">&nbsp;'+data[i].chat_Chk+'</p>'
-		    	 +'<P style="display: inline-block;">&nbsp;'+data[i].chat_Date+'</p>'
+		    	 $("#scroll").append('<div id = "your_chat" >'
+		    	 +'&nbsp; '+data[i].chat_UCode+'&nbsp;&nbsp;&nbsp;<div id="your_1" >&nbsp;'+data[i].chat_Content+'&nbsp;</div>'
+		    	 +'<div id="your_2">'
+		    	 +'<div id="your_3" >&nbsp;'+data[i].chat_Date+'</div></div>'
 		    	 +'</div>');
 		    	 }
 		    	 
@@ -140,7 +241,7 @@ function down(){
  // 채팅 입력하기
  $("#send").on("click",function(){
 	  down();
-	  let con = $("#chat_Content").val();
+	  let con = $("#chat_Content").val().replaceAll(/(\n|\r\n)/g, "<br>&nbsp;");
 	  let num = ${param.room_No};
 	  let code = ${user_Code};
 	  let data = {chat_Num : num , chat_Content : con, chat_UCode : code };

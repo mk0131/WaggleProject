@@ -57,6 +57,9 @@ public class ChatController {
 	public List<ChatContentDto> Chat(int room_No , int chat_UCode) {
 		
 		List<ChatContentDto> list = chatService.ChatHistory(room_No); // 해당 채팅방의 채팅내역 불러오기
+		
+		
+		
 		return list;
 	}
 	
