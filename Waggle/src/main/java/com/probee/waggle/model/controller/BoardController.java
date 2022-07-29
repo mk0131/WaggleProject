@@ -49,7 +49,6 @@ public class BoardController {
 	public String selectList(Model model, Criteria cri) {
 		
 		int boardListCnt = boardService.boardListCnt();
-		
 		// 페이징 객체
 		Paging paging = new Paging();
 		
@@ -58,10 +57,7 @@ public class BoardController {
 		paging.setCri(cri);
 		paging.setTotalCount(boardListCnt);
 		
-		
-		List<RequestDto2> list = boardService.selectList(cri);
-//		List<String> res_list = new ArrayList<String>();
-		
+		List<RequestDto2> list = boardService.selectList(cri);	
 		
 		model.addAttribute("list", list);
 		model.addAttribute("paging", paging);
