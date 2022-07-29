@@ -387,6 +387,9 @@ public class BoardController {
 		// 확인중 -> 완료로 업데이트
 		boardService.complete(req_No);
 		
+		// Result 시간 업데이트
+		boardService.updateResultWDate(res_dto.getRes_Code());
+		
 		// 꿀벌 포인트 업데이트
 		System.out.println("error1");
 		RequestDto2 req_dto = boardService.selectRequest(req_No);

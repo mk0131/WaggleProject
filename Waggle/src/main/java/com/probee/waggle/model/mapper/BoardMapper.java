@@ -114,4 +114,8 @@ public interface BoardMapper {
 	@Select(" SELECT * FROM USERADDRESS WHERE ua_UCode = #{ua_UCode} ")
 	public UserAddressDto selectUserAddr(int ua_Ucode);
 	
+	// 요청글 완료 전환시 Result DB 시간 업데이트
+	@Update(" update Result set res_WDate=NOW() where res_Code=#{res_Code} ")
+	public int updateResultWDate(int res_Code);
+	
 }

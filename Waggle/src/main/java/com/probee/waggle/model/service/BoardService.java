@@ -52,4 +52,6 @@ public interface BoardService {
 	public int boardListCnt();
 	
 	public UserAddressDto selectUserAddr(int ua_Ucode);
+	
+	public int updateResultWDate(int res_Code);
 }
