@@ -14,4 +14,8 @@ public interface ChatService {
 	public List<ChatRoomDto> ChatList(int room_UCode1);
 	
 	public List<ChatContentDto> ChatHistory(int room_No);
+	
+	public int Content(int chat_Num, String chat_Content, int chat_UCode);
+	
+	public int Chk(int chat_Num, int chat_UCode);
 }

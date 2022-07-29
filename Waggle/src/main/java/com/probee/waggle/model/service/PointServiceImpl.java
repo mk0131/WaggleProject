@@ -39,6 +39,11 @@ public class PointServiceImpl implements PointService{
 	public int updateUserPoint(int user_Point, int user_Code) {
 		return pointMapper.updateUserPoint(user_Point, user_Code);
 	}
+
+	@Override
+	public int insertPoints(int po_Point, int po_UCode, int po_No) {
+		return pointMapper.insertPoints(po_Point, po_UCode, po_No);
+	}
 	
 	
 

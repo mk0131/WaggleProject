@@ -5,6 +5,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 
 import com.probee.waggle.model.dto.ChatContentDto;
 import com.probee.waggle.model.dto.ChatRoomDto;
@@ -24,4 +25,10 @@ public interface ChatMapper {
 	
 	@Select(" select * from chatcontent where chat_Num = #{room_No} ")
 	List<ChatContentDto> ChatHistory(int room_No);
+	
+	@Insert(" insert into chatcontent values (null,#{chat_Num},#{chat_Content},now(),false,#{chat_UCode}) ")
+	int Content(int chat_Num, String chat_Content, int chat_UCode);
+	
+	@Update(" update chatcontent set chat_Chk = true where chat_Num = #{chat_Num} and chat_UCode != #{chat_UCode} ")
+	int Chk(int chat_Num, int chat_UCode);
 }

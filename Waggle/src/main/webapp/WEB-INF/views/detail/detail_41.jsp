@@ -342,12 +342,14 @@ div#progress_percentage::after {
 <div id="modal" class="modal-overlay">
         <div class="modal-window">
             <div class="title">
-                <h2>100 P 지불하고 후기 내용 보기</h2>
+                <h2>1000 P 지불하고 후기 내용 보기</h2>
             </div>
             
             <div class="content">
-                <input type="button" id="modalbtn" value="100 P 소모" onclick="">
-                
+            	<form action="/point/consume" method="post">
+            		<input type="hidden" name="req_No" value="${req_dto.req_No }">
+                	<input type="submit" id="modalbtn" value="1000 P 소모">
+                </form>
             </div>
         </div>
     </div>
@@ -493,16 +495,7 @@ div#progress_percentage::after {
 		       </tbody>
 	       </table>
 			<div id="modal" class="modal-overlay">
-        <div class="modal-window">
-            <div class="title">
-                <h2>100 P 지불하고 후기 내용 보기</h2>
-            </div>
-            
-            <div class="content">
-                <input type="button" id="modalbtn" value="100 P 소모" onclick="">
-                
-            </div>
-        </div>
+
     </div>       
 		   <br/><br/><hr class="my-hr">
 		 

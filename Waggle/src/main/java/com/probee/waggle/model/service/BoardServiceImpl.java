@@ -18,6 +18,7 @@ import com.probee.waggle.model.dto.PointsDto;
 import com.probee.waggle.model.dto.RequestDto2;
 import com.probee.waggle.model.dto.ResultDto;
 import com.probee.waggle.model.dto.ResultFileDto;
+import com.probee.waggle.model.dto.UserAddressDto;
 import com.probee.waggle.model.dto.UserRatingDto;
 import com.probee.waggle.model.dto.UsersDto;
 import com.probee.waggle.model.dto.UsersDto2;
@@ -240,6 +241,11 @@ public class BoardServiceImpl implements BoardService{
 	@Override
 	public int boardListCnt() {
 		return boardMapper.boardListCnt();
+	}
+
+	@Override
+	public UserAddressDto selectUserAddr(int ua_Ucode) {
+		return boardMapper.selectUserAddr(ua_Ucode);
 	}
 
 }
