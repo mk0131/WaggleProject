@@ -1,11 +1,16 @@
 package com.probee.waggle.model.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.probee.waggle.model.dto.ChatContentDto;
 import com.probee.waggle.model.dto.ChatRoomDto;
 import com.probee.waggle.model.service.ChatService;
 
@@ -41,13 +46,34 @@ public class ChatController {
 		return "ChatList";
 	}
 	
-	@GetMapping("/chatting")
-	public String Chat(int room_No , Model model) {
-		
-		model.addAttribute("chat",chatService.ChatHistory(room_No)); // 해당 채팅방의 채팅내역 불러오기
-		
+	@GetMapping("/chat")
+	public String GoChat(int room_No ) {
 		
 		return "Chatting";
+	}
+	
+	@PostMapping("/chatting")
+	@ResponseBody
+	public List<ChatContentDto> Chat(int room_No , int chat_UCode) {
+		
+		List<ChatContentDto> list = chatService.ChatHistory(room_No); // 해당 채팅방의 채팅내역 불러오기
+		return list;
+	}
+	
+	@PostMapping("/content")
+	@ResponseBody
+	public String Content(int chat_Num, String chat_Content, int chat_UCode) {
+		
+		chatService.Chk(chat_Num,chat_UCode ); // 상대 채팅 읽음 표시
+		
+		int res = chatService.Content(chat_Num, chat_Content, chat_UCode); // 채팅입력 하기
+		if(res != 0) {
+			return "success";
+		} else {
+			return "fail";	
+		}
+		
+		
 	}
 
 }

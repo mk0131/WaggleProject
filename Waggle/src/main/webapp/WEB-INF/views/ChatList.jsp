@@ -138,7 +138,7 @@ button:active {
         		<li><a href="javascript:void(0)">
         		<i class="fa-solid fa-house"></i>
         		</a>
-        		<p>HOME > 요청 상세페이지</p>
+        		<p>HOME > 채팅방 목록</p>
         		</li>	
         	</ul>
 		</div>
@@ -157,6 +157,7 @@ button:active {
 				</tr>
 			</thead>
 			<tbody>
+			<c:if test="${user_Code == param.room_UCode1 }">
 				<c:choose>
 					<c:when test="${empty dto }">
 						<td colspan="4">-------------채팅이 없습니다.-------------</td>
@@ -169,7 +170,7 @@ button:active {
 									<td>
 										<p>생성일자 : ${dto.room_Birth }</p>
 									</td>
-									<td onclick="location.href='/chat/chatting?room_No=${dto.room_No}'" style="text-align: left; border-radius: 8px; border: 1px solid;" ><P> 방번호 : ${dto.room_No }</P> 
+									<td onclick="location.href='/chat/chat?room_No=${dto.room_No}'" style="text-align: left; border-radius: 8px; border: 1px solid;" ><P> 방번호 : ${dto.room_No }</P> 
 									<c:if test="${dto.room_UCode1  == user_Code}"><p >상대방 코드 : ${dto.room_UCode2 }</p></c:if>
 									<c:if test="${dto.room_UCode1  != user_Code}"><p >상대방 코드 : ${dto.room_UCode1 }</p></c:if>
 									</td>
@@ -179,7 +180,7 @@ button:active {
 						</c:forEach>
 					</c:otherwise>
 				</c:choose>
-
+			</c:if>
 			</tbody>
 		</table>
 		

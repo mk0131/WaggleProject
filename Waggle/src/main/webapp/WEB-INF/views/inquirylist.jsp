@@ -265,6 +265,7 @@ button:active {
 #paging-a {
 	text-decoration: none;
 	padding: 8px;
+	color: #878787;
 }
 
 #paging-a:visited {

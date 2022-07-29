@@ -46,6 +46,7 @@
 	position: relative;
 }
 
+
 .searchbar {
 	font-size: 1rem;
 	width: 60rem;
@@ -255,10 +256,10 @@ div {
 		<div class="container" >
 			<input type="text" maxlength="12" placeholder="주소 검색하기"
 				class="searchbar" onclick="kakaopost()"> 
-			<input type="text" maxlength="12" class="searchbar2" style="display:none"> 
 				<img
 				src="https://images-na.ssl-images-amazon.com/images/I/41gYkruZM2L.png"
 				alt="Magnifying Glass" class="button" onclick="kakaopost()">
+			<input type="text" maxlength="12" class="searchbar2" style="display:none"> 
 		</div>
 		
 		<form id="addr_filter" method="post">
@@ -343,10 +344,24 @@ div {
 	// 지도를 생성합니다    
 	var map = new kakao.maps.Map(mapContainer, mapOption); 
 	
+	//마우스 스크롤로 지도 레벨 zoom out 되면 꿀벌들 사진 사라지도록 변경
+	kakao.maps.event.addListener(map, 'zoom_changed', function() {        
+	    
+	    var level = map.getLevel();
+	    
+	    if(level > 3){
+	    	for(var i=0; i<markers.length; i++){
+	    		markers[i].setMap(null);
+	    	}
+	    }
+	});
+	
+	
 	// 모든 회원들 지도에 뿌려주기
 	$(function(){
 		// 주소-좌표 변환 객체를 생성합니다
 		var geocoder = new kakao.maps.services.Geocoder();
+		var markers2 = [];
 		
 		var userAddr = new Array();
 		var userimg = new Array();
@@ -382,20 +397,30 @@ div {
 			            clickable: true
 			        });
 			        marker.setMap(map);
+			        markers2.push(marker);
 			        
 					//마커 클릭시 해당 꿀벌의 마이페이지로 이동하도록
 				    kakao.maps.event.addListener(marker, 'click', function(){
 				    	window.open("/mypage/other?ucode="+userCode[i],"a",'height=' + 1300 + ',width=' + 1200 + 'fullscreen=yes');
 				    });
+					
 			    } else {
 			    	console.log("에러");
 			    }
 			});  
-		    
 		 
 		}
 		
-		  
+		//zoom out시에 꿀벌 사라지게
+	    kakao.maps.event.addListener(map, 'zoom_changed', function() {        
+		    var level = map.getLevel();
+		    
+		    if(level > 3){
+		    	for(var i=0; i<markers2.length; i++){
+		    		markers2[i].setMap(null);
+		    	}
+		    }
+		});
 		
 	});
 		

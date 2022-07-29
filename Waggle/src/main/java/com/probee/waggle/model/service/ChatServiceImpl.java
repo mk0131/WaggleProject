@@ -35,4 +35,14 @@ public class ChatServiceImpl implements ChatService{
 		return chatMapper.ChatHistory(room_No);
 	}
 
+	@Override
+	public int Content(int chat_Num, String chat_Content, int chat_UCode) {
+		return chatMapper.Content(chat_Num, chat_Content, chat_UCode);
+	}
+
+	@Override
+	public int Chk(int chat_Num, int chat_UCode) {
+		return chatMapper.Chk(chat_Num, chat_UCode);
+	}
+
 }

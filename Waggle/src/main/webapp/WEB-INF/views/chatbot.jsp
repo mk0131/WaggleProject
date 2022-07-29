@@ -15,7 +15,6 @@
 
 html, body {
 	margin: 0;
-	padding: 20px;
 }
 
 body {
@@ -28,7 +27,13 @@ body {
 }
 
 #persistent-menu {
-	margin: 10px;
+	margin-top: 10px;
+	width:200px;
+	height:50px;
+	font-size:12pt;
+	border: none;
+	border-top: 1px solid #dbdada;
+	border-bottom: 1px solid #dbdada;
 }
 
 
@@ -36,15 +41,13 @@ body {
 	display: flex;
     justify-content: center;
     margin: 10px;
-    padding: 10px;
+    padding: 5px;
 }
 
 
 
 button {
 	background-color: #ffffff;
-	border-radius: 8px;
-	border: 1px solid;
 	box-sizing: border-box;
 	color: #151515;
 	font-size: 13px;
@@ -63,7 +66,6 @@ button:hover {
 button:active {
 	box-shadow: 0 4px 4px 0 rgb(60 64 67 / 30%), 0 8px 12px 6px rgb(60 64 67 / 15%);
 	outline: none;
-	border: 1px solid #ffffff;
 }
 
 
@@ -74,107 +76,156 @@ button:active {
 
 #msg {
 	border: none;
-	border-bottom: 1px solid;
-	height: 20px;
-	width: 260px;
+	background-color: #f2f2f3;
+	font-size:13pt;
+	margin-top: 4px;
+}
+
+input:focus{
+	outline:none;
+}
+
+#communicate{
+	font-size:15pt
+}
+
+.logo{
+	display:inline-block;
+	width:30px;
+}
+
+.conversation{
+	display:inline-block;
+	width:80%;
+	font-size:12pt;
+	background-color:#f2f2f3;
+	border-radius:25px;
+	padding:20px;
+	padding-top:10px;
+	padding-bottom:10px;
+}
+
+.send{
+	width:80%;
+	font-size:15pt;
+	background-color:#d2d4f6;
+	border-radius:25px;
+	padding:20px;
+	padding-top:10px;
+	padding-bottom:10px;
+	margin-left:70px;
+	text-align:right;
 }
 
 </style>
 </head>
 <body>
+	<div class="chatbot-header" style="padding:13px">
+		<div class="img01" style="text-align:center">
+		<img src="/images/importToJsp/logo.png" style="width:50px"/>
+		</div>
+		<div style="font-size:20px; text-align:center">Waggle에게 문의하기</div>
+		<div style="color:#898989; text-align:center; margin-top:7px; font-size:10pt">보러가야하는 집이 있지만 시간이 없을 때! Waggle을 이용하세요!</div>
+	</div>
+	<div id="probee-chatbot">
+		<div id="template">
+			<button id="persistent-menu" onclick="menu1()" style="border-right:1px solid #dbdada">이용 안내</button>
+			<button id="persistent-menu" onclick="menu2()" style="border-right:1px solid #dbdada">결제 문의</button>
+			<button id="persistent-menu" onclick="menu3()">환불 문의</button>
+		</div>
 
-  <div id="probee-chatbot">
-    <form id="chatform">
-	<div class="form-group" style="margin: 10px;">
-         <label for="msg">문의사항</label>
-         <input type="text" id="msg" class="form-control" placeholder="문의 내용을 입력하세요.">
-     </div>
-     <button type="submit" id="send">보내기</button>
-     </form>
-     
-	<div id="chatBox">
-        <table id="conversation" class="table table-striped">
-            <thead>
-            <tr>
-                <th>메세지</th>
-            </tr>
-            </thead>
-            <tbody id="communicate">
-            </tbody>
-        </table>
-   </div>
-     <div id="template">
-    		<button id="persistent-menu" onclick="menu1()">이용 안내</button>
-    		<button id="persistent-menu" onclick="menu2()">결제 문의</button>
-    		<button id="persistent-menu" onclick="menu3()">환불 문의</button>
-     </div>
-   </div>
+		<div id="chatBox" style="padding:10px">
+			<!-- 
+			<table id="conversation" class="table table-striped">
+				<thead>
+					<tr>
+						<th>메세지</th>
+					</tr>
+				</thead>
+				<tbody id="communicate">
+				</tbody>
+			</table>
+			-->
+		</div>
+		
+		<form id="chatform" style="border-radius: 20px; background-color:#f2f2f3; position:fixed; bottom: 0px; margin-left:7px; width:94%">
+			<div class="form-group" style="margin: 10px; width:80%">
+				<input type="text" id="msg" class="form-control" placeholder="문의 메세지를 입력해주세요." style="width:100%">
+			</div>
+			<button type="submit" id="send" style="border:none; background-color:#d2d4f6; border-radius:20px; font-size:12pt; font-weight:bold; color:#4f5bff">전송</button>
+		</form>
+	</div>
     
 </body>
 <script>
-	
-	
 	var stompClient = null;
 
 	function connect() {
 
-	    var socket = new SockJS('/ws');
-	    stompClient = Stomp.over(socket);
-			stompClient.connect({}, onConnected, function(frame) {
-		        console.log('Connected: ' + frame);
+		var socket = new SockJS('/ws');
+		stompClient = Stomp.over(socket);
+		stompClient.connect({}, onConnected, function(frame) {
+			console.log('Connected: ' + frame);
 		});
 
-	}			
-			
-	function onConnected() {
-	    stompClient.subscribe('/topic/public', function (message) {
-            showMessage("Probee: " + message.body); //서버에 메시지 전달 후 리턴받는 메시지
-		});
-	    sendMessage2();
 	}
 
- 	function onMessageReceived(payload) {
-	    console.log(payload);
-	} 
+	function onConnected() {
+		stompClient.subscribe('/topic/public', function(message) {
+			showReceiveMessage(message.body); //서버에 메시지 전달 후 리턴받는 메시지
+		});
+		sendMessage2();
+	}
 
+	function onMessageReceived(payload) {
+		console.log(payload);
+	}
 
 	function sendMessage() {
 		let message = $("#msg").val()
-	    showMessage("보낸 메시지: " + message);
-		
-	    stompClient.send("/app/sendMessage", {}, JSON.stringify(message));
-	}
-	
-	function sendMessage2() {
-		let message = $("#msg").val()
-		
-	    stompClient.send("/app/sendMessage", {}, JSON.stringify(message));
-	}
-	
-	function showMessage(message) {
-	    $("#communicate").append("<br/><tr><td>" + message + "</td></tr><br/>");
+		showSendMessage(message);
+
+		stompClient.send("/app/sendMessage", {}, JSON.stringify(message));
 	}
 
+	function sendMessage2() {
+		let message = $("#msg").val()
+
+		stompClient.send("/app/sendMessage", {}, JSON.stringify(message));
+	}
+
+	//보낸메시지 보여주는 함수
+	function showSendMessage(message) {
+		$("#chatBox").append("<div class='send'><p style='margin:0'>" + message + "</p></div><br/>");
+	}
+	
+	//받은메시지 보여주는 함수
+	function showReceiveMessage(message){
+		$("#chatBox").append("<div class='logo'><img src='/images/importToJsp/logo.png' style='width:30px'/></div>"
+							+ "<div class='conversation'><p style='margin:0'>" + message + "</p></div><br/><br/>");
+	}
+	
 	connect();
-	
-	$(function () {
-	    $("form").on('submit', function (e) {
-	        e.preventDefault();
-	    });
-	    $( "#send" ).click(function() { sendMessage(); });
+
+	$(function() {
+		$("form").on('submit', function(e) {
+			e.preventDefault();
+		});
+		$("#send").click(function() {
+			sendMessage();
+		});
 	});
-	
+
 	function menu1() {
-		showMessage("Probee: " + "waggle은 이사를 위한 집에 대한 이전 리뷰 기록을 조회할 수 있는 정보 열람 기능과 직접 탐색할 추가 정보를 요청할 수 있는 정보요청 서비스를 제공하는 플랫폼이에요! 회원가입 후, 보고싶은 집의 정보와 함께 요청글을 작성하시거나 꿀벌이 되어 집을 탐색해주세요.");
+		showReceiveMessage("waggle은 이사를 위한 집에 대한 이전 리뷰 기록을 조회할 수 있는 정보 열람 기능과 직접 탐색할 추가 정보를 요청할 수 있는 정보요청 서비스를 제공하는 플랫폼이에요! 회원가입 후, 보고싶은 집의 정보와 함께 요청글을 작성하시거나 꿀벌이 되어 집을 탐색해주세요.");
 	}
-	
+
 	function menu2() {
-		showMessage("Probee: " + "결제는 [마이페이지 > 포인트 충전하기] 에서 가능합니다. 만약 결제 중 문제가 발생한다면 [고객센터 > 결제 관련 문의] 에 글을 작성해주시기 바랍니다.");
+		showReceiveMessage("결제는 [마이페이지 > 포인트 충전하기] 에서 가능합니다. 만약 결제 중 문제가 발생한다면 [고객센터 > 결제 관련 문의] 에 글을 작성해주시기 바랍니다.");
 	}
-	
+
 	function menu3() {
-		showMessage("Probee: " + "서로 합의된 내용을 기반하여 제공된 결과물에 대해서는 고객의 단순 변심으로 환불은 불가능합니다. 만약 대행인이 기존에 합의된 서비스 요청 내용을 이행하지 않았을 경우 [고객센터 > 환불 문의] 를 통해 고객센터에 작성해주시기 바랍니다.");
+		showReceiveMessage("서로 합의된 내용을 기반하여 제공된 결과물에 대해서는 고객의 단순 변심으로 환불은 불가능합니다. 만약 대행인이 기존에 합의된 서비스 요청 내용을 이행하지 않았을 경우 [고객센터 > 환불 문의] 를 통해 고객센터에 작성해주시기 바랍니다.");
 	}
-	
 </script>
 </html>

@@ -15,7 +15,7 @@ public class WaggleApplication {
 	
 	@RequestMapping("/")
 	public static String goindex() {
-		return "index";
+		return "home";
 	}
 	
 	@RequestMapping("/home")
@@ -31,11 +31,6 @@ public class WaggleApplication {
 	@RequestMapping("/inquiry")
 	public static String goinquiry() {
 		return "inquiry";
-	}
-	
-	@RequestMapping("/profileEdit")
-	public static String goprofileedit() {
-		return "profileEdit";
 	}
 	
 	@RequestMapping("/history")
