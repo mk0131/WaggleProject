@@ -56,8 +56,8 @@ public interface MypageMapper {
 	@Update(" UPDATE USERS SET User_Age = #{user_Age} WHERE user_Code = #{user_Code} ")
 	public int AgeChange(int user_Age, int user_Code);
 	
-	@Update(" UPDATE UserAddress SET ua_Post = #{ua_Post}, ua_Addr =#{ua_Addr}, ua_DAddr =#{ua_DAddr} WHERE ua_UCode = #{ua_UCode} ")
-	public int AddrChange(String ua_Post, String ua_Addr, String ua_DAddr, int ua_UCode);
+	@Update(" UPDATE UserAddress SET ua_Post = #{ua_Post}, ua_Addr =#{ua_Addr}, ua_DAddr =#{ua_DAddr}, ua_Lat = #{ua_Lat}, ua_Lng = #{ua_Lng} WHERE ua_UCode = #{ua_UCode} ")
+	public int AddrChange(String ua_Post, String ua_Addr, String ua_DAddr, int ua_UCode, double ua_Lat, double ua_Lng);
 	
 	@Update(" UPDATE USERS SET User_Gender = #{user_Gender} WHERE user_Code = #{user_Code} ")
 	public int GenderChange(String user_Gender, int user_Code);

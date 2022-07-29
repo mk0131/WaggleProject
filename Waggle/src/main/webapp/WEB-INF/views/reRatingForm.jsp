@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>요청상세페이지(확인중)</title>
+<title>꿀벌 다시 평가하기</title>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <style type="text/css">
 
@@ -474,11 +474,11 @@ div#progress_percentage::after {
 		   <div id="detail_container">
 		    <div id="file_container">
 		    <c:choose>
-		    	<c:when test="${file eq '[null]' }">
+		    	<c:when test="${fi_list eq '[null]' }">
 		    		<div>디테일 사진이 존재하지 않습니다.</div>
 		    	</c:when>
 		    	<c:otherwise>
-				    <c:forEach items="${file }" var="dto">
+				    <c:forEach items="${fi_list }" var="dto">
 				   	 <c:choose>
 				   	  <c:when test="${dto.fi_Type eq 'img' }">
 				   	   <img src="${dto.fi_Nm }" alt="방사진">

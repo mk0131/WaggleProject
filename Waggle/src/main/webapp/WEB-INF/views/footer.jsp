@@ -119,6 +119,10 @@ footer .footer-right .service-center li p {
 	text-decoration: none;
 }
 
+a {
+	text-decoration: none;
+}
+
 </style>
 </head>
 <body>
@@ -205,8 +209,9 @@ footer .footer-right .service-center li p {
 </body>
 
 <script type="text/javascript">
-
-	function showPopup() { window.open("/chatbot", "a", "width=600, height=500, left=800, top=100");
+	var popupX = (document.body.offsetWidth);
+	var popupY = (document.body.offsetHeight);
+	function showPopup() { window.open("/chatbot", "a", "width=400, height=550, left="+popupX+", top="+popupY+"");
 		
 	}
 	

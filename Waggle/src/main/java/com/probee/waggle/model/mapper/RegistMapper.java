@@ -27,7 +27,7 @@ public interface RegistMapper {
 	@Select(" SELECT * FROM USERS WHERE user_Email = #{user_Email}")
 	 UsersDto SelectOne(String user_Email);
 	
-	@Insert(" INSERT INTO USERADDRESS (ua_UCode, ua_Post, ua_Addr, ua_DAddr) VALUES(#{ua_UCode},#{ua_Post},#{ua_Addr},#{ua_DAddr} )")
+	@Insert(" INSERT INTO USERADDRESS (ua_UCode, ua_Post, ua_Addr, ua_DAddr, ua_Lat, ua_Lng) VALUES(#{ua_UCode},#{ua_Post},#{ua_Addr},#{ua_DAddr},#{ua_Lat},#{ua_Lng} )")
 	 int AdressJoin(UserAddressDto dto);
 	
 	@Select("SELECT user_Naver FROM USERS Where user_Email = #{user_Email}")

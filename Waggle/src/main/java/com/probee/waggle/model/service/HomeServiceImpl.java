@@ -19,8 +19,8 @@ public class HomeServiceImpl implements HomeService{
 	}
 
 	@Override
-	public HomeDto findHome(HomeDto dto) {
-		return homeMapper.findHome(dto);
+	public HomeDto findHome(String home_Addr, String ji_Addr, String road_Addr, String home_DAddr) {
+		return homeMapper.findHome(home_Addr, ji_Addr, road_Addr, home_DAddr);
 	}
 
 	@Override

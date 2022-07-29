@@ -219,6 +219,7 @@ img {
     height: 300px;
     object-fit: cover;
     border-radius: 10px;
+    cursor: pointer;
 }
  
 #board-img {
@@ -249,6 +250,7 @@ img {
     height: 60px;
     border: 1px solid #d3d3d3;
     border-radius: 10px;
+    cursor: pointer;
 }
  
 #board-dl {
@@ -258,7 +260,7 @@ img {
     padding-bottom: 20px;
 } 
 
-#board-dt {
+.board-dt {
 	line-height: 14px;
     font-size: 14px;
     letter-spacing: -.06px;
@@ -266,7 +268,7 @@ img {
     color: rgba(34,34,34,.5);
 }
 
-#board-dd {
+.board-dd {
 	margin: 4px 0px 0px 0px;
     word-break: break-word;
     line-height: 17px;
@@ -274,10 +276,18 @@ img {
     
 }
  
-#board-ltd-box {
+#board-ltd-box1 {
 	padding: 0 12px;
-/* 	padding-left: 0;
-	padding-right: 0; */
+	flex: 1;
+} 
+
+#board-ltd-box2 {
+	padding: 0 12px;
+	flex: 1;
+} 
+
+#board-ltd-box3 {
+	padding: 0 12px;
 	flex: 1;
 } 
 
@@ -288,6 +298,7 @@ img {
 #board-dl-dt-dd {
 	border-top: 1px solid #ebebeb;
 	border-bottom: 1px solid #ebebeb;
+	cursor: pointer;
 }
 
 #board-ltd-title {
@@ -315,6 +326,7 @@ img {
     font-size: 18px;
     letter-spacing: -.09px;
     font-weight: 400;
+    cursor: pointer;
 }
 
 .middle-btn {
@@ -333,6 +345,7 @@ img {
     border-radius: 12px;
     font-size: 14px;
     letter-spacing: -.14px;
+    cursor: pointer;
     
 }
  
@@ -383,17 +396,17 @@ img {
 						 <h4 class="board-content-inner" id="board-ltd-title" onclick="location.href='/board/detail?req_No=${dto.req_No}'">요청 정보</h4>
 						  <div class="board-content-inner" id="board-dl-dt-dd" onclick="location.href='/board/detail?req_No=${dto.req_No}'">	
 							<dl id="board-dl">
-							  <div id="board-ltd-box">
-								<dt id="board-dt">주소</dt>
-								<dd id="board-dd">${dto.home_Addr }</dd>
+							  <div id="board-ltd-box1">
+								<dt class="board-dt">주소</dt>
+								<dd class="board-dd">${dto.home_Addr }</dd>
 							  </div>
-							  <div id="board-ltd-box" class="board-ltd-detail-box">
-								<dt id="board-dt">예상거리</dt>
-								<dd id="board-dd">??km</dd>
+							  <div id="board-ltd-box2" class="board-ltd-detail-box">
+								<dt class="board-dt">예상거리</dt>
+								<dd class="board-dd">??km</dd>
 							  </div>
-							  <div id="board-ltd-box" class="board-ltd-detail-box">
-								<dt id="board-dt">기한</dt>
-								<dd id="board-dd">${dto.req_EDate }</dd>
+							  <div id="board-ltd-box3" class="board-ltd-detail-box">
+								<dt class="board-dt">기한</dt>
+								<dd class="board-dd">${dto.req_EDate }</dd>
 							 </div>
 							</dl>
 						  </div>

@@ -257,7 +257,7 @@ public class MypageController {
 		session.setAttribute("user_Intro", editDesc);
 		session.setMaxInactiveInterval(-1);
 
-		return "redirect:/mypage_me";
+		return "redirect:/mypage/me";
 	}
 
 	@RequestMapping(value = "/descEdit", method = RequestMethod.POST)
@@ -281,7 +281,7 @@ public class MypageController {
 		session.setAttribute("user_Intro", editDesc);
 		session.setMaxInactiveInterval(-1);
 
-		return "redirect:/mypage_me";
+		return "redirect:/mypage/me";
 	}
 
 	// 마이페이지 완료된리스트 컨트롤러
@@ -299,9 +299,12 @@ public class MypageController {
 		HttpSession session = request.getSession();
 		
 		int user_Pro = (int)session.getAttribute("user_Pro");
-		FileDto ProfileFile = mypageService.SelectConfirmFile(user_Pro);
 		
-		model.addAttribute("Pro_Fi_Nm", ProfileFile.getFi_Nm());
+		if(user_Pro != 0) {
+			FileDto ProfileFile = mypageService.SelectConfirmFile(user_Pro);
+			model.addAttribute("Pro_Fi_Nm", ProfileFile.getFi_Nm());
+		}
+		
 		model.addAttribute("dto", user);
 
 		return "profileEdit";
@@ -375,7 +378,7 @@ public class MypageController {
 
 	@GetMapping("/addrchange") // 주소 변경
 	public String AddrChange(int ua_UCode, UserAddressDto dto, Model model, String ua_Post, String ua_Addr,
-			String ua_DAddr) {
+			String ua_DAddr, double ua_Lat, double ua_Lng) {
 
 		UserAddressDto user = mypageService.SelectAddr(ua_UCode);
 		if (user == null) {
@@ -383,7 +386,7 @@ public class MypageController {
 			UserAddressDto users = mypageService.SelectAddr(ua_UCode);
 			model.addAttribute("dto", users);
 		} else {
-			mypageService.AddrChange(ua_Post, ua_Addr, ua_DAddr, ua_UCode);
+			mypageService.AddrChange(ua_Post, ua_Addr, ua_DAddr, ua_UCode, ua_Lat, ua_Lng);
 			model.addAttribute("dto", user);
 		}
 

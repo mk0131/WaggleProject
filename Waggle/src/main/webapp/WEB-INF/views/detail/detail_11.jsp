@@ -211,7 +211,7 @@ button:active {
 												<img style="width: 130px; height: 130px; border-radius: 75px;" alt="프로필사진o" src="${dto.fi_Nm }">
 											</c:when>
 											<c:otherwise>
-												<img style="width: 130px; height: 130px; border-radius: 75px;" alt="프로필사진x" src="/images/profile/profile_default.jpg">
+												<img style="width: 130px; height: 130px; border-radius: 75px;" alt="프로필사진x" src="/images/importToJsp/profile_default.jpg">
 											</c:otherwise>
 										</c:choose>
 									</td>

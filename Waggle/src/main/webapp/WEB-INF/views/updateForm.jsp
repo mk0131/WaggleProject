@@ -14,8 +14,27 @@
 	        oncomplete: function(data) {
 	        	$("#home_Addr").val(data.address);
 	        	$("#home_Post").val(data.zonecode);
+	        	$("#ji_Addr").val(data.jibunAddress);
+	        	$("#road_Addr").val(data.roadAddress);
+	        	
+	        	 //받은 주소값을 위도 경도로 바꿔서 input hidden 값에 value값으로 넣어주기
+                var geocoder = new kakao.maps.services.Geocoder();
+                var addr = $('#home_Addr').val();
+                geocoder.addressSearch(addr, function(result, status) {
+                	
+        		    // 정상적으로 검색이 완료됐으면 
+        		     if (status === kakao.maps.services.Status.OK) {
+        				$("#home_Lat").attr('value',result[0].y);
+        				$("#home_Lng").attr('value',result[0].x);
+        				
+        		    } else {
+        		    	console.log("에러");
+        		    }
+        		});  
 	        }
-	    }).open();		
+	    }).open({
+	    	popupName: 'AddrSearch'
+	    });		
 	}
 </script>
 <style type="text/css">
@@ -197,6 +216,10 @@ input[type="date"] {
 							<th><label class="required">집 주소</label><br><br><br></th>
 							<td>
 								<input type="text" placeholder="클릭해서 주소 입력" name="home_Addr" id="home_Addr" readonly="readonly" onclick="kakaopost()" required="required" value="${req_dto.home_Addr}">
+								<input type="hidden" name="home_Lat" id="home_Lat">
+								<input type="hidden" name="home_Lng" id="home_Lng">
+								<input type="hidden" name="ji_Addr" id="ji_Addr">
+								<input type="hidden" name="road_Addr" id="road_Addr">
 								<br><input type="text" placeholder="상세주소(선택)" name="home_DAddr" value="${req_dto.home_DAddr}">
 							</td>
 						</tr>

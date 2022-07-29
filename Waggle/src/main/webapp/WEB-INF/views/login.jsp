@@ -277,6 +277,7 @@ input {
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js"></script>
 	<script type="text/javascript" src="https://static.nid.naver.com/js/naverLogin_implicit-1.0.3.js" charset="utf-8"></script>
+	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=df487b49cd90a64d7305e577e300f2e4&libraries=services,clusterer,drawing"></script>
 <script type="text/javascript">
 
 	$(function(){
@@ -327,6 +328,8 @@ input {
 		})
 		/* 다음 주소 연동*/
 		$("#address").on("click",function(){
+			var width = 500; //팝업의 너비
+			var height = 600; //팝업의 높이
 			new daum.Postcode({
 		        oncomplete: function(data) {
 		        	// 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
@@ -368,11 +371,31 @@ input {
 	                // 우편번호와 주소 정보를 해당 필드에 넣는다.
 	                $("#post").val(data.zonecode);
 	                $("#addr").val(addr);
+	                
+	                //받은 주소값을 위도 경도로 바꿔서 input hidden 값에 value값으로 넣어주기
+	                var geocoder = new kakao.maps.services.Geocoder();
+	                var addr = $('#addr').val();
+	                geocoder.addressSearch(addr, function(result, status) {
+	                	
+	        		    // 정상적으로 검색이 완료됐으면 
+	        		     if (status === kakao.maps.services.Status.OK) {
+	        				$("#ua_Lat").attr('value',result[0].y);
+	        				$("#ua_Lng").attr('value',result[0].x);
+	        				
+	        		    } else {
+	        		    	console.log("에러");
+	        		    }
+	        		});  
+	                
 	                // 커서를 상세주소 필드로 이동한다.
 	                $("#daddr").attr("readonly",false);
 	                $("#daddr").focus();
 		        }
-		    }).open();
+		    }).open({
+		    	left: (window.screen.width / 2) - (width / 2),
+	    	    top: (window.screen.height / 2) - (height / 2),
+	    		popupName: 'AddrSearch'
+		    });
 		})
 		
 		
@@ -787,6 +810,8 @@ input {
 							<input type="button" id="address" value="주소찾기" style="width: 100px;">
 						<input type="text" name="ua_Addr" id="addr" placeholder="  주소"
 							style="width: 500px;" readonly="readonly"> 
+							<input type="hidden" name="ua_Lat" id="ua_Lat">
+							<input type="hidden" name="ua_Lng" id="ua_Lng">
 							<input type="text" name="ua_DAddr" id="daddr" placeholder="  상세주소"
 							style="width: 500px;" readonly="readonly">
 							<br>
@@ -1299,8 +1324,9 @@ input {
         var pwck = $('#pw_chk').val();            // 비밀번호 확인 입력란
         var name = $('#nm_input').val();            // 이름 입력란
         var mail = $('#email_input').val();            // 이메일 입력란
-        var addr = $('#daddr').val();        // 상세 주소 입력란
+        var daddr = $('#daddr').val();        // 상세 주소 입력란
         var age = $('#age_input').val();
+        
         
         if(id == ""){
             $('.final_id_ck').css('display','block');
@@ -1342,7 +1368,7 @@ input {
             emailCheck = true;
         }
         
-        if(addr == ""){
+        if(daddr == ""){
             $('.final_addr_ck').css('display','block');
             addressCheck = false;
         }else{
