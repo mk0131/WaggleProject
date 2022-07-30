@@ -47,8 +47,8 @@ public class ChatController {
 	}
 	
 	@GetMapping("/chat")
-	public String GoChat(int room_No ) {
-		
+	public String GoChat(int room_No ,int chat_UCode) {
+		chatService.Chk(room_No,chat_UCode ); // 상대 채팅 읽음 표시
 		return "Chatting";
 	}
 	
@@ -57,8 +57,6 @@ public class ChatController {
 	public List<ChatContentDto> Chat(int room_No , int chat_UCode) {
 		
 		List<ChatContentDto> list = chatService.ChatHistory(room_No); // 해당 채팅방의 채팅내역 불러오기
-		
-		
 		
 		return list;
 	}
