@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -137,15 +138,18 @@ nav ul li a:hover, nav ul li a:visited:hover {
 
 </head>
 <body>
-		<%@ include file="header.jsp"%>
+	<%@ include file="header.jsp"%>
 	<div id="wrap">
 		<section>
+			<c:if test="${user_Code eq 1 }">
+				<input type="button" onclick="location.href='/license/list'" value="공인중개사 인증">
+			</c:if>
 			<div class="home-image">
 				<img src="https://images.unsplash.com/photo-1479839672679-a46483c0e7c8?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2020&q=80">
 			</div>
 		</section>
 	</div>
-  <%@ include file="footer.jsp" %>
+	<%@ include file="footer.jsp" %>
 </body>
 <script>
 	(function($) { // Begin jQuery
