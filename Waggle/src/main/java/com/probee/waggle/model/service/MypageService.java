@@ -12,6 +12,7 @@ import com.probee.waggle.model.dto.MypageFinishlistDto;
 import com.probee.waggle.model.dto.MypageOtherDto;
 import com.probee.waggle.model.dto.MypageUsageDto;
 import com.probee.waggle.model.dto.UserAddressDto;
+import com.probee.waggle.model.dto.UsersDto;
 
 public interface MypageService {
 	
@@ -68,4 +69,8 @@ public interface MypageService {
 	public int InsertConfirm(int ucode, int new_fi_Code);
 	
 	public FileDto SelectConfirmFile(int fi_code);
+	
+	public UsersDto SelectMyInfo(int ucode);
+	
+	public int DeleteMyDesc(int ucode);
 }

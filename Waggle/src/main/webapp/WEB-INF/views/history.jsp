@@ -150,7 +150,7 @@ img {
 
 #my-req-list-dt {
 	line-height: 14px;
-    font-size: 14px;
+    font-size: 15px;
     letter-spacing: -.06px;
     letter-spacing: -.33px;
     color: rgba(34,34,34,.5);
@@ -160,7 +160,7 @@ img {
 	margin: 4px 0px 0px 0px;
     word-break: break-word;
     line-height: 17px;
-    font-size: 14px;
+    font-size: 15px;
     
 }
  
@@ -248,7 +248,7 @@ img {
 
 #my-res-list-dt {
 	line-height: 14px;
-    font-size: 14px;
+    font-size: 15px;
     letter-spacing: -.06px;
     letter-spacing: -.33px;
     color: rgba(34,34,34,.5);
@@ -258,7 +258,7 @@ img {
 	margin: 4px 0px 0px 0px;
     word-break: break-word;
     line-height: 17px;
-    font-size: 14px;
+    font-size: 15px;
     
 }
  
@@ -325,9 +325,9 @@ img {
 			<br/>
 			<div class="tabs">
 				<input id="login" type="radio" name="tab_item" checked onclick="showMyReq();"> 
-				<label class="tab_item" for="login">나의 요청</label> 
+				<label class="tab_item" for="login">내가 요청한 목록</label> 
 				<input id="sign-up" type="radio" name="tab_item" onclick="showMyPerform();"> 
-				<label class="tab_item" for="sign-up">나의 수행</label>
+				<label class="tab_item" for="sign-up">내가 수행한 목록</label>
 			</div>
 			<div class="myReqList" style="display:none">
 				<c:forEach var="Req" items="${Request }">
@@ -355,11 +355,11 @@ img {
 							onclick="location.href='/board/detail?req_No=${Req.req_No}'">
 							<dl id="my-req-list-dl">
 								<div id="my-req-list-ltd-box">
-									<dt id="my-req-list-dt">주소</dt>
+									<dt id="my-req-list-dt">매물주소</dt>
 									<dd id="my-req-list-dd">${Req.home_Addr}</dd>
 								</div>
 								<div id="my-req-list-ltd-box" class="my-req-list-ltd-detail-box">
-									<dt id="my-req-list-dt">기한</dt>
+									<dt id="my-req-list-dt">방문기한</dt>
 									<dd id="my-req-list-dd">${Req.req_EDate}</dd>
 								</div>
 							</dl>
@@ -397,11 +397,11 @@ img {
 							onclick="location.href='/board/detail?req_No=${per.req_No}'">
 							<dl id="my-res-list-dl">
 								<div id="my-res-list-ltd-box">
-									<dt id="my-res-list-dt">주소</dt>
+									<dt id="my-res-list-dt">매물주소</dt>
 									<dd id="my-res-list-dd">${per.home_Addr }</dd>
 								</div>
 								<div id="my-res-list-ltd-box" class="my-res-list-ltd-detail-box">
-									<dt id="my-res-list-dt">기한</dt>
+									<dt id="my-res-list-dt">방문기한</dt>
 									<dd id="my-res-list-dd">${per.req_EDate }</dd>
 								</div>
 							</dl>

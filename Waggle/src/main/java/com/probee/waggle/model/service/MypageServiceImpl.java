@@ -16,6 +16,7 @@ import com.probee.waggle.model.dto.MypageFinishlistDto;
 import com.probee.waggle.model.dto.MypageOtherDto;
 import com.probee.waggle.model.dto.MypageUsageDto;
 import com.probee.waggle.model.dto.UserAddressDto;
+import com.probee.waggle.model.dto.UsersDto;
 import com.probee.waggle.model.mapper.MypageMapper;
 
 @Service
@@ -191,6 +192,16 @@ public class MypageServiceImpl implements MypageService{
 	@Override
 	public FileDto SelectConfirmFile(int fi_code) {
 		return mypageMapper.SelectConfirmFile(fi_code);
+	}
+
+	@Override
+	public UsersDto SelectMyInfo(int ucode) {
+		return mypageMapper.SelectMyInfo(ucode);
+	}
+
+	@Override
+	public int DeleteMyDesc(int ucode) {
+		return mypageMapper.DeleteMyDesc(ucode);
 	}
 	
 	

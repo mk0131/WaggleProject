@@ -43,6 +43,7 @@
 	border: 3px solid;
 	margin-left: 40px;
 	float: right;
+	color: #2e2e2e;
 }
 
 .button p {
@@ -121,6 +122,7 @@ textarea:focus ~ label, textarea:valid ~ label {
 	font-size: 0.75em;
 	color: #999;
 	top: -5px;
+	display:none;
 	-webkit-transition: all 0.225s ease;
 	transition: all 0.225s ease;
 }
@@ -156,6 +158,7 @@ textarea {
 	-webkit-transition: all 0.25s ease;
 	transition: all 0.25s ease;
 	pointer-events: none;
+	text-align:left;
 }
 
 
@@ -590,34 +593,65 @@ textarea {
 			<div class="middle-profile">
 				<div class="profile" style="text-align: center; display: flex; justify-content: center;">
 					<div class="profile-left" style="display: inline-block">
-						<c:if test = "${user_Pro == 0}">
+						<c:if test = "${dto.user_Pro == 0}">
 						<img src="/images/importToJsp/profile_default.jpg"
 							style="width: 100px; height: 100px">
 						</c:if>
-						<c:if test = "${user_Pro != 0 }">
+						<c:if test = "${dto.user_Pro != 0 }">
 						<img src="${Pro_fi_Nm }" style="width:200px; height: 200px; border-radius:200px">
 						</c:if>
-						<div style="font-weight: bold; font-size: 20pt">${user_Point } P</div>
+						<div style="font-weight: bold; font-size: 20pt">${dto.user_Point } P</div>
 						<div>
 							<a href="/point/use" style="color: #2d7eac">포인트 충전하기</a>
 						</div>
 					</div>
 					<div class="profile-right"
 						style="display: inline-block; margin-left: 40px; text-align: left">
-						<c:if test="${user_Code != null }">
+						<c:if test="${dto.user_Code != null }">
 						<div>
 							<span
-								style="font-size: 20pt; margin-bottom: 20px; font-weight: bold">${user_Nm}
+								style="font-size: 20pt; margin-bottom: 20px; font-weight: bold">${dto.user_Nm}
 								님</span>
 						</div>
-						<div style="font-size: 14pt">나이: ${user_Age}</div>
-						<c:if test="${user_Gender == 'M'}">
+						<c:choose>
+							<c:when test="${dto.user_Age >= 10 and dto.user_Age < 20}">
+								<div style="font-size: 14pt">나이: 10대</div>
+							</c:when>
+							<c:when test="${dto.user_Age >= 20 and dto.user_Age < 30}">
+								<div style="font-size: 14pt">나이: 20대</div>
+							</c:when>
+							<c:when test="${dto.user_Age >= 30 and dto.user_Age < 40}">
+								<div style="font-size: 14pt">나이: 30대</div>
+							</c:when>
+							<c:when test="${dto.user_Age >= 40 and dto.user_Age < 50}">
+								<div style="font-size: 14pt">나이: 40대</div>
+							</c:when>
+							<c:when test="${dto.user_Age >= 50 and dto.user_Age < 60}">
+								<div style="font-size: 14pt">나이: 50대</div>
+							</c:when>
+							<c:when test="${dto.user_Age >= 60 and dto.user_Age < 70}">
+								<div style="font-size: 14pt">나이: 60대</div>
+							</c:when>
+							<c:when test="${dto.user_Age >= 70 and dto.user_Age < 80}">
+								<div style="font-size: 14pt">나이: 70대</div>
+							</c:when>
+							<c:when test="${dto.user_Age >= 80 and dto.user_Age < 90}">
+								<div style="font-size: 14pt">나이: 80대</div>
+							</c:when>
+							<c:when test="${dto.user_Age >= 90 and dto.user_Age < 100}">
+								<div style="font-size: 14pt">나이: 90대</div>
+							</c:when>
+							<c:otherwise>
+								<div style="font-size: 14pt">나이: <span style="font-size:11pt">'회원정보 수정'에서 나이를 입력해주세요.</span></div>
+							</c:otherwise>
+						</c:choose>
+						<c:if test="${dto.user_Gender == 'M'}">
 						<div style="font-size: 14pt; margin-bottom: 60px">성별: 남</div>
 						</c:if>
-						<c:if test="${user_Gender == 'F'}">
+						<c:if test="${dto.user_Gender == 'F'}">
 						<div style="font-size: 14pt; margin-bottom: 60px">성별: 여</div>
 						</c:if>
-						<div style="font-size: 14pt; font-weight: bold">내가 딴 꿀 수확량: ${user_Grade}</div>
+						<div style="font-size: 14pt; font-weight: bold">내가 딴 꿀 수확량: ${dto.user_Grade}</div>
 							<div id="bar_container">
 								<div id="progress_bar">
 									<div id="progress_percentage" data-percentage="10">
@@ -684,12 +718,13 @@ textarea {
 					</div>
 					<div class="desc-content-aboutme">
 						<div class="desc-content">
-							<c:if test="${ user_Intro == null}">
+							<c:if test="${ dto.user_Intro == null}">
 								<form action="/mypage/descInsert" method="POST">
 								<input type="hidden" name="code" value="${user_Code }">
 								<div class="styled-input">
 									<textarea required name="description"></textarea>
-									<label>자기소개를 입력해주세요.</label>
+									<label>자기소개 예시:<br>
+									 제 이름은 OOO입니다. 현재까지 Waggle에서 총 ?건의 수행을 완료하였고 모두 좋은 꿀벌 평가를 받았습니다!<br>요구하는 사항을 꼼꼼하게 반영해서 신속하게 수행하겠습니다 :)</label>
 								</div>
 								<div></div>
 								<div class="desc-content-button">
@@ -697,23 +732,24 @@ textarea {
 								</div>
 								</form>	
 							</c:if>
-							<c:if test="${ user_Intro != null }">
-								<form action="/mypage/descEdit" method="POST">
-								<input type="hidden" name="code" value="${user_Code}">
+							<c:if test="${ dto.user_Intro != null }">
+								<form name="form" method="POST">
 								<div class="desc-intro" data-behaviour="search-on-list" style="text-align:initial">
 									<span class="counter"	data-search-on-list="counter">
-										${user_Intro}
+										<div style="white-space:pre;">${dto.user_Intro}</div>
 									</span>
 								</div>
 								<div class="styled-input" id="desc-edit-input" style="display:none">
-										<textarea id="desc-text" required name="description">${user_Intro}</textarea>
-										<label>${user_Intro }</label>
+										<textarea id="desc-text" required  name="description">${dto.user_Intro}</textarea>
+										<label>${dto.user_Intro }</label>
 								</div>
 								<div class="desc-content-button">
+									<input type="hidden" name="code" value="${user_Code}">
 									<div class="button" id="desc-edit" style="display: inline-block; width: 150px; margin-top:20px">
 										<p style="margin: 5px">자기소개 수정하기</p>
 									</div>
-									<input type="submit" class="button" id="desc-edit-finish" value="수정 완료" style="display: inline-block; margin-top:20px; display:none; padding:5px; font-size:15px; font-weight:bold">
+									<input type="submit" class="button" value="자기소개 삭제" onclick="javascript: form.action='/mypage/descDelete';" style="display: inline-block; margin-top:20px; padding:5px; font-size:15px; font-weight:bold">
+									<input type="submit" class="button" id="desc-edit-finish" value="수정 완료" onclick="javascript: form.action='/mypage/descEdit';" style="display: inline-block; margin-top:20px; display:none; padding:5px; font-size:15px; font-weight:bold">
 									<div class="button" id="desc-edit-cancel" style="display: inline-block; margin-top:20px; display:none">
 										<p style="margin: 5px">수정 취소</p>
 									</div>
@@ -737,7 +773,7 @@ textarea {
 							</li>
 						</ul>
 						</div>
-						<div class="usage-right" style="width: 400px; display: inline-block">
+						<div class="usage-right" style="width: 400px; display: inline-block; border-right: 1px dashed #898989; padding-right:35px">
 							<ul class="bar-graph" style="width: 400px; padding: 0">
 								<li>
 									<p>[의뢰인]진행중 상태 의뢰 요청취소 비율</p>
@@ -776,7 +812,7 @@ textarea {
 						    <p class="drop-zoon__paragraph">Drop your file here or Click to browse</p>
 						    <span id="loadingText" class="drop-zoon__loading-text">Please Wait</span>
 						    <img src="" alt="Preview Image" id="previewImage" class="drop-zoon__preview-image" draggable="false">
-						    <input type="file" name="myfile" data-max-file-size="5MB" id="fileInput" class="drop-zoon__file-input" accept="image/*">
+						    <input type="file" name="myfile" data-max-file-size="10MB" id="fileInput" class="drop-zoon__file-input" accept="image/*">
 						  </div>
 						  <!-- End Drop Zoon -->
 						
@@ -991,12 +1027,14 @@ textarea {
 	  "jpeg",
 	  "png",
 	  "svg",
-	  "gif"
+	  "gif",
+	  "jfif"
 	];
 
 	// Append Images Types Array Inisde Tooltip Data
 	toolTipData.innerHTML = [...imagesTypes].join(', .');
 
+	/*
 	// When (drop-zoon) has (dragover) Event 
 	dropZoon.addEventListener('dragover', function (event) {
 	  // Prevent Default Behavior 
@@ -1026,7 +1064,7 @@ textarea {
 	  // Call Function uploadFile(), And Send To Her The Dropped File :)
 	  uploadFile(file);
 	});
-
+	*/
 	// When (drop-zoon) has (click) Event 
 	dropZoon.addEventListener('click', function (event) {
 	  // Click The (fileInput)
@@ -1146,10 +1184,10 @@ textarea {
 	  // If The Uploaded File Is An Image
 	  if (isImage.length !== 0) {
 	    // Check, If File Size Is 2MB or Less
-	    if (fileSize <= 2000000) { // 2MB :)
+	    if (fileSize <= 10000000) { // 2MB :)
 	      return true;
 	    } else { // Else File Size
-	      return alert('Please Your File Should be 2 Megabytes or Less');
+	      return alert('Please Your File Should be 10 Megabytes or Less');
 	    };
 	  } else { // Else File Type 
 	    return alert('Please make sure to upload An Image File Type');

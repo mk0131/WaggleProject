@@ -17,6 +17,7 @@
 
 .container {
 	max-width: 1000px;
+	display: contents;
 	margin: 0 auto;
 }
 
@@ -30,7 +31,7 @@
 
 .brand-container {
 	position: absolute;
-	padding-left: 20px;
+	padding-left: 95px;
 	float: left;
 	line-height: 70px;
 	text-transform: uppercase;
@@ -57,7 +58,7 @@
 .nav-container {
 	position: relative;
 	float: right;
-	width: 750px;
+	width: 1280px;
 	margin: 0 auto;
 }
 
@@ -125,8 +126,21 @@ nav ul li a:hover, nav ul li a:visited:hover {
 			<div class="nav-container">
 				<nav>
 					<ul class="nav-list">
+						<c:if test="${user_Code != null }">
 						<li><a href="/map/user">지도</a></li>
-						<li><a href="/board/list">꿀단지</a></li>
+						</c:if>
+						<c:if test="${user_Code == null }">
+						<li><a href="/login">지도</a></li>
+						</c:if>
+						<li><a href="/board/list">꿀단지목록</a></li>
+						
+						<c:if test="${user_Code == null }">
+						<li><a href="/login">요청글 작성하기</a></li>
+						</c:if>
+						<c:if test="${user_Code != null }">
+						<li><a href="/board/requestform">요청글 작성하기</a></li>
+						</c:if>
+						
 						<c:if test="${user_Code == null }">
 						<li><a href="/login">마이페이지</a></li>
 						</c:if>

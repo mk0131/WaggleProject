@@ -54,4 +54,6 @@ public interface BoardService {
 	public UserAddressDto selectUserAddr(int ua_Ucode);
 	
 	public int updateResultWDate(int res_Code);
+	
+	public int updateUserGrade(int user_Code, int user_Grade);
 }
