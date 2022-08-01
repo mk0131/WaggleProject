@@ -112,7 +112,7 @@ nav ul li a:hover, nav ul li a:visited:hover {
 
 </style>
 <script type="text/javascript">
-  var naver_id_login = new naver_id_login("xDkhcqAWvvHzWB6YfVIG", "http://localhost:8787/home");
+  var naver_id_login = new naver_id_login("JGPtZuIPhsS22_zSl6eT", "http://localhost:8787/home");
   // 접근 토큰 값 출력
   console.log(naver_id_login.oauthParams.access_token);
   // 네이버 사용자 프로필 조회

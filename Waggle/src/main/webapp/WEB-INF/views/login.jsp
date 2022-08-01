@@ -567,7 +567,6 @@ input {
 								} else {
 									checkBox.attr("disabled", false);
 									code = data;
-									console.log(code);
 									$('.find_input_re_3').css("display","none");
 								}
 								
@@ -678,7 +677,6 @@ input {
 								} else {
 									checkBox.attr("disabled", false);
 									code = data;
-									console.log(code);
 									$('.find_input_re_3').css("display","none");
 								}
 								
@@ -715,7 +713,7 @@ input {
                 	<div id="naver_id_login"></div>
 						<!-- //네이버 로그인 버튼 노출 영역 -->
 					<script type="text/javascript">
-						var naver_id_login = new naver_id_login("xDkhcqAWvvHzWB6YfVIG", "http://localhost:8787/home");
+						var naver_id_login = new naver_id_login("JGPtZuIPhsS22_zSl6eT", "http://localhost:8787/home");
 						var state = naver_id_login.getUniqState();
 						naver_id_login.setButton("green", 4,60);
 						naver_id_login.setDomain("http://localhost:8787");
@@ -1236,7 +1234,6 @@ input {
 				if(data != 'fail'){
 					checkBox.attr("disabled", false);
 					code = data;
-					console.log(code);
 					$('.email_input_re_3').css("display","none");
 				} else {
 					$('.email_input_re_3').css("display","inline-block");
