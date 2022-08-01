@@ -56,7 +56,7 @@ public class RegistController {
 			Random random = new Random(); // 인증번호 난수 생성
 			int checkNum = random.nextInt(888888) + 111111;
 
-			String setFrom = "waggle_waggle@naver.com";
+			String setFrom = "mulcamfinal@naver.com";
 			String toMail = user_Email;
 			String title = "Waggle 회원가입 인증 이메일 입니다.";
 			String content = "홈페이지를 방문해주셔서 감사합니다." + "<br><br>" + "인증 번호는 " + checkNum + "입니다." + "<br>"
@@ -132,7 +132,7 @@ public class RegistController {
 				Random random = new Random(); // 인증번호 난수 생성
 				int checkNum = random.nextInt(888888) + 111111;
 
-				String setFrom = "waggle_waggle@naver.com";
+				String setFrom = "mulcamfinal@naver.com";
 				String toMail = user_Email;
 				String title = "Waggle 인증번호 이메일 입니다.";
 				String content = "홈페이지를 방문해주셔서 감사합니다." + "<br><br>" + "인증 번호는 " + checkNum + "입니다." + "<br>"
@@ -173,7 +173,7 @@ public class RegistController {
 				
 				String checkNum = user.getUser_Pw();
 
-				String setFrom = "waggle_waggle@naver.com";
+				String setFrom = "mulcamfinal@naver.com";
 				String toMail = user_Email;
 				String title = "Waggle 비밀번호 이메일 입니다.";
 				String content = "홈페이지를 방문해주셔서 감사합니다." + "<br><br>" + "비밀번호 는 " + checkNum + "입니다." + "<br>";
@@ -191,7 +191,7 @@ public class RegistController {
 					e.printStackTrace();
 				}
 
-				return "redirect:/login?user_Pw=" +checkNum; // 이메일 해킹당해서 메일을 보낼 수 없음 대신 url 에 비밀번호 출력
+				return "redirect:/login"; 
 			}
 	
 	@RequestMapping(value = "/findId", method = RequestMethod.GET) // 이메일로 아이디 찾기
@@ -201,7 +201,7 @@ public class RegistController {
 				
 				String checkNum = user.getUser_Id();
 
-				String setFrom = "waggle_waggle@naver.com";
+				String setFrom = "mulcamfinal@naver.com";
 				String toMail = user_Email;
 				String title = "Waggle 아이디 이메일 입니다.";
 				String content = "홈페이지를 방문해주셔서 감사합니다." + "<br><br>" + "아이디 는 " + checkNum + "입니다." + "<br>";
@@ -219,6 +219,6 @@ public class RegistController {
 					e.printStackTrace();
 				}
 
-				return "redirect:/login?user_Id=" +checkNum; // 이메일 해킹당해서 메일을 보낼 수 없음 대신 url 에 아이디 출력
+				return "redirect:/login"; 
 			}
 }

@@ -32,5 +32,8 @@ build/
 ### VS Code ###
 .vscode/
 
-### ###
-spring.profiles.include=my
+### application.propertie ###
+application-my.properties
+
+### payment.js ###
+payment.js

@@ -567,7 +567,6 @@ input {
 								} else {
 									checkBox.attr("disabled", false);
 									code = data;
-									console.log(code);
 									$('.find_input_re_3').css("display","none");
 								}
 								
@@ -678,7 +677,6 @@ input {
 								} else {
 									checkBox.attr("disabled", false);
 									code = data;
-									console.log(code);
 									$('.find_input_re_3').css("display","none");
 								}
 								
@@ -715,7 +713,7 @@ input {
                 	<div id="naver_id_login"></div>
 						<!-- //네이버 로그인 버튼 노출 영역 -->
 					<script type="text/javascript">
-						var naver_id_login = new naver_id_login("xDkhcqAWvvHzWB6YfVIG", "http://localhost:8787/home");
+						var naver_id_login = new naver_id_login("JGPtZuIPhsS22_zSl6eT", "http://localhost:8787/home");
 						var state = naver_id_login.getUniqState();
 						naver_id_login.setButton("green", 4,60);
 						naver_id_login.setDomain("http://localhost:8787");
@@ -752,9 +750,15 @@ input {
 					<form id="regist_join" method="post">
 					 
 					<div>
+					<div style="text-align:center;">
+					<br>
+						<a href="#" data-toggle="modal" data-target="#myModal"><b>[필수] 이용약관 보기</b></a>
+						<input type="checkbox" id="terms" style="width: 50px; height: 15px;" onclick="return false">
+						<span class="final_terms_ck">이용약관에 동의해주세요.</span>
+					</div>
 						<br>
 						<b style="text-align: left;">아이디</b> <br> 
-						<input type="text" id="id_input2" name="user_Id" placeholder="  아이디" style="width: 400px;">
+						<input type="text" id="id_input2" name="user_Id" placeholder=" 5~20자의 영문,숫자,특수문자(._-)만 사용 가능합니다." style="width: 400px;">
 						<input type="button" id="id_chk" value="중복 확인" style="width: 80px;">
 						<br>
 						<span class="id_input_re_1">사용 가능한 아이디입니다.</span>
@@ -764,7 +768,7 @@ input {
 					</div>
 					<div>
 						<b style="text-align: left;">비밀번호</b> 
-						<input type="password" id="pw_input" placeholder="  비밀번호"> <br>
+						<input type="password" id="pw_input" placeholder="  8~16자 영문,숫자,특수문자를 최소 한가지씩 사용하세요."> <br>
 						<span class="final_pw_ck">비밀번호를 입력해주세요.</span>
 						<span class="pw_form_check"></span> 
 						<br>
@@ -791,7 +795,7 @@ input {
 					</div>
 					<div>
 						<b style="text-align: left;">닉네임</b> <br> 
-						<input type="text" id="nm_input" name="user_Nm" placeholder="  닉네임" style="width: 400px;">
+						<input type="text" id="nm_input" name="user_Nm" placeholder="  2~16자의 영어,숫자,한글만 사용 가능합니다." style="width: 400px;">
 						<input type="button" id="nm_chk" value="중복 확인" style="width: 80px;">
 						<br>
 						<span class="nm_input_re_1">사용 가능한 닉네임입니니다.</span>
@@ -801,7 +805,7 @@ input {
 					</div>
 					<div>
 						<b style="text-align: left;">나이</b> <br> 
-						<input type="text" id="age_input" name="user_Age" placeholder="  나이" style="width: 500px;">
+						<input type="text" id="age_input" name="user_Age" placeholder="  숫자만 입력해 주세요." style="width: 500px;">
 						<br>
 						<span class="age_form_check"></span>
 					</div>
@@ -829,9 +833,6 @@ input {
 					</div>
 					<hr>
 					<div class="text-center">
-						<a href="#" data-toggle="modal" data-target="#myModal"><b>[필수] 이용약관 보기</b></a>
-						<input type="checkbox" id="terms" style="width: 50px; height: 15px;" onclick="return false">
-						<span class="final_terms_ck">이용약관에 동의해주세요.</span>
 						<div class="modal fade" id="myModal" data-backdrop="static"
 							data-keyboard="false">
 							<div class="modal-dialog modal-xl modal-dialog-centered">
@@ -1100,9 +1101,7 @@ input {
 						<br><br><br><br>
 						 <input type="button" value="회원가입" id="regist_com" 
 							style="width: 120px;"> 
-							<input type="button" value="회원가입 취소"
-							style="width: 120px;"
-							onclick="location.href='/login'">
+							
 					</div>
 					</form>
 				</div>
@@ -1235,7 +1234,6 @@ input {
 				if(data != 'fail'){
 					checkBox.attr("disabled", false);
 					code = data;
-					console.log(code);
 					$('.email_input_re_3').css("display","none");
 				} else {
 					$('.email_input_re_3').css("display","inline-block");
