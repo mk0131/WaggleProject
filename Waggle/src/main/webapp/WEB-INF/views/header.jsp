@@ -125,7 +125,12 @@ nav ul li a:hover, nav ul li a:visited:hover {
 			<div class="nav-container">
 				<nav>
 					<ul class="nav-list">
+						<c:if test="${user_Code != null }">
 						<li><a href="/map/user">지도</a></li>
+						</c:if>
+						<c:if test="${user_Code == null }">
+						<li><a href="/login">지도</a></li>
+						</c:if>
 						<li><a href="/board/list">꿀단지</a></li>
 						<c:if test="${user_Code == null }">
 						<li><a href="/login">마이페이지</a></li>

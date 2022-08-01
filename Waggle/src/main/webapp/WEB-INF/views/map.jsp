@@ -451,6 +451,10 @@ div {
 		    	for(var i=0; i<markers2.length; i++){
 		    		markers2[i].setMap(null);
 		    	}
+		    }else{
+		    	for(var i=0; i<markers2.length; i++){
+		    		markers2[i].setMap(map);
+		    	}
 		    }
 		});
 		
