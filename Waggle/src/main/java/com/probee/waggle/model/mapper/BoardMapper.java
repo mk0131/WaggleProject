@@ -118,4 +118,8 @@ public interface BoardMapper {
 	@Update(" update Result set res_WDate=NOW() where res_Code=#{res_Code} ")
 	public int updateResultWDate(int res_Code);
 	
+	// 유저코드로 사용자 꿀 수확량 수정
+	@Update(" update Users set user_Grade=#{user_Grade} where user_Code=#{user_Code} ")
+	public int updateUserGrade(int user_Code, int user_Grade);
+	
 }
