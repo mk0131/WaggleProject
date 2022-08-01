@@ -267,7 +267,7 @@ text-align: center;
 <%@ include file="./footer.jsp" %>
 <script type="text/javascript">
  var date2 = null;
-
+ var size = 0;
  // 채팅내역 불러오기
  function ChatHistory(){
 		let num = ${param.room_No};
@@ -278,8 +278,13 @@ text-align: center;
 		url : "/chat/chatting",
 		data : data,
 		success : function(data){
-			$("#scroll").empty(); 
-			
+			$("#scroll").empty();
+			 console.log(size);
+			 console.log(data.length);
+			 if(data.length > size){
+				 down();
+			 }
+			 size = data.length;
 		     $.each(data, function(i){
 		    	
 		    	 var time = new Date(data[i].chat_Date).getHours();
@@ -319,7 +324,7 @@ text-align: center;
 		    	 +'<div id="my_1"><div id="my_2" >'+data[i].chat_Chk+'&nbsp;&nbsp;</div>'
 		    	 +'<div id="my_3" >'+data[i].chat_Date+'&nbsp;&nbsp;</div></div>'
 		    	 +'<div id="my_4" >&nbsp;'+data[i].chat_Content+'&nbsp;</div>'
-		    	 +'&nbsp;&nbsp;&nbsp;'+data[i].chat_UCode+' &nbsp;</div>');
+		    	 +'&nbsp;</div>');
 		    	 } else {
 		    	 $("#scroll").append('<div id = "your_chat" >'
 		    	 +'&nbsp; '+data[i].chat_UCode+'&nbsp;&nbsp;&nbsp;<div id="your_1" >&nbsp;'+data[i].chat_Content+'&nbsp;</div>'
@@ -349,7 +354,7 @@ function down(){
  // 채팅 입력하기
  $("#send").on("click",function(){
 	  down();
-	  let con = $("#chat_Content").val().replaceAll(/(\n|\r\n)/g, "<br>&nbsp;");
+	  let con = $("#chat_Content").val().replaceAll(/(\n|\r\n)/g, "<br>&nbsp;"); // 엔터키 인식
 	  let num = ${param.room_No};
 	  let code = ${user_Code};
 	  let data = {chat_Num : num , chat_Content : con, chat_UCode : code };
@@ -370,13 +375,6 @@ function down(){
  $(function() {
 
 	 timer = setInterval( function () {
-		 var scval = $("#scroll").scrollTop(); // 현재 스크롤바 위치
-		 var domhg = $("#scroll").innerHeight(); // 화면의 길이
-		 var end = $("#scroll").prop('scrollHeight'); // 스크롤바 끝
-		 
-		 if(scval + domhg +300 >= end){
-			 down();
-		 } 
 		 
 	    //ChatHistory();
 	     }, 1000);

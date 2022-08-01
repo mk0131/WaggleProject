@@ -384,6 +384,11 @@ public class BoardController {
 			System.out.println("꿀벌 평가 DB 저장 실패...");
 			return "redirect:/board/detail?req_No="+req_No;
 		}
+		// 수행자 Users DB에서 user_Grade 업데이트
+		int res_UCode = res_dto.getRes_UCode();								// 수행자 코드
+		int grade = boardService.selectUser(res_UCode).getUser_Grade();		// 수행자 현재 등급
+		boardService.updateUserGrade(res_UCode, grade+tmp1+tmp2+tmp3);
+		
 		// 확인중 -> 완료로 업데이트
 		boardService.complete(req_No);
 		
@@ -392,8 +397,8 @@ public class BoardController {
 		
 		// 꿀벌 포인트 업데이트
 		RequestDto2 req_dto = boardService.selectRequest(req_No);
-		pointService.insertPay(req_dto.getReq_Point(), res_dto.getRes_UCode(), "획득");
-		int user_point = pointService.selectUserPoint(res_dto.getRes_UCode());
+		pointService.insertPay(req_dto.getReq_Point(), res_UCode, "획득");
+		int user_point = pointService.selectUserPoint(res_UCode);
 		pointService.updateUserPoint(user_point + req_dto.getReq_Point(), res_dto.getRes_UCode());
 		
 		return "redirect:/board/detail?req_No="+req_No;
@@ -418,11 +423,27 @@ public class BoardController {
 		model.addAttribute("user_rating", gson.toJson(userRating_dto));
 		model.addAttribute("fi_list", fi_list);
 		
+		// 이전 평가 점수 보내주기
+		List<String> tmplist2 = new ArrayList<String>();
+		tmplist2.add(userRating_dto.getUr_Attr1());
+		tmplist2.add(userRating_dto.getUr_Attr2());
+		tmplist2.add(userRating_dto.getUr_Attr3());
+		int sum_val = 0;
+		for(String val: tmplist2) {
+			if(val.equals("좋아요")) {
+				sum_val += 1;
+			} else if(val.equals("별로에요")) {
+				sum_val -= 1;
+			}
+		}
+		
+		model.addAttribute("sum_val", sum_val);
+		
 		return "reRatingForm";
 	}
 	
 	@PostMapping("/rerating")
-	public String reratingBee(int req_No, UserRatingDto userRating_dto) {
+	public String reratingBee(int req_No, UserRatingDto userRating_dto, int sum_val) {
 		ResultDto res_dto = boardService.selectResult(req_No);
 		userRating_dto.setUr_Code(res_dto.getRes_Code());
 		
@@ -439,6 +460,11 @@ public class BoardController {
 		
 		int tmp3 = Integer.parseInt(userRating_dto.getUr_Attr3());
 		userRating_dto.setUr_Attr3(indexArray.get(tmp3+1));
+		
+		// 수행자 Users DB에서 user_Grade 업데이트
+		int res_UCode = res_dto.getRes_UCode();								// 수행자 코드
+		int grade = boardService.selectUser(res_UCode).getUser_Grade();		// 수행자 현재 등급
+		boardService.updateUserGrade(res_UCode, grade-sum_val+tmp1+tmp2+tmp3);
 
 		boardService.insertReRatingBee(userRating_dto);
 		
