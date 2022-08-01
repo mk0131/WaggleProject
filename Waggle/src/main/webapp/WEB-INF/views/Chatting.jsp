@@ -57,7 +57,7 @@
  text-align: left;
  float: right;
  display: flex;
- align-items: center;
+ align-items: end;
  padding: 2px;
 }
 
@@ -229,6 +229,27 @@ display: inline-block;
 text-align: center;
 }
 
+#updown{
+ position: absolute;
+ left: 1260px;
+ top: 740px;
+}
+
+#up{
+ border: 1px solid;
+ border-bottom: none;
+}
+
+#down{
+ border: 1px solid;
+}
+
+#your_img{
+ width: 50px;
+ height: 50px;
+ border-radius: 75px;
+}
+
 </style>
 <body>
 <%@ include file="./header.jsp" %>
@@ -249,6 +270,9 @@ text-align: center;
 	  <c:if test="${user_Code == param.chat_UCode }"> 
 	   <div id="scroll" >
 	 </div>
+	 <div id="updown">
+	 <div id="up">△</div><div id="down">▽</div>
+	 </div>
 	 <div id="input" >
 	 <form onsubmit="return false">
 	 <div  id="area">
@@ -267,7 +291,9 @@ text-align: center;
 <%@ include file="./footer.jsp" %>
 <script type="text/javascript">
  var date2 = null;
- var size = 0;
+ var size = 0; // 현재 채팅 개수
+ var scroll = 0; // 전체 채팅 개수
+ var length = 0; // 불러올 채팅 숫자
  // 채팅내역 불러오기
  function ChatHistory(){
 		let num = ${param.room_No};
@@ -278,17 +304,9 @@ text-align: center;
 		url : "/chat/chatting",
 		data : data,
 		success : function(data){
-			$("#scroll").empty();
-			
-			 console.log(size);
-			 console.log(data.length);
+			 scroll = data.length;
 			 
-			 if(data.length > size){
-				 down();
-			 }
-			 size = data.length;
-			 
-		     $.each(data, function(i){
+		     for(let i = length; i<data.length; i++){ // 채팅 내용이 늘어나면 그만큼 추가
 		    	
 		    	 var time = new Date(data[i].chat_Date).getHours();
 		    	 var date = new Date(data[i].chat_Date).getDay();
@@ -329,16 +347,15 @@ text-align: center;
 		    	 +'<div id="my_4" >&nbsp;'+data[i].chat_Content+'&nbsp;</div>'
 		    	 +'&nbsp;</div>');
 		    	 } else {
-		    	 $("#scroll").append('<div id = "your_chat" >'
-		    	 +'&nbsp; '+data[i].chat_UCode+'&nbsp;&nbsp;&nbsp;<div id="your_1" >&nbsp;'+data[i].chat_Content+'&nbsp;</div>'
+		    	 $("#scroll").append('<div id = "your_chat" >&nbsp;<img id="your_img" src="'+data[i].fi_Nm+'" onerror=this.src="/images/importToJsp/profile_default.jpg">'
+		    	 +'&nbsp;<div><div id = "your_code"> '+data[i].user_Nm+'</div>&nbsp;&nbsp;&nbsp;<div id="your_1" >&nbsp;'+data[i].chat_Content+'&nbsp;</div></div>'
 		    	 +'<div id="your_2">'
 		    	 +'<div id="your_3" >&nbsp;'+data[i].chat_Date+'</div></div>'
 		    	 +'</div>');
 		    	 }
 		    	 
-		     });
-		     
-			 
+		     };
+		      length = data.length; // 채팅내역 길이 저장
 		 
 		} 
 			
@@ -346,14 +363,22 @@ text-align: center;
 }
 // 시작시 불러오기
  ChatHistory();
+
 //스크롤 맨밑으로
 window.onload = function (){
-	down();
+		down();
 };
 function down(){
 	$("#scroll").scrollTop($("#scroll")[0].scrollHeight); 
 }
-	  
+
+$("#up").on("click",function(){
+	$("#scroll").animate({scrollTop: 0},400); // 스크롤 맨위로
+})
+$("#down").on("click",function(){
+	$("#scroll").animate({scrollTop: $("#scroll")[0].scrollHeight},400); // 스크롤 맨 아래로
+})
+ 
  // 채팅 입력하기
  $("#send").on("click",function(){
 	  down();
@@ -368,7 +393,6 @@ function down(){
 			success : function(result){
 				if(result != 'fail'){
 					$("#chat_Content").val(null);
-					ChatHistory();
 				} else {
 					
 				}
@@ -377,10 +401,22 @@ function down(){
  });
   // 스크롤바 위치 구하기 & 채팅내역 1초마다 불러오기
  $(function() {
-
+	 
 	 timer = setInterval( function () {
 		 
-	    //ChatHistory();
+		 var scval = $("#scroll").scrollTop(); // 현재 스크롤바 위치
+		 var domhg = $("#scroll").innerHeight(); // 화면의 길이
+		 var end = $("#scroll").prop('scrollHeight'); // 스크롤바 끝
+		 
+	    ChatHistory();
+	    
+	    if(scroll > size){ // 대화 내용이 늘어나면 
+	    	
+	    	if(scval + domhg +300 >= end){ // 현재 스크롤이 밑쪽에 있으면
+				 down();
+			 } 
+	    	size = scroll;
+	    }
 	     }, 1000);
 
 	 });

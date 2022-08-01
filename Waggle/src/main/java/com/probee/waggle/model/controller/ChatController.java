@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.probee.waggle.model.dto.ChatContentDto;
+import com.probee.waggle.model.dto.ChatContentDto2;
 import com.probee.waggle.model.dto.ChatRoomDto;
 import com.probee.waggle.model.service.ChatService;
 
@@ -54,9 +55,9 @@ public class ChatController {
 	
 	@PostMapping("/chatting")
 	@ResponseBody
-	public List<ChatContentDto> Chat(int room_No , int chat_UCode) {
+	public List<ChatContentDto2> Chat(int room_No , int chat_UCode) {
 		
-		List<ChatContentDto> list = chatService.ChatHistory(room_No); // 해당 채팅방의 채팅내역 불러오기
+		List<ChatContentDto2> list = chatService.ChatHistory(room_No); // 해당 채팅방의 채팅내역 불러오기
 		
 		return list;
 	}

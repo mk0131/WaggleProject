@@ -152,7 +152,6 @@ button:active {
 			<thead>
 				<tr>
 					<th scope="col" style="width: 200px; "></th>
-					<th scope="col" style="width: 600px; "></th>
 					
 				</tr>
 			</thead>
@@ -167,9 +166,6 @@ button:active {
 							<form>
 								<tr >
 									
-									<td>
-										<p>생성일자 : ${dto.room_Birth }</p>
-									</td>
 									<td onclick="location.href='/chat/chat?room_No=${dto.room_No}&chat_UCode=${user_Code }'" style="text-align: left; border-radius: 8px; border: 1px solid;" ><P> 방번호 : ${dto.room_No }</P> 
 									<c:if test="${dto.room_UCode1  == user_Code}"><p >상대방 코드 : ${dto.room_UCode2 }</p></c:if>
 									<c:if test="${dto.room_UCode1  != user_Code}"><p >상대방 코드 : ${dto.room_UCode1 }</p></c:if>

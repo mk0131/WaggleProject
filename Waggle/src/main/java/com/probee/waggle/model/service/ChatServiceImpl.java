@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.probee.waggle.model.dto.ChatContentDto;
+import com.probee.waggle.model.dto.ChatContentDto2;
 import com.probee.waggle.model.dto.ChatRoomDto;
 import com.probee.waggle.model.mapper.ChatMapper;
 
@@ -31,7 +32,7 @@ public class ChatServiceImpl implements ChatService{
 	}
 
 	@Override
-	public List<ChatContentDto> ChatHistory(int room_No) {
+	public List<ChatContentDto2> ChatHistory(int room_No) {
 		return chatMapper.ChatHistory(room_No);
 	}
 
