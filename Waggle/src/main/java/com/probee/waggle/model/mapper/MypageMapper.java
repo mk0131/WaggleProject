@@ -13,6 +13,7 @@ import com.probee.waggle.model.dto.MypageFinishlistDto;
 import com.probee.waggle.model.dto.MypageOtherDto;
 import com.probee.waggle.model.dto.MypageUsageDto;
 import com.probee.waggle.model.dto.UserAddressDto;
+import com.probee.waggle.model.dto.UsersDto;
 
 @Mapper
 public interface MypageMapper {
@@ -97,5 +98,8 @@ public interface MypageMapper {
 	
 	@Select("select * from file where fi_code = #{fi_code}")
 	public FileDto SelectConfirmFile(int fi_code);
+	
+	@Select("select * from users where user_Code = #{ucode}")
+	public UsersDto SelectMyInfo(int ucode);
 	
 }

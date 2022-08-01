@@ -590,34 +590,65 @@ textarea {
 			<div class="middle-profile">
 				<div class="profile" style="text-align: center; display: flex; justify-content: center;">
 					<div class="profile-left" style="display: inline-block">
-						<c:if test = "${user_Pro == 0}">
+						<c:if test = "${dto.user_Pro == 0}">
 						<img src="/images/importToJsp/profile_default.jpg"
 							style="width: 100px; height: 100px">
 						</c:if>
-						<c:if test = "${user_Pro != 0 }">
+						<c:if test = "${dto.user_Pro != 0 }">
 						<img src="${Pro_fi_Nm }" style="width:200px; height: 200px; border-radius:200px">
 						</c:if>
-						<div style="font-weight: bold; font-size: 20pt">${user_Point } P</div>
+						<div style="font-weight: bold; font-size: 20pt">${dto.user_Point } P</div>
 						<div>
 							<a href="/point/use" style="color: #2d7eac">포인트 충전하기</a>
 						</div>
 					</div>
 					<div class="profile-right"
 						style="display: inline-block; margin-left: 40px; text-align: left">
-						<c:if test="${user_Code != null }">
+						<c:if test="${dto.user_Code != null }">
 						<div>
 							<span
-								style="font-size: 20pt; margin-bottom: 20px; font-weight: bold">${user_Nm}
+								style="font-size: 20pt; margin-bottom: 20px; font-weight: bold">${dto.user_Nm}
 								님</span>
 						</div>
-						<div style="font-size: 14pt">나이: ${user_Age}</div>
-						<c:if test="${user_Gender == 'M'}">
+						<c:choose>
+							<c:when test="${dto.user_Age >= 10 and dto.user_Age < 20}">
+								<div style="font-size: 14pt">나이: 10대</div>
+							</c:when>
+							<c:when test="${dto.user_Age >= 20 and dto.user_Age < 30}">
+								<div style="font-size: 14pt">나이: 20대</div>
+							</c:when>
+							<c:when test="${dto.user_Age >= 30 and dto.user_Age < 40}">
+								<div style="font-size: 14pt">나이: 30대</div>
+							</c:when>
+							<c:when test="${dto.user_Age >= 40 and dto.user_Age < 50}">
+								<div style="font-size: 14pt">나이: 40대</div>
+							</c:when>
+							<c:when test="${dto.user_Age >= 50 and dto.user_Age < 60}">
+								<div style="font-size: 14pt">나이: 50대</div>
+							</c:when>
+							<c:when test="${dto.user_Age >= 60 and dto.user_Age < 70}">
+								<div style="font-size: 14pt">나이: 60대</div>
+							</c:when>
+							<c:when test="${dto.user_Age >= 70 and dto.user_Age < 80}">
+								<div style="font-size: 14pt">나이: 70대</div>
+							</c:when>
+							<c:when test="${dto.user_Age >= 80 and dto.user_Age < 90}">
+								<div style="font-size: 14pt">나이: 80대</div>
+							</c:when>
+							<c:when test="${dto.user_Age >= 90 and dto.user_Age < 100}">
+								<div style="font-size: 14pt">나이: 90대</div>
+							</c:when>
+							<c:otherwise>
+								<div style="font-size: 14pt">나이: <span style="font-size:11pt">'회원정보 수정'에서 나이를 입력해주세요.</span></div>
+							</c:otherwise>
+						</c:choose>
+						<c:if test="${dto.user_Gender == 'M'}">
 						<div style="font-size: 14pt; margin-bottom: 60px">성별: 남</div>
 						</c:if>
-						<c:if test="${user_Gender == 'F'}">
+						<c:if test="${dto.user_Gender == 'F'}">
 						<div style="font-size: 14pt; margin-bottom: 60px">성별: 여</div>
 						</c:if>
-						<div style="font-size: 14pt; font-weight: bold">내가 딴 꿀 수확량: ${user_Grade}</div>
+						<div style="font-size: 14pt; font-weight: bold">내가 딴 꿀 수확량: ${dto.user_Grade}</div>
 							<div id="bar_container">
 								<div id="progress_bar">
 									<div id="progress_percentage" data-percentage="10">
@@ -684,12 +715,12 @@ textarea {
 					</div>
 					<div class="desc-content-aboutme">
 						<div class="desc-content">
-							<c:if test="${ user_Intro == null}">
+							<c:if test="${ dto.user_Intro == null}">
 								<form action="/mypage/descInsert" method="POST">
 								<input type="hidden" name="code" value="${user_Code }">
 								<div class="styled-input">
 									<textarea required name="description"></textarea>
-									<label>자기소개를 입력해주세요.</label>
+									<label>자기소개 예시: 제 이름은 OOO입니다. 현재까지 Waggle에서 총 ?건의 수행을 완료하였고 모두 좋은 꿀벌 평가를 받았습니다! 요구하는 사항을 꼼꼼하게 반영해서 신속하게 수행하겠습니다 :)</label>
 								</div>
 								<div></div>
 								<div class="desc-content-button">
@@ -697,28 +728,33 @@ textarea {
 								</div>
 								</form>	
 							</c:if>
-							<c:if test="${ user_Intro != null }">
-								<form action="/mypage/descEdit" method="POST">
-								<input type="hidden" name="code" value="${user_Code}">
+							<c:if test="${ dto.user_Intro != null }">
 								<div class="desc-intro" data-behaviour="search-on-list" style="text-align:initial">
 									<span class="counter"	data-search-on-list="counter">
-										${user_Intro}
+										${dto.user_Intro}
 									</span>
 								</div>
 								<div class="styled-input" id="desc-edit-input" style="display:none">
-										<textarea id="desc-text" required name="description">${user_Intro}</textarea>
-										<label>${user_Intro }</label>
+										<textarea id="desc-text" required name="description">${dto.user_Intro}</textarea>
+										<label>${dto.user_Intro }</label>
 								</div>
 								<div class="desc-content-button">
+									<form action="/mypage/descEdit" method="POST">
+									<input type="hidden" name="code" value="${user_Code}">
+									<input type="submit" class="button" id="desc-edit-finish" value="수정 완료" style="display: inline-block; margin-top:20px; display:none; padding:5px; font-size:15px; font-weight:bold">
+									</form>
+									<form action="/mypage/descEdit" method="POST">
+									<input type="hidden" name="code" value="${user_Code}">
 									<div class="button" id="desc-edit" style="display: inline-block; width: 150px; margin-top:20px">
 										<p style="margin: 5px">자기소개 수정하기</p>
 									</div>
+									</form>
 									<input type="submit" class="button" id="desc-edit-finish" value="수정 완료" style="display: inline-block; margin-top:20px; display:none; padding:5px; font-size:15px; font-weight:bold">
 									<div class="button" id="desc-edit-cancel" style="display: inline-block; margin-top:20px; display:none">
 										<p style="margin: 5px">수정 취소</p>
 									</div>
 								</div>
-								</form>
+								
 							</c:if>
 						</div>
 					</div>
