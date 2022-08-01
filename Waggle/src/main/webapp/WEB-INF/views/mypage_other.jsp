@@ -400,11 +400,20 @@ textarea {
 					</div>
 					<div class="desc-content-aboutme">
 						<div class="desc-content">
+							<c:if test="${ dto.user_Intro == null}">
+								<div class="desc-intro" data-behaviour="search-on-list" style="text-align:initial">
+									<span class="counter"	data-search-on-list="counter">
+										${dto.user_Nm} 님이 작성한 자기소개가 없습니다.
+									</span>
+								</div>
+							</c:if>
+							<c:if test="${ dto.user_Intro != null}">
 								<div class="desc-intro" data-behaviour="search-on-list" style="text-align:initial">
 									<span class="counter"	data-search-on-list="counter">
 										${dto.user_Intro}
 									</span>
 								</div>
+							</c:if>
 						</div>
 					</div>
 					<div></div>

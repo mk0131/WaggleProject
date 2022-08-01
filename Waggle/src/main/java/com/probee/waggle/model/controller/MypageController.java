@@ -23,6 +23,7 @@ import com.probee.waggle.model.dto.MypageFinishlistDto;
 import com.probee.waggle.model.dto.MypageOtherDto;
 import com.probee.waggle.model.dto.MypageUsageDto;
 import com.probee.waggle.model.dto.UserAddressDto;
+import com.probee.waggle.model.dto.UsersDto;
 import com.probee.waggle.model.service.MypageService;
 import com.probee.waggle.model.service.RegistService;
 
@@ -83,6 +84,7 @@ public class MypageController {
 		int ucode = (int)session.getAttribute("user_Code");
 		int user_Pro = (int)session.getAttribute("user_Pro");
 		
+		UsersDto myinfo = mypageService.SelectMyInfo(ucode);
 		MypageUsageDto reqCancel = mypageService.reqCancel(ucode);
 		MypageUsageDto reqTotal = mypageService.reqTotal(ucode);
 		MypageUsageDto resCancel = mypageService.resCancel(ucode);
@@ -118,7 +120,8 @@ public class MypageController {
 		}else {
 			resRatio = 0;
 		}
-
+		
+		model.addAttribute("dto", myinfo);
 		model.addAttribute("reqCancel", reqCancel.getReqCancel());
 		model.addAttribute("reqTotal", reqTotal.getReqTotal());
 		model.addAttribute("resCancel", resCancel.getResCancel());
@@ -263,10 +266,6 @@ public class MypageController {
 	@RequestMapping(value = "/descEdit", method = RequestMethod.POST)
 	public String selectUserInfo(HttpServletRequest request, int code, String description) {
 
-		// 기존에 자기소개 저장되어있는거 삭제
-		HttpSession session = request.getSession();
-		session.removeAttribute("user_Intro");
-
 		// 자기소개 수정
 		int res = 0;
 		res = mypageService.DescUpdate(description, code);
@@ -276,14 +275,26 @@ public class MypageController {
 			System.out.println("수정 실패");
 		}
 
-		// 수정된 자기소개 세션에 다시 저장
-		String editDesc = mypageService.SelectDesc(code);
-		session.setAttribute("user_Intro", editDesc);
-		session.setMaxInactiveInterval(-1);
-
 		return "redirect:/mypage/me";
 	}
-
+	
+	/*
+	@RequestMapping(value = "/descDelete", method = RequestMethod.POST)
+	public String selectUserInfo(HttpServletRequest request, int ucode) {
+		
+		// 자기소개 수정
+		int res = 0;
+		res = mypageService.DescDelete(ucode);
+		if (res > 0) {
+			System.out.println("수정 성공");
+		} else {
+			System.out.println("수정 실패");
+		}
+		
+		return "redirect:/mypage/me";
+	}
+*/
+	
 	// 마이페이지 완료된리스트 컨트롤러
 	@RequestMapping(value = "/reqroom", method = RequestMethod.POST)
 	@ResponseBody
