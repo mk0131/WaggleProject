@@ -43,6 +43,7 @@
 	border: 3px solid;
 	margin-left: 40px;
 	float: right;
+	color: #2e2e2e;
 }
 
 .button p {
@@ -156,6 +157,7 @@ textarea {
 	-webkit-transition: all 0.25s ease;
 	transition: all 0.25s ease;
 	pointer-events: none;
+	text-align:left;
 }
 
 
@@ -720,7 +722,8 @@ textarea {
 								<input type="hidden" name="code" value="${user_Code }">
 								<div class="styled-input">
 									<textarea required name="description"></textarea>
-									<label>자기소개 예시: 제 이름은 OOO입니다. 현재까지 Waggle에서 총 ?건의 수행을 완료하였고 모두 좋은 꿀벌 평가를 받았습니다! 요구하는 사항을 꼼꼼하게 반영해서 신속하게 수행하겠습니다 :)</label>
+									<label>자기소개 예시:<br>
+									 제 이름은 OOO입니다. 현재까지 Waggle에서 총 ?건의 수행을 완료하였고 모두 좋은 꿀벌 평가를 받았습니다!<br>요구하는 사항을 꼼꼼하게 반영해서 신속하게 수행하겠습니다 :)</label>
 								</div>
 								<div></div>
 								<div class="desc-content-button">
@@ -729,32 +732,28 @@ textarea {
 								</form>	
 							</c:if>
 							<c:if test="${ dto.user_Intro != null }">
+								<form name="form" method="POST">
 								<div class="desc-intro" data-behaviour="search-on-list" style="text-align:initial">
 									<span class="counter"	data-search-on-list="counter">
 										${dto.user_Intro}
 									</span>
 								</div>
 								<div class="styled-input" id="desc-edit-input" style="display:none">
-										<textarea id="desc-text" required name="description">${dto.user_Intro}</textarea>
+										<textarea id="desc-text" required name="description"><div style="white-space:pre;"><c:out value="${dto.user_Intro}" /></div></textarea>
 										<label>${dto.user_Intro }</label>
 								</div>
 								<div class="desc-content-button">
-									<form action="/mypage/descEdit" method="POST">
-									<input type="hidden" name="code" value="${user_Code}">
-									<input type="submit" class="button" id="desc-edit-finish" value="수정 완료" style="display: inline-block; margin-top:20px; display:none; padding:5px; font-size:15px; font-weight:bold">
-									</form>
-									<form action="/mypage/descEdit" method="POST">
 									<input type="hidden" name="code" value="${user_Code}">
 									<div class="button" id="desc-edit" style="display: inline-block; width: 150px; margin-top:20px">
 										<p style="margin: 5px">자기소개 수정하기</p>
 									</div>
-									</form>
-									<input type="submit" class="button" id="desc-edit-finish" value="수정 완료" style="display: inline-block; margin-top:20px; display:none; padding:5px; font-size:15px; font-weight:bold">
+									<input type="submit" class="button" value="자기소개 삭제" onclick="javascript: form.action='/mypage/descDelete';" style="display: inline-block; margin-top:20px; padding:5px; font-size:15px; font-weight:bold">
+									<input type="submit" class="button" id="desc-edit-finish" value="수정 완료" onclick="javascript: form.action='/mypage/descEdit';" style="display: inline-block; margin-top:20px; display:none; padding:5px; font-size:15px; font-weight:bold">
 									<div class="button" id="desc-edit-cancel" style="display: inline-block; margin-top:20px; display:none">
 										<p style="margin: 5px">수정 취소</p>
 									</div>
 								</div>
-								
+								</form>
 							</c:if>
 						</div>
 					</div>

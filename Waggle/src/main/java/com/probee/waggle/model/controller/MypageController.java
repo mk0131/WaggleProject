@@ -278,22 +278,22 @@ public class MypageController {
 		return "redirect:/mypage/me";
 	}
 	
-	/*
+	
 	@RequestMapping(value = "/descDelete", method = RequestMethod.POST)
-	public String selectUserInfo(HttpServletRequest request, int ucode) {
+	public String selectUserInfo(HttpServletRequest request, int code) {
 		
 		// 자기소개 수정
 		int res = 0;
-		res = mypageService.DescDelete(ucode);
+		res = mypageService.DeleteMyDesc(code);
 		if (res > 0) {
-			System.out.println("수정 성공");
+			System.out.println("삭제 성공");
 		} else {
-			System.out.println("수정 실패");
+			System.out.println("삭제 실패");
 		}
 		
 		return "redirect:/mypage/me";
 	}
-*/
+
 	
 	// 마이페이지 완료된리스트 컨트롤러
 	@RequestMapping(value = "/reqroom", method = RequestMethod.POST)

@@ -102,4 +102,6 @@ public interface MypageMapper {
 	@Select("select * from users where user_Code = #{ucode}")
 	public UsersDto SelectMyInfo(int ucode);
 	
+	@Update("update users set user_Intro = null where user_Code = #{ucode}")
+	public int DeleteMyDesc(int ucode);
 }

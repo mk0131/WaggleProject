@@ -71,4 +71,6 @@ public interface MypageService {
 	public FileDto SelectConfirmFile(int fi_code);
 	
 	public UsersDto SelectMyInfo(int ucode);
+	
+	public int DeleteMyDesc(int ucode);
 }

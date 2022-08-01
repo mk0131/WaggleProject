@@ -198,6 +198,11 @@ public class MypageServiceImpl implements MypageService{
 	public UsersDto SelectMyInfo(int ucode) {
 		return mypageMapper.SelectMyInfo(ucode);
 	}
+
+	@Override
+	public int DeleteMyDesc(int ucode) {
+		return mypageMapper.DeleteMyDesc(ucode);
+	}
 	
 	
 
