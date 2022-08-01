@@ -32,7 +32,7 @@ build/
 ### VS Code ###
 .vscode/
 
-### application.properties ###
+### application.propertie ###
 application-my.properties
 
 ### payment.js ###
