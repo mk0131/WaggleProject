@@ -63,7 +63,7 @@
 
 .guideline-all p {
 	display: inline-block;
-	font-size: 14px;
+	font-size: 15px;
 }
 
 .ongoing21-user-name {
@@ -84,7 +84,7 @@
   	justify-content: center;
     padding: 25px;
     border-spacing: 50px;
-    font-size: 14px;
+    font-size: 16px;
 }
 
 .ongoing21-content-bottom {
@@ -204,7 +204,7 @@ input[type="date"] {
 							<td><input type="text" placeholder="Title" name="req_Title" required="required"></td>
 						</tr>
 						<tr>
-							<th>내가 본 집 링크 첨부(직방)</th>
+							<th>내가 본 집 링크 첨부<br/>(ex.직방, 다방 등등..)</th>
 							<td><input type="text" placeholder="LInk" name="req_Link"></td>
 						</tr>
 						<tr>
@@ -212,7 +212,7 @@ input[type="date"] {
 							<td><input type="date" name="req_EDate" required="required"></td>
 						</tr>
 						<tr>
-							<th><label class="required">집 주소</label><br><br><br></th>
+							<th><label class="required">내가 찾아본 집의 주소</label><br><br><br></th>
 							<td>
 								<input type="text" placeholder="클릭해서 주소 입력" name="home_Addr" id="home_Addr" readonly="readonly" onclick="kakaopost()" required="required">
 								<input type="hidden" name="home_Lat" id="home_Lat">
@@ -233,8 +233,8 @@ input[type="date"] {
 					</tbody>
 		    	</table>
 				<div class="ongoing21-content-bottom">
-					<h4>디테일 요구사항</h4>
-					<textarea id="incontent" rows="12" cols="70"  placeholder="요구사항을 입력해주세요" name="req_Detail"></textarea>
+					<h4>자세하게 봐야 될 부분</h4>
+					<textarea id="incontent" rows="12" cols="70"  placeholder="요구사항을 입력해주세요&nbsp;ex.수압이나 바깥전망, 소음 등 원하는 사진이나 동영상이 필요한 부분을 적어주세요" name="req_Detail"></textarea>
 					<br><br>
 					<div class="btn1" id="btn1">
 						<button type="submit" value="작성">작성 완료</button>

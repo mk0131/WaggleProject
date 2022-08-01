@@ -31,7 +31,7 @@
 
 .guideline-all p {
 	display: inline-block;
-	font-size: 14px;
+	font-size: 15px;
 }
 #scroll{
 	--ms-overflow-style: none;
