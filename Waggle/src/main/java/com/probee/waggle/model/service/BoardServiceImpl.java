@@ -253,4 +253,9 @@ public class BoardServiceImpl implements BoardService{
 		return boardMapper.updateResultWDate(res_Code);
 	}
 
+	@Override
+	public int updateUserGrade(int user_Code, int user_Grade) {
+		return boardMapper.updateUserGrade(user_Code, user_Grade);
+	}
+
 }
