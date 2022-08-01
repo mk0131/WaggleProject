@@ -122,6 +122,7 @@ textarea:focus ~ label, textarea:valid ~ label {
 	font-size: 0.75em;
 	color: #999;
 	top: -5px;
+	display:none;
 	-webkit-transition: all 0.225s ease;
 	transition: all 0.225s ease;
 }
@@ -735,11 +736,11 @@ textarea {
 								<form name="form" method="POST">
 								<div class="desc-intro" data-behaviour="search-on-list" style="text-align:initial">
 									<span class="counter"	data-search-on-list="counter">
-										${dto.user_Intro}
+										<div style="white-space:pre;">${dto.user_Intro}</div>
 									</span>
 								</div>
 								<div class="styled-input" id="desc-edit-input" style="display:none">
-										<textarea id="desc-text" required name="description"><div style="white-space:pre;"><c:out value="${dto.user_Intro}" /></div></textarea>
+										<textarea id="desc-text" required  name="description">${dto.user_Intro}</textarea>
 										<label>${dto.user_Intro }</label>
 								</div>
 								<div class="desc-content-button">
@@ -811,7 +812,7 @@ textarea {
 						    <p class="drop-zoon__paragraph">Drop your file here or Click to browse</p>
 						    <span id="loadingText" class="drop-zoon__loading-text">Please Wait</span>
 						    <img src="" alt="Preview Image" id="previewImage" class="drop-zoon__preview-image" draggable="false">
-						    <input type="file" name="myfile" data-max-file-size="5MB" id="fileInput" class="drop-zoon__file-input" accept="image/*">
+						    <input type="file" name="myfile" data-max-file-size="10MB" id="fileInput" class="drop-zoon__file-input" accept="image/*">
 						  </div>
 						  <!-- End Drop Zoon -->
 						
@@ -1181,10 +1182,10 @@ textarea {
 	  // If The Uploaded File Is An Image
 	  if (isImage.length !== 0) {
 	    // Check, If File Size Is 2MB or Less
-	    if (fileSize <= 2000000) { // 2MB :)
+	    if (fileSize <= 10000000) { // 2MB :)
 	      return true;
 	    } else { // Else File Size
-	      return alert('Please Your File Should be 2 Megabytes or Less');
+	      return alert('Please Your File Should be 10 Megabytes or Less');
 	    };
 	  } else { // Else File Type 
 	    return alert('Please make sure to upload An Image File Type');
