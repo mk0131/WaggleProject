@@ -170,7 +170,7 @@ tr {
 						</tr>
 						<tr>         
 				         <td class="btn1" colspan="2" align="right">
-				         	<button type="button" value="문의" onclick="location.href='/inquiry/list?user_Code=${user_Code}'">목록</button>
+				         	<button type="button" value="목록" onclick='history.back();'>목록</button>
 				         	<button type="button" value="수정" onclick="location.href='/inquiry/updateform?in_Code=${dto.in_Code}'">수정</button>
 				         	<button type="button" value="삭제" onclick="location.href='/inquiry/delete?in_Code=${dto.in_Code}&user_Code=${user_Code }'">삭제</button>  
 				         </td>   
