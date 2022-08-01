@@ -773,7 +773,7 @@ textarea {
 							</li>
 						</ul>
 						</div>
-						<div class="usage-right" style="width: 400px; display: inline-block">
+						<div class="usage-right" style="width: 400px; display: inline-block; border-right: 1px dashed #898989; padding-right:35px">
 							<ul class="bar-graph" style="width: 400px; padding: 0">
 								<li>
 									<p>[의뢰인]진행중 상태 의뢰 요청취소 비율</p>
@@ -1027,12 +1027,14 @@ textarea {
 	  "jpeg",
 	  "png",
 	  "svg",
-	  "gif"
+	  "gif",
+	  "jfif"
 	];
 
 	// Append Images Types Array Inisde Tooltip Data
 	toolTipData.innerHTML = [...imagesTypes].join(', .');
 
+	/*
 	// When (drop-zoon) has (dragover) Event 
 	dropZoon.addEventListener('dragover', function (event) {
 	  // Prevent Default Behavior 
@@ -1062,7 +1064,7 @@ textarea {
 	  // Call Function uploadFile(), And Send To Her The Dropped File :)
 	  uploadFile(file);
 	});
-
+	*/
 	// When (drop-zoon) has (click) Event 
 	dropZoon.addEventListener('click', function (event) {
 	  // Click The (fileInput)
