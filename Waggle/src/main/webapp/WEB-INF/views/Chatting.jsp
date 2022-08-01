@@ -279,12 +279,15 @@ text-align: center;
 		data : data,
 		success : function(data){
 			$("#scroll").empty();
+			
 			 console.log(size);
 			 console.log(data.length);
+			 
 			 if(data.length > size){
 				 down();
 			 }
 			 size = data.length;
+			 
 		     $.each(data, function(i){
 		    	
 		    	 var time = new Date(data[i].chat_Date).getHours();
@@ -365,6 +368,7 @@ function down(){
 			success : function(result){
 				if(result != 'fail'){
 					$("#chat_Content").val(null);
+					ChatHistory();
 				} else {
 					
 				}

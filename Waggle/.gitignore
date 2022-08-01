@@ -34,3 +34,6 @@ build/
 
 ### application.propertie ###
 application-my.properties
+
+### payment.js ###
+payment.js
