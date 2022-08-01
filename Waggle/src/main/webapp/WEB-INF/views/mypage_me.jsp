@@ -690,11 +690,20 @@ textarea {
 							</div>
 
 						<!-- div style="margin-bottom:20px">|--------------|</div> -->
-						<c:if test="${condto != 0}">
+						<c:if test="${con_ucode != 0}">
+							<c:if test="${con_stat == '미확인' }">
 							<span style="font-size: 11pt; color: #898989">업로드한 자격증을 확인중입니다.</span>
 							<span style="font-size: 11pt; color: #2d7eac; margin-left: 5px" onclick="showProof();">파일 다시 업로드하기</span>
+							</c:if>
+							<c:if test="${con_stat == '확인' }">
+							<span style="font-size: 11pt; color: #5c5c5c; font-weight:bold">${dto.user_Nm }님은 <span style="color:red">인증된 공인중개사</span>이십니다!</span>
+							</c:if>
+							<c:if test="${con_stat == '반려' }">
+							<span style="font-size: 11pt; color: #898989">신청한 자격증이 반려되었습니다.</span>
+							<span style="font-size: 11pt; color: #2d7eac; margin-left: 5px" onclick="showProof();">파일 다시 업로드하기</span>
+							</c:if>
 						</c:if>
-						<c:if test="${condto == 0}">
+						<c:if test="${con_ucode == 0}">
 						<div>
 							<span style="font-size: 11pt; color: #898989">공인중개사이신가요?</span>
 							<span style="font-size: 11pt; color: #2d7eac; margin-left: 5px" onclick="showProof();">인증하기</span>
@@ -765,10 +774,11 @@ textarea {
 						<div class="usage-left" style="width:400px; display:inline-block; float: right; padding-top:15px">
 						<ul class="bar-graph" style="width: 400px; padding:0">
 							<li>
-								<p>[꿀벌]의뢰수락 24시간 후 취소 비율</p>
-								<p>-> 의뢰 수행 횟수 총 ${resTotal }건 중 취소횟수 ${resCancel}건</p>
+								<p style="font-size:18pt; font-weight:bold; color:#5a76ff">[꿀벌] 의뢰 수행완료 비율</p>
+								<p>${dto.user_Nm} 님이 현재까지 수행한 의뢰 총 갯수 : ${resTotal } 건<p>
+								<p>-> 꿀벌 지원 ${resTotal }건 중 수행완료 ${resTotal - resCancel}건</p>
 								<div class="bar-wrap">
-									<span class="bar-fill" style="width:${ratio2}%;">${ratio2 }%</span>
+									<span class="bar-fill" style="width:${100-ratio2}%;">${100-ratio2 }%</span>
 								</div>
 							</li>
 						</ul>
@@ -776,10 +786,14 @@ textarea {
 						<div class="usage-right" style="width: 400px; display: inline-block; border-right: 1px dashed #898989; padding-right:35px">
 							<ul class="bar-graph" style="width: 400px; padding: 0">
 								<li>
-									<p>[의뢰인]진행중 상태 의뢰 요청취소 비율</p>
-									<p>-> 의뢰글 총 ${reqTotal }건 중 취소횟수 ${reqCancel }건</p>
+									<p style="font-size:18pt; font-weight:bold; color:#5a76ff">[의뢰] 의뢰 대비 꿀벌평가 완료 비율</p>
+									<p>${dto.user_Nm} 님이 현재까지 의뢰한 게시글 총 갯수 : ${reqTotal } 건<p>
+									<p>${dto.user_Nm} 님이 현재 의뢰중인 게시글 갯수 : ? 건<p>
+								<p>${dto.user_Nm} 님이 현재까지 꿀벌 평가를 완료한 게시글 갯수 : ? 건<p>
+								<p>${dto.user_Nm} 님이 현재까지 요청취소한 게시글 갯수 : ? 건<p>
+									<p>-> 의뢰글 ${reqTotal }건 중 꿀벌평가 ${reqTotal - reqCancel }건 완료</p>
 									<div class="bar-wrap">
-										<span class="bar-fill" style="width: ${ratio}%;">${ratio }%</span>
+										<span class="bar-fill" style="width: ${100-ratio}%;">${100-ratio }%</span>
 									</div>
 								</li>
 							</ul>

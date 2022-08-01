@@ -98,7 +98,8 @@ public class MypageController {
 			//공인중개사 사진 파일 이름 db에서 가져오기 위함.
 			FileDto ConfirmFile = mypageService.SelectConfirmFile(ConF_Code);
 			model.addAttribute("con_file_Name",ConfirmFile.getFi_Nm());
-			model.addAttribute("condto", MyConfirm.getCo_UCode());
+			model.addAttribute("con_stat", MyConfirm.getCo_Confirm());
+			model.addAttribute("con_ucode", MyConfirm.getCo_UCode());
 		} else {
 			model.addAttribute("condto",0);
 		}
