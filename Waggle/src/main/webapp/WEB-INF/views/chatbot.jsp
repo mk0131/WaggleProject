@@ -70,8 +70,11 @@ button:active {
 
 
 #chatBox {
-    height: 100%;
+    height: 360px;
     padding-bottom: 50px;
+    overflow-y: auto;
+/*    display: flex;
+    flex-direction: column-reverse; */
 }
 
 #msg {
@@ -188,19 +191,17 @@ img {
 			
 		</div>
 		
+		<form id="chatform">
+			<div class="form-group" style="margin: 10px; width:80%">
+				<input type="text" id="msg" class="form-control" placeholder="문의 메세지를 입력해주세요.">
+			</div>
+			<button type="submit" id="send">전송</button>
+		</form>
 	</div>
 	
 	
 	
 	
-	<div id="chatform-all">
-	<form id="chatform">
-			<div class="form-group" style="margin: 10px; width:80%">
-				<input type="text" id="msg" class="form-control" placeholder="문의 메세지를 입력해주세요.">
-			</div>
-			<button type="submit" id="send">전송</button>
-	</form>
-    </div>
 </body>
 <script>
 	var stompClient = null;
@@ -242,13 +243,16 @@ img {
 	//보낸메시지 보여주는 함수
 	function showSendMessage(message) {
 		$("#chatBox").append("<div class='send'><div>" + message + "</div></div><br/>");
+		
 	}
 	
 	//받은메시지 보여주는 함수
 	function showReceiveMessage(message){
 		$("#chatBox").append("<div class='logo'><img src='/images/importToJsp/logo.png'/></div>"
 							+ "<div class='conversation'><div>" + message + "</div></div><br/><br/>");
+		$("#chatBox").scrollTop($("#chatBox")[0].scrollHeight)
 	}
+	
 	
 	connect();
 

@@ -238,7 +238,39 @@ div {
 	object-fit: fill;
 }
 
+//이미지에 모달창 띄우기
+.modal {
+  position: absolute;
+  top: 0;
+  left: 0;
 
+  width: 100%;
+  height: 100%;
+
+  display: none;
+
+  background-color: rgba(0, 0, 0, 0.4);
+}
+
+.modal_body {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+
+  width: 100px;
+  height: 35px;
+  z-index:100;
+  
+  padding: 5px;
+  font-weight:bold;
+  text-align: center;
+
+  background-color: rgb(255, 255, 255);
+  border-radius: 10px;
+  box-shadow: 0 2px 3px 0 rgba(34, 36, 38, 0.15);
+
+  transform: translateX(-50%) translateY(-50%);
+}
 </style>
 <body>
 	<%@ include file="header.jsp"%>
@@ -469,6 +501,7 @@ div {
 		let searchbar1 = $('#var1').val();
 		let searchbar2 = $('.searchbar2').val();
 		let data = {jibunAddr : searchbar1, roadAddr : searchbar2};
+		let now = new Date();
 		
 		$.ajax({
 			type : "post",
@@ -496,13 +529,168 @@ div {
 						for(let i=0; i<unique_DAddr.length; i++){
 							$(".list").append('<li class="list-item" onclick="clickDAddr(\''+unique_DAddr[i]+'\');" data-search-on-list="list-item"><a href="#" class="list-item-link">'+unique_DAddr[i]+'<span class="item-list-subtext">우편번호: '+result[i].home_Post+'</span></a></li>');
 						}
-					
+						
+						//영상 뿌리기 시작
+						var test = false;
+						//json 객체중에 포인트를 사용했던 객체가 있나 테스트.
+						for(let i=0; i<result.length; i++){
+							if(result[i].po_UCode == ${user_Code}){
+								test = true;
+							}
+						}
+						
+						console.log(test);
+						//포인트를 사용한 객체가 없다면, fi_Nm의 중복 요소들 제거한 이후에 뿌려줌.
+						if(test == false){
+							let unique = result.filter(function(item1, idx1){
+								return result.findIndex(function(item2, idx2){
+									return item1.fi_Nm == item2.fi_Nm
+								}) == idx1;
+							}) ;
+							
+							//검색 주소에 해당하는 영상들 페이지에 뿌려주기
+							for(let i=0; i<unique.length; i++){
+								var res = new Date(unique[i].res_WDate);
+								if(unique[i].fi_Nm.includes('jpg') || unique[i].fi_Nm.includes('png') || unique[i].fi_Nm.includes('jpeg') || unique[i].fi_Nm.includes('tiff')){
+									//글이 24시가 넘었을 경우 블러 해제
+									if((now.getTime()-res.getTime())/(1000*60*60*24) >= 1){
+											$(".horizontal-scroll-wrapper").append('<div><a href="/board/detail?req_No='+unique[i].req_No+'"><img class="detail_img" src='+unique[i].fi_Nm+'></a></div>');
+									}else{ // 글이 24시가 넘지 않았을 경우 블러처리
+										//로그인한 회원이 글 작성자인경우 다 보여줌
+										if(${user_Code}==unique[i].res_UCode){
+											$(".horizontal-scroll-wrapper").append('<div><a href="/board/detail?req_No='+unique[i].req_No+'"><img class="detail_img" src='+unique[i].fi_Nm+'></a></div>');
+										}else if(${user_Code}==1){//관리자 보여줌
+											$(".horizontal-scroll-wrapper").append('<div><a href="/board/detail?req_No='+unique[i].req_No+'"><img class="detail_img" src='+unique[i].fi_Nm+'></a></div>');
+										}else{//로그인한 회원이 글 작성자가 아닐 경우
+											$(".horizontal-scroll-wrapper").append('<div><a href="/board/detail?req_No='+unique[i].req_No+'"><div class="modal"><div class="modal_body">1000 P</div></div><img style="filter:blur(7px); -webkit-filter:blur(7px)" class="detail_img" src='+unique[i].fi_Nm+'></a></div>');
+										}
+									}
+								}else if(unique[i].fi_Nm.includes('mp4') || unique[i].fi_Nm.includes('avi')){
+									if((now.getTime()-res.getTime())/(1000*60*60*24) >= 1){
+										$(".horizontal-scroll-wrapper").append('<div><a href="/board/detail?req_No='+unique[i].req_No+'"><video class="detail_video" controls ><source src='+unique[i].fi_Nm+'></video></a></div>');
+									}else{
+										//로그인한 회원이 글 작성자인경우 다 보여줌
+										if(${user_Code}==unique[i].res_UCode){
+											$(".horizontal-scroll-wrapper").append('<div><a href="/board/detail?req_No='+unique[i].req_No+'"><video class="detail_video" controls ><source src='+unique[i].fi_Nm+'></video></a></div>');
+										}else if(${user_Code}==1){
+											$(".horizontal-scroll-wrapper").append('<div><a href="/board/detail?req_No='+unique[i].req_No+'"><video class="detail_video" controls ><source src='+unique[i].fi_Nm+'></video></a></div>');
+										}else{//로그인한 회원이 글 작성자가 아닐 경우
+											$(".horizontal-scroll-wrapper").append('<div><a href="/board/detail?req_No='+unique[i].req_No+'"><div class="modal"><div class="modal_body">1000 P</div></div><video style="filter:blur(7px); -webkit-filter:blur(7px)" class="detail_video" controls ><source src='+unique[i].fi_Nm+'></video></a></div>');
+										}
+									}
+								}
+							}
+							
+							if(unique.length < 3){
+								$(".horizontal-scroll-wrapper").append('<div>추가 정보가 없습니다.</div>');
+								$(".horizontal-scroll-wrapper").append('<div>추가 정보가 없습니다.</div>');
+							}
+							
+						}else{//json객체 중에 포인트를 사용한 파일이 있다면
+							var req_No = 0; //포인트 사용한 요청글 번호 구하기 위한 변수
+							var fi_num = 0; //포인트 사용한 요청글의 파일들 갯수 구하기 위한 변수
+							for(let i=0; i<result.length; i++){
+								if(result[i].po_UCode == ${user_Code}){
+									req_No = result[i].req_No;
+									fi_num += 1;
+								}
+							}
+							
+							console.log(req_No);
+							console.log(fi_num);
+							for(let i=0; i<result.length; i++){
+								//포인트 사용한 요청글과 관련없는 요청글들은 그냥 뿌려줌
+								if(result[i].req_No != req_No){
+									var res = new Date(result[i].res_WDate);
+									if(result[i].fi_Nm.includes('jpg') || result[i].fi_Nm.includes('png') || result[i].fi_Nm.includes('jpeg') || result[i].fi_Nm.includes('tiff')){
+										//글이 24시가 넘었을 경우 블러 해제
+										if((now.getTime()-res.getTime())/(1000*60*60*24) >= 1){
+												$(".horizontal-scroll-wrapper").append('<div><a href="/board/detail?req_No='+result[i].req_No+'"><img class="detail_img" src='+result[i].fi_Nm+'></a></div>');
+										}else{ // 글이 24시가 넘지 않았을 경우 블러처리
+											//로그인한 회원이 글 작성자인경우 다 보여줌
+											if(${user_Code}==result[i].res_UCode){
+												$(".horizontal-scroll-wrapper").append('<div><a href="/board/detail?req_No='+result[i].req_No+'"><img class="detail_img" src='+result[i].fi_Nm+'></a></div>');
+											}else if(${user_Code}==1){//관리자 보여줌
+												$(".horizontal-scroll-wrapper").append('<div><a href="/board/detail?req_No='+result[i].req_No+'"><img class="detail_img" src='+result[i].fi_Nm+'></a></div>');
+											}else{//로그인한 회원이 글 작성자가 아닐 경우
+												$(".horizontal-scroll-wrapper").append('<div><a href="/board/detail?req_No='+result[i].req_No+'"><div class="modal"><div class="modal_body">1000 P</div></div><img style="filter:blur(7px); -webkit-filter:blur(7px)" class="detail_img" src='+result[i].fi_Nm+'></a></div>');
+											}
+										}
+									}else if(result[i].fi_Nm.includes('mp4') || result[i].fi_Nm.includes('avi')){
+										if((now.getTime()-res.getTime())/(1000*60*60*24) >= 1){
+											$(".horizontal-scroll-wrapper").append('<div><a href="/board/detail?req_No='+result[i].req_No+'"><video class="detail_video" controls ><source src='+result[i].fi_Nm+'></video></a></div>');
+										}else{
+											//로그인한 회원이 글 작성자인경우 다 보여줌
+											if(${user_Code}==result[i].res_UCode){
+												$(".horizontal-scroll-wrapper").append('<div><a href="/board/detail?req_No='+result[i].req_No+'"><video class="detail_video" controls ><source src='+result[i].fi_Nm+'></video></a></div>');
+											}else if(${user_Code}==1){
+												$(".horizontal-scroll-wrapper").append('<div><a href="/board/detail?req_No='+result[i].req_No+'"><video class="detail_video" controls ><source src='+result[i].fi_Nm+'></video></a></div>');
+											}else{//로그인한 회원이 글 작성자가 아닐 경우
+												$(".horizontal-scroll-wrapper").append('<div><a href="/board/detail?req_No='+result[i].req_No+'"><div class="modal"><div class="modal_body">1000 P</div></div><video style="filter:blur(7px); -webkit-filter:blur(7px)" class="detail_video" controls ><source src='+result[i].fi_Nm+'></video></a></div>');
+											}
+										}
+									}
+								}
+							}
+							
+							//포인트 사용한 요청글과 관련한 글들이라면
+							//블러 처리를 할 필요가 없고, 중복 가능하니까 중복처리 해서 뿌려줌
+							//글 작성자는 포인트를 사용할 리가 없으니까 글 작성자 고려요소도 제거 가능
+							//돈 낸거니까 시간도 고려안해도 됨.
+							let unique = result.filter(function(item1, idx1){
+								return result.findIndex(function(item2, idx2){
+									return item1.fi_Nm == item2.fi_Nm
+								}) == idx1;
+							}) ;
+							
+							for(let i=0; i<unique.length; i++){
+								if(unique[i].req_No == req_No){
+									if(unique[i].fi_Nm.includes('jpg') || unique[i].fi_Nm.includes('png') || unique[i].fi_Nm.includes('jpeg') || unique[i].fi_Nm.includes('tiff')){
+										$(".horizontal-scroll-wrapper").append('<div><a href="/board/detail?req_No='+unique[i].req_No+'"><img class="detail_img" src='+unique[i].fi_Nm+'></a></div>');
+									}else if(unique[i].fi_Nm.includes('mp4') || unique[i].fi_Nm.includes('avi')){
+										$(".horizontal-scroll-wrapper").append('<div><a href="/board/detail?req_No='+unique[i].req_No+'"><video class="detail_video" controls ><source src='+unique[i].fi_Nm+'></video></a></div>');
+									}
+								}
+							}
+							
+							if(unique.length < 3){
+								$(".horizontal-scroll-wrapper").append('<div>추가 정보가 없습니다.</div>');
+								$(".horizontal-scroll-wrapper").append('<div>추가 정보가 없습니다.</div>');
+							}
+								
+						}
+						
+						/*
 						//검색 주소에 해당하는 영상들 페이지에 뿌려주기
 						for(let i=0; i<result.length; i++){
+							var res = new Date(result[i].res_WDate);
 							if(result[i].fi_Nm.includes('jpg') || result[i].fi_Nm.includes('png') || result[i].fi_Nm.includes('jpeg') || result[i].fi_Nm.includes('tiff')){
-								$(".horizontal-scroll-wrapper").append('<div><a href="/board/detail?req_No='+result[i].req_No+'"><img class="detail_img" src='+result[i].fi_Nm+'></a></div>');
+								//글이 24시가 넘었을 경우 블러 해제
+								if((now.getTime()-res.getTime())/(1000*60*60*24) >= 1){
+										$(".horizontal-scroll-wrapper").append('<div><a href="/board/detail?req_No='+result[i].req_No+'"><img class="detail_img" src='+result[i].fi_Nm+'></a></div>');
+								}else{ // 글이 24시가 넘지 않았을 경우 블러처리
+									//로그인한 회원이 글 작성자인경우 다 보여줌
+									if(${user_Code}==result[i].res_UCode){
+										$(".horizontal-scroll-wrapper").append('<div><a href="/board/detail?req_No='+result[i].req_No+'"><img class="detail_img" src='+result[i].fi_Nm+'></a></div>');
+									}else if(${user_Code}==1){//관리자 보여줌
+										$(".horizontal-scroll-wrapper").append('<div><a href="/board/detail?req_No='+result[i].req_No+'"><img class="detail_img" src='+result[i].fi_Nm+'></a></div>');
+									}else{//로그인한 회원이 글 작성자가 아닐 경우
+										$(".horizontal-scroll-wrapper").append('<div><a href="/board/detail?req_No='+result[i].req_No+'"><div class="modal"><div class="modal_body">1000 P</div></div><img style="filter:blur(7px); -webkit-filter:blur(7px)" class="detail_img" src='+result[i].fi_Nm+'></a></div>');
+									}
+								}
 							}else if(result[i].fi_Nm.includes('mp4') || result[i].fi_Nm.includes('avi')){
-								$(".horizontal-scroll-wrapper").append('<div><a href="/board/detail?req_No='+result[i].req_No+'"><video class="detail_video" controls ><source src='+result[i].fi_Nm+'></video></a></div>');
+								if((now.getTime()-res.getTime())/(1000*60*60*24) >= 1){
+									$(".horizontal-scroll-wrapper").append('<div><a href="/board/detail?req_No='+result[i].req_No+'"><video class="detail_video" controls ><source src='+result[i].fi_Nm+'></video></a></div>');
+								}else{
+									//로그인한 회원이 글 작성자인경우 다 보여줌
+									if(${user_Code}==result[i].res_UCode){
+										$(".horizontal-scroll-wrapper").append('<div><a href="/board/detail?req_No='+result[i].req_No+'"><video class="detail_video" controls ><source src='+result[i].fi_Nm+'></video></a></div>');
+									}else if(${user_Code}==1){
+										$(".horizontal-scroll-wrapper").append('<div><a href="/board/detail?req_No='+result[i].req_No+'"><video class="detail_video" controls ><source src='+result[i].fi_Nm+'></video></a></div>');
+									}else{//로그인한 회원이 글 작성자가 아닐 경우
+										$(".horizontal-scroll-wrapper").append('<div><a href="/board/detail?req_No='+result[i].req_No+'"><div class="modal"><div class="modal_body">1000 P</div></div><video style="filter:blur(7px); -webkit-filter:blur(7px)" class="detail_video" controls ><source src='+result[i].fi_Nm+'></video></a></div>');
+									}
+								}
 							}
 						}
 						
@@ -510,6 +698,7 @@ div {
 							$(".horizontal-scroll-wrapper").append('<div>추가 정보가 없습니다.</div>');
 							$(".horizontal-scroll-wrapper").append('<div>추가 정보가 없습니다.</div>');
 						}
+						*/
 					}
 					
 			},
@@ -524,6 +713,7 @@ div {
 	function clickDAddr(DAddr) {
 		let searchbar1 = $('#var1').val();
 		let searchbar2 = $('.searchbar2').val();
+		let now = new Date();
 		let data = {jibunAddr : searchbar1, roadAddr : searchbar2, DAddr : DAddr};
 		$(".horizontal-scroll-wrapper").empty();
 		$.ajax({
@@ -531,12 +721,167 @@ div {
 			url : "/map/clickDAddr",
 			data : data,
 			success : function(result){
+				//영상 뿌리기 시작
+				var test = false;
+				//json 객체중에 포인트를 사용했던 객체가 있나 테스트.
+				for(let i=0; i<result.length; i++){
+					if(result[i].po_UCode == ${user_Code}){
+						test = true;
+					}
+				}
+				
+				console.log(test);
+				//포인트를 사용한 객체가 없다면, fi_Nm의 중복 요소들 제거한 이후에 뿌려줌.
+				if(test == false){
+					let unique = result.filter(function(item1, idx1){
+						return result.findIndex(function(item2, idx2){
+							return item1.fi_Nm == item2.fi_Nm
+						}) == idx1;
+					}) ;
+					
+					//검색 주소에 해당하는 영상들 페이지에 뿌려주기
+					for(let i=0; i<unique.length; i++){
+						var res = new Date(unique[i].res_WDate);
+						if(unique[i].fi_Nm.includes('jpg') || unique[i].fi_Nm.includes('png') || unique[i].fi_Nm.includes('jpeg') || unique[i].fi_Nm.includes('tiff')){
+							//글이 24시가 넘었을 경우 블러 해제
+							if((now.getTime()-res.getTime())/(1000*60*60*24) >= 1){
+									$(".horizontal-scroll-wrapper").append('<div><a href="/board/detail?req_No='+unique[i].req_No+'"><img class="detail_img" src='+unique[i].fi_Nm+'></a></div>');
+							}else{ // 글이 24시가 넘지 않았을 경우 블러처리
+								//로그인한 회원이 글 작성자인경우 다 보여줌
+								if(${user_Code}==unique[i].res_UCode){
+									$(".horizontal-scroll-wrapper").append('<div><a href="/board/detail?req_No='+unique[i].req_No+'"><img class="detail_img" src='+unique[i].fi_Nm+'></a></div>');
+								}else if(${user_Code}==1){//관리자 보여줌
+									$(".horizontal-scroll-wrapper").append('<div><a href="/board/detail?req_No='+unique[i].req_No+'"><img class="detail_img" src='+unique[i].fi_Nm+'></a></div>');
+								}else{//로그인한 회원이 글 작성자가 아닐 경우
+									$(".horizontal-scroll-wrapper").append('<div><a href="/board/detail?req_No='+unique[i].req_No+'"><div class="modal"><div class="modal_body">1000 P</div></div><img style="filter:blur(7px); -webkit-filter:blur(7px)" class="detail_img" src='+unique[i].fi_Nm+'></a></div>');
+								}
+							}
+						}else if(unique[i].fi_Nm.includes('mp4') || unique[i].fi_Nm.includes('avi')){
+							if((now.getTime()-res.getTime())/(1000*60*60*24) >= 1){
+								$(".horizontal-scroll-wrapper").append('<div><a href="/board/detail?req_No='+unique[i].req_No+'"><video class="detail_video" controls ><source src='+unique[i].fi_Nm+'></video></a></div>');
+							}else{
+								//로그인한 회원이 글 작성자인경우 다 보여줌
+								if(${user_Code}==unique[i].res_UCode){
+									$(".horizontal-scroll-wrapper").append('<div><a href="/board/detail?req_No='+unique[i].req_No+'"><video class="detail_video" controls ><source src='+unique[i].fi_Nm+'></video></a></div>');
+								}else if(${user_Code}==1){
+									$(".horizontal-scroll-wrapper").append('<div><a href="/board/detail?req_No='+unique[i].req_No+'"><video class="detail_video" controls ><source src='+unique[i].fi_Nm+'></video></a></div>');
+								}else{//로그인한 회원이 글 작성자가 아닐 경우
+									$(".horizontal-scroll-wrapper").append('<div><a href="/board/detail?req_No='+unique[i].req_No+'"><div class="modal"><div class="modal_body">1000 P</div></div><video style="filter:blur(7px); -webkit-filter:blur(7px)" class="detail_video" controls ><source src='+unique[i].fi_Nm+'></video></a></div>');
+								}
+							}
+						}
+					}
+					
+					if(unique.length < 3){
+						$(".horizontal-scroll-wrapper").append('<div>추가 정보가 없습니다.</div>');
+						$(".horizontal-scroll-wrapper").append('<div>추가 정보가 없습니다.</div>');
+					}
+					
+				}else{//json객체 중에 포인트를 사용한 파일이 있다면
+					var req_No = 0; //포인트 사용한 요청글 번호 구하기 위한 변수
+					var fi_num = 0; //포인트 사용한 요청글의 파일들 갯수 구하기 위한 변수
+					for(let i=0; i<result.length; i++){
+						if(result[i].po_UCode == ${user_Code}){
+							req_No = result[i].req_No;
+							fi_num += 1;
+						}
+					}
+					
+					console.log(req_No);
+					console.log(fi_num);
+					for(let i=0; i<result.length; i++){
+						//포인트 사용한 요청글과 관련없는 요청글들은 그냥 뿌려줌
+						if(result[i].req_No != req_No){
+							var res = new Date(result[i].res_WDate);
+							if(result[i].fi_Nm.includes('jpg') || result[i].fi_Nm.includes('png') || result[i].fi_Nm.includes('jpeg') || result[i].fi_Nm.includes('tiff')){
+								//글이 24시가 넘었을 경우 블러 해제
+								if((now.getTime()-res.getTime())/(1000*60*60*24) >= 1){
+										$(".horizontal-scroll-wrapper").append('<div><a href="/board/detail?req_No='+result[i].req_No+'"><img class="detail_img" src='+result[i].fi_Nm+'></a></div>');
+								}else{ // 글이 24시가 넘지 않았을 경우 블러처리
+									//로그인한 회원이 글 작성자인경우 다 보여줌
+									if(${user_Code}==result[i].res_UCode){
+										$(".horizontal-scroll-wrapper").append('<div><a href="/board/detail?req_No='+result[i].req_No+'"><img class="detail_img" src='+result[i].fi_Nm+'></a></div>');
+									}else if(${user_Code}==1){//관리자 보여줌
+										$(".horizontal-scroll-wrapper").append('<div><a href="/board/detail?req_No='+result[i].req_No+'"><img class="detail_img" src='+result[i].fi_Nm+'></a></div>');
+									}else{//로그인한 회원이 글 작성자가 아닐 경우
+										$(".horizontal-scroll-wrapper").append('<div><a href="/board/detail?req_No='+result[i].req_No+'"><div class="modal"><div class="modal_body">1000 P</div></div><img style="filter:blur(7px); -webkit-filter:blur(7px)" class="detail_img" src='+result[i].fi_Nm+'></a></div>');
+									}
+								}
+							}else if(result[i].fi_Nm.includes('mp4') || result[i].fi_Nm.includes('avi')){
+								if((now.getTime()-res.getTime())/(1000*60*60*24) >= 1){
+									$(".horizontal-scroll-wrapper").append('<div><a href="/board/detail?req_No='+result[i].req_No+'"><video class="detail_video" controls ><source src='+result[i].fi_Nm+'></video></a></div>');
+								}else{
+									//로그인한 회원이 글 작성자인경우 다 보여줌
+									if(${user_Code}==result[i].res_UCode){
+										$(".horizontal-scroll-wrapper").append('<div><a href="/board/detail?req_No='+result[i].req_No+'"><video class="detail_video" controls ><source src='+result[i].fi_Nm+'></video></a></div>');
+									}else if(${user_Code}==1){
+										$(".horizontal-scroll-wrapper").append('<div><a href="/board/detail?req_No='+result[i].req_No+'"><video class="detail_video" controls ><source src='+result[i].fi_Nm+'></video></a></div>');
+									}else{//로그인한 회원이 글 작성자가 아닐 경우
+										$(".horizontal-scroll-wrapper").append('<div><a href="/board/detail?req_No='+result[i].req_No+'"><div class="modal"><div class="modal_body">1000 P</div></div><video style="filter:blur(7px); -webkit-filter:blur(7px)" class="detail_video" controls ><source src='+result[i].fi_Nm+'></video></a></div>');
+									}
+								}
+							}
+						}
+					}
+					
+					//포인트 사용한 요청글과 관련한 글들이라면
+					//블러 처리를 할 필요가 없고, 중복 가능하니까 중복처리 해서 뿌려줌
+					//글 작성자는 포인트를 사용할 리가 없으니까 글 작성자 고려요소도 제거 가능
+					//돈 낸거니까 시간도 고려안해도 됨.
+					let unique = result.filter(function(item1, idx1){
+						return result.findIndex(function(item2, idx2){
+							return item1.fi_Nm == item2.fi_Nm
+						}) == idx1;
+					}) ;
+					
+					for(let i=0; i<unique.length; i++){
+						if(unique[i].req_No == req_No){
+							if(unique[i].fi_Nm.includes('jpg') || unique[i].fi_Nm.includes('png') || unique[i].fi_Nm.includes('jpeg') || unique[i].fi_Nm.includes('tiff')){
+								$(".horizontal-scroll-wrapper").append('<div><a href="/board/detail?req_No='+unique[i].req_No+'"><img class="detail_img" src='+unique[i].fi_Nm+'></a></div>');
+							}else if(unique[i].fi_Nm.includes('mp4') || unique[i].fi_Nm.includes('avi')){
+								$(".horizontal-scroll-wrapper").append('<div><a href="/board/detail?req_No='+unique[i].req_No+'"><video class="detail_video" controls ><source src='+unique[i].fi_Nm+'></video></a></div>');
+							}
+						}
+					}
+					
+					if(unique.length < 3){
+						$(".horizontal-scroll-wrapper").append('<div>추가 정보가 없습니다.</div>');
+						$(".horizontal-scroll-wrapper").append('<div>추가 정보가 없습니다.</div>');
+					}
+						
+				}
+				
+				/*
 					//검색 주소에 해당하는 영상들 페이지에 뿌려주기
 					for(let i=0; i<result.length; i++){
-						if(result[i].fi_Nm.includes('jpg')){
-							$(".horizontal-scroll-wrapper").append('<div><a href="/board/detail?req_No='+result[i].req_No+'"><img class="detail_img" src='+result[i].fi_Nm+'></a></div>');
-						}else if(result[i].fi_Nm.includes('mp4')){
-							$(".horizontal-scroll-wrapper").append('<div><a href="/board/detail?req_No='+result[i].req_No+'"><video class="detail_video" controls ><source src='+result[i].fi_Nm+'></video></a></div>');
+						var res = new Date(result[i].res_WDate)
+						if(result[i].fi_Nm.includes('jpg') || result[i].fi_Nm.includes('png') || result[i].fi_Nm.includes('jpeg') || result[i].fi_Nm.includes('tiff')){
+							//글이 24시가 넘었을 경우 블러 해제
+							if((now.getTime()-res.getTime())/(1000*60*60*24) >= 1){
+								$(".horizontal-scroll-wrapper").append('<div><a href="/board/detail?req_No='+result[i].req_No+'"><img class="detail_img" src='+result[i].fi_Nm+'></a></div>');
+							}else{ // 글이 24시가 넘지 않았을 경우 블러처리
+								//로그인한 회원이 글 작성자인경우 다 보여줌
+								if(${user_Code}==result[i].res_UCode){
+									$(".horizontal-scroll-wrapper").append('<div><a href="/board/detail?req_No='+result[i].req_No+'"><img class="detail_img" src='+result[i].fi_Nm+'></a></div>');
+								}else if(${user_Code}==1){//관리자 보여줌
+									$(".horizontal-scroll-wrapper").append('<div><a href="/board/detail?req_No='+result[i].req_No+'"><img class="detail_img" src='+result[i].fi_Nm+'></a></div>');
+								}else{//로그인한 회원이 글 작성자가 아닐 경우
+									$(".horizontal-scroll-wrapper").append('<div><a href="/board/detail?req_No='+result[i].req_No+'"><div class="modal"><div class="modal_body">1000 P</div></div><img style="filter:blur(7px); -webkit-filter:blur(7px)" class="detail_img" src='+result[i].fi_Nm+'></a></div>');
+								}
+							}
+						}else if(result[i].fi_Nm.includes('mp4') || result[i].fi_Nm.includes('avi')){
+							if((now.getTime()-res.getTime())/(1000*60*60*24) >= 1){
+								$(".horizontal-scroll-wrapper").append('<div><a href="/board/detail?req_No='+result[i].req_No+'"><video class="detail_video" controls ><source src='+result[i].fi_Nm+'></video></a></div>');
+							}else if(${user_Code}==1){
+								$(".horizontal-scroll-wrapper").append('<div><a href="/board/detail?req_No='+result[i].req_No+'"><video class="detail_video" controls ><source src='+result[i].fi_Nm+'></video></a></div>');
+							}else{
+								//로그인한 회원이 글 작성자인경우 다 보여줌
+								if(${user_Code}==result[i].res_UCode){
+									$(".horizontal-scroll-wrapper").append('<div><a href="/board/detail?req_No='+result[i].req_No+'"><video class="detail_video" controls ><source src='+result[i].fi_Nm+'></video></a></div>');
+								}else{//로그인한 회원이 글 작성자가 아닐 경우
+									$(".horizontal-scroll-wrapper").append('<div><a href="/board/detail?req_No='+result[i].req_No+'"><div class="modal"><div class="modal_body">1000 P</div></div><video style="filter:blur(7px); -webkit-filter:blur(7px)" class="detail_video" controls ><source src='+result[i].fi_Nm+'></video></a></div>');
+								}
+							}
 						}
 					}
 					
@@ -544,6 +889,7 @@ div {
 						$(".horizontal-scroll-wrapper").append('<div>추가 정보가 없습니다.</div>');
 						$(".horizontal-scroll-wrapper").append('<div>추가 정보가 없습니다.</div>');
 					}
+					*/
 				},
 			error : function(){
 				console.log("ajax 에러");
