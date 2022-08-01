@@ -48,7 +48,7 @@
   	justify-content: center;
     padding: 5px;
     border-spacing: 30px;
-    font-size: 14px;
+    font-size: 16px;
 }
 
 .ongoing21-content2 {
@@ -384,7 +384,7 @@ div#review_containser{
 	  
 	   <div class="ongoing21-all">
 	    <h3 id="ongoing-detail">${userName}님이 요청한 리스트 상세</h3>
-	     <p id="w-date">요청날짜 : ${req_dto.req_WDate }</p>
+	     <p id="w-date">작성일 : ${req_dto.req_WDate }</p>
 	    <div class="ongoing21-all">
 	    <table class="ongoing21-content">
 	     <tbody>
@@ -405,7 +405,7 @@ div#review_containser{
 	       <td>${req_dto.home_DAddr }</td>
 	      </tr>
 	      <tr>
-	       <th colspan="2">디테일 요구사항</th>
+	       <th colspan="2">자세하게 봐야 될 부분</th>
 	      </tr>
 	      </tbody>
 	     </table>
@@ -565,7 +565,7 @@ div#review_containser{
 	       <br/>
 		   <br/><br/><hr class="my-hr">
 		   
-		   <br><h4>디테일 요청사항</h4>
+		   <br><h4>자세하게 봐야 될 부분</h4>
 		   <div id="detail_container">
 		    <div id="file_container">
 		    	<!-- 

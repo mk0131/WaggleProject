@@ -31,7 +31,7 @@
 
 .guideline-all p {
 	display: inline-block;
-	font-size: 14px;
+	font-size: 15px;
 }
 
 .ongoing21-user-name {
@@ -52,7 +52,7 @@
   	justify-content: center;
     padding: 25px;
     border-spacing: 50px;
-    font-size: 14px;
+    font-size: 16px;
 }
 
 .ongoing21-content-bottom {
@@ -144,7 +144,7 @@ button:active {
 	       <td>${req_dto.req_Title }</td>
 	      </tr>
 	      <tr>
-	       <th>내가 본 집 링크 첨부</th>
+	       <th>내가 본 집 링크 첨부<br/>(ex.직방, 다방 등등..)</th>
 	       <td><a style="color: #f48c06;" id="link" href="" target="_blank">${req_dto.req_Link }</a></td>
 
 	      </tr>
@@ -167,7 +167,7 @@ button:active {
 	      </tbody>
 	     </table>
 	     <div class="ongoing21-content-bottom" style="width: 900px; margin: 0 auto;">
-	       <h4>디테일 요구사항</h4>
+	       <h4>자세하게 봐야 될 부분</h4>
 	       <textarea id="incontent" rows="14" cols="80" name="content" placeholder="요구사항을 입력해주세요" readonly="readonly">${req_dto.req_Detail }</textarea>
 	       <br/><br/><br/>
 	       <div style="text-align: right; width: 750px; font-size: 16pt;"><b>심부름 비용: ${req_dto.req_Point }원</b> </div>

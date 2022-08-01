@@ -48,7 +48,7 @@
   	justify-content: center;
     padding: 5px;
     border-spacing: 30px;
-    font-size: 14px;
+    font-size: 16px;
 }
 
 .ongoing21-content2 {
@@ -246,7 +246,7 @@ div#review_containser{
 	       <td>${req_dto.home_DAddr }</td>
 	      </tr>
 	      <tr>
-	       <th colspan="2">디테일 요구사항</th>
+	       <th colspan="2">자세하게 봐야 될 부분</th>
 	      </tr>
 	      </tbody>
 	     </table>
@@ -406,7 +406,7 @@ div#review_containser{
 	       <br/>
 		   <br/><br/><hr class="my-hr">
 		   
-		   <br><h4>디테일 요청사항</h4>
+		   <br><h4>자세하게 봐야 될 부분</h4>
 		   <div id="detail_container">
 		    <div id="file_container">
 		     <input type="file" name="myfile" multiple="multiple" data-max-file-size="20MB">

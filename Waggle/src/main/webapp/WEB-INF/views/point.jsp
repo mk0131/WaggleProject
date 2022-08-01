@@ -324,6 +324,12 @@ input:focus ~ .bar:before, input:focus ~ .bar:after {
 	</div>
 
 	<%@ include file="footer.jsp"%>
+<<<<<<< HEAD
+	<script type="text/javascript" src="/js/payment.js"></script>
+</body>
+
+=======
 <script type="text/javascript" src="/js/payment.js"></script>
 </body>
+>>>>>>> 4c5f6b59ba47db77684cee182994d7d39225851a
 </html>

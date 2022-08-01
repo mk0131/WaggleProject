@@ -34,7 +34,7 @@
 
 .guideline-all p {
 	display: inline-block;
-	font-size: 14px;
+	font-size: 15px;
 }
 
 /* .board {
@@ -263,7 +263,7 @@ img {
 
 .board-dt {
 	line-height: 14px;
-    font-size: 14px;
+    font-size: 15px;
     letter-spacing: -.06px;
     letter-spacing: -.33px;
     color: rgba(34,34,34,.5);
@@ -273,7 +273,7 @@ img {
 	margin: 4px 0px 0px 0px;
     word-break: break-word;
     line-height: 17px;
-    font-size: 14px;
+    font-size: 15px;
     
 }
  
@@ -362,7 +362,7 @@ img {
 				<a href="javascript:void(0)">
 					<i class="fa-solid fa-house"></i>
 				</a>
-				<p>HOME > 꿀단지</p>
+				<p>HOME > 꿀단지목록</p>
 			</li>
    		</ul>
    	</div>
@@ -401,15 +401,15 @@ img {
 						  <div class="board-content-inner" id="board-dl-dt-dd" onclick="location.href='/board/detail?req_No=${dto.req_No}'">	
 							<dl id="board-dl">
 							  <div id="board-ltd-box1">
-								<dt class="board-dt">주소</dt>
+								<dt class="board-dt">매물주소</dt>
 								<dd class="board-dd">${dto.home_Addr }</dd>
 							  </div>
 							  <div id="board-ltd-box2" class="board-ltd-detail-box">
-								<dt class="board-dt">예상거리</dt>
+								<dt class="board-dt">요청매물과 나와의 거리</dt>
 								<dd id="Km_${status.index}" class="board-dd">??km</dd>
 							  </div>
 							  <div id="board-ltd-box3" class="board-ltd-detail-box">
-								<dt class="board-dt">기한</dt>
+								<dt class="board-dt">방문기한</dt>
 								<dd class="board-dd">${dto.req_EDate }</dd>
 							 </div>
 							</dl>

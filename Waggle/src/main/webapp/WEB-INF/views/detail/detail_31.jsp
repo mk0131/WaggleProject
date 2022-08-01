@@ -31,7 +31,7 @@
 
 .guideline-all p {
 	display: inline-block;
-	font-size: 14px;
+	font-size: 15px;
 }
 
 .ongoing21-user-name {
@@ -52,7 +52,7 @@
   	justify-content: center;
     padding: 5px;
     border-spacing: 30px;
-    font-size: 14px;
+    font-size: 16px;
 }
 
 .ongoing21-content2 {
@@ -61,7 +61,7 @@
   	justify-content: center;
     padding: 5px;
     border-spacing: 30px;
-    font-size: 14px;
+    font-size: 16px;
 }
 
 .ongoing21-content-bottom {
@@ -343,7 +343,7 @@ div#progress_percentage::after {
 	       <td>${req_dto.req_Title }</td>
 	      </tr>
 	      <tr>
-	       <th>내가 본 집 링크 첨부</th>
+	       <th>내가 본 집 링크 첨부<br/>(ex.직방, 다방 등등..)</th>
 	       <td><a style="color: #f48c06;" id="link" href="">${req_dto.req_Link }</a></td>
 	      </tr>
 	      <tr>
@@ -363,7 +363,7 @@ div#progress_percentage::after {
 	       <td>${req_dto.req_Phone }</td>
 	      </tr>
 	      <tr>
-	       <th colspan="2">디테일 요구사항</th>
+	       <th colspan="2">자세하게 봐야 될 부분</th>
 	      </tr>
 	      </tbody>
 	     </table>
