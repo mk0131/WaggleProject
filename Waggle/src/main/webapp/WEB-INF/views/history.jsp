@@ -308,6 +308,41 @@ img {
 
 /* 탭 css 끝 */
 
+.paging1 {
+	text-align: center;
+}
+
+.paging1 li {
+	list-style: none;
+	display: inline-block;
+}
+
+.paging2 {
+	text-align: center;
+}
+
+.paging2 li {
+	list-style: none;
+	display: inline-block;
+}
+
+
+.nowpage {
+	font-weight: bold;
+	color: #000000 !important;
+}
+ 
+#paging-a {
+	text-decoration: none;
+	padding: 8px;
+	color: #878787;
+}
+
+#paging-a:visited {
+	color: #878787;
+}
+
+
 </style>
 </head>
 <body>
@@ -367,6 +402,23 @@ img {
 					</div>
 				</div>
 				</c:forEach>
+					<ul class="paging1">
+					 <c:if test="${paging1.prev}">       
+					   <li id="paging">
+						 <a id="paging-a" href='<c:url value="/mypage/history?ucode=${ucode }&page=${paging1.startPage-1}"/>'>이전</a>
+					   </li>  
+					 </c:if>
+					  <c:forEach begin="${paging1.startPage}" end="${paging1.endPage}" var="num">
+						<li>
+						 <a id="paging-a" class="${paging1.cri.page == num ? 'nowpage' : null }" href='<c:url value="/mypage/history?ucode=${ucode }&page=${num}"/>'>${num}</a>
+						</li>  
+					  </c:forEach>
+					   <c:if test="${paging1.next && paging1.endPage > 0}">
+						<li>
+						 <a id="paging-a" href='<c:url value="/mypage/history?ucode=${ucode }&&page=${paging1.endPage+1}"/>'>다음</a>
+						</li>
+						</c:if>
+					 </ul>
 			</div>
 			
 			<div class="myReqListPaging"></div>
@@ -409,171 +461,42 @@ img {
 					</div>
 				</div>
 				</c:forEach>
+				<ul class="paging2">
+					 <c:if test="${paging2.prev}">       
+					   <li id="paging">
+						 <a id="paging-a" href='<c:url value="/mypage/history?ucode=${ucode }&page=${paging2.startPage-1}"/>'>이전</a>
+					   </li>  
+					 </c:if>
+					  <c:forEach begin="${paging2.startPage}" end="${paging2.endPage}" var="num">
+						<li>
+						 <a id="paging-a" class="${paging2.cri.page == num ? 'nowpage' : null }" href='<c:url value="/mypage/history?ucode=${ucode }&page=${num}"/>'>${num}</a>
+						</li>  
+					  </c:forEach>
+					   <c:if test="${paging2.next && paging2.endPage > 0}">
+						<li>
+						 <a id="paging-a" href='<c:url value="/mypage/history?ucode=${ucode }&page=${paging2.endPage+1}"/>'>다음</a>
+						</li>
+						</c:if>
+					 </ul>
 			</div>
 		</div>
 		
 		
-								<%-- <ul class="paging">
-								 <c:if test="${paging.prev}">       
-			 					   <li id="paging">
-			 						 <a id="paging-a" href='<c:url value="/history/detail?req_No=${unique[i].req_No}&page=${paging.startPage-1}"/>'>이전</a>
-			 					   </li>  
-			 					 </c:if>
-			 					  <c:forEach begin="${paging.startPage}" end="${paging.endPage}" var="num">
-			 						<li>
-			 						 <a id="paging-a" class="${paging.cri.page == num ? 'nowpage' : null }" href='<c:url value="/history?page=${num}"/>'>${num}</a>
-			 						</li>  
-			 					  </c:forEach>
-			 					   <c:if test="${paging.next && paging.endPage > 0}">
-			 						<li>
-			 						 <a id="paging-a" href='<c:url value="/history/detail?req_No=${unique[i].req_No}&page=${paging.endPage+1}"/>'>다음</a>
-			 						</li>
-			 						</c:if>
-			 					 </ul> --%>
 		
 	</div>
 	<%@ include file="footer.jsp"%>
 </body>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
+
 //요청내역 리스트 보여줌
 $(document).ready(function(){
 	$(".myReqList").show();
-	
-/*
-	let ucode = ${user_Code};
-	let data = {ucode : ucode};
-	
-	$.ajax({
-		type: "post",
-		url: "mypage/reqhistory",
-		data : data,
-		success : function(result){
-			let unique = result.filter(function(item1, idx1){
-				return result.findIndex(function(item2, idx2){
-					return item1.req_No == item2.req_No
-				}) == idx1;
-			}) ;
-			
-			$(".myPerform").empty();
-			for(let i=0; i<unique.length; i++){
-				$(".myReqList").append('<div class="my-req-list-content-all" id="my-req-list-content-all">'
-										+'<div class="my-req-list-content-inner" id="my-req-list-img" onclick="location.href=\'/board/detail?req_No='+unique[i].req_No+'\'">'
-										+'<img src='+unique[i].fi_Nm+'>'
-										+'</div>'
-										+'<div id="my-req-list-text">'
-										+'<div class="my-req-list-content-inner" id="my-req-list-stat" onclick="location.href=\'/board/detail?req_No=\''+unique[i].req_No+'\'">'
-										+'<label id="req-stat">'
-										+unique[i].req_Stat
-										+'</label>'
-										+'</div>'
-										+'<div class="my-req-list-content-inner" id="my-req-list-title" onclick="location.href=\'/board/detail?req_No=\''+unique[i].req_No+'\'">'
-										+unique[i].req_Title
-										+'</div>'
-										+'<div class="my-req-list-content-inner" id="my-req-list-point" onclick="location.href=\'/board/detail?req_No='+unique[i].req_No+'\'">'
-										+unique[i].req_Point
-										+'&nbsp;'
-										+'<i class="fa-solid fa-p">'
-										+'</i></div>'						
-										+'<h4 class="my-req-list-content-inner" id="my-req-list-ltd-title" onclick="location.href=\'/board/detail?req_No='+unique[i].req_No+'\'">요청 정보'
-										+'</h4>'
-										+'<div class="my-req-list-content-inner" id="my-req-list-dl-dt-dd" onclick="location.href=\'/board/detail?req_No='+unique[i].req_No+'\'">'	
-										+'<dl id="my-req-list-dl">'
-										+'<div id="my-req-list-ltd-box">'
-										+'<dt id="my-req-list-dt">주소'
-										+'</dt>'
-										+'<dd id="my-req-list-dd">'
-										+unique[i].home_Addr 
-										+'</dd>'
-										+'</div>'
-										+'<div id="my-req-list-ltd-box" class="my-req-list-ltd-detail-box">'
-										+'<dt id="my-req-list-dt">기한'
-										+'</dt>'
-										+'<dd id="my-req-list-dd">'
-										+unique[i].req_EDate
-										+'</dd>'
-										+'</div>'
-										+'</dl>'
-										+'</div>'
-										+'</div>'					   
-										+'</div>');
-				}
-		},
-		error: function(){
-			console.log("요청내역 ajax 에러");
-		}
-})
-*/
-
 });
+
 function showMyReq() {
 	$(".myReqList").show();
 	$(".myPerform").hide();
-	/*
-	let ucode = ${user_Code};
-	let data = {ucode : ucode};
-	
-	$.ajax({
-		type: "post",
-		url: "mypage/reqhistory",
-		data : data,
-		success : function(result){
-			let unique = result.filter(function(item1, idx1){
-				return result.findIndex(function(item2, idx2){
-					return item1.req_No == item2.req_No
-				}) == idx1;
-			}) ;
-			
-			$(".myPerform").empty();
-			for(let i=0; i<unique.length; i++){
-				$(".myReqList").append('<div class="my-req-list-content-all" id="my-req-list-content-all">'
-										+'<div class="my-req-list-content-inner" id="my-req-list-img" onclick="location.href=\'/board/detail?req_No='+unique[i].req_No+'\'">'
-										+'<img src='+unique[i].fi_Nm+'>'
-										+'</div>'
-										+'<div id="my-req-list-text">'
-										+'<div class="my-req-list-content-inner" id="my-req-list-stat" onclick="location.href=\'/board/detail?req_No='+unique[i].req_No+'\'">'
-										+'<label id="req-stat">'
-										+unique[i].req_Stat
-										+'</label>'
-										+'</div>'
-										+'<div class="my-req-list-content-inner" id="my-req-list-title" onclick="location.href=\'/board/detail?req_No='+unique[i].req_No+'\'">'
-										+unique[i].req_Title
-										+'</div>'
-										+'<div class="my-req-list-content-inner" id="my-req-list-point" onclick="location.href=\'/board/detail?req_No='+unique[i].req_No+'\'">'
-										+unique[i].req_Point
-										+'&nbsp;'
-										+'<i class="fa-solid fa-p">'
-										+'</i></div>'						
-										+'<h4 class="my-req-list-content-inner" id="my-req-list-ltd-title" onclick="location.href=\'/board/detail?req_No='+unique[i].req_No+'\'">요청 정보'
-										+'</h4>'
-										+'<div class="my-req-list-content-inner" id="my-req-list-dl-dt-dd" onclick="location.href=\'/board/detail?req_No='+unique[i].req_No+'\'">'	
-										+'<dl id="my-req-list-dl">'
-										+'<div id="my-req-list-ltd-box">'
-										+'<dt id="my-req-list-dt">주소'
-										+'</dt>'
-										+'<dd id="my-req-list-dd">'
-										+unique[i].home_Addr 
-										+'</dd>'
-										+'</div>'
-										+'<div id="my-req-list-ltd-box" class="my-req-list-ltd-detail-box">'
-										+'<dt id="my-req-list-dt">기한'
-										+'</dt>'
-										+'<dd id="my-req-list-dd">'
-										+unique[i].req_EDate
-										+'</dd>'
-										+'</div>'
-										+'</dl>'
-										+'</div>'
-										+'</div>'					   
-										+'</div>');
-			}
-		},
-		error: function(){
-			console.log("요청내역 ajax 에러");
-		}
-})
-
-*/
 }
 
 //나의 수행 내역 보여주기
@@ -581,66 +504,6 @@ function showMyPerform(){
 	$(".myReqList").hide();
 	$(".myPerform").show();
 	
-	/*
-	let ucode = ${user_Code};
-	let data = {ucode : ucode};
-	
-	$.ajax({
-		type: "post",
-		url: "mypage/performhistory",
-		data : data,
-		success : function(result){
-			$(".myReqList").empty();
-			$(".myPerform").empty();
-			for(let i=0; i<result.length; i++){
-				$(".myReqList").append('<div class="my-res-list-content-all" id="my-res-list-content-all">'
-										+'<div class="my-res-list-content-inner" id="my-res-list-img" onclick="location.href=\'/board/detail?req_No='+result[i].req_No+'\'">'
-										+'<img src='+result[i].fi_Nm+'>'
-										+'</div>'
-										+'<div id="my-res-list-text">'
-										+'<div class="my-res-list-content-inner" id="my-res-list-stat" onclick="location.href=\'/board/detail?req_No='+result[i].req_No+'\'">'
-										+'<label id="res-stat">'
-										+result[i].req_Stat
-										+'</label>'
-										+'</div>'
-										+'<div class="my-res-list-content-inner" id="my-res-list-title" onclick="location.href=\'/board/detail?req_No='+result[i].req_No+'\'">'
-										+result[i].req_Title
-										+'</div>'
-										+'<div class="my-res-list-content-inner" id="my-res-list-point" onclick="location.href=\'/board/detail?req_No='+result[i].req_No+'\'">'
-										+result[i].req_Point
-										+'&nbsp;'
-										+'<i class="fa-solid fa-p">'
-										+'</i></div>'						
-										+'<h4 class="my-res-list-content-inner" id="my-res-list-ltd-title" onclick="location.href=\'/board/detail?req_No='+result[i].req_No+'\'">요청 정보'
-										+'</h4>'
-										+'<div class="my-res-list-content-inner" id="my-res-list-dl-dt-dd" onclick="location.href=\'/board/detail?req_No='+result[i].req_No+'\'">'	
-										+'<dl id="my-res-list-dl">'
-										+'<div id="my-res-list-ltd-box">'
-										+'<dt id="my-res-list-dt">주소'
-										+'</dt>'
-										+'<dd id="my-res-list-dd">'
-										+result[i].home_Addr 
-										+'</dd>'
-										+'</div>'
-										+'<div id="my-res-list-ltd-box" class="my-res-list-ltd-detail-box">'
-										+'<dt id="my-res-list-dt">기한'
-										+'</dt>'
-										+'<dd id="my-res-list-dd">'
-										+result[i].req_EDate
-										+'</dd>'
-										+'</div>'
-										+'</dl>'
-										+'</div>'
-										+'</div>'					   
-										+'</div>');
-			}
-		},
-		error: function(){
-			console.log("완료리스트 ajax 에러");
-		}
-	})
-	
-*/
 }
 </script>
 </html>

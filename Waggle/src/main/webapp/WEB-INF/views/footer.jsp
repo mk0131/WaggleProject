@@ -27,13 +27,13 @@ body {
 #wrap {
     min-height: 100vh;
     height: 100%;
-    padding-bottom: 50px;
+    padding-bottom: 100px;
 }
 
 footer {
   height: 200px;
   margin: 40px 0px 0px 0px;
-  padding: 0px 40px 40px 40px;
+  padding: 40px 40px 40px 40px;
   position: relative;
   font-size: 12px;
   background-color: #F7F9FA;

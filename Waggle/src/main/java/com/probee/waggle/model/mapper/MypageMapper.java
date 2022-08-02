@@ -4,10 +4,12 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 
 import com.probee.waggle.model.dto.ConfirmDto;
+import com.probee.waggle.model.dto.Criteria;
 import com.probee.waggle.model.dto.FileDto;
 import com.probee.waggle.model.dto.MypageFinishlistDto;
 import com.probee.waggle.model.dto.MypageOtherDto;
@@ -31,19 +33,26 @@ public interface MypageMapper {
 	public String SelectDesc(int code); 
 	
 	//완료된 리스트 가져오기
-	@Select(" select req_No, req_Title, req_EDate, req_Point, req_Stat, home_Addr, fi_Nm, RES_UCODE from request join HOME on REQUEST.REQ_HCODE = HOME.home_Code join FILE on REQUEST.REQ_FCODE = FILE.FI_CODE JOIN RESULT ON REQUEST.REQ_NO = RESULT.RES_NO JOIN USERS ON RESULT.RES_UCODE = USERS.USER_CODE WHERE REQ_STAT = #{stat} AND RES_UCODE = #{ucode} ")
+	@Select(" select req_No, req_Title, req_EDate, req_Point, req_Stat, home_Addr, fi_Nm, RES_UCODE from request left outer join HOME on REQUEST.REQ_HCODE = HOME.home_Code left outer join FILE on REQUEST.REQ_FCODE = FILE.FI_CODE left outer JOIN RESULT ON REQUEST.REQ_NO = RESULT.RES_NO left outer JOIN USERS ON RESULT.RES_UCODE = USERS.USER_CODE WHERE REQ_STAT = #{stat} AND RES_UCODE = #{ucode} ")
 	public List<MypageFinishlistDto> SelectReqRoom(String stat, int ucode);
 	
 	@Select(" SELECT * FROM USERADDRESS WHERE ua_UCode = #{ua_UCode} ")
 	public UserAddressDto SelectAddr(int ua_Ucode);
-
+	
+	// 페이징 카운트
+	@Select(" select COUNT(*) from request left outer join HOME on REQUEST.REQ_HCODE = HOME.home_Code left outer join FILE on REQUEST.REQ_FCODE = FILE.FI_CODE WHERE REQ_UCODE = #{ucode} ")
+	public int historyReqListCnt(int ucode);
+	
+	@Select(" select COUNT(*) from REQUEST left outer join HOME on REQUEST.REQ_HCODE = HOME.home_Code left outer join FILE on REQUEST.REQ_FCODE = FILE.FI_CODE left outer JOIN RESULT ON REQUEST.REQ_NO = RESULT.RES_NO left outer JOIN USERS ON RESULT.RES_UCODE = USERS.USER_CODE WHERE RES_UCODE = #{ucode} ")
+	public int historyPerListCnt(int ucode);
+	
 	//이용내역페이지 나의 요청 sql
-	@Select("select req_No, req_Title, req_EDate, req_Point, req_Stat, home_Addr, fi_Nm from request left outer join HOME on REQUEST.REQ_HCODE = HOME.home_Code left outer join FILE on REQUEST.REQ_FCODE = FILE.FI_CODE WHERE REQ_UCODE = #{ucode} ")
-	public List<MypageFinishlistDto> SelectMyRequest(int ucode);
+	@Select("select req_No, req_Title, req_EDate, req_Point, req_Stat, home_Addr, fi_Nm from request left outer join HOME on REQUEST.REQ_HCODE = HOME.home_Code left outer join FILE on REQUEST.REQ_FCODE = FILE.FI_CODE WHERE REQ_UCODE = #{ucode} order by req_No desc LIMIT #{cri.pageStart}, #{cri.perPageNum} ")
+	public List<MypageFinishlistDto> SelectMyRequest(int ucode, @Param("cri") Criteria cri);
 	
 	//이용내역페이지 나의 수행 sql
-	@Select("select req_No, req_Title, req_EDate, req_Point, req_Stat, home_Addr, fi_Nm, RES_UCODE from request left outer join HOME on REQUEST.REQ_HCODE = HOME.home_Code left outer join FILE on REQUEST.REQ_FCODE = FILE.FI_CODE left outer JOIN RESULT ON REQUEST.REQ_NO = RESULT.RES_NO left outer JOIN USERS ON RESULT.RES_UCODE = USERS.USER_CODE WHERE RES_UCODE = #{ucode} ")
-	public List<MypageFinishlistDto> SelectMyPerform(int ucode);
+	@Select("select req_No, req_Title, req_EDate, req_Point, req_Stat, home_Addr, fi_Nm, RES_UCODE from request left outer join HOME on REQUEST.REQ_HCODE = HOME.home_Code left outer join FILE on REQUEST.REQ_FCODE = FILE.FI_CODE left outer JOIN RESULT ON REQUEST.REQ_NO = RESULT.RES_NO left outer JOIN USERS ON RESULT.RES_UCODE = USERS.USER_CODE WHERE RES_UCODE = #{ucode} order by req_No desc LIMIT #{cri.pageStart}, #{cri.perPageNum} ")
+	public List<MypageFinishlistDto> SelectMyPerform(int ucode, @Param("cri") Criteria cri);
 
 	@Update(" UPDATE USERS SET User_PW = #{user_Pw} WHERE user_Code = #{user_Code} ")
 	public int PwChange(String user_Pw, int user_Code);
