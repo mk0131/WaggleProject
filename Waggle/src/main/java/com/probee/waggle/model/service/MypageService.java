@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.probee.waggle.model.dto.ConfirmDto;
+import com.probee.waggle.model.dto.Criteria;
 import com.probee.waggle.model.dto.FileDto;
 import com.probee.waggle.model.dto.MypageFinishlistDto;
 import com.probee.waggle.model.dto.MypageOtherDto;
@@ -32,9 +33,13 @@ public interface MypageService {
 	
 	public UserAddressDto SelectAddr(int ua_UCode);
 
-	public List<MypageFinishlistDto> SelectMyRequest(int ucode);
+	// 페이징 카운트
+	public int historyReqListCnt(int ucode);
+	public int historyPerListCnt(int ucode);
+
+	public List<MypageFinishlistDto> SelectMyRequest(int ucode, Criteria cri);
+	public List<MypageFinishlistDto> SelectMyPerform(int ucode, Criteria cri);
 	
-	public List<MypageFinishlistDto> SelectMyPerform(int ucode);
 	
 	public int PwChange(String user_Pw, int user_Code);
 	
@@ -49,12 +54,18 @@ public interface MypageService {
 	public int GenderChange(String user_Gender, int user_Code);
 	
 	public MypageUsageDto reqCancel(int ucode);
-	
+	public MypageUsageDto reqFinish(int ucode);
 	public MypageUsageDto reqTotal(int ucode);
-	
+	public MypageUsageDto resFinish(int ucode);
 	public MypageUsageDto resCancel(int ucode);
-	
 	public MypageUsageDto resTotal(int ucode);
+	
+	public MypageUsageDto reqCancel3M(int ucode);
+	public MypageUsageDto reqFinish3M(int ucode);
+	public MypageUsageDto reqTotal3M(int ucode);
+	public MypageUsageDto resFinish3M(int ucode);
+	public MypageUsageDto resCancel3M(int ucode);
+	public MypageUsageDto resTotal3M(int ucode);
 	
 	public int saveLocalProfile(int new_Fi_Code, MultipartFile file, HttpServletRequest request);
 	

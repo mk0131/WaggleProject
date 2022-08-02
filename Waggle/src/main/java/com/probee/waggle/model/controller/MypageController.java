@@ -20,10 +20,12 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.probee.waggle.model.component.FileSaver;
 import com.probee.waggle.model.dto.ConfirmDto;
+import com.probee.waggle.model.dto.Criteria;
 import com.probee.waggle.model.dto.FileDto;
 import com.probee.waggle.model.dto.MypageFinishlistDto;
 import com.probee.waggle.model.dto.MypageOtherDto;
 import com.probee.waggle.model.dto.MypageUsageDto;
+import com.probee.waggle.model.dto.Paging;
 import com.probee.waggle.model.dto.UserAddressDto;
 import com.probee.waggle.model.dto.UsersDto;
 import com.probee.waggle.model.service.MypageService;
@@ -45,10 +47,20 @@ public class MypageController {
 	@GetMapping("/other")
 	public String selectOtherInfo(int ucode, Model model) {
 		MypageOtherDto UserList = mypageService.SelectUsersInfo(ucode);
+		//이용횟수 모든기간
 		MypageUsageDto reqCancel = mypageService.reqCancel(ucode);
+		MypageUsageDto reqFinish = mypageService.reqFinish(ucode);
 		MypageUsageDto reqTotal = mypageService.reqTotal(ucode);
 		MypageUsageDto resCancel = mypageService.resCancel(ucode);
+		MypageUsageDto resFinish = mypageService.resFinish(ucode);
 		MypageUsageDto resTotal = mypageService.resTotal(ucode);
+		//이용횟수 3개월
+		MypageUsageDto reqCancel3M = mypageService.reqCancel3M(ucode);
+		MypageUsageDto reqFinish3M = mypageService.reqFinish3M(ucode);
+		MypageUsageDto reqTotal3M = mypageService.reqTotal3M(ucode);
+		MypageUsageDto resCancel3M = mypageService.resCancel3M(ucode);
+		MypageUsageDto resFinish3M = mypageService.resFinish3M(ucode);
+		MypageUsageDto resTotal3M = mypageService.resTotal3M(ucode);
 		
 		int OtherUserPro = UserList.getUser_Pro();
 		if(OtherUserPro !=0) {
@@ -58,16 +70,29 @@ public class MypageController {
 		
 		double reqRatio = 0;
 		double resRatio = 0;
+		double reqRatio3M = 0;
+		double resRatio3M = 0;
+		
 		
 		if (reqTotal.getReqTotal() != 0) {
-			reqRatio = (double)(reqCancel.getReqCancel()/reqTotal.getReqTotal())*100;
+			reqRatio = ((double)reqFinish.getReqFinish()/(double)reqTotal.getReqTotal())*100;
 		}else {
 			reqRatio = 0;
 		}
 		if(resTotal.getResTotal() != 0) {
-			resRatio = (double)(resCancel.getResCancel()/resTotal.getResTotal())*100;
+			resRatio = ((double)resFinish.getResFinish()/(double)resTotal.getResTotal())*100;
 		}else {
 			resRatio = 0;
+		}
+		if (reqTotal3M.getReqTotal() != 0) {
+			reqRatio3M = ((double)reqFinish3M.getReqFinish()/(double)reqTotal3M.getReqTotal())*100;
+		}else {
+			reqRatio3M = 0;
+		}
+		if(resTotal3M.getResTotal() != 0) {
+			resRatio3M = ((double)resFinish3M.getResFinish()/(double)resTotal3M.getResTotal())*100;
+		}else {
+			resRatio3M = 0;
 		}
 		
 		model.addAttribute("dto",UserList);
@@ -75,8 +100,18 @@ public class MypageController {
 		model.addAttribute("reqTotal", reqTotal.getReqTotal());
 		model.addAttribute("resCancel", resCancel.getResCancel());
 		model.addAttribute("resTotal", resTotal.getResTotal());
+		model.addAttribute("reqFinish", reqFinish.getReqFinish());
+		model.addAttribute("resFinish", resFinish.getResFinish());
 		model.addAttribute("ratio", Math.round(reqRatio));
 		model.addAttribute("ratio2", Math.round(resRatio));
+		model.addAttribute("reqCancel3M", reqCancel3M.getReqCancel());
+		model.addAttribute("reqTotal3M", reqTotal3M.getReqTotal());
+		model.addAttribute("resCancel3M", resCancel3M.getResCancel());
+		model.addAttribute("resTotal3M", resTotal3M.getResTotal());
+		model.addAttribute("reqFinish3M", reqFinish3M.getReqFinish());
+		model.addAttribute("resFinish3M", resFinish3M.getResFinish());
+		model.addAttribute("ratio3M", Math.round(reqRatio3M));
+		model.addAttribute("ratio2_3M", Math.round(resRatio3M));
 		return "mypage_other";
 	}
 	
@@ -86,11 +121,23 @@ public class MypageController {
 		int ucode = (int)session.getAttribute("user_Code");
 		int user_Pro = (int)session.getAttribute("user_Pro");
 		
+		//마이페이지 유저 정보
 		UsersDto myinfo = mypageService.SelectMyInfo(ucode);
+		//이용횟수 모든기간
 		MypageUsageDto reqCancel = mypageService.reqCancel(ucode);
+		MypageUsageDto reqFinish = mypageService.reqFinish(ucode);
 		MypageUsageDto reqTotal = mypageService.reqTotal(ucode);
 		MypageUsageDto resCancel = mypageService.resCancel(ucode);
+		MypageUsageDto resFinish = mypageService.resFinish(ucode);
 		MypageUsageDto resTotal = mypageService.resTotal(ucode);
+		//이용횟수 3개월
+		MypageUsageDto reqCancel3M = mypageService.reqCancel3M(ucode);
+		MypageUsageDto reqFinish3M = mypageService.reqFinish3M(ucode);
+		MypageUsageDto reqTotal3M = mypageService.reqTotal3M(ucode);
+		MypageUsageDto resCancel3M = mypageService.resCancel3M(ucode);
+		MypageUsageDto resFinish3M = mypageService.resFinish3M(ucode);
+		MypageUsageDto resTotal3M = mypageService.resTotal3M(ucode);
+		//공인중개사자격증
 		ConfirmDto MyConfirm = mypageService.SelectMyConfirm(ucode);
 		
 		if (MyConfirm != null) {
@@ -98,7 +145,8 @@ public class MypageController {
 			//공인중개사 사진 파일 이름 db에서 가져오기 위함.
 			FileDto ConfirmFile = mypageService.SelectConfirmFile(ConF_Code);
 			model.addAttribute("con_file_Name",ConfirmFile.getFi_Nm());
-			model.addAttribute("condto", MyConfirm.getCo_UCode());
+			model.addAttribute("con_stat", MyConfirm.getCo_Confirm());
+			model.addAttribute("con_ucode", MyConfirm.getCo_UCode());
 		} else {
 			model.addAttribute("condto",0);
 		}
@@ -111,16 +159,29 @@ public class MypageController {
 		
 		double reqRatio = 0;
 		double resRatio = 0;
+		double reqRatio3M = 0;
+		double resRatio3M = 0;
+		
 		
 		if (reqTotal.getReqTotal() != 0) {
-			reqRatio = (double)(reqCancel.getReqCancel()/reqTotal.getReqTotal())*100;
+			reqRatio = ((double)reqFinish.getReqFinish()/(double)reqTotal.getReqTotal())*100;
 		}else {
 			reqRatio = 0;
 		}
 		if(resTotal.getResTotal() != 0) {
-			resRatio = (double)(resCancel.getResCancel()/resTotal.getResTotal())*100;
+			resRatio = ((double)resFinish.getResFinish()/(double)resTotal.getResTotal())*100;
 		}else {
 			resRatio = 0;
+		}
+		if (reqTotal3M.getReqTotal() != 0) {
+			reqRatio3M = ((double)reqFinish3M.getReqFinish()/(double)reqTotal3M.getReqTotal())*100;
+		}else {
+			reqRatio3M = 0;
+		}
+		if(resTotal3M.getResTotal() != 0) {
+			resRatio3M = ((double)resFinish3M.getResFinish()/(double)resTotal3M.getResTotal())*100;
+		}else {
+			resRatio3M = 0;
 		}
 		
 		model.addAttribute("dto", myinfo);
@@ -128,8 +189,18 @@ public class MypageController {
 		model.addAttribute("reqTotal", reqTotal.getReqTotal());
 		model.addAttribute("resCancel", resCancel.getResCancel());
 		model.addAttribute("resTotal", resTotal.getResTotal());
+		model.addAttribute("reqFinish", reqFinish.getReqFinish());
+		model.addAttribute("resFinish", resFinish.getResFinish());
 		model.addAttribute("ratio", Math.round(reqRatio));
 		model.addAttribute("ratio2", Math.round(resRatio));
+		model.addAttribute("reqCancel3M", reqCancel3M.getReqCancel());
+		model.addAttribute("reqTotal3M", reqTotal3M.getReqTotal());
+		model.addAttribute("resCancel3M", resCancel3M.getResCancel());
+		model.addAttribute("resTotal3M", resTotal3M.getResTotal());
+		model.addAttribute("reqFinish3M", reqFinish3M.getReqFinish());
+		model.addAttribute("resFinish3M", resFinish3M.getResFinish());
+		model.addAttribute("ratio3M", Math.round(reqRatio3M));
+		model.addAttribute("ratio2_3M", Math.round(resRatio3M));
 		
 		return "mypage_me";
 	}
@@ -326,39 +397,50 @@ public class MypageController {
 		return "profileEdit";
 	}
 
-/*
-	// 이용내역페이지 나의 요청 컨트롤러
-	@RequestMapping(value = "/reqhistory", method = RequestMethod.POST)
-	@ResponseBody
-	public List<MypageFinishlistDto> reqhistory(int ucode) {
-		List<MypageFinishlistDto> myReqList = mypageService.SelectMyRequest(ucode);
-		return myReqList;
-	}
-
-	@RequestMapping(value = "/performhistory", method = RequestMethod.POST)
-	@ResponseBody
-	public List<MypageFinishlistDto> performhistory(int ucode) {
-		List<MypageFinishlistDto> myPerformList = mypageService.SelectMyPerform(ucode);
-		return myPerformList;
-
-	}
-*/
 	@GetMapping("/history")
-	public String history(Model model, HttpServletRequest request) {
+	public String history(Model model, HttpServletRequest request, Criteria cri) {
 		HttpSession session = request.getSession();
+		
 		int ucode = (int)session.getAttribute("user_Code");
 		
+		int historyReqListCnt = mypageService.historyReqListCnt(ucode);
+		int historyPerListCnt = mypageService.historyPerListCnt(ucode);
+		
+		// 페이징 객체
+		Paging paging1 = new Paging();
+		Paging paging2 = new Paging();
+		
+		cri.setPerPageNum(4);
+		
+		paging1.setCri(cri);
+		paging2.setCri(cri);
+		paging1.setTotalCount(historyReqListCnt);
+		paging2.setTotalCount(historyPerListCnt);
+		
+		
 		//나의 요청
-		List<MypageFinishlistDto> myReqList = mypageService.SelectMyRequest(ucode);
+		List<MypageFinishlistDto> myReqList = mypageService.SelectMyRequest(ucode, cri);
 		
 		//나의 수행
-		List<MypageFinishlistDto> myPerformList = mypageService.SelectMyPerform(ucode);
-
+		List<MypageFinishlistDto> myPerformList = mypageService.SelectMyPerform(ucode, cri);
+		
+//		System.out.println(myReqList);
+		
 		model.addAttribute("Request", myReqList);
 		model.addAttribute("Perform", myPerformList);
 		
+		model.addAttribute("paging1", paging1);
+		model.addAttribute("paging2", paging2);
+	
+		System.out.println("Req 게시글 수 : " + historyReqListCnt);
+		System.out.println("Per 게시글 수 : " + historyPerListCnt);
+		System.out.println(paging1);
+		System.out.println(paging2);
+		
 		return "history";
+	
 	}
+	
 	
 	@PostMapping("/pwchange") // 비밀번호 변경
 	public String PwChange(int user_Code, String user_Pw) {

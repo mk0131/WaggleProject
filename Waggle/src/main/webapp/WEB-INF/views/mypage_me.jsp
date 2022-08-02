@@ -166,6 +166,19 @@ textarea {
 	float: right;
 }
 
+.desc-content-finishlist{
+	margin: 0 auto;
+	width: 900px;
+	display: none;
+	text-align:left;
+	padding-top:100px;
+}
+
+.desc-content-finishlist img{
+	width:300px;
+	height:300px;
+}
+
 #bar_container {
   height: 16px;
   background: #dcdbd7;
@@ -573,6 +586,135 @@ textarea {
 }
 
 /* 이용횟수 통계 그림 끝 */
+
+/*이용횟수 간단 css */
+#bold{
+	font-weight:bold;
+	color:#fc4f4f;
+}
+
+#ratio{
+	text-align: center;
+	font-size: 18px;
+	font-weight: bold;
+}
+
+#line{
+	width:100%;
+	height:50px;
+	border-bottom: 1px dashed #898989;
+}
+
+#ul-left{
+	width:420px;
+	padding:0;
+	padding-left:20px;	
+}
+
+#ul-right{
+	width:420px;
+	padding:0;
+}
+/*이용횟수 간단 css */
+
+/*완료한 리스트 css */
+
+#my-res-list-img {
+	display: inline-block;
+    vertical-align: top;
+    align-self: center;
+    padding: 0px 40px 0px 0px;
+}
+ 
+#my-res-list-text {
+	display:inline-block;
+	width: 550px;
+    height: 300px;
+    padding: 40px 0px 40px 40px;
+    border-left: 1px solid #ebebeb;
+}
+ 
+#my-res-list-content-all {
+	display: flex;
+    justify-content: center;
+}
+
+#my-res-list-point {
+	display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 550px;
+    height: 60px;
+    border: 1px solid #d3d3d3;
+    border-radius: 10px;
+}
+ 
+#my-res-list-dl {
+	display: flex;
+    min-height: 20px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+} 
+
+#my-res-list-dt {
+	line-height: 14px;
+    font-size: 15px;
+    letter-spacing: -.06px;
+    letter-spacing: -.33px;
+    color: rgba(34,34,34,.5);
+}
+
+#my-res-list-dd {
+	margin: 4px 0px 0px 0px;
+    word-break: break-word;
+    line-height: 17px;
+    font-size: 15px;
+    
+}
+ 
+#my-res-list-ltd-box {
+	padding: 0 12px;
+/* 	padding-left: 0;
+	padding-right: 0; */
+	flex: 1;
+} 
+
+.my-res-list-ltd-detail-box {
+	border-left: 1px solid #ebebeb;
+}
+
+#my-res-list-dl-dt-dd {
+	border-top: 1px solid #ebebeb;
+	border-bottom: 1px solid #ebebeb;
+}
+
+#my-res-list-ltd-title {
+	line-height: 22px;
+    padding: 21px 0 12px;
+    font-size: 18px;
+    letter-spacing: -.15px;
+    margin: 0;
+}
+ 
+#my-res-list-stat {
+	display: inline-block;
+	padding-top: 1px;
+    margin-bottom: 9px;
+    font-size: 18px;
+}
+ 
+#res-stat {
+	font-weight: 800;
+    border-bottom: 2px solid #222;
+}
+ 
+#my-res-list-title {
+	margin-bottom: 6px;
+    font-size: 18px;
+    letter-spacing: -.09px;
+    font-weight: 400;
+}
+/* 완료한 리스트 css 끝 */
 </style>
 
 
@@ -690,11 +832,23 @@ textarea {
 							</div>
 
 						<!-- div style="margin-bottom:20px">|--------------|</div> -->
-						<c:if test="${condto != 0}">
+						<c:if test="${con_ucode != 0}">
+							<c:if test="${con_stat == '미확인' }">
 							<span style="font-size: 11pt; color: #898989">업로드한 자격증을 확인중입니다.</span>
 							<span style="font-size: 11pt; color: #2d7eac; margin-left: 5px" onclick="showProof();">파일 다시 업로드하기</span>
+							</c:if>
+							<c:if test="${con_stat == '확인' }">
+							<span style="font-size: 11pt; color: #5c5c5c; font-weight:bold">${dto.user_Nm }님은 <span style="color:red">인증된 공인중개사</span>이십니다!</span>
+							</c:if>
+							<c:if test="${con_stat == '반려' }">
+							<span style="font-size: 11pt; color: #898989">신청한 자격증이 반려되었습니다.</span>
+							<span style="font-size: 11pt; color: #2d7eac; margin-left: 5px" onclick="showProof();">파일 다시 업로드하기</span>
+							</c:if>
+							<c:if test="${con_stat == '처리중' }">
+							<span style="font-size: 11pt; color: #898989">신청한 자격증이 처리중입니다.</span>
+							</c:if>
 						</c:if>
-						<c:if test="${condto == 0}">
+						<c:if test="${con_ucode == 0}">
 						<div>
 							<span style="font-size: 11pt; color: #898989">공인중개사이신가요?</span>
 							<span style="font-size: 11pt; color: #2d7eac; margin-left: 5px" onclick="showProof();">인증하기</span>
@@ -759,27 +913,69 @@ textarea {
 						</div>
 					</div>
 					<div></div>
-					<div class="desc-content-finishlist" style="margin: 0 auto; width: 900px; display: none">
+					<div class="desc-content-finishlist">
 					</div>
 					<div class="desc-usage" style="margin: 0 auto; width: 900px; padding-top: 60px; display: none">
-						<div class="usage-left" style="width:400px; display:inline-block; float: right; padding-top:15px">
-						<ul class="bar-graph" style="width: 400px; padding:0">
-							<li>
-								<p>[꿀벌]의뢰수락 24시간 후 취소 비율</p>
-								<p>-> 의뢰 수행 횟수 총 ${resTotal }건 중 취소횟수 ${resCancel}건</p>
-								<div class="bar-wrap">
-									<span class="bar-fill" style="width:${ratio2}%;">${ratio2 }%</span>
-								</div>
-							</li>
-						</ul>
-						</div>
-						<div class="usage-right" style="width: 400px; display: inline-block; border-right: 1px dashed #898989; padding-right:35px">
-							<ul class="bar-graph" style="width: 400px; padding: 0">
+						<div class="usage-left" style="width:420px; display:inline-block; float: right; padding-top:15px">
+							<ul class="bar-graph" id="ul-left">
 								<li>
-									<p>[의뢰인]진행중 상태 의뢰 요청취소 비율</p>
-									<p>-> 의뢰글 총 ${reqTotal }건 중 취소횟수 ${reqCancel }건</p>
+									<p style="font-size:20pt; font-weight:bold"><꿀벌></p>
+									<p style="font-size:16pt; font-weight:bold; color:#5a76ff">[모든 기간] 의뢰 수행완료 비율</p>
+									<p>${dto.user_Nm} 님이 <span id="bold">현재까지 지원</span>한 의뢰 총 갯수 : ${resTotal } 건<p>
+									<p>${dto.user_Nm} 님이 현재 <span id="bold">진행중</span>인 의뢰 갯수 : ${resTotal-resFinish } 건<p>
+									<p>${dto.user_Nm} 님이 현재까지 <span id="bold">수행완료</span>한 의뢰 갯수 : ${resFinish } 건<p>
+									<p>${dto.user_Nm} 님이 현재까지 <span id="bold">수행취소</span>한 의뢰 갯수 : ${resCancel } 건<p>
+									<br>
+									<p id="ratio">꿀벌 지원 총 ${resTotal }건 중 수행완료 ${resFinish}건</p>
+									<div class="bar-wrap">
+										<span class="bar-fill" style="width:${ratio2}%;">${ratio2 }%</span>
+									</div>
+								</li>
+							</ul>
+							<div id="line" style="margin-left:20px"></div>
+							<ul class="bar-graph" id="ul-left">
+								<li>
+									<p style="font-size:16pt; font-weight:bold; color:#5a76ff">[최근 3개월] 의뢰 수행완료 비율</p>
+									<p>${dto.user_Nm} 님이 <span id="bold">현재까지 지원</span>한 의뢰 총 갯수 : ${resTotal3M } 건<p>
+									<p>${dto.user_Nm} 님이 현재 <span id="bold">진행중</span>인 의뢰 갯수 : ${resTotal3M-resFinish3M } 건<p>
+									<p>${dto.user_Nm} 님이 현재까지 <span id="bold">수행완료</span>한 의뢰 갯수 : ${resFinish3M } 건<p>
+									<p>${dto.user_Nm} 님이 현재까지 <span id="bold">수행취소</span>한 의뢰 갯수 : ${resCancel3M } 건<p>
+									<br>
+									<p id="ratio">꿀벌 지원 총 ${resTotal3M }건 중 수행완료 ${resFinish3M}건</p>
+									<div class="bar-wrap">
+										<span class="bar-fill" style="width:${ratio2_3M}%;">${ratio2_3M }%</span>
+									</div>
+								</li>
+							</ul>
+						</div>
+						<div class="usage-right" style="width: 420px; display: inline-block; border-right: 1px dashed #898989; padding-right:35px">
+							<ul class="bar-graph" id="ul-right">
+								<li>
+									<p style="font-size:20pt; font-weight:bold"><의뢰인></p>
+									<p style="font-size:16pt; font-weight:bold; color:#5a76ff">[모든 기간] 의뢰 대비 꿀벌평가 완료 비율</p>
+									<p>${dto.user_Nm} 님이 <span id="bold">현재까지 의뢰</span>한 게시글 총 갯수 : ${reqTotal } 건<p>
+									<p>${dto.user_Nm} 님이 현재 <span id="bold">의뢰중</span>인 게시글 갯수 : ${reqTotal - reqFinish } 건<p>
+									<p>${dto.user_Nm} 님이 현재까지 <span id="bold">꿀벌 평가 완료</span>한 게시글 : ${reqFinish } 건<p>
+									<p>${dto.user_Nm} 님이 현재까지 <span id="bold">요청취소</span>한 게시글 갯수 : ${reqCancel } 건<p>
+									<br>
+									<p id="ratio">의뢰글 총 ${reqTotal }건 중 꿀벌평가 ${reqFinish }건 완료</p>
 									<div class="bar-wrap">
 										<span class="bar-fill" style="width: ${ratio}%;">${ratio }%</span>
+									</div>
+								</li>
+							</ul>
+							<div id="line"></div>
+							<ul class="bar-graph" id="ul-right">
+								<li>
+									<p style="font-size:16pt; font-weight:bold; color:#5a76ff">[최근 3개월] 의뢰 대비 꿀벌평가 완료 비율</p>
+									<p>${dto.user_Nm} 님이 <span id="bold">현재까지 의뢰</span>한 게시글 총 갯수 : ${reqTotal3M } 건<p>
+									<p>${dto.user_Nm} 님이 현재 <span id="bold">의뢰중</span>인 게시글 갯수 : ${reqTotal3M - reqFinish3M } 건<p>
+									<p>${dto.user_Nm} 님이 현재까지 <span id="bold">꿀벌 평가 완료</span>한 게시글 : ${reqFinish3M } 건<p>
+									<p>${dto.user_Nm} 님이 현재까지 <span id="bold">요청취소</span>한 게시글 갯수 : ${reqCancel3M } 건<p>
+									<br>
+									<p id="ratio">의뢰글 총 ${reqTotal3M }건 중 꿀벌평가 ${reqFinish3M }건 완료</p>
+									<div class="bar-wrap">
+										<span class="bar-fill" style="width: ${ratio3M}%;">${ratio3M }%</span>
 									</div>
 								</li>
 							</ul>
@@ -910,27 +1106,25 @@ textarea {
 					$(".desc-content-finishlist").append('<div style="width:900px;height:300px;padding-top:130px">완료한 수행내역이 없습니다.</div>');
 				}else{
 					for(let i=0; i<result.length; i++){
-						$(".desc-content-finishlist").append('<a href ="/board/detail?req_No='+result[i].req_No+'">'
-															+'<div class="finish-top" style="float: right; width: 900px; height:20px">'
-															+'<div style="float: right"></div></div>'
-															+'<div class="finish-mid" style="width: 900px">'
-															+'<div class="finish-mid-left" style="display: inline-block; width: 200px; height: 200px; float: left; border:3px solid #80808075; border-radius: 10px">'
-															+'<div class="room-img"><img style="width:203px; height:203px; border-radius:10px" src='+result[i].fi_Nm+'></div></div>'
-															+'<div class="finish-mid-right" style="display: inline-block; width: 670px; height: 200px; float: right; border:3px solid #80808075; border-radius: 10px">'
-															+'<div class="req-desc" style="display: inline-block; float: left; height: 200px">'
-															+'<p style="margin: 5px 10px; font-size: 16pt; text-align:left">기한 :'+result[i].req_EDate+'</p>'
-															+'<p style="margin: 135px 10px 0 10px; font-size: 12pt">'+result[i].home_Addr+'</p>'
-															+'</div>'
-															+'<div class="req-title" style="display: inline-block">'
-															+'<p style="line-height: 150px; font-size: 20pt">'+result[i].req_Title+'</p>'
-															+'</div>'
-															+'<div class="req-point" style="display: inline-block; float: right; height: 200px">'
-															+'<p style="font-size: 20pt; line-height: 200px; margin: 0 18px">'+result[i].req_Point+'P</p>'
-															+'</div></div></div>'
-															+'<div class="finish-bot" style="width: 900px;">'
-															+'<div class="button" style="float: left; width: 80px; margin-top: 10px; margin-left: 55px; border-radius: 30px">'
-															+'<p style="margin: 5px">완료</p>'
-															+'</div></div></a>');
+						$(".desc-content-finishlist").append('<div class="my-res-list-content-all" id="my-res-list-content-all">'
+																+'<div class="my-res-list-content-inner" id="my-res-list-img" onclick="location.href=\'/board/detail?req_No='+result[i].req_No+'\'">'
+																+'<img src="'+result[i].fi_Nm+'"></div>'
+																+'<div id="my-res-list-text">'
+																+'<div class="my-res-list-content-inner" id="my-res-list-stat" onclick="location.href=\'/board/detail?req_No='+result[i].req_No+'\'">'
+																+'<label id="res-stat">'+result[i].req_Stat+'</label></div>'
+																+'<div class="my-res-list-content-inner" id="my-res-list-title"	onclick="location.href=\'/board/detail?req_No='+result[i].req_No+'\'">'+result[i].req_Title+'</div>'
+																+'<div class="my-res-list-content-inner" id="my-res-list-point"	onclick="location.href=\'/board/detail?req_No='+result[i].req_No+'\'">'+result[i].req_Point+'&nbsp; <i class="fa-solid fa-p"> </i></div>'
+																+'<h4 class="my-res-list-content-inner" id="my-res-list-ltd-title" onclick="location.href=\'/board/detail?req_No='+result[i].req_No+'\'">요청 정보</h4>'
+																+'<div class="my-res-list-content-inner" id="my-res-list-dl-dt-dd" onclick="location.href=\'/board/detail?req_No='+result[i].req_No+'\'">'
+																+'<dl id="my-res-list-dl">'
+																+'<div id="my-res-list-ltd-box">'
+																	+'<dt id="my-res-list-dt">매물주소</dt>'
+																	+'<dd id="my-res-list-dd">'+result[i].home_Addr+'</dd>'
+																	+'</div>'
+																	+'<div id="my-res-list-ltd-box" class="my-res-list-ltd-detail-box">'
+																	+'<dt id="my-res-list-dt">방문기한</dt>'
+																	+'<dd id="my-res-list-dd">'+result[i].req_EDate+'</dd>'
+																	+'</div></dl></div></div></div>');
 					}
 				}
 			},
@@ -940,7 +1134,6 @@ textarea {
 		})
 
 	}
-	
 	//공인중개사 파일 업로드 태그 보여줌
 	function showProof(){
 		$(".desc-content-aboutme").hide();

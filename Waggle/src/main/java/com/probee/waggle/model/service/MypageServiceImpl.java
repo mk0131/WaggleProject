@@ -11,6 +11,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.probee.waggle.model.component.FileSaver;
 import com.probee.waggle.model.dto.ConfirmDto;
+import com.probee.waggle.model.dto.Criteria;
 import com.probee.waggle.model.dto.FileDto;
 import com.probee.waggle.model.dto.MypageFinishlistDto;
 import com.probee.waggle.model.dto.MypageOtherDto;
@@ -50,15 +51,28 @@ public class MypageServiceImpl implements MypageService{
 	}
 
 
-	public List<MypageFinishlistDto> SelectMyRequest(int ucode) {
-		return mypageMapper.SelectMyRequest(ucode);
+	// 페이징
+	@Override
+	public int historyReqListCnt(int ucode) {
+		return mypageMapper.historyReqListCnt(ucode);
 	}
 
 	@Override
-	public List<MypageFinishlistDto> SelectMyPerform(int ucode) {
-		return mypageMapper.SelectMyPerform(ucode);
+	public int historyPerListCnt(int ucode) {
+		return mypageMapper.historyPerListCnt(ucode);
+	}
+	
+
+	public List<MypageFinishlistDto> SelectMyRequest(int ucode, Criteria cri) {
+		return mypageMapper.SelectMyRequest(ucode, cri);
 	}
 
+	@Override
+	public List<MypageFinishlistDto> SelectMyPerform(int ucode, Criteria cri) {
+		return mypageMapper.SelectMyPerform(ucode, cri);
+	}
+
+	
 	@Override
 	public int PwChange(String user_Pw, int user_Code) {
 		return mypageMapper.PwChange(user_Pw, user_Code);
@@ -202,6 +216,46 @@ public class MypageServiceImpl implements MypageService{
 	@Override
 	public int DeleteMyDesc(int ucode) {
 		return mypageMapper.DeleteMyDesc(ucode);
+	}
+
+	@Override
+	public MypageUsageDto reqFinish(int ucode) {
+		return mypageMapper.reqFinish(ucode);
+	}
+
+	@Override
+	public MypageUsageDto resFinish(int ucode) {
+		return mypageMapper.resFinish(ucode);
+	}
+
+	@Override
+	public MypageUsageDto reqCancel3M(int ucode) {
+		return mypageMapper.reqCancel3M(ucode);
+	}
+
+	@Override
+	public MypageUsageDto reqFinish3M(int ucode) {
+		return mypageMapper.reqFinish3M(ucode);
+	}
+
+	@Override
+	public MypageUsageDto reqTotal3M(int ucode) {
+		return mypageMapper.reqTotal3M(ucode);
+	}
+
+	@Override
+	public MypageUsageDto resFinish3M(int ucode) {
+		return mypageMapper.resFinish3M(ucode);
+	}
+
+	@Override
+	public MypageUsageDto resCancel3M(int ucode) {
+		return mypageMapper.resCancel3M(ucode);
+	}
+
+	@Override
+	public MypageUsageDto resTotal3M(int ucode) {
+		return mypageMapper.resTotal3M(ucode);
 	}
 	
 	
