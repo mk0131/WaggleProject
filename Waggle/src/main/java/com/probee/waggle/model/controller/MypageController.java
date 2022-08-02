@@ -20,10 +20,12 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.probee.waggle.model.component.FileSaver;
 import com.probee.waggle.model.dto.ConfirmDto;
+import com.probee.waggle.model.dto.Criteria;
 import com.probee.waggle.model.dto.FileDto;
 import com.probee.waggle.model.dto.MypageFinishlistDto;
 import com.probee.waggle.model.dto.MypageOtherDto;
 import com.probee.waggle.model.dto.MypageUsageDto;
+import com.probee.waggle.model.dto.Paging;
 import com.probee.waggle.model.dto.UserAddressDto;
 import com.probee.waggle.model.dto.UsersDto;
 import com.probee.waggle.model.service.MypageService;
@@ -395,38 +397,50 @@ public class MypageController {
 		return "profileEdit";
 	}
 
-/*
-	// 이용내역페이지 나의 요청 컨트롤러
-	@RequestMapping(value = "/reqhistory", method = RequestMethod.POST)
-	@ResponseBody
-	public List<MypageFinishlistDto> reqhistory(int ucode) {
-		List<MypageFinishlistDto> myReqList = mypageService.SelectMyRequest(ucode);
-		return myReqList;
-	}
-
-	@RequestMapping(value = "/performhistory", method = RequestMethod.POST)
-	@ResponseBody
-	public List<MypageFinishlistDto> performhistory(int ucode) {
-		List<MypageFinishlistDto> myPerformList = mypageService.SelectMyPerform(ucode);
-		return myPerformList;
-
-	}
-*/
 	@GetMapping("/history")
-	public String history(Model model, HttpServletRequest request) {
+	public String history(Model model, HttpServletRequest request, Criteria cri) {
 		HttpSession session = request.getSession();
+		
 		int ucode = (int)session.getAttribute("user_Code");
+		
+		int historyReqListCnt = mypageService.historyReqListCnt(ucode);
+		int historyPerListCnt = mypageService.historyPerListCnt(ucode);
+		
+		// 페이징 객체
+		Paging paging1 = new Paging();
+		Paging paging2 = new Paging();
+		
+		cri.setPerPageNum(4);
+		
+		paging1.setCri(cri);
+		paging2.setCri(cri);
+		paging1.setTotalCount(historyReqListCnt);
+		paging2.setTotalCount(historyPerListCnt);
+		
+		
 		//나의 요청
-		List<MypageFinishlistDto> myReqList = mypageService.SelectMyRequest(ucode);
+		List<MypageFinishlistDto> myReqList = mypageService.SelectMyRequest(ucode, cri);
 		
 		//나의 수행
-		List<MypageFinishlistDto> myPerformList = mypageService.SelectMyPerform(ucode);
-		System.out.println(myReqList);
+		List<MypageFinishlistDto> myPerformList = mypageService.SelectMyPerform(ucode, cri);
+		
+//		System.out.println(myReqList);
+		
 		model.addAttribute("Request", myReqList);
 		model.addAttribute("Perform", myPerformList);
 		
+		model.addAttribute("paging1", paging1);
+		model.addAttribute("paging2", paging2);
+	
+		System.out.println("Req 게시글 수 : " + historyReqListCnt);
+		System.out.println("Per 게시글 수 : " + historyPerListCnt);
+		System.out.println(paging1);
+		System.out.println(paging2);
+		
 		return "history";
+	
 	}
+	
 	
 	@PostMapping("/pwchange") // 비밀번호 변경
 	public String PwChange(int user_Code, String user_Pw) {

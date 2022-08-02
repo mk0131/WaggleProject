@@ -11,6 +11,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.probee.waggle.model.component.FileSaver;
 import com.probee.waggle.model.dto.ConfirmDto;
+import com.probee.waggle.model.dto.Criteria;
 import com.probee.waggle.model.dto.FileDto;
 import com.probee.waggle.model.dto.MypageFinishlistDto;
 import com.probee.waggle.model.dto.MypageOtherDto;
@@ -50,15 +51,28 @@ public class MypageServiceImpl implements MypageService{
 	}
 
 
-	public List<MypageFinishlistDto> SelectMyRequest(int ucode) {
-		return mypageMapper.SelectMyRequest(ucode);
+	// 페이징
+	@Override
+	public int historyReqListCnt(int ucode) {
+		return mypageMapper.historyReqListCnt(ucode);
 	}
 
 	@Override
-	public List<MypageFinishlistDto> SelectMyPerform(int ucode) {
-		return mypageMapper.SelectMyPerform(ucode);
+	public int historyPerListCnt(int ucode) {
+		return mypageMapper.historyPerListCnt(ucode);
+	}
+	
+
+	public List<MypageFinishlistDto> SelectMyRequest(int ucode, Criteria cri) {
+		return mypageMapper.SelectMyRequest(ucode, cri);
 	}
 
+	@Override
+	public List<MypageFinishlistDto> SelectMyPerform(int ucode, Criteria cri) {
+		return mypageMapper.SelectMyPerform(ucode, cri);
+	}
+
+	
 	@Override
 	public int PwChange(String user_Pw, int user_Code) {
 		return mypageMapper.PwChange(user_Pw, user_Code);
