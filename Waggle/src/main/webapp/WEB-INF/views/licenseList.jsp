@@ -17,7 +17,6 @@
 </script>
 <style type="text/css">
 .box {
-	background-color: var(--color-black);
     flex-direction: column;
     justify-content: center;
     align-items: center;
@@ -26,7 +25,7 @@
 	width: 70%;
 }
 button {
-	background: #6698cf;
+	background: #E0F8F7;
 	
 	margin: 2px;
 	text-decoration: none;
@@ -34,15 +33,15 @@ button {
 	padding: 4px 12px;  
 	font-size: 12px;
 	border-radius: 6px;
-	box-shadow: 0px 2px #343a50;
-	color: white;
+	box-shadow: 0px 2px #A9E2F3;
+	color: #0040FF;
 	&:focus {
       outline: none;
 	}
 }
 button:active {
-	box-shadow: 0 0 #6698cf;
-	background-color: #6698cf;
+	box-shadow: 0 0 #A9E2F3;
+	background-color: #E0F8F7;
 }
 .button-container {
 	margin: 3px;
@@ -104,15 +103,20 @@ button:active {
 		var checkbox = $("input:checkbox:checked");
 		var list = new Array();
 		
-		for(var i=0; i<checkbox.length; i++) {
-			list.push(checkbox[i].name);
+		if(checkbox.length == 0) {
+			alert("한가지 이상 체크하세요");
+		} else {
+			for(var i=0; i<checkbox.length; i++) {
+				list.push(checkbox[i].name);
+			}
+			
+			let f = document.createElement('form');
+		    f.setAttribute('method', 'post');
+		    f.setAttribute('action', '/license/process?list='+list);
+		    document.body.appendChild(f);
+		    f.submit();
 		}
 		
-		let f = document.createElement('form');
-	    f.setAttribute('method', 'post');
-	    f.setAttribute('action', '/license/process?list='+list);
-	    document.body.appendChild(f);
-	    f.submit();
 		
 	}
 
@@ -160,11 +164,15 @@ button:active {
 		var checkbox = $("input:checkbox:checked");
 		var tmp_list = new Array();
 		
-		for(var i=0; i<checkbox.length; i++) {
-			tmp_list.push(checkbox[i].name);
+		if(checkbox.length == 0) {
+			alert("한가지 이상 체크하세요");
+		} else {
+			for(var i=0; i<checkbox.length; i++) {
+				tmp_list.push(checkbox[i].name);
+			}
+			
+			permit(tmp_list);			
 		}
-		
-		permit(tmp_list);
 		
 	}
 	
@@ -172,11 +180,16 @@ button:active {
 		var checkbox = $("input:checkbox:checked");
 		var tmp_list = new Array();
 		
-		for(var i=0; i<checkbox.length; i++) {
-			tmp_list.push(checkbox[i].name);
+		if(checkbox.length == 0) {
+			alert("한가지 이상 체크하세요");
+		} else {
+			for(var i=0; i<checkbox.length; i++) {
+				tmp_list.push(checkbox[i].name);
+			}
+			
+			reject(tmp_list);
 		}
 		
-		reject(tmp_list);
 	}
 	
 	function allcheck() { // 전체 체크
