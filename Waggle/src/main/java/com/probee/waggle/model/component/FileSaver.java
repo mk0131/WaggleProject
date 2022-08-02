@@ -1,15 +1,16 @@
 package com.probee.waggle.model.component;
 
 import java.awt.image.BufferedImage;
-import java.io.DataInputStream;
+import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.OutputStreamWriter;
 import java.net.URL;
 import java.nio.file.Path;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
 import java.util.List;
 
 import javax.imageio.ImageIO;
@@ -20,8 +21,6 @@ import org.springframework.core.io.ResourceLoader;
 import org.springframework.stereotype.Component;
 import org.springframework.util.FileCopyUtils;
 import org.springframework.web.multipart.MultipartFile;
-
-import com.google.common.io.Files;
 
 @Component
 public class FileSaver {
@@ -214,6 +213,44 @@ public class FileSaver {
 		
 		
 		return answer;
+	}
+	
+	public int makeCSV(List<String> name_list, List<String> numb_list, HttpServletRequest request) throws IOException {
+		BufferedWriter bw = null;
+		String NEWLINE = System.lineSeparator();
+		
+		// 이름, 공인중개사 번호 CSV 파일 생성
+		LocalDateTime now = LocalDateTime.now();
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyMMddHHmm");        
+		String formatedNow = now.format(formatter);
+		
+		String path = request.getSession().getServletContext().getRealPath("/").replace("\\", "/");
+		path = path.substring(0, path.lastIndexOf("/"));
+		path = path.substring(0, path.lastIndexOf("/"));
+		path += "/resources/static";
+		
+		String file_name = "/csv/진위확인신청서_"+formatedNow+".csv";
+		
+		File file = new File(path + file_name);
+		// 경로가 있는지 확인해서 없으면 경로 생성
+		if(!file.exists()) {
+			file.createNewFile();
+		}
+		
+		bw = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(file), "MS949"));
+		
+		bw.write("성명,자격증번호");
+		bw.write(NEWLINE);
+		
+		for(int i=0; i<name_list.size(); i++) {
+			bw.write(name_list.get(i) + "," + numb_list.get(i));
+			bw.write(NEWLINE);
+		}
+		
+		bw.flush();
+		bw.close();
+		
+		return 1;
 	}
 	
 }
