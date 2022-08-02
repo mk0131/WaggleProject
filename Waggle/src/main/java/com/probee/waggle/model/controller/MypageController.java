@@ -1,8 +1,10 @@
 package com.probee.waggle.model.controller;
 
+import java.io.PrintWriter;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -84,11 +86,23 @@ public class MypageController {
 		int ucode = (int)session.getAttribute("user_Code");
 		int user_Pro = (int)session.getAttribute("user_Pro");
 		
+		//마이페이지 유저 정보
 		UsersDto myinfo = mypageService.SelectMyInfo(ucode);
+		//이용횟수 모든기간
 		MypageUsageDto reqCancel = mypageService.reqCancel(ucode);
+		MypageUsageDto reqFinish = mypageService.reqFinish(ucode);
 		MypageUsageDto reqTotal = mypageService.reqTotal(ucode);
 		MypageUsageDto resCancel = mypageService.resCancel(ucode);
+		MypageUsageDto resFinish = mypageService.resFinish(ucode);
 		MypageUsageDto resTotal = mypageService.resTotal(ucode);
+		//이용횟수 3개월
+		MypageUsageDto reqCancel3M = mypageService.reqCancel3M(ucode);
+		MypageUsageDto reqFinish3M = mypageService.reqFinish3M(ucode);
+		MypageUsageDto reqTotal3M = mypageService.reqTotal3M(ucode);
+		MypageUsageDto resCancel3M = mypageService.resCancel3M(ucode);
+		MypageUsageDto resFinish3M = mypageService.resFinish3M(ucode);
+		MypageUsageDto resTotal3M = mypageService.resTotal3M(ucode);
+		//공인중개사자격증
 		ConfirmDto MyConfirm = mypageService.SelectMyConfirm(ucode);
 		
 		if (MyConfirm != null) {
@@ -96,7 +110,8 @@ public class MypageController {
 			//공인중개사 사진 파일 이름 db에서 가져오기 위함.
 			FileDto ConfirmFile = mypageService.SelectConfirmFile(ConF_Code);
 			model.addAttribute("con_file_Name",ConfirmFile.getFi_Nm());
-			model.addAttribute("condto", MyConfirm.getCo_UCode());
+			model.addAttribute("con_stat", MyConfirm.getCo_Confirm());
+			model.addAttribute("con_ucode", MyConfirm.getCo_UCode());
 		} else {
 			model.addAttribute("condto",0);
 		}
@@ -109,16 +124,29 @@ public class MypageController {
 		
 		double reqRatio = 0;
 		double resRatio = 0;
+		double reqRatio3M = 0;
+		double resRatio3M = 0;
+		
 		
 		if (reqTotal.getReqTotal() != 0) {
-			reqRatio = (double)(reqCancel.getReqCancel()/reqTotal.getReqTotal())*100;
+			reqRatio = (double)(reqFinish.getReqFinish()/reqTotal.getReqTotal())*100;
 		}else {
 			reqRatio = 0;
 		}
 		if(resTotal.getResTotal() != 0) {
-			resRatio = (double)(resCancel.getResCancel()/resTotal.getResTotal())*100;
+			resRatio = (double)(resFinish.getResFinish()/resTotal.getResTotal())*100;
 		}else {
 			resRatio = 0;
+		}
+		if (reqTotal3M.getReqTotal() != 0) {
+			reqRatio3M = (double)(reqFinish3M.getReqFinish()/reqTotal3M.getReqTotal())*100;
+		}else {
+			reqRatio3M = 0;
+		}
+		if(resTotal3M.getResTotal() != 0) {
+			resRatio3M = (double)(resFinish3M.getResFinish()/resTotal3M.getResTotal())*100;
+		}else {
+			resRatio3M = 0;
 		}
 		
 		model.addAttribute("dto", myinfo);
@@ -126,8 +154,18 @@ public class MypageController {
 		model.addAttribute("reqTotal", reqTotal.getReqTotal());
 		model.addAttribute("resCancel", resCancel.getResCancel());
 		model.addAttribute("resTotal", resTotal.getResTotal());
+		model.addAttribute("reqFinish", reqFinish.getReqFinish());
+		model.addAttribute("resFinish", resFinish.getResFinish());
 		model.addAttribute("ratio", Math.round(reqRatio));
 		model.addAttribute("ratio2", Math.round(resRatio));
+		model.addAttribute("reqCancel3M", reqCancel3M.getReqCancel());
+		model.addAttribute("reqTotal3M", reqTotal3M.getReqTotal());
+		model.addAttribute("resCancel3M", resCancel3M.getResCancel());
+		model.addAttribute("resTotal3M", resTotal3M.getResTotal());
+		model.addAttribute("reqFinish3M", reqFinish3M.getReqFinish());
+		model.addAttribute("resFinish3M", resFinish3M.getResFinish());
+		model.addAttribute("ratio3M", Math.round(reqRatio3M));
+		model.addAttribute("ratio2_3M", Math.round(resRatio3M));
 		
 		return "mypage_me";
 	}
@@ -135,7 +173,7 @@ public class MypageController {
 	
 	//프로필 사진 수정 컨트롤러
 	@PostMapping(value="/imageEdit")
-	public String ImageEdit(HttpServletRequest request, MultipartHttpServletRequest request2) {
+	public String ImageEdit(HttpServletResponse response, HttpServletRequest request, MultipartHttpServletRequest request2) {
 		HttpSession session = request.getSession();
 		
 		int user_Code = (int)session.getAttribute("user_Code");
@@ -148,31 +186,32 @@ public class MypageController {
 		int pos = fileName.lastIndexOf(".");
 		String ext = fileName.substring(pos + 1);
 		
-		// 프로필 사진 수정하기 버튼 누를때 fileDB에 형식 맞춰서 INSERT 됨.
-		int res = 0;
-		res = mypageService.ImageFileInsert(new_Fi_Code, ext);
-		if (res > 0) {
-			System.out.println("이미지 파일 insert 성공");
-		} else {
-			System.out.println("이미지 파일 insert 실패");
-		}
-		
-		// 프로필 사진 수정하기 버튼 누를때 USERS DB의 프로필 코드 수정됨.
-		int res1 = 0;
-		res1 = mypageService.UserProChange(new_Fi_Code, user_Code);
-		if (res1 > 0) {
-			System.out.println("수정 성공");
-		} else {
-			System.out.println("수정 실패");
-		}
-		
 		// 업로드 된 이미지를 로컬에 저장하는 코드
 		int res2 = mypageService.saveLocalProfile(new_Fi_Code, file, request2);
 		if(res2 >0) {
 			System.out.println("로컬에 이미지 저장 성공");
+			// 프로필 사진 수정하기 버튼 누를때 fileDB에 형식 맞춰서 INSERT 됨.
+			int res = 0;
+			res = mypageService.ImageFileInsert(new_Fi_Code, ext);
+			if (res > 0) {
+				System.out.println("이미지 파일 insert 성공");
+			} else {
+				System.out.println("이미지 파일 insert 실패");
+			}
+			
+			// 프로필 사진 수정하기 버튼 누를때 USERS DB의 프로필 코드 수정됨.
+			int res1 = 0;
+			res1 = mypageService.UserProChange(new_Fi_Code, user_Code);
+			if (res1 > 0) {
+				System.out.println("수정 성공");
+			} else {
+				System.out.println("수정 실패");
+			}
 		}else {
 			System.out.println("로컬에 이미지 저장 실패");
+			alertAndGo(response, "이미지 저장 실패");
 		}
+		
 		session.removeAttribute("user_Pro");
 		session.setAttribute("user_Pro", new_Fi_Code);
 		return "redirect:/mypage/profileEdit?ua_UCode=" + user_Code;
@@ -180,7 +219,7 @@ public class MypageController {
 	
 	//공인중개사 인증 업로드 컨트롤러
 	@PostMapping(value="/confirm")
-	public String Confirm(HttpServletRequest request, MultipartHttpServletRequest request2) {
+	public String Confirm(HttpServletResponse response, HttpServletRequest request, MultipartHttpServletRequest request2) {
 		HttpSession session = request.getSession();
 		int user_Code = (int)session.getAttribute("user_Code");
 		List<FileDto> lastFileLowList = mypageService.SelectLastFiCode();
@@ -195,29 +234,30 @@ public class MypageController {
 		String ext = fileName.substring(pos + 1);
 		
 		if(MyConfirm == null) {
-			//Confirm DB에 파일 없으면 파일 db 먼저 INSERT
-			int res = mypageService.InsertFileConfirm(new_Fi_Code, user_Code, ext);
-			if (res>0) {
-				System.out.println("파일DB INSERT 성공");
-			}else {
-				System.out.println("파일DB INSERT 실패");
-			};
-			
-			//file db insert 후 confirm db insert
-			int res1 = mypageService.InsertConfirm(user_Code, new_Fi_Code);
-			if (res1>0) {
-				System.out.println("CONFIRM DB INSERT 성공");
-			}else {
-				System.out.println("CONFIRM DB INSERT 실패");
-			};
-			
 			//로컬에 이미지 저장
 			int res2 = mypageService.saveLocalConfirm(user_Code, file, request);
 			if(res2>0) {
 				System.out.println("로컬에 자격증 이미지 저장 성공");
+				//Confirm DB에 파일 없으면 파일 db 먼저 INSERT
+				int res = mypageService.InsertFileConfirm(new_Fi_Code, user_Code, ext);
+				if (res>0) {
+					System.out.println("파일DB INSERT 성공");
+				}else {
+					System.out.println("파일DB INSERT 실패");
+				};
+				
+				//file db insert 후 confirm db insert
+				int res1 = mypageService.InsertConfirm(user_Code, new_Fi_Code);
+				if (res1>0) {
+					System.out.println("CONFIRM DB INSERT 성공");
+				}else {
+					System.out.println("CONFIRM DB INSERT 실패");
+				};
 			}else {
 				System.out.println("로컬에 자격증 이미지 저장 실패");
+				alertAndGo(response, "이미지 저장 실패");
 			};
+			
 			
 		} else {
 			int co_Fcode = MyConfirm.getCo_FCode();
@@ -225,16 +265,17 @@ public class MypageController {
 			int res2 = mypageService.saveLocalConfirm(user_Code, file, request);
 			if(res2>0) {
 				System.out.println("로컬에 자격증 이미지 저장 성공");
+				// File DB에 Fi_Nm 업데이트
+				int res1 = mypageService.FileUpdate(user_Code, ext, co_Fcode);
+				if(res1>0) {
+					System.out.println("FI_NM 수정 성공");
+				}else {
+					System.out.println("FI_NM 수정 실패");
+				}
+				
 			}else {
 				System.out.println("로컬에 자격증 이미지 저장 실패");
-			}
-			
-			// File DB에 Fi_Nm 업데이트
-			int res1 = mypageService.FileUpdate(user_Code, ext, co_Fcode);
-			if(res1>0) {
-				System.out.println("FI_NM 수정 성공");
-			}else {
-				System.out.println("FI_NM 수정 실패");
+				alertAndGo(response, "이미지 저장 실패");
 			}
 			
 		}
@@ -342,13 +383,12 @@ public class MypageController {
 	public String history(Model model, HttpServletRequest request) {
 		HttpSession session = request.getSession();
 		int ucode = (int)session.getAttribute("user_Code");
-		
 		//나의 요청
 		List<MypageFinishlistDto> myReqList = mypageService.SelectMyRequest(ucode);
 		
 		//나의 수행
 		List<MypageFinishlistDto> myPerformList = mypageService.SelectMyPerform(ucode);
-
+		System.out.println(myReqList);
 		model.addAttribute("Request", myReqList);
 		model.addAttribute("Perform", myPerformList);
 		
@@ -434,5 +474,18 @@ public class MypageController {
 		session.setMaxInactiveInterval(-1);
 
 		return "redirect:/mypage/profileEdit?ua_UCode=" + user_Code;
+	}
+	
+	//화면에 alert 창 띄우기
+	public static void alertAndGo(HttpServletResponse response, String msg) {
+		try {
+			response.setContentType("text/html; charset=utf-8");
+			PrintWriter w = response.getWriter();
+			w.write("<script>alert('"+msg+"');history.go(-1);</script>");
+			w.flush();
+			w.close();
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
 	}
 }

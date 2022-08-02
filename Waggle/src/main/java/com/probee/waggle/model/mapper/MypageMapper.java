@@ -38,11 +38,11 @@ public interface MypageMapper {
 	public UserAddressDto SelectAddr(int ua_Ucode);
 
 	//이용내역페이지 나의 요청 sql
-	@Select("select req_No, req_Title, req_EDate, req_Point, req_Stat, home_Addr, fi_Nm from request join HOME on REQUEST.REQ_HCODE = HOME.home_Code join FILE on REQUEST.REQ_FCODE = FILE.FI_CODE WHERE REQ_UCODE = #{ucode} ")
+	@Select("select req_No, req_Title, req_EDate, req_Point, req_Stat, home_Addr, fi_Nm from request left outer join HOME on REQUEST.REQ_HCODE = HOME.home_Code left outer join FILE on REQUEST.REQ_FCODE = FILE.FI_CODE WHERE REQ_UCODE = #{ucode} ")
 	public List<MypageFinishlistDto> SelectMyRequest(int ucode);
 	
 	//이용내역페이지 나의 수행 sql
-	@Select("select req_No, req_Title, req_EDate, req_Point, req_Stat, home_Addr, fi_Nm, RES_UCODE from request join HOME on REQUEST.REQ_HCODE = HOME.home_Code join FILE on REQUEST.REQ_FCODE = FILE.FI_CODE JOIN RESULT ON REQUEST.REQ_NO = RESULT.RES_NO JOIN USERS ON RESULT.RES_UCODE = USERS.USER_CODE WHERE RES_UCODE = #{ucode} ")
+	@Select("select req_No, req_Title, req_EDate, req_Point, req_Stat, home_Addr, fi_Nm, RES_UCODE from request left outer join HOME on REQUEST.REQ_HCODE = HOME.home_Code left outer join FILE on REQUEST.REQ_FCODE = FILE.FI_CODE left outer JOIN RESULT ON REQUEST.REQ_NO = RESULT.RES_NO left outer JOIN USERS ON RESULT.RES_UCODE = USERS.USER_CODE WHERE RES_UCODE = #{ucode} ")
 	public List<MypageFinishlistDto> SelectMyPerform(int ucode);
 
 	@Update(" UPDATE USERS SET User_PW = #{user_Pw} WHERE user_Code = #{user_Code} ")
@@ -72,8 +72,12 @@ public interface MypageMapper {
 	@Update("UPDATE USERS SET USER_PRO = #{fi_Code} WHERE USER_CODE = #{ucode}")
 	public int UserProChange(int fi_Code, int ucode);
 	
+	//이용횟수 모든 기간
 	@Select("select count(*) as reqCancel from request where req_ucode=#{ucode} and req_stat='취소'")
 	public MypageUsageDto reqCancel(int ucode);
+	
+	@Select("select count(*) as reqFinish from request where req_ucode=#{ucode} and req_stat='완료'")
+	public MypageUsageDto reqFinish(int ucode);
 	
 	@Select("select count(*) as reqTotal from request where req_UCode = #{ucode}")
 	public MypageUsageDto reqTotal(int ucode);
@@ -81,8 +85,32 @@ public interface MypageMapper {
 	@Select("select count(*) as resCancel from result where res_ucode=#{ucode} and res_stat='취소'")
 	public MypageUsageDto resCancel(int ucode);
 	
+	@Select("select count(*) as resFinish from result where res_ucode=#{ucode} and res_stat='완료'")
+	public MypageUsageDto resFinish(int ucode);
+	
 	@Select("select count(*) as resTotal from result where res_ucode=#{ucode}")
 	public MypageUsageDto resTotal(int ucode);
+	//이용횟수 모든 기간 끝
+	
+	//이용횟수 3개월 전
+	@Select("select count(*) as reqCancel from request where req_ucode=#{ucode} and req_stat='취소' AND (req_WDate BETWEEN DATE_ADD(NOW(), INTERVAL -3 MONTH) AND NOW())")
+	public MypageUsageDto reqCancel3M(int ucode);
+	
+	@Select("select count(*) as reqFinish from request where req_ucode=#{ucode} and req_stat='완료' AND (req_WDate BETWEEN DATE_ADD(NOW(), INTERVAL -3 MONTH) AND NOW())")
+	public MypageUsageDto reqFinish3M(int ucode);
+	
+	@Select("select count(*) as reqTotal from request where req_UCode = #{ucode} AND (req_WDate BETWEEN DATE_ADD(NOW(), INTERVAL -3 MONTH) AND NOW())")
+	public MypageUsageDto reqTotal3M(int ucode);
+	
+	@Select("select count(*) as resCancel from result where res_ucode=#{ucode} and res_stat='취소' AND (res_WDate BETWEEN DATE_ADD(NOW(), INTERVAL -3 MONTH) AND NOW())")
+	public MypageUsageDto resCancel3M(int ucode);
+	
+	@Select("select count(*) as resFinish from result where res_ucode=#{ucode} and res_stat='완료' AND (res_WDate BETWEEN DATE_ADD(NOW(), INTERVAL -3 MONTH) AND NOW())")
+	public MypageUsageDto resFinish3M(int ucode);
+	
+	@Select("select count(*) as resTotal from result where res_ucode=#{ucode} AND (res_WDate BETWEEN DATE_ADD(NOW(), INTERVAL -3 MONTH) AND NOW())")
+	public MypageUsageDto resTotal3M(int ucode);
+	//이용횟수 3개월 전 끝
 	
 	@Select("Select * from Confirm where co_UCode = #{ucode}")
 	public ConfirmDto SelectMyConfirm(int ucode);
