@@ -265,8 +265,8 @@ div {
   top: 50%;
   left: 50%;
 
-  width: 100px;
-  height: 35px;
+  width: 200px;
+  height: 65px;
   z-index:100;
   
   padding: 5px;
@@ -927,7 +927,7 @@ div {
 	     if(hour<10){hour="0"+hour;}
 	     if(min<10){min="0"+min;}
 	     if(sec<10){sec="0"+sec;}
-	      console.log(hour+"시"+min+"분"+sec+"초");
+	      $('.modal_body').html("<div style='font-size:15pt'>1000P</div>블러 해제: "+hour+"시"+min+"분"+sec+"초");
 	};
 	
 	setInterval(remaindTime,1000);
