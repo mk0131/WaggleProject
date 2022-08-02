@@ -159,6 +159,9 @@ nav ul li a:hover, nav ul li a:visited:hover {
 						<c:if test="${user_Code != null }">
 						<li><a href="/chat/list?room_UCode1=${user_Code}">채팅</a></li>
 						</c:if>
+						<c:if test="${user_Code == 1 }">
+						<li><a href="/license/list">인증센터</a></li>
+						</c:if>
 					</ul>
 				</nav>
 				<div class="login">
