@@ -49,12 +49,18 @@ public interface MypageService {
 	public int GenderChange(String user_Gender, int user_Code);
 	
 	public MypageUsageDto reqCancel(int ucode);
-	
+	public MypageUsageDto reqFinish(int ucode);
 	public MypageUsageDto reqTotal(int ucode);
-	
+	public MypageUsageDto resFinish(int ucode);
 	public MypageUsageDto resCancel(int ucode);
-	
 	public MypageUsageDto resTotal(int ucode);
+	
+	public MypageUsageDto reqCancel3M(int ucode);
+	public MypageUsageDto reqFinish3M(int ucode);
+	public MypageUsageDto reqTotal3M(int ucode);
+	public MypageUsageDto resFinish3M(int ucode);
+	public MypageUsageDto resCancel3M(int ucode);
+	public MypageUsageDto resTotal3M(int ucode);
 	
 	public int saveLocalProfile(int new_Fi_Code, MultipartFile file, HttpServletRequest request);
 	

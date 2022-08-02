@@ -573,6 +573,37 @@ textarea {
 }
 
 /* 이용횟수 통계 그림 끝 */
+
+/*이용횟수 간단 css */
+#bold{
+	font-weight:bold;
+	color:#fc4f4f;
+}
+
+#ratio{
+	text-align: center;
+	font-size: 18px;
+	font-weight: bold;
+}
+
+#line{
+	width:100%;
+	height:50px;
+	border-bottom: 1px dashed #898989;
+}
+
+#ul-left{
+	width:420px;
+	padding:0;
+	padding-left:20px;	
+}
+
+#ul-right{
+	width:420px;
+	padding:0;
+}
+/*이용횟수 간단 css */
+
 </style>
 
 
@@ -771,29 +802,66 @@ textarea {
 					<div class="desc-content-finishlist" style="margin: 0 auto; width: 900px; display: none">
 					</div>
 					<div class="desc-usage" style="margin: 0 auto; width: 900px; padding-top: 60px; display: none">
-						<div class="usage-left" style="width:400px; display:inline-block; float: right; padding-top:15px">
-						<ul class="bar-graph" style="width: 400px; padding:0">
-							<li>
-								<p style="font-size:18pt; font-weight:bold; color:#5a76ff">[꿀벌] 의뢰 수행완료 비율</p>
-								<p>${dto.user_Nm} 님이 현재까지 수행한 의뢰 총 갯수 : ${resTotal } 건<p>
-								<p>-> 꿀벌 지원 ${resTotal }건 중 수행완료 ${resTotal - resCancel}건</p>
-								<div class="bar-wrap">
-									<span class="bar-fill" style="width:${100-ratio2}%;">${100-ratio2 }%</span>
-								</div>
-							</li>
-						</ul>
-						</div>
-						<div class="usage-right" style="width: 400px; display: inline-block; border-right: 1px dashed #898989; padding-right:35px">
-							<ul class="bar-graph" style="width: 400px; padding: 0">
+						<div class="usage-left" style="width:420px; display:inline-block; float: right; padding-top:15px">
+							<ul class="bar-graph" id="ul-left">
 								<li>
-									<p style="font-size:18pt; font-weight:bold; color:#5a76ff">[의뢰] 의뢰 대비 꿀벌평가 완료 비율</p>
-									<p>${dto.user_Nm} 님이 현재까지 의뢰한 게시글 총 갯수 : ${reqTotal } 건<p>
-									<p>${dto.user_Nm} 님이 현재 의뢰중인 게시글 갯수 : ? 건<p>
-								<p>${dto.user_Nm} 님이 현재까지 꿀벌 평가를 완료한 게시글 갯수 : ? 건<p>
-								<p>${dto.user_Nm} 님이 현재까지 요청취소한 게시글 갯수 : ? 건<p>
-									<p>-> 의뢰글 ${reqTotal }건 중 꿀벌평가 ${reqTotal - reqCancel }건 완료</p>
+									<p style="font-size:20pt; font-weight:bold"><꿀벌></p>
+									<p style="font-size:16pt; font-weight:bold; color:#5a76ff">[모든 기간] 의뢰 수행완료 비율</p>
+									<p>${dto.user_Nm} 님이 <span id="bold">현재까지 지원</span>한 의뢰 총 갯수 : ${resTotal } 건<p>
+									<p>${dto.user_Nm} 님이 현재 <span id="bold">진행중</span>인 의뢰 갯수 : ${resTotal-resFinish } 건<p>
+									<p>${dto.user_Nm} 님이 현재까지 <span id="bold">수행완료</span>한 의뢰 갯수 : ${resFinish } 건<p>
+									<p>${dto.user_Nm} 님이 현재까지 <span id="bold">수행취소</span>한 의뢰 갯수 : ${resCancel } 건<p>
+									<br>
+									<p id="ratio">꿀벌 지원 총 ${resTotal }건 중 수행완료 ${resFinish}건</p>
 									<div class="bar-wrap">
-										<span class="bar-fill" style="width: ${100-ratio}%;">${100-ratio }%</span>
+										<span class="bar-fill" style="width:${ratio2}%;">${ratio2 }%</span>
+									</div>
+								</li>
+							</ul>
+							<div id="line" style="margin-left:20px"></div>
+							<ul class="bar-graph" id="ul-left">
+								<li>
+									<p style="font-size:16pt; font-weight:bold; color:#5a76ff">[최근 3개월] 의뢰 수행완료 비율</p>
+									<p>${dto.user_Nm} 님이 <span id="bold">현재까지 지원</span>한 의뢰 총 갯수 : ${resTotal3M } 건<p>
+									<p>${dto.user_Nm} 님이 현재 <span id="bold">진행중</span>인 의뢰 갯수 : ${resTotal3M-resFinish3M } 건<p>
+									<p>${dto.user_Nm} 님이 현재까지 <span id="bold">수행완료</span>한 의뢰 갯수 : ${resFinish3M } 건<p>
+									<p>${dto.user_Nm} 님이 현재까지 <span id="bold">수행취소</span>한 의뢰 갯수 : ${resCancel3M } 건<p>
+									<br>
+									<p id="ratio">꿀벌 지원 총 ${resTotal3M }건 중 수행완료 ${resFinish3M}건</p>
+									<div class="bar-wrap">
+										<span class="bar-fill" style="width:${ratio2_3M}%;">${ratio2_3M }%</span>
+									</div>
+								</li>
+							</ul>
+						</div>
+						<div class="usage-right" style="width: 420px; display: inline-block; border-right: 1px dashed #898989; padding-right:35px">
+							<ul class="bar-graph" id="ul-right">
+								<li>
+									<p style="font-size:20pt; font-weight:bold"><의뢰인></p>
+									<p style="font-size:16pt; font-weight:bold; color:#5a76ff">[모든 기간] 의뢰 대비 꿀벌평가 완료 비율</p>
+									<p>${dto.user_Nm} 님이 <span id="bold">현재까지 의뢰</span>한 게시글 총 갯수 : ${reqTotal } 건<p>
+									<p>${dto.user_Nm} 님이 현재 <span id="bold">의뢰중</span>인 게시글 갯수 : ${reqTotal - reqFinish } 건<p>
+									<p>${dto.user_Nm} 님이 현재까지 <span id="bold">꿀벌 평가 완료</span>한 게시글 : ${reqFinish } 건<p>
+									<p>${dto.user_Nm} 님이 현재까지 <span id="bold">요청취소</span>한 게시글 갯수 : ${reqCancel } 건<p>
+									<br>
+									<p id="ratio">의뢰글 총 ${reqTotal }건 중 꿀벌평가 ${reqFinish }건 완료</p>
+									<div class="bar-wrap">
+										<span class="bar-fill" style="width: ${ratio}%;">${ratio }%</span>
+									</div>
+								</li>
+							</ul>
+							<div id="line"></div>
+							<ul class="bar-graph" id="ul-right">
+								<li>
+									<p style="font-size:16pt; font-weight:bold; color:#5a76ff">[최근 3개월] 의뢰 대비 꿀벌평가 완료 비율</p>
+									<p>${dto.user_Nm} 님이 <span id="bold">현재까지 의뢰</span>한 게시글 총 갯수 : ${reqTotal3M } 건<p>
+									<p>${dto.user_Nm} 님이 현재 <span id="bold">의뢰중</span>인 게시글 갯수 : ${reqTotal3M - reqFinish3M } 건<p>
+									<p>${dto.user_Nm} 님이 현재까지 <span id="bold">꿀벌 평가 완료</span>한 게시글 : ${reqFinish3M } 건<p>
+									<p>${dto.user_Nm} 님이 현재까지 <span id="bold">요청취소</span>한 게시글 갯수 : ${reqCancel3M } 건<p>
+									<br>
+									<p id="ratio">의뢰글 총 ${reqTotal3M }건 중 꿀벌평가 ${reqFinish3M }건 완료</p>
+									<div class="bar-wrap">
+										<span class="bar-fill" style="width: ${ratio3M}%;">${ratio3M }%</span>
 									</div>
 								</li>
 							</ul>

@@ -203,6 +203,46 @@ public class MypageServiceImpl implements MypageService{
 	public int DeleteMyDesc(int ucode) {
 		return mypageMapper.DeleteMyDesc(ucode);
 	}
+
+	@Override
+	public MypageUsageDto reqFinish(int ucode) {
+		return mypageMapper.reqFinish(ucode);
+	}
+
+	@Override
+	public MypageUsageDto resFinish(int ucode) {
+		return mypageMapper.resFinish(ucode);
+	}
+
+	@Override
+	public MypageUsageDto reqCancel3M(int ucode) {
+		return mypageMapper.reqCancel3M(ucode);
+	}
+
+	@Override
+	public MypageUsageDto reqFinish3M(int ucode) {
+		return mypageMapper.reqFinish3M(ucode);
+	}
+
+	@Override
+	public MypageUsageDto reqTotal3M(int ucode) {
+		return mypageMapper.reqTotal3M(ucode);
+	}
+
+	@Override
+	public MypageUsageDto resFinish3M(int ucode) {
+		return mypageMapper.resFinish3M(ucode);
+	}
+
+	@Override
+	public MypageUsageDto resCancel3M(int ucode) {
+		return mypageMapper.resCancel3M(ucode);
+	}
+
+	@Override
+	public MypageUsageDto resTotal3M(int ucode) {
+		return mypageMapper.resTotal3M(ucode);
+	}
 	
 	
 
