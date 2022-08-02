@@ -844,6 +844,9 @@ textarea {
 							<span style="font-size: 11pt; color: #898989">신청한 자격증이 반려되었습니다.</span>
 							<span style="font-size: 11pt; color: #2d7eac; margin-left: 5px" onclick="showProof();">파일 다시 업로드하기</span>
 							</c:if>
+							<c:if test="${con_stat == '처리중' }">
+							<span style="font-size: 11pt; color: #898989">신청한 자격증이 처리중입니다.</span>
+							</c:if>
 						</c:if>
 						<c:if test="${con_ucode == 0}">
 						<div>
@@ -1131,7 +1134,6 @@ textarea {
 		})
 
 	}
-	
 	//공인중개사 파일 업로드 태그 보여줌
 	function showProof(){
 		$(".desc-content-aboutme").hide();

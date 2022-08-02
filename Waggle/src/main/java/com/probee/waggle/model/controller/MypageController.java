@@ -45,10 +45,20 @@ public class MypageController {
 	@GetMapping("/other")
 	public String selectOtherInfo(int ucode, Model model) {
 		MypageOtherDto UserList = mypageService.SelectUsersInfo(ucode);
+		//이용횟수 모든기간
 		MypageUsageDto reqCancel = mypageService.reqCancel(ucode);
+		MypageUsageDto reqFinish = mypageService.reqFinish(ucode);
 		MypageUsageDto reqTotal = mypageService.reqTotal(ucode);
 		MypageUsageDto resCancel = mypageService.resCancel(ucode);
+		MypageUsageDto resFinish = mypageService.resFinish(ucode);
 		MypageUsageDto resTotal = mypageService.resTotal(ucode);
+		//이용횟수 3개월
+		MypageUsageDto reqCancel3M = mypageService.reqCancel3M(ucode);
+		MypageUsageDto reqFinish3M = mypageService.reqFinish3M(ucode);
+		MypageUsageDto reqTotal3M = mypageService.reqTotal3M(ucode);
+		MypageUsageDto resCancel3M = mypageService.resCancel3M(ucode);
+		MypageUsageDto resFinish3M = mypageService.resFinish3M(ucode);
+		MypageUsageDto resTotal3M = mypageService.resTotal3M(ucode);
 		
 		int OtherUserPro = UserList.getUser_Pro();
 		if(OtherUserPro !=0) {
@@ -58,16 +68,29 @@ public class MypageController {
 		
 		double reqRatio = 0;
 		double resRatio = 0;
+		double reqRatio3M = 0;
+		double resRatio3M = 0;
+		
 		
 		if (reqTotal.getReqTotal() != 0) {
-			reqRatio = (double)(reqCancel.getReqCancel()/reqTotal.getReqTotal())*100;
+			reqRatio = ((double)reqFinish.getReqFinish()/(double)reqTotal.getReqTotal())*100;
 		}else {
 			reqRatio = 0;
 		}
 		if(resTotal.getResTotal() != 0) {
-			resRatio = (double)(resCancel.getResCancel()/resTotal.getResTotal())*100;
+			resRatio = ((double)resFinish.getResFinish()/(double)resTotal.getResTotal())*100;
 		}else {
 			resRatio = 0;
+		}
+		if (reqTotal3M.getReqTotal() != 0) {
+			reqRatio3M = ((double)reqFinish3M.getReqFinish()/(double)reqTotal3M.getReqTotal())*100;
+		}else {
+			reqRatio3M = 0;
+		}
+		if(resTotal3M.getResTotal() != 0) {
+			resRatio3M = ((double)resFinish3M.getResFinish()/(double)resTotal3M.getResTotal())*100;
+		}else {
+			resRatio3M = 0;
 		}
 		
 		model.addAttribute("dto",UserList);
@@ -75,8 +98,18 @@ public class MypageController {
 		model.addAttribute("reqTotal", reqTotal.getReqTotal());
 		model.addAttribute("resCancel", resCancel.getResCancel());
 		model.addAttribute("resTotal", resTotal.getResTotal());
+		model.addAttribute("reqFinish", reqFinish.getReqFinish());
+		model.addAttribute("resFinish", resFinish.getResFinish());
 		model.addAttribute("ratio", Math.round(reqRatio));
 		model.addAttribute("ratio2", Math.round(resRatio));
+		model.addAttribute("reqCancel3M", reqCancel3M.getReqCancel());
+		model.addAttribute("reqTotal3M", reqTotal3M.getReqTotal());
+		model.addAttribute("resCancel3M", resCancel3M.getResCancel());
+		model.addAttribute("resTotal3M", resTotal3M.getResTotal());
+		model.addAttribute("reqFinish3M", reqFinish3M.getReqFinish());
+		model.addAttribute("resFinish3M", resFinish3M.getResFinish());
+		model.addAttribute("ratio3M", Math.round(reqRatio3M));
+		model.addAttribute("ratio2_3M", Math.round(resRatio3M));
 		return "mypage_other";
 	}
 	
@@ -129,22 +162,22 @@ public class MypageController {
 		
 		
 		if (reqTotal.getReqTotal() != 0) {
-			reqRatio = (double)(reqFinish.getReqFinish()/reqTotal.getReqTotal())*100;
+			reqRatio = ((double)reqFinish.getReqFinish()/(double)reqTotal.getReqTotal())*100;
 		}else {
 			reqRatio = 0;
 		}
 		if(resTotal.getResTotal() != 0) {
-			resRatio = (double)(resFinish.getResFinish()/resTotal.getResTotal())*100;
+			resRatio = ((double)resFinish.getResFinish()/(double)resTotal.getResTotal())*100;
 		}else {
 			resRatio = 0;
 		}
 		if (reqTotal3M.getReqTotal() != 0) {
-			reqRatio3M = (double)(reqFinish3M.getReqFinish()/reqTotal3M.getReqTotal())*100;
+			reqRatio3M = ((double)reqFinish3M.getReqFinish()/(double)reqTotal3M.getReqTotal())*100;
 		}else {
 			reqRatio3M = 0;
 		}
 		if(resTotal3M.getResTotal() != 0) {
-			resRatio3M = (double)(resFinish3M.getResFinish()/resTotal3M.getResTotal())*100;
+			resRatio3M = ((double)resFinish3M.getResFinish()/(double)resTotal3M.getResTotal())*100;
 		}else {
 			resRatio3M = 0;
 		}

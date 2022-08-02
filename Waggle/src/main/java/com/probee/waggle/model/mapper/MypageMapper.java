@@ -31,7 +31,7 @@ public interface MypageMapper {
 	public String SelectDesc(int code); 
 	
 	//완료된 리스트 가져오기
-	@Select(" select req_No, req_Title, req_EDate, req_Point, req_Stat, home_Addr, fi_Nm, RES_UCODE from request join HOME on REQUEST.REQ_HCODE = HOME.home_Code join FILE on REQUEST.REQ_FCODE = FILE.FI_CODE JOIN RESULT ON REQUEST.REQ_NO = RESULT.RES_NO JOIN USERS ON RESULT.RES_UCODE = USERS.USER_CODE WHERE REQ_STAT = #{stat} AND RES_UCODE = #{ucode} ")
+	@Select(" select req_No, req_Title, req_EDate, req_Point, req_Stat, home_Addr, fi_Nm, RES_UCODE from request left outer join HOME on REQUEST.REQ_HCODE = HOME.home_Code left outer join FILE on REQUEST.REQ_FCODE = FILE.FI_CODE left outer JOIN RESULT ON REQUEST.REQ_NO = RESULT.RES_NO left outer JOIN USERS ON RESULT.RES_UCODE = USERS.USER_CODE WHERE REQ_STAT = #{stat} AND RES_UCODE = #{ucode} ")
 	public List<MypageFinishlistDto> SelectReqRoom(String stat, int ucode);
 	
 	@Select(" SELECT * FROM USERADDRESS WHERE ua_UCode = #{ua_UCode} ")
