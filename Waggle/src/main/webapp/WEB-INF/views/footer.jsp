@@ -32,10 +32,11 @@ body {
 
 footer {
   height: 200px;
-  border-top: 1px solid #151515;
-  margin: 40px;
+  margin: 40px 0px 0px 0px;
+  padding: 0px 40px 40px 40px;
   position: relative;
   font-size: 12px;
+  background-color: #F7F9FA;
 }
 
 footer .footer-left {
