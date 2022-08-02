@@ -5,6 +5,7 @@ import java.util.List;
 import com.probee.waggle.model.dto.ChatContentDto;
 import com.probee.waggle.model.dto.ChatContentDto2;
 import com.probee.waggle.model.dto.ChatRoomDto;
+import com.probee.waggle.model.dto.ChatRoomDto2;
 
 public interface ChatService {
 
@@ -12,7 +13,7 @@ public interface ChatService {
 	
 	public int CreChat(int room_UCode1 , int room_UCode2);
 	
-	public List<ChatRoomDto> ChatList(int room_UCode1);
+	public List<ChatRoomDto2> ChatList(int room_UCode1);
 	
 	public List<ChatContentDto2> ChatHistory(int room_No);
 	
