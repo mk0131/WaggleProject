@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import com.probee.waggle.model.dto.ChatContentDto;
 import com.probee.waggle.model.dto.ChatContentDto2;
 import com.probee.waggle.model.dto.ChatRoomDto;
+import com.probee.waggle.model.dto.ChatRoomDto2;
 import com.probee.waggle.model.mapper.ChatMapper;
 
 @Service
@@ -27,7 +28,7 @@ public class ChatServiceImpl implements ChatService{
 	}
 
 	@Override
-	public List<ChatRoomDto> ChatList(int room_UCode1) {
+	public List<ChatRoomDto2> ChatList(int room_UCode1) {
 		return chatMapper.ChatList(room_UCode1);
 	}
 
