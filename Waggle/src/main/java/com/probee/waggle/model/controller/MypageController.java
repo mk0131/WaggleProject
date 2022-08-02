@@ -383,13 +383,12 @@ public class MypageController {
 	public String history(Model model, HttpServletRequest request) {
 		HttpSession session = request.getSession();
 		int ucode = (int)session.getAttribute("user_Code");
-		
 		//나의 요청
 		List<MypageFinishlistDto> myReqList = mypageService.SelectMyRequest(ucode);
 		
 		//나의 수행
 		List<MypageFinishlistDto> myPerformList = mypageService.SelectMyPerform(ucode);
-
+		System.out.println(myReqList);
 		model.addAttribute("Request", myReqList);
 		model.addAttribute("Perform", myPerformList);
 		
