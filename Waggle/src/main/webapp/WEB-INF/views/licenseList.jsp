@@ -21,8 +21,9 @@
     justify-content: center;
     align-items: center;
 	margin: auto;
-	margin-top: 20px;
-	width: 70%;
+	margin-top: 40px;
+	margin-bottom: 80px;
+	width: 1000px;
 }
 button {
 	background: #E0F8F7;
@@ -44,7 +45,15 @@ button:active {
 	background-color: #E0F8F7;
 }
 .button-container {
-	margin: 3px;
+	text-align: center;
+	margin: 20px;
+	margin-bottom: 40px;
+}
+.button-container button {
+	margin-right: 20px;
+}
+tbody tr td {
+	text-align: center;
 }
 </style>
 </head>
