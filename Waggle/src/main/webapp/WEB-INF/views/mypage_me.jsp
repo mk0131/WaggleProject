@@ -8,6 +8,7 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <style>
+
 .middle {
 	margin: 0;
 	padding: 0;
@@ -36,30 +37,39 @@
 	display: inline-block;
 }
 
+#point {
+	color: #487cbd;
+}
+#point:hover{
+	color: #faaa44 !important;
+}
+
+/* 버튼 */
 .button {
-	background: transparent;
-	width: 110px;
-	border-radius: 10px;
-	border: 3px solid;
-	margin-left: 40px;
-	float: right;
-	color: #2e2e2e;
+  color: var(--color);
+  transition: 0.25s;
+}
+.button:hover, .button:focus {
+  box-shadow: inset 0 0 0 2em var(--hover);
+  border-color: var(--hover);
+  color: #fff;
 }
 
-.button p {
-	font-family: "Roboto";
-	text-align: center;
-	text-transform: uppercase;
-	color: #2e2e2e;
-	user-select: none;
-	font-size: 15px;
-	font-weight: bold;
+.button {
+  background: none;
+  border-radius: 10px;
+  border: 3px solid;
+  font: inherit;
+  line-height: 1;
+  margin: 0.5em;
+  width: 110px;
+  float: right;
+  --color: #262626;
+  --hover: #f9a73d;
+  font-weight:bold;
+  text-align:center;
 }
-
-.button:hover {
-	cursor: pointer;
-}
-
+/* 버튼 */
 .description {
 	height: 70px;
 	background: #ffffff;
@@ -116,6 +126,7 @@
 	overflow: hidden;
 	background: #ffffff;
 	margin-top:30px;
+	font-size:1.2em;
 }
 
 textarea:focus ~ label, textarea:valid ~ label {
@@ -125,17 +136,18 @@ textarea:focus ~ label, textarea:valid ~ label {
 	display:none;
 	-webkit-transition: all 0.225s ease;
 	transition: all 0.225s ease;
+	padding:1.2em;
 }
 
 textarea {
 	border: 1px solid #d4d7e1;
 	box-shadow: 0 1px 2px rgb(0 0 0 / 5%), 0 5px 10px rgb(0 0 0 / 5%);
-	font-size: 1.5rem;
-	background-color: #e9e9e9;
+	font-size: 1.2rem;
+	background-color: #ffffff;
 	border-radius: 30px;
 	width: 900px;
 	height: 300px;
-	padding:30px;
+	padding:1em;
 }
 
 .styled-input {
@@ -168,11 +180,13 @@ textarea {
 
 .desc-content-finishlist{
 	margin: 0 auto;
-	width: 900px;
+	width: 1000px;
+	height:900px;
+	overflow-y:auto;
 	display: none;
 	text-align:left;
-	padding-top:100px;
 }
+
 
 .desc-content-finishlist img{
 	width:300px;
@@ -744,7 +758,7 @@ textarea {
 						</c:if>
 						<div style="font-weight: bold; font-size: 20pt">${dto.user_Point } P</div>
 						<div>
-							<a href="/point/use" style="color: #2d7eac">포인트 충전하기</a>
+							<a href="/point/use" id="point">포인트 충전하기</a>
 						</div>
 					</div>
 					<div class="profile-right"
@@ -858,7 +872,7 @@ textarea {
 					</div>
 				</div>
 				<div class="profile-bottom">
-						<div class="button" onclick="location.href='/mypage/profileEdit?ua_UCode=${user_Code}'">
+						<div class="button" id="uedit" onclick="location.href='/mypage/profileEdit?ua_UCode=${user_Code}'">
 							<a><p style="margin:5px">회원정보 수정</p></a>
 						</div>
 					</div>
@@ -1060,7 +1074,7 @@ textarea {
 
 	//자기소개 보여줌
 	function showDescMe() {
-		$(".desc-content-aboutme").show();
+		$(".desc-content-aboutme").fadeIn(600);
 		$(".upload-area").hide();
 		$(".desc-usage").hide();
 		$(".desc-content-finishlist").hide();
@@ -1074,7 +1088,7 @@ textarea {
 	function showUsage() {
 		$(".desc-content-aboutme").hide();
 		$(".upload-area").hide();
-		$(".desc-usage").show();
+		$(".desc-usage").fadeIn();
 		$(".desc-content-finishlist").hide();
 		$(".desc-list1").css("color", "#898989");
 		$(".desc-list2").css("color", "#898989");
@@ -1087,7 +1101,7 @@ textarea {
 		$(".desc-content-aboutme").hide();
 		$(".upload-area").hide();
 		$(".desc-usage").hide();
-		$(".desc-content-finishlist").show();
+		$(".desc-content-finishlist").fadeIn();
 		$(".desc-list1").css("color", "#898989");
 		$(".desc-list2").css("color", "#000000");
 		$(".desc-list3").css("color", "#898989");
@@ -1108,7 +1122,8 @@ textarea {
 					for(let i=0; i<result.length; i++){
 						$(".desc-content-finishlist").append('<div class="my-res-list-content-all" id="my-res-list-content-all">'
 																+'<div class="my-res-list-content-inner" id="my-res-list-img" onclick="location.href=\'/board/detail?req_No='+result[i].req_No+'\'">'
-																+'<img src="'+result[i].fi_Nm+'"></div>'
+																+(result[i].fi_Nm != null? "<img src='+result[i].fi_Nm+'>":'<img src="/images/importToJsp/homeimg.png">')
+																+'</div>'
 																+'<div id="my-res-list-text">'
 																+'<div class="my-res-list-content-inner" id="my-res-list-stat" onclick="location.href=\'/board/detail?req_No='+result[i].req_No+'\'">'
 																+'<label id="res-stat">'+result[i].req_Stat+'</label></div>'
@@ -1139,7 +1154,7 @@ textarea {
 		$(".desc-content-aboutme").hide();
 		$(".desc-content-finishlist").hide();
 		$(".desc-usage").hide();
-		$(".upload-area").show();
+		$(".upload-area").fadeIn();
 		$(".desc-list1").css("color", "#898989");
 		$(".desc-list2").css("color", "#898989");
 		$(".desc-list3").css("color", "#898989");

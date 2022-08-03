@@ -16,6 +16,33 @@
 	});
 </script>
 <style type="text/css">
+body{
+	font-size: 16px !important;
+}
+.middle {
+   margin: 0;
+   padding: 0;
+}
+.guideline {
+   margin: 0 auto !important;
+   width: 1125px;
+}
+.guideline-all {
+	margin: 16px 0 !important;
+	height: 51px !important;
+	line-height: 51px;
+}
+.guideline-all i {
+	display: inline-block;
+	color: #151515;
+}
+.guideline-all li {
+	display: inline-block;
+}
+.guideline-all p {
+	display: inline-block;
+	font-size: 15px;
+}
 .box {
     flex-direction: column;
     justify-content: center;
@@ -55,10 +82,31 @@ button:active {
 tbody tr td {
 	text-align: center;
 }
+.link {
+	text-decoration: none;
+	color: #FF1493;
+}
+.link:hover {
+	color: #C71585;
+	text-decoration: underline;
+	cursor: pointer;
+}
 </style>
 </head>
 <body>
 <%@ include file="header.jsp"%>
+  <div id="wrap">
+  <div class="middle">
+			<div class="guideline">
+			<ul class="guideline-all">
+        		<li><a href="javascript:void(0)">
+        		<i class="fa-solid fa-house"></i>
+        		</a>
+        		<p>HOME > 인증센터</p>
+        		</li>	
+        	</ul>
+		</div>
+	</div>
 	<div class="box">
 		<div class="button-container">
 			<button onclick="showAll()">전체 보기</button>
@@ -102,9 +150,9 @@ tbody tr td {
 				</tr>
 			</tfoot>
 		</table>
-		<a href="https://www.gmd.go.kr/gmd/external/reqVerifyCerti.do" target="_blank">국가기술자격 진위 확인</a>
+		<a class="link" href="https://www.gmd.go.kr/gmd/external/reqVerifyCerti.do" target="_blank">국가기술자격 진위 확인</a>
 	</div>
-
+  </div>
 <%@ include file="footer.jsp" %>
 <script type="text/javascript">
 

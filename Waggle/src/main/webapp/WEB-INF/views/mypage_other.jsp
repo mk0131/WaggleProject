@@ -165,10 +165,11 @@ textarea {
 
 .desc-content-finishlist{
 	margin: 0 auto;
-	width: 900px;
+	width: 1000px;
+	height:900px;
+	overflow-y:auto;
 	display: none;
 	text-align:left;
-	padding-top:100px;
 }
 
 .desc-content-finishlist img{
@@ -569,7 +570,7 @@ textarea {
 						</div>
 					</div>
 					<div></div>
-					<div class="desc-content-finishlist" style="margin: 0 auto; width: 900px; display: none">
+					<div class="desc-content-finishlist">
 					</div>
 					<div class="desc-usage" style="margin: 0 auto; width: 900px; padding-top: 60px; display: none">
 						<div class="usage-left" style="width:420px; display:inline-block; float: right; padding-top:15px">
@@ -690,7 +691,8 @@ textarea {
 					for(let i=0; i<result.length; i++){
 						$(".desc-content-finishlist").append('<div class="my-res-list-content-all" id="my-res-list-content-all">'
 													+'<div class="my-res-list-content-inner" id="my-res-list-img" onclick="location.href=\'/board/detail?req_No='+result[i].req_No+'\'">'
-													+'<img src="'+result[i].fi_Nm+'"></div>'
+													+(result[i].fi_Nm != null? "<img src='+result[i].fi_Nm+'>":'<img src="/images/importToJsp/homeimg.png">')
+													+'</div>'
 													+'<div id="my-res-list-text">'
 													+'<div class="my-res-list-content-inner" id="my-res-list-stat" onclick="location.href=\'/board/detail?req_No='+result[i].req_No+'\'">'
 													+'<label id="res-stat">'+result[i].req_Stat+'</label></div>'
