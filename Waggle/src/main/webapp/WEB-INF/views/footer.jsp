@@ -26,14 +26,17 @@ body {
 
 #wrap {
     min-height: 100vh;
+    min-width: 1190px;
+    overflow:hidden;
     height: 100%;
-    padding-bottom: 100px;
+    padding-top: 107px;
+    padding-bottom: 50px;
 }
 
 footer {
   height: 200px;
   margin: 40px 0px 0px 0px;
-  padding: 40px 40px 40px 40px;
+  padding: 20px 40px 20px 40px;
   position: relative;
   font-size: 12px;
   background-color: #F7F9FA;
@@ -122,6 +125,12 @@ footer .footer-right .service-center li p {
 
 a {
 	text-decoration: none;
+}
+
+@media (max-width:900px) {
+	.info {
+		display: none;
+	}
 }
 
 </style>
