@@ -292,7 +292,7 @@ div {
              	 <i class="fa-solid fa-house"></i>
               	</a>
               	</li>
-             	 <p>HOME > 지도</p>
+             	 <p>HOME > 매물검색</p>
            </ul>
      	</div>
 			
