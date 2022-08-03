@@ -285,6 +285,7 @@ div {
 </style>
 <body>
 	<%@ include file="header.jsp"%>
+	<div id="wrap">
 	<div class="middle">
         <div class="guideline">
          	<ul class="guideline-all">
@@ -335,7 +336,7 @@ div {
 		<div id="map">
 		</div>
 	</div>
-
+  </div>
 	<%@ include file="footer.jsp"%>
 	
 	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=df487b49cd90a64d7305e577e300f2e4&libraries=services,clusterer,drawing"></script>

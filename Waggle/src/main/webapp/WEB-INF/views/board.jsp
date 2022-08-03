@@ -262,7 +262,7 @@ img {
 } 
 
 .board-content-all:hover{
-	box-shadow: inset 0 0 0 15em #f9f9f9;
+	box-shadow: inset 0 0 0 15em #fffcf6;
 }
 .board-content-all{
 	width:1020px;
@@ -440,7 +440,7 @@ img {
 					    <label id="req-stat">${dto.req_Stat }</label>
 					   </div>
 					    <div class="board-content-inner" id="board-title" onclick="location.href='/board/detail?req_No=${dto.req_No}'">${dto.req_Title }</div>
-					     <div class="board-content-inner" id="board-point" onclick="location.href='/board/detail?req_No=${dto.req_No}'">${dto.req_Point }&nbsp;<i class="fa-solid fa-p"></i></div>
+					     <div class="board-content-inner" id="board-point" onclick="location.href='/board/detail?req_No=${dto.req_No}'">${dto.req_Point }&nbsp;P</i></div>
 						
 						 <h4 class="board-content-inner" id="board-ltd-title" onclick="location.href='/board/detail?req_No=${dto.req_No}'">요청 정보</h4>
 						  <div class="board-content-inner" id="board-dl-dt-dd" onclick="location.href='/board/detail?req_No=${dto.req_No}'">	

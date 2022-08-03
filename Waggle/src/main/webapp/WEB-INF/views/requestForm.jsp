@@ -240,11 +240,11 @@ input[type="date"] {
 						</tr>
 						<tr>
 							<th><label class="required">요청 포인트</label></th>
-							<td><input type="text" placeholder="Point" name="req_Point" required="required"></td>
+							<td><input type="text" placeholder="Point(숫자만 입력하세요)" name="req_Point" required="required" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" /></td>
 						</tr>
 						<tr>
 							<th>공인중개사 연락처</th>
-							<td><input type="text" placeholder="" name="req_Phone"></td>
+							<td><input type="text" placeholder="010-0000-0000(선택사항)" name="req_Phone" maxlength='13' oninput="this.value = this.value.replace(/[^0-9-]/g, '');"></td>
 						</tr>
 					</tbody>
 		    	</table>

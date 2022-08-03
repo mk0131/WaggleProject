@@ -12,191 +12,261 @@
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
 <style>
-@charset "UTF-8";
 
-
-.container {
-	max-width: 1000px;
-	display: contents;
-	margin: 0 auto;
+header {
+	width: 100%;
+	position: fixed;
+	background-color: #fff;
+	top: 0;
+	left: 0;
+	right: 0;
+	z-index: 99999;
 }
 
-.navigation {
-	height: 70px;
-	background: #ffffff;
-	margin: 40px 40px 0 40px;
-	border-bottom: solid;
-	border-width: 1px;
+.nav-top {
+	height: 38px;
+	display: flex;
+	justify-content: flex-end;
+	align-items: center;
+	padding: 0 50px;
+	border-bottom: 1px solid #ebebeb;
+	
 }
 
-.brand-container {
-	position: absolute;
-	padding-left: 95px;
-	float: left;
-	line-height: 70px;
-	text-transform: uppercase;
-	font-size: 1.4em;
+.nav-top-text {
+	color: rgba(34,34,34,.8);
+	text-decoration: none;
+	font-size: 14px;
+	padding: 10px;
 }
 
-.brand-container a, .brand-container a:visited, .login a, .login a:visited, .login span{
-	color: #000000;
+#user-nm {
+	color: rgba(34,34,34,.8);
+	font-size: 14px;
+	padding: 10px;
+	margin: 0px;
+}
+
+.nav-bottom {
+	border-bottom: 1px solid #ebebeb;
+	height: 67px;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	padding: 0 50px;
+}
+
+.nav-menu-all {
+	display: flex;
+}
+
+.nav-menu {
+	padding: 10px;
+}
+
+
+.nav-top a {
 	text-decoration: none;
 }
 
-.img01, .img02 {
-	            position:relative;
+.nav-top a:hover {
+	text-decoration: none;
+	color: rgba(34,34,34,.8);
 }
 
-.img01 > a> svg, .img02 > a > svg {
-            position:absolute;
-            margin:auto;
-            top:0; bottom:0; right:0;
+.nav-top a:visited {
+	text-decoration: none;
+	color: rgba(34,34,34,.8);
+}
+
+.nav-toggleBtn {
+	display: none;
+}
+
+.nav-logo {
+	display: flex;
+}
+
+#nav-logo-text {
+	color: #222;
+	text-decoration: none;
+	font-size: 32px;
+	font-weight: bold;
 }
 
 
-
-.nav-container {
-	position: relative;
-	float: right;
-	width: 1280px;
-	margin: 0 auto;
-}
-
-nav {
-	float: left;
-}
-
-nav ul {
-	list-style: none;
-	margin: 0;
-	padding: 0;
-}
-
-nav ul li {
-	float: left;
-	position: relative;
-}
-
-nav ul li a, nav ul li a:visited {
-	display: block;
-	padding: 0 20px;
-	line-height: 70px;
-	background: transparent;
-	color: #000000;
+#nav-logo-text:visited {
+	color: #222;
 	text-decoration: none;
 }
 
-nav ul li a:hover, nav ul li a:visited:hover {
-	background: #2581DC;
-	color: #ffffff;
+.nav-logo-img1 {
+	width: 48px;
+	height: 48px;
 }
 
-.login {
-	position: relative;
-	padding-right: 20px;
-	float: right;
-	line-height: 70px;
-	font-size: 1em;
+.nav-menu-all a {
+	text-decoration: none;
+	color: #222;
+}
+
+.nav-menu-all a:visited {
+	text-decoration: none;
+	color: #222;
+}
+
+@media (max-width:900px) {
+
+	.nav-bottom {
+    border-bottom: 1px solid #ebebeb;
+    height: 67px;
+    padding: 0 35px;
+	}
+
+	.nav-all {
+		flex-direction: row;
+		align-items: flex-start;
+	}
+	
+	.nav-menu-all {
+		display: none;
+		flex-direction: row;
+		align-items: center;;
+		width: 100%;
+	}
+	
+	.nav-toggleBtn {
+		display: block;
+		text-decoration: none;
+		color: #222;
+	}
+	
+	.nav-toggleBtn:visited {
+		color: #222;
+	}
+	
+	.nav-menu div {
+		width: 100%;
+	}
+	
+	.nav-menu-all.active {
+		display: flex;
+	}
+	
 }
 
 </style>
 
 <body>
-<section class="navigation">
-		<div class="container">
-			<div class="brand-container">
-				<span class="img01">
-					<a href="/home"> 
-						<svg width="45" height="45"
-							fill="none" xmlns="http://www.w3.org/2000/svg"
-							xmlns:xlink="http://www.w3.org/1999/xlink">
-							<path fill="url(#a)" d="M0 0h48v48H0z" />
-							<defs>
-							<pattern id="a" patternContentUnits="objectBoundingBox" width="1"
-											height="1">
-							<use xlink:href="#b" transform="scale(.02083)" /></pattern>
-							<image id="b" width="45" height="45"
-											xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAAABmJLR0QA/wD/AP+gvaeTAAADa0lEQVRoge3YSYgdVRTG8V9rQjq0Q2LUlYJICOIQh3RU2gGSjQE1KoIBBRWzckIX6sIB3AgJZCMOICIoKMGoLSS61bhQ1I1KosZExUBspygS2ylDt4tTj65U6laq3+tXr4X3hwv1qu699Z13zz331KFPnz6zgZWY12sR7TKA3diG4R5raYtLMJm1A1jnf7YaG4T47TiUXXe8GkO4HW9jB8bxF/bgQzyNm7Ggk5eYcp9JXICR7H2t1XhCG6txDnaaWtaqth9v4apMzHQZyebZmbs3iPU4mD1bPd1Jt9YUX2yfYVWN+Y/BWoxiLBv7KZYV+i0XKzBtfmrTgFYbxSmJuQfwcmLcBB5qR3CRLwoTL83uD2EJbsMm7Ksw4ntcWDL3jRVjWu2aTg14rjDha4l+g7gerySM2WfK+BajNQzY1qkBw2I585OuE76b4nix/D8Uxv2Mb0QE26F61fLt4rpijy25N4bTcVHu3uW4TsTpP/AP5uI0nIVLRRhcivm5cUNYmPU9Wf2QuAsf1DWijBPwsc42c6eBoGMW4t0eGZA/FzpiAHfjx2m8/FDu+m9cJlxpOZ4qPE+132fKgBZzxIn4gvDNvSK9+Db7/VJm6GIRRVpCyvz4VkcGib1iw/8mTveJmTagLsfh/Zyw3cqj17MON+D5pgQWWYSHheh/lbvDDSXjFhf6fNWE2DwDuEe40dH8eQxnl4zPG/xrI6pznCpS7bob+0+RmA2Lc2Kk8Py7ZuVPsVps5E7D5qamheeZj8dFyGzXgCuaEDoXd4iQWsaZ2JwQmGoTeLSrqnPclL10O1ZU9LsaX0uLPohfsOUo88w4LxaEvCqSvjIG8ZjIQosG3N91pQk+LxEzLs6BVJZ5Bt4sjNnQdaUJNkq7xS7VX1KrTBUK1ndXZjUrxR5IGbJFnLJlzBOrtbb7MquZg/tExlhmxH48Kb7SZjWLhNBUerxHZJ7t1IsaZZlIm1NutRXn9UxdjruwJvGsVaxK1ZQO4MEGNFayRoh5D+cn+iwQFYyy1PraBjRWssThp+kzOCnR91y8k+u/uQmBdch/Lk6KT8E7lZdniPTjI+lSY+Pcq9zHP8GVPdRVmxPFv57KLDeKYtes5hbVKfI4HuiZupo84sjSSN6dikXdWckKvC5y/y/xhqifpjZ0nz59usB/rqP1v6Iiv6UAAAAASUVORK5CYII=" />
-							</defs>
-						</svg>
-					</a>
-				</span>	
-				<a href="/home">Waggle</a>
-			</div>
-			<div class="nav-container">
-				<nav>
-					<ul class="nav-list">
-						<c:if test="${user_Code != null }">
-						<li><a href="/map/user">지도</a></li>
-						</c:if>
-						<c:if test="${user_Code == null }">
-						<li><a href="/login">지도</a></li>
-						</c:if>
-						<li><a href="/board/list">꿀단지목록</a></li>
-						
-						<c:if test="${user_Code == null }">
-						<li><a href="/login">요청글 작성하기</a></li>
-						</c:if>
-						<c:if test="${user_Code != null }">
-						<li><a href="/board/requestform">요청글 작성하기</a></li>
-						</c:if>
-						
-						<c:if test="${user_Code == null }">
-						<li><a href="/login">마이페이지</a></li>
-						</c:if>
-						<c:if test="${user_Code != null }">
-						<li><a href="/mypage/me">마이페이지</a></li>
-						</c:if>
-						<c:if test="${user_Code == null }">
-						<li><a href="/login">이용내역</a></li>
-						</c:if>
-						<c:if test="${user_Code != null }">
-						<li><a href="/mypage/history">이용내역</a></li>
-						</c:if>
-						<c:if test="${user_Code == null }">
-						<li><a href="/login">채팅</a></li>
-						</c:if>
-						<c:if test="${user_Code != null }">
-						<li><a href="/chat/list?room_UCode1=${user_Code}">채팅</a></li>
-						</c:if>
-						<c:if test="${user_Code == 1 }">
-						<li><a href="/license/list">인증센터</a></li>
-						</c:if>
-					</ul>
-				</nav>
-				<div class="login">
-					<span class="img02">
-					<a href="#!">
-					<svg width="34" height="34" viewBox="0 0 34 34" fill="none"	xmlns="http://www.w3.org/2000/svg">
-						<path d="M27.7917 3H6.54167C4.5849 3 3 4.26792 3 5.83333V28.5C3 30.0654 4.5849 31.3333 6.54167 31.3333H27.7917C29.7484 31.3333 31.3333 30.0654 31.3333 28.5V5.83333C31.3333 4.26792 29.7484 3 27.7917 3ZM17.1667 8.66667C20.1771 8.66667 22.4792 10.5083 22.4792 12.9167C22.4792 15.325 20.1771 17.1667 17.1667 17.1667C14.1563 17.1667 11.8542 15.325 11.8542 12.9167C11.8542 10.5083 14.1563 8.66667 17.1667 8.66667ZM26.0208 25.6667H8.3125C8.3125 25.6667 8.3125 24.8379 8.3125 24.25C8.3125 22.0244 12.7608 20 17.1667 20C21.5725 20 26.0208 22.0244 26.0208 24.25C26.0208 24.8379 26.0208 25.6667 26.0208 25.6667Z" fill="black" />
-					</svg>
-					</a>
-					</span>
-					<c:if test="${user_Code == null }">
-					<a href="/login">로그인</a> <span>/</span> <a href="/login">회원가입</a>
-					</c:if>
-					<c:if test="${user_Code != null }">
-					 <b>${user_Nm } 님 환영합니다</b>/<a href="/login/logout">로그아웃</a>
-					 <input type="hidden" name="in_Code" value="${user_Code }">
-					</c:if>
-				</div>
-			</div>
+
+	<header>
+	 <nav class="nav-all">
+	  <div class="nav-top">
+	  
+	  	<c:if test="${user_Code != null }">
+	      <h5 id="user-nm">${user_Nm } 님</h5>
+		  <input type="hidden" name="in_Code" value="${user_Code }">
+		</c:if>
+		
+		<c:if test="${user_Code == null }">
+				<a href="/login" class="nav-top-text">마이페이지</a>
+		</c:if>
+		<c:if test="${user_Code != null }">
+				<a href="/mypage/me" class="nav-top-text">마이페이지</a>
+		</c:if>
+	    
+	    <c:if test="${user_Code == null }">
+			<a href="/login" class="nav-top-text">로그인</a>
+	    </c:if>
+	    <c:if test="${user_Code != null }">
+			 <a href="/login/logout" class="nav-top-text">로그아웃</a>
+			 <input type="hidden" name="in_Code" value="${user_Code }">
+		</c:if>
+	  </div>
+	  <div class="nav-bottom">
+	   <div class="nav-logo">
+	   <span class="nav-logo-img1">
+	    <a href="/home">
+	     <svg width="45" height="45" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+		  <path fill="url(#a)" d="M0 0h48v48H0z" />
+			<defs>
+		  <pattern id="a" patternContentUnits="objectBoundingBox" width="1" height="1">
+			 <use xlink:href="#b" transform="scale(.02083)" /></pattern>
+				<image id="b" width="45" height="45" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAAABmJLR0QA/wD/AP+gvaeTAAADa0lEQVRoge3YSYgdVRTG8V9rQjq0Q2LUlYJICOIQh3RU2gGSjQE1KoIBBRWzckIX6sIB3AgJZCMOICIoKMGoLSS61bhQ1I1KosZExUBspygS2ylDt4tTj65U6laq3+tXr4X3hwv1qu699Z13zz331KFPnz6zgZWY12sR7TKA3diG4R5raYtLMJm1A1jnf7YaG4T47TiUXXe8GkO4HW9jB8bxF/bgQzyNm7Ggk5eYcp9JXICR7H2t1XhCG6txDnaaWtaqth9v4apMzHQZyebZmbs3iPU4mD1bPd1Jt9YUX2yfYVWN+Y/BWoxiLBv7KZYV+i0XKzBtfmrTgFYbxSmJuQfwcmLcBB5qR3CRLwoTL83uD2EJbsMm7Ksw4ntcWDL3jRVjWu2aTg14rjDha4l+g7gerySM2WfK+BajNQzY1qkBw2I585OuE76b4nix/D8Uxv2Mb0QE26F61fLt4rpijy25N4bTcVHu3uW4TsTpP/AP5uI0nIVLRRhcivm5cUNYmPU9Wf2QuAsf1DWijBPwsc42c6eBoGMW4t0eGZA/FzpiAHfjx2m8/FDu+m9cJlxpOZ4qPE+132fKgBZzxIn4gvDNvSK9+Db7/VJm6GIRRVpCyvz4VkcGib1iw/8mTveJmTagLsfh/Zyw3cqj17MON+D5pgQWWYSHheh/lbvDDSXjFhf6fNWE2DwDuEe40dH8eQxnl4zPG/xrI6pznCpS7bob+0+RmA2Lc2Kk8Py7ZuVPsVps5E7D5qamheeZj8dFyGzXgCuaEDoXd4iQWsaZ2JwQmGoTeLSrqnPclL10O1ZU9LsaX0uLPohfsOUo88w4LxaEvCqSvjIG8ZjIQosG3N91pQk+LxEzLs6BVJZ5Bt4sjNnQdaUJNkq7xS7VX1KrTBUK1ndXZjUrxR5IGbJFnLJlzBOrtbb7MquZg/tExlhmxH48Kb7SZjWLhNBUerxHZJ7t1IsaZZlIm1NutRXn9UxdjruwJvGsVaxK1ZQO4MEGNFayRoh5D+cn+iwQFYyy1PraBjRWssThp+kzOCnR91y8k+u/uQmBdch/Lk6KT8E7lZdniPTjI+lSY+Pcq9zHP8GVPdRVmxPFv57KLDeKYtes5hbVKfI4HuiZupo84sjSSN6dikXdWckKvC5y/y/xhqifpjZ0nz59usB/rqP1v6Iiv6UAAAAASUVORK5CYII=" />
+			</defs>
+		</svg></a>
+		</span>
+		<a href="/home" id="nav-logo-text">WAGGLE</a>
+		
 		</div>
-	</section>
+	   
+	   
+	    <div class="nav-menu-all">
+	    
+	    <div class="nav-menu" id="n-menu1"><a href="/map/user">매물검색</a></div>
+	    
+	    <div class="nav-menu" id="n-menu2"><a href="/board/list">꿀단지목록</a></div>
+	    
+	    <div class="nav-menu" id="n-menu3">
+	    <c:if test="${user_Code == null }">
+	    <a href="/login">요청글 작성하기</a>
+	    </c:if>
+	    <c:if test="${user_Code != null }">
+	    <a href="/board/requestform">요청글 작성하기</a>
+	    </c:if>
+	    </div>
+	    
+	    <div class="nav-menu" id="n-menu4">
+	    <c:if test="${user_Code == null }">
+	    <a href="/login">이용내역</a>
+	    </c:if>
+	    <c:if test="${user_Code != null }">
+	    <a href="/mypage/history">이용내역</a>
+	    </c:if>
+	    </div>
+	    
+	    <div class="nav-menu" id="n-menu5">
+	    <c:if test="${user_Code == null }">
+	    <a href="/login">포인트 충전</a>
+	    </c:if>
+	    <c:if test="${user_Code != null }">
+	    <a href="/point/use">포인트 충전</a>
+	    </c:if>
+	    </div>
+	    
+	    <div class="nav-menu" id="n-menu6">
+	    <c:if test="${user_Code == null }">
+	    <a href="/login">채팅</a>
+	    </c:if>
+	    
+	    <c:if test="${user_Code != null }">
+	    <a href="/chat/list?room_UCode1=${user_Code}">채팅</a>
+	    </c:if>
+	    </div>
+	    
+	    <div class="nav-menu" id="n-menu7">
+	    <c:if test="${user_Code == 1}">
+	    <a href="/license/list">인증센터</a>
+	    </c:if>
+	    </div>
+	    
+	    </div>
+	    
+	    <a href="#" class="nav-toggleBtn"><i class="fa-solid fa-bars"></i></a>
+	    
+	  </div>
+	 </nav>
+	</header>
 
 </body>
 <script>
-	(function($) { // Begin jQuery
-		$(function() { // DOM ready
-			// Toggle open and close nav styles on click
-			$('#nav-toggle').click(function() {
-				$('nav ul').slideToggle();
-			});
-			// Hamburger to X toggle
-			$('#nav-toggle').on('click', function() {
-				this.classList.toggle('active');
-			});
-		}); // end DOM ready
-	})(jQuery); // end jQuery
+
+	const toggleBtn = document.querySelector('.nav-toggleBtn');
+	const menu = document.querySelector('.nav-menu-all');
+	
+	toggleBtn.addEventListener('click', () => {
+		menu.classList.toggle('active');
+	})
+
 </script>
 </html>
