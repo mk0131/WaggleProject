@@ -691,7 +691,8 @@ textarea {
 					for(let i=0; i<result.length; i++){
 						$(".desc-content-finishlist").append('<div class="my-res-list-content-all" id="my-res-list-content-all">'
 													+'<div class="my-res-list-content-inner" id="my-res-list-img" onclick="location.href=\'/board/detail?req_No='+result[i].req_No+'\'">'
-													+'<img src="'+result[i].fi_Nm+'"></div>'
+													+(result[i].fi_Nm != null? "<img src='+result[i].fi_Nm+'>":'<img src="/images/importToJsp/homeimg.png">')
+													+'</div>'
 													+'<div id="my-res-list-text">'
 													+'<div class="my-res-list-content-inner" id="my-res-list-stat" onclick="location.href=\'/board/detail?req_No='+result[i].req_No+'\'">'
 													+'<label id="res-stat">'+result[i].req_Stat+'</label></div>'
