@@ -152,8 +152,8 @@ div#detail_container {
 }
 
 div#file_container img {
-	width: 400px;
-	height: 250px;
+	width: 100%;
+	height: 200px;
 }
 
 div#file_container {
@@ -705,7 +705,7 @@ class Upload{
 		//message div
 		this.message = document.createElement('div');
 		this.message.setAttribute('id', 'message');
-		this.message.innerText = '업로드할 이미지를 클릭하거나 드래그 해주세요';
+		this.message.innerText = '업로드할 이미지를 클릭해주세요';
 		this.obj.appendChild(this.message);
 		//button
 		this.btn = document.createElement('div');
@@ -715,8 +715,6 @@ class Upload{
 		//adding event listeners
 		this.input.addEventListener('change', this.__fileSelectHandler__, false);
 		this.obj.addEventListener('click', () => {this.input.click()}, false);
-		this.obj.addEventListener('dragover', this.__fileDragHover__, false);
-		this.obj.addEventListener('dragleave', this.__fileDragHover__, false);
 		this.obj.addEventListener('drop', this.__fileSelectHandler__, false);
 		this.upload.addEventListener('click', this.__upload__, false);
 		//file list
