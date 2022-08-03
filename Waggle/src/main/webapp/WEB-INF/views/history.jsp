@@ -342,7 +342,24 @@ img {
 	color: #878787;
 }
 
-
+.my-req-list-content-all:hover{
+	box-shadow: inset 0 0 0 15em #fffcf6;
+}
+.my-req-list-content-all{
+	width:1020px;
+	margin:0 auto;
+	border-radius:30px;
+	transition: 1s;
+}
+.my-res-list-content-all:hover{
+	box-shadow: inset 0 0 0 15em #fffcf6;
+}
+.my-res-list-content-all{
+	width:1020px;
+	margin:0 auto;
+	border-radius:30px;
+	transition: 1s;
+}
 </style>
 </head>
 <body>

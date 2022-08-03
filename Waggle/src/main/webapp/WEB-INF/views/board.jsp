@@ -262,7 +262,7 @@ img {
 } 
 
 .board-content-all:hover{
-	box-shadow: inset 0 0 0 15em #f9f9f9;
+	box-shadow: inset 0 0 0 15em #fffcf6;
 }
 .board-content-all{
 	width:1020px;

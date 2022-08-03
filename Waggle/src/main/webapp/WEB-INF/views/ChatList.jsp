@@ -39,7 +39,7 @@
 				left: 100px;
 				width: 300px;
 				height: 600px;
-				border: 1px solid green;
+				border: 1px solid;
 				overflow: auto;
 			}
 			
@@ -49,8 +49,9 @@
 			
 			#list_1{
 				
-				height: 100px;
+				height: 105px;
 				margin: 3px;
+				border-bottom: 1px solid;
 				
 				
 			}
@@ -392,31 +393,33 @@
 										
 										if(data[i].chat_Date == null){
 											var time = 100;
+											var diffTime = 0;
+											var start = 0;
+											var end = 0;
 											data[i].chat_Date = ""; 
 											
-										} else {
+										} else if(data[i].chat_Date != null){
+											var now = new Date();
 											var time = new Date(data[i].chat_Date).getHours();
-											var date = new Date(data[i].chat_Date).getDay();
 											var start = new Date(data[i].chat_Date);
 											var end = new Date();
 											var diffTime = (end.getTime() - start.getTime()) / (1000*60*60*24);
 										}
 										
-								
 										
 										if (time <= 12 && time >= 0) {
 											
-											data[i].chat_Date = "오전 " + new Date(data[i].chat_Date).getHours() + " : " + String(new Date(data[i].chat_Date).getMinutes()).padStart(2, "0");
+											data[i].chat_Date = "오전 " +start.getHours() + " : " + String(start.getMinutes()).padStart(2, "0");
 											
-										} else if(diffTime >= 1 ){
-											
-											data[i].chat_Date = new Date(data[i].chat_Date).getFullYear() + "-" + (new Date(data[i].chat_Date).getMonth() + 1) + "-" + new Date(data[i].chat_Date).getDate();
-											
-										} 
-										
-										else if(time >= 12 && time <= 24) {
-											data[i].chat_Date = "오후 " + (new Date(data[i].chat_Date).getHours() - 12) + " : " + String(new Date(data[i].chat_Date).getMinutes()).padStart(2, "0");
+										} else if(time >= 12 && time <= 24) {
+											data[i].chat_Date = "오후 " + (start.getHours() - 12) + " : " + String(start.getMinutes()).padStart(2, "0");
 										}
+										
+										 if(diffTime >= 1 ){
+											 
+											 data[i].chat_Date = start.getFullYear() + "-" + (start.getMonth() + 1) + "-" + start.getDate();
+											
+										 } 
 										
 										if(data[i].chat_Content == null){
 											data[i].chat_Content = "";
@@ -450,7 +453,10 @@
 					 			 $("#send").attr("disabled", false);
 					 			 $("#chat_Content").val(null);
 								 num = $(this).find("input").val();
+								 $("#chat_Content").focus();
 								 ChatHistory();
+								 timer = setTimeout(down,1000);
+								 
 								
 							
 						});
@@ -545,6 +551,7 @@
 								success: function (result) {
 									if (result != 'fail') {
 										$("#chat_Content").val(null);
+										$("#chat_Content").focus();
 										chatList();
 										
 									} else {
