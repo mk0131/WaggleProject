@@ -170,6 +170,44 @@
 	text-align: center;
 }
 
+/* 버튼 */
+.inputbutton {
+  color: var(--color);
+  transition: 0.25s;
+}
+.inputbutton:hover, .inputbutton:focus {
+  box-shadow: inset 0 0 0 2em var(--hover) !important;
+  border-color: var(--hover) !important;
+  color: #fff !important;
+}
+
+.inputbutton {
+border-radius: 8px;
+	box-sizing: border-box;
+	font-size: 13px;
+	font-weight: 500;
+	font-family: inherit;
+	letter-spacing: .25px;
+	line-height: normal;
+	padding: 5px 5px;
+	background-color: #fff;
+	border: 1px solid #d3d3d3;
+  --color: #222222CC;
+  --hover: #f9a73d;
+  text-align:center;
+}
+
+.back{
+	border-radius:20px;
+}
+.back:hover{
+	border-radius: 20px;
+	width: 100px;
+	transition: 0.25s;
+	box-shadow: inset 0 0 0 2em #e9e9e9;
+}
+/* 버튼 */
+/*
 .inputbutton {
 	border-radius: 8px;
 	box-sizing: border-box;
@@ -183,7 +221,7 @@
 	border: 1px solid #d3d3d3;
     color: #222222CC;
 }
-
+*/
 input:focus {
 	outline: none;
 }
@@ -369,7 +407,7 @@ span {
               </label>
               <div class="delete" onclick="removeimg()">&times;</div>
             </div>
-            <input type="submit" value="프로필사진 수정하기" id="img-edit-btn">
+            <input type="submit" class="inputbutton" value="프로필사진 수정하기" id="img-edit-btn">
             </form>
          </div>
          <div class="edit-profile-info">
@@ -400,7 +438,7 @@ span {
             <input type="password" id="pw_chk" name="user_Pw">
            
             <input type="hidden" name="user_Code" value="${user_Code }">
-            <input type="submit" id="change_pw" value="비밀번호 수정" disabled="disabled" class="inputbutton">
+            <input type="submit" id="change_pw" value="비밀번호 수정" disabled="disabled" class="inputbutton button">
             
             <br>
             <span class="pw_input_re_1">비밀번호가 같습니다.</span>
@@ -412,10 +450,10 @@ span {
             <form action="/mypage/emailchange" method="post">
             <h5>이메일</h5>
             <input type="text" id="email_input" name="user_Email" value="${user_Email }">
-            <input type="button" id="mail_chk" value="이메일 인증" class="inputbutton">
+            <input type="button" id="mail_chk" value="이메일 인증" class="inputbutton button">
 						<input type="text" id="chk_nm" placeholder="인증번호를 입력해 주세요" disabled="disabled">
 						<input type="hidden" name="user_Code" value="${user_Code }">
-						<input type="submit" id="change_email" value="이메일 수정" disabled="disabled" class="inputbutton">
+						<input type="submit" id="change_email" value="이메일 수정" disabled="disabled" class="inputbutton button">
 						<br>
 						<span class="email_input_re_1">인증번호가 일치합니다.</span>
 						<span class="email_input_re_2">인증번호를 다시 확인해주세요.</span>
@@ -493,7 +531,7 @@ span {
             
             <br/><br/>
             <div id="back-btn">
-               <div id="back-btn-inner" onclick="location.href='/mypage/me'">
+               <div id="back-btn-inner" class="back" onclick="location.href='/mypage/me'">
                 <i class="fa-solid fa-arrow-left-long"></i>
                  <h5 id="back-btn-inner-text">돌아가기</h5>
                </div>
