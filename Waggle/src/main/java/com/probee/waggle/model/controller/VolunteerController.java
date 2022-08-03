@@ -1,5 +1,9 @@
 package com.probee.waggle.model.controller;
 
+import java.io.IOException;
+import java.io.PrintWriter;
+
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,13 +25,32 @@ public class VolunteerController {
 	BoardService boardService;
 	
 	@GetMapping("/submit") //지원하기
-	public String Vol(int vo_UCode, int vo_No) {
+	public String Vol(int vo_UCode, int vo_No, HttpServletResponse response) {
 		
 		// 지원자의 주소 여부 확인후 없으면 마이페이지 주소 업데이트 폼으로 이동
 		UserAddressDto add_dto = boardService.selectUserAddr(vo_UCode);
 
 		if(add_dto == null) {
-			return "redirect:/mypage/profileEdit?ua_UCode="+vo_UCode;
+			response.setContentType("text/html; charset=UTF-8");
+			PrintWriter out;
+			String redirect = "/mypage/profileEdit?ua_UCode="+vo_UCode;
+			String redirect2 = "/board/detail?req_No="+vo_No;
+			
+			try {
+				out = response.getWriter();
+				out.println("<script language='javascript'>");
+				out.println("if(confirm('내정보 수정에서 주소를 입력해 주세요.')){"
+						+ "window.location.href='"+redirect+"';"
+						+ "} else {"
+						+ "window.location.href='"+redirect2+"';"
+						+ "}");
+				out.println("</script>");
+				out.flush();
+				return null;
+			} catch (IOException e) {
+				e.printStackTrace();
+				return "redirect:/board/list";
+			}
 		}
 		
 		int res = volunteerService.Submit(vo_UCode, vo_No);

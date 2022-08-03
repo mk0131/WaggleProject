@@ -308,7 +308,7 @@ public class BoardController {
 	
 	
 	@GetMapping("/accept")  // 수락하기
-	public String Accept(int req_UCode, int res_UCode, int req_No, HttpSession session) {
+	public String Accept(int req_UCode, int res_UCode, int req_No, HttpSession session, HttpServletResponse response) {
 		
 		int res =  boardService.CreateRes(req_No, res_UCode);
 		
@@ -318,10 +318,31 @@ public class BoardController {
 		
 		// 포인트 부족하면 충전페이지로 이동
 		RequestDto2 req_dto = boardService.selectRequest(req_No);
-		int point = (int)session.getAttribute("user_Point");
+		int user_Code = (int)session.getAttribute("user_Code");
+		int point = boardService.selectUser(user_Code).getUser_Point();
 		int po_Point = req_dto.getReq_Point();
+		
 		if(point - po_Point < 0) {
-			return "redirect:/point/use";
+			response.setContentType("text/html; charset=UTF-8");
+			PrintWriter out;
+			String redirect = "/point/use";
+			String redirect2 = "/board/detail?req_No="+req_No;
+			
+			try {
+				out = response.getWriter();
+				out.println("<script language='javascript'>");
+				out.println("if(confirm('포인트가 부족합니다.')){"
+						+ "window.location.href='"+redirect+"';"
+						+ "} else {"
+						+ "window.location.href='"+redirect2+"';"
+						+ "}");
+				out.println("</script>");
+				out.flush();
+				return null;
+			} catch (IOException e) {
+				e.printStackTrace();
+				return "redirect:/point/use";
+			}
 		}
 		
 		// 요청자 포인트 소모
