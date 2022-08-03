@@ -362,6 +362,7 @@ div#review_containser{
 #multi-file-upload{
 	text-align: center;
 	margin: auto 25%;
+	display: inline-block;
 }
 /*파일 업로드 css 끝 */
 </style>
