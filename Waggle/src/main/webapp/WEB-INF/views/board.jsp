@@ -387,7 +387,12 @@ img {
                 	 <input id="Lng_${status.index}" type="hidden" value="${dto.home_Lng }">
 
 					 <div class="board-content-inner" id="board-img" onclick="location.href='/board/detail?req_No=${dto.req_No}'">
-					  <img src=${dto.fi_Nm }>
+						 <c:if test="${dto.fi_Nm != null }">
+						 <img src=${dto.fi_Nm }>
+						 </c:if>
+						 <c:if test="${dto.fi_Nm == null }">
+						 <img src="/images/importToJsp/homeimg.png">
+						 </c:if>
 					 </div>
 					 
 					  <div id="board-text">
