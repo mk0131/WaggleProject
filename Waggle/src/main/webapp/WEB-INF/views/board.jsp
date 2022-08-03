@@ -261,6 +261,16 @@ img {
     padding-bottom: 20px;
 } 
 
+.board-content-all:hover{
+	box-shadow: inset 0 0 0 15em #f9f9f9;
+}
+.board-content-all{
+	width:1020px;
+	margin:0 auto;
+	border-radius:30px;
+	transition: 1s;
+}
+
 .board-dt {
 	line-height: 14px;
     font-size: 15px;
@@ -340,6 +350,7 @@ img {
 .req-btn {
   color: var(--color);
   transition: 0.25s;
+  margin-bottom:20px;
 }
 .req-btn:hover, .req-btn:focus {
   box-shadow: inset 0 0 0 2em var(--hover);
@@ -362,6 +373,7 @@ img {
   --hover: #f9a73d;
   border:none;
 }
+
 /* 버튼 */
 /*
 .req-btn {
