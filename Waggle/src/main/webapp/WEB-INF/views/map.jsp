@@ -44,6 +44,7 @@
 .container {
 	margin: 0 auto;
 	position: relative;
+	width:1000px;
 }
 
 
@@ -63,6 +64,7 @@
 .searchbar:hover {
 	width: 60rem;
 	height: 2rem;
+	background-color:#f7f9fa;
 }
 
 .button {
@@ -115,6 +117,10 @@
 	border: 1px solid #d4d7e1;
 	border-radius: 3px;
 	font-size: 1em;
+}
+
+.input-query:hover{
+	background-color:#f7f9fa;
 }
 
 .input-query:focus ~ .counter {
@@ -242,12 +248,21 @@ div {
 #map img[src*=profile]{
 	border-radius:1000px;
 }
+
+#map img[src*=http://t1.daumcdn.net/mapjsapi/images/transparent.gif]{
+	z-index:99;
+}
 .detail_img, .detail_video{
 	width: 100%;
 	height: 83%;
 	object-fit: fill;
 }
 
+.detail_img:hover, .detail_video:hover{
+	border:5px solid #f2f0e8;
+	height: 79%;
+	width: 97%;
+}
 //이미지에 모달창 띄우기
 .modal {
   position: absolute;
@@ -289,9 +304,8 @@ div {
 	<div class="middle">
         <div class="guideline">
          	<ul class="guideline-all">
-            	  <li><a href="javascript:void(0)">
+            	  <li>
              	 <i class="fa-solid fa-house"></i>
-              	</a>
               	</li>
              	 <p>HOME > 매물검색</p>
            </ul>
@@ -385,18 +399,6 @@ div {
 
 	// 지도를 생성합니다    
 	var map = new kakao.maps.Map(mapContainer, mapOption); 
-	
-	//마우스 스크롤로 지도 레벨 zoom out 되면 꿀벌들 사진 사라지도록 변경
-	kakao.maps.event.addListener(map, 'zoom_changed', function() {        
-	    
-	    var level = map.getLevel();
-	    
-	    if(level > 3){
-	    	for(var i=0; i<markers.length; i++){
-	    		markers[i].setMap(null);
-	    	}
-	    }
-	});
 	
 	
 	// 모든 회원들 지도에 뿌려주기
@@ -497,6 +499,21 @@ div {
 		        // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
 		        map.setCenter(coords);
 		        markers.push(marker);
+		        
+		      //zoom out시에 꿀벌 사라지게
+			    kakao.maps.event.addListener(map, 'zoom_changed', function() {        
+				    var level = map.getLevel();
+				    
+				    if(level > 3){
+				    	for(var i=0; i<markers.length; i++){
+				    		markers[i].setMap(null);
+				    	}
+				    }else{
+				    	for(var i=0; i<markers.length; i++){
+				    		markers[i].setMap(map);
+				    	}
+				    }
+				});
 		    } else {
 		    	console.log("에러");
 		    }
@@ -541,7 +558,7 @@ div {
 						let unique_DAddr = Array.from(new Set(DAddr.sort()));
 						//중복제거한 상세주소 페이지에 뿌리기
 						for(let i=0; i<unique_DAddr.length; i++){
-							$(".list").append('<li class="list-item" onclick="clickDAddr(\''+unique_DAddr[i]+'\');" data-search-on-list="list-item"><a href="#" class="list-item-link">'+unique_DAddr[i]+'<span class="item-list-subtext">우편번호: '+result[i].home_Post+'</span></a></li>');
+							$(".list").append('<li class="list-item" onclick="clickDAddr(\''+unique_DAddr[i]+'\');" data-search-on-list="list-item"><a href="#" class="list-item-link">'+unique_DAddr[i]+'<span class="item-list-subtext">'+result[i].home_Addr+'</span></a></li>');
 						}
 						
 						//영상 뿌리기 시작
