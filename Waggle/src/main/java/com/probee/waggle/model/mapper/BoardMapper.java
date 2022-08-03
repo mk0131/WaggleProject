@@ -99,11 +99,11 @@ public interface BoardMapper {
 	@Select(" select * from points p where po_No = #{req_No} and po_UCode = #{user_Code} ")
 	PointsDto selectPoint(int req_No, int user_Code);
 	
-	// result 업데이트
+	// result 업데이트(확인중)
 	@Update(" update Result set "
 			+ "res_Attr1=#{res_Attr1}, res_Attr2=#{res_Attr2}, res_Attr3=#{res_Attr3}, "
 			+ "res_Attr4=#{res_Attr4}, res_Attr5=#{res_Attr5}, res_Attr6=#{res_Attr6}, "
-			+ "res_Detail=#{res_Detail}, res_Rate=#{res_Rate}, res_WDate=NOW(), res_Stat='완료' "
+			+ "res_Detail=#{res_Detail}, res_Rate=#{res_Rate}, res_WDate=NOW(), res_Stat='확인중' "
 			+ "where res_Code=#{res_Code} ")
 	public int updateResult(ResultDto dto);
 
@@ -115,7 +115,7 @@ public interface BoardMapper {
 	public UserAddressDto selectUserAddr(int ua_Ucode);
 	
 	// 요청글 완료 전환시 Result DB 시간 업데이트
-	@Update(" update Result set res_WDate=NOW() where res_Code=#{res_Code} ")
+	@Update(" update Result set res_Stat='완료', res_WDate=NOW() where res_Code=#{res_Code} ")
 	public int updateResultWDate(int res_Code);
 	
 	// 유저코드로 사용자 꿀 수확량 수정

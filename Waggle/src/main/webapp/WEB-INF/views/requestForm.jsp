@@ -173,6 +173,16 @@ input[type="date"] {
 	padding: 10px;
 }
 
+.link-guide {
+	color: #FF1493;
+}
+
+.link-guide:hover {
+	color: #C71585;
+	text-decoration: underline;
+	cursor: pointer;
+}
+
 </style>
 </head>
 <body>
@@ -204,8 +214,14 @@ input[type="date"] {
 							<td><input type="text" placeholder="Title" name="req_Title" required="required"></td>
 						</tr>
 						<tr>
-							<th>내가 본 집 링크 첨부<br/>(ex.직방, 다방 등등..)</th>
-							<td><input type="text" placeholder="LInk" name="req_Link"></td>
+							<th>
+								내가 본 집 링크 첨부<br/>
+								(ex.직방, 다방 등등..)
+							</th>
+							<td>
+								<input type="text" placeholder="LInk" name="req_Link">
+								<a class="link-guide" onclick="window.open('/images/importToJsp/링크첨부방법.gif', 'window_name', 'width=1000, height=600, location=no, status=no, scrollbars=yes')">링크 첨부방법 확인</a>
+							</td>
 						</tr>
 						<tr>
 							<th><label class="required">방문기한</label></th>

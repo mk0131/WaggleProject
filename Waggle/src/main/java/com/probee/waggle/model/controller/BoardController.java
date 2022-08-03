@@ -392,7 +392,7 @@ public class BoardController {
 		// 확인중 -> 완료로 업데이트
 		boardService.complete(req_No);
 		
-		// Result 시간 업데이트
+		// Result 시간 업데이트 및 상태 완료로 업데이트
 		boardService.updateResultWDate(res_dto.getRes_Code());
 		
 		// 꿀벌 포인트 업데이트
@@ -486,7 +486,7 @@ public class BoardController {
 		// 글번호로 result dto 가져오기
 		ResultDto dto = boardService.selectResult(req_No);
 		
-		// result dto 내용 업데이트
+		// result dto 내용 업데이트 (result stat 확인중으로 변경)
 		res_dto.setRes_Code(dto.getRes_Code());
 		boardService.updateResult(res_dto);
 		
