@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.probee.waggle.model.dto.ChatContentDto;
 import com.probee.waggle.model.dto.ChatContentDto2;
 import com.probee.waggle.model.dto.ChatRoomDto;
+import com.probee.waggle.model.dto.ChatRoomDto2;
 import com.probee.waggle.model.service.ChatService;
 
 @Controller
@@ -31,26 +32,24 @@ public class ChatController {
 			chatService.CreChat(room_UCode1, room_UCode2); // 없으면 새로 만들기
 		}
 		
-		model.addAttribute("dto",chatService.ChatList(room_UCode1)); // 내가속한 채팅방 리스트 구하기
-		
 		
 		return "ChatList";
 	}
 	
 	@GetMapping("/list") // 채팅 클릭시 
 	public String ChatList(int room_UCode1, Model model) {
-		
-		
-		model.addAttribute("dto",chatService.ChatList(room_UCode1)); // 내가속한 채팅방 리스트 구하기
-		
+	
 		
 		return "ChatList";
 	}
 	
-	@GetMapping("/chat")
-	public String GoChat(int room_No ,int chat_UCode) {
-		chatService.Chk(room_No,chat_UCode ); // 상대 채팅 읽음 표시
-		return "Chatting";
+	@PostMapping("show")
+	@ResponseBody
+	public List<ChatRoomDto2> Show(int room_UCode1){
+		
+		List<ChatRoomDto2> list = chatService.ChatList(room_UCode1);
+		
+		return list;
 	}
 	
 	@PostMapping("/chatting")
