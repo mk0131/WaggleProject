@@ -51,6 +51,7 @@ button:active {
 </head>
 <body>
 <%@ include file="header.jsp"%>
+  <div id="wrap">
 	<div class="box">
 		<div class="button-container">
 			<button onclick="showAll()">전체 보기</button>
@@ -96,7 +97,7 @@ button:active {
 		</table>
 		<a href="https://www.gmd.go.kr/gmd/external/reqVerifyCerti.do" target="_blank">국가기술자격 진위 확인</a>
 	</div>
-
+  </div>
 <%@ include file="footer.jsp" %>
 <script type="text/javascript">
 
