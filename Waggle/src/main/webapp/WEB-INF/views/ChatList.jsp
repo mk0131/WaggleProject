@@ -349,6 +349,7 @@
 							</ul>
 						</div>
 					</div>
+					
 					<div id="list"></div>
 					<div id="scroll">
 						</div>
@@ -367,6 +368,7 @@
 								</div>
 							</form>
 						</div>
+						
 				</div>
 				<%@ include file="./footer.jsp" %>
 					<script type="text/javascript">

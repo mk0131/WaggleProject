@@ -100,11 +100,6 @@ header {
 	text-decoration: none;
 }
 
-.nav-logo-img1 {
-	width: 48px;
-	height: 48px;
-}
-
 .nav-menu-all a {
 	text-decoration: none;
 	color: #222;
@@ -114,6 +109,12 @@ header {
 	text-decoration: none;
 	color: #222;
 }
+
+.nav-logo-img1 {
+	width: 120px;
+	height: 58px;
+}
+
 
 @media (max-width:900px) {
 
@@ -187,16 +188,9 @@ header {
 	   <div class="nav-logo">
 	   <span class="nav-logo-img1">
 	    <a href="/home">
-	     <svg width="45" height="45" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-		  <path fill="url(#a)" d="M0 0h48v48H0z" />
-			<defs>
-		  <pattern id="a" patternContentUnits="objectBoundingBox" width="1" height="1">
-			 <use xlink:href="#b" transform="scale(.02083)" /></pattern>
-				<image id="b" width="45" height="45" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAAABmJLR0QA/wD/AP+gvaeTAAADa0lEQVRoge3YSYgdVRTG8V9rQjq0Q2LUlYJICOIQh3RU2gGSjQE1KoIBBRWzckIX6sIB3AgJZCMOICIoKMGoLSS61bhQ1I1KosZExUBspygS2ylDt4tTj65U6laq3+tXr4X3hwv1qu699Z13zz331KFPnz6zgZWY12sR7TKA3diG4R5raYtLMJm1A1jnf7YaG4T47TiUXXe8GkO4HW9jB8bxF/bgQzyNm7Ggk5eYcp9JXICR7H2t1XhCG6txDnaaWtaqth9v4apMzHQZyebZmbs3iPU4mD1bPd1Jt9YUX2yfYVWN+Y/BWoxiLBv7KZYV+i0XKzBtfmrTgFYbxSmJuQfwcmLcBB5qR3CRLwoTL83uD2EJbsMm7Ksw4ntcWDL3jRVjWu2aTg14rjDha4l+g7gerySM2WfK+BajNQzY1qkBw2I585OuE76b4nix/D8Uxv2Mb0QE26F61fLt4rpijy25N4bTcVHu3uW4TsTpP/AP5uI0nIVLRRhcivm5cUNYmPU9Wf2QuAsf1DWijBPwsc42c6eBoGMW4t0eGZA/FzpiAHfjx2m8/FDu+m9cJlxpOZ4qPE+132fKgBZzxIn4gvDNvSK9+Db7/VJm6GIRRVpCyvz4VkcGib1iw/8mTveJmTagLsfh/Zyw3cqj17MON+D5pgQWWYSHheh/lbvDDSXjFhf6fNWE2DwDuEe40dH8eQxnl4zPG/xrI6pznCpS7bob+0+RmA2Lc2Kk8Py7ZuVPsVps5E7D5qamheeZj8dFyGzXgCuaEDoXd4iQWsaZ2JwQmGoTeLSrqnPclL10O1ZU9LsaX0uLPohfsOUo88w4LxaEvCqSvjIG8ZjIQosG3N91pQk+LxEzLs6BVJZ5Bt4sjNnQdaUJNkq7xS7VX1KrTBUK1ndXZjUrxR5IGbJFnLJlzBOrtbb7MquZg/tExlhmxH48Kb7SZjWLhNBUerxHZJ7t1IsaZZlIm1NutRXn9UxdjruwJvGsVaxK1ZQO4MEGNFayRoh5D+cn+iwQFYyy1PraBjRWssThp+kzOCnR91y8k+u/uQmBdch/Lk6KT8E7lZdniPTjI+lSY+Pcq9zHP8GVPdRVmxPFv57KLDeKYtes5hbVKfI4HuiZupo84sjSSN6dikXdWckKvC5y/y/xhqifpjZ0nz59usB/rqP1v6Iiv6UAAAAASUVORK5CYII=" />
-			</defs>
-		</svg></a>
+	     <img src="/images/mainhome/nav-logo.png">
+	     </a>
 		</span>
-		<a href="/home" id="nav-logo-text">WAGGLE</a>
 		
 		</div>
 	   

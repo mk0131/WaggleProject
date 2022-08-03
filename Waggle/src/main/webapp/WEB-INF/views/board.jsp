@@ -215,7 +215,7 @@ img {
 	color: #878787;
 }
 
-img {
+#board-img {
 	width: 310px;
     height: 300px;
     object-fit: cover;
@@ -433,7 +433,7 @@ img {
 						 <img src=${dto.fi_Nm }>
 						 </c:if>
 						 <c:if test="${dto.fi_Nm == null }">
-						 <img src="/images/importToJsp/homeimg.png">
+						 <img id="board-img" src="/images/importToJsp/homeimg.png">
 						 </c:if>
 					 </div>
 					 
