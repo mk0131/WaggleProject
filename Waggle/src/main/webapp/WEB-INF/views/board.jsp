@@ -336,6 +336,34 @@ img {
     max-width: 1380px;
 }
 
+/* 버튼 */
+.req-btn {
+  color: var(--color);
+  transition: 0.25s;
+}
+.req-btn:hover, .req-btn:focus {
+  box-shadow: inset 0 0 0 2em var(--hover);
+  border-color: var(--hover);
+  color: #fff;
+}
+
+.req-btn {
+  font-weight: 600;
+   color: #fff;
+   background-color: #222;
+   padding: 0 18px;
+   height: 42px;
+   line-height: 40px;
+   border-radius: 12px;
+   font-size: 14px;
+   letter-spacing: -.14px;
+   cursor: pointer;
+  --color: #262626;
+  --hover: #f9a73d;
+  border:none;
+}
+/* 버튼 */
+/*
 .req-btn {
 	font-weight: 600;
     color: #fff;
@@ -349,7 +377,7 @@ img {
     cursor: pointer;
     
 }
- 
+ */
 </style>
 
 </head>
@@ -368,7 +396,7 @@ img {
    	</div>
    	
 	<div class="middle-btn">	
-			<button type="button" class="req-btn" onclick="location.href='/board/requestform'">요청하기</button>
+			<button type="button" class="req-btn" onclick="location.href='/board/requestform'">새로운 요청하기</button>
     </div>
     
    <div class="board-all">
