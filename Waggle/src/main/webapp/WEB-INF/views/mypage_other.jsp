@@ -165,10 +165,11 @@ textarea {
 
 .desc-content-finishlist{
 	margin: 0 auto;
-	width: 900px;
+	width: 1000px;
+	height:900px;
+	overflow-y:auto;
 	display: none;
 	text-align:left;
-	padding-top:100px;
 }
 
 .desc-content-finishlist img{
@@ -569,7 +570,7 @@ textarea {
 						</div>
 					</div>
 					<div></div>
-					<div class="desc-content-finishlist" style="margin: 0 auto; width: 900px; display: none">
+					<div class="desc-content-finishlist">
 					</div>
 					<div class="desc-usage" style="margin: 0 auto; width: 900px; padding-top: 60px; display: none">
 						<div class="usage-left" style="width:420px; display:inline-block; float: right; padding-top:15px">

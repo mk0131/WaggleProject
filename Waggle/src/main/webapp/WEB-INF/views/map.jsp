@@ -334,7 +334,6 @@ div {
 		
 		<div id="map">
 		</div>
-		
 	</div>
 
 	<%@ include file="footer.jsp"%>
