@@ -71,12 +71,12 @@ header {
 
 .nav-top a:hover {
 	text-decoration: none;
-	color:color: rgba(34,34,34,.8);
+	color: rgba(34,34,34,.8);
 }
 
 .nav-top a:visited {
 	text-decoration: none;
-	color:color: rgba(34,34,34,.8);
+	color: rgba(34,34,34,.8);
 }
 
 .nav-toggleBtn {
@@ -93,7 +93,7 @@ header {
 	font-size: 32px;
 	font-weight: bold;
 }
-}
+
 
 #nav-logo-text:visited {
 	color: #222;
@@ -245,7 +245,7 @@ header {
 	    </div>
 	    
 	    <div class="nav-menu" id="n-menu7">
-	    <c:if test=${user_Code == 1}>
+	    <c:if test="${user_Code == 1}">
 	    <a href="/license/list">인증센터</a>
 	    </c:if>
 	    </div>
