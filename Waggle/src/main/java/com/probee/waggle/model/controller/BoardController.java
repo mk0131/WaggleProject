@@ -307,14 +307,9 @@ public class BoardController {
 	}
 	
 	
-	@GetMapping("/accept")  // 수락하기
+	@GetMapping("/accept")  // 수락하기 요청자 코드, 수행자 코드, 글번호
 	public String Accept(int req_UCode, int res_UCode, int req_No, HttpSession session, HttpServletResponse response) {
 		
-		int res =  boardService.CreateRes(req_No, res_UCode);
-		
-		if(res > 0) {
-			boardService.Progress(req_No);
-		}
 		
 		// 포인트 부족하면 충전페이지로 이동
 		RequestDto2 req_dto = boardService.selectRequest(req_No);
@@ -345,6 +340,11 @@ public class BoardController {
 			}
 		}
 		
+		int res =  boardService.CreateRes(req_No, res_UCode); // 결과글 생성
+		
+		if(res > 0) {
+			boardService.Progress(req_No); // 진행중 으로 변경
+		}
 		// 요청자 포인트 소모
 		int po_No = req_dto.getReq_No();
 		// Points DB 업데이트

@@ -52,4 +52,5 @@ public class VolunteerServiceImpl implements VolunteerService{
 		return volunteerMapper.ResRevoke(vo_No, vo_UCode);
 	}
 
+
 }

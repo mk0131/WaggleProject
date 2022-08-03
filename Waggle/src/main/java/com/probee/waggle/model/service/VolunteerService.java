@@ -20,4 +20,5 @@ public interface VolunteerService {
 	
 	public int ResRevoke(int vo_No, int vo_UCode);
 
+
 }

@@ -390,7 +390,7 @@
 									
 									for(let i = 0; i <data.length; i++){
 										
-										
+										// 대화 시간이 없을 시
 										if(data[i].chat_Date == null){
 											var time = 100;
 											var diffTime = 0;
@@ -406,7 +406,7 @@
 											var diffTime = (end.getTime() - start.getTime()) / (1000*60*60*24);
 										}
 										
-										
+										// 오전 오후 구분
 										if (time <= 12 && time >= 0) {
 											
 											data[i].chat_Date = "오전 " +start.getHours() + " : " + String(start.getMinutes()).padStart(2, "0");
@@ -414,13 +414,13 @@
 										} else if(time >= 12 && time <= 24) {
 											data[i].chat_Date = "오후 " + (start.getHours() - 12) + " : " + String(start.getMinutes()).padStart(2, "0");
 										}
-										
+										// 하루가 지나면 년-월-일 형식으로 표현
 										 if(diffTime >= 1 ){
 											 
 											 data[i].chat_Date = start.getFullYear() + "-" + (start.getMonth() + 1) + "-" + start.getDate();
 											
 										 } 
-										
+										// 대화기록이 없으면 안보인다
 										if(data[i].chat_Content == null){
 											data[i].chat_Content = "";
 										}
@@ -443,7 +443,7 @@
 						// 처음 채팅방 보이기
 						chatList();
 						
-						// 채팅방 더블 클릭시 채팅내역 환경 리셋, send 버튼 활성화
+						// 채팅방 더블 클릭시 채팅내역 환경 리셋, send 버튼 활성화 1초후 마지막 대화내용으로 이동
 						$(document).on("dblclick","div[id='list_1']",function(){
 					 			 $("#scroll").empty();
 					 			 length = 0;

@@ -35,4 +35,5 @@ public interface VolunteerMapper {
 	@Update(" update Result set res_Stat = '취소(0)' where res_No = #{req_No}  ")
 	int Revoke(int req_No);
 	
+	
 }
