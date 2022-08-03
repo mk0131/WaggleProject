@@ -56,6 +56,8 @@ public class ChatController {
 	@ResponseBody
 	public List<ChatContentDto2> Chat(int room_No , int chat_UCode) {
 		
+		chatService.Chk(room_No,chat_UCode ); // 상대 채팅 읽음 표시
+		
 		List<ChatContentDto2> list = chatService.ChatHistory(room_No); // 해당 채팅방의 채팅내역 불러오기
 		
 		return list;
