@@ -376,7 +376,14 @@ public class BoardController {
 		volunteerService.delete(req_No); // 지원자들 삭제
 		volunteerService.Revoke(req_No); // 모든 결과물 취소(0)
 		
-		// 포인트 되돌려 줘야 함
+		// 포인트 되돌려 받음
+		RequestDto2 req_dto = boardService.selectRequest(req_No);
+		int req_Point = req_dto.getReq_Point();
+		int req_UCode = req_dto.getReq_UCode();
+		pointService.insertPay(req_Point, req_UCode, "획득");
+		// user 정보 point update
+		int user_point = pointService.selectUserPoint(req_UCode);
+		pointService.updateUserPoint(user_point + req_Point, req_UCode);
 		
 		return "redirect:/board/list";
 	}
