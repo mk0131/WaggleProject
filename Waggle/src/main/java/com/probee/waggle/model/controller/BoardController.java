@@ -375,6 +375,8 @@ public class BoardController {
 		volunteerService.delete(req_No); // 지원자들 삭제
 		volunteerService.Revoke(req_No); // 모든 결과물 취소(0)
 		
+		// 포인트 되돌려 줘야 함
+		
 		return "redirect:/board/list";
 	}
 	
