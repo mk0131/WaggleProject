@@ -160,8 +160,7 @@
 		      <div class="swiper-wrapper">
 		        <div class="swiper-slide"><img src="images/mainhome/frame 2.jpg"><div id="gopagebtn1" onclick="location.href='/board/requestform'"></div></div>
 		        <div class="swiper-slide"><img src="images/mainhome/frame 3.jpg"><div id="gopagebtn2" onclick="location.href='/board/list'"></div></div>
-		        <!-- <div class="swiper-slide"><img src="images/mainhome/frame 7.png"><div id="gopagebtn1" onclick="location.href='/point/use'"></div></div> -->
-				<div class="swiper-slide"><img src="images/mainhome/frame 6.jpg"></div>
+				<div class="swiper-slide"><img src="images/mainhome/frame 12.png"></div>
 		      </div>
 		      <div class="swiper-button-next"></div>
 		      <div class="swiper-button-prev"></div>

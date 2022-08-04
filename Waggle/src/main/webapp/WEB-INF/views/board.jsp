@@ -34,7 +34,7 @@
 
 .guideline-all p {
 	display: inline-block;
-	font-size: 15px;
+	font-size: 16px;
 }
 
 /* .board {
@@ -209,13 +209,14 @@ img {
 #paging-a {
 	text-decoration: none;
 	padding: 8px;
+	color: #878787;
 }
 
 #paging-a:visited {
 	color: #878787;
 }
 
-img {
+.board-all img {
 	width: 310px;
     height: 300px;
     object-fit: cover;
@@ -252,6 +253,8 @@ img {
     border: 1px solid #d3d3d3;
     border-radius: 10px;
     cursor: pointer;
+    font-size:16pt;
+    font-weight:bold;
 }
  
 #board-dl {
@@ -262,7 +265,7 @@ img {
 } 
 
 .board-content-all:hover{
-	box-shadow: inset 0 0 0 15em #fffcf6;
+	box-shadow: inset 0 0 0 15em #f7f9fa;
 }
 .board-content-all{
 	width:1020px;
@@ -514,7 +517,7 @@ img {
 				}
 				
 			} else {
-				$("#Km_"+i).text('주소를 입력해 주세요');
+				$("#Km_"+i).html("'회원정보 수정'에서<br>주소를 입력해 주세요");
 			}
 			
 		}

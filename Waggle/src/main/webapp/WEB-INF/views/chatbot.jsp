@@ -175,7 +175,7 @@ img {
 <body>
 	<div class="chatbot-header" style="padding:13px">
 		<div class="img01" style="text-align:center">
-		<img src="/images/importToJsp/logo.png" style="width:50px"/>
+		<img src="/images/mainhome/chat-logo.png" style="width:50px"/>
 		</div>
 		<div id="chatbot-title">Waggle에게 문의하기</div>
 		<div id="chatbot-middle-title">보러가야하는 집이 있지만 시간이 없을 때! Waggle을 이용하세요!</div>
@@ -248,7 +248,7 @@ img {
 	
 	//받은메시지 보여주는 함수
 	function showReceiveMessage(message){
-		$("#chatBox").append("<div class='logo'><img src='/images/importToJsp/logo.png'/></div>"
+		$("#chatBox").append("<div class='logo'><img src='/images/mainhome/chat-logo.png'/></div>"
 							+ "<div class='conversation'><div>" + message + "</div></div><br/><br/>");
 		$("#chatBox").scrollTop($("#chatBox")[0].scrollHeight)
 	}

@@ -18,6 +18,10 @@
 	width: 1125px;
 }
 
+.guideline-all {
+	margin-top: 16px !important;
+}
+
 .guideline-all i {
 	display: inline-block;
 	color: #151515;
@@ -29,17 +33,18 @@
 
 .guideline-all p {
 	display: inline-block;
-	font-size: 14px;
+	font-size: 16px;
 }
 
-.login-form h1 {
-	text-align: center;
+.login-form {
+	display: flex;
+	justify-content: center;
 }
 
 .tabs {
 	background-color: #ffffff;
 	width: 560px;
-	height: 700px;
+	height: 1150px;
 	margin: 0 auto;
 }
 
@@ -263,6 +268,9 @@ input {
     color : red;
 }
 	
+.modal-dialog {
+	padding-top: 315px;
+}
  
 
 </style>
@@ -425,7 +433,7 @@ input {
 		<br />
 		<section>
 			<div class="login-form">
-				<h1 id="title">로그인</h1>
+			  <img src="/images/login/login-logo.png">
 			</div>
 
 			<br />
@@ -747,7 +755,7 @@ input {
 					</div>
 				</div>
 				<div class="tab_content" id="sign-up-form-content"></div>
-				<div id="regist" style="display: none;">
+				<div id="regist" style="display: none; height: 100%;">
 					<br>
 					<br>
 					<form id="regist_join" method="post">
@@ -1112,7 +1120,7 @@ input {
 		</section>
 
 	</div>
-	<div id="end"><br><br><br><br><br><br><br><br><br><br><br><br><br><br></div>
+	<!-- <div id="end"><br><br><br><br><br><br><br><br><br><br><br><br><br><br></div> -->
 	<%@ include file="footer.jsp"%>
 	<script type="text/javascript">
 	
