@@ -104,7 +104,7 @@ input {
 	font-size: 14px;
 }
 
-img {
+.history-img {
 	width: 310px;
     height: 300px;
     object-fit: cover;
@@ -387,10 +387,10 @@ img {
 					<div class="my-req-list-content-inner" id="my-req-list-img"
 						onclick="location.href='/board/detail?req_No=${Req.req_No}'">
 						<c:if test="${Req.fi_Nm != null }">
-						 <img src=${Req.fi_Nm }>
+						 <img class="history-img" src=${Req.fi_Nm }>
 						 </c:if>
 						 <c:if test="${Req.fi_Nm == null }">
-						 <img src="/images/importToJsp/homeimg.png">
+						 <img class="history-img" src="/images/importToJsp/homeimg.png">
 						 </c:if>
 					</div>
 					<div id="my-req-list-text">
@@ -451,10 +451,10 @@ img {
 					<div class="my-res-list-content-inner" id="my-res-list-img"
 						onclick="location.href='/board/detail?req_No=${per.req_No}'">
 						<c:if test="${per.fi_Nm != null }">
-						 <img src=${per.fi_Nm }>
+						 <img class="history-img" src=${per.fi_Nm }>
 						 </c:if>
 						 <c:if test="${per.fi_Nm == null }">
-						 <img src="/images/importToJsp/homeimg.png">
+						 <img class="history-img" src="/images/importToJsp/homeimg.png">
 						 </c:if>
 					</div>
 					<div id="my-res-list-text">
