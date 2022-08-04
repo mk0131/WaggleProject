@@ -197,7 +197,15 @@ header {
 	   
 	    <div class="nav-menu-all">
 	    
-	    <div class="nav-menu" id="n-menu1"><a href="/map/user">매물검색</a></div>
+	    <div class="nav-menu" id="n-menu1">
+	    <c:if test="${user_Code == null }">
+	    <a href="/login">매물검색</a>
+	    </c:if>
+	    
+	    <c:if test="${user_Code != null }">
+	    <a href="/map/user">매물검색</a>
+	    </c:if>
+	    </div>
 	    
 	    <div class="nav-menu" id="n-menu2"><a href="/board/list">꿀단지목록</a></div>
 	    

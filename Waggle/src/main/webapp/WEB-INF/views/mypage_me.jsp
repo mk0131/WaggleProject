@@ -846,7 +846,7 @@ textarea {
 							</div>
 
 						<!-- div style="margin-bottom:20px">|--------------|</div> -->
-						<c:if test="${con_ucode != 0}">
+						<c:if test="${con_ucode != null}">
 							<c:if test="${con_stat == '미확인' }">
 							<span style="font-size: 11pt; color: #898989">업로드한 자격증을 확인중입니다.</span>
 							<span style="font-size: 11pt; color: #2d7eac; margin-left: 5px" onclick="showProof();">파일 다시 업로드하기</span>
@@ -862,7 +862,7 @@ textarea {
 							<span style="font-size: 11pt; color: #898989">신청한 자격증이 처리중입니다.</span>
 							</c:if>
 						</c:if>
-						<c:if test="${con_ucode == 0}">
+						<c:if test="${con_ucode == null}">
 						<div>
 							<span style="font-size: 11pt; color: #898989">공인중개사이신가요?</span>
 							<span style="font-size: 11pt; color: #2d7eac; margin-left: 5px" onclick="showProof();">인증하기</span>

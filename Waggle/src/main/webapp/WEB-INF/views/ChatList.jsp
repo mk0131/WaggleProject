@@ -32,15 +32,25 @@
 				display: inline-block;
 				font-size: 16px;
 			}
-
+			
+			.fixed-list{
+				height:60px;
+				font-size:20pt;
+				font-weight:bold;
+				color:#343434;
+				padding-top:15px;
+				padding-left:15px;
+			}
+			
 			#list{
 			    --ms-overflow-style: none;
 				left: 100px;
-				width: 300px;
-				height: 700px;
-				border: 1px solid;
+				width: 340px;
+				height: 500px;
+				border: 1px solid #e6e6e6;
 				overflow: auto;
 				display:inline-block;
+				padding-bottom:30px;
 			}
 			
 			#list::-webkit-scrollbar {
@@ -48,50 +58,50 @@
 			}
 			
 			#list_1{
-				
-				height: 105px;
-				border-bottom: 1px solid;
-				
-				
+				height: 90px;
+				border-bottom: 1px solid #eceff1;
+				padding-left:15px;
+				padding-right:15px;
+				padding-top:5px;
 			}
 			
 			#list_2{
-				width: 50px;
-				height: 50px;
-				border-radius: 75px;
-				display: block;
+				width: 65px;
+				height: 65px;
+				border-radius: 40%;
+				border: 1px solid #f1f1f1;
+				display: inline-block;
+				
 			}
 			
 			#list_3{
 				width: 150px;
-				
-				
+				font-weight:bold;
+				font-size:15pt;
+				color:#282828;
 			}
 			
 			#list_4{
 				width: 150px;
-				
+				font-size:12pt;
 				height: 50px;
 				overflow: hidden;
 				text-overflow: ellipsis; 
+				color:#737373;
 			}
 			
 			#list_5{
 				width: 150px;
-				
+				display:inline-block;
 				position: relative;
-				left: 60px;
-				top: -50px;
+				padding-left:15px;
 				
 			}
 			
 			#list_6{
-				width: 70px;
-				
 				position: relative;
-				font-size: 12px;
-				left: 215px;
-				top: -130px;
+				font-size: 13px;
+				color:#898989;
 				
 			}
 			
@@ -99,17 +109,30 @@
 				width: 25px;
 				height: 25px;
 				text-align: center;
-				border: 1px solid pink;
-				border-radius: 75px;
+				border-radius: 50%;
+				color:white;
+				background-color:#ff7a6b;
 				position: relative;
-				left: 260px;
-				top: -120px;
+				margin-top: 10px;
+				float:right;
+				
+				
 				
 			}
 			
+			#list_8{
+				display: inline-block;
+				float:right;
+			}
 			#scroll {
 				--ms-overflow-style: none;
-				background-color: #9bbbd4;
+				background-color: #b2c7d9;
+				width: 630px;
+				height: 458px;
+				border: 1px solid #e6e6e6;
+				border-bottom:none;
+				overflow: auto;
+				padding-bottom:10px;
 			}
 
 			#scroll::-webkit-scrollbar {
@@ -123,7 +146,8 @@
 				text-align: right;
 				align-items: center;
 				justify-content: flex-end;
-				padding: 2px;
+				padding-right:5px;
+				padding-bottom:10px;
 			}
 
 			#your_chat {
@@ -132,7 +156,7 @@
 				float: right;
 				display: flex;
 				align-items: end;
-				padding: 2px;
+				padding-bottom:10px;
 			}
 
 			#my_1 {
@@ -161,9 +185,15 @@
 				align-self: center;
 				text-align: left;
 				background-color: #fef01b;
+				padding:1px;
+				padding-right:5px;
 
 			}
-
+			
+			#your_code{
+				margin-left: 7px;
+				margin-bottom: 3px;
+			}
 			#your_1 {
 				display: inline-block;
 				border-radius: 8px;
@@ -171,6 +201,8 @@
 				font-size: 20px;
 				align-self: center;
 				background-color: #ffffff;
+				padding:1px;
+				padding-right:7px;
 
 			}
 
@@ -186,44 +218,45 @@
 
 			}
 
-			#scroll {
-				left: 450px;
-				width: 800px;
-				height: 600px;
-				border: 1px solid;
-				overflow: auto;
-				display:inline-block;
-			}
-
 			#area {
 				display: flex;
+				border: 1px solid #e6e6e6;
+				border-top:none;
+				height:70px;
 			}
 
 			#chat_Content {
-				width: 650px;
-				height: 50px;
+				width: 470px;
+				height: 20px;
 				display: inline-block;
 			}
 
 			#send {
-				width: 100px;
-				height: 80px;
+				width: 85px;
+				height: 50px;
 				display: inline-block;
+				float:right;
+				margin:5px;
+				margin-top:10px;
+				border:1px solid #f5f6f6;
 			}
 
 			/* From uiverse.io by @alexruix */
 			.input-group {
 				position: relative;
-				border: 1px solid;
+				border-radius: 10px;
+				width:610px;
+				margin:0 auto;
+				margin-left: 10px;
 			}
 
 			.input {
-				border: solid 1.5px #9e9e9e;
+				border: solid 2px #f5f6f6;
 				border-radius: 1rem;
 				background: none;
 				padding: 1rem;
 				font-size: 1rem;
-
+				margin-top:7px;
 				transition: border 150ms cubic-bezier(0.4, 0, 0.2, 1);
 			}
 
@@ -233,22 +266,19 @@
 				pointer-events: none;
 				transform: translateY(1rem);
 				transition: 150ms cubic-bezier(0.4, 0, 0.2, 1);
+				color:#898989;
 			}
-
+			
 			.input:focus,
 			input:valid {
 				outline: none;
-				border: 1.5px solid #1a73e8;
+				border: 2px solid #cbcbcb;
 			}
-
+			
 			.input:focus~label,
 			input:valid~label {
-				transform: translateY(-50%) scale(0.8);
-				background-color: #212121;
-				padding: 0 .2em;
-				color: #2196f3;
+				display:none;
 			}
-
 			/* From uiverse.io */
 			.btn {
 				position: relative;
@@ -260,7 +290,8 @@
 				font-family: inherit;
 				font-weight: 500;
 				color: black;
-				background-color: yellow;
+				background-color: #ffeb33;
+				border-radius:5px;
 			}
 
 			.btn:hover {
@@ -296,12 +327,20 @@
 			}
 
 			#btn_img {
-				width: 50px;
-				height: 50px;
+				width: 40px;
+				height: 40px;
+				padding-top:3px;
 			}
 
 			#date {
 				text-align: center;
+				border: 1px solid #a9bdce;
+				border-radius:10px;
+				width:145px;
+				margin:0 auto;
+				background-color:#a9bdce;
+				color:#69717f;
+				margin-top:6px;
 			}
 
 			#updown {
@@ -309,29 +348,39 @@
 			}
 
 			#up {
-				border: 1px solid;
+				border: 1px solid #898989;
 				border-bottom: none;
 			}
 
 			#down {
-				border: 1px solid;
+				border: 1px solid #898989;
 			}
 
 			#your_img {
 				width: 50px;
 				height: 50px;
-				border-radius: 75px;
+				border-radius: 40%;
 			}
 			
 			.content{
 				margin: 0 auto;
-				width: 1150px;
-				padding-left:40px;
+				width: 1250px;
+				padding-left:120px;
 			}
 			
 			.chat-content{
+				display:none;
+				width:660px;
+			}
+			
+			.chat-content-left{
 				display:inline-block;
-				width:830px;
+			}
+			
+			.chat-content-right{
+				display:inline-block;
+				float:right;
+				margin-top:445px;
 			}
 			
 		</style>
@@ -352,25 +401,33 @@
 						</div>
 					</div>
 					<div class="content">
-						<div id="list"></div>
+						<div id="list">
+							<div class="fixed-list">
+								<div>Waggle 채팅 목록</div>
+							</div>
+						</div>
 						<div class="chat-content">
-							<div id="scroll">
-							</div>
-							<div id="updown">
-								<div id="up">△</div>
-								<div id="down">▽</div>
-							</div>
-							<div id="input">
-								<form onsubmit="return false">
-									<div id="area">
-										<div class="input-group">
-											<textarea class="input" id="chat_Content" autocomplete="off"></textarea>
-											<label class="user-label">Type here</label>
-											<button class="btn" id="send" disabled="disabled"> <img id="btn_img" alt="send"
-												src="https://cdn-icons-png.flaticon.com/512/149/149444.png"></button>
+							<div class="chat-content-left">
+								<div id="scroll">
+								</div>
+								<div id="input">
+									<form onsubmit="return false">
+										<div id="area">
+											<div class="input-group">
+												<textarea class="input" id="chat_Content" autocomplete="off"></textarea>
+												<label class="user-label">건전한 채팅 문화를 만들어 갑시다.</label>
+												<button class="btn" id="send" disabled="disabled"> <img id="btn_img" alt="send"
+													src="https://cdn-icons-png.flaticon.com/512/149/149444.png"></button>
+											</div>
 										</div>
-									</div>
-								</form>
+									</form>
+								</div>
+							</div>
+							<div class="chat-content-right">
+								<div id="updown">
+									<div id="up">△</div>
+									<div id="down">▽</div>
+								</div>
 							</div>
 						</div>
 					</div>
@@ -394,7 +451,7 @@
 								success: function (data) {
 									
 									$("#list").empty();
-									
+									$("#list").append('<div class="fixed-list"><div>Waggle 채팅 목록</div></div>');
 									for(let i = 0; i <data.length; i++){
 										
 										// 대화 시간이 없을 시
@@ -433,13 +490,13 @@
 										}
 										
 										
-										
-										$("#list").append('<div id="list_1"><input type="hidden" value="'+data[i].room_No+'" id="room">'
+										var x = (i+1);
+										$("#list").append('<div class="list'+(i+1)+'" onclick="clickBackground(\''+x+'\');" id="list_1"><input type="hidden" value="'+data[i].room_No+'" id="room">'
 												+'<img id ="list_2" src="' + data[i].fi_Nm + '" onerror=this.src="/images/importToJsp/profile_default.jpg">'
 												+'<div id ="list_5"><div id="list_3">'+data[i].user_Nm+'</div>'
 												+'<div id ="list_4">'+data[i].chat_Content+'</div></div>'
-												+'<div id ="list_6">'+data[i].chat_Date+'</div>'
-												+'<div id ="list_7">'+data[i].chat_Chk+'</div></div>');
+												+'<div id="list_8"><div id ="list_6">'+data[i].chat_Date+'</div>'
+												+'<div id ="list_7">'+data[i].chat_Chk+'</div></div></div>');
 									}
 								}
 					
@@ -452,6 +509,8 @@
 						
 						// 채팅방 더블 클릭시 채팅내역 환경 리셋, send 버튼 활성화 1초후 마지막 대화내용으로 이동
 						$(document).on("dblclick","div[id='list_1']",function(){
+								 $(".chat-content").fadeIn('fast');
+								 $(".chat-content").css("display","inline-block");
 					 			 $("#scroll").empty();
 					 			 length = 0;
 					 			 size = 0;
@@ -520,7 +579,7 @@
 												+ '&nbsp;</div>');
 										} else {
 											$("#scroll").append('<div id = "your_chat" >&nbsp;<img id="your_img" src="' + data[i].fi_Nm + '" onerror=this.src="/images/importToJsp/profile_default.jpg">'
-												+ '&nbsp;<div><div id = "your_code"> ' + data[i].user_Nm + '</div>&nbsp;&nbsp;&nbsp;<div id="your_1" >&nbsp;' + data[i].chat_Content + '&nbsp;</div></div>'
+												+ '&nbsp;<div><div id = "your_code"> ' + data[i].user_Nm + '</div>&nbsp;&nbsp;<div id="your_1" >&nbsp;' + data[i].chat_Content + '&nbsp;</div></div>'
 												+ '<div id="your_2">'
 												+ '<div id="your_3" >&nbsp;' + data[i].chat_Date + '</div></div>'
 												+ '</div>');
@@ -588,10 +647,21 @@
 							}, 1000);
 
 						});
-						
-						
 
 					</script>
 		</body>
+		<script>
+		function clickBackground(num){
+			var y = '.list'+num;
+			for(var i=1; i<num+2; i++){
+				if(i==num){
+					$(y).attr("style","background-color: #f2f2f2");
+				}else{
+					var z = '.list'+i;
+					$(z).attr("style","background-color:white");
+				}
+			}
+		};
+		</script>
 
 		</html>
