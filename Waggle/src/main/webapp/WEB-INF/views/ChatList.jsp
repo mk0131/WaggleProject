@@ -51,7 +51,7 @@
 				
 				height: 105px;
 				margin: 3px;
-				border-bottom: 1px solid;
+				
 				
 				
 			}
@@ -349,9 +349,11 @@
 							</ul>
 						</div>
 					</div>
+					
 					<div id="list"></div>
 					<div id="scroll">
 						</div>
+						
 						<div id="updown">
 							<div id="up">△</div>
 							<div id="down">▽</div>
@@ -453,7 +455,6 @@
 					 			 $("#send").attr("disabled", false);
 					 			 $("#chat_Content").val(null);
 								 num = $(this).find("input").val();
-								 $("#chat_Content").focus();
 								 ChatHistory();
 								 timer = setTimeout(down,1000);
 								 
@@ -538,7 +539,7 @@
 							$("#scroll").animate({ scrollTop: $("#scroll")[0].scrollHeight }, 400); // 스크롤 맨 아래로
 						})
 						
-						
+						// 채팅 입력
 						$("#send").on("click", function () {
 							down();
 							let con = $("#chat_Content").val().replaceAll(/(\n|\r\n)/g, "<br>&nbsp;"); // 엔터키 인식
