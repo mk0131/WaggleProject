@@ -271,31 +271,38 @@ input:focus ~ .bar:before, input:focus ~ .bar:after {
 				<div class="history-main" style="margin:0 auto; width:1000px">
 					<div class="pointcharge">
 					</div>
-						<c:forEach var="dto" items="${list}">
-							<div class="pointuse" style="border-bottom: 1px solid #898989; width:1000px; height:130px; margin-top:18px">
-								<div class="use-left"  style="width:110px; height:110px; display:inline-block">
-									<div style="width:100px; height:100px; border:5px solid #898989; border-radius:150px; color:#898989; font-size:20pt; text-align:center; line-height:100px; float:left">
-									${dto.type}
+						<c:choose>
+							<c:when test="${fn:length(list) eq 0}">
+								<h3>포인트 이용내역이 없습니다.</h3>
+							</c:when>
+							<c:otherwise>
+								<c:forEach var="dto" items="${list}">
+									<div class="pointuse" style="border-bottom: 1px solid #898989; width:1000px; height:130px; margin-top:18px">
+										<div class="use-left"  style="width:110px; height:110px; display:inline-block">
+											<div style="width:100px; height:100px; border:5px solid #898989; border-radius:150px; color:#898989; font-size:20pt; text-align:center; line-height:100px; float:left">
+											${dto.type}
+											</div>
+										</div>
+										<div class="use-middle" style="width:650px; height:110px; padding-left:35px; display:inline-block">
+											<div>${dto.date}</div>
+											<div style="font-size:20pt">포인트 ${dto.type}</div>
+											<div style="padding-top:30px">잔여 포인트: &nbsp;${dto.price_Sum}&nbsp;P</div>
+										</div>
+										<div class="use-right" style="width:200px; height:110px; display:inline-block; text-align:center; float:right">
+											<c:choose>
+												<c:when test="${dto.type eq '사용'}">
+													<div style="font-size:30pt">-${dto.price} P</div>
+												</c:when>
+												<c:otherwise>
+													<div style="font-size:30pt">+${dto.price} P</div>
+												</c:otherwise>
+											</c:choose>
+											<div style="border:1px solid #3a3a3a; border-radius:10px; width:100px; height:30px; text-align:center; line-height:30px; margin-left:55px; color:#3a3a3a">내역삭제</div>						
+										</div>
 									</div>
-								</div>
-								<div class="use-middle" style="width:650px; height:110px; padding-left:35px; display:inline-block">
-									<div>${dto.date}</div>
-									<div style="font-size:20pt">포인트 ${dto.type}</div>
-									<div style="padding-top:30px">잔여 포인트: &nbsp;${dto.price_Sum}&nbsp;P</div>
-								</div>
-								<div class="use-right" style="width:200px; height:110px; display:inline-block; text-align:center; float:right">
-									<c:choose>
-										<c:when test="${dto.type eq '사용'}">
-											<div style="font-size:30pt">-${dto.price} P</div>
-										</c:when>
-										<c:otherwise>
-											<div style="font-size:30pt">+${dto.price} P</div>
-										</c:otherwise>
-									</c:choose>
-									<div style="border:1px solid #3a3a3a; border-radius:10px; width:100px; height:30px; text-align:center; line-height:30px; margin-left:55px; color:#3a3a3a">내역삭제</div>						
-								</div>
-							</div>
-						</c:forEach>
+								</c:forEach>
+							</c:otherwise>
+						</c:choose>
 				</div>
 				<div>
 					<ul class="paging">
