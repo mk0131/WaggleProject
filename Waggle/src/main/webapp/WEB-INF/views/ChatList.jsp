@@ -65,6 +65,9 @@
 				padding-top:5px;
 			}
 			
+			#list_1:hover{
+				background-color:#f2f2f28c;
+			}	
 			#list_2{
 				width: 65px;
 				height: 65px;
@@ -341,6 +344,8 @@
 				background-color:#a9bdce;
 				color:#69717f;
 				margin-top:6px;
+				display:flex;
+				padding-left:25px;
 			}
 
 			#updown {
