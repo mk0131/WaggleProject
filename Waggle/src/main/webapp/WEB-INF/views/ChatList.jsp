@@ -332,6 +332,10 @@
 				border-radius: 75px;
 			}
 			
+			.content{
+				margin: 0 auto;
+				width: 1100px;
+			}
 		</style>
 
 		<body>
@@ -349,6 +353,7 @@
 							</ul>
 						</div>
 					</div>
+					<div class="content">
 					<div id="list"></div>
 					<div id="scroll">
 						</div>
@@ -367,6 +372,7 @@
 								</div>
 							</form>
 						</div>
+					</div>
 				</div>
 				<%@ include file="./footer.jsp" %>
 					<script type="text/javascript">

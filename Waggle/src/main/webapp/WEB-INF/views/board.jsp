@@ -215,7 +215,7 @@ img {
 	color: #878787;
 }
 
-img {
+.board-all img {
 	width: 310px;
     height: 300px;
     object-fit: cover;
