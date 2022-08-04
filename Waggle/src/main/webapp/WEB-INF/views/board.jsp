@@ -34,7 +34,7 @@
 
 .guideline-all p {
 	display: inline-block;
-	font-size: 15px;
+	font-size: 16px;
 }
 
 /* .board {
@@ -215,7 +215,7 @@ img {
 	color: #878787;
 }
 
-#board-img {
+.board-all img {
 	width: 310px;
     height: 300px;
     object-fit: cover;
@@ -433,7 +433,7 @@ img {
 						 <img src=${dto.fi_Nm }>
 						 </c:if>
 						 <c:if test="${dto.fi_Nm == null }">
-						 <img id="board-img" src="/images/importToJsp/homeimg.png">
+						 <img src="/images/importToJsp/homeimg.png">
 						 </c:if>
 					 </div>
 					 
