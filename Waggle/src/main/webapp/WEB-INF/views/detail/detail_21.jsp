@@ -221,6 +221,14 @@ button:active {
 			}
 			
 		})
+		
+		// 내가본 집 링크 연결
+		let link = $("#link").text();
+		if (link.includes("https://")) {
+			$("#link").attr('href',link);
+		} else {
+			$("#link").attr('href',"https://"+link);			
+		}
 	</script>
 </body>
 </html>

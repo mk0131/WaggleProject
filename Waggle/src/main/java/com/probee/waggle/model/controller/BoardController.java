@@ -207,6 +207,7 @@ public class BoardController {
 			if(user_Code==req_UCode) {
 				
 				model.addAttribute("vol", boardService.FindVol(req_No));
+				
 				return "detail/detail_11";	
 			} else {
 				VolunteerDto vols = volunteerService.SelectOne(req_No, user_Code);
