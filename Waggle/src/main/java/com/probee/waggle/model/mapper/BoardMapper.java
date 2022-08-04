@@ -45,7 +45,7 @@ public interface BoardMapper {
 	@Select(" select * from Result where res_No=#{req_No} and res_Stat in ('진행중','확인중','완료') ")
 	public ResultDto selectResult(int req_No);
 	
-	@Select(" select user_Code, user_Pro, user_Grade, user_Intro, user_Nm, fi_Nm from Users u inner join volunteer v on u.user_Code = v.vo_Ucode left outer join File f on u.user_Pro=f.fi_Code where v.vo_No = #{vo_No}")
+	@Select(" select user_Code, user_Pro, user_Grade, user_Intro, user_Nm, fi_Nm from Users u inner join volunteer v on u.user_Code = v.vo_Ucode left outer join File f on u.user_Pro=f.fi_Code where v.vo_No = #{vo_No} and v.vo_Block = false")
 	public List<UsersDto2> FindVol(int vo_No);
 	
 	// 유저정보 가져오기
