@@ -58,11 +58,15 @@
 			}
 			
 			#list_1{
+
+				
+
 				height: 90px;
 				border-bottom: 1px solid #eceff1;
 				padding-left:15px;
 				padding-right:15px;
 				padding-top:5px;
+
 			}
 			
 			#list_1:hover{
@@ -405,6 +409,25 @@
 							</ul>
 						</div>
 					</div>
+<<<<<<< HEAD
+					
+					<div id="list"></div>
+					<div id="scroll">
+						</div>
+						
+						<div id="updown">
+							<div id="up">△</div>
+							<div id="down">▽</div>
+						</div>
+						<div id="input">
+							<form onsubmit="return false">
+								<div id="area">
+									<div class="input-group">
+										<textarea class="input" id="chat_Content" autocomplete="off"></textarea>
+										<label class="user-label">Type here</label>
+									</div> &nbsp;<button class="btn" id="send" disabled="disabled"> <img id="btn_img" alt="send"
+											src="https://cdn-icons-png.flaticon.com/512/149/149444.png"></button>
+=======
 					<div class="content">
 						<div id="list">
 							<div class="fixed-list">
@@ -414,6 +437,7 @@
 						<div class="chat-content">
 							<div class="chat-content-left">
 								<div id="scroll">
+>>>>>>> 1f56bdacb5f74fb46cdec530c42c1307596fb358
 								</div>
 								<div id="input">
 									<form onsubmit="return false">
@@ -524,7 +548,6 @@
 					 			 $("#send").attr("disabled", false);
 					 			 $("#chat_Content").val(null);
 								 num = $(this).find("input").val();
-								 $("#chat_Content").focus();
 								 ChatHistory();
 								 timer = setTimeout(down,1000);
 								 
@@ -609,7 +632,7 @@
 							$("#scroll").animate({ scrollTop: $("#scroll")[0].scrollHeight }, 400); // 스크롤 맨 아래로
 						})
 						
-						
+						// 채팅 입력
 						$("#send").on("click", function () {
 							down();
 							let con = $("#chat_Content").val().replaceAll(/(\n|\r\n)/g, "<br>&nbsp;"); // 엔터키 인식

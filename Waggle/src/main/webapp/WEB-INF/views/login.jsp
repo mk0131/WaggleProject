@@ -718,19 +718,22 @@ input {
 					<h3 style="text-align: center;">SNS 간편 로그인</h3>
 					<div class="api-login">
 						<!-- 네이버 로그인 버튼 노출 영역 -->
-                	<div id="naver_id_login"></div>
+                	<div id="naver_id_login">
+                	</div>
+                	
+                	
 						<!-- //네이버 로그인 버튼 노출 영역 -->
 					<script type="text/javascript">
 						var naver_id_login = new naver_id_login("JGPtZuIPhsS22_zSl6eT", "http://localhost:8787/home");
 						var state = naver_id_login.getUniqState();
-						naver_id_login.setButton("green", 4,60);
 						naver_id_login.setDomain("http://localhost:8787");
+						naver_id_login.setButton("white", 3,60);
 						naver_id_login.setState(state);
 						naver_id_login.init_naver_id_login();
 					</script>
   						<br>
 						<a class="p-2" href="https://kauth.kakao.com/oauth/authorize?client_id=6271ae3b4283fa56e846863ed3a4f7be&redirect_uri=http://localhost:8787/home&response_type=code">
-							<img src="/images/login/kakao_login_medium_narrow.png" style="width:280px; height:60px;">
+							<img src="/images/login/kakao_login_large_wide.png" style="width:400px; height:60px;">
 							</a>
 							<br>
 							<br>

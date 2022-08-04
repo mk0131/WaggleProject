@@ -42,10 +42,10 @@ public interface BoardMapper {
 	public int insertRequest(RequestDto2 dto);
 	
 	// 글번호로 취소상태가 아닌 result 가져오기(진행중과 완료는 둘중 하나만 존재)
-	@Select(" select * from Result where res_No=#{req_No} and res_Stat in ('진행중','완료') ")
+	@Select(" select * from Result where res_No=#{req_No} and res_Stat in ('진행중','확인중','완료') ")
 	public ResultDto selectResult(int req_No);
 	
-	@Select(" select user_Code, user_Pro, user_Grade, user_Intro, user_Nm, fi_Nm from Users u inner join volunteer v on u.user_Code = v.vo_Ucode left outer join File f on u.user_Pro=f.fi_Code where v.vo_No = #{vo_No}")
+	@Select(" select user_Code, user_Pro, user_Grade, user_Intro, user_Nm, fi_Nm from Users u inner join volunteer v on u.user_Code = v.vo_Ucode left outer join File f on u.user_Pro=f.fi_Code where v.vo_No = #{vo_No} and v.vo_Block = false")
 	public List<UsersDto2> FindVol(int vo_No);
 	
 	// 유저정보 가져오기
