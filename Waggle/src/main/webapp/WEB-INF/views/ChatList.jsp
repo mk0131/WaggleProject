@@ -30,17 +30,17 @@
 
 			.guideline-all p {
 				display: inline-block;
-				font-size: 15px;
+				font-size: 16px;
 			}
 
 			#list{
 			    --ms-overflow-style: none;
-				position: absolute;
 				left: 100px;
 				width: 300px;
-				height: 600px;
+				height: 700px;
 				border: 1px solid;
 				overflow: auto;
+				display:inline-block;
 			}
 			
 			#list::-webkit-scrollbar {
@@ -50,7 +50,6 @@
 			#list_1{
 				
 				height: 105px;
-				margin: 3px;
 				border-bottom: 1px solid;
 				
 				
@@ -60,7 +59,6 @@
 				width: 50px;
 				height: 50px;
 				border-radius: 75px;
-				margin: 2px;
 				display: block;
 			}
 			
@@ -189,18 +187,12 @@
 			}
 
 			#scroll {
-				position: absolute;
 				left: 450px;
 				width: 800px;
 				height: 600px;
 				border: 1px solid;
 				overflow: auto;
-			}
-
-			#input {
-				position: absolute;
-				top: 800px;
-				left: 450px;
+				display:inline-block;
 			}
 
 			#area {
@@ -222,6 +214,7 @@
 			/* From uiverse.io by @alexruix */
 			.input-group {
 				position: relative;
+				border: 1px solid;
 			}
 
 			.input {
@@ -312,9 +305,7 @@
 			}
 
 			#updown {
-				position: absolute;
-				left: 1260px;
-				top: 740px;
+				display:inline-block;
 			}
 
 			#up {
@@ -330,6 +321,17 @@
 				width: 50px;
 				height: 50px;
 				border-radius: 75px;
+			}
+			
+			.content{
+				margin: 0 auto;
+				width: 1150px;
+				padding-left:40px;
+			}
+			
+			.chat-content{
+				display:inline-block;
+				width:830px;
 			}
 			
 		</style>
@@ -349,26 +351,29 @@
 							</ul>
 						</div>
 					</div>
-					
-					<div id="list"></div>
-					<div id="scroll">
+					<div class="content">
+						<div id="list"></div>
+						<div class="chat-content">
+							<div id="scroll">
+							</div>
+							<div id="updown">
+								<div id="up">△</div>
+								<div id="down">▽</div>
+							</div>
+							<div id="input">
+								<form onsubmit="return false">
+									<div id="area">
+										<div class="input-group">
+											<textarea class="input" id="chat_Content" autocomplete="off"></textarea>
+											<label class="user-label">Type here</label>
+											<button class="btn" id="send" disabled="disabled"> <img id="btn_img" alt="send"
+												src="https://cdn-icons-png.flaticon.com/512/149/149444.png"></button>
+										</div>
+									</div>
+								</form>
+							</div>
 						</div>
-						<div id="updown">
-							<div id="up">△</div>
-							<div id="down">▽</div>
-						</div>
-						<div id="input">
-							<form onsubmit="return false">
-								<div id="area">
-									<div class="input-group">
-										<textarea class="input" id="chat_Content" autocomplete="off"></textarea>
-										<label class="user-label">Type here</label>
-									</div> &nbsp;<button class="btn" id="send" disabled="disabled"> <img id="btn_img" alt="send"
-											src="https://cdn-icons-png.flaticon.com/512/149/149444.png"></button>
-								</div>
-							</form>
-						</div>
-						
+					</div>
 				</div>
 				<%@ include file="./footer.jsp" %>
 					<script type="text/javascript">

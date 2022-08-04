@@ -19,7 +19,7 @@
 }
 .middle-top{
 	margin: 0;
-	padding: 0;
+	padding: 1px;
 	background-color: #ECECEC;
 }
 .middle-bottom{
@@ -172,6 +172,7 @@ input:focus ~ .bar:before, input:focus ~ .bar:after {
 /* 페이징 */
 .paging {
 	text-align: center;
+	padding-top: 35px;
 }
 
 .paging li {
@@ -204,7 +205,7 @@ input:focus ~ .bar:before, input:focus ~ .bar:after {
 	<div class="middle">
 		<div class="middle-top">
 			<div class="guideline">
-				<ul class="guideline-all" style="margin-top:0">
+				<ul class="guideline-all">
 					<li><a href="javascript:void(0)"> <i
 							class="fa-solid fa-house"></i>
 					</a></li>
@@ -331,10 +332,6 @@ input:focus ~ .bar:before, input:focus ~ .bar:after {
 	</div>
    </div>
 	<%@ include file="footer.jsp"%>
-
-	<script type="text/javascript" src="/js/payment.js"></script>
-</body>
-
 
 <script type="text/javascript" src="/js/payment.js"></script>
 </body>

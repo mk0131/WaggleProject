@@ -63,7 +63,7 @@
 
 .guideline-all p {
 	display: inline-block;
-	font-size: 15px;
+	font-size: 16px;
 }
 
 .ongoing21-user-name {
