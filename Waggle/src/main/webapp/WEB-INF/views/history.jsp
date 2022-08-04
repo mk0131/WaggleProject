@@ -343,8 +343,9 @@ input {
 }
 
 .my-req-list-content-all:hover{
-	box-shadow: inset 0 0 0 15em #fffcf6;
+	box-shadow: inset 0 0 0 15em #f7f9fa;
 }
+
 .my-req-list-content-all{
 	width:1020px;
 	margin:0 auto;
@@ -352,7 +353,7 @@ input {
 	transition: 1s;
 }
 .my-res-list-content-all:hover{
-	box-shadow: inset 0 0 0 15em #fffcf6;
+	box-shadow: inset 0 0 0 15em #f7f9fa;
 }
 .my-res-list-content-all{
 	width:1020px;
