@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -347,7 +348,10 @@ div#progress_percentage::after {
 	    
 	   <div class="ongoing21-all">
 	    <h3 id="ongoing-detail">요청 상세 페이지(${req_dto.req_Stat })</h3>
-	     <p id="w-date">요청날짜 : ${req_dto.req_WDate }</p>
+	     <p id="w-date">요청날짜 : 
+	     	<fmt:parseDate value="${req_dto.req_WDate }" pattern="yyyy-MM-dd'T'HH:mm" var="parsedDateTime" type="both" />
+	     	<fmt:formatDate value="${parsedDateTime }" pattern="yyyy-MM-dd"/>
+     	</p>
 	     <div class="ongoing21-user-name">
 	      <p id="userrealname">작성자 : ${user_dto.user_Nm}</p>
 	     </div>
@@ -477,15 +481,16 @@ div#progress_percentage::after {
 	   <br>
 		<div class="modal-window">
             <div class="title">
-                <h2>1000 P 지불하고 자세한 후기 내용 보기</h2>
+                <h2>자세한 후기 내용 보기</h2>
             </div>
             
             <div class="content">
             	<form action="/point/consume" method="post" onsubmit="return ask()">
             		<input type="hidden" name="req_No" value="${req_dto.req_No }">
-                	<input type="submit" id="modalbtn" value="1000 P 소모">
+                	<input type="submit" id="modalbtn" value="1000 P 결제후 이용 가능">
                 </form>
             </div>
+            <div class="time-box"></div>
         </div>
 	   </div>
 	   
@@ -769,7 +774,7 @@ div#progress_percentage::after {
 		var diffTime2 = (end2.getTime() - start2.getTime()) / (1000*60*60*24);
 
 		if(diffTime2 < 1) {
-		 	if(${req_dto.req_UCode} != ${user_Code} && ${res} != ${user_Code} && ${po} != ${user_Code}){	
+		 	if(${req_dto.req_UCode} != ${user_Code} && ${res} != ${user_Code} && ${po} != ${user_Code} && ${user_Code} != 1){	
 		 	 $("#hide-box").hide();
 		 	 $("#show-box").css("display","block");
 		 	}			
@@ -784,6 +789,28 @@ div#progress_percentage::after {
 			return false;
 		}
 	}
+	
+	//블러 처리 남은 시간 구하는 함수
+	function remaindTime() {
+	    var now = new Date(); //현재시간을 구한다.
+	    var et = new Date($("#v_Date").val()); //파일이 업로드 된 시간.
+
+	    var nt = now.getTime(); // 현재의 시간만 가져온다
+	  
+	     sec = 24*60*60*1000 - parseInt(nt-et)/1000;
+	     day  = parseInt(sec/60/60/24);
+	     sec = (sec - (day * 60 * 60 * 24));
+	     hour = parseInt(sec/60/60);
+	     sec = (sec - (hour*60*60));
+	     min = parseInt(sec/60);
+	     sec = parseInt(sec-(min*60));
+	     if(hour<10){hour="0"+hour;}
+	     if(min<10){min="0"+min;}
+	     if(sec<10){sec="0"+sec;}
+	      $('.time-box').html("<div style='font-size:15pt'>잠김 해제까지 시간: "+hour+"시간"+min+"분"+sec+"초</div>");
+	};
+	
+	setInterval(remaindTime,1000);
 </script>
 
 </html>

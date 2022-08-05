@@ -432,7 +432,7 @@ input {
         		<li><a href="javascript:void(0)">
         		<i class="fa-solid fa-house"></i>
         		</a>
-        		<p>HOME > 공지사항</p>
+        		<p>HOME > 로그인&회원가입</p>
         		</li>	
         	</ul>
 		</div>
