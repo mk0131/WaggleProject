@@ -736,6 +736,47 @@ textarea {
     font-weight: 400;
 }
 /* 완료한 리스트 css 끝 */
+
+.grade{
+	display:inline-block;
+	height:30px;
+	border-radius:25px;
+	padding:10px;
+	padding-top:0px;
+	padding-bottom:0px;
+	line-height:28px;
+	margin-left:10px;
+	background-color:#110902;
+	font-weight:bold;
+	color:white;
+	
+}
+
+.grade_tooltip{
+	position:relative;
+	color:var(--clr-light-gray);
+	cursor:pointer;
+	transition:color 300ms ease-in-out;
+}
+
+.grade_tooltip:hover{
+	color:var(--clr-gray);
+}
+
+.grade_tooltip-data{
+	position:absolute;
+	top:750%;
+	left:270%;
+	transform: translate(-50%, -125%);
+	min-width: max-content;
+	background-color: var(--clr-white);
+	color: var(--clr-gray);
+	border:1px solid var(--clr-light-gray);
+	padding: 0.625rem 1.25rem;
+	font-weight:500;
+	display:none;
+	color:#898989;
+}
 </style>
 
 
@@ -772,9 +813,30 @@ textarea {
 						style="display: inline-block; margin-left: 40px; text-align: left">
 						<c:if test="${dto.user_Code != null }">
 						<div>
-							<span
-								style="font-size: 20pt; margin-bottom: 20px; font-weight: bold">${dto.user_Nm}
-								님</span>
+							<span style="font-size: 20pt; margin-bottom: 20px; font-weight: bold">${dto.user_Nm} 님</span>
+							<c:choose>
+								<c:when test="${dto.user_Grade < 0}">
+									<div class="grade" >사기꾼</div>
+								</c:when>
+								<c:when test="${dto.user_Grade >= 0 and dto.user_Grade < 30}">
+									<div class="grade" >Bronze</div>
+								</c:when>
+								<c:when test="${dto.user_Grade >= 30 and dto.user_Grade < 46}">
+									<div class="grade" >Silver</div>
+								</c:when>
+								<c:when test="${dto.user_Grade >= 46 and dto.user_Grade < 61}">
+									<div class="grade" >Gold</div>
+								</c:when>
+								<c:when test="${dto.user_Grade >= 61 and dto.user_Grade < 101}">
+									<div class="grade">Platinum</div>
+								</c:when>
+								<c:when test="${dto.user_Grade >= 101}">
+									<div class="grade" >Diamond</div>
+								</c:when>
+							</c:choose>
+							<strong class="grade_tooltip">등급제도란?
+							<span class="grade_tooltip-data"></span>
+							</strong>
 						</div>
 						<c:choose>
 							<c:when test="${dto.user_Age >= 10 and dto.user_Age < 20}">
@@ -1422,6 +1484,19 @@ textarea {
 		location.reload();
 	})
 	
+	$(document).ready(function(){
+		//등급제도 설명 나타나게하기
+		$(".grade_tooltip-data").html("꿀 수확량 0-29 : Bronze <br>"
+									  +"꿀 수확량 30-45 : Silver <br>"
+									  +"꿀 수확량 46-60 : Gold <br>"
+									  +"꿀 수확량 61-100 : Platinum <br>"
+									  +"꿀 수확량 100 초과 : Diamond")
+		$(".grade_tooltip").mouseover(function(){
+			$(".grade_tooltip-data").fadeIn();
+		}).mouseout(function(){
+			$(".grade_tooltip-data").fadeOut();
+		});
+	});
 </script>
 <script>
 
