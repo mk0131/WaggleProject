@@ -474,6 +474,7 @@ div#progress_percentage::after {
 		<br/><br/><hr class="my-hr">	
 		      
 	   <div id="show-box">
+	   <br>
 		<div class="modal-window">
             <div class="title">
                 <h2>1000 P 지불하고 자세한 후기 내용 보기</h2>
@@ -770,7 +771,7 @@ div#progress_percentage::after {
 		if(diffTime2 < 1) {
 		 	if(${req_dto.req_UCode} != ${user_Code} && ${res} != ${user_Code} && ${po} != ${user_Code}){	
 		 	 $("#hide-box").hide();
-		 	 $("#show-box").css("display","flex");
+		 	 $("#show-box").css("display","block");
 		 	}			
 		}
 		
