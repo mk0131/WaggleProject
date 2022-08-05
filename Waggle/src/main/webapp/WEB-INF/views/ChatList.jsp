@@ -409,25 +409,6 @@
 							</ul>
 						</div>
 					</div>
-<<<<<<< HEAD
-					
-					<div id="list"></div>
-					<div id="scroll">
-						</div>
-						
-						<div id="updown">
-							<div id="up">△</div>
-							<div id="down">▽</div>
-						</div>
-						<div id="input">
-							<form onsubmit="return false">
-								<div id="area">
-									<div class="input-group">
-										<textarea class="input" id="chat_Content" autocomplete="off"></textarea>
-										<label class="user-label">Type here</label>
-									</div> &nbsp;<button class="btn" id="send" disabled="disabled"> <img id="btn_img" alt="send"
-											src="https://cdn-icons-png.flaticon.com/512/149/149444.png"></button>
-=======
 					<div class="content">
 						<div id="list">
 							<div class="fixed-list">
@@ -437,7 +418,6 @@
 						<div class="chat-content">
 							<div class="chat-content-left">
 								<div id="scroll">
->>>>>>> 1f56bdacb5f74fb46cdec530c42c1307596fb358
 								</div>
 								<div id="input">
 									<form onsubmit="return false">

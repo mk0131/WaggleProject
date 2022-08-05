@@ -124,6 +124,31 @@ button:active {
   transition: all 3s 0s cubic-bezier(0.83, 0, 0.17, 1);;
 }
 
+/* 버튼 */
+.button {
+  color: var(--color);
+  transition: 0.25s;
+}
+.button:hover, .button:focus {
+  box-shadow: inset 0 0 0 5em var(--hover);
+  border-color: var(--hover);
+  color: #fff;
+}
+
+.button {
+  background: none;
+  border-radius: 10px;
+  border: 3px solid;
+  font: inherit;
+  line-height: 1;
+  margin: 0.5em;
+  float: right;
+  --color: #262626;
+  --hover: #f9a73d;
+  font-weight:bold;
+  text-align:center;
+}
+/* 버튼 */
 </style>
 <body>
 	
@@ -217,7 +242,7 @@ button:active {
 									</td>
 									<td style="text-align: left; border-radius: 8px; border: 1px solid;" onclick="window.open('/mypage/other?ucode=${dto.user_Code}')"><P>닉네임 : ${dto.user_Nm }</P> 
 									<P>평점 : ${dto.user_Grade }</P> <P>자기소개 : ${dto.user_Intro }</P></td>
-									<td><button onclick="location.href='/board/accept?req_UCode=${user_Code}&res_UCode=${dto.user_Code }&req_No=${req_dto.req_No }'" type="button" style="width: 100px; height: 100px;">수락하기</button></td>
+									<td><button onclick="location.href='/board/accept?req_UCode=${user_Code}&res_UCode=${dto.user_Code }&req_No=${req_dto.req_No }'" class="button" type="button" style="width: 100px; height: 100px;">수락하기</button></td>
 									
 								</tr>
 							</form>
@@ -233,11 +258,11 @@ button:active {
 	        
 	     <div class="btn2" id="btn2">
 
-	      <button type="button" value="요청취소" onclick="location.href='/board/cancel?req_No=${req_dto.req_No}'" style="width: 200px; margin-right: 100px;" >요청 취소하기</button>
+	      <button class="button" type="button" value="요청취소" onclick="location.href='/board/cancel?req_No=${req_dto.req_No}'" style="width: 200px; margin-right:115px;" >요청 취소하기</button>
 
-	     <button type="button" value="수정하기" onclick="location.href='/board/updateform?req_No=${req_dto.req_No }'" style="width: 200px; margin-right: 100px;" >수정하기</button>
+	     <button class="button" type="button" value="수정하기" onclick="location.href='/board/updateform?req_No=${req_dto.req_No }'" style="width: 200px;" >수정하기</button>
 
-	      <button type="button" value="목록" onclick="location.href='/board/list'" style="width: 200px;">목록으로 돌아가기</button>
+	      <button class="button" type="button" value="목록" onclick="location.href='/board/list'" style="width: 200px;">목록으로 돌아가기</button>
 	     </div>
 	     </div>
 	    </div>

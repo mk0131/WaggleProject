@@ -191,6 +191,7 @@ textarea {
 .desc-content-finishlist img{
 	width:300px;
 	height:300px;
+	border-radius:10px;
 }
 
 #bar_container {
@@ -619,8 +620,9 @@ textarea {
 	border-bottom: 1px dashed #898989;
 }
 
+
 #ul-left{
-	width:420px;
+	width:445px;
 	padding:0;
 	padding-left:20px;	
 }
@@ -648,9 +650,14 @@ textarea {
     border-left: 1px solid #ebebeb;
 }
  
+#my-res-list-content-all:hover{
+	box-shadow: inset 0 0 0 15em #f7f9fa;
+}
+
 #my-res-list-content-all {
 	display: flex;
     justify-content: center;
+    transition: 1s;
 }
 
 #my-res-list-point {
@@ -935,10 +942,10 @@ textarea {
 								<li>
 									<p style="font-size:20pt; font-weight:bold"><꿀벌></p>
 									<p style="font-size:16pt; font-weight:bold; color:#5a76ff">[모든 기간] 의뢰 수행완료 비율</p>
-									<p>${dto.user_Nm} 님이 <span id="bold">현재까지 지원</span>한 의뢰 총 갯수 : ${resTotal } 건<p>
-									<p>${dto.user_Nm} 님이 현재 <span id="bold">진행중</span>인 의뢰 갯수 : ${resTotal-resFinish } 건<p>
+									<p>${dto.user_Nm} 님이 현재까지 <span id="bold">지원</span>한 의뢰 총 갯수 : ${resTotal } 건<p>
+									<p>${dto.user_Nm} 님이 현재 <span id="bold">진행중</span>인 의뢰 갯수 : ${resTotal-resFinish-resCancel-resCancelZero } 건<p>
 									<p>${dto.user_Nm} 님이 현재까지 <span id="bold">수행완료</span>한 의뢰 갯수 : ${resFinish } 건<p>
-									<p>${dto.user_Nm} 님이 현재까지 <span id="bold">수행취소</span>한 의뢰 갯수 : ${resCancel } 건<p>
+									<p>현재까지 의뢰 시작 24시간 후 <span id="bold">수행취소</span>한 의뢰 갯수 : ${resCancel } 건<p>
 									<br>
 									<p id="ratio">꿀벌 지원 총 ${resTotal }건 중 수행완료 ${resFinish}건</p>
 									<div class="bar-wrap">
@@ -946,14 +953,13 @@ textarea {
 									</div>
 								</li>
 							</ul>
-							<div id="line" style="margin-left:20px"></div>
+							<div id="line" style="margin-left:20px; width: 110%;"></div>
 							<ul class="bar-graph" id="ul-left">
 								<li>
 									<p style="font-size:16pt; font-weight:bold; color:#5a76ff">[최근 3개월] 의뢰 수행완료 비율</p>
-									<p>${dto.user_Nm} 님이 <span id="bold">현재까지 지원</span>한 의뢰 총 갯수 : ${resTotal3M } 건<p>
-									<p>${dto.user_Nm} 님이 현재 <span id="bold">진행중</span>인 의뢰 갯수 : ${resTotal3M-resFinish3M } 건<p>
-									<p>${dto.user_Nm} 님이 현재까지 <span id="bold">수행완료</span>한 의뢰 갯수 : ${resFinish3M } 건<p>
-									<p>${dto.user_Nm} 님이 현재까지 <span id="bold">수행취소</span>한 의뢰 갯수 : ${resCancel3M } 건<p>
+									<p>${dto.user_Nm} 님이 최근 3개월 동안 <span id="bold">지원</span>한 의뢰 총 갯수 : ${resTotal3M } 건<p>
+									<p>${dto.user_Nm} 님이 최근 3개월 동안 <span id="bold">수행완료</span>한 의뢰 갯수 : ${resFinish3M } 건<p>
+									<p>최근 3개월간 의뢰 시작 24시간 후 <span id="bold">수행취소</span>한 의뢰 갯수 : ${resCancel3M } 건<p>
 									<br>
 									<p id="ratio">꿀벌 지원 총 ${resTotal3M }건 중 수행완료 ${resFinish3M}건</p>
 									<div class="bar-wrap">
@@ -967,8 +973,8 @@ textarea {
 								<li>
 									<p style="font-size:20pt; font-weight:bold"><의뢰인></p>
 									<p style="font-size:16pt; font-weight:bold; color:#5a76ff">[모든 기간] 의뢰 대비 꿀벌평가 완료 비율</p>
-									<p>${dto.user_Nm} 님이 <span id="bold">현재까지 의뢰</span>한 게시글 총 갯수 : ${reqTotal } 건<p>
-									<p>${dto.user_Nm} 님이 현재 <span id="bold">의뢰중</span>인 게시글 갯수 : ${reqTotal - reqFinish } 건<p>
+									<p>${dto.user_Nm} 님이 현재까지 <span id="bold">의뢰</span>한 게시글 총 갯수 : ${reqTotal } 건<p>
+									<p>${dto.user_Nm} 님이 현재 <span id="bold">의뢰중</span>인 게시글 갯수 : ${reqTotal - reqFinish -reqCancel} 건<p>
 									<p>${dto.user_Nm} 님이 현재까지 <span id="bold">꿀벌 평가 완료</span>한 게시글 : ${reqFinish } 건<p>
 									<p>${dto.user_Nm} 님이 현재까지 <span id="bold">요청취소</span>한 게시글 갯수 : ${reqCancel } 건<p>
 									<br>
@@ -982,10 +988,9 @@ textarea {
 							<ul class="bar-graph" id="ul-right">
 								<li>
 									<p style="font-size:16pt; font-weight:bold; color:#5a76ff">[최근 3개월] 의뢰 대비 꿀벌평가 완료 비율</p>
-									<p>${dto.user_Nm} 님이 <span id="bold">현재까지 의뢰</span>한 게시글 총 갯수 : ${reqTotal3M } 건<p>
-									<p>${dto.user_Nm} 님이 현재 <span id="bold">의뢰중</span>인 게시글 갯수 : ${reqTotal3M - reqFinish3M } 건<p>
-									<p>${dto.user_Nm} 님이 현재까지 <span id="bold">꿀벌 평가 완료</span>한 게시글 : ${reqFinish3M } 건<p>
-									<p>${dto.user_Nm} 님이 현재까지 <span id="bold">요청취소</span>한 게시글 갯수 : ${reqCancel3M } 건<p>
+									<p>${dto.user_Nm} 님이 최근 3개월 간 <span id="bold">의뢰</span>한 게시글 총 갯수 : ${reqTotal3M } 건<p>
+									<p>${dto.user_Nm} 님이 최근 3개월 간 <span id="bold">꿀벌 평가 완료</span>한 게시글 : ${reqFinish3M } 건<p>
+									<p>${dto.user_Nm} 님이 최근 3개월 간 <span id="bold">요청취소</span>한 게시글 갯수 : ${reqCancel3M } 건<p>
 									<br>
 									<p id="ratio">의뢰글 총 ${reqTotal3M }건 중 꿀벌평가 ${reqFinish3M }건 완료</p>
 									<div class="bar-wrap">
@@ -1122,7 +1127,7 @@ textarea {
 					for(let i=0; i<result.length; i++){
 						$(".desc-content-finishlist").append('<div class="my-res-list-content-all" id="my-res-list-content-all">'
 																+'<div class="my-res-list-content-inner" id="my-res-list-img" onclick="location.href=\'/board/detail?req_No='+result[i].req_No+'\'">'
-																+(result[i].fi_Nm != null? "<img src='+result[i].fi_Nm+'>":'<img src="/images/importToJsp/homeimg.png">')
+																+(result[i].fi_Nm != null? '<img src="'+result[i].fi_Nm+'">':'<img src="/images/importToJsp/homeimg.png">')
 																+'</div>'
 																+'<div id="my-res-list-text">'
 																+'<div class="my-res-list-content-inner" id="my-res-list-stat" onclick="location.href=\'/board/detail?req_No='+result[i].req_No+'\'">'

@@ -58,6 +58,7 @@ public interface MypageService {
 	public MypageUsageDto reqTotal(int ucode);
 	public MypageUsageDto resFinish(int ucode);
 	public MypageUsageDto resCancel(int ucode);
+	public MypageUsageDto resCancelZero(int ucode);
 	public MypageUsageDto resTotal(int ucode);
 	
 	public MypageUsageDto reqCancel3M(int ucode);
@@ -65,6 +66,7 @@ public interface MypageService {
 	public MypageUsageDto reqTotal3M(int ucode);
 	public MypageUsageDto resFinish3M(int ucode);
 	public MypageUsageDto resCancel3M(int ucode);
+	public MypageUsageDto resCancelZero3M(int ucode);
 	public MypageUsageDto resTotal3M(int ucode);
 	
 	public int saveLocalProfile(int new_Fi_Code, MultipartFile file, HttpServletRequest request);
