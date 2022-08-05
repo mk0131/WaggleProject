@@ -718,10 +718,11 @@ input {
 					<h3 style="text-align: center;">SNS 간편 로그인</h3>
 					<div class="api-login">
 						<!-- 네이버 로그인 버튼 노출 영역 -->
-                	<div id="naver_id_login">
-                	</div>
+                	<div id="naver_id_login" style="display: none;"></div>
                 	
-                	
+                	<a href="https://nid.naver.com/oauth2.0/authorize?response_type=token&amp;client_id=JGPtZuIPhsS22_zSl6eT&amp;redirect_uri=http%3A%2F%2Flocalhost%3A8787%2Fhome&amp;state=109291b6-428e-4335-8890-2c65ad0d44e4" id="naver_id_login_anchor">
+                	<img src="http://static.nid.naver.com/oauth/big_w.PNG" border="0" title="네이버 아이디로 로그인" width="400px" height="60px"></a>
+                	<br>
 						<!-- //네이버 로그인 버튼 노출 영역 -->
 					<script type="text/javascript">
 						var naver_id_login = new naver_id_login("JGPtZuIPhsS22_zSl6eT", "http://localhost:8787/home");
