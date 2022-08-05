@@ -94,6 +94,9 @@ public interface MypageMapper {
 	@Select("select count(*) as resCancel from result where res_ucode=#{ucode} and res_stat='취소'")
 	public MypageUsageDto resCancel(int ucode);
 	
+	@Select("select count(*) as resCancel from result where res_ucode=#{ucode} and res_stat='취소(0)'")
+	public MypageUsageDto resCancelZero(int ucode);
+	
 	@Select("select count(*) as resFinish from result where res_ucode=#{ucode} and res_stat='완료'")
 	public MypageUsageDto resFinish(int ucode);
 	
@@ -113,6 +116,9 @@ public interface MypageMapper {
 	
 	@Select("select count(*) as resCancel from result where res_ucode=#{ucode} and res_stat='취소' AND (res_WDate BETWEEN DATE_ADD(NOW(), INTERVAL -3 MONTH) AND NOW())")
 	public MypageUsageDto resCancel3M(int ucode);
+	
+	@Select("select count(*) as resCancel from result where res_ucode=#{ucode} and res_stat='취소(0)' AND (res_WDate BETWEEN DATE_ADD(NOW(), INTERVAL -3 MONTH) AND NOW())")
+	public MypageUsageDto resCancelZero3M(int ucode);
 	
 	@Select("select count(*) as resFinish from result where res_ucode=#{ucode} and res_stat='완료' AND (res_WDate BETWEEN DATE_ADD(NOW(), INTERVAL -3 MONTH) AND NOW())")
 	public MypageUsageDto resFinish3M(int ucode);
