@@ -351,8 +351,6 @@ public class BoardController {
 		pointService.insertPoints(po_Point, req_UCode, po_No);
 		// Users DB 업데이트
 		pointService.updateUserPoint(point - po_Point, req_UCode);
-		// session 업데이트
-		session.setAttribute("user_Point", point - po_Point);
 		
 		return "redirect:/board/detail?req_No=" +req_No;
 	}

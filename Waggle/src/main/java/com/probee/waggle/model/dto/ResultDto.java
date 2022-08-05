@@ -1,6 +1,6 @@
 package com.probee.waggle.model.dto;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 public class ResultDto {
 	private int res_Code;
@@ -14,7 +14,7 @@ public class ResultDto {
 	private String res_Attr6;
 	private String res_Detail;
 	private Double res_Rate;
-	private LocalDate res_WDate;
+	private LocalDateTime res_WDate;
 	private String res_Stat;
 	
 	public ResultDto() {
@@ -24,7 +24,7 @@ public class ResultDto {
 
 	public ResultDto(int res_Code, int res_No, int res_UCode, String res_Attr1, String res_Attr2, String res_Attr3,
 			String res_Attr4, String res_Attr5, String res_Attr6, String res_Detail, Double res_Rate,
-			LocalDate res_WDate, String res_Stat) {
+			LocalDateTime res_WDate, String res_Stat) {
 		super();
 		this.res_Code = res_Code;
 		this.res_No = res_No;
@@ -129,11 +129,11 @@ public class ResultDto {
 		this.res_Rate = res_Rate;
 	}
 
-	public LocalDate getRes_WDate() {
+	public LocalDateTime getRes_WDate() {
 		return res_WDate;
 	}
 
-	public void setRes_WDate(LocalDate res_WDate) {
+	public void setRes_WDate(LocalDateTime res_WDate) {
 		this.res_WDate = res_WDate;
 	}
 
