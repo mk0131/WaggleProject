@@ -345,6 +345,7 @@ textarea {
 
 .upload-area__drop-zoon:hover {
   border-color: #000000;
+  background-color:#f7f9fa;
 }
 
 .drop-zoon__icon {
@@ -737,6 +738,7 @@ textarea {
 }
 /* 완료한 리스트 css 끝 */
 
+/* 등급 제도 */
 .grade{
 	display:inline-block;
 	height:30px;
@@ -777,6 +779,13 @@ textarea {
 	display:none;
 	color:#898989;
 }
+/* 등급 제도 */
+
+/* 인증서 파일 업로드 글자 hover */
+.confirmspan:hover{
+	color: orange !important;
+}
+
 </style>
 
 
@@ -918,14 +927,14 @@ textarea {
 						<c:if test="${con_ucode != null}">
 							<c:if test="${con_stat == '미확인' }">
 							<span style="font-size: 11pt; color: #898989">업로드한 자격증을 확인중입니다.</span>
-							<span style="font-size: 11pt; color: #2d7eac; margin-left: 5px" onclick="showProof();">파일 다시 업로드하기</span>
+							<span class="confirmspan" style="font-size: 11pt; color: #2d7eac; margin-left: 5px" onclick="showProof();">파일 다시 업로드하기</span>
 							</c:if>
 							<c:if test="${con_stat == '확인' }">
 							<span style="font-size: 11pt; color: #5c5c5c; font-weight:bold">${dto.user_Nm }님은 <span style="color:red">인증된 공인중개사</span>이십니다!</span>
 							</c:if>
 							<c:if test="${con_stat == '반려' }">
 							<span style="font-size: 11pt; color: #898989">신청한 자격증이 반려되었습니다.</span>
-							<span style="font-size: 11pt; color: #2d7eac; margin-left: 5px" onclick="showProof();">파일 다시 업로드하기</span>
+							<span class="confirmspan" style="font-size: 11pt; color: #2d7eac; margin-left: 5px" onclick="showProof();">파일 다시 업로드하기</span>
 							</c:if>
 							<c:if test="${con_stat == '처리중' }">
 							<span style="font-size: 11pt; color: #898989">신청한 자격증이 처리중입니다.</span>
@@ -934,7 +943,7 @@ textarea {
 						<c:if test="${con_ucode == null}">
 						<div>
 							<span style="font-size: 11pt; color: #898989">공인중개사이신가요?</span>
-							<span style="font-size: 11pt; color: #2d7eac; margin-left: 5px" onclick="showProof();">인증하기</span>
+							<span class="confirmspan" style="font-size: 11pt; color: #2d7eac; margin-left: 5px" onclick="showProof();">인증하기</span>
 						</div>
 						</c:if>
 					</c:if>
