@@ -1,11 +1,12 @@
 package com.probee.waggle.model.dto;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 public class PayDto {
 	private int pay_No;
 	private int pay_Price;
-	private LocalDate pay_Date;
+	private LocalDateTime pay_Date;
 	private int pay_UCode;
 	private String pay_Type;
 	
@@ -14,7 +15,7 @@ public class PayDto {
 		// TODO Auto-generated constructor stub
 	}
 
-	public PayDto(int pay_No, int pay_Price, LocalDate pay_Date, int pay_UCode, String pay_Type) {
+	public PayDto(int pay_No, int pay_Price, LocalDateTime pay_Date, int pay_UCode, String pay_Type) {
 		super();
 		this.pay_No = pay_No;
 		this.pay_Price = pay_Price;
@@ -39,11 +40,11 @@ public class PayDto {
 		this.pay_Price = pay_Price;
 	}
 
-	public LocalDate getPay_Date() {
+	public LocalDateTime getPay_Date() {
 		return pay_Date;
 	}
 
-	public void setPay_Date(LocalDate pay_Date) {
+	public void setPay_Date(LocalDateTime pay_Date) {
 		this.pay_Date = pay_Date;
 	}
 

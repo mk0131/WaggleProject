@@ -68,8 +68,6 @@ public class BoardController {
 		model.addAttribute("paging", paging);
 		
 		// 사용자 위치 
-		double user_lat = 0;
-		double user_lng = 0;
 		int user_code = 0;
 		try {
 			user_code = (int)session.getAttribute("user_Code");			
@@ -158,7 +156,8 @@ public class BoardController {
 	
 	@GetMapping("/updateform")
 	public String goUpdateForm(Model model, int req_No) {
-		model.addAttribute("req_dto", boardService.selectRequest(req_No));
+		RequestDto2 req_dto = boardService.selectRequest(req_No);
+		model.addAttribute("req_dto", req_dto);
 		return "updateForm";
 	}
 	
