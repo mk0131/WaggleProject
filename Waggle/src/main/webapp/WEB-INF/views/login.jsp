@@ -272,7 +272,15 @@ input {
 	padding-top: 315px;
 }
  
+.find:hover{
+	cursor: pointer;
+	color: #8b8b8b !important;
+}
 
+#naver_id_login img{
+	width:350px !important;
+	margin: 0 auto;
+}
 </style>
 <script type="text/javascript"
 	src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -461,9 +469,9 @@ input {
 					<div class="forgot-idpw">
 						<p class="forgot">
 							<!-- Button trigger modal -->
-					<a  data-toggle="modal" data-target="#staticBackdrop">
+					<a  class="find" data-toggle="modal" data-target="#staticBackdrop">
   					아이디 찾기
-					</a>&nbsp;|&nbsp;<a  data-toggle="modal" data-target="#staticBackdrop2">패스워드 찾기</a>
+					</a>&nbsp;|&nbsp;<a class="find" data-toggle="modal" data-target="#staticBackdrop2">패스워드 찾기</a>
 					<!-- Modal -->
 	<div class="modal fade" id="staticBackdrop" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
   	<div class="modal-dialog">

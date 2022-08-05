@@ -396,6 +396,7 @@
 
       <body>
 
+
          <%@ include file="./header.jsp" %>
             <div id="wrap">
                <div class="middle">
@@ -539,6 +540,8 @@
                      
                   });
                   
+
+			
 
                   function ChatHistory() {
                      let code = ${ user_Code };

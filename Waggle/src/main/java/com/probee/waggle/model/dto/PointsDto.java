@@ -1,19 +1,19 @@
 package com.probee.waggle.model.dto;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 public class PointsDto {
 	private int po_No;
 	private int po_UCode;
 	private int po_Point;
-	private LocalDate po_Date;
+	private LocalDateTime po_Date;
 	
 	public PointsDto() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
-	public PointsDto(int po_No, int po_UCode, int po_Point, LocalDate po_Date) {
+	public PointsDto(int po_No, int po_UCode, int po_Point, LocalDateTime po_Date) {
 		super();
 		this.po_No = po_No;
 		this.po_UCode = po_UCode;
@@ -45,11 +45,11 @@ public class PointsDto {
 		this.po_Point = po_Point;
 	}
 
-	public LocalDate getPo_Date() {
+	public LocalDateTime getPo_Date() {
 		return po_Date;
 	}
 
-	public void setPo_Date(LocalDate po_Date) {
+	public void setPo_Date(LocalDateTime po_Date) {
 		this.po_Date = po_Date;
 	}
 

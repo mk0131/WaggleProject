@@ -1,9 +1,9 @@
 package com.probee.waggle.model.dto;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 public class PointsDto2 implements Comparable<PointsDto2>{
-	private LocalDate date;
+	private LocalDateTime date;
 	private String type;
 	private int price;
 	private int price_Sum;
@@ -11,17 +11,17 @@ public class PointsDto2 implements Comparable<PointsDto2>{
 	public PointsDto2() {
 		super();
 	}
-	public PointsDto2(LocalDate date, String type, int price, int price_Sum) {
+	public PointsDto2(LocalDateTime date, String type, int price, int price_Sum) {
 		super();
 		this.date = date;
 		this.type = type;
 		this.price = price;
 		this.price_Sum = price_Sum;
 	}
-	public LocalDate getDate() {
+	public LocalDateTime getDate() {
 		return date;
 	}
-	public void setDate(LocalDate date) {
+	public void setDate(LocalDateTime date) {
 		this.date = date;
 	}
 	public String getType() {

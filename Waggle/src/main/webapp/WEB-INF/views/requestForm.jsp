@@ -182,12 +182,72 @@ input[type="date"] {
 	text-decoration: underline;
 	cursor: pointer;
 }
+/* loading spinner */
+.spinner {
+	animation: rotator 1.4s linear infinite;
+}
+@keyframes rotator {
+	0% {
+		transform: rotate(0deg);
+	}
+	100% {
+		transform: rotate(270deg);
+	}
+}
+.path {
+	stroke-dasharray: 187;
+	stroke-dashoffset: 0;
+	transform-origin: center;
+	animation: dash 1.4s ease-in-out infinite, colors 5.6s ease-in-out infinite;
+}
+@keyframes colors {
+	0% {
+		stroke: #4285f4;
+	}
+	25% {
+		stroke: #de3e35;
+	}
+	50% {
+		stroke: #f7c223;
+	}
+	75% {
+		stroke: #1b9a59;
+	}
+	100% {
+		stroke: #4285f4;
+	}
+}
+@keyframes dash {
+	0% {
+		stroke-dashoffset: 187;
+	}
+	50% {
+		stroke-dashoffset: 46.75;
+		transform: rotate(135deg);
+	}
+	100% {
+		stroke-dashoffset: 187;
+		transform: rotate(450deg);
+	}
+}
+.loading-wrapper {
+  display: none;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
 
 </style>
 </head>
 <body>
 	<%@ include file="header.jsp"%>
-	
+	<div id="loadingdo" class="loading-wrapper">
+		<div class="loading-box">
+			<svg class="spinner" width="65px" height="65px" viewBox="0 0 66 66" xmlns="http://www.w3.org/2000/svg">
+			   <circle class="path" fill="none" stroke-width="6" stroke-linecap="round" cx="33" cy="33" r="30"></circle>
+			</svg>
+		</div>
+	</div>
 	 <div id="wrap">
 	  <div class="middle">
 		<div class="guideline">
@@ -204,7 +264,7 @@ input[type="date"] {
 	<div class="ongoing21-all">
 		<h3 id="ongoing-detail">요청페이지</h3>
 		<div class="ongoing21-all">
-			<form action="/board/request" method="post">
+			<form onsubmit="return loading()" action="/board/request" method="post">
 			<input type="hidden" value="${user_Code }" name="req_UCode">
 			<input type="hidden" name="home_Post" id="home_Post">
 				<table class="ongoing21-content">
@@ -253,7 +313,7 @@ input[type="date"] {
 					<textarea id="incontent" rows="12" cols="70"  placeholder="요구사항을 입력해주세요&nbsp;ex.수압이나 바깥전망, 소음 등 원하는 사진이나 동영상이 필요한 부분을 적어주세요" name="req_Detail"></textarea>
 					<br><br>
 					<div class="btn1" id="btn1">
-						<button type="submit" value="작성">작성 완료</button>
+						<button id="submit-do" type="submit" value="작성">작성 완료</button>
 						<button type="button" value="취소" onclick="location.href='/board/list'">취소</button>	    	
 					</div>
 					<br/><br/><br/>
@@ -264,5 +324,20 @@ input[type="date"] {
 	
 	</div>
 	<%@ include file="footer.jsp" %>
+<script type="text/javascript">
+	function loading() {
+		var addVal = $("#home_Addr").val();
+		
+		if(addVal == null || addVal == '') {
+			alert("주소를 입력하세요!");
+			return false;
+		} else {
+			$("#loadingdo").attr("style","display:flex;");
+			$("#wrap").attr("style","display:none;");		
+			return true;
+		}
+		
+	}
+</script>
 </body>
 </html>

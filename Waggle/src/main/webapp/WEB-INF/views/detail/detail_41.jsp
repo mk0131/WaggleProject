@@ -75,12 +75,16 @@
     resize: none;
     border-radius: 5px;
 	box-shadow: rgba(67, 71, 85, 0.27) 0px 0px 0.25em, rgba(90, 125, 188, 0.05) 0px 0.25em 1em;
+	border: none;
+	padding: 10px;
 }
 #revcontent {
 	outline: none;
     resize: none;
     border-radius: 5px;
 	box-shadow: rgba(67, 71, 85, 0.27) 0px 0px 0.25em, rgba(90, 125, 188, 0.05) 0px 0.25em 1em;
+	border: none;
+	padding: 10px;
 }
 #userrealname {
 	font-weight: bold;
@@ -282,77 +286,50 @@ div#progress_percentage::after {
   color: #ddd;
 }
 */
-#modal.modal-overlay {
-            width: 100%;
-            height: 500px;
-            position: absolute;
-            left: 0;
-            top: 1500px;
-            display: none;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            background: rgba(255, 255, 255, 0.25);
-            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
-            backdrop-filter: blur(1.5px);
-            -webkit-backdrop-filter: blur(1.5px);
-            border-radius: 10px;
-            border: 1px solid rgba(255, 255, 255, 0.18);
-        }
-        #modal .modal-window {
-            background: rgba( 69, 139, 197, 0.70 );
-            box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );
-            backdrop-filter: blur( 13.5px );
-            -webkit-backdrop-filter: blur( 13.5px );
-            border-radius: 10px;
-            border: 1px solid rgba( 255, 255, 255, 0.18 );
-            width: 400px;
-            height: 100px;
-            position: relative;
-            top: -0px;
-            padding: 10px;
-        }
-        #modal .title {
-            padding-left: 10px;
-            display: inline;
-            text-shadow: 1px 1px 2px gray;
-            color: white;
-            
-        }
-        #modal .title h2 {
-            display: inline;
-        }
-        
-        #modal .content {
-            margin-top: 20px;
-            padding: 0px 10px;
-            text-shadow: 1px 1px 2px gray;
-            color: white;
-        }
- 		#modalbtn{
- 		 	width: 380px;
- 		 	height: 50px;
- 		 	border-radius: 8px;
- 		}
+
+#modal .modal-window {
+    background: rgba( 69, 139, 197, 0.70 );
+    box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );
+    backdrop-filter: blur( 13.5px );
+    -webkit-backdrop-filter: blur( 13.5px );
+    border-radius: 10px;
+    border: 1px solid rgba( 255, 255, 255, 0.18 );
+    width: 400px;
+    height: 100px;
+    position: relative;
+    top: -0px;
+    padding: 10px;
+}
+#modal .title {
+    padding-left: 10px;
+    display: inline;
+    text-shadow: 1px 1px 2px gray;
+    color: white;
+    
+}
+#modal .title h2 {
+    display: inline;
+}
+
+#modal .content {
+    margin-top: 20px;
+    padding: 0px 10px;
+    text-shadow: 1px 1px 2px gray;
+    color: white;
+}
+#modalbtn{
+ 	width: 380px;
+ 	height: 50px;
+ 	border-radius: 8px;
+}
+#show-box {
+	display: none;
+}
 
 </style>
 
 </head>
 <body>
-<div id="modal" class="modal-overlay">
-        <div class="modal-window">
-            <div class="title">
-                <h2>1000 P 지불하고 후기 내용 보기</h2>
-            </div>
-            
-            <div class="content">
-            	<form action="/point/consume" method="post">
-            		<input type="hidden" name="req_No" value="${req_dto.req_No }">
-                	<input type="submit" id="modalbtn" value="1000 P 소모">
-                </form>
-            </div>
-        </div>
-    </div>
 	<%@ include file="../header.jsp" %>
 	 <div id="wrap">
 	 
@@ -494,12 +471,24 @@ div#progress_percentage::after {
 		       	</tr>
 		       </tbody>
 	       </table>
-			<div id="modal" class="modal-overlay">
-
-    </div>       
-		   <br/><br/><hr class="my-hr">
-		 
-		   
+		<br/><br/><hr class="my-hr">	
+		      
+	   <div id="show-box">
+		<div class="modal-window">
+            <div class="title">
+                <h2>1000 P 지불하고 자세한 후기 내용 보기</h2>
+            </div>
+            
+            <div class="content">
+            	<form action="/point/consume" method="post" onsubmit="return ask()">
+            		<input type="hidden" name="req_No" value="${req_dto.req_No }">
+                	<input type="submit" id="modalbtn" value="1000 P 소모">
+                </form>
+            </div>
+        </div>
+	   </div>
+	   
+	   <div id="hide-box">
 		   <br><h4>기본 선택사항</h4>
 		   <table class="ongoing21-content2">
 	       <tbody>
@@ -672,7 +661,7 @@ div#progress_percentage::after {
 		     <textarea id="revcontent" rows="30" cols="40"  placeholder="디테일 리뷰가 없습니다." readonly="readonly"></textarea>
 		    </div>
 		   </div>
-		   
+	   </div>
 		   <br/><br/><hr class="my-hr">
 		   
 		   <br><h4>집 평가를 이렇게 받았어요!</h4>
@@ -777,20 +766,23 @@ div#progress_percentage::after {
 		var start2 = new Date($("#v_Date").val());
 		var end2 = new Date();
 		var diffTime2 = (end2.getTime() - start2.getTime()) / (1000*60*60*24);
-		
+
 		if(diffTime2 < 1) {
-		 	if(${req_dto.req_UCode} != ${user_Code} && ${res} != ${user_Code} && ${po} != ${user_Code}){
-		 	 $(".ongoing21-content2").hide();	
-		 	 $("#detail_container").hide();
-		 	 $("#full-stars-example-two").hide();
-		 	 $("#modal").css("display","flex");
+		 	if(${req_dto.req_UCode} != ${user_Code} && ${res} != ${user_Code} && ${po} != ${user_Code}){	
+		 	 $("#hide-box").hide();
+		 	 $("#show-box").css("display","flex");
 		 	}			
 		}
 		
-	 	
-	 	
-		
 	});
+	
+	function ask() {
+		if(confirm("1000포인트 지불하고 내용을 보시겠습니까?")) {
+			return true;
+		} else {
+			return false;
+		}
+	}
 </script>
 
 </html>

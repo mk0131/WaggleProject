@@ -1,12 +1,13 @@
 package com.probee.waggle.model.dto;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 public class RequestDto {
 	private int req_No;
 	private String req_Title;
 	private String req_Link;
-	private LocalDate req_WDate;
+	private LocalDateTime req_WDate;
 	private LocalDate req_EDate;
 	private String req_Phone;
 	private String req_Detail;
@@ -21,7 +22,7 @@ public class RequestDto {
 		// TODO Auto-generated constructor stub
 	}
 
-	public RequestDto(int req_No, String req_Title, String req_Link, LocalDate req_WDate, LocalDate req_EDate,
+	public RequestDto(int req_No, String req_Title, String req_Link, LocalDateTime req_WDate, LocalDate req_EDate,
 			String req_Phone, String req_Detail, int req_Point, String req_Stat, int req_UCode, int req_FCode,
 			int req_HCode) {
 		super();
@@ -63,11 +64,11 @@ public class RequestDto {
 		this.req_Link = req_Link;
 	}
 
-	public LocalDate getReq_WDate() {
+	public LocalDateTime getReq_WDate() {
 		return req_WDate;
 	}
 
-	public void setReq_WDate(LocalDate req_WDate) {
+	public void setReq_WDate(LocalDateTime req_WDate) {
 		this.req_WDate = req_WDate;
 	}
 

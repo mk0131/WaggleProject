@@ -280,9 +280,16 @@ input:focus ~ .bar:before, input:focus ~ .bar:after {
 								<c:forEach var="dto" items="${list}">
 									<div class="pointuse" style="border-bottom: 1px solid #898989; width:1000px; height:130px; margin-top:18px">
 										<div class="use-left"  style="width:110px; height:110px; display:inline-block">
-											<div style="width:100px; height:100px; border:5px solid #898989; border-radius:150px; color:#898989; font-size:20pt; text-align:center; line-height:100px; float:left">
+											<c:if test="${dto.type == '사용'}">
+											<div style="width:100px; height:100px; border:5px solid #e37b7b; border-radius:150px; color:#e37b7b; font-size:20pt; text-align:center; line-height:100px; float:left">
 											${dto.type}
 											</div>
+											</c:if>
+											<c:if test="${dto.type == '충전' or dto.type=='획득'}">
+											<div style="width:100px; height:100px; border:5px solid #3a6589bf; border-radius:150px; color:#3a6589bf; font-size:20pt; text-align:center; line-height:100px; float:left">
+											${dto.type}
+											</div>
+											</c:if>
 										</div>
 										<div class="use-middle" style="width:650px; height:110px; padding-left:35px; display:inline-block">
 											<div>${dto.date}</div>
@@ -292,13 +299,12 @@ input:focus ~ .bar:before, input:focus ~ .bar:after {
 										<div class="use-right" style="width:200px; height:110px; display:inline-block; text-align:center; float:right">
 											<c:choose>
 												<c:when test="${dto.type eq '사용'}">
-													<div style="font-size:30pt">-${dto.price} P</div>
+													<div style="font-size:30pt; margin-top:25px; color:#e37b7b;">-${dto.price} P</div>
 												</c:when>
 												<c:otherwise>
-													<div style="font-size:30pt">+${dto.price} P</div>
+													<div style="font-size:30pt; margin-top:25px; color:#3a6589bf;">+${dto.price} P</div>
 												</c:otherwise>
 											</c:choose>
-											<div style="border:1px solid #3a3a3a; border-radius:10px; width:100px; height:30px; text-align:center; line-height:30px; margin-left:55px; color:#3a3a3a">내역삭제</div>						
 										</div>
 									</div>
 								</c:forEach>

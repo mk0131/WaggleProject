@@ -68,8 +68,6 @@ public class BoardController {
 		model.addAttribute("paging", paging);
 		
 		// 사용자 위치 
-		double user_lat = 0;
-		double user_lng = 0;
 		int user_code = 0;
 		try {
 			user_code = (int)session.getAttribute("user_Code");			
@@ -158,7 +156,8 @@ public class BoardController {
 	
 	@GetMapping("/updateform")
 	public String goUpdateForm(Model model, int req_No) {
-		model.addAttribute("req_dto", boardService.selectRequest(req_No));
+		RequestDto2 req_dto = boardService.selectRequest(req_No);
+		model.addAttribute("req_dto", req_dto);
 		return "updateForm";
 	}
 	
@@ -352,8 +351,6 @@ public class BoardController {
 		pointService.insertPoints(po_Point, req_UCode, po_No);
 		// Users DB 업데이트
 		pointService.updateUserPoint(point - po_Point, req_UCode);
-		// session 업데이트
-		session.setAttribute("user_Point", point - po_Point);
 		
 		return "redirect:/board/detail?req_No=" +req_No;
 	}
@@ -375,6 +372,15 @@ public class BoardController {
 		boardService.Revoke(req_No); // 요청글 취소
 		volunteerService.delete(req_No); // 지원자들 삭제
 		volunteerService.Revoke(req_No); // 모든 결과물 취소(0)
+		
+		// 포인트 되돌려 받음
+		RequestDto2 req_dto = boardService.selectRequest(req_No);
+		int req_Point = req_dto.getReq_Point();
+		int req_UCode = req_dto.getReq_UCode();
+		pointService.insertPay(req_Point, req_UCode, "획득");
+		// user 정보 point update
+		int user_point = pointService.selectUserPoint(req_UCode);
+		pointService.updateUserPoint(user_point + req_Point, req_UCode);
 		
 		return "redirect:/board/list";
 	}

@@ -257,6 +257,16 @@ public class MypageServiceImpl implements MypageService{
 	public MypageUsageDto resTotal3M(int ucode) {
 		return mypageMapper.resTotal3M(ucode);
 	}
+
+	@Override
+	public MypageUsageDto resCancelZero(int ucode) {
+		return mypageMapper.resCancelZero(ucode);
+	}
+
+	@Override
+	public MypageUsageDto resCancelZero3M(int ucode) {
+		return mypageMapper.resCancelZero3M(ucode);
+	}
 	
 	
 

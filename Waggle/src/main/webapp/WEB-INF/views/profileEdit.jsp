@@ -75,6 +75,9 @@
  .profile .edit span {
     transform: rotate(45deg);
     display: block;
+    font-size:30px;
+    position:fixed;
+    left:49%;
 }
  .profile .edit input {
     opacity: 0;
@@ -402,12 +405,12 @@ span {
             <div class="profile" style="background-image:url(${Pro_Fi_Nm})">
             </c:if>
               <label class="edit">
-                <span>&#10002;</span>
+                <span id="pen">&#10002;</span>
                 <input type="file" name="myfile" data-max-file-size="10MB">
               </label>
               <div class="delete" onclick="removeimg()">&times;</div>
             </div>
-            <input type="submit" class="inputbutton" value="프로필사진 수정하기" id="img-edit-btn">
+	            <input type="submit" class="inputbutton" value="프로필사진 수정하기" id="img-edit-btn">
             </form>
          </div>
          <div class="edit-profile-info">
@@ -548,9 +551,11 @@ span {
 <script>
 function removeimg() {
 	  $(".profile").attr("style","background-image:url(/images/importToJsp/profile_default.jpg)");
+	  $("input[name=myfile]").off();
+	  $("#img-edit-btn").attr("disabled",true);
 	};
 	
-	
+
 $(function(){
 
 //프로필 사진 수정 시작
@@ -560,10 +565,39 @@ function setImageUrl(url){
   image.style.backgroundImage = 'url('+url+')';
 };
 
-$("input[name=myfile]").off().on("change", function(){
+$(".edit").on("click", function(){
+    $("input[name=myfile]").val('');
+	$("input[name=myfile]").on("change", function(){
+		  var reader = new FileReader();
+		  reader.onload = function(e){
+		    setImageUrl(e.target.result);
+		  };
+		  reader.readAsDataURL(event.target.files[0]);
+		
+			if (this.files && this.files[0]) {
+		
+				var maxSize = 20 * 1024 * 1024;
+				var fileSize = this.files[0].size;
+		
+				if(fileSize > maxSize){
+					alert("첨부파일 사이즈는 5MB 이내로 등록 가능합니다.");
+					$(this).val('');
+					return false;
+				}
+			}
+			
+			
+		});
+	$("#img-edit-btn").attr("disabled",false);
+});
+
+
+/*
+$("input[name=myfile]").on("change", function(){
 	  var reader = new FileReader();
 	  reader.onload = function(e){
 	    setImageUrl(e.target.result);
+	    console.log(e.target.result);
 	  };
 	  reader.readAsDataURL(event.target.files[0]);
 	
@@ -581,7 +615,7 @@ $("input[name=myfile]").off().on("change", function(){
 		
 		
 	});
-
+*/
 //프로필 사진 수정 끝
 
 $('#pw_input').blur(function(){ // 비밀번호 유형 검사

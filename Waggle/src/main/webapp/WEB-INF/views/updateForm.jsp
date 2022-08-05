@@ -36,6 +36,7 @@
 	    	popupName: 'AddrSearch'
 	    });		
 	}
+	
 </script>
 <style type="text/css">
 
@@ -216,10 +217,10 @@ input[type="date"] {
 							<th><label class="required">집 주소</label><br><br><br></th>
 							<td>
 								<input type="text" placeholder="클릭해서 주소 입력" name="home_Addr" id="home_Addr" readonly="readonly" onclick="kakaopost()" required="required" value="${req_dto.home_Addr}">
-								<input type="hidden" name="home_Lat" id="home_Lat">
-								<input type="hidden" name="home_Lng" id="home_Lng">
-								<input type="hidden" name="ji_Addr" id="ji_Addr">
-								<input type="hidden" name="road_Addr" id="road_Addr">
+								<input type="hidden" name="home_Lat" id="home_Lat" value="${req_dto.home_Lat}">
+								<input type="hidden" name="home_Lng" id="home_Lng" value="${req_dto.home_Lng}">
+								<input type="hidden" name="ji_Addr" id="ji_Addr" value="${req_dto.home_Addr}">
+								<input type="hidden" name="road_Addr" id="road_Addr" value="${req_dto.home_Addr}">
 								<br><input type="text" placeholder="상세주소(선택)" name="home_DAddr" value="${req_dto.home_DAddr}">
 							</td>
 						</tr>

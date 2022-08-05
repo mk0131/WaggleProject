@@ -22,13 +22,13 @@ import com.probee.waggle.model.dto.UsersDto2;
 public interface BoardMapper {
 	
 	// 전체 request 가져오기
-	@Select(" select req_No,req_Title,req_Link,date_format(req_WDate,'%Y-%m-%d') req_WDate,date_format(req_EDate,'%Y-%m-%d') req_EDate,req_Phone,req_Detail,req_Point,req_Stat,req_UCode,req_FCode,req_HCode,fi_Nm,home_Addr,home_DAddr,home_Lat,home_Lng "
+	@Select(" select req_No,req_Title,req_Link, req_WDate,date_format(req_EDate,'%Y-%m-%d') req_EDate,req_Phone,req_Detail,req_Point,req_Stat,req_UCode,req_FCode,req_HCode,fi_Nm,home_Addr,home_DAddr,home_Lat,home_Lng "
 			+ "from request r left outer join file f on r.req_FCode = f.fi_Code left outer join home h on r.req_HCode = h.home_Code "
 			+ "order by req_No desc LIMIT #{pageStart}, #{perPageNum} ")
 	public List<RequestDto2> selectList(Criteria cri);
 	
 	// 글번호로 request 모든 정보 불러오기
-	@Select(" select req_No,req_Title,req_Link,date_format(req_WDate,'%Y-%m-%d') req_WDate,date_format(req_EDate,'%Y-%m-%d') req_EDate,req_Phone,req_Detail,req_Point,req_Stat,req_UCode,req_FCode,req_HCode,fi_Nm,home_Addr,home_DAddr,home_Lat,home_Lng "
+	@Select(" select req_No,req_Title,req_Link, req_WDate,date_format(req_EDate,'%Y-%m-%d') req_EDate,req_Phone,req_Detail,req_Point,req_Stat,req_UCode,req_FCode,req_HCode,fi_Nm,home_Addr,home_DAddr,home_Lat,home_Lng "
 			+ "from request r left outer join file f on r.req_FCode = f.fi_Code left outer join home h on r.req_HCode = h.home_Code "
 			+ "where req_No=#{req_No} ")
 	public RequestDto2 selectRequest(int req_No);

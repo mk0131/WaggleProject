@@ -58,6 +58,7 @@ header {
 
 .nav-menu-all {
 	display: flex;
+	font-weight: bold;
 }
 
 .nav-menu {

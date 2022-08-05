@@ -583,7 +583,7 @@ div {
 							for(let i=0; i<unique.length; i++){
 								var res = new Date(unique[i].res_WDate);
 								$('#wdate').html(res.getTime());
-								if(unique[i].fi_Nm.includes('jpg') || unique[i].fi_Nm.includes('png') || unique[i].fi_Nm.includes('jpeg') || unique[i].fi_Nm.includes('tiff')){
+								if(unique[i].fi_Nm.includes('jpg') || unique[i].fi_Nm.includes('png') || unique[i].fi_Nm.includes('jpeg') || unique[i].fi_Nm.includes('tiff') || unique[i].fi_Nm.includes('jfif')){
 									//글이 24시가 넘었을 경우 블러 해제
 									if((now.getTime()-res.getTime())/(1000*60*60*24) >= 1){
 											$(".horizontal-scroll-wrapper").append('<div><a href="/board/detail?req_No='+unique[i].req_No+'"><img class="detail_img" src='+unique[i].fi_Nm+'><div id="img-detail">업로드 날짜: '+unique[i].res_WDate.substr(0,10)+'</div></a></div>');
@@ -635,7 +635,7 @@ div {
 								if(result[i].req_No != req_No){
 									var res = new Date(result[i].res_WDate);
 									$('#wdate').html(res.getTime());
-									if(result[i].fi_Nm.includes('jpg') || result[i].fi_Nm.includes('png') || result[i].fi_Nm.includes('jpeg') || result[i].fi_Nm.includes('tiff')){
+									if(result[i].fi_Nm.includes('jpg') || result[i].fi_Nm.includes('png') || result[i].fi_Nm.includes('jpeg') || result[i].fi_Nm.includes('tiff') || result[i].fi_Nm.includes('jfif')){
 										//글이 24시가 넘었을 경우 블러 해제
 										if((now.getTime()-res.getTime())/(1000*60*60*24) >= 1){
 												$(".horizontal-scroll-wrapper").append('<div><a href="/board/detail?req_No='+result[i].req_No+'"><img class="detail_img" src='+result[i].fi_Nm+'><div id="img-detail">업로드 날짜: '+result[i].res_WDate.substr(0,10)+'</div></a></div>');
@@ -678,7 +678,7 @@ div {
 							
 							for(let i=0; i<unique.length; i++){
 								if(unique[i].req_No == req_No){
-									if(unique[i].fi_Nm.includes('jpg') || unique[i].fi_Nm.includes('png') || unique[i].fi_Nm.includes('jpeg') || unique[i].fi_Nm.includes('tiff')){
+									if(unique[i].fi_Nm.includes('jpg') || unique[i].fi_Nm.includes('png') || unique[i].fi_Nm.includes('jpeg') || unique[i].fi_Nm.includes('tiff') || unique[i].fi_Nm.includes('jfif')){
 										$(".horizontal-scroll-wrapper").append('<div><a href="/board/detail?req_No='+unique[i].req_No+'"><img class="detail_img" src='+unique[i].fi_Nm+'><div id="img-detail">업로드 날짜: '+unique[i].res_WDate.substr(0,10)+'</div></a></div>');
 									}else if(unique[i].fi_Nm.includes('mp4') || unique[i].fi_Nm.includes('avi')){
 										$(".horizontal-scroll-wrapper").append('<div><a href="/board/detail?req_No='+unique[i].req_No+'"><video class="detail_video" controls ><source src='+unique[i].fi_Nm+'></video><div id="img-detail">업로드 날짜: '+unique[i].res_WDate.substr(0,10)+'</div></a></div>');
@@ -775,7 +775,7 @@ div {
 					//검색 주소에 해당하는 영상들 페이지에 뿌려주기
 					for(let i=0; i<unique.length; i++){
 						var res = new Date(unique[i].res_WDate);
-						if(unique[i].fi_Nm.includes('jpg') || unique[i].fi_Nm.includes('png') || unique[i].fi_Nm.includes('jpeg') || unique[i].fi_Nm.includes('tiff')){
+						if(unique[i].fi_Nm.includes('jpg') || unique[i].fi_Nm.includes('png') || unique[i].fi_Nm.includes('jpeg') || unique[i].fi_Nm.includes('tiff') || unique[i].fi_Nm.includes('jfif')){
 							//글이 24시가 넘었을 경우 블러 해제
 							if((now.getTime()-res.getTime())/(1000*60*60*24) >= 1){
 									$(".horizontal-scroll-wrapper").append('<div><a href="/board/detail?req_No='+unique[i].req_No+'"><img class="detail_img" src='+unique[i].fi_Nm+'><div id="img-detail">업로드 날짜: '+unique[i].res_WDate.substr(0,10)+'</div></a></div>');
@@ -826,7 +826,7 @@ div {
 						//포인트 사용한 요청글과 관련없는 요청글들은 그냥 뿌려줌
 						if(result[i].req_No != req_No){
 							var res = new Date(result[i].res_WDate);
-							if(result[i].fi_Nm.includes('jpg') || result[i].fi_Nm.includes('png') || result[i].fi_Nm.includes('jpeg') || result[i].fi_Nm.includes('tiff')){
+							if(result[i].fi_Nm.includes('jpg') || result[i].fi_Nm.includes('png') || result[i].fi_Nm.includes('jpeg') || result[i].fi_Nm.includes('tiff') || result[i].fi_Nm.includes('jfif')){
 								//글이 24시가 넘었을 경우 블러 해제
 								if((now.getTime()-res.getTime())/(1000*60*60*24) >= 1){
 										$(".horizontal-scroll-wrapper").append('<div><a href="/board/detail?req_No='+result[i].req_No+'"><img class="detail_img" src='+result[i].fi_Nm+'><div id="img-detail">업로드 날짜: '+result[i].res_WDate.substr(0,10)+'</div></a></div>');
@@ -869,7 +869,7 @@ div {
 					
 					for(let i=0; i<unique.length; i++){
 						if(unique[i].req_No == req_No){
-							if(unique[i].fi_Nm.includes('jpg') || unique[i].fi_Nm.includes('png') || unique[i].fi_Nm.includes('jpeg') || unique[i].fi_Nm.includes('tiff')){
+							if(unique[i].fi_Nm.includes('jpg') || unique[i].fi_Nm.includes('png') || unique[i].fi_Nm.includes('jpeg') || unique[i].fi_Nm.includes('tiff') || unique[i].fi_Nm.includes('jfif')){
 								$(".horizontal-scroll-wrapper").append('<div><a href="/board/detail?req_No='+unique[i].req_No+'"><img class="detail_img" src='+unique[i].fi_Nm+'><div id="img-detail">업로드 날짜: '+unique[i].res_WDate.substr(0,10)+'</div></a></div>');
 							}else if(unique[i].fi_Nm.includes('mp4') || unique[i].fi_Nm.includes('avi')){
 								$(".horizontal-scroll-wrapper").append('<div><a href="/board/detail?req_No='+unique[i].req_No+'"><video class="detail_video" controls ><source src='+unique[i].fi_Nm+'></video><div id="img-detail">업로드 날짜: '+unique[i].res_WDate.substr(0,10)+'</div></a></div>');

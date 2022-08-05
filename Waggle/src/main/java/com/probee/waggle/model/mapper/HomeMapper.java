@@ -14,4 +14,7 @@ public interface HomeMapper {
 	
 	@Insert(" insert into Home(home_Post,home_Addr,home_DAddr,home_Lat, home_Lng) values(#{home_Post},#{home_Addr},#{home_DAddr},#{home_Lat},#{home_Lng}) ")
 	public int insertHome(HomeDto dto);
+	
+	@Select(" select * from Home where home_Code=#{home_Code} ")
+	public HomeDto selectHome(int home_Code);
 }
