@@ -83,8 +83,9 @@
   	align-items: center;
   	justify-content: center;
     padding: 25px;
-    border-spacing: 50px;
+    border-spacing: 44px;
     font-size: 16px;
+    text-align:right;
 }
 
 .ongoing21-content-bottom {
@@ -93,6 +94,7 @@
 
 .ongoing21-content td {
 	width: 380px;
+	text-align:left;
 }
 
 #yellow {
@@ -124,13 +126,14 @@ button {
 	box-shadow: rgba(0, 0, 0, .2) 0 3px 5px -1px,rgba(0, 0, 0, .14) 0 6px 10px 0,rgba(0, 0, 0, .12) 0 1px 18px 0;
 	box-sizing: border-box;
 	color: #fff;
-	font-size: 12px;
+	font-size: 20px;
 	font-weight: 500;
 	font-family: inherit;
 	letter-spacing: .25px;
 	line-height: normal;
 	padding: 11px 11px;
 	transition: background box-shadow 280ms ease;
+	margin-right: 30px;
 }
 
 button:hover {
