@@ -19,6 +19,9 @@ public interface InquiryMapper {
 	@Select(" SELECT IN_CODE, IN_UCODE, IN_TYPE, IN_TITLE, IN_DATE, IN_CONTENT, IN_STAT, IN_ANSWER, in_CHK FROM INQUIRY left join USERS on IN_UCODE = USER_CODE where IN_UCODE = #{user_Code} order by IN_CODE desc LIMIT #{cri.pageStart}, #{cri.perPageNum} ")
 	public List<InquiryDto> selectList(int user_Code, @Param("cri") Criteria cri);
 	
+	@Select( " select * FROM inquiry join users where in_UCode = user_Code order by IN_CODE desc LIMIT #{cri.pageStart}, #{cri.perPageNum} " )
+	public List<InquiryDto> adminList(String user_Nm, @Param("cri") Criteria cri);
+	
 //	@Select(" SELECT IN_CODE, IN_UCODE, IN_TYPE, IN_TITLE, IN_DATE, IN_CONTENT, IN_STAT, IN_ANSWER, in_CHK FROM INQUIRY join USERS on(IN_UCODE = USER_CODE) order by IN_CODE DESC ")
 //	public List<InquiryDto> selectuserList();
 	
@@ -39,5 +42,8 @@ public interface InquiryMapper {
 	
 	@Select(" SELECT COUNT(*) FROM INQUIRY left join USERS on IN_UCODE = USER_CODE where in_UCode = #{user_Code} order by IN_CODE DESC ")
 	public int inquiryListCnt(int user_Code);
+	
+	@Select(" SELECT COUNT(*) FROM INQUIRY order by IN_CODE DESC ")
+	public int inquiryallListCnt(String user_Nm);
 	
 }

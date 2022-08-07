@@ -52,5 +52,15 @@ public class InquiryServiceImpl implements InquiryService {
 		return inquiryMapper.delete(in_Code);
 	}
 
+	@Override
+	public List<InquiryDto> adminList(String user_Nm, Criteria cri) {
+		return inquiryMapper.adminList(user_Nm, cri);
+	}
+
+	@Override
+	public int inquiryallListCnt(String user_Nm) {
+		return inquiryMapper.inquiryallListCnt(user_Nm);
+	}
+
 
 }
