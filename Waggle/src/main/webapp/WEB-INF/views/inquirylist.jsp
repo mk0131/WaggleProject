@@ -272,6 +272,16 @@ button:active {
 	color: #878787;
 }
 
+.paging-a {
+	text-decoration: none;
+	padding: 8px;
+	color: #878787;
+}
+
+.paging-a:visited {
+	color: #878787;
+}
+
 </style>
 </head>
 <body>
@@ -491,6 +501,8 @@ button:active {
 			                  </tr>
 			               </thead>
 				            <tbody>
+				            
+			                   <c:if test="${user_Nm ne 'admin' }">
 			                  <c:choose>
 			                     <c:when test="${empty list }">
 			                        <tr>
@@ -501,6 +513,7 @@ button:active {
 			                        <c:forEach items="${list }" var="dto">
 			                           <tr class="Inquiry-content">
 			                              <td>${dto.in_Type }</td>
+			                              <td>${dto.in_Type }</td>
 			                              <td><a id="Inquiry-title" href="/inquiry/detail?in_Code=${dto.in_Code }">${dto.in_Title }</a></td>
 			                              <td>${dto.in_Date }</td>
 			                              <td>${dto.in_Stat }</td>
@@ -508,6 +521,29 @@ button:active {
 			                        </c:forEach>
 			                     </c:otherwise>
 			                  </c:choose>
+			                  </c:if>
+			                  
+			                  <c:if test="${user_Nm eq 'admin' }">
+			                    <c:choose>
+			                     <c:when test="${empty alist }">
+			                        <tr>
+			                           <td colspan="4" class="Inquiry-content">문의 내용이 없습니다.</td>
+			                        </tr>
+			                     </c:when>
+			                     <c:otherwise>
+			                        <c:forEach items="${alist }" var="dto">
+			                           <tr class="Inquiry-content">
+			                              <td>${dto.in_Type }</td>
+			                              <td>${dto.in_Type }</td>
+			                              <td><a id="Inquiry-title" href="/inquiry/detail?in_Code=${dto.in_Code }">${dto.in_Title }</a></td>
+			                              <td>${dto.in_Date }</td>
+			                              <td>${dto.in_Stat }</td>
+			                           </tr>
+			                        </c:forEach>
+			                     </c:otherwise>
+			                  </c:choose>
+			                  </c:if>
+			                  
 			               </tbody>   
 				          <tr>
 				         <td class="btn1" colspan="2" align="right">
@@ -516,23 +552,45 @@ button:active {
 				           </tr>    
 				          	</table>
 				          	
+				          	<c:if test="${user_Nm ne 'admin' }">
 				          	<ul class="paging">
-	 	 						<c:if test="${paging.prev}">        
-	 	 							<li id="paging">
-	 	 								<a id="paging-a" href='<c:url value="/inquiry/list?user_Code=${user_Code }&page=${paging.startPage-1}"/>'>이전</a>
-	 	 							</li>    
+	 	 						<c:if test="${paging1.prev}">        
+	 	 							<li class="paging">
+	 	 								<a class="paging-a" href='<c:url value="/inquiry/list?user_Code=${user_Code }&page=${paging1.startPage-1}"/>'>이전</a>
+	 	 							</li>    
 	 	 						</c:if>
-	 	 						<c:forEach begin="${paging.startPage}" end="${paging.endPage}" var="num">
+	 	 						<c:forEach begin="${paging1.startPage}" end="${paging1.endPage}" var="num">
 	 	 							<li>
-	 	 								<a id="paging-a" class="${paging.cri.page == num ? 'nowpage' : null }" href='<c:url value="/inquiry/list?user_Code=${user_Code }&page=${num}"/>'>${num}</a>
-	 	 							</li>    
+	 	 								<a id="paging-a" class="${paging1.cri.page == num ? 'nowpage' : null }" href='<c:url value="/inquiry/list?user_Code=${user_Code }&page=${num}"/>'>${num}</a>
+	 	 							</li>    
 	 	 						</c:forEach>
-	 	 						<c:if test="${paging.next && paging.endPage > 0}">        
+	 	 						<c:if test="${paging1.next && paging1.endPage > 0}">        
 	 	 							<li>
-	 	 								<a id="paging-a" href='<c:url value="/inquiry/list?user_Code=${user_Code }&page=${paging.endPage+1}"/>'>다음</a>
-	 	 							</li>    
+	 	 								<a class="paging-a" href='<c:url value="/inquiry/list?user_Code=${user_Code }&page=${paging1.endPage+1}"/>'>다음</a>
+	 	 							</li>    
 	 	 						</c:if>
 	 	 					</ul>
+				          	</c:if>
+				          	
+				          	<c:if test="${user_Nm eq 'admin' }">
+				          	<ul class="paging">
+	 	 						<c:if test="${paging2.prev}">        
+	 	 							<li class="paging">
+	 	 								<a class="paging-a" href='<c:url value="/inquiry/list?user_Code=${user_Code }&page=${paging2.startPage-1}"/>'>이전</a>
+	 	 							</li>    
+	 	 						</c:if>
+	 	 						<c:forEach begin="${paging2.startPage}" end="${paging2.endPage}" var="num">
+	 	 							<li>
+	 	 								<a id="paging-a" class="${paging1.cri.page == num ? 'nowpage' : null }" href='<c:url value="/inquiry/list?user_Code=${user_Code }&page=${num}"/>'>${num}</a>
+	 	 							</li>    
+	 	 						</c:forEach>
+	 	 						<c:if test="${paging2.next && paging2.endPage > 0}">        
+	 	 							<li>
+	 	 								<a class="paging-a" href='<c:url value="/inquiry/list?user_Code=${user_Code }&page=${paging2.endPage+1}"/>'>다음</a>
+	 	 							</li>    
+	 	 						</c:if>
+	 	 					</ul>
+				          	</c:if>
 		 </div>
  	</div>
  	</div>

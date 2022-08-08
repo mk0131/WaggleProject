@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -334,7 +335,10 @@ div#progress_percentage::after {
 	  
 	   <div class="ongoing21-all">
 	    <h3 id="ongoing-detail">요청 상세 페이지(${req_dto.req_Stat })</h3>
-	     <p id="w-date">요청날짜 : ${req_dto.req_WDate }</p>
+	     <p id="w-date">요청날짜 : 
+	     	<fmt:parseDate value="${req_dto.req_WDate }" pattern="yyyy-MM-dd'T'HH:mm" var="parsedDateTime" type="both" />
+	     	<fmt:formatDate value="${parsedDateTime }" pattern="yyyy-MM-dd"/>
+     	</p>
 	     <div class="ongoing21-user-name">
 	      <p id="userrealname">작성자 : ${user_dto.user_Nm}</p>
 	     </div>

@@ -23,21 +23,30 @@ public class InquiryController {
 	private InquiryService inquiryService;
 	
 	@GetMapping("/list")
-	public String selectList(Model model, int user_Code, Criteria cri) {
+	public String selectList(Model model, int user_Code, String user_Nm, Criteria cri) {
 		
-		int inquiryListCnt = inquiryService.inquiryListCnt(user_Code);
+		int inquiryListCnt1 = inquiryService.inquiryListCnt(user_Code);
+		int inquiryListCnt2 = inquiryService.inquiryallListCnt(user_Nm);
 		
 		// 페이징 객체
-		Paging paging = new Paging();
-		paging.setCri(cri);
-		paging.setTotalCount(inquiryListCnt);
+		Paging paging1 = new Paging();
+		paging1.setCri(cri);
+		paging1.setTotalCount(inquiryListCnt1);
+		
+		// 페이징 객체
+		Paging paging2 = new Paging();
+		
+		paging2.setCri(cri);
+		paging2.setTotalCount(inquiryListCnt2);
+				
 		
 		List<InquiryDto> list = inquiryService.selectList(user_Code, cri);
+		List<InquiryDto> alist = inquiryService.adminList(user_Nm, cri);
 		
 		model.addAttribute("list", list);
-		model.addAttribute("paging", paging);
-		
-		System.out.println(paging);
+		model.addAttribute("alist", alist);
+		model.addAttribute("paging1", paging1);
+		model.addAttribute("paging2", paging2);
 		
 		return "inquirylist";
 	}
@@ -51,11 +60,19 @@ public class InquiryController {
 		
 	@GetMapping("/detail") 
 	public String selectOne(Model model, int in_Code) {
-		model.addAttribute("dto", inquiryService.selectOne(in_Code));
 		
-		UsersDto user_dto = inquiryService.selectuser(in_Code);
+
+		InquiryDto inqdto = inquiryService.selectOne(in_Code);
+		model.addAttribute("dto", inqdto);
+		
+		UsersDto user_dto = inquiryService.selectuser(inqdto.getIn_UCode());
 		model.addAttribute("user_dto", user_dto);
+		
+		System.out.println(inqdto);
+		System.out.println(user_dto);
+		
 		return "inquirydetail";
+		
 	}
 	
 	@GetMapping("/insertform")

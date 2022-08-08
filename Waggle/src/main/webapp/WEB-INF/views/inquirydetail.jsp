@@ -154,7 +154,7 @@ tr {
 						</tr>
 						<tr>
 						<th>작성자</th>
-						<td>${user_Nm}</td>						
+						<td>${user_dto.user_Nm}</td>						
 						</tr>
 						<tr>
 						<th>작성일</th>

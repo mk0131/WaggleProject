@@ -829,18 +829,26 @@ textarea {
 	}
 	//내가 딴 꿀 수확량 구현
 	window.addEventListener("load", () => {
-		  $("#progress_bar").css({
-		    width: ${user_Grade}+"%"
-		  });
+		if(${dto.user_Grade} <= 100){
+			  $("#progress_bar").css({
+			    width: ${dto.user_Grade}+"%"
+			  });
+		  }else if(${dto.user_Grade} > 100){
+			  $("#progress_bar").css({
+				    width: 100+"%"
+				  });
+		  }
 		  
-		  if(${user_Grade}>=0 && ${user_Grade}<=29){
-			  $('#progress_bar').css('background-image','linear-gradient(to bottom, #7a3950 0%, #370617 100%)');
-		  }else if(${user_Grade}>=30 && ${user_Grade}<=45){
-			  $('#progress_bar').css('background-image','linear-gradient(to bottom, #e16b6f 0%, #9d0208 100%)');
-		  }else if(${user_Grade}>=46 && ${user_Grade}<=60){
-			  $('#progress_bar').css('background-image','linear-gradient(to bottom, #ffc57b 0%, #f48c06 100%)');
+		  if(${dto.user_Grade}>=0 && ${dto.user_Grade}<=29){
+			  $('#progress_bar').css('background-image','linear-gradient(rgb(199 112 0) 0%, rgb(145 81 0) 100%)');
+		  }else if(${dto.user_Grade}>=30 && ${dto.user_Grade}<=45){
+			  $('#progress_bar').css('background-image','linear-gradient(rgb(241 241 241) 0%, rgb(161 161 161) 100%)');
+		  }else if(${dto.user_Grade}>=46 && ${dto.user_Grade}<=60){
+			  $('#progress_bar').css('background-image','linear-gradient(rgb(253 255 178) 0%, rgb(225 197 0) 100%)');
+		  }else if(${dto.user_Grade}>=61 && ${dto.user_Grade}<=100){
+			  $('#progress_bar').css('background-image','linear-gradient(rgb(202 255 241) 0%, rgb(0 209 132) 100%)');
 		  }else{
-			  $('#progress_bar').css('background-image','linear-gradient(to bottom, #ffdd86 0%, #ffba08 100%)');
+			  $('#progress_bar').css('background-image','linear-gradient(rgb(196 244 255) 0%, rgb(0 180 209) 100%)');
 		  }
 		  
 		  function animateValue(obj, start, end, duration) {
