@@ -6,7 +6,8 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>프로필 수정</title>
+<title>Waggle 프로필 수정</title>
+<link rel="icon" href="/images/importToJsp/favicon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <style>
@@ -390,7 +391,7 @@ span {
                <li><a href="javascript:void(0)"> <i
                      class="fa-solid fa-house"></i>
                </a></li>
-               <p>HOME > 마이페이지 > 회원정보 수정하기</p>
+               <p>HOME > 마이페이지 > 프로필 수정</p>
             </ul>
          </div>
         </div>

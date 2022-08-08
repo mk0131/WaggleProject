@@ -5,7 +5,8 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>Waggle 문의글 목록</title>
+<link rel="icon" href="/images/importToJsp/favicon.png">
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 

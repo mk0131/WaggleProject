@@ -6,7 +6,8 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>Waggle 유저 정보</title>
+<link rel="icon" href="/images/importToJsp/favicon.png">
 <style>
 .middle {
 	margin: 0;
@@ -526,7 +527,6 @@ textarea {
 						<c:if test = "${dto.user_Pro != 0 }">
 						<img src="${Pro_fi_Nm }" style="width:200px; height: 200px; border-radius:100px">
 						</c:if>
-						<div style="font-weight: bold; font-size: 20pt">${dto.user_Point } P</div>
 					</div>
 					
 					<div class="profile-right"
@@ -563,7 +563,38 @@ textarea {
 														  	 꿀 수확량 100 초과 : Diamond"</span>
 							</strong>
 						</div>
-						<div style="font-size: 14pt">나이: ${dto.user_Age}</div>
+						<c:choose>
+							<c:when test="${dto.user_Age >= 10 and dto.user_Age < 20}">
+								<div style="font-size: 14pt">나이: 10대</div>
+							</c:when>
+							<c:when test="${dto.user_Age >= 20 and dto.user_Age < 30}">
+								<div style="font-size: 14pt">나이: 20대</div>
+							</c:when>
+							<c:when test="${dto.user_Age >= 30 and dto.user_Age < 40}">
+								<div style="font-size: 14pt">나이: 30대</div>
+							</c:when>
+							<c:when test="${dto.user_Age >= 40 and dto.user_Age < 50}">
+								<div style="font-size: 14pt">나이: 40대</div>
+							</c:when>
+							<c:when test="${dto.user_Age >= 50 and dto.user_Age < 60}">
+								<div style="font-size: 14pt">나이: 50대</div>
+							</c:when>
+							<c:when test="${dto.user_Age >= 60 and dto.user_Age < 70}">
+								<div style="font-size: 14pt">나이: 60대</div>
+							</c:when>
+							<c:when test="${dto.user_Age >= 70 and dto.user_Age < 80}">
+								<div style="font-size: 14pt">나이: 70대</div>
+							</c:when>
+							<c:when test="${dto.user_Age >= 80 and dto.user_Age < 90}">
+								<div style="font-size: 14pt">나이: 80대</div>
+							</c:when>
+							<c:when test="${dto.user_Age >= 90 and dto.user_Age < 100}">
+								<div style="font-size: 14pt">나이: 90대</div>
+							</c:when>
+							<c:otherwise>
+								<div style="font-size: 14pt">나이: <span style="font-size:11pt">나이를 입력하지 않았습니다.</span></div>
+							</c:otherwise>
+						</c:choose>
 						<c:if test="${dto.user_Gender == 'M'}">
 						<div style="font-size: 14pt; margin-bottom: 60px">성별: 남</div>
 						</c:if>
@@ -636,10 +667,12 @@ textarea {
 					</div>
 				</div>
 				<div class="profile-bottom">
+					<c:if test="${user_Code ne dto.user_Code }">
 						<div class="button" onclick="location.href='/chat/create?room_UCode1=${user_Code}&room_UCode2=${param.ucode}'">
 							<a><p style="margin:5px">채팅하기</p></a>
 						</div>
-					</div>
+					</c:if>
+				</div>
 				<div class="description" style="text-align: center">
 					<div class="desc-nav">
 						<ul class="desc-list">

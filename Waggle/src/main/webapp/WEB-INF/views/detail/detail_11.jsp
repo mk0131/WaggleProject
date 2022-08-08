@@ -5,7 +5,8 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>요청상세페이지(모집중)</title>
+<title>Waggle 요청글(모집중)</title>
+<link rel="icon" href="/images/importToJsp/favicon.png">
 </head>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <style type="text/css">
@@ -237,6 +238,9 @@ button:active {
 
 .imp-title-content {
 	font-size: 15px;
+	white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
 }
 
 #imp-text-center1 {
@@ -318,6 +322,7 @@ button:active {
 	padding-left: 20px;
 	color: #000000;
 	text-decoration: none;
+	word-break: break-all;
 }
 
 .middle-tcontent:visited {
@@ -389,7 +394,7 @@ button:active {
 		<div class="guideline">
 			<ul class="guideline-all">
         		<li><i class="fa-solid fa-house"></i>
-        		<p>HOME > 요청 상세페이지</p>
+        		<p>HOME > 꿀단지목록 > 요청글</p>
         		</li>	
         	</ul>
 		</div>
@@ -407,9 +412,16 @@ button:active {
 		   <input type="hidden" name="req_dto.req_No" value="${req_dto.req_No }">
 		   
 		    <div class="ongoing21-content">
+		    <c:if test="${req_dto.fi_Nm == null }">
+		    <div id="ongoing21-img">
+		      <img src="/images/importToJsp/detail_default_img.png">
+		     </div>
+		    </c:if>
+		    <c:if test="${req_dto.fi_Nm != null}">
 		     <div id="ongoing21-img">
 		      <img src=${req_dto.fi_Nm }>
 		     </div>
+		     </c:if>
 		   </div>
 		  </div>
 		  
@@ -437,7 +449,7 @@ button:active {
 	     
 	     
 	     <div class="ongoing21-content-bottom">
-	       <h3 class="h3-font">지원자</h3>
+	       <h3 class="h3-font">지원자 목록</h3>
 	       
 	       
 				<c:choose>

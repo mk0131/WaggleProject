@@ -4,7 +4,8 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>Waggle 챗봇</title>
+<link rel="icon" href="/images/importToJsp/favicon.png">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.1.5/sockjs.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.min.js"></script>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -230,6 +231,7 @@ img {
 	function sendMessage() {
 		let message = $("#msg").val()
 		showSendMessage(message);
+		$("#msg").val("")
 
 		stompClient.send("/app/sendMessage", {}, JSON.stringify(message));
 	}

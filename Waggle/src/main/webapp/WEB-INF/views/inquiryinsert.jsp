@@ -5,7 +5,8 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>Waggle 문의글 작성</title>
+<link rel="icon" href="/images/importToJsp/favicon.png">
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
@@ -165,7 +166,7 @@ tr {
 						<tr>         
 				         <td class="btn1" colspan="2" align="right">
 				         	<input type="submit" value="완료">
-				         	<input type="button" value="취소" onclick="location.href='inquiry/list?user_Code=${user_Code}'">  
+				         	<input type="button" value="취소" onclick="location.href='/inquiry/list?user_Code=${user_Code}'">  
 				         </td>   
 						</tr>
 					</table>

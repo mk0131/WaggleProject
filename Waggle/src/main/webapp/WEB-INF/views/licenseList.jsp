@@ -7,6 +7,7 @@
 <head>
 <meta charset="UTF-8">
 <title>공인인증서 확인 목록</title>
+<link rel="icon" href="/images/importToJsp/favicon.png">
 <link rel="stylesheet" href="https://cdn.datatables.net/t/bs-3.3.6/jqc-1.12.0,dt-1.10.11/datatables.min.css"/> 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.datatables.net/t/bs-3.3.6/jqc-1.12.0,dt-1.10.11/datatables.min.js"></script>

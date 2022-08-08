@@ -68,8 +68,6 @@ public class InquiryController {
 		UsersDto user_dto = inquiryService.selectuser(inqdto.getIn_UCode());
 		model.addAttribute("user_dto", user_dto);
 		
-		System.out.println(inqdto);
-		System.out.println(user_dto);
 		
 		return "inquirydetail";
 		
@@ -93,7 +91,15 @@ public class InquiryController {
 	
 	@GetMapping("/updateform")
 	public String updateform(int in_Code, Model model) {	
-		model.addAttribute("dto", inquiryService.selectOne(in_Code));
+		
+		InquiryDto inqdto = inquiryService.selectOne(in_Code);
+		model.addAttribute("dto", inqdto);
+		
+		UsersDto user_dto = inquiryService.selectuser(inqdto.getIn_UCode());
+		model.addAttribute("user_dto", user_dto);
+		
+		System.out.println(inqdto);
+		System.out.println(user_dto);
 		
 		return "inquiryupdate";
 	}
