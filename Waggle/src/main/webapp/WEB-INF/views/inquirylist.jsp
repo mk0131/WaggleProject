@@ -313,184 +313,55 @@ button:active {
 	 	 			<label for="tab03">1:1 문의</label>
 	 	 			
 	 	 			<br/><br/><br/>
-	 	 			<div class="conbox con1">
 	 	 			<c:if test="${user_Code == 1 }">
-	 	 			<input type="button" value="공지 작성" >
+	 	 			<input type="button" value="작성" onclick="location.href='/notice/insertform'">
 	 	 			</c:if>
+	 	 			<div class="conbox con1">
+	 	 			
 	 	 			<div class="accordion-all"> <!-- 여기서 부터 -->
-	 	 				<div class="accordion js-accordion">
-						  <div class="accordion__item js-accordion-item">
-						    <div class="accordion-header js-accordion-header">[공지]  waggle 개인정보 처리방침 개정 안내</div> 
+	 	 				<div class="accordion js-accordion" id="list">
+	 	 				
+						 
+						  <c:forEach items="${list2 }" var="dto">
+						  <c:if test="${dto.no_Type == '공지' }">
+			                <div class="accordion__item js-accordion-item">
+						    <div class="accordion-header js-accordion-header">[공지] ${dto.no_Title } </div> 
 						  <div class="accordion-body js-accordion-body">
 						    <div class="accordion-body__contents">
 						    <br/><br/>
-						    안녕하세요.<br/>
-	 	 					Probee waggle입니다.<br/>waggle을 이용해 주시는 고객님께 진심으로 감사드립니다.<br/>
-	 	 					㈜Probee는 개인정보보호법, 정보통신망 이용촉진 및 정보보호 등에 관한 법률 등 정보통신서비스 관련 법규상의 개인정보 보호 규정을 준수하며, 관련 법령에 의거한 개인정보처리방침을 정하여 사용자의 권익 보호를 위해 노력하고 있습니다.<br/>
-	 	 					아래와 같이 개인정보처리방침 개정될 예정임을 안내드리오니, 확인 후 이용에 참고하시기 바랍니다.<br/>
-	 	 					<br/>(1) 개정일정 :<br/>
-							<br/>공고일자 : 2022년 3월 29일<br/>
-							<br/>시행일자 : 2022년 3월 30일<br/>
-							<br/>(2) 주요 개정 내용 : 개인정보의 수집•이용 목적•항목•수집방법, 개인정보 처리 및 보유기간, 권익침해 구제방법 등
+						   	${dto.no_Content }
+	 	 					<br/>(1) 개정일정 <br/>
+							<br/>공고일자 : ${dto.no_Date }<br/>
+							<br/>시행일자 : ${dto.no_Date }<br/>
 							<br/><br/>
 						    </div>
-						     
 						    </div><!-- end of accordion body -->
 						  </div><!-- end of accordion item -->
+						 	</c:if>
+			               </c:forEach>
 						  
-						  <div class="accordion__item js-accordion-item active">
-						    <div class="accordion-header js-accordion-header">[공지]  waggle 개인정보 처리방침 개정 안내</div> 
-						  <div class="accordion-body js-accordion-body">
-						    <div class="accordion-body__contents">
-						    <br/><br/>
-						    안녕하세요.<br/>
-	 	 					Probee waggle입니다.<br/>waggle을 이용해 주시는 고객님께 진심으로 감사드립니다.<br/>
-	 	 					㈜Probee는 개인정보보호법, 정보통신망 이용촉진 및 정보보호 등에 관한 법률 등 정보통신서비스 관련 법규상의 개인정보 보호 규정을 준수하며, 관련 법령에 의거한 개인정보처리방침을 정하여 사용자의 권익 보호를 위해 노력하고 있습니다.<br/>
-	 	 					아래와 같이 개인정보처리방침 개정될 예정임을 안내드리오니, 확인 후 이용에 참고하시기 바랍니다.<br/>
-	 	 					<br/>(1) 개정일정 :<br/>
-							<br/>공고일자 : 2022년 3월 29일<br/>
-							<br/>시행일자 : 2022년 3월 30일<br/>
-							<br/>(2) 주요 개정 내용 : 개인정보의 수집•이용 목적•항목•수집방법, 개인정보 처리 및 보유기간, 권익침해 구제방법 등
-							<br/><br/>
-						    </div>
-						      
-						    </div><!-- end of accordion body -->
-						  </div><!-- end of accordion item -->
-						    <div class="accordion__item js-accordion-item">
-						    <div class="accordion-header js-accordion-header">[공지]  waggle 개인정보 처리방침 개정 안내</div> 
-						  <div class="accordion-body js-accordion-body">
-						    <div class="accordion-body__contents">
-						    <br/><br/>
-						    안녕하세요.<br/>
-	 	 					Probee waggle입니다.<br/>waggle을 이용해 주시는 고객님께 진심으로 감사드립니다.<br/>
-	 	 					㈜Probee는 개인정보보호법, 정보통신망 이용촉진 및 정보보호 등에 관한 법률 등 정보통신서비스 관련 법규상의 개인정보 보호 규정을 준수하며, 관련 법령에 의거한 개인정보처리방침을 정하여 사용자의 권익 보호를 위해 노력하고 있습니다.<br/>
-	 	 					아래와 같이 개인정보처리방침 개정될 예정임을 안내드리오니, 확인 후 이용에 참고하시기 바랍니다.<br/>
-	 	 					<br/>(1) 개정일정 :<br/>
-							<br/>공고일자 : 2022년 3월 29일<br/>
-							<br/>시행일자 : 2022년 3월 30일<br/>
-							<br/>(2) 주요 개정 내용 : 개인정보의 수집•이용 목적•항목•수집방법, 개인정보 처리 및 보유기간, 권익침해 구제방법 등
-							<br/><br/>
-						    </div>
-						    </div><!-- end of accordion body -->
-						  </div><!-- end of accordion item -->
-						  
-						     <div class="accordion__item js-accordion-item">
-						    <div class="accordion-header js-accordion-header">[공지]  waggle 개인정보 처리방침 개정 안내</div> 
-						  <div class="accordion-body js-accordion-body">
-						    <div class="accordion-body__contents">
-						    <br/><br/>
-						    안녕하세요.<br/>
-	 	 					Probee waggle입니다.<br/>waggle을 이용해 주시는 고객님께 진심으로 감사드립니다.<br/>
-	 	 					㈜Probee는 개인정보보호법, 정보통신망 이용촉진 및 정보보호 등에 관한 법률 등 정보통신서비스 관련 법규상의 개인정보 보호 규정을 준수하며, 관련 법령에 의거한 개인정보처리방침을 정하여 사용자의 권익 보호를 위해 노력하고 있습니다.<br/>
-	 	 					아래와 같이 개인정보처리방침 개정될 예정임을 안내드리오니, 확인 후 이용에 참고하시기 바랍니다.<br/>
-	 	 					<br/>(1) 개정일정 :<br/>
-							<br/>공고일자 : 2022년 3월 29일<br/>
-							<br/>시행일자 : 2022년 3월 30일<br/>
-							<br/>(2) 주요 개정 내용 : 개인정보의 수집•이용 목적•항목•수집방법, 개인정보 처리 및 보유기간, 권익침해 구제방법 등
-							<br/><br/>
-						    </div>
-						    </div><!-- end of accordion body -->
-						  </div><!-- end of accordion item -->
-						  
-						     <div class="accordion__item js-accordion-item">
-						    <div class="accordion-header js-accordion-header">[공지]  waggle 개인정보 처리방침 개정 안내</div> 
-						  <div class="accordion-body js-accordion-body">
-						    <div class="accordion-body__contents">
-						    <br/><br/>
-						    안녕하세요.<br/>
-	 	 					Probee waggle입니다.<br/>waggle을 이용해 주시는 고객님께 진심으로 감사드립니다.<br/>
-	 	 					㈜Probee는 개인정보보호법, 정보통신망 이용촉진 및 정보보호 등에 관한 법률 등 정보통신서비스 관련 법규상의 개인정보 보호 규정을 준수하며, 관련 법령에 의거한 개인정보처리방침을 정하여 사용자의 권익 보호를 위해 노력하고 있습니다.<br/>
-	 	 					아래와 같이 개인정보처리방침 개정될 예정임을 안내드리오니, 확인 후 이용에 참고하시기 바랍니다.<br/>
-	 	 					<br/>(1) 개정일정 :<br/>
-							<br/>공고일자 : 2022년 3월 29일<br/>
-							<br/>시행일자 : 2022년 3월 30일<br/>
-							<br/>(2) 주요 개정 내용 : 개인정보의 수집•이용 목적•항목•수집방법, 개인정보 처리 및 보유기간, 권익침해 구제방법 등
-							<br/><br/>
-						    </div>
-						    </div><!-- end of accordion body -->
-						  </div><!-- end of accordion item -->
-  
-    
 	 	 				</div>
 	 	 			</div> <!-- 여기 까지 -->
 	 	 			</div>	
 	 	 			
 	 	 			<div class="conbox con2">
 	 	 				<div class="accordion js-accordion">
-						  <div class="accordion__item js-accordion-item">
-						    <div class="accordion-header js-accordion-header">Q. waggle은 어떤 서비스인가요?</div> 
+	 	 			
+						  <c:forEach items="${list2 }" var="dto">
+						  <c:if test="${dto.no_Type == '질문' }">
+			                <div class="accordion__item js-accordion-item">
+						    <div class="accordion-header js-accordion-header">Q. ${dto.no_Title } </div> 
 						  <div class="accordion-body js-accordion-body">
 						    <div class="accordion-body__contents">
 						    <br/><br/>
-						    이사를 위한 집에대한 이전 리뷰 기록을 조회할 수 있는 정보 열람 기능과<br/> 
-							직접 탐색할 추가 정보를 요청할 수 있는 정보요청 서비스를 제공하는 플랫폼이에요!<br/><br/>
-	 	 					부동산 플랫폼 상에서 직접 탐색하고 싶은 매물을 찾았을 때,<br/>
-	 	 					해당 매물 주변에 거주하는 사람에게 요청함으로써 물리, 시간적 절약을 도모하여 효율성을 높였습니다!<br/>
-							같은 사용자 입장으로 부터 정보를 얻도록 하여, 정보의 신뢰성을 높이고자 만들게 되었습니다.<br/>
+						   	${dto.no_Content }
 							<br/><br/>
 						    </div>
-						     
 						    </div><!-- end of accordion body -->
 						  </div><!-- end of accordion item -->
-						  
-						  <div class="accordion__item js-accordion-item active">
-						    <div class="accordion-header js-accordion-header">Q. 회원가입을 하면 어떤 점이 좋나요?</div> 
-						  <div class="accordion-body js-accordion-body">
-						    <div class="accordion-body__contents">
-						    안녕하세요.<br/>
-	 	 					
-						    </div>
-						      
-						    </div><!-- end of accordion body -->
-						  </div><!-- end of accordion item -->
-						  
-						  <div class="accordion__item js-accordion-item">
-						    <div class="accordion-header js-accordion-header">Q. 등급은 어떻게 계산 되나요?</div> 
-						  <div class="accordion-body js-accordion-body">
-						    <div class="accordion-body__contents">
-						    <br/><br/>
-						    등급은 내가 받은 평가, 거래 후기, 제재를 종합해서 계산합니다.<br/>
-							좋은 평가, 긍정적인 거래 후기를 받으면 등급이 올라요.<br/>
-							비매너 평가, 부정적인 거래 후기, 제재를 받으면 등급이 내려가요.<br/>
-							이 모든 지표가 계산되어 등급에 반영되기까지 7~10일 정도 걸릴 수 있어요.<br/>
-							최근 받은 평가와 긍정적인 거래 후기를 받았는데도 등급이 안 오른다면 조금만 더 기다려 주세요. :) <br/>
-							<br/><br/>	 					
-						    </div>
-						    </div><!-- end of accordion body -->
-						  </div><!-- end of accordion item -->
-						  
-						    <div class="accordion__item js-accordion-item">
-						    <div class="accordion-header js-accordion-header">Q. 거래에 문제가 생겼어요!</div> 
-						  <div class="accordion-body js-accordion-body">
-						    <div class="accordion-body__contents">
-						    <br/><br/>
-						  	'waggle'은 개인 간의 매칭을 돕는 중개 플랫폼으로서, 심부름/서비스 진행 중 발생한 피해에 대해서는 당사자 간에 합의를 해야 해요.<br/>
-						  	만약 의견 조율이 되지 않는다면,<br/>
-						  	[고객센터 > 1:1 문의하기]를 통해 고객센터로 연락해 주세요.<br/>
-						  	<br/><br/>
-						    </div>
-						    </div><!-- end of accordion body -->
-						  </div><!-- end of accordion item -->
-						  
-						     <div class="accordion__item js-accordion-item">
-						    <div class="accordion-header js-accordion-header">Q. 환불 규정이 궁금해요.</div> 
-						  <div class="accordion-body js-accordion-body">
-						    <div class="accordion-body__contents">
-						    <br/><br/>
-						    'waggle'은 고객과 대행인 간의 매칭을 도와드리는 중개 플랫폼으로서, 기본적으로 당사자 간의 결정을 중시하고 있어요.<br/>
-						    서로 합의된 내용을 기반하여 제공된 결과물에 대해서는 고객의 단순 변심으로 환불은 불가능해요.<br/>
-						    만약 대행인이 기존에 합의된 서비스 요청 내용을 이행하지 않았을 경우 [고객센터 > 1:1 문의하기]를 통해 고객센터에 즉각 신고해 주세요.<br/>
-						    경위 확인 후 서비스비는 전액 환불해 드리며, 해당 대행인은 즉시 활동 정지 조치되어요.<br/>
-						    <br/><br/>
-						    환불 시점은 결제사에 따라 차이가 있으며, 영업일 기준으로 1~3일 소요됩니다.<br/>
-						    <br/><br/>				
-						    </div>
-						    </div><!-- end of accordion body -->
-						  </div><!-- end of accordion item -->
-						  
-						     
-  
-    
+						 	</c:if>
+			               </c:forEach>
+
 	 	 				</div>
 	 	 			</div>
 	 	 			<br/>
@@ -652,6 +523,8 @@ button:active {
 
 	$(document).ready(function(){
 	  accordion.init({ speed: 300, oneOpen: true });
+	  d
+	  
 	});
 </script>
 </html>

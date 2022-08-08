@@ -11,9 +11,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.probee.waggle.model.dto.Criteria;
 import com.probee.waggle.model.dto.InquiryDto;
+import com.probee.waggle.model.dto.NoticeDto;
 import com.probee.waggle.model.dto.Paging;
 import com.probee.waggle.model.dto.UsersDto;
 import com.probee.waggle.model.service.InquiryService;
+import com.probee.waggle.model.service.NoticeService;
 
 @Controller
 @RequestMapping("/inquiry")
@@ -21,6 +23,9 @@ public class InquiryController {
 
 	@Autowired
 	private InquiryService inquiryService;
+	
+	@Autowired
+	NoticeService noticeService;
 	
 	@GetMapping("/list")
 	public String selectList(Model model, int user_Code, String user_Nm, Criteria cri) {
@@ -42,6 +47,10 @@ public class InquiryController {
 		
 		List<InquiryDto> list = inquiryService.selectList(user_Code, cri);
 		List<InquiryDto> alist = inquiryService.adminList(user_Nm, cri);
+		
+		List<NoticeDto> list2 =  noticeService.list();
+		
+		model.addAttribute("list2",list2);
 		
 		model.addAttribute("list", list);
 		model.addAttribute("alist", alist);
