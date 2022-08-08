@@ -6,7 +6,8 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>Waggle 이용내역</title>
+<link rel="icon" href="/images/importToJsp/favicon.png">
 <style>
 .middle {
 	margin: 0;

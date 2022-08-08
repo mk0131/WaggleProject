@@ -5,7 +5,8 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>Waggle 문의글 수정</title>
+<link rel="icon" href="/images/importToJsp/favicon.png">
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
@@ -141,11 +142,12 @@ tr {
 						<tr>
 						<th>문의유형</th>
 						<td>
+						<input id="in_type" type="hidden" value="${dto.in_Type }">
 						  <select>
-						  <option selected>1:1 문의</option> 
-						  <option>결제 관련 문의</option> 
-						  <option>환불 관련 문의</option>
-						  <option>회원 신고 하기</option>
+						  <option id="1:1문의">1:1 문의</option> 
+						  <option id="결제관련문의">결제 관련 문의</option> 
+						  <option id="환불관련문의">환불 관련 문의</option>
+						  <option id="회원신고하기">회원 신고 하기</option>
 						  </select></td>
 						</tr>
 						<tr>
@@ -173,5 +175,13 @@ tr {
  	</div>
 
   <%@ include file="footer.jsp" %>
+<script type="text/javascript">
+	$(function() {
+		var type = $("#in_type").val();
+		type = type.replaceAll(' ','');
+		console.log(type);
+		$("#"+type).attr("selected","selected");
+	});
+</script>
 </body>
 </html>

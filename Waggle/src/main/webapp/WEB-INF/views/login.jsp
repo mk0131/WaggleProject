@@ -7,6 +7,7 @@
 
 <meta charset="UTF-8">
 <title>로그인&회원가입</title>
+<link rel="icon" href="/images/importToJsp/favicon.png">
 <style type="text/css">
 .middle {
 	margin: 0;

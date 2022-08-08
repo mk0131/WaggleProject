@@ -5,7 +5,8 @@
 
       <head>
          <meta charset="UTF-8">
-         <title>채팅</title>
+         <title>Waggle 채팅</title>
+         <link rel="icon" href="/images/importToJsp/favicon.png">
       </head>
       <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
       <style type="text/css">

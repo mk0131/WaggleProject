@@ -6,7 +6,8 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>MAP</title>
+<title>Waggle 매물검색</title>
+<link rel="icon" href="/images/importToJsp/favicon.png">
 <link href="https://fonts.googleapis.com/css?family=Inter&display=swap"
 	rel="stylesheet" />
 </head>

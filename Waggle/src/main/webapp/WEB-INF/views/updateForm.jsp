@@ -4,7 +4,8 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>요청상세페이지 수정</title>
+<title>Waggle 요청글 수정</title>
+<link rel="icon" href="/images/importToJsp/favicon.png">
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <link rel="stylesheet" href="/css/guideline.css">
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
@@ -183,7 +184,7 @@ input[type="date"] {
         		<li><a href="javascript:void(0)">
         		<i class="fa-solid fa-house"></i>
         		</a>
-        		<p>HOME > 꿀단지 > 요청 상세페이지</p>
+        		<p>HOME > 꿀단지 > 요청글 > 수정</p>
         		</li>	
         	</ul>
 		</div>

@@ -6,7 +6,8 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>꿀벌 다시 평가하기</title>
+<title>Waggle 꿀벌 평가 수정</title>
+<link rel="icon" href="/images/importToJsp/favicon.png">
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <style type="text/css">
 
@@ -322,7 +323,7 @@ div#progress_percentage::after {
         		<li><a href="javascript:void(0)">
         		<i class="fa-solid fa-house"></i>
         		</a>
-        		<p>HOME > 요청 상세페이지</p>
+        		<p>HOME > 꿀단지목록 > 요청글 > 평가 수정</p>
         		</li>	
         	</ul>
 		</div>
