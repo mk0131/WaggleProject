@@ -313,9 +313,11 @@ button:active {
 	 	 			<label for="tab03">1:1 문의</label>
 	 	 			
 	 	 			<br/><br/><br/>
-	 	 			
 	 	 			<div class="conbox con1">
-	 	 			<div class="accordion-all">
+	 	 			<c:if test="${user_Code == 1 }">
+	 	 			<input type="button" value="공지 작성" >
+	 	 			</c:if>
+	 	 			<div class="accordion-all"> <!-- 여기서 부터 -->
 	 	 				<div class="accordion js-accordion">
 						  <div class="accordion__item js-accordion-item">
 						    <div class="accordion-header js-accordion-header">[공지]  waggle 개인정보 처리방침 개정 안내</div> 
@@ -335,6 +337,7 @@ button:active {
 						     
 						    </div><!-- end of accordion body -->
 						  </div><!-- end of accordion item -->
+						  
 						  <div class="accordion__item js-accordion-item active">
 						    <div class="accordion-header js-accordion-header">[공지]  waggle 개인정보 처리방침 개정 안내</div> 
 						  <div class="accordion-body js-accordion-body">
@@ -409,7 +412,7 @@ button:active {
   
     
 	 	 				</div>
-	 	 			</div>
+	 	 			</div> <!-- 여기 까지 -->
 	 	 			</div>	
 	 	 			
 	 	 			<div class="conbox con2">

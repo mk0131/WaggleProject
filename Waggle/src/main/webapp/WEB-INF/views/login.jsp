@@ -808,7 +808,8 @@ input {
 							<b style="text-align: left;">비밀번호</b> 
 							<input type="password" id="pw_input" placeholder="  8~16자 영문,숫자,특수문자를 최소 한가지씩 사용하세요."> <br>
 							<span class="final_pw_ck">비밀번호를 입력해주세요.</span>
-							<span class="pw_form_check"></span> 
+							<span class="pw_form_check"></span>
+							<br> 
 							<b style="text-align: left;">비밀번호 확인</b>
 							<br> 
 							<input type="password" id="pw_chk" name="user_Pw" placeholder="  비밀번호 확인">
@@ -832,7 +833,7 @@ input {
 						</div>
 						<div style="margin-bottom:15px;">
 							<b style="text-align: left;">닉네임</b> <br> 
-							<input type="text" id="nm_input" name="user_Nm" placeholder="  2~16자의 영어,숫자,한글만 사용 가능합니다." style="width: 400px;">
+							<input type="text" id="nm_input" name="user_Nm" placeholder="  2~10자의 영어,숫자,한글만 사용 가능합니다." style="width: 400px;">
 							<input class="regist-button" type="button" id="nm_chk" value="중복 확인" style="width: 80px;">
 							<br>
 							<span class="nm_input_re_1">사용 가능한 닉네임입니니다.</span>
@@ -884,7 +885,7 @@ input {
 
 									<!-- Modal body -->
 									<div class="modal-body">
-										<textarea rows="" cols="" style="width: 400px; height: 500px;">제1조(목적) 이 약관은 OO 회사(전자상거래 사업자)가 운영하는 OO 사이버 몰(이하 “몰”이라 한다)에서 제공하는 인터넷 관련 서비스(이하 “서비스”라 한다)를 이용함에 있어 사이버 몰과 이용자의 권리·의무 및 책임사항을 규정함을 목적으로 합니다.
+										<textarea rows="" cols="" style="width: 400px; height: 400px;">제1조(목적) 이 약관은 OO 회사(전자상거래 사업자)가 운영하는 OO 사이버 몰(이하 “몰”이라 한다)에서 제공하는 인터넷 관련 서비스(이하 “서비스”라 한다)를 이용함에 있어 사이버 몰과 이용자의 권리·의무 및 책임사항을 규정함을 목적으로 합니다.
 
   ※「PC통신, 무선 등을 이용하는 전자상거래에 대해서도 그 성질에 반하지 않는 한 이 약관을 준용합니다.」
 
@@ -1291,6 +1292,8 @@ input {
 			$('.email_input_re_1').css("display","inline-block");
 			$('.email_input_re_2').css("display", "none");
 			$(".email_form_check").css("display","none");
+			$("#email_input").attr("readonly",true);
+			$("#mail_chk").attr("disabled",true);
 			emailnumCheck = true;
 		} else{
 			$('.email_input_re_2').css("display","inline-block");
@@ -1310,7 +1313,7 @@ input {
 		if(nmFormCheck(user_Nm)){
 	        
 	    	} else {
-	        	warnMsg.html("2 ~ 16자의 영어, 숫자, 한글만 사용 가능합니다.");
+	        	warnMsg.html("2 ~ 10자의 영어, 숫자, 한글만 사용 가능합니다.");
 	        	warnMsg.css("color","red");
 	        	warnMsg.css("display", "inline-block");
 	        	$('.nm_input_re_1').css("display", "none");
@@ -1362,7 +1365,7 @@ input {
         var pwck = $('#pw_chk').val();            // 비밀번호 확인 입력란
         var name = $('#nm_input').val();            // 이름 입력란
         var mail = $('#email_input').val();            // 이메일 입력란
-        var daddr = $('#daddr').val();        // 상세 주소 입력란
+        var addr = $('#addr').val();        // 상세 주소 입력란
         var age = $('#age_input').val();
         
         
@@ -1406,7 +1409,7 @@ input {
             emailCheck = true;
         }
         
-        if(daddr == ""){
+        if(addr == ""){
             $('.final_addr_ck').css('display','block');
             addressCheck = false;
         }else{
@@ -1445,7 +1448,7 @@ input {
 	}
 	
 	function nmFormCheck(nm){
-		var form = /^(?=.*[a-z0-9가-힣])[a-z0-9가-힣]{2,16}$/;
+		var form = /^(?=.*[a-z0-9가-힣])[a-z0-9가-힣]{2,10}$/;
 		return form.test(nm);
 	}
 	

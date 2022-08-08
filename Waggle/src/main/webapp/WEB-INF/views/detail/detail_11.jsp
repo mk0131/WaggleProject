@@ -429,7 +429,7 @@ button:active {
 		  <div class="ongoing21-flex">
 		    <div class="ongoing21-middle">
 		    
-		     <h3 class="h3-font">${user_dto.user_Nm}님이 요청하신 내용입니다.</h3>
+		     <h3 class="h3-font" onclick="window.open('/mypage/other?ucode=${user_dto.user_Code}')">${user_dto.user_Nm}님이 요청하신 내용입니다.</h3>
 		    
 		      <div class="middle-content"><div class="middle-title">내가 본 집 링크 첨부<br/>(ex.직방, 다방 등등..)</div> <a class="middle-tcontent" id="link" href="" target="_blank">${req_dto.req_Link }</a></div>
 		        <div class="b-line"></div>
@@ -454,7 +454,7 @@ button:active {
 	       
 				<c:choose>
 					<c:when test="${empty vol }">
-						<td colspan="4">-------------지원자가 없습니다.-------------</td>
+						<td >-------------지원자가 없습니다.-------------</td>
 					</c:when>
 					<c:otherwise>
 						<c:forEach items="${vol }" var="dto">
