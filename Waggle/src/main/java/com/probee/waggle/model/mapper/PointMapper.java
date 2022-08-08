@@ -2,6 +2,7 @@ package com.probee.waggle.model.mapper;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
@@ -36,5 +37,9 @@ public interface PointMapper {
 	// 글번호와 유저코드, 금액으로 Points DB 데이터 추가
 	@Insert(" insert into Points values(#{po_No}, #{po_UCode}, #{po_Point}, NOW()) ")
 	public int insertPoints(int po_Point, int po_UCode, int po_No);
+	
+	// 글번호와 유저코드로 Points DB 데이터 삭제
+	@Delete(" delete from Points where po_No=#{po_No} and po_UCode=#{po_UCode}")
+	public int deletePoints(int po_No, int po_UCode);
 	
 }

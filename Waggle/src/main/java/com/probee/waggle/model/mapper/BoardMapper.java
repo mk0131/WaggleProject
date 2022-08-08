@@ -97,7 +97,7 @@ public interface BoardMapper {
 	
 	// 포인트 사용여부 검사
 	@Select(" select * from points p where po_No = #{req_No} and po_UCode = #{user_Code} ")
-	PointsDto selectPoint(int req_No, int user_Code);
+	List<PointsDto> selectPoint(int req_No, int user_Code);
 	
 	// result 업데이트(확인중)
 	@Update(" update Result set "

@@ -11,8 +11,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.probee.waggle.model.dto.RequestDto2;
 import com.probee.waggle.model.dto.UserAddressDto;
 import com.probee.waggle.model.service.BoardService;
+import com.probee.waggle.model.service.PointService;
 import com.probee.waggle.model.service.VolunteerService;
 
 @Controller
@@ -23,6 +25,8 @@ public class VolunteerController {
 	VolunteerService volunteerService;
 	@Autowired
 	BoardService boardService;
+	@Autowired
+	PointService pointService;
 	
 	@GetMapping("/submit") //지원하기
 	public String Vol(int vo_UCode, int vo_No, HttpServletResponse response) {
@@ -80,6 +84,15 @@ public class VolunteerController {
 		int res = volunteerService.Block(vo_No,vo_UCode); // 수행자 차단
 		volunteerService.ResCancel(vo_No, vo_UCode); // 결과물 취소(0) 상태
 		
+		// 작성자 포인트 환급
+		RequestDto2 req_dto = boardService.selectRequest(vo_No);
+		int req_Point = req_dto.getReq_Point();
+		int req_UCode = req_dto.getReq_UCode();
+		pointService.insertPay(req_Point, req_UCode, "획득");
+		// user 정보 point update
+		int user_point = pointService.selectUserPoint(req_UCode);
+		pointService.updateUserPoint(user_point + req_Point, req_UCode);
+		
 		if(res>0) {
 			session.setAttribute("vo_UCode", -1);
 			boardService.Recruit(vo_No); // 모집중으로 변환
@@ -93,6 +106,15 @@ public class VolunteerController {
 		
 		int res = volunteerService.Block(vo_No,vo_UCode); // 수행자 차단
 		volunteerService.ResRevoke(vo_No, vo_UCode); // 결과물 취소 상태
+		
+		// 작성자 포인트 환급
+		RequestDto2 req_dto = boardService.selectRequest(vo_No);
+		int req_Point = req_dto.getReq_Point();
+		int req_UCode = req_dto.getReq_UCode();
+		pointService.insertPay(req_Point, req_UCode, "획득");
+		// user 정보 point update
+		int user_point = pointService.selectUserPoint(req_UCode);
+		pointService.updateUserPoint(user_point + req_Point, req_UCode);
 		
 		if(res>0) {
 			session.setAttribute("vo_UCode", -1);

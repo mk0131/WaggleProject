@@ -298,8 +298,13 @@ public class BoardController {
 					String tmp = gson.toJson(list.get(i));
 					rate_list.add(tmp);
 				}
-				
-				PointsDto po = boardService.selectPoint(req_No, user_Code);
+				List<PointsDto> po_list = boardService.selectPoint(req_No, user_Code);
+				PointsDto po = null;
+				try { 
+					po = po_list.get(0);
+				} catch (Exception e) {
+					
+				}
 				if(po != null) {
 					model.addAttribute("po",po.getPo_UCode());	
 				}else {
