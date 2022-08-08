@@ -335,7 +335,7 @@
             margin:0 auto;
             background-color:#a9bdce;
             color:#69717f;
-            margin-top:6px;
+            margin-top:28px;
             display:flex;
             padding-left:25px;
          }
@@ -392,6 +392,18 @@
           height: 67;
           border-radius: 8px;
          }         
+         
+         .closeChat{
+         	margin-left:495px;
+         	font-size:13pt;
+         	font-weight:bold;
+         	color:#4f5860;
+         }
+         
+         .closeChat:hover{
+         	color: #79838b;
+         	cursor:pointer;
+         }
       </style>
 
       <body>
@@ -529,9 +541,9 @@
                           $("#scroll").empty();
                           var user = $(this).find("div[id='list_3']").html();
                           var pro = $(this).find("img").attr("src");
-                          $("#scroll").append('<div style="width: 630px; display:inline-flex; position: absolute; background-color:#556677;">'
-                          +'<img id ="your_img" src="'+pro+'" onerror=this.src="/images/importToJsp/profile_default.jpg">'
-                          +''+user+'</div><br><br>');
+                          $("#scroll").append('<div style="width: 610px; display:inline-flex; position: absolute; background-color:#a9bdce; padding:10px;">'
+                          +'<img style="margin-right:10px;" id ="your_img" src="'+pro+'" onerror=this.src="/images/importToJsp/profile_default.jpg">'
+                          +'<div style="font-weight:bold; color:#4f5860;">'+user+'</div><div class="closeChat" onclick="closeChat();">X</div></div><br><br>');
                           length = 0;
                           size = 0;
                           scroll = 0;
@@ -695,6 +707,10 @@
                $(z).attr("style","background-color:white");
             }
          }
+      };
+      
+      function closeChat(){
+		$(".chat-content").fadeOut();    	  
       };
       </script>
 
