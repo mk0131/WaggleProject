@@ -513,7 +513,6 @@ button:active {
 			                        <c:forEach items="${list }" var="dto">
 			                           <tr class="Inquiry-content">
 			                              <td>${dto.in_Type }</td>
-			                              <td>${dto.in_Type }</td>
 			                              <td><a id="Inquiry-title" href="/inquiry/detail?in_Code=${dto.in_Code }">${dto.in_Title }</a></td>
 			                              <td>${dto.in_Date }</td>
 			                              <td>${dto.in_Stat }</td>
@@ -533,7 +532,6 @@ button:active {
 			                     <c:otherwise>
 			                        <c:forEach items="${alist }" var="dto">
 			                           <tr class="Inquiry-content">
-			                              <td>${dto.in_Type }</td>
 			                              <td>${dto.in_Type }</td>
 			                              <td><a id="Inquiry-title" href="/inquiry/detail?in_Code=${dto.in_Code }">${dto.in_Title }</a></td>
 			                              <td>${dto.in_Date }</td>

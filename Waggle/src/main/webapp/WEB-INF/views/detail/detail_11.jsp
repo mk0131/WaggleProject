@@ -63,9 +63,9 @@
 	width: 380px;
 }
 
-#yellow {
+/* #yellow {
 	color: #f48c06;
-}
+} */
 
 #incontent {
 	outline: none;
@@ -86,31 +86,24 @@
 }
 
 button {
- background-color: #151515;
- border-radius: 8px;
- border-style: none;
- box-shadow: rgba(0, 0, 0, .2) 0 3px 5px -1px,rgba(0, 0, 0, .14) 0 6px 10px 0,rgba(0, 0, 0, .12) 0 1px 18px 0;
- box-sizing: border-box;
+ font-weight: 600;
  color: #fff;
- font-size: 12px;
- font-weight: 500;
+ background-color: #222;
+ border-radius: 12px;
+ border: none;
+ font-size: 13px;
  font-family: inherit;
- letter-spacing: .25px;
+ letter-spacing: .14px;
  line-height: normal;
  padding: 11px 11px;
- transition: background box-shadow 280ms ease;
-}
-
-button:hover {
- background: #fff;
- color: #151515;
 }
 
 button:active {
- box-shadow: 0 4px 4px 0 rgb(60 64 67 / 30%), 0 8px 12px 6px rgb(60 64 67 / 15%);
  outline: none;
- border: 1px solid #ffffff;
+ border: none;
+ background-color: #353535;
 }
+
 #progress_bar {
   background-color: #dcf1c6;
   height: 110%;
@@ -126,10 +119,9 @@ button:active {
 
 .bubble {
   width: 450px;
-  padding: .5em 1em;
   line-height: 1.4em;
   padding: 20px;
-  background-color: #ecf0f1;
+  background-color: rgb(250, 250, 250);
   position: relative;
   -webkit-border-radius: 8px;
   -moz-border-radius: 8px;
@@ -177,12 +169,18 @@ button:active {
 	-o-transition-timing-function: ease-in;
 	transition-timing-function: ease-in;
 	font-size: 16px;
-	text-shadow: white 1px 1px 0;
+	font-weight: bold;
 	cursor: pointer;
 }
 
-#accept-btn {
+.accept-btn {
+	padding: 15px;
+}
+
+#accept-btn-inner {
 	cursor: pointer;
+	height: 50px;
+	width: 90px;
 }
 
 .ongoing21-top {
@@ -204,7 +202,7 @@ button:active {
     border-radius: 12px;
     padding: 24px;
     box-shadow: rgb(0 0 0 / 12%) 0px 6px 16px;
-    width: 325px;
+    width: 345px;
     height: 315px;
     /* margin: 0px 30px 0px 30px; */
    	position: relative;
@@ -222,14 +220,14 @@ button:active {
 
 #title1 {
 	flex: 1 1 0%;
-	font-size: 13px;
+	font-size: 14px;
 	padding: 15px;
 	border-right: 1px solid rgb(221, 221, 221);	
 }
 
 #title2  {
 	flex: 1 1 0%;
-	font-size: 13px;
+	font-size: 14px;
 	padding: 15px;
 }
 
@@ -256,7 +254,7 @@ button:active {
 .b-line {
 	border-top-width: 1px;
     border-top-style: solid;
-    border-top-color: rgb(221, 221, 221);
+    border-top-color: rgb(245, 245, 245);
 }
 
 .ongoing21-middle {
@@ -264,9 +262,8 @@ button:active {
     text-align: center;
     display: flex;
     flex-direction: column;
-    /* align-items: center; */
     margin: 0 auto;
-    
+    letter-spacing: .25px;
     -webkit-box-flex: 1;
     flex-grow: 1;
     padding-top: 40px;
@@ -274,12 +271,12 @@ button:active {
 
 .imp-flex {
 	flex: 0 0 auto;
-    width: 380px;
+    width: 400px;
     position: relative;
 }
 
 .ongoing21-flex {
-    padding: 0px 50px 0px 50px;
+    padding: 0px 80px 0px 30px;
 }
 
 #flex-please {
@@ -304,11 +301,84 @@ button:active {
 	display: flex;
 	justify-content: space-around;
 	align-items: center;
+	padding: 16px 0px;
 }
 
-.ongoing21-middle-bottom {
-	
+.ongoing21-content-bottom {
+	padding-top: 120px;
 }
+
+.middle-content {
+	display: flex;
+	padding: 30px 0px;
+	align-items: center;
+}
+
+.middle-tcontent {
+	padding-left: 20px;
+	color: #000000;
+	text-decoration: none;
+}
+
+.middle-tcontent:visited {
+	padding-left: 20px;
+	color: #000000;
+	text-decoration: none;
+}
+
+.middle-title {
+	width: 160px;
+    font-size: 16px;
+    line-height: 26px;
+    font-weight: 700;
+}
+
+.imp-bold-title {
+	font-weight: bold;
+}
+
+.detail-point {
+	padding: 30px 0px;
+	text-align: right; 
+	width: 750px; 
+	font-size: 16pt;
+}
+
+.detail-end {
+	display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 16px 0px;
+}
+
+.profile-photo-img {
+	width: 80px; 
+	height: 80px; 
+	border-radius: 75px; 
+	padding: 16px;
+}
+
+.bubble-text {
+	display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0px 5px;
+}
+
+.bubble-text-inner {
+	display: inline-block;
+	font-weight: bold;
+}
+
+#bubble-user-intro {
+	padding: 0px 5px;
+}
+
+.h3-font {
+	font-size: 20px;
+	margin: 0px 0px 25px 0px;
+}
+
 
 </style>
 <body>
@@ -318,9 +388,7 @@ button:active {
 	  <div class="middle">
 		<div class="guideline">
 			<ul class="guideline-all">
-        		<li><a href="javascript:void(0)">
-        		<i class="fa-solid fa-house"></i>
-        		</a>
+        		<li><i class="fa-solid fa-house"></i>
         		<p>HOME > 요청 상세페이지</p>
         		</li>	
         	</ul>
@@ -348,36 +416,28 @@ button:active {
 		  <div id="flex-please">
 		  <div class="ongoing21-flex">
 		    <div class="ongoing21-middle">
-		    <div class="b-line"></div>
-		     <h4>${user_dto.user_Nm}님이 요청하신 내용입니다.</h4>
-		     <div class="middle-content"><div>내가 본 집 링크 첨부 (ex.직방, 다방 등등..)</div> <a id="link" href="" target="_blank">${req_dto.req_Link }</a></div>
 		    
-		     <div class="b-line"></div>
-		     <div class="middle-content"><div>방문기한은</div> <div>${req_dto.req_EDate }까지 입니다.</div></div>
-		     <div class="middle-content"><div>내가 본 집 주소</div> <div></div></div>
-		     <div class="middle-content"><div>상세주소</div> <div></div></div>
-		     <div class="middle-content"><div>공인중개사 연락처</div> <div></div></div>
-		     <div class="middle-content"><div>자세하게 봐야 될 부분</div> <div></div></div>
+		     <h3 class="h3-font">${user_dto.user_Nm}님이 요청하신 내용입니다.</h3>
+		    
+		      <div class="middle-content"><div class="middle-title">내가 본 집 링크 첨부<br/>(ex.직방, 다방 등등..)</div> <a class="middle-tcontent" id="link" href="" target="_blank">${req_dto.req_Link }</a></div>
+		        <div class="b-line"></div>
+		     <div class="middle-content"><div class="middle-title">방문기한</div> <div class="middle-tcontent">${req_dto.req_EDate }</div></div>
+		       <div class="b-line"></div>
+		     <div class="middle-content"><div class="middle-title">내가 본 집 주소</div> <div class="middle-tcontent">${req_dto.home_Addr }</div></div>
+		       <div class="b-line"></div>
+		     <div class="middle-content"><div class="middle-title">상세주소</div> <div class="middle-tcontent">${req_dto.home_DAddr }</div></div>
+		       <div class="b-line"></div>
+		     <div class="middle-content"><div class="middle-title">공인중개사 연락처</div> <div class="middle-tcontent">${req_dto.req_Phone }</div></div>
+		       <div class="b-line"></div>
+		     <div class="middle-content"><div class="middle-title">자세하게 봐야 될 부분</div><div class="middle-tcontent">${req_dto.req_Detail }</div></div>
 	
-		  	 <div><h4>자세하게 봐야 될 부분</h4></div>
-	      
-	      
-	      
-	       	 <textarea id="incontent" rows="14" cols="80" name="content" placeholder="요구사항을 입력해주세요" readonly="readonly">${req_dto.req_Detail }</textarea>
-		 
 		     
 		    </div>
 	     
 	     
 	     
-	     
 	     <div class="ongoing21-content-bottom">
-	      <%--  <h4>자세하게 봐야 될 부분</h4>
-	      
-	       <textarea id="incontent" rows="14" cols="80" name="content" placeholder="요구사항을 입력해주세요" readonly="readonly">${req_dto.req_Detail }</textarea> --%>
-	       <br/><br/><br/>
-	       <hr>
-	       <h4>지원자</h4>
+	       <h3 class="h3-font">지원자</h3>
 	       
 	       
 				<c:choose>
@@ -391,19 +451,26 @@ button:active {
 									
 										<c:choose>
 											<c:when test="${not empty dto.fi_Nm }">
-												<img style="width: 100px; height: 100px; border-radius: 75px;" alt="프로필사진o" src="${dto.fi_Nm }">
+												<img class="profile-photo-img" alt="프로필사진o" src="${dto.fi_Nm }">
 											</c:when>
 											<c:otherwise>
-												<img style="width: 100px; height: 100px; border-radius: 75px;" alt="프로필사진x" src="/images/importToJsp/profile_default.jpg">
+												<img class="profile-photo-img" alt="프로필사진x" src="/images/importToJsp/profile_default.jpg">
 											</c:otherwise>
 										</c:choose>
 									
-									<div class="bubble" onclick="window.open('/mypage/other?ucode=${dto.user_Code}')"><h4>${dto.user_Nm } 님</h4> 
-									<P>평점은 ${dto.user_Grade } 입니다.</P> <P><br/>${dto.user_Intro }</P>
+									<div class="bubble" onclick="window.open('/mypage/other?ucode=${dto.user_Code}')">
+									
+									<div class="bubble-text">
+									<h4 class="bubble-text-inner">${dto.user_Nm } 님</h4> 
+									<P class="bubble-text-inner">평점 ${dto.user_Grade }</P> 
+									</div>	
+									
+									<P id="bubble-user-intro">${dto.user_Intro }</P>
+									
 										<div class="over-bubble">클릭 시 지원자의 프로필 창이 켜집니다.</div>
 									</div>
 									
-									<div><button id="accept-btn" onclick="location.href='/board/accept?req_UCode=${user_Code}&res_UCode=${dto.user_Code }&req_No=${req_dto.req_No }'" type="button">수락하기</button></div>
+									<div class="accept-btn"><button id="accept-btn-inner" onclick="location.href='/board/accept?req_UCode=${user_Code}&res_UCode=${dto.user_Code }&req_No=${req_dto.req_No }'" type="button">수락하기</button></div>
 									
 									
 							</form>
@@ -412,18 +479,8 @@ button:active {
 				</c:choose>
 
 	       	<br><br><br>
-	        <div style="text-align: right; width: 750px; font-size: 16pt;"><b>포인트 비용 : ${req_dto.req_Point }P</b> </div>
 	        <br><br>
 	        
-	     <div class="btn2" id="btn2">
-
-	      <button type="button" value="요청취소" onclick="location.href='/board/cancel?req_No=${req_dto.req_No}'" style="width: 200px; margin-right: 100px;" >요청 취소하기</button>
-
-	     <button type="button" value="수정하기" onclick="location.href='/board/updateform?req_No=${req_dto.req_No }'" style="width: 200px; margin-right: 100px;" >수정하기</button>
-
-	      <button type="button" value="목록" onclick="location.href='/board/list'" style="width: 200px;">목록으로 돌아가기</button>
-	     </div>
-	     
 	     </div>
 	     
 	    </div>
@@ -431,25 +488,40 @@ button:active {
 	   <div class="imp-flex"> 
 	   <div class="imp-all" style="position: static;">
 	    <div class="imp">
-	    	<h4>요약 정보</h4>
+	    	<h3>요약 정보</h3>
 	     <div class="imp-line">
 	    	 <div class="imp-box">
-	    	  <div class="imp-title" id="title1"><div>방문기한</div><div class="imp-title-content">${req_dto.req_EDate }</div></div>
-	    	  <div class="imp-title" id="title2">요청 매물과 나와의 거리</div>
+	    	  <div class="imp-title" id="title1"><div class="imp-bold-title">방문기한</div><div class="imp-title-content">${req_dto.req_EDate }</div></div>
+	    	  <div class="imp-title" id="title2"><div class="imp-bold-title">요청 매물과 나와의 거리</div><div class="imp-title-content"></div></div>
 	    	  </div>
 	    	  
 	    	  
-	    	 <div class="imp-title" id="imp-text-center1"><div>포인트 비용</div><div class="imp-title-content" id="imp-content-other1">${req_dto.req_Point }P</div></div>
+	    	 <div class="imp-title" id="imp-text-center1"><div class="imp-bold-title">포인트 비용</div><div class="imp-title-content" id="imp-content-other1">${req_dto.req_Point }P</div></div>
 	    	
-	    	<div class="imp-title" id="imp-text-center2"><div>자세하게 봐야 될 부분</div><div class="imp-title-content" id="imp-content-other2">${req_dto.req_Detail }</div></div>
+	    	<div class="imp-title" id="imp-text-center2"><div class="imp-bold-title">자세하게 봐야 될 부분</div><div class="imp-title-content" id="imp-content-other2">${req_dto.req_Detail }</div></div>
 	      </div>
 	     </div>
 	    </div> 
 	   </div>
 	    
 	    
+	    
+	    
 	   </div>
 	   </div>
+	   
+	   <div class="detail-end">
+	    <div class="detail-point"><b>포인트 비용 : ${req_dto.req_Point }P</b> </div>
+	   <div class="btn2" id="btn2">
+
+	      <button type="button" value="요청취소" onclick="location.href='/board/cancel?req_No=${req_dto.req_No}'" style="width: 170px; margin-right: 100px;" >요청 취소하기</button>
+
+	     <button type="button" value="수정하기" onclick="location.href='/board/updateform?req_No=${req_dto.req_No }'" style="width: 170px; margin-right: 100px;" >수정하기</button>
+
+	      <button type="button" value="목록" onclick="location.href='/board/list'" style="width: 170px;">목록으로 돌아가기</button>
+	     </div>
+	    </div>
+	     
 	 </div>
 	</div>
 	<%@ include file="../footer.jsp" %>
@@ -462,65 +534,18 @@ button:active {
 			$("#link").attr('href',"https://"+link);			
 		}
 		
-		 /* $(document).ready(function() {
-			// 기존 css에서 플로팅 배너 위치(top)값을 가져와 저장한다.
-			var floatPosition = parseInt($(".imp").css('top'));
-			// 250px 이런식으로 가져오므로 여기서 숫자만 가져온다. parseInt( 값 );
-
-			$(window).scroll(function() {
-				// 현재 스크롤 위치를 가져온다.
-				var scrollTop = $(window).scrollTop();
-				var newPosition = scrollTop + floatPosition + "px";
-
-				 $(".imp").css('top', newPosition);
-				 
-
-
-			}).scroll();
-
-		}); */
-		
-			/* onscroll = function() {
-			  var nVScroll = document.documentElement.scrollTop || document.body.scrollTop;
-			  if(nVScroll > 1000) $(".imp").css("position", "fixed"); 
-			  else $(".imp").css("position", "relative");
-			}; */
 		 
-			  $(window).scroll(  function() {
-				 var nVScroll = document.documentElement.scrollTop || document.body.scrollTop;
-				 var currentPosition = parseInt($(".imp").css("top")); 
-				 
-				 if(nVScroll > 750) {
-					 $(".imp").css("position", "fixed").css("top", "135" + "px")
-				} 
-				else {
-					$(".imp").css("position", "relative").css("top", "40" + "px")
-				}
-			});  
-			
-			
-			/* $(document).ready(function(){ 
-				var currentPosition = parseInt($(".imp").css("top")); 
-				$(window).scroll(function() {
-				var position = $(window).scrollTop(); // 현재 스크롤바의 위치값을 반환합니다.
-				$(".imp").stop().animate({"top":position+currentPosition+"px"},1000);
-				});
-				}); */
-			
-			
-		 
-		/*  $(window).scroll(  
-				    function(){  
-				        //스크롤의 위치가 상단에서 450보다 크면  
-				         if(window.pageYOffset >= $('.imp').offset().top){ 
-				            $('.imp').addClass("fix");  
-				            //위의 if문에 대한 조건 만족시 fix라는 class를 부여함  
-				        }else{  
-				            $('.imp').removeClass("fix");  
-				            //위의 if문에 대한 조건 아닌경우 fix라는 class를 삭제함  
-				        }  
-				    }  
-				);  */
+		   $(window).scroll(  function() {
+			 var nVScroll = document.documentElement.scrollTop || document.body.scrollTop;
+			 var currentPosition = parseInt($(".imp").css("top")); 
+			 
+			 if(nVScroll > 750) {
+				 $(".imp").css("position", "fixed").css("top", "135" + "px")
+			} 
+			else {
+				$(".imp").css("position", "absolute").css("top", "40" + "px")
+			}
+		}); 
 		
 	</script>
 </body>
