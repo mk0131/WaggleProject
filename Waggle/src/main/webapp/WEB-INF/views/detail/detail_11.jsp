@@ -237,6 +237,9 @@ button:active {
 
 .imp-title-content {
 	font-size: 15px;
+	white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
 }
 
 #imp-text-center1 {
@@ -318,6 +321,7 @@ button:active {
 	padding-left: 20px;
 	color: #000000;
 	text-decoration: none;
+	word-break: break-all;
 }
 
 .middle-tcontent:visited {
