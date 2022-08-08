@@ -96,6 +96,7 @@ button {
  letter-spacing: .14px;
  line-height: normal;
  padding: 11px 11px;
+ cursor: pointer;
 }
 
 button:active {
@@ -178,7 +179,6 @@ button:active {
 }
 
 #accept-btn-inner {
-	cursor: pointer;
 	height: 50px;
 	width: 90px;
 }
