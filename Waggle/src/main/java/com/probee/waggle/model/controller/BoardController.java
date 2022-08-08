@@ -2,6 +2,8 @@ package com.probee.waggle.model.controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -156,13 +158,14 @@ public class BoardController {
 	
 	@GetMapping("/updateform")
 	public String goUpdateForm(Model model, int req_No) {
+		
 		RequestDto2 req_dto = boardService.selectRequest(req_No);
 		model.addAttribute("req_dto", req_dto);
 		return "updateForm";
 	}
 	
 	@PostMapping("/update")
-	public String updateRequest(RequestDto2 req_dto, HomeDto home_dto, String home_Addr, String ji_Addr, String road_Addr, String home_DAddr) {		
+	public String updateRequest(RequestDto2 req_dto, String req_WDate2, HomeDto home_dto, String home_Addr, String ji_Addr, String road_Addr, String home_DAddr) {		
 		HomeDto find_home = homeService.findHome(home_Addr, ji_Addr, road_Addr, home_DAddr);
 		
 		if(find_home == null) {
@@ -171,6 +174,12 @@ public class BoardController {
 		}
 		
 		req_dto.setReq_HCode(find_home.getHome_Code()); 
+		
+		// LocatDateTime 형식으로 인한 error 해결
+		req_WDate2 = req_WDate2.replace('T', ' ');
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+		LocalDateTime ldt = LocalDateTime.parse(req_WDate2, formatter);
+		req_dto.setReq_WDate(ldt);
 		
 		int res = boardService.updateRequest(req_dto);
 		

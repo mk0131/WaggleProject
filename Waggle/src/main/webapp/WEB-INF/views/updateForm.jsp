@@ -197,7 +197,7 @@ input[type="date"] {
 			<input type="hidden" value="${req_dto.req_FCode }" name="req_FCode">
 			<input type="hidden" value="${req_dto.req_HCode }" name="req_HCode">
 			<input type="hidden" value="${req_dto.req_No}" name="req_No">
-			<input type="hidden" value="${req_dto.req_WDate}" name="req_WDate">
+			<input type="hidden" value="${req_dto.req_WDate}" name="req_WDate2">
 			<input type="hidden" name="home_Post" id="home_Post">
 				<table class="ongoing21-content">
 					<tbody style="border-bottom: 1px solid;">

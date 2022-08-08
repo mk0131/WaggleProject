@@ -221,8 +221,10 @@ public class MypageController {
 		
 		int user_Code = (int)session.getAttribute("user_Code");
 		List<FileDto> lastFileLowList = mypageService.SelectLastFiCode();
-		
-		int new_Fi_Code = lastFileLowList.get(0).getFi_Code() + 1;
+		int new_Fi_Code = 1;
+		if(lastFileLowList.size() !=0 ) {
+			new_Fi_Code = lastFileLowList.get(0).getFi_Code() + 1;			
+		}
 		
 		MultipartFile file = request2.getFile("myfile");
 		String fileName = file.getOriginalFilename();
