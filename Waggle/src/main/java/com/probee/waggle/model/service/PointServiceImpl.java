@@ -44,6 +44,11 @@ public class PointServiceImpl implements PointService{
 	public int insertPoints(int po_Point, int po_UCode, int po_No) {
 		return pointMapper.insertPoints(po_Point, po_UCode, po_No);
 	}
+
+	@Override
+	public int deletePoints(int po_No, int po_UCode) {
+		return pointMapper.deletePoints(po_No, po_UCode);
+	}
 	
 	
 

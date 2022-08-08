@@ -174,7 +174,7 @@ public class BoardServiceImpl implements BoardService{
 	}
 
 	@Override
-	public PointsDto selectPoint(int req_No, int user_Code) {
+	public List<PointsDto> selectPoint(int req_No, int user_Code) {
 		return boardMapper.selectPoint(req_No, user_Code);
 	}
 
