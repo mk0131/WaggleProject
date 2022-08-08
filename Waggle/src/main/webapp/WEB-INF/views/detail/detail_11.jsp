@@ -471,9 +471,10 @@ button:active {
 									</div>
 									
 									<div class="accept-btn"><button id="accept-btn-inner" onclick="location.href='/board/accept?req_UCode=${user_Code}&res_UCode=${dto.user_Code }&req_No=${req_dto.req_No }'" type="button">수락하기</button></div>
-									
+									 
 									
 							</form>
+							 <div class="b-line"></div>
 						</c:forEach>
 					</c:otherwise>
 				</c:choose>
