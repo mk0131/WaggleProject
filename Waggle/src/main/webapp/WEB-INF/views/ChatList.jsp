@@ -212,6 +212,7 @@
             padding-right:7px;
 
          }
+         
 
          #your_2 {
             display: inline-block;
@@ -258,6 +259,7 @@
          }
 
          .input {
+         --ms-overflow-style: none;
             border: solid 2px #f5f6f6;
             border-radius: 1rem;
             background: none;
@@ -266,8 +268,6 @@
             margin-top:7px;
             transition: border 150ms cubic-bezier(0.4, 0, 0.2, 1);
          }
-
-         .
          
           .input::-webkit-scrollbar {
             display: none;
@@ -424,7 +424,7 @@
                            <form onsubmit="return false">
                               <div id="area">
                                  <div class="input-group">
-                                    <textarea class="input" id="chat_Content" autocomplete="off" placeholder="건전한 채팅 문화를 만들어 갑시다."></textarea>
+                                    <textarea  class="input" id="chat_Content" autocomplete="off" placeholder="건전한 채팅 문화를 만들어 갑시다."></textarea>
                                     <button class="btn" id="send" disabled="disabled"> <img id="btn_img" alt="send"
                                        src="https://cdn-icons-png.flaticon.com/512/149/149444.png"></button>
                                  </div>
@@ -458,9 +458,15 @@
                         url: "/chat/show",
                         data: data,
                         success: function (data) {
+                        
                            
                            $("#list").empty();
-                           $("#list").append('<div class="fixed-list"><div>Waggle 채팅 목록</div></div>');
+                           if(data.length == 0){
+                      		 $("#list").append('<div class="fixed-list"><div>채팅목록 이 없습니다.</div></div>');
+                      	} else {
+                      		 $("#list").append('<div class="fixed-list"><div>Waggle 채팅 목록</div></div>');
+                      	}
+                          
                            for(let i = 0; i <data.length; i++){
                               
                               // 대화 시간이 없을 시
@@ -619,6 +625,18 @@
                   $("#down").on("click", function () {
                      $("#scroll").animate({ scrollTop: $("#scroll")[0].scrollHeight }, 400); // 스크롤 맨 아래로
                   })
+                  
+                  // 엔터키 입력시 전송 , shift + 엔터 입력시 줄바꿈
+                  $(function() {
+    					$('textarea').on('keydown', function(event) {
+        						if (event.keyCode == 13)
+            					if (!event.shiftKey){
+               				 event.preventDefault();
+               				 $('#send').click();
+            				}
+    				});
+
+				});
                   
                   // 채팅 입력
                   $("#send").on("click", function () {
