@@ -432,7 +432,7 @@ span {
 			<form action="/mypage/pwchange" method="post">
             <div id="border-line">
             <h5>비밀번호</h5>
-            <input type="password" id="pw_input">
+            <input type="password" id="pw_input" placeholder="8~16자 영문,숫자,특수문자를 최소 한가지씩 사용하세요.">
             <br>
             <span class="pw_form_check"></span> 
             </div>
@@ -730,7 +730,7 @@ $('#nm_chk').on("click", function(){ // 버튼클릭 시
 	if(nmFormCheck(user_Nm)){
         
     	} else {
-        	warnMsg.html("2 ~ 16자의 영어, 숫자, 한글만 사용 가능합니다.");
+        	warnMsg.html("2 ~ 10자의 영어, 숫자, 한글만 사용 가능합니다.");
         	warnMsg.css("color","red");
         	warnMsg.css("display", "inline-block");
         	$('.nm_input_re_1').css("display", "none");
@@ -860,7 +860,7 @@ function pwFormCheck(pw){
 }
 
 function nmFormCheck(nm){
-   var form = /^(?=.*[a-z0-9가-힣])[a-z0-9가-힣]{2,16}$/;
+   var form = /^(?=.*[a-z0-9가-힣])[a-z0-9가-힣]{2,10}$/;
    return form.test(nm);
 }
 

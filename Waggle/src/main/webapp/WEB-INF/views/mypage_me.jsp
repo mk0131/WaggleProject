@@ -982,7 +982,7 @@ textarea {
 								<form name="form" method="POST">
 								<div class="desc-intro" data-behaviour="search-on-list" style="text-align:initial">
 									<span class="counter"	data-search-on-list="counter">
-										<div style="white-space:pre;">${dto.user_Intro}</div>
+										<div >${dto.user_Intro}</div>
 									</span>
 								</div>
 								<div class="styled-input" id="desc-edit-input" style="display:none">
