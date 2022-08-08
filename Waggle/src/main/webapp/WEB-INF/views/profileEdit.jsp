@@ -47,6 +47,7 @@
     padding: 0;
     position: relative;
     margin-top:40px;
+    border: 1px solid #ebebeb;
 }
  .profile:hover .edit, .profile:hover .delete {
     opacity: 0.5;

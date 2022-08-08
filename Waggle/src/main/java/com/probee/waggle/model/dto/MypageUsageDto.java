@@ -6,6 +6,7 @@ public class MypageUsageDto {
 	private int reqCancel;
 	private int reqTotal;
 	private int resCancel;
+	private int resCancelZero;
 	private int resTotal;
 	private int reqFinish;
 	private int resFinish;
@@ -14,12 +15,13 @@ public class MypageUsageDto {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	public MypageUsageDto(int reqCancel, int reqTotal, int resCancel, int resTotal, int reqFinish, int resFinish,
-			Date req_WDate) {
+	public MypageUsageDto(int reqCancel, int reqTotal, int resCancel, int resCancelZero, int resTotal, int reqFinish,
+			int resFinish, Date req_WDate) {
 		super();
 		this.reqCancel = reqCancel;
 		this.reqTotal = reqTotal;
 		this.resCancel = resCancel;
+		this.resCancelZero = resCancelZero;
 		this.resTotal = resTotal;
 		this.reqFinish = reqFinish;
 		this.resFinish = resFinish;
@@ -42,6 +44,12 @@ public class MypageUsageDto {
 	}
 	public void setResCancel(int resCancel) {
 		this.resCancel = resCancel;
+	}
+	public int getResCancelZero() {
+		return resCancelZero;
+	}
+	public void setResCancelZero(int resCancelZero) {
+		this.resCancelZero = resCancelZero;
 	}
 	public int getResTotal() {
 		return resTotal;
@@ -70,8 +78,10 @@ public class MypageUsageDto {
 	@Override
 	public String toString() {
 		return "MypageUsageDto [reqCancel=" + reqCancel + ", reqTotal=" + reqTotal + ", resCancel=" + resCancel
-				+ ", resTotal=" + resTotal + ", reqFinish=" + reqFinish + ", resFinish=" + resFinish + ", req_WDate="
-				+ req_WDate + "]";
+				+ ", resCancelZero=" + resCancelZero + ", resTotal=" + resTotal + ", reqFinish=" + reqFinish
+				+ ", resFinish=" + resFinish + ", req_WDate=" + req_WDate + "]";
 	}
+	
+	
 	
 }

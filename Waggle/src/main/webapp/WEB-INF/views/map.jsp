@@ -53,7 +53,7 @@
 	font-size: 1rem;
 	width: 60rem;
 	height: 1rem;
-	border: 1px solid #d4d7e1;
+	border: 2px solid #d4d7e1;
 	outline: none;
 	border-radius: 1rem;
 	padding: 1rem;
@@ -314,7 +314,7 @@ div {
 			
 		<div class="container" >
 			<input type="text" maxlength="12" placeholder="주소 검색하기"
-				class="searchbar" onclick="kakaopost()"> 
+				class="searchbar" onclick="kakaopost()" readonly /> 
 				<img
 				src="https://images-na.ssl-images-amazon.com/images/I/41gYkruZM2L.png"
 				alt="Magnifying Glass" class="button" onclick="kakaopost()">

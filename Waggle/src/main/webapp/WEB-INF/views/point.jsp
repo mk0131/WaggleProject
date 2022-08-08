@@ -81,6 +81,7 @@ input {
 
 input:focus {
 	outline: none;
+	border-bottom:0px;
 }
 
 .img-x{
@@ -110,6 +111,7 @@ input:focus {
 /* active state */
 input:focus ~ .bar:before, input:focus ~ .bar:after {
 	width: 100%;
+	
 }
 
 .money-buttons{
@@ -128,6 +130,10 @@ input:focus ~ .bar:before, input:focus ~ .bar:after {
   display: inline-block;
   margin: 0 10px 15px 10px;
   height: 35px;
+}
+
+.button:hover{
+	background-color: #c5c5c5;
 }
 
 .button p {
@@ -341,6 +347,8 @@ input:focus ~ .bar:before, input:focus ~ .bar:after {
 	<%@ include file="footer.jsp"%>
 
 <script type="text/javascript" src="/js/payment.js"></script>
+<script>
+</script>
 </body>
 
 </html>

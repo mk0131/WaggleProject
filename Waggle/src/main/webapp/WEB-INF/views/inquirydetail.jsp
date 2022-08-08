@@ -97,8 +97,8 @@ tr {
 }
 
 .btn1 {
-	position: relative;
 	top: 150px;
+	padding: 45px 0px;
 }
 
 .Inquiry-text-center {
@@ -172,8 +172,10 @@ tr {
 						<tr>         
 				         <td class="btn1" colspan="2" align="right">
 				         	<button type="button" value="목록" onclick="location.href='/inquiry/list?user_Code=${user_Code}'">목록</button>
+				         	<c:if test="${user_Nm ne 'admin' }">
 				         	<button type="button" value="수정" onclick="location.href='/inquiry/updateform?in_Code=${dto.in_Code}'">수정</button>
-				         	<button type="button" value="삭제" onclick="location.href='/inquiry/delete?in_Code=${dto.in_Code}&user_Code=${user_Code }'">삭제</button>  
+				         	<button type="button" value="삭제" onclick="location.href='/inquiry/delete?in_Code=${dto.in_Code}&user_Code=${user_Code }'">삭제</button>
+				         	</c:if>
 				         </td>   
 						</tr>
 					</table>
