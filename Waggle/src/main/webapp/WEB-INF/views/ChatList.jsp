@@ -395,7 +395,7 @@
          }         
          
          .closeChat{
-         	margin-left:495px;
+         	margin-left:auto;
          	font-size:13pt;
          	font-weight:bold;
          	color:#4f5860;

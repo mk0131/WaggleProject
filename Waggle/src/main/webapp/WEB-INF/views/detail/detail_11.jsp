@@ -412,9 +412,16 @@ button:active {
 		   <input type="hidden" name="req_dto.req_No" value="${req_dto.req_No }">
 		   
 		    <div class="ongoing21-content">
+		    <c:if test="${req_dto.fi_Nm == null }">
+		    <div id="ongoing21-img">
+		      <img src="/images/importToJsp/detail_default_img.png">
+		     </div>
+		    </c:if>
+		    <c:if test="${req_dto.fi_Nm != null}">
 		     <div id="ongoing21-img">
 		      <img src=${req_dto.fi_Nm }>
 		     </div>
+		     </c:if>
 		   </div>
 		  </div>
 		  
@@ -442,7 +449,7 @@ button:active {
 	     
 	     
 	     <div class="ongoing21-content-bottom">
-	       <h3 class="h3-font">지원자</h3>
+	       <h3 class="h3-font">지원자 목록</h3>
 	       
 	       
 				<c:choose>
