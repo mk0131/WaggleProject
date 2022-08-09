@@ -648,7 +648,7 @@ if (link.includes("https://")) {
 </script>
 <script>
 //꿀 수확량 구현
-window.addEventListener("load", () => {
+$(function() {
 	  if(${user_dto.user_Grade} <= 100){
 		  $("#progress_bar").css({
 		    width: ${user_dto.user_Grade}+"%"
@@ -671,22 +671,8 @@ window.addEventListener("load", () => {
 		  $('#progress_bar').css('background-image','linear-gradient(rgb(196 244 255) 0%, rgb(0 180 209) 100%)');
 	  }
 	  
-	  function animateValue(obj, start, end, duration) {
-	    let startTimestamp = null;
-	    const step = (timestamp) => {
-	      if (!startTimestamp) startTimestamp = timestamp;
-	      const progress = Math.min((timestamp - startTimestamp) / duration, 1);
-	      obj.innerHTML = Math.floor(progress * (end - start) + start);
-	      if (progress < 1) {
-	        window.requestAnimationFrame(step);
-	      }
-	    };
-	    window.requestAnimationFrame(step);
-	  }
-
-	  const obj = document.getElementById("point_counter");
-	  animateValue(obj, 0, 12345, 3000);
-	});
+	  
+});
 
 </script>
 </body>
