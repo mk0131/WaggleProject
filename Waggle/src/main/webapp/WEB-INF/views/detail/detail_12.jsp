@@ -39,7 +39,7 @@
 .ongoing21-user-name {
 	display: flex;
     font-weight:bold;
-    font-size:20pt;
+    font-size:24pt;
     margin-right:auto;
 }
 
@@ -83,6 +83,7 @@
     font-weight: bold;
     margin:0;
     color:#868e96;
+    font-size:18px;
 }
 
 button {
@@ -122,7 +123,6 @@ button:active {
 	display: flex;
     justify-content: center;
     align-items: center;
-    padding: 35px 0px 50px 0px;
 }
 
 #ongoing21-img img {
@@ -204,7 +204,7 @@ button:active {
     letter-spacing: .25px;
     -webkit-box-flex: 1;
     flex-grow: 1;
-    padding-top: 40px;
+    padding-top:20px
 }
 
 .imp-flex {
@@ -294,22 +294,93 @@ button:active {
 	margin: 0px 0px 25px 0px;
 }
 
+.profile-img{
+	width: 80px;
+	height: 80px;
+	border-radius: 50%;
+	border: 1px solid #f7f9fa;
+	vertical-align:middle;
+}
+.userinfo-left{
+	width: 80px; 
+	height: 80px; 
+	display: inline-block; 
+	margin-left: 70px; 
+	margin-right: 10px;
+	margin-bottom: 15px;
+}
+.userinfo-right{
+	vertical-align:middle;
+}
 
+.userinfo-honey{
+	display:inline-block;
+}
+/* 꿀 수확량 CSS */
+#bar_container {
+  height: 10px;
+  background: #dcdbd7;
+  border-radius: 20px;
+  border-top: 1px solid #cfcec9;
+  border-bottom: 1px solid #f7f6f4;
+  box-shadow: 0 -1px 0 #bab9b4;
+  margin-bottom: 24px;
+  position: relative;
+  margin-top: 10px;
+  width:200px;
+}
+
+#progress_bar {
+  background-color: #dcf1c6;
+  height: 110%;
+  position: absolute;
+  top: -3px;
+  left: 0px;
+  border-top: 1px solid #e5ebf4;
+  border-radius: 20px;
+  box-shadow: 0 3px 10px #717171;
+  width: 0%;
+  transition: all 3s 0s cubic-bezier(0.83, 0, 0.17, 1);;
+}
+
+#progress_percentage {
+  position: absolute;
+  top: -40px;
+  right: -10px;
+  width: 40px;
+  height: 24px;
+  padding-top: 6px;
+}
+
+#progress_percentage::before {
+  /* used for the border of the arrow */
+  content: "";
+  position: absolute;
+  left: 14px;
+  bottom: -11px;
+}
+
+#progress_percentage::after {
+  /* the actual little arrow in the baloon */
+  content: "";
+  position: absolute;
+  left: 14px;
+  bottom: -10px;
+}
+
+
+:root {
+  --clr-white: rgb(255, 255, 255);
+  --clr-black: rgb(0, 0, 0);
+  --clr-light: rgb(245, 248, 255);
+  --clr-light-gray: rgb(196, 195, 196);
+  --clr-blue: rgb(63, 134, 255);
+  --clr-light-blue: rgb(171, 202, 255);
+}
+
+/* 꿀 수확량 CSS */
 </style>
 <body>
-<<<<<<< HEAD
-	<%@ include file="../header.jsp"%>
-	<div id="wrap">
-		<div class="middle">
-			<div class="guideline">
-				<ul class="guideline-all">
-					<li><a href="javascript:void(0)"> <i
-							class="fa-solid fa-house"></i>
-					</a>
-						<p>HOME > 요청 상세페이지</p></li>
-				</ul>
-			</div>
-=======
 	<%@ include file="../header.jsp" %>
 	 <div id="wrap">
 	  <div class="middle">
@@ -321,7 +392,6 @@ button:active {
         		<p>HOME > 꿀단지목록 > 요청글</p>
         		</li>	
         	</ul>
->>>>>>> 3b8de4d0ec3be9d3a3d477fcb6436b80bfdcc296
 		</div>
 
 		<div class="ongoing21-all">
@@ -346,10 +416,8 @@ button:active {
 					</div>
 				</div>
 				
-				<div class="userinfo-left"
-					style="width: 80px; height: 80px; display: inline-block; margin-left: 70px; margin-right: 10px">
-					<img src="/images/importToJsp/profile_default.jpg"
-						style="width: 80px; height: 80px; border-radius: 50%; border: 1px solid #f7f9fa;" />
+				<div class="userinfo-left" onclick="window.open('/mypage/other?ucode=${user_dto.user_Code}')">
+					<img src="/images/importToJsp/profile_default.jpg" class="profile-img"/>
 				</div>
 				<div class="userinfo-right" style="display: inline-block;">
 					<div class="ongoing21-user-name">
@@ -365,13 +433,20 @@ button:active {
 					</p>
 				</div>
 				
-				<div style="border-bottom: 1px solid"></div>
+				<div class="userinfo-honey">
+				<div style="font-size: 14pt; font-weight: bold">user3님이 딴 꿀 수확량: ${dto.user_Grade}</div>
+				<div id="bar_container">
+					<div id="progress_bar">
+						<div id="progress_percentage" data-percentage="10">
+						</div>
+					</div>
+				</div>
+				</div>
+					
+				<div style="border-bottom:2px solid #e9ecef; width:90%; margin:0 auto;"></div>
 				<div id="flex-please">
 					<div class="ongoing21-flex">
 						<div class="ongoing21-middle">
-
-							<h3 class="h3-font">${user_dto.user_Nm}님이요청하신내용입니다.</h3>
-
 							<div class="middle-content">
 								<div class="middle-title">
 									내가 본 집 링크 첨부<br />(ex.직방, 다방 등등..)
@@ -438,26 +513,27 @@ button:active {
 					</div>
 				</div>
 			</div>
-			<div class="detail-end">
-				<div class="detail-point">
-					<b>포인트 비용 : ${req_dto.req_Point }P</b>
-				</div>
-				<div class="btn2" id="btn2">
-
-					<button type="button" value="요청취소"
-						onclick="location.href='/board/cancel?req_No=${req_dto.req_No}'"
-						style="width: 170px; margin-right: 100px;">요청 취소하기</button>
-
-					<button type="button" value="수정하기"
-						onclick="location.href='/board/updateform?req_No=${req_dto.req_No }'"
-						style="width: 170px; margin-right: 100px;">수정하기</button>
-
-					<button type="button" value="목록"
-						onclick="location.href='/board/list'" style="width: 170px;">목록으로
-						돌아가기</button>
+				<div class="detail-end">
+					<div class="detail-point">
+						<b>포인트 비용 : ${req_dto.req_Point }P</b>
+					</div>
+					<div class="btn2" id="btn2">
+						<c:if test="${user_Code == vo_UCode && vo_Block != true }">
+							<button type="button"
+								onclick="location.href='/vol/cancel?vo_UCode=${user_Code}&vo_No=${req_dto.req_No }'"
+								style="width: 200px; margin-right: 100px;">지원취소</button>
+						</c:if>
+						<c:if test="${user_Code != vo_UCode  }">
+							<button type="button"
+								onclick="location.href='/vol/submit?vo_UCode=${user_Code}&vo_No=${req_dto.req_No }'"
+								style="width: 200px; margin-right: 100px;">지원하기</button>
+						</c:if>
+						<button type="button" value="목록"
+							onclick="location.href='/board/list'" style="width: 200px;">목록으로
+							돌아가기</button>
+					</div>
 				</div>
 			</div>
-		</div>
 	</div>
 
 	<!--    
@@ -545,6 +621,48 @@ if (link.includes("https://")) {
 		$(".imp").css("position", "absolute").css("top", "40" + "px")
 	}
 }); 
+   
+	//꿀 수확량 구현
+	window.addEventListener("load", () => {
+		  if(${dto.user_Grade} <= 100){
+			  $("#progress_bar").css({
+			    width: ${dto.user_Grade}+"%"
+			  });
+		  }else if(${dto.user_Grade} > 100){
+			  $("#progress_bar").css({
+				    width: 100+"%"
+				  });
+		  }
+		  
+		  if(${dto.user_Grade}>=0 && ${dto.user_Grade}<=29){
+			  $('#progress_bar').css('background-image','linear-gradient(rgb(199 112 0) 0%, rgb(145 81 0) 100%)');
+		  }else if(${dto.user_Grade}>=30 && ${dto.user_Grade}<=45){
+			  $('#progress_bar').css('background-image','linear-gradient(rgb(241 241 241) 0%, rgb(161 161 161) 100%)');
+		  }else if(${dto.user_Grade}>=46 && ${dto.user_Grade}<=60){
+			  $('#progress_bar').css('background-image','linear-gradient(rgb(253 255 178) 0%, rgb(225 197 0) 100%)');
+		  }else if(${dto.user_Grade}>=61 && ${dto.user_Grade}<=100){
+			  $('#progress_bar').css('background-image','linear-gradient(rgb(202 255 241) 0%, rgb(0 209 132) 100%)');
+		  }else{
+			  $('#progress_bar').css('background-image','linear-gradient(rgb(196 244 255) 0%, rgb(0 180 209) 100%)');
+		  }
+		  
+		  function animateValue(obj, start, end, duration) {
+		    let startTimestamp = null;
+		    const step = (timestamp) => {
+		      if (!startTimestamp) startTimestamp = timestamp;
+		      const progress = Math.min((timestamp - startTimestamp) / duration, 1);
+		      obj.innerHTML = Math.floor(progress * (end - start) + start);
+		      if (progress < 1) {
+		        window.requestAnimationFrame(step);
+		      }
+		    };
+		    window.requestAnimationFrame(step);
+		  }
+
+		  const obj = document.getElementById("point_counter");
+		  animateValue(obj, 0, 12345, 3000);
+		});
+
 </script>
 </body>
 </html>
