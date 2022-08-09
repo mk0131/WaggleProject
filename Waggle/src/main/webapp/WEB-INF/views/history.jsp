@@ -429,17 +429,17 @@ input {
 					<ul class="paging1">
 					 <c:if test="${paging1.prev}">       
 					   <li id="paging">
-						 <a id="paging-a" href='<c:url value="/mypage/history?ucode=${ucode }&page=${paging1.startPage-1}"/>'>이전</a>
+						 <a id="paging-a" href='<c:url value="/mypage/history?page=${paging1.startPage-1}&sub_page=${paging2.cri.page}"/>'>이전</a>
 					   </li>  
 					 </c:if>
 					  <c:forEach begin="${paging1.startPage}" end="${paging1.endPage}" var="num">
 						<li>
-						 <a id="paging-a" class="${paging1.cri.page == num ? 'nowpage' : null }" href='<c:url value="/mypage/history?ucode=${ucode }&page=${num}"/>'>${num}</a>
+						 <a id="paging-a" class="${paging1.cri.page == num ? 'nowpage' : null }" href='<c:url value="/mypage/history?page=${num}&sub_page=${paging2.cri.page}"/>'>${num}</a>
 						</li>  
 					  </c:forEach>
 					   <c:if test="${paging1.next && paging1.endPage > 0}">
 						<li>
-						 <a id="paging-a" href='<c:url value="/mypage/history?ucode=${ucode }&&page=${paging1.endPage+1}"/>'>다음</a>
+						 <a id="paging-a" href='<c:url value="/mypage/history?page=${paging1.endPage+1}&sub_page=${paging2.cri.page}"/>'>다음</a>
 						</li>
 						</c:if>
 					 </ul>
@@ -493,17 +493,17 @@ input {
 				<ul class="paging2">
 					 <c:if test="${paging2.prev}">       
 					   <li id="paging">
-						 <a id="paging-a" href='<c:url value="/mypage/history?ucode=${ucode }&page=${paging2.startPage-1}"/>'>이전</a>
+						 <a id="paging-a" href='<c:url value="/mypage/history?page=${paging1.cri.page}&sub_page=${paging2.startPage-1}"/>'>이전</a>
 					   </li>  
 					 </c:if>
 					  <c:forEach begin="${paging2.startPage}" end="${paging2.endPage}" var="num">
 						<li>
-						 <a id="paging-a" class="${paging2.cri.page == num ? 'nowpage' : null }" href='<c:url value="/mypage/history?ucode=${ucode }&page=${num}"/>'>${num}</a>
+						 <a id="paging-a" class="${paging2.cri.page == num ? 'nowpage' : null }" href='<c:url value="/mypage/history?page=${paging1.cri.page}&sub_page=${num}"/>'>${num}</a>
 						</li>  
 					  </c:forEach>
 					   <c:if test="${paging2.next && paging2.endPage > 0}">
 						<li>
-						 <a id="paging-a" href='<c:url value="/mypage/history?ucode=${ucode }&page=${paging2.endPage+1}"/>'>다음</a>
+						 <a id="paging-a" href='<c:url value="/mypage/history?page=${paging1.cri.page}&sub_page=${paging2.endPage+1}"/>'>다음</a>
 						</li>
 						</c:if>
 					 </ul>
