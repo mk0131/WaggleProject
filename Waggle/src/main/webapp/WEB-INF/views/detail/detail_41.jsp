@@ -773,6 +773,8 @@ div#progress_percentage::after {
 		var start2 = new Date($("#v_Date").val());
 		var end2 = new Date();
 		var diffTime2 = (end2.getTime() - start2.getTime()) / (1000*60*60*24);
+		
+		console.log(${po});
 
 		if(diffTime2 < 1) {
 		 	if(${req_dto.req_UCode} != ${user_Code} && ${res} != ${user_Code} && ${po} != ${user_Code} && ${user_Code} != 1){	
