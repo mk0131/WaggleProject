@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+    <%@ taglib prefix= "fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+    <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -81,7 +83,7 @@
 #w-date {
 	display: flex;
     justify-content: flex-end;
-    max-width: 1280px;
+    max-width: 87%;
     font-weight: bold;
 }
 
@@ -388,153 +390,207 @@ button:active {
 <body>
 	
 	<%@ include file="../header.jsp" %>
-	 <div id="wrap">
-	  <div class="middle">
-		<div class="guideline">
-			<ul class="guideline-all">
-        		<li><i class="fa-solid fa-house"></i>
-        		<p>HOME > 요청 상세페이지</p>
-        		</li>	
-        	</ul>
+	<div id="wrap">
+		<div class="middle">
+			<div class="guideline">
+				<ul class="guideline-all">
+					<li><i class="fa-solid fa-house"></i>
+						<p>HOME > 요청 상세페이지</p></li>
+				</ul>
+			</div>
 		</div>
-	  </div>
-	  
-	   <div class="ongoing21-all">
-	    <h2 id="ongoing-detail">${req_dto.req_Title }(${req_dto.req_Stat })</h2>
-	     <p id="w-date">작성일 ${req_dto.req_WDate }</p>
-<%-- 	    <div class="ongoing21-user-name">
+
+		<div class="ongoing21-all">
+			<h2 id="ongoing-detail">${req_dto.req_Title }(${req_dto.req_Stat })</h2>
+			<fmt:parseDate value="${req_dto.req_WDate }"
+				pattern="yyyy-MM-dd'T'HH:mm" var="parsedDateTime" type="both" />
+			<p id="w-date">
+				작성일
+				<fmt:formatDate value="${parsedDateTime }" pattern="yyyy-MM-dd" />
+			</p>
+			<%-- 	    <div class="ongoing21-user-name">
 	     <p id="username">작성자</p>&nbsp;
 	      <p id="userrealname">${user_dto.user_Nm}</p>
 	       </div> --%>
-	      <div class="ongoing21-middle-bottom">
-	      <div class="ongoing21-top">
-		   <input type="hidden" name="req_dto.req_No" value="${req_dto.req_No }">
-		   
-		    <div class="ongoing21-content">
-		    <c:if test="${req_dto.fi_Nm == null }">
-		    <div id="ongoing21-img">
-		      <img src="/images/importToJsp/detail_default_img.png">
-		     </div>
-		    </c:if>
-		    <c:if test="${req_dto.fi_Nm != null}">
-		     <div id="ongoing21-img">
-		      <img src=${req_dto.fi_Nm }>
-		     </div>
-		     </c:if>
-		   </div>
-		  </div>
-		  
-		  <div id="flex-please">
-		  <div class="ongoing21-flex">
-		    <div class="ongoing21-middle">
-		    
-		     <h3 class="h3-font">${user_dto.user_Nm}님이 요청하신 내용입니다.</h3>
-		    
-		      <div class="middle-content"><div class="middle-title">내가 본 집 링크 첨부<br/>(ex.직방, 다방 등등..)</div> <a class="middle-tcontent" id="link" href="" target="_blank">${req_dto.req_Link }</a></div>
-		        <div class="b-line"></div>
-		     <div class="middle-content"><div class="middle-title">방문기한</div> <div class="middle-tcontent">${req_dto.req_EDate }</div></div>
-		       <div class="b-line"></div>
-		     <div class="middle-content"><div class="middle-title">내가 본 집 주소</div> <div class="middle-tcontent">${req_dto.home_Addr }</div></div>
-		       <div class="b-line"></div>
-		     <div class="middle-content"><div class="middle-title">상세주소</div> <div class="middle-tcontent">${req_dto.home_DAddr }</div></div>
-		       <div class="b-line"></div>
-		     <div class="middle-content"><div class="middle-title">공인중개사 연락처</div> <div class="middle-tcontent">${req_dto.req_Phone }</div></div>
-		       <div class="b-line"></div>
-		     <div class="middle-content"><div class="middle-title">자세하게 봐야 될 부분</div><div class="middle-tcontent">${req_dto.req_Detail }</div></div>
-	
-		     
-		    </div>
-	     
-	     
-	     
-	     <div class="ongoing21-content-bottom">
-	       <h3 class="h3-font">지원자 목록</h3>
-	       
-	       
-				<c:choose>
-					<c:when test="${empty vol }">
-						<td colspan="4">-------------지원자가 없습니다.-------------</td>
-					</c:when>
-					<c:otherwise>
-						<c:forEach items="${vol }" var="dto">
-							<form id="user-profile-reply">
-							<input type="hidden" value="${dto.user_Code }">
-									
-										<c:choose>
-											<c:when test="${not empty dto.fi_Nm }">
-												<img class="profile-photo-img" alt="프로필사진o" src="${dto.fi_Nm }">
-											</c:when>
-											<c:otherwise>
-												<img class="profile-photo-img" alt="프로필사진x" src="/images/importToJsp/profile_default.jpg">
-											</c:otherwise>
-										</c:choose>
-									
-									<div class="bubble" onclick="window.open('/mypage/other?ucode=${dto.user_Code}')">
-									
-									<div class="bubble-text">
-									<h4 class="bubble-text-inner">${dto.user_Nm } 님</h4> 
-									<P class="bubble-text-inner">평점 ${dto.user_Grade }</P> 
-									</div>	
-									
-									<P id="bubble-user-intro">${dto.user_Intro }</P>
-									
-										<div class="over-bubble">클릭 시 지원자의 프로필 창이 켜집니다.</div>
+			<div class="ongoing21-middle-bottom">
+				<div class="ongoing21-top">
+					<input type="hidden" name="req_dto.req_No"
+						value="${req_dto.req_No }">
+
+					<div class="ongoing21-content">
+						<c:if test="${req_dto.fi_Nm == null }">
+							<div id="ongoing21-img">
+								<img src="/images/importToJsp/detail_default_img.png">
+							</div>
+						</c:if>
+						<c:if test="${req_dto.fi_Nm != null}">
+							<div id="ongoing21-img">
+								<img src=${req_dto.fi_Nm }>
+							</div>
+						</c:if>
+					</div>
+				</div>
+
+				<div id="flex-please">
+					<div class="ongoing21-flex">
+						<div class="ongoing21-middle">
+
+							<h3 class="h3-font">${user_dto.user_Nm}님이요청하신 내용입니다.</h3>
+
+							<div class="middle-content">
+								<div class="middle-title">
+									내가 본 집 링크 첨부<br />(ex.직방, 다방 등등..)
+								</div>
+								<a class="middle-tcontent" id="link" href="" target="_blank">${req_dto.req_Link }</a>
+							</div>
+							<div class="b-line"></div>
+							<div class="middle-content">
+								<div class="middle-title">방문기한</div>
+								<div class="middle-tcontent">${req_dto.req_EDate }</div>
+							</div>
+							<div class="b-line"></div>
+							<div class="middle-content">
+								<div class="middle-title">내가 본 집 주소</div>
+								<div class="middle-tcontent">${req_dto.home_Addr }</div>
+							</div>
+							<div class="b-line"></div>
+							<div class="middle-content">
+								<div class="middle-title">상세주소</div>
+								<div class="middle-tcontent">${req_dto.home_DAddr }</div>
+							</div>
+							<div class="b-line"></div>
+							<div class="middle-content">
+								<div class="middle-title">공인중개사 연락처</div>
+								<div class="middle-tcontent">${req_dto.req_Phone }</div>
+							</div>
+							<div class="b-line"></div>
+							<div class="middle-content">
+								<div class="middle-title">자세하게 봐야 될 부분</div>
+								<div class="middle-tcontent">${req_dto.req_Detail }</div>
+							</div>
+
+
+						</div>
+
+
+
+						<div class="ongoing21-content-bottom">
+							<h3 class="h3-font">지원자 목록</h3>
+
+
+							<c:choose>
+								<c:when test="${empty vol }">
+									<td colspan="4">-------------지원자가 없습니다.-------------</td>
+								</c:when>
+								<c:otherwise>
+									<c:forEach items="${vol }" var="dto">
+										<form id="user-profile-reply">
+											<input type="hidden" value="${dto.user_Code }">
+
+											<c:choose>
+												<c:when test="${not empty dto.fi_Nm }">
+													<img class="profile-photo-img" alt="프로필사진o"
+														src="${dto.fi_Nm }">
+												</c:when>
+												<c:otherwise>
+													<img class="profile-photo-img" alt="프로필사진x"
+														src="/images/importToJsp/profile_default.jpg">
+												</c:otherwise>
+											</c:choose>
+
+											<div class="bubble"
+												onclick="window.open('/mypage/other?ucode=${dto.user_Code}')">
+
+												<div class="bubble-text">
+													<h4 class="bubble-text-inner">${dto.user_Nm }님</h4>
+													<P class="bubble-text-inner">평점 ${dto.user_Grade }</P>
+												</div>
+
+												<P id="bubble-user-intro">${dto.user_Intro }</P>
+
+												<div class="over-bubble">클릭 시 지원자의 프로필 창이 켜집니다.</div>
+											</div>
+
+											<div class="accept-btn">
+												<button id="accept-btn-inner"
+													onclick="location.href='/board/accept?req_UCode=${user_Code}&res_UCode=${dto.user_Code }&req_No=${req_dto.req_No }'"
+													type="button">수락하기</button>
+											</div>
+
+
+										</form>
+										<div class="b-line"></div>
+									</c:forEach>
+								</c:otherwise>
+							</c:choose>
+
+							<br>
+							<br>
+							<br> <br>
+							<br>
+
+						</div>
+
+					</div>
+
+					<div class="imp-flex">
+						<div class="imp-all" style="position: static;">
+							<div class="imp">
+								<h3>요약 정보</h3>
+								<div class="imp-line">
+									<div class="imp-box">
+										<div class="imp-title" id="title1">
+											<div class="imp-bold-title">방문기한</div>
+											<div class="imp-title-content">${req_dto.req_EDate }</div>
+										</div>
+										<div class="imp-title" id="title2">
+											<div class="imp-bold-title">요청 매물과 나와의 거리</div>
+											<div class="imp-title-content"></div>
+										</div>
 									</div>
-									
-									<div class="accept-btn"><button id="accept-btn-inner" onclick="location.href='/board/accept?req_UCode=${user_Code}&res_UCode=${dto.user_Code }&req_No=${req_dto.req_No }'" type="button">수락하기</button></div>
-									 
-									
-							</form>
-							 <div class="b-line"></div>
-						</c:forEach>
-					</c:otherwise>
-				</c:choose>
 
-	       	<br><br><br>
-	        <br><br>
-	        
-	     </div>
-	     
-	    </div>
-	    
-	   <div class="imp-flex"> 
-	   <div class="imp-all" style="position: static;">
-	    <div class="imp">
-	    	<h3>요약 정보</h3>
-	     <div class="imp-line">
-	    	 <div class="imp-box">
-	    	  <div class="imp-title" id="title1"><div class="imp-bold-title">방문기한</div><div class="imp-title-content">${req_dto.req_EDate }</div></div>
-	    	  <div class="imp-title" id="title2"><div class="imp-bold-title">요청 매물과 나와의 거리</div><div class="imp-title-content"></div></div>
-	    	  </div>
-	    	  
-	    	  
-	    	 <div class="imp-title" id="imp-text-center1"><div class="imp-bold-title">포인트 비용</div><div class="imp-title-content" id="imp-content-other1">${req_dto.req_Point }P</div></div>
-	    	
-	    	<div class="imp-title" id="imp-text-center2"><div class="imp-bold-title">자세하게 봐야 될 부분</div><div class="imp-title-content" id="imp-content-other2">${req_dto.req_Detail }</div></div>
-	      </div>
-	     </div>
-	    </div> 
-	   </div>
-	    
-	    
-	    
-	    
-	   </div>
-	   </div>
-	   
-	   <div class="detail-end">
-	    <div class="detail-point"><b>포인트 비용 : ${req_dto.req_Point }P</b> </div>
-	   <div class="btn2" id="btn2">
 
-	      <button type="button" value="요청취소" onclick="location.href='/board/cancel?req_No=${req_dto.req_No}'" style="width: 170px; margin-right: 100px;" >요청 취소하기</button>
+									<div class="imp-title" id="imp-text-center1">
+										<div class="imp-bold-title">포인트 비용</div>
+										<div class="imp-title-content" id="imp-content-other1">${req_dto.req_Point }P</div>
+									</div>
 
-	     <button type="button" value="수정하기" onclick="location.href='/board/updateform?req_No=${req_dto.req_No }'" style="width: 170px; margin-right: 100px;" >수정하기</button>
+									<div class="imp-title" id="imp-text-center2">
+										<div class="imp-bold-title">자세하게 봐야 될 부분</div>
+										<div class="imp-title-content" id="imp-content-other2">${req_dto.req_Detail }</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
 
-	      <button type="button" value="목록" onclick="location.href='/board/list'" style="width: 170px;">목록으로 돌아가기</button>
-	     </div>
-	    </div>
-	     
-	 </div>
+
+
+
+				</div>
+			</div>
+
+			<div class="detail-end">
+				<div class="detail-point">
+					<b>포인트 비용 : ${req_dto.req_Point }P</b>
+				</div>
+				<div class="btn2" id="btn2">
+
+					<button type="button" value="요청취소"
+						onclick="location.href='/board/cancel?req_No=${req_dto.req_No}'"
+						style="width: 170px; margin-right: 100px;">요청 취소하기</button>
+
+					<button type="button" value="수정하기"
+						onclick="location.href='/board/updateform?req_No=${req_dto.req_No }'"
+						style="width: 170px; margin-right: 100px;">수정하기</button>
+
+					<button type="button" value="목록"
+						onclick="location.href='/board/list'" style="width: 170px;">목록으로
+						돌아가기</button>
+				</div>
+			</div>
+
+		</div>
 	</div>
 	<%@ include file="../footer.jsp" %>
 	<script type="text/javascript">

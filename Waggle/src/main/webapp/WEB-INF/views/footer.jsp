@@ -26,7 +26,7 @@ body {
 
 #wrap {
     min-height: 100vh;
-    min-width: 1190px;
+    min-width: 1189px;
     overflow:hidden;
     height: 100%;
     padding-top: 107px;
