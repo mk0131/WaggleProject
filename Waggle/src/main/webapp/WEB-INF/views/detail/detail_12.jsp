@@ -429,42 +429,44 @@ button:active {
 						</c:if>
 					</div>
 				</div>
-
-					<div class="userinfo-left"
-						onclick="window.open('/mypage/other?ucode=${user_dto.user_Code}')">
-						<c:if test="${user_dto.user_Pro == 0}">
-							<img src="/images/importToJsp/profile_default.jpg" class="profile-img"/>
-						</c:if>
-						<c:if test="${user_dto.user_Pro != 0 }">
-							<img src="${Pro_fi_Nm }" class="profile-img"/>
-						</c:if>
-					</div>
-					<div class="userinfo-right" style="display: inline-block;">
-					<div class="ongoing21-user-name">
-						 <span
-							id="userrealname"
-							onclick="window.open('/mypage/other?ucode=${user_dto.user_Code}')">${user_dto.user_Nm}</span>
-					</div>
-					<fmt:parseDate value="${req_dto.req_WDate }"
-						pattern="yyyy-MM-dd'T'HH:mm" var="parsedDateTime" type="both" />
-					<p id="w-date">
-						작성일
-						<fmt:formatDate value="${parsedDateTime }" pattern="yyyy-MM-dd" />
-					</p>
-				</div>
-				
-				<div class="userinfo-honey">
-				<div class="honey-letter">user3님의 꿀 수확량: ${user_dto.user_Grade}</div>
-				<div id="bar_container">
-					<div id="progress_bar">
-						<div id="progress_percentage" data-percentage="10">
+					<div class="info-content" style="width: 1300px; margin: 0 auto;">
+						<div class="userinfo-left"
+							onclick="window.open('/mypage/other?ucode=${user_dto.user_Code}')">
+							<c:if test="${user_dto.user_Pro == 0}">
+								<img src="/images/importToJsp/profile_default.jpg"
+									class="profile-img" />
+							</c:if>
+							<c:if test="${user_dto.user_Pro != 0 }">
+								<img src="${Pro_fi_Nm }" class="profile-img" />
+							</c:if>
 						</div>
+						<div class="userinfo-right" style="display: inline-block;">
+							<div class="ongoing21-user-name">
+								<span id="userrealname"
+									onclick="window.open('/mypage/other?ucode=${user_dto.user_Code}')">${user_dto.user_Nm}</span>
+							</div>
+							<fmt:parseDate value="${req_dto.req_WDate }"
+								pattern="yyyy-MM-dd'T'HH:mm" var="parsedDateTime" type="both" />
+							<p id="w-date">
+								작성일
+								<fmt:formatDate value="${parsedDateTime }" pattern="yyyy-MM-dd" />
+							</p>
+						</div>
+
+						<div class="userinfo-honey">
+							<div class="honey-letter">${user_dto.user_Nm}님의꿀 수확량:
+								${user_dto.user_Grade}</div>
+							<div id="bar_container">
+								<div id="progress_bar">
+									<div id="progress_percentage" data-percentage="10"></div>
+								</div>
+							</div>
+						</div>
+
+						<div
+							style="border-bottom: 2px solid #e9ecef; width: 90%; margin: 0 auto;"></div>
 					</div>
-				</div>
-				</div>
-			
-				<div style="border-bottom:2px solid #e9ecef; width:90%; margin:0 auto;"></div>
-				<div id="flex-please">
+					<div id="flex-please">
 					<div class="ongoing21-flex">
 						<div class="ongoing21-middle">
 							<div class="middle-content">
