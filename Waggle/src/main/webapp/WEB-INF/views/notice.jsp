@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Waggle 문의글 작성</title>
+<title>Waggle 공지글 작성</title>
 <link rel="icon" href="/images/importToJsp/favicon.png">
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -80,7 +80,7 @@ tr {
 
 .btn1 {
 	position: relative;
-	top: 150px;
+	top: 130px;
 }
 
 .Inquiry-insert {
@@ -136,32 +136,25 @@ tr {
 			 </div>
 			<div class="notice-container">
 	 			<div class="conbox con3">
-	 			 <form action="/inquiry/insert" method="post">
-	              <input type="hidden" name="in_UCode" value="${user_Code }">
+	 			 <form action="/notice/insert" method="post">
+	 			 <input type="hidden" name="user_Code" value="${user_Code }">
 					<table class="Inquiry-insert">
 						<tr>
-						<th>문의유형</th>
+						<th>유형</th>
 						<td>
-						  <select name="in_Type">
-						  <option value="1:1 문의">1:1 문의</option> 
-						  <option value="걸제 관련 문의">결제 관련 문의</option> 
-						  <option value="환불 관련 문의">환불 관련 문의</option>
-						  <option value="회원 신고 하기">회원 신고 하기</option>
+						  <select name="no_Type">
+						  <option value="공지">공지</option> 
+						  <option value="질문">질문</option> 
 						  </select>
 						</td>
 						</tr>
 						<tr>
 						<th>제목</th>
-						
-						<td><input type="text" id="title" name="in_Title" placeholder="제목을 입력해주세요."></td>
-						</tr>
-						<tr>
-						<th>작성자</th>
-						<td>${user_Nm }</td>						
+						<td><input type="text" id="title" name="no_Title" placeholder="제목을 입력해주세요."></td>
 						</tr>
 						<tr>
 						<th>내용</th>
-						<td><textarea id="incontent" rows="14" cols="70" name="in_Content" placeholder="문의할 내용을 입력해주세요."></textarea></td>
+						<td><textarea id="incontent" rows="14" cols="70" name="no_Content" placeholder="내용을 입력해주세요."></textarea></td>
 						</tr>
 						<tr>         
 				         <td class="btn1" colspan="2" align="right">

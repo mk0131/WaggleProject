@@ -8,7 +8,8 @@
 <head>
 <link rel="stylesheet" href="//brick.a.ssl.fastly.net/Roboto:400"/>
 <meta charset="UTF-8">
-<title>포인트 충전</title>
+<title>Waggle 포인트 충전</title>
+<link rel="icon" href="/images/importToJsp/favicon.png">
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <!-- iamport.payment.js -->
 <script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.2.0.js"></script>

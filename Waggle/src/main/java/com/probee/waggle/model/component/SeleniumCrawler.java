@@ -16,9 +16,10 @@ public class SeleniumCrawler {
 	
 	public String GetImgUrl(String url) {
 		// 직방 크롤링만 가능
-		if(!url.contains("www.zigbang.com")) {
+		if(!url.contains("www.zigbang.com") || url.contains("apt") || url.contains("/home/store")) {
 			return null;
 		}
+		
 		if(!url.contains("https://")) {
 			url = "https://" + url;
 		}

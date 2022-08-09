@@ -44,7 +44,7 @@ public interface BoardService {
 	public int insertRatingBee(UserRatingDto userRating_dto);
 	public int insertReRatingBee(UserRatingDto userRating_dto);
 	
-	public PointsDto selectPoint(int req_No, int user_Code);
+	public List<PointsDto> selectPoint(int req_No, int user_Code);
 	
 	public int saveLocal(int req_No, List<MultipartFile> files, int res_Code, HttpServletRequest request);
 	public int updateResult(ResultDto dto);

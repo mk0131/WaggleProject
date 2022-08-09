@@ -6,7 +6,8 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>요청상세페이지(진행중)</title>
+<title>Waggle 요청글</title>
+<link rel="icon" href="/images/importToJsp/favicon.png">
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <style type="text/css">
 
@@ -132,7 +133,7 @@ button:active {
         		<li><a href="javascript:void(0)">
         		<i class="fa-solid fa-house"></i>
         		</a>
-        		<p>HOME > 요청 상세페이지</p>
+        		<p>HOME > 꿀단지목록 > 요청글</p>
         		</li>	
         	</ul>
 		</div>

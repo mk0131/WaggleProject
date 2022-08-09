@@ -6,7 +6,8 @@
 <html>
 <head>
 <meta charset="EUC-KR">
-<title>Insert title here</title>
+<title>Waggle 수행 완료</title>
+<link rel="icon" href="/images/importToJsp/favicon.png">
 <style>
 
 .middle {
@@ -377,7 +378,7 @@ div#review_containser{
         		<li><a href="javascript:void(0)">
         		<i class="fa-solid fa-house"></i>
         		</a>
-        		<p>HOME > 요청 완료 페이지</p>
+        		<p>HOME > 꿀단지목록 > 요청글</p>
         		</li>	
         	</ul>
 		</div>

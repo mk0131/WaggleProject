@@ -5,7 +5,8 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>Waggle 문의글 상세</title>
+<link rel="icon" href="/images/importToJsp/favicon.png">
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
@@ -170,7 +171,7 @@ tr {
 						</tr>
 						<tr>         
 				         <td class="btn1" colspan="2" align="right">
-				         	<button type="button" value="목록" onclick='history.back();'>목록</button>
+				         	<button type="button" value="목록" onclick="location.href='/inquiry/list?user_Code=${user_Code}'">목록</button>
 				         	<c:if test="${user_Nm ne 'admin' }">
 				         	<button type="button" value="수정" onclick="location.href='/inquiry/updateform?in_Code=${dto.in_Code}'">수정</button>
 				         	<button type="button" value="삭제" onclick="location.href='/inquiry/delete?in_Code=${dto.in_Code}&user_Code=${user_Code }'">삭제</button>

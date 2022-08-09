@@ -298,8 +298,13 @@ public class BoardController {
 					String tmp = gson.toJson(list.get(i));
 					rate_list.add(tmp);
 				}
-				
-				PointsDto po = boardService.selectPoint(req_No, user_Code);
+				List<PointsDto> po_list = boardService.selectPoint(req_No, user_Code);
+				PointsDto po = null;
+				try { 
+					po = po_list.get(0);
+				} catch (Exception e) {
+					
+				}
 				if(po != null) {
 					model.addAttribute("po",po.getPo_UCode());	
 				}else {
@@ -398,7 +403,7 @@ public class BoardController {
 	public String ratingBee(int req_No, UserRatingDto userRating_dto) {
 		ResultDto res_dto = boardService.selectResult(req_No);
 		userRating_dto.setUr_Code(res_dto.getRes_Code());
-
+	
 		// 1, 0, -1 -> '좋아요', '보통이에요', '별로에요' 값변환
 		List<String> indexArray = new ArrayList<String>();
 		indexArray.add("별로에요");
@@ -433,10 +438,16 @@ public class BoardController {
 		boardService.updateResultWDate(res_dto.getRes_Code());
 		
 		// 꿀벌 포인트 업데이트
+		
 		RequestDto2 req_dto = boardService.selectRequest(req_No);
+		
+		
 		pointService.insertPay(req_dto.getReq_Point(), res_UCode, "획득");
+		
 		int user_point = pointService.selectUserPoint(res_UCode);
+		
 		pointService.updateUserPoint(user_point + req_dto.getReq_Point(), res_dto.getRes_UCode());
+		
 		
 		return "redirect:/board/detail?req_No="+req_No;
 	}

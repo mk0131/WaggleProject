@@ -7,7 +7,8 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>요청상세페이지(모집중)</title>
+<title>Waggle 요청글</title>
+<link rel="icon" href="/images/importToJsp/favicon.png">
 </head>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <style type="text/css">
@@ -390,6 +391,7 @@ button:active {
 <body>
 	
 	<%@ include file="../header.jsp" %>
+<<<<<<< HEAD
 	<div id="wrap">
 		<div class="middle">
 			<div class="guideline">
@@ -398,6 +400,16 @@ button:active {
 						<p>HOME > 요청 상세페이지</p></li>
 				</ul>
 			</div>
+=======
+	 <div id="wrap">
+	  <div class="middle">
+		<div class="guideline">
+			<ul class="guideline-all">
+        		<li><i class="fa-solid fa-house"></i>
+        		<p>HOME > 꿀단지목록 > 요청글</p>
+        		</li>	
+        	</ul>
+>>>>>>> 3b8de4d0ec3be9d3a3d477fcb6436b80bfdcc296
 		</div>
 
 		<div class="ongoing21-all">
@@ -412,6 +424,7 @@ button:active {
 	     <p id="username">작성자</p>&nbsp;
 	      <p id="userrealname">${user_dto.user_Nm}</p>
 	       </div> --%>
+<<<<<<< HEAD
 			<div class="ongoing21-middle-bottom">
 				<div class="ongoing21-top">
 					<input type="hidden" name="req_dto.req_No"
@@ -547,6 +560,81 @@ button:active {
 											<div class="imp-bold-title">요청 매물과 나와의 거리</div>
 											<div class="imp-title-content"></div>
 										</div>
+=======
+	      <div class="ongoing21-middle-bottom">
+	      <div class="ongoing21-top">
+		   <input type="hidden" name="req_dto.req_No" value="${req_dto.req_No }">
+		   
+		    <div class="ongoing21-content">
+		    <c:if test="${req_dto.fi_Nm == null }">
+		    <div id="ongoing21-img">
+		      <img src="/images/importToJsp/detail_default_img.png">
+		     </div>
+		    </c:if>
+		    <c:if test="${req_dto.fi_Nm != null}">
+		     <div id="ongoing21-img">
+		      <img src=${req_dto.fi_Nm }>
+		     </div>
+		     </c:if>
+		   </div>
+		  </div>
+		  
+		  <div id="flex-please">
+		  <div class="ongoing21-flex">
+		    <div class="ongoing21-middle">
+		    
+		     <h3 class="h3-font" onclick="window.open('/mypage/other?ucode=${user_dto.user_Code}')">${user_dto.user_Nm}님이 요청하신 내용입니다.</h3>
+		    
+		      <div class="middle-content"><div class="middle-title">내가 본 집 링크 첨부<br/>(ex.직방, 다방 등등..)</div> <a class="middle-tcontent" id="link" href="" target="_blank">${req_dto.req_Link }</a></div>
+		        <div class="b-line"></div>
+		     <div class="middle-content"><div class="middle-title">방문기한</div> <div class="middle-tcontent">${req_dto.req_EDate }</div></div>
+		       <div class="b-line"></div>
+		     <div class="middle-content"><div class="middle-title">내가 본 집 주소</div> <div class="middle-tcontent">${req_dto.home_Addr }</div></div>
+		       <div class="b-line"></div>
+		     <div class="middle-content"><div class="middle-title">상세주소</div> <div class="middle-tcontent">${req_dto.home_DAddr }</div></div>
+		       <div class="b-line"></div>
+		     <div class="middle-content"><div class="middle-title">공인중개사 연락처</div> <div class="middle-tcontent">${req_dto.req_Phone }</div></div>
+		       <div class="b-line"></div>
+		     <div class="middle-content"><div class="middle-title">자세하게 봐야 될 부분</div><div class="middle-tcontent">${req_dto.req_Detail }</div></div>
+	
+		     
+		    </div>
+	     
+	     
+	     
+	     <div class="ongoing21-content-bottom">
+	       <h3 class="h3-font">지원자 목록</h3>
+	       
+	       
+				<c:choose>
+					<c:when test="${empty vol }">
+						<td >-------------지원자가 없습니다.-------------</td>
+					</c:when>
+					<c:otherwise>
+						<c:forEach items="${vol }" var="dto">
+							<form id="user-profile-reply">
+							<input type="hidden" value="${dto.user_Code }">
+									
+										<c:choose>
+											<c:when test="${not empty dto.fi_Nm }">
+												<img class="profile-photo-img" alt="프로필사진o" src="${dto.fi_Nm }">
+											</c:when>
+											<c:otherwise>
+												<img class="profile-photo-img" alt="프로필사진x" src="/images/importToJsp/profile_default.jpg">
+											</c:otherwise>
+										</c:choose>
+									
+									<div class="bubble" onclick="window.open('/mypage/other?ucode=${dto.user_Code}')">
+									
+									<div class="bubble-text">
+									<h4 class="bubble-text-inner">${dto.user_Nm } 님</h4> 
+									<P class="bubble-text-inner">평점 ${dto.user_Grade }</P> 
+									</div>	
+									
+									<P id="bubble-user-intro">${dto.user_Intro }</P>
+									
+										<div class="over-bubble">클릭 시 지원자의 프로필 창이 켜집니다.</div>
+>>>>>>> 3b8de4d0ec3be9d3a3d477fcb6436b80bfdcc296
 									</div>
 
 

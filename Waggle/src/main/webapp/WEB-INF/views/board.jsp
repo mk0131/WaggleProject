@@ -6,7 +6,8 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>꿀단지</title>
+<title>Waggle 게시판</title>
+<link rel="icon" href="/images/importToJsp/favicon.png">
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <link rel="stylesheet" href="/css/guideline.css">
 <link rel="preconnect" href="https://fonts.googleapis.com">

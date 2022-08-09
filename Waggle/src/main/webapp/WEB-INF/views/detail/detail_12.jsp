@@ -6,7 +6,8 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>요청상세페이지(모집중)</title>
+<title>Waggle 요청글</title>
+<link rel="icon" href="/images/importToJsp/favicon.png">
 </head>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <style type="text/css">
@@ -296,6 +297,7 @@ button:active {
 
 </style>
 <body>
+<<<<<<< HEAD
 	<%@ include file="../header.jsp"%>
 	<div id="wrap">
 		<div class="middle">
@@ -307,6 +309,19 @@ button:active {
 						<p>HOME > 요청 상세페이지</p></li>
 				</ul>
 			</div>
+=======
+	<%@ include file="../header.jsp" %>
+	 <div id="wrap">
+	  <div class="middle">
+		<div class="guideline">
+			<ul class="guideline-all">
+        		<li><a href="javascript:void(0)">
+        		<i class="fa-solid fa-house"></i>
+        		</a>
+        		<p>HOME > 꿀단지목록 > 요청글</p>
+        		</li>	
+        	</ul>
+>>>>>>> 3b8de4d0ec3be9d3a3d477fcb6436b80bfdcc296
 		</div>
 
 		<div class="ongoing21-all">

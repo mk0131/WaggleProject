@@ -6,7 +6,8 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>Waggle 마이페이지</title>
+<link rel="icon" href="/images/importToJsp/favicon.png">
 <style>
 
 .middle {
@@ -799,7 +800,7 @@ textarea {
 					<li><a href="javascript:void(0)"> <i
 							class="fa-solid fa-house"></i>
 					</a></li>
-					<p>HOME > 나의 프로필</p>
+					<p>HOME > 마이페이지</p>
 				</ul>
 			</div>
 
@@ -982,7 +983,7 @@ textarea {
 								<form name="form" method="POST">
 								<div class="desc-intro" data-behaviour="search-on-list" style="text-align:initial">
 									<span class="counter"	data-search-on-list="counter">
-										<div style="white-space:pre;">${dto.user_Intro}</div>
+										<div >${dto.user_Intro}</div>
 									</span>
 								</div>
 								<div class="styled-input" id="desc-edit-input" style="display:none">
