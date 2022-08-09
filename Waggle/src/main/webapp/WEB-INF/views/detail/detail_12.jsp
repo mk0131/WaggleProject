@@ -457,7 +457,7 @@ button:active {
 						</div>
 
 						<div class="userinfo-honey">
-							<div class="honey-letter">${user_dto.user_Nm}님의꿀 수확량:
+							<div class="honey-letter">${user_dto.user_Nm}님의 꿀 수확량:
 								${user_dto.user_Grade}</div>
 							<div id="bar_container">
 								<div id="progress_bar">
