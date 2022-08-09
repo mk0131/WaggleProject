@@ -428,7 +428,11 @@ button:active {
 			               </tbody>   
 				          <tr>
 				         <td class="btn1" colspan="2" align="right">
-				         	<button type="button" value="문의" onclick="location.href='/inquiry/insertform'">문의 작성</button>      
+				         	<c:if test="${user_Nm ne 'admin'}">
+						    <div class="btn-admin" id="btn-admin">
+						     <button type="button" value="문의" onclick="location.href='/inquiry/insertform'">문의 작성</button>
+						    </div>
+	    					</c:if>   
 				         </td>   
 				           </tr>    
 				          	</table>

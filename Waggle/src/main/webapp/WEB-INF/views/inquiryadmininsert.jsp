@@ -5,8 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Waggle 문의글 상세</title>
-<link rel="icon" href="/images/importToJsp/favicon.png">
+<title>Insert title here</title>
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
@@ -40,7 +39,7 @@
 	text-align: center;
 }
 
-button {
+.btn1 input {
  background-color: #151515;
  border-radius: 8px;
  border-style: none;
@@ -56,36 +55,18 @@ button {
  transition: background box-shadow 280ms ease;
 }
 
-button:hover {
+.btn1 input:hover {
  background: #fff;
  color: #151515;
 }
 
-button:active {
+.btn1 input:active {
  box-shadow: 0 4px 4px 0 rgb(60 64 67 / 30%), 0 8px 12px 6px rgb(60 64 67 / 15%);
  outline: none;
  border: 1px solid #ffffff;
 }
 
-.Inquiry-detail {
-	display:flex;
-  	align-items: center;
-  	justify-content: center;
-    padding: 50px;
-    border-spacing: 10px;
-}
-
-.Inauiry-board-content {
-	border: none;
-	resize: none;
-}
-
-.Inauiry-board-content:focus {
-	border: none;
-	outline: none;
-	resize: none;
-}
-
+/* 
 th {
 	width:200px;
 }
@@ -94,26 +75,38 @@ tr {
 	width:200px;
 	height: 75px;
 	border: 1px solid;
-}
+} */
 
 .btn1 {
+	position: relative;
 	top: 150px;
-	padding: 45px 0px;
 }
 
-.Inquiry-text-center {
-	text-align: center;
+.Inquiry-insert {
+	display: flex;
+    justify-content: center;
+    border-spacing: 50px;
 }
 
-.Inquiry-text {
-	border-bottom: 1px solid;
-	display: inline-block;
-	margin: 0 auto;
-	width: 630px;
+/* .Inquiry-insert input {
+	border: 0;
+    border-bottom: 1px solid;
+} */
+
+#title {
+	width: 440px;
+    height: 30px;
+    border: 0;
+    border-bottom: 1px solid;
 }
 
-.Inquiry-text p {
-	font-size: 13px;
+#title:focus {
+	outline: none;
+}
+
+#incontent {
+	border: 0;
+	resize: none;
 }
 
 
@@ -128,7 +121,7 @@ tr {
         		<li><a href="javascript:void(0)">
         		<i class="fa-solid fa-house"></i>
         		</a>
-        		<p>HOME > 1:1문의</p>
+        		<p>HOME > 공지사항</p>
         		</li>	
         	</ul>
 		</div>
@@ -137,52 +130,38 @@ tr {
 		<br/>
 	   <div class="Inquiry-text-center">
 		<div class="Inquiry-text">
-		   <h4>1:1 문의</h4>
-			<p>고객님께서 1:1문의에서 작성하신 내용입니다.</p>
+		   
 			</div>
 			 </div>
 			<div class="notice-container">
 	 			<div class="conbox con3">
-	              <input type="hidden" name="user_Code" value="${user_Code }">
-					<table class="Inquiry-detail">
-						<tr>
-						<th>문의 유형</th>
-						<td>${dto.in_Type }</td>
-						</tr>
+	 			 <form action="/inquiry/admininsert" method="post">
+	 			<input type="hidden" name="user_Code" value="${user_Code }">
+	 			 <input type="hidden" name="originNo" value="${originNo}">
+	 			 <input type="hidden" name="val" value="${user_dto.user_Code}">
+					<table class="Inquiry-insert">
 						<tr>
 						<th>제목</th>
-						<td>${dto.in_Title }</td>
+						<td><input type="text" id="title" name="in_Title" ></td>
 						</tr>
 						<tr>
 						<th>작성자</th>
-						<td>${user_dto.user_Nm}</td>						
-						</tr>
-						<tr>
-						<th>작성일</th>
-						<td>${dto.in_Date }</td>
+						<td>${user_dto.user_Nm }</td>						
 						</tr>
 						<tr>
 						<th>내용</th>
-						<td>${dto.in_Content }</td>
-						</tr>
-						<tr>
-						<th>답변상태</th>
-						<td>${dto.in_Stat }</td>
+						
+						<td><textarea id="incontent" rows="14" cols="70" name="in_Content" placeholder="문의할 내용을 입력해주세요."></textarea></td>
+						
 						</tr>
 						<tr>         
 				         <td class="btn1" colspan="2" align="right">
-				         	<button type="button" value="목록" onclick='history.back();'>목록</button>
-				         	<c:if test="${user_Nm eq 'admin' }">
-				         	<button type="button" value="답변 작성" onclick="location.href='/inquiry/admininsertform?in_Code=${dto.in_Code}'">답변 작성</button>
-				         	</c:if>
-				         	<c:if test="${user_Nm ne 'admin' }">
-				         	<button type="button" value="수정" onclick="location.href='/inquiry/updateform?in_Code=${dto.in_Code}'">수정</button>
-				         	<button type="button" value="삭제" onclick="location.href='/inquiry/delete?in_Code=${dto.in_Code}&user_Code=${user_Code }'">삭제</button>  
-				         	</c:if>
+				         	<input type="submit" value="완료" onclick="location.href='/inquiry/list?user_Code=${user_Code}&page=${num }'">
+				         	<input type="button" value="취소" onclick="location.href='/inquiry/list?user_Code=${user_Code}'">  
 				         </td>   
 						</tr>
 					</table>
-
+				   </form>
 		 </div>
  	</div>
  	</div>
