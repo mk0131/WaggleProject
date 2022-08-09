@@ -226,7 +226,7 @@ input:focus ~ .bar:before, input:focus ~ .bar:after {
 				<form>
 					<div class="money">
 						<div class="img-x">
-						<input id="price" class="point-amount" type="text" style="background-color:transparent;" required placeholder="금액을 입력해주세요"><span class="bar"></span>
+						<input id="price" class="point-amount" type="text" style="background-color:transparent;" required placeholder="아래 버튼을 눌러 금액을 입력해주세요" readonly="readonly"><span class="bar"></span>
 						</div>
 						<div class="img-x" onclick="priceReset()">
 						<svg width="45" height="45" viewBox="0 0 42 42" fill="none"
@@ -346,6 +346,8 @@ input:focus ~ .bar:before, input:focus ~ .bar:after {
 		
 	</div>
    </div>
+   <input type="hidden" value="${user_Email}" id="useremail">
+   <input type="hidden" value="${user_Code}" id="usercode">
 	<%@ include file="footer.jsp"%>
 
 <script type="text/javascript" src="/js/payment.js"></script>

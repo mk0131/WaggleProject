@@ -519,7 +519,7 @@ button:active {
 										</div>
 										<div class="imp-title" id="title2">
 											<div class="imp-bold-title">요청 매물과 나와의 거리</div>
-											<div class="imp-title-content"></div>
+											<div class="imp-title-content" id="distance"></div>
 										</div>
 									</div>
 
@@ -650,47 +650,70 @@ if (link.includes("https://")) {
    
 	
 </script>
-<script>
-//꿀 수확량 구현
-window.addEventListener("load", () => {
-	  if(${user_dto.user_Grade} <= 100){
-		  $("#progress_bar").css({
-		    width: ${user_dto.user_Grade}+"%"
-		  });
-	  }else if(${user_dto.user_Grade} > 100){
-		  $("#progress_bar").css({
-			    width: 100+"%"
-			  });
-	  }
-	  
-	  if(${user_dto.user_Grade}>=0 && ${user_dto.user_Grade}<=29){
-		  $('#progress_bar').css('background-image','linear-gradient(rgb(199 112 0) 0%, rgb(145 81 0) 100%)');
-	  }else if(${user_dto.user_Grade}>=30 && ${user_dto.user_Grade}<=45){
-		  $('#progress_bar').css('background-image','linear-gradient(rgb(241 241 241) 0%, rgb(161 161 161) 100%)');
-	  }else if(${user_dto.user_Grade}>=46 && ${user_dto.user_Grade}<=60){
-		  $('#progress_bar').css('background-image','linear-gradient(rgb(253 255 178) 0%, rgb(225 197 0) 100%)');
-	  }else if(${user_dto.user_Grade}>=61 && ${user_dto.user_Grade}<=100){
-		  $('#progress_bar').css('background-image','linear-gradient(rgb(202 255 241) 0%, rgb(0 209 132) 100%)');
-	  }else{
-		  $('#progress_bar').css('background-image','linear-gradient(rgb(196 244 255) 0%, rgb(0 180 209) 100%)');
-	  }
-	  
-	  function animateValue(obj, start, end, duration) {
-	    let startTimestamp = null;
-	    const step = (timestamp) => {
-	      if (!startTimestamp) startTimestamp = timestamp;
-	      const progress = Math.min((timestamp - startTimestamp) / duration, 1);
-	      obj.innerHTML = Math.floor(progress * (end - start) + start);
-	      if (progress < 1) {
-	        window.requestAnimationFrame(step);
-	      }
-	    };
-	    window.requestAnimationFrame(step);
-	  }
+<script type="text/javascript">
+	//꿀 수확량 구현
+	$(function() {
+		if(${user_dto.user_Grade} <= 100){
+			$("#progress_bar").css({
+				width: ${user_dto.user_Grade}+"%"
+			});
+		}else if(${user_dto.user_Grade} > 100){
+			$("#progress_bar").css({
+					width: 100+"%"
+				});
+		}
+		
+		if(${user_dto.user_Grade}>=0 && ${user_dto.user_Grade}<=29){
+			$('#progress_bar').css('background-image','linear-gradient(rgb(199 112 0) 0%, rgb(145 81 0) 100%)');
+		}else if(${user_dto.user_Grade}>=30 && ${user_dto.user_Grade}<=45){
+			$('#progress_bar').css('background-image','linear-gradient(rgb(241 241 241) 0%, rgb(161 161 161) 100%)');
+		}else if(${user_dto.user_Grade}>=46 && ${user_dto.user_Grade}<=60){
+			$('#progress_bar').css('background-image','linear-gradient(rgb(253 255 178) 0%, rgb(225 197 0) 100%)');
+		}else if(${user_dto.user_Grade}>=61 && ${user_dto.user_Grade}<=100){
+			$('#progress_bar').css('background-image','linear-gradient(rgb(202 255 241) 0%, rgb(0 209 132) 100%)');
+		}else{
+			$('#progress_bar').css('background-image','linear-gradient(rgb(196 244 255) 0%, rgb(0 180 209) 100%)');
+		}
+		
+		// 거리
+		if(${checking} == 0) {
+			var check = false;
+		} else {
+			var check = true;
+			var user_lat = ${user_add.ua_Lat};
+			var user_lng = ${user_add.ua_Lng};		
+		}
+		var home_lat = ${req_dto.home_Lat};
+		var home_lng = ${req_dto.home_Lng};
 
-	  const obj = document.getElementById("point_counter");
-	  animateValue(obj, 0, 12345, 3000);
+		if(check) {
+			var distance = getDistanceFromLatLonInKm(user_lat,user_lng,home_lat,home_lng);
+			if(distance > 1) {
+				$("#distance").text(distance.toFixed(1)+' Km');					
+			} else {
+				$("#distance").text( (distance.toFixed(3) * 1000) + ' m');
+			}
+			
+		} else {
+			$("#distance").html("??km");
+		}
+		
+		
 	});
+	
+	function getDistanceFromLatLonInKm(lat1,lng1,lat2,lng2) {
+	    function deg2rad(deg) {
+	        return deg * (Math.PI/180)
+	    }
+
+	    var R = 6371; // Radius of the earth in km
+	    var dLat = deg2rad(lat2-lat1);  // deg2rad below
+	    var dLon = deg2rad(lng2-lng1);
+	    var a = Math.sin(dLat/2) * Math.sin(dLat/2) + Math.cos(deg2rad(lat1)) * Math.cos(deg2rad(lat2)) * Math.sin(dLon/2) * Math.sin(dLon/2);
+	    var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+	    var d = R * c; // Distance in km
+	    return d;
+	}
 
 </script>
 </body>
