@@ -33,6 +33,7 @@ import com.probee.waggle.model.dto.UsersDto;
 import com.probee.waggle.model.dto.VolunteerDto;
 import com.probee.waggle.model.service.BoardService;
 import com.probee.waggle.model.service.HomeService;
+import com.probee.waggle.model.service.MypageService;
 import com.probee.waggle.model.service.PointService;
 import com.probee.waggle.model.service.VolunteerService;
 
@@ -51,6 +52,9 @@ public class BoardController {
 	
 	@Autowired
 	private PointService pointService;
+	
+	@Autowired
+	private MypageService mypageService;
 	
 	@GetMapping("/list")
 	public String selectList(Model model, Criteria cri, HttpSession session) {
@@ -207,6 +211,12 @@ public class BoardController {
 		// 사용자 정보
 		UsersDto user_dto = boardService.selectUser(req_dto.getReq_UCode());
 		model.addAttribute("user_dto", user_dto);
+		
+		int OtherUserPro = user_dto.getUser_Pro();
+		if(OtherUserPro !=0) {
+			FileDto ProfileFile = mypageService.SelectConfirmFile(OtherUserPro);
+			model.addAttribute("Pro_fi_Nm", ProfileFile.getFi_Nm());
+		}
 		
 		int req_UCode = req_dto.getReq_UCode();
 		String req_Stat = req_dto.getReq_Stat();

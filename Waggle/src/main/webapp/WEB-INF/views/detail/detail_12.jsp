@@ -56,6 +56,7 @@
     padding: 25px;
     border-spacing: 50px;
     font-size: 16px;
+    width:100%;
 }
 
 /* #yellow {
@@ -126,8 +127,8 @@ button:active {
 }
 
 #ongoing21-img img {
-	width: 400px;
-    height: 400px;
+	width: 100%;
+    height: 100%;
 	object-fit: cover;
 	border-radius: 8px;
 }
@@ -301,6 +302,11 @@ button:active {
 	border: 1px solid #f7f9fa;
 	vertical-align:middle;
 }
+
+.profile-img:hover{
+	box-shadow:2px 2px 2px 2px #b3b3b3;
+}
+
 .userinfo-left{
 	width: 80px; 
 	height: 80px; 
@@ -315,6 +321,8 @@ button:active {
 
 .userinfo-honey{
 	display:inline-block;
+	float:right;
+	margin-right:80px;
 }
 /* 꿀 수확량 CSS */
 #bar_container {
@@ -378,6 +386,12 @@ button:active {
   --clr-light-blue: rgb(171, 202, 255);
 }
 
+.honey-letter{
+	font-size: 14pt; 
+	font-weight: bold; 
+	margin-bottom:19px; 
+	margin-top: 15px;
+}
 /* 꿀 수확량 CSS */
 </style>
 <body>
@@ -415,11 +429,17 @@ button:active {
 						</c:if>
 					</div>
 				</div>
-				
-				<div class="userinfo-left" onclick="window.open('/mypage/other?ucode=${user_dto.user_Code}')">
-					<img src="/images/importToJsp/profile_default.jpg" class="profile-img"/>
-				</div>
-				<div class="userinfo-right" style="display: inline-block;">
+
+					<div class="userinfo-left"
+						onclick="window.open('/mypage/other?ucode=${user_dto.user_Code}')">
+						<c:if test="${user_dto.user_Pro == 0}">
+							<img src="/images/importToJsp/profile_default.jpg" class="profile-img"/>
+						</c:if>
+						<c:if test="${user_dto.user_Pro != 0 }">
+							<img src="${Pro_fi_Nm }" class="profile-img"/>
+						</c:if>
+					</div>
+					<div class="userinfo-right" style="display: inline-block;">
 					<div class="ongoing21-user-name">
 						 <span
 							id="userrealname"
@@ -434,7 +454,7 @@ button:active {
 				</div>
 				
 				<div class="userinfo-honey">
-				<div style="font-size: 14pt; font-weight: bold">user3님이 딴 꿀 수확량: ${dto.user_Grade}</div>
+				<div class="honey-letter">user3님의 꿀 수확량: ${user_dto.user_Grade}</div>
 				<div id="bar_container">
 					<div id="progress_bar">
 						<div id="progress_percentage" data-percentage="10">
@@ -442,7 +462,7 @@ button:active {
 					</div>
 				</div>
 				</div>
-					
+			
 				<div style="border-bottom:2px solid #e9ecef; width:90%; margin:0 auto;"></div>
 				<div id="flex-please">
 					<div class="ongoing21-flex">
@@ -622,46 +642,49 @@ if (link.includes("https://")) {
 	}
 }); 
    
-	//꿀 수확량 구현
-	window.addEventListener("load", () => {
-		  if(${dto.user_Grade} <= 100){
-			  $("#progress_bar").css({
-			    width: ${dto.user_Grade}+"%"
+	
+</script>
+<script>
+//꿀 수확량 구현
+window.addEventListener("load", () => {
+	  if(${user_dto.user_Grade} <= 100){
+		  $("#progress_bar").css({
+		    width: ${user_dto.user_Grade}+"%"
+		  });
+	  }else if(${user_dto.user_Grade} > 100){
+		  $("#progress_bar").css({
+			    width: 100+"%"
 			  });
-		  }else if(${dto.user_Grade} > 100){
-			  $("#progress_bar").css({
-				    width: 100+"%"
-				  });
-		  }
-		  
-		  if(${dto.user_Grade}>=0 && ${dto.user_Grade}<=29){
-			  $('#progress_bar').css('background-image','linear-gradient(rgb(199 112 0) 0%, rgb(145 81 0) 100%)');
-		  }else if(${dto.user_Grade}>=30 && ${dto.user_Grade}<=45){
-			  $('#progress_bar').css('background-image','linear-gradient(rgb(241 241 241) 0%, rgb(161 161 161) 100%)');
-		  }else if(${dto.user_Grade}>=46 && ${dto.user_Grade}<=60){
-			  $('#progress_bar').css('background-image','linear-gradient(rgb(253 255 178) 0%, rgb(225 197 0) 100%)');
-		  }else if(${dto.user_Grade}>=61 && ${dto.user_Grade}<=100){
-			  $('#progress_bar').css('background-image','linear-gradient(rgb(202 255 241) 0%, rgb(0 209 132) 100%)');
-		  }else{
-			  $('#progress_bar').css('background-image','linear-gradient(rgb(196 244 255) 0%, rgb(0 180 209) 100%)');
-		  }
-		  
-		  function animateValue(obj, start, end, duration) {
-		    let startTimestamp = null;
-		    const step = (timestamp) => {
-		      if (!startTimestamp) startTimestamp = timestamp;
-		      const progress = Math.min((timestamp - startTimestamp) / duration, 1);
-		      obj.innerHTML = Math.floor(progress * (end - start) + start);
-		      if (progress < 1) {
-		        window.requestAnimationFrame(step);
-		      }
-		    };
-		    window.requestAnimationFrame(step);
-		  }
+	  }
+	  
+	  if(${user_dto.user_Grade}>=0 && ${user_dto.user_Grade}<=29){
+		  $('#progress_bar').css('background-image','linear-gradient(rgb(199 112 0) 0%, rgb(145 81 0) 100%)');
+	  }else if(${user_dto.user_Grade}>=30 && ${user_dto.user_Grade}<=45){
+		  $('#progress_bar').css('background-image','linear-gradient(rgb(241 241 241) 0%, rgb(161 161 161) 100%)');
+	  }else if(${user_dto.user_Grade}>=46 && ${user_dto.user_Grade}<=60){
+		  $('#progress_bar').css('background-image','linear-gradient(rgb(253 255 178) 0%, rgb(225 197 0) 100%)');
+	  }else if(${user_dto.user_Grade}>=61 && ${user_dto.user_Grade}<=100){
+		  $('#progress_bar').css('background-image','linear-gradient(rgb(202 255 241) 0%, rgb(0 209 132) 100%)');
+	  }else{
+		  $('#progress_bar').css('background-image','linear-gradient(rgb(196 244 255) 0%, rgb(0 180 209) 100%)');
+	  }
+	  
+	  function animateValue(obj, start, end, duration) {
+	    let startTimestamp = null;
+	    const step = (timestamp) => {
+	      if (!startTimestamp) startTimestamp = timestamp;
+	      const progress = Math.min((timestamp - startTimestamp) / duration, 1);
+	      obj.innerHTML = Math.floor(progress * (end - start) + start);
+	      if (progress < 1) {
+	        window.requestAnimationFrame(step);
+	      }
+	    };
+	    window.requestAnimationFrame(step);
+	  }
 
-		  const obj = document.getElementById("point_counter");
-		  animateValue(obj, 0, 12345, 3000);
-		});
+	  const obj = document.getElementById("point_counter");
+	  animateValue(obj, 0, 12345, 3000);
+	});
 
 </script>
 </body>
