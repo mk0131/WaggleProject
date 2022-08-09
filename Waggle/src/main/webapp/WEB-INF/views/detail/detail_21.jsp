@@ -74,7 +74,11 @@
 	cursor: pointer;
 	color: #898989;
 }
-
+.b-line {
+	border-top-width: 1px;
+    border-top-style: solid;
+    border-top-color: rgb(245, 245, 245);
+}
 #w-date {
 	display: flex;
 	font-weight: bold;
