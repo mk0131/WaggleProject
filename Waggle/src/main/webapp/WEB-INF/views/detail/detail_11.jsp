@@ -708,7 +708,7 @@ button:active {
 		}); 
 		
 	</script>
-	<script>
+	<script type="text/javascript">
 //꿀 수확량 구현
 $(function() {
 	  if(${user_dto.user_Grade} <= 100){
