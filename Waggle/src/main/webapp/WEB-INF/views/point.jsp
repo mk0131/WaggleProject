@@ -2,6 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+  <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -126,7 +127,7 @@ input:focus ~ .bar:before, input:focus ~ .bar:after {
   background: transparent;
   width: 110px;
   border-radius: 10px;
-  border: 3px solid;
+  border: 2px solid;
   display: inline-block;
   margin: 0 10px 15px 10px;
   height: 35px;
@@ -299,7 +300,8 @@ input:focus ~ .bar:before, input:focus ~ .bar:after {
 											</c:if>
 										</div>
 										<div class="use-middle" style="width:650px; height:110px; padding-left:35px; display:inline-block">
-											<div>${dto.date}</div>
+											<fmt:parseDate value="${dto.date }" pattern="yyyy-MM-dd'T'HH:mm" var="parsedDateTime" type="both" />
+											<div><fmt:formatDate value="${parsedDateTime }" pattern="yyyy-MM-dd"/></div>
 											<div style="font-size:20pt">포인트 ${dto.type}</div>
 											<div style="padding-top:30px">잔여 포인트: &nbsp;${dto.price_Sum}&nbsp;P</div>
 										</div>

@@ -1,11 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+    <%@ taglib prefix= "fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+    <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Waggle 요청글(모집중)</title>
+<title>Waggle 요청글</title>
 <link rel="icon" href="/images/importToJsp/favicon.png">
 </head>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -82,7 +84,7 @@
 #w-date {
 	display: flex;
     justify-content: flex-end;
-    max-width: 1280px;
+    max-width: 87%;
     font-weight: bold;
 }
 
@@ -402,7 +404,12 @@ button:active {
 	  
 	   <div class="ongoing21-all">
 	    <h2 id="ongoing-detail">${req_dto.req_Title }(${req_dto.req_Stat })</h2>
-	     <p id="w-date">작성일 ${req_dto.req_WDate }</p>
+	    <fmt:parseDate value="${req_dto.req_WDate }"
+						pattern="yyyy-MM-dd'T'HH:mm" var="parsedDateTime" type="both" />
+					<p id="w-date">
+						작성일
+						<fmt:formatDate value="${parsedDateTime }" pattern="yyyy-MM-dd" />
+					</p>
 <%-- 	    <div class="ongoing21-user-name">
 	     <p id="username">작성자</p>&nbsp;
 	      <p id="userrealname">${user_dto.user_Nm}</p>
@@ -429,7 +436,7 @@ button:active {
 		  <div class="ongoing21-flex">
 		    <div class="ongoing21-middle">
 		    
-		     <h3 class="h3-font" onclick="window.open('/mypage/other?ucode=${user_dto.user_Code}')">${user_dto.user_Nm}님이 요청하신 내용입니다.</h3>
+		     <h3 class="h3-font">${user_dto.user_Nm}님이 요청하신 내용입니다.</h3>
 		    
 		      <div class="middle-content"><div class="middle-title">내가 본 집 링크 첨부<br/>(ex.직방, 다방 등등..)</div> <a class="middle-tcontent" id="link" href="" target="_blank">${req_dto.req_Link }</a></div>
 		        <div class="b-line"></div>
@@ -454,7 +461,7 @@ button:active {
 	       
 				<c:choose>
 					<c:when test="${empty vol }">
-						<td >-------------지원자가 없습니다.-------------</td>
+						<td colspan="4">-------------지원자가 없습니다.-------------</td>
 					</c:when>
 					<c:otherwise>
 						<c:forEach items="${vol }" var="dto">
@@ -527,15 +534,21 @@ button:active {
 	    <div class="detail-point"><b>포인트 비용 : ${req_dto.req_Point }P</b> </div>
 	   <div class="btn2" id="btn2">
 
-	      <button type="button" value="요청취소" onclick="location.href='/board/cancel?req_No=${req_dto.req_No}'" style="width: 170px; margin-right: 100px;" >요청 취소하기</button>
+					<button type="button" value="요청취소"
+						onclick="location.href='/board/cancel?req_No=${req_dto.req_No}'"
+						style="width: 170px; margin-right: 100px;">요청 취소하기</button>
 
-	     <button type="button" value="수정하기" onclick="location.href='/board/updateform?req_No=${req_dto.req_No }'" style="width: 170px; margin-right: 100px;" >수정하기</button>
+					<button type="button" value="수정하기"
+						onclick="location.href='/board/updateform?req_No=${req_dto.req_No }'"
+						style="width: 170px; margin-right: 100px;">수정하기</button>
 
-	      <button type="button" value="목록" onclick="location.href='/board/list'" style="width: 170px;">목록으로 돌아가기</button>
-	     </div>
-	    </div>
-	     
-	 </div>
+					<button type="button" value="목록"
+						onclick="location.href='/board/list'" style="width: 170px;">목록으로
+						돌아가기</button>
+				</div>
+			</div>
+
+		</div>
 	</div>
 	<%@ include file="../footer.jsp" %>
 	<script type="text/javascript">
