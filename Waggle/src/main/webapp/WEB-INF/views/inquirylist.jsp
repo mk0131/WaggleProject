@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -283,6 +284,10 @@ button:active {
 	color: #878787;
 }
 
+#create{
+	float: right;
+}
+
 </style>
 </head>
 <body>
@@ -313,11 +318,8 @@ button:active {
 	 	 			<label for="tab03">1:1 문의</label>
 	 	 			
 	 	 			<br/><br/><br/>
-	 	 			<c:if test="${user_Code == 1 }">
-	 	 			<input type="button" value="작성" onclick="location.href='/notice/insertform'">
-	 	 			</c:if>
-	 	 			<div class="conbox con1">
 	 	 			
+	 	 			<div class="conbox con1">
 	 	 			<div class="accordion-all"> <!-- 여기서 부터 -->
 	 	 				<div class="accordion js-accordion" id="list">
 	 	 				
@@ -330,9 +332,8 @@ button:active {
 						    <div class="accordion-body__contents">
 						    <br/><br/>
 						   	${dto.no_Content }
-	 	 					<br/>(1) 개정일정 <br/>
-							<br/>공고일자 : ${dto.no_Date }<br/>
-							<br/>시행일자 : ${dto.no_Date }<br/>
+						   	<br>
+							<br/>공고일자 : <fmt:formatDate value="${dto.no_Date}" pattern="yyyy년 MM월 dd일"/><br/>
 							<br/><br/>
 						    </div>
 						    </div><!-- end of accordion body -->
@@ -342,7 +343,8 @@ button:active {
 						  
 	 	 				</div>
 	 	 			</div> <!-- 여기 까지 -->
-	 	 			</div>	
+	 	 			</div>
+	 	 				
 	 	 			
 	 	 			<div class="conbox con2">
 	 	 				<div class="accordion js-accordion">
@@ -364,6 +366,12 @@ button:active {
 
 	 	 				</div>
 	 	 			</div>
+	 	 			<c:if test="${user_Code == 1 }">
+	 	 			<br>
+	 	 			<div style="width: 1135px;">
+	 	 			<button  id="create" onclick="location.href='/notice/insertform'">공지 작성</button>
+	 	 			</div>
+	 	 			</c:if>
 	 	 			<br/>
 	 	 			<div class="conbox con3">
 	 	 				<table class="Inquiry-category">
@@ -523,7 +531,21 @@ button:active {
 
 	$(document).ready(function(){
 	  accordion.init({ speed: 300, oneOpen: true });
-	  d
+	  
+	  
+	  $(function(){
+		  
+		  $("#tab03").on("click",function(){
+			  $("#create").css("display", "none");
+		  });
+		  $("#tab01").on("click",function(){
+			  $("#create").show();
+		  });
+		  $("#tab02").on("click",function(){
+			  $("#create").show();
+		  });
+	  })
+	  
 	  
 	});
 </script>
