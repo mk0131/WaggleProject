@@ -640,9 +640,11 @@ if (link.includes("https://")) {
 	 var nVScroll = document.documentElement.scrollTop || document.body.scrollTop;
 	 var currentPosition = parseInt($(".imp").css("top")); 
 	 
-	 if(nVScroll > 750) {
+	 if(nVScroll > 930 && nVScroll <=1100) {
 		 $(".imp").css("position", "fixed").css("top", "135" + "px")
-	} 
+	} else if(nVScroll > 1100){
+		$(".imp").css("position", "absolute").css("top", "190" + "px")
+	}
 	else {
 		$(".imp").css("position", "absolute").css("top", "40" + "px")
 	}

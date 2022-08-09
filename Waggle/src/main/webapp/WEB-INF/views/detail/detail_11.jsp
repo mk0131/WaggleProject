@@ -699,9 +699,11 @@ button:active {
 			 var nVScroll = document.documentElement.scrollTop || document.body.scrollTop;
 			 var currentPosition = parseInt($(".imp").css("top")); 
 			 
-			 if(nVScroll > 750) {
+			 if(nVScroll > 930 && nVScroll <=1300) {
 				 $(".imp").css("position", "fixed").css("top", "135" + "px")
-			} 
+			} else if(nVScroll > 1300){
+				$(".imp").css("position", "absolute").css("top", "400" + "px")
+			}
 			else {
 				$(".imp").css("position", "absolute").css("top", "40" + "px")
 			}
