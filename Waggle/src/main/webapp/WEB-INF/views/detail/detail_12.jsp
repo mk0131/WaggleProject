@@ -396,6 +396,7 @@ button:active {
 	margin-top: 15px;
 }
 /* 꿀 수확량 CSS */
+
 </style>
 <body>
 	<%@ include file="../header.jsp" %>
