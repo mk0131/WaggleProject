@@ -205,6 +205,22 @@ public class BoardController {
 		if (storedValue instanceof Integer) {
 			user_Code = (int) storedValue;
 		}
+		
+		// 유저 코드로 좌표 가져오기
+		UserAddressDto add_dto = boardService.selectUserAddr(user_Code);
+
+		if(add_dto != null) {
+			model.addAttribute("user_add",add_dto);
+			model.addAttribute("checking",1);
+			
+		} else {
+			UserAddressDto add_dto1 = new UserAddressDto();
+			add_dto1.setUa_Lat(0.0);
+			add_dto1.setUa_Lng(0.0);
+			model.addAttribute("user_add",add_dto1);
+			model.addAttribute("checking",0);
+		}
+		
 		// 요청글 정보
 		RequestDto2 req_dto = boardService.selectRequest(req_No);
 		model.addAttribute("req_dto", req_dto);
