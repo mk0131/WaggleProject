@@ -2,6 +2,8 @@ package com.probee.waggle.model.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -91,12 +93,51 @@ public class InquiryController {
 	public String insert(InquiryDto dto, int in_UCode) {
 		System.out.println(dto);
 		if(inquiryService.insert(dto) > 0) {
+			inquiryService.updateOriginNo(dto);
 			return "redirect:/inquiry/list?user_Code="+dto.getIn_UCode();
 		} else {
 			return "redirect:/inquiry/insert";
 		}
 		
 	}
+	
+	@GetMapping("/admininsertform")
+	public String admininsertform(HttpServletRequest request, Model model) {	
+		
+		int in_Code = Integer.parseInt(request.getParameter("in_Code"));
+		
+		InquiryDto inqdto = inquiryService.selectOne(in_Code);
+		model.addAttribute("dto", inqdto);
+		
+		UsersDto user_dto = inquiryService.selectuser(inqdto.getIn_UCode());
+		model.addAttribute("user_dto", user_dto);
+		
+		request.setAttribute("originNo", Integer.parseInt(request.getParameter("in_Code")));
+		
+		user_dto.setUser_Nm("관리자");
+		
+		System.out.println(user_dto);
+		
+		return "inquiryadmininsert";
+	}
+	
+	@RequestMapping("/admininsert")
+	public String admininsert(InquiryDto dto, int val, Model model, HttpServletRequest request, String user_Nm) {
+		
+		UsersDto user_dto = inquiryService.selectuser(val);
+		user_dto.setUser_Nm("관리자");
+		
+		dto.setIn_UCode(val);
+		
+		if(inquiryService.admininsert(dto) > 0 ) {
+			return "redirect:/inquiry/list?user_Code=" + dto.getIn_UCode();
+		} else {
+			return "redirect:/inquiry/admininsert";
+		}
+		
+		
+	}
+	
 	
 	@GetMapping("/updateform")
 	public String updateform(int in_Code, Model model) {	

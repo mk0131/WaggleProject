@@ -37,25 +37,8 @@
 	font-size: 15px;
 }
 
-.ongoing21-user-name {
-	display: flex;
-    justify-content: flex-end;
-    max-width: 1280px;
-}
-
-
  #ongoing-detail {
 	text-align: center;
-}
-
-
-.ongoing21-content {
-	display:flex;
-  	align-items: center;
-  	justify-content: center;
-    padding: 25px;
-    border-spacing: 50px;
-    font-size: 16px;
 }
 
 .ongoing21-content-bottom {
@@ -77,16 +60,6 @@
 	box-shadow: rgba(67, 71, 85, 0.27) 0px 0px 0.25em, rgba(90, 125, 188, 0.05) 0px 0.25em 1em;
 }
 
-#userrealname {
-	font-weight: bold;
-}
-
-#w-date {
-	display: flex;
-    justify-content: flex-end;
-    max-width: 87%;
-    font-weight: bold;
-}
 
 button {
  font-weight: 600;
@@ -190,12 +163,13 @@ button:active {
 	display: flex;
     justify-content: center;
     align-items: center;
-    padding: 35px 0px 50px 0px;
 }
-
+#ongoing21-img {
+	width: 800px;
+}
 #ongoing21-img img {
-	width: 400px;
-    height: 400px;
+	width: 100%;
+    height: 100%;
 	object-fit: cover;
 	border-radius: 8px;
 }
@@ -272,7 +246,7 @@ button:active {
     letter-spacing: .25px;
     -webkit-box-flex: 1;
     flex-grow: 1;
-    padding-top: 40px;
+    padding-top: 20px;
 }
 
 .imp-flex {
@@ -283,6 +257,7 @@ button:active {
 
 .ongoing21-flex {
     padding: 0px 80px 0px 30px;
+    width:50%;
 }
 
 #flex-please {
@@ -386,6 +361,139 @@ button:active {
 	margin: 0px 0px 25px 0px;
 }
 
+/* 프로필 유저 정보 css */
+#userrealname {
+	font-weight: bold;
+}
+
+#userrealname:hover{
+	cursor:pointer;
+	color:#898989;
+}
+
+.ongoing21-content {
+	display:flex;
+  	align-items: center;
+  	justify-content: center;
+    padding: 25px;
+    border-spacing: 50px;
+    font-size: 16px;
+    width:100%;
+}
+
+.ongoing21-user-name {
+	display: flex;
+    font-weight:bold;
+    font-size:24pt;
+    margin-right:auto;
+}
+
+#w-date {
+	display: flex;
+    font-weight: bold;
+    margin:0;
+    color:#868e96;
+    font-size:18px;
+}
+
+.profile-img{
+	width: 80px;
+	height: 80px;
+	border-radius: 50%;
+	border: 1px solid #f7f9fa;
+	vertical-align:middle;
+}
+
+.profile-img:hover{
+	box-shadow:2px 2px 2px 2px #b3b3b3;
+}
+
+.userinfo-left{
+	width: 80px; 
+	height: 80px; 
+	display: inline-block; 
+	margin-left: 70px; 
+	margin-right: 10px;
+	margin-bottom: 15px;
+}
+.userinfo-right{
+	vertical-align:middle;
+}
+
+.userinfo-honey{
+	display:inline-block;
+	float:right;
+	margin-right:80px;
+}
+/* 꿀 수확량 CSS */
+#bar_container {
+  height: 10px;
+  background: #dcdbd7;
+  border-radius: 20px;
+  border-top: 1px solid #cfcec9;
+  border-bottom: 1px solid #f7f6f4;
+  box-shadow: 0 -1px 0 #bab9b4;
+  margin-bottom: 24px;
+  position: relative;
+  margin-top: 10px;
+  width:200px;
+}
+
+#progress_bar {
+  background-color: #dcf1c6;
+  height: 110%;
+  position: absolute;
+  top: -3px;
+  left: 0px;
+  border-top: 1px solid #e5ebf4;
+  border-radius: 20px;
+  box-shadow: 0 3px 10px #717171;
+  width: 0%;
+  transition: all 3s 0s cubic-bezier(0.83, 0, 0.17, 1);;
+}
+
+#progress_percentage {
+  position: absolute;
+  top: -40px;
+  right: -10px;
+  width: 40px;
+  height: 24px;
+  padding-top: 6px;
+}
+
+#progress_percentage::before {
+  /* used for the border of the arrow */
+  content: "";
+  position: absolute;
+  left: 14px;
+  bottom: -11px;
+}
+
+#progress_percentage::after {
+  /* the actual little arrow in the baloon */
+  content: "";
+  position: absolute;
+  left: 14px;
+  bottom: -10px;
+}
+
+
+:root {
+  --clr-white: rgb(255, 255, 255);
+  --clr-black: rgb(0, 0, 0);
+  --clr-light: rgb(245, 248, 255);
+  --clr-light-gray: rgb(196, 195, 196);
+  --clr-blue: rgb(63, 134, 255);
+  --clr-light-blue: rgb(171, 202, 255);
+}
+
+.honey-letter{
+	font-size: 14pt; 
+	font-weight: bold; 
+	margin-bottom:19px; 
+	margin-top: 15px;
+}
+/* 꿀 수확량 CSS */
 
 </style>
 <body>
@@ -404,16 +512,6 @@ button:active {
 	  
 	   <div class="ongoing21-all">
 	    <h2 id="ongoing-detail">${req_dto.req_Title }(${req_dto.req_Stat })</h2>
-	    <fmt:parseDate value="${req_dto.req_WDate }"
-						pattern="yyyy-MM-dd'T'HH:mm" var="parsedDateTime" type="both" />
-					<p id="w-date">
-						작성일
-						<fmt:formatDate value="${parsedDateTime }" pattern="yyyy-MM-dd" />
-					</p>
-<%-- 	    <div class="ongoing21-user-name">
-	     <p id="username">작성자</p>&nbsp;
-	      <p id="userrealname">${user_dto.user_Nm}</p>
-	       </div> --%>
 	      <div class="ongoing21-middle-bottom">
 	      <div class="ongoing21-top">
 		   <input type="hidden" name="req_dto.req_No" value="${req_dto.req_No }">
@@ -431,12 +529,48 @@ button:active {
 		     </c:if>
 		   </div>
 		  </div>
-		  
-		  <div id="flex-please">
+
+				<div class="info-content" style="width: 1300px; margin: 0 auto;">
+					<div class="userinfo-left"
+						onclick="window.open('/mypage/other?ucode=${user_dto.user_Code}')">
+						<c:if test="${user_dto.user_Pro == 0}">
+							<img src="/images/importToJsp/profile_default.jpg"
+								class="profile-img" />
+						</c:if>
+						<c:if test="${user_dto.user_Pro != 0 }">
+							<img src="${Pro_fi_Nm }" class="profile-img" />
+						</c:if>
+					</div>
+					<div class="userinfo-right" style="display: inline-block;">
+						<div class="ongoing21-user-name">
+							<span id="userrealname"
+								onclick="window.open('/mypage/other?ucode=${user_dto.user_Code}')">${user_dto.user_Nm}</span>
+						</div>
+						<fmt:parseDate value="${req_dto.req_WDate }"
+							pattern="yyyy-MM-dd'T'HH:mm" var="parsedDateTime" type="both" />
+						<p id="w-date">
+							작성일
+							<fmt:formatDate value="${parsedDateTime }" pattern="yyyy-MM-dd" />
+						</p>
+					</div>
+
+					<div class="userinfo-honey">
+						<div class="honey-letter">${user_dto.user_Nm}님의 꿀 수확량:
+							${user_dto.user_Grade}</div>
+						<div id="bar_container">
+							<div id="progress_bar">
+								<div id="progress_percentage" data-percentage="10"></div>
+							</div>
+						</div>
+					</div>
+
+					<div
+						style="border-bottom: 2px solid #e9ecef; width: 94%; margin: 0 auto;"></div>
+				</div>
+
+				<div id="flex-please">
 		  <div class="ongoing21-flex">
 		    <div class="ongoing21-middle">
-		    
-		     <h3 class="h3-font">${user_dto.user_Nm}님이 요청하신 내용입니다.</h3>
 		    
 		      <div class="middle-content"><div class="middle-title">내가 본 집 링크 첨부<br/>(ex.직방, 다방 등등..)</div> <a class="middle-tcontent" id="link" href="" target="_blank">${req_dto.req_Link }</a></div>
 		        <div class="b-line"></div>
@@ -512,7 +646,7 @@ button:active {
 	     <div class="imp-line">
 	    	 <div class="imp-box">
 	    	  <div class="imp-title" id="title1"><div class="imp-bold-title">방문기한</div><div class="imp-title-content">${req_dto.req_EDate }</div></div>
-	    	  <div class="imp-title" id="title2"><div class="imp-bold-title">요청 매물과 나와의 거리</div><div class="imp-title-content"></div></div>
+	    	  <div class="imp-title" id="title2"><div class="imp-bold-title">요청 매물과 나와의 거리</div><div class="imp-title-content" id="distance"></div></div>
 	    	  </div>
 	    	  
 	    	  
@@ -565,14 +699,82 @@ button:active {
 			 var nVScroll = document.documentElement.scrollTop || document.body.scrollTop;
 			 var currentPosition = parseInt($(".imp").css("top")); 
 			 
-			 if(nVScroll > 750) {
+			 if(nVScroll > 930 && nVScroll <=1300) {
 				 $(".imp").css("position", "fixed").css("top", "135" + "px")
-			} 
+			} else if(nVScroll > 1300){
+				$(".imp").css("position", "absolute").css("top", "400" + "px")
+			}
 			else {
 				$(".imp").css("position", "absolute").css("top", "40" + "px")
 			}
 		}); 
 		
 	</script>
+<script type="text/javascript">
+	//꿀 수확량 구현
+	$(function() {
+		if(${user_dto.user_Grade} <= 100){
+		 $("#progress_bar").css({
+		   width: ${user_dto.user_Grade}+"%"
+		 });
+		}else if(${user_dto.user_Grade} > 100){
+		 $("#progress_bar").css({
+		    width: 100+"%"
+		  });
+		}
+		
+		if(${user_dto.user_Grade}>=0 && ${user_dto.user_Grade}<=29){
+		 $('#progress_bar').css('background-image','linear-gradient(rgb(199 112 0) 0%, rgb(145 81 0) 100%)');
+		}else if(${user_dto.user_Grade}>=30 && ${user_dto.user_Grade}<=45){
+		 $('#progress_bar').css('background-image','linear-gradient(rgb(241 241 241) 0%, rgb(161 161 161) 100%)');
+		}else if(${user_dto.user_Grade}>=46 && ${user_dto.user_Grade}<=60){
+		 $('#progress_bar').css('background-image','linear-gradient(rgb(253 255 178) 0%, rgb(225 197 0) 100%)');
+		}else if(${user_dto.user_Grade}>=61 && ${user_dto.user_Grade}<=100){
+		 $('#progress_bar').css('background-image','linear-gradient(rgb(202 255 241) 0%, rgb(0 209 132) 100%)');
+		}else{
+		 $('#progress_bar').css('background-image','linear-gradient(rgb(196 244 255) 0%, rgb(0 180 209) 100%)');
+		}
+	  
+		// 거리
+		if(${checking} == 0) {
+			var check = false;
+		} else {
+			var check = true;
+			var user_lat = ${user_add.ua_Lat};
+			var user_lng = ${user_add.ua_Lng};		
+		}
+		var home_lat = ${req_dto.home_Lat};
+		var home_lng = ${req_dto.home_Lng};
+
+		if(check) {
+			var distance = getDistanceFromLatLonInKm(user_lat,user_lng,home_lat,home_lng);
+			if(distance > 1) {
+				$("#distance").text(distance.toFixed(1)+' Km');					
+			} else {
+				$("#distance").text( (distance.toFixed(3) * 1000) + ' m');
+			}
+			
+		} else {
+			$("#distance").html("??km");
+		}
+		
+		
+	});
+	
+	function getDistanceFromLatLonInKm(lat1,lng1,lat2,lng2) {
+	    function deg2rad(deg) {
+	        return deg * (Math.PI/180)
+	    }
+
+	    var R = 6371; // Radius of the earth in km
+	    var dLat = deg2rad(lat2-lat1);  // deg2rad below
+	    var dLon = deg2rad(lng2-lng1);
+	    var a = Math.sin(dLat/2) * Math.sin(dLat/2) + Math.cos(deg2rad(lat1)) * Math.cos(deg2rad(lat2)) * Math.sin(dLon/2) * Math.sin(dLon/2);
+	    var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+	    var d = R * c; // Distance in km
+	    return d;
+	}
+
+</script>
 </body>
 </html>

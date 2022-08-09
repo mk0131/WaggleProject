@@ -62,5 +62,16 @@ public class InquiryServiceImpl implements InquiryService {
 		return inquiryMapper.inquiryallListCnt(user_Nm);
 	}
 
+	@Override
+	public int updateOriginNo(InquiryDto dto) {
+		return inquiryMapper.updateOriginNo(dto);
+		
+	}
+
+	@Override
+	public int admininsert(InquiryDto dto) {
+		return inquiryMapper.adminInsert(dto);
+	}
+
 
 }

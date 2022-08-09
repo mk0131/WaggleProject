@@ -205,6 +205,22 @@ public class BoardController {
 		if (storedValue instanceof Integer) {
 			user_Code = (int) storedValue;
 		}
+		
+		// 유저 코드로 좌표 가져오기
+		UserAddressDto add_dto = boardService.selectUserAddr(user_Code);
+
+		if(add_dto != null) {
+			model.addAttribute("user_add",add_dto);
+			model.addAttribute("checking",1);
+			
+		} else {
+			UserAddressDto add_dto1 = new UserAddressDto();
+			add_dto1.setUa_Lat(0.0);
+			add_dto1.setUa_Lng(0.0);
+			model.addAttribute("user_add",add_dto1);
+			model.addAttribute("checking",0);
+		}
+		
 		// 요청글 정보
 		RequestDto2 req_dto = boardService.selectRequest(req_No);
 		model.addAttribute("req_dto", req_dto);
@@ -212,6 +228,7 @@ public class BoardController {
 		UsersDto user_dto = boardService.selectUser(req_dto.getReq_UCode());
 		model.addAttribute("user_dto", user_dto);
 		
+		// 요청글 작성자 정보
 		int OtherUserPro = user_dto.getUser_Pro();
 		if(OtherUserPro !=0) {
 			FileDto ProfileFile = mypageService.SelectConfirmFile(OtherUserPro);
@@ -275,7 +292,20 @@ public class BoardController {
 			
 			model.addAttribute("who", who);
 			
+			
 			ResultDto result = boardService.selectResult(req_No);
+			
+			//수행자 정보
+			int WorkUserCode = result.getRes_UCode();
+			UsersDto WorkUserDto = boardService.selectUser(WorkUserCode); 
+			int WorkUserPro = WorkUserDto.getUser_Pro();
+			if(WorkUserPro !=0) {
+				FileDto ProfileFile = mypageService.SelectConfirmFile(WorkUserPro);
+				model.addAttribute("bee_img", ProfileFile.getFi_Nm());
+			}
+			model.addAttribute("bee_dto", WorkUserDto);
+			//수행자 정보 끝
+			
 			Gson gson = new Gson();
 			
 			model.addAttribute("res_dto", gson.toJson(result));

@@ -13,12 +13,15 @@ public class InquiryDto {
 	private String in_Answer;
 	private Boolean in_Chk;
 	
+	private int originNo;
+	private int grpOrd;
+	private int grpLayer;
+	
 	public InquiryDto() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
-	public InquiryDto(int in_Code, int in_UCode, String in_Type, String in_Title, LocalDate in_Date, String in_Content,
+	public InquiryDto(int in_Code, int originNo, int grpOrd, int grpLayer, int in_UCode, String in_Type, String in_Title, LocalDate in_Date, String in_Content,
 			String in_Stat, String in_Answer, Boolean in_Chk) {
 		super();
 		this.in_Code = in_Code;
@@ -104,6 +107,30 @@ public class InquiryDto {
 		this.in_Chk = in_Chk;
 	}
 
+	public int getGrpOrd() {
+		return grpOrd;
+	}
+
+	public void setGrpOrd(int grpOrd) {
+		this.grpOrd = grpOrd;
+	}
+
+	public int getOriginNo() {
+		return originNo;
+	}
+
+	public void setOriginNo(int originNo) {
+		this.originNo = originNo;
+	}
+
+	public int getGrpLayer() {
+		return grpLayer;
+	}
+
+	public void setGrpLayer(int grpLayer) {
+		this.grpLayer = grpLayer;
+	}
+	
 	@Override
 	public String toString() {
 		return "InquiryDto [in_Code=" + in_Code + ", in_UCode=" + in_UCode + ", in_Type=" + in_Type + ", in_Title="

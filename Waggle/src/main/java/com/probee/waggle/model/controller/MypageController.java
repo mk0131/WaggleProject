@@ -416,6 +416,9 @@ public class MypageController {
 	public String history(Model model, HttpServletRequest request, Criteria cri) {
 		HttpSession session = request.getSession();
 		
+		Criteria cri2 = new Criteria();
+		cri2.setPage(cri.getSub_page());
+		
 		int ucode = (int)session.getAttribute("user_Code");
 		
 		int historyReqListCnt = mypageService.historyReqListCnt(ucode);
@@ -426,9 +429,10 @@ public class MypageController {
 		Paging paging2 = new Paging();
 		
 		cri.setPerPageNum(4);
+		cri2.setPerPageNum(4);
 		
 		paging1.setCri(cri);
-		paging2.setCri(cri);
+		paging2.setCri(cri2);
 		paging1.setTotalCount(historyReqListCnt);
 		paging2.setTotalCount(historyPerListCnt);
 		
@@ -437,7 +441,7 @@ public class MypageController {
 		List<MypageFinishlistDto> myReqList = mypageService.SelectMyRequest(ucode, cri);
 		
 		//나의 수행
-		List<MypageFinishlistDto> myPerformList = mypageService.SelectMyPerform(ucode, cri);
+		List<MypageFinishlistDto> myPerformList = mypageService.SelectMyPerform(ucode, cri2);
 		
 //		System.out.println(myReqList);
 		
@@ -447,10 +451,10 @@ public class MypageController {
 		model.addAttribute("paging1", paging1);
 		model.addAttribute("paging2", paging2);
 	
-		System.out.println("Req 게시글 수 : " + historyReqListCnt);
-		System.out.println("Per 게시글 수 : " + historyPerListCnt);
-		System.out.println(paging1);
-		System.out.println(paging2);
+//		System.out.println("Req 게시글 수 : " + historyReqListCnt);
+//		System.out.println("Per 게시글 수 : " + historyPerListCnt);
+//		System.out.println(paging1);
+//		System.out.println(paging2);
 		
 		return "history";
 	

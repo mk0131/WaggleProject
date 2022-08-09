@@ -5,6 +5,7 @@ public class Criteria {
 	// 특정 페이지 조회를 위한 클래스
 	private int page; // 현재 페이지 번호
 	private int perPageNum; // 페이지당 보여줄 게시글의 갯수
+	private int sub_page;
 
 	public int getPageStart() {
 		// 특정 페이지의 범위를 정하는 구간. 현재 페이지의 게시글 시작 번호
@@ -15,6 +16,7 @@ public class Criteria {
 
 	public Criteria() {
 		this.page = 1;
+		this.sub_page = 1;
 		this.perPageNum = 10;
 	}
 
@@ -47,7 +49,13 @@ public class Criteria {
 
 	@Override
 	public String toString() {
-		return "Criteria [page=" + page + ", perPageNum=" + perPageNum + "]";
+		return "Criteria [page=" + page + ", perPageNum=" + perPageNum + ", sub_page=" + sub_page + "]";
 	}
+
+	public int getSub_page() {
+		return sub_page;
+	}
+
+	
 
 }

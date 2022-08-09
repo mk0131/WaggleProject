@@ -126,6 +126,9 @@ button:active {
     align-items: center;
 }
 
+#ongoing21-img{
+	width:800px;
+}
 #ongoing21-img img {
 	width: 100%;
     height: 100%;
@@ -393,6 +396,7 @@ button:active {
 	margin-top: 15px;
 }
 /* 꿀 수확량 CSS */
+
 </style>
 <body>
 	<%@ include file="../header.jsp" %>
@@ -429,42 +433,44 @@ button:active {
 						</c:if>
 					</div>
 				</div>
-
-					<div class="userinfo-left"
-						onclick="window.open('/mypage/other?ucode=${user_dto.user_Code}')">
-						<c:if test="${user_dto.user_Pro == 0}">
-							<img src="/images/importToJsp/profile_default.jpg" class="profile-img"/>
-						</c:if>
-						<c:if test="${user_dto.user_Pro != 0 }">
-							<img src="${Pro_fi_Nm }" class="profile-img"/>
-						</c:if>
-					</div>
-					<div class="userinfo-right" style="display: inline-block;">
-					<div class="ongoing21-user-name">
-						 <span
-							id="userrealname"
-							onclick="window.open('/mypage/other?ucode=${user_dto.user_Code}')">${user_dto.user_Nm}</span>
-					</div>
-					<fmt:parseDate value="${req_dto.req_WDate }"
-						pattern="yyyy-MM-dd'T'HH:mm" var="parsedDateTime" type="both" />
-					<p id="w-date">
-						작성일
-						<fmt:formatDate value="${parsedDateTime }" pattern="yyyy-MM-dd" />
-					</p>
-				</div>
-				
-				<div class="userinfo-honey">
-				<div class="honey-letter">user3님의 꿀 수확량: ${user_dto.user_Grade}</div>
-				<div id="bar_container">
-					<div id="progress_bar">
-						<div id="progress_percentage" data-percentage="10">
+					<div class="info-content" style="width: 1300px; margin: 0 auto;">
+						<div class="userinfo-left"
+							onclick="window.open('/mypage/other?ucode=${user_dto.user_Code}')">
+							<c:if test="${user_dto.user_Pro == 0}">
+								<img src="/images/importToJsp/profile_default.jpg"
+									class="profile-img" />
+							</c:if>
+							<c:if test="${user_dto.user_Pro != 0 }">
+								<img src="${Pro_fi_Nm }" class="profile-img" />
+							</c:if>
 						</div>
+						<div class="userinfo-right" style="display: inline-block;">
+							<div class="ongoing21-user-name">
+								<span id="userrealname"
+									onclick="window.open('/mypage/other?ucode=${user_dto.user_Code}')">${user_dto.user_Nm}</span>
+							</div>
+							<fmt:parseDate value="${req_dto.req_WDate }"
+								pattern="yyyy-MM-dd'T'HH:mm" var="parsedDateTime" type="both" />
+							<p id="w-date">
+								작성일
+								<fmt:formatDate value="${parsedDateTime }" pattern="yyyy-MM-dd" />
+							</p>
+						</div>
+
+						<div class="userinfo-honey">
+							<div class="honey-letter">${user_dto.user_Nm}님의 꿀 수확량:
+								${user_dto.user_Grade}</div>
+							<div id="bar_container">
+								<div id="progress_bar">
+									<div id="progress_percentage" data-percentage="10"></div>
+								</div>
+							</div>
+						</div>
+
+						<div
+							style="border-bottom: 2px solid #e9ecef; width: 90%; margin: 0 auto;"></div>
 					</div>
-				</div>
-				</div>
-			
-				<div style="border-bottom:2px solid #e9ecef; width:90%; margin:0 auto;"></div>
-				<div id="flex-please">
+					<div id="flex-please">
 					<div class="ongoing21-flex">
 						<div class="ongoing21-middle">
 							<div class="middle-content">
@@ -513,7 +519,7 @@ button:active {
 										</div>
 										<div class="imp-title" id="title2">
 											<div class="imp-bold-title">요청 매물과 나와의 거리</div>
-											<div class="imp-title-content"></div>
+											<div class="imp-title-content" id="distance"></div>
 										</div>
 									</div>
 
@@ -634,9 +640,11 @@ if (link.includes("https://")) {
 	 var nVScroll = document.documentElement.scrollTop || document.body.scrollTop;
 	 var currentPosition = parseInt($(".imp").css("top")); 
 	 
-	 if(nVScroll > 750) {
+	 if(nVScroll > 930 && nVScroll <=1100) {
 		 $(".imp").css("position", "fixed").css("top", "135" + "px")
-	} 
+	} else if(nVScroll > 1100){
+		$(".imp").css("position", "absolute").css("top", "190" + "px")
+	}
 	else {
 		$(".imp").css("position", "absolute").css("top", "40" + "px")
 	}
@@ -644,47 +652,70 @@ if (link.includes("https://")) {
    
 	
 </script>
-<script>
-//꿀 수확량 구현
-window.addEventListener("load", () => {
-	  if(${user_dto.user_Grade} <= 100){
-		  $("#progress_bar").css({
-		    width: ${user_dto.user_Grade}+"%"
-		  });
-	  }else if(${user_dto.user_Grade} > 100){
-		  $("#progress_bar").css({
-			    width: 100+"%"
-			  });
-	  }
-	  
-	  if(${user_dto.user_Grade}>=0 && ${user_dto.user_Grade}<=29){
-		  $('#progress_bar').css('background-image','linear-gradient(rgb(199 112 0) 0%, rgb(145 81 0) 100%)');
-	  }else if(${user_dto.user_Grade}>=30 && ${user_dto.user_Grade}<=45){
-		  $('#progress_bar').css('background-image','linear-gradient(rgb(241 241 241) 0%, rgb(161 161 161) 100%)');
-	  }else if(${user_dto.user_Grade}>=46 && ${user_dto.user_Grade}<=60){
-		  $('#progress_bar').css('background-image','linear-gradient(rgb(253 255 178) 0%, rgb(225 197 0) 100%)');
-	  }else if(${user_dto.user_Grade}>=61 && ${user_dto.user_Grade}<=100){
-		  $('#progress_bar').css('background-image','linear-gradient(rgb(202 255 241) 0%, rgb(0 209 132) 100%)');
-	  }else{
-		  $('#progress_bar').css('background-image','linear-gradient(rgb(196 244 255) 0%, rgb(0 180 209) 100%)');
-	  }
-	  
-	  function animateValue(obj, start, end, duration) {
-	    let startTimestamp = null;
-	    const step = (timestamp) => {
-	      if (!startTimestamp) startTimestamp = timestamp;
-	      const progress = Math.min((timestamp - startTimestamp) / duration, 1);
-	      obj.innerHTML = Math.floor(progress * (end - start) + start);
-	      if (progress < 1) {
-	        window.requestAnimationFrame(step);
-	      }
-	    };
-	    window.requestAnimationFrame(step);
-	  }
+<script type="text/javascript">
+	//꿀 수확량 구현
+	$(function() {
+		if(${user_dto.user_Grade} <= 100){
+			$("#progress_bar").css({
+				width: ${user_dto.user_Grade}+"%"
+			});
+		}else if(${user_dto.user_Grade} > 100){
+			$("#progress_bar").css({
+					width: 100+"%"
+				});
+		}
+		
+		if(${user_dto.user_Grade}>=0 && ${user_dto.user_Grade}<=29){
+			$('#progress_bar').css('background-image','linear-gradient(rgb(199 112 0) 0%, rgb(145 81 0) 100%)');
+		}else if(${user_dto.user_Grade}>=30 && ${user_dto.user_Grade}<=45){
+			$('#progress_bar').css('background-image','linear-gradient(rgb(241 241 241) 0%, rgb(161 161 161) 100%)');
+		}else if(${user_dto.user_Grade}>=46 && ${user_dto.user_Grade}<=60){
+			$('#progress_bar').css('background-image','linear-gradient(rgb(253 255 178) 0%, rgb(225 197 0) 100%)');
+		}else if(${user_dto.user_Grade}>=61 && ${user_dto.user_Grade}<=100){
+			$('#progress_bar').css('background-image','linear-gradient(rgb(202 255 241) 0%, rgb(0 209 132) 100%)');
+		}else{
+			$('#progress_bar').css('background-image','linear-gradient(rgb(196 244 255) 0%, rgb(0 180 209) 100%)');
+		}
+		
+		// 거리
+		if(${checking} == 0) {
+			var check = false;
+		} else {
+			var check = true;
+			var user_lat = ${user_add.ua_Lat};
+			var user_lng = ${user_add.ua_Lng};		
+		}
+		var home_lat = ${req_dto.home_Lat};
+		var home_lng = ${req_dto.home_Lng};
 
-	  const obj = document.getElementById("point_counter");
-	  animateValue(obj, 0, 12345, 3000);
+		if(check) {
+			var distance = getDistanceFromLatLonInKm(user_lat,user_lng,home_lat,home_lng);
+			if(distance > 1) {
+				$("#distance").text(distance.toFixed(1)+' Km');					
+			} else {
+				$("#distance").text( (distance.toFixed(3) * 1000) + ' m');
+			}
+			
+		} else {
+			$("#distance").html("??km");
+		}
+		
+		
 	});
+	
+	function getDistanceFromLatLonInKm(lat1,lng1,lat2,lng2) {
+	    function deg2rad(deg) {
+	        return deg * (Math.PI/180)
+	    }
+
+	    var R = 6371; // Radius of the earth in km
+	    var dLat = deg2rad(lat2-lat1);  // deg2rad below
+	    var dLon = deg2rad(lng2-lng1);
+	    var a = Math.sin(dLat/2) * Math.sin(dLat/2) + Math.cos(deg2rad(lat1)) * Math.cos(deg2rad(lat2)) * Math.sin(dLon/2) * Math.sin(dLon/2);
+	    var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+	    var d = R * c; // Distance in km
+	    return d;
+	}
 
 </script>
 </body>
