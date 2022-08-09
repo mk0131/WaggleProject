@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Waggle 요청글(모집중)</title>
+<title>Waggle 요청글</title>
 <link rel="icon" href="/images/importToJsp/favicon.png">
 </head>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
