@@ -164,7 +164,9 @@ button:active {
     justify-content: center;
     align-items: center;
 }
-
+#ongoing21-img {
+	width: 800px;
+}
 #ongoing21-img img {
 	width: 100%;
     height: 100%;

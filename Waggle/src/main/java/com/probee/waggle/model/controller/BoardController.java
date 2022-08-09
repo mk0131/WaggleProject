@@ -212,6 +212,7 @@ public class BoardController {
 		UsersDto user_dto = boardService.selectUser(req_dto.getReq_UCode());
 		model.addAttribute("user_dto", user_dto);
 		
+		// 요청글 작성자 정보
 		int OtherUserPro = user_dto.getUser_Pro();
 		if(OtherUserPro !=0) {
 			FileDto ProfileFile = mypageService.SelectConfirmFile(OtherUserPro);
@@ -275,7 +276,20 @@ public class BoardController {
 			
 			model.addAttribute("who", who);
 			
+			
 			ResultDto result = boardService.selectResult(req_No);
+			
+			//수행자 정보
+			int WorkUserCode = result.getRes_UCode();
+			UsersDto WorkUserDto = boardService.selectUser(WorkUserCode); 
+			int WorkUserPro = WorkUserDto.getUser_Pro();
+			if(WorkUserPro !=0) {
+				FileDto ProfileFile = mypageService.SelectConfirmFile(WorkUserPro);
+				model.addAttribute("bee_img", ProfileFile.getFi_Nm());
+			}
+			model.addAttribute("bee_dto", WorkUserDto);
+			//수행자 정보 끝
+			
 			Gson gson = new Gson();
 			
 			model.addAttribute("res_dto", gson.toJson(result));
