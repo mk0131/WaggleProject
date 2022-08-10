@@ -357,53 +357,6 @@ div#progress_percentage::after {
 	
 }
 
-/* 사진 돌리기 */
-
-.swiper {
-  width: 100%;
-  height: 100%;
-}
-
-.swiper-slide {
-  text-align: center;
-  font-size: 18px;
-  background: #fff;
-
-  /* Center slide text vertically */
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: -webkit-flex;
-  display: flex;
-  -webkit-box-pack: center;
-  -ms-flex-pack: center;
-  -webkit-justify-content: center;
-  justify-content: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  -webkit-align-items: center;
-  align-items: center;
-}
-
-.swiper-slide img {
-  display: block;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
-.swiper-button-next::after,
-.swiper-button-prev::after {
-  color: black;
-  padding: 100px;
-}
-
-.swiper .swiper-pagination-bullet {
-  background-color: black;
-  margin: 0 10px;
-}
-
-/* 사진 돌리기 */
-
 .h3-font {
 	font-size: 20px;
 	margin: 0px 0px 25px 0px;
@@ -672,6 +625,19 @@ div#progress_percentage::after {
 	margin-right: auto;
 }
 
+.swiper-button-next::after,
+.swiper-button-prev::after {
+  color: black;
+  padding: 100px;
+}
+
+.swiper .swiper-pagination-bullet {
+  background-color: black;
+  margin: 0 10px;
+}
+
+/* 슬라이드 css 끝 */
+
 #view-more {
 	letter-spacing: 1px;
 }
@@ -728,47 +694,39 @@ div#progress_percentage::after {
 		    </div>
 		   </div> --%>
 		   
-	<div class="swiper mySwiper">
-      <div class="swiper-wrapper">
-       <c:choose>
-		<c:when test="${file eq '[null]' }">
-         <div class="swiper-slide">
-        	<div>디테일 사진이 존재하지 않습니다.</div>
-         </div>
-        </c:when>
-        
-        <c:otherwise>
-		 <c:forEach items="${file }" var="dto">
-		  <c:choose>
-		   <c:when test="${dto.fi_Type eq 'img' }">
-            <div class="swiper-slide">
-             <img src="${dto.fi_Nm }" alt="방사진">
-            </div>
-		    </c:when>
-		   
-		  <c:otherwise>
-		  <div class="swiper-slide">
-		   <video controls width="600px"><source src="${dto.fi_Nm }"> </video>
-		  </div>
-		  </c:otherwise>
-		 </c:choose>
-		</c:forEach>		    	
-	   </c:otherwise>
-	  </c:choose>  
-		    
-      </div>
-      <div class="swiper-button-next"></div>
-      <div class="swiper-button-prev"></div>
-      <div class="swiper-pagination"></div>
-    </div>
-		   
-		  
-		
-
-		  
-		  
-		  
-		   
+				<div class="swiper mySwiper">
+			      <div class="swiper-wrapper">
+			       <c:choose>
+					<c:when test="${file eq '[null]' }">
+			         <div class="swiper-slide">
+			        	<div>디테일 사진이 존재하지 않습니다.</div>
+			         </div>
+			        </c:when>
+			        
+			        <c:otherwise>
+					 <c:forEach items="${file }" var="dto">
+					  <c:choose>
+					   <c:when test="${dto.fi_Type eq 'img' }">
+			            <div class="swiper-slide">
+			             <img src="${dto.fi_Nm }" alt="방사진">
+			            </div>
+					    </c:when>
+					   
+					  <c:otherwise>
+					  <div class="swiper-slide">
+					   <video controls width="600px"><source src="${dto.fi_Nm }"> </video>
+					  </div>
+					  </c:otherwise>
+					 </c:choose>
+					</c:forEach>		    	
+				   </c:otherwise>
+				  </c:choose>  
+					    
+			      </div>
+			      <div class="swiper-button-next"></div>
+			      <div class="swiper-button-prev"></div>
+			      <div class="swiper-pagination"></div>
+			    </div>
 		   
 				</div>
 				<div class="info-content" style="width: 1300px; margin: 0 auto;">
@@ -1446,9 +1404,6 @@ $(window).scroll(  function() {
 var swiper = new Swiper(".mySwiper", {
     slidesPerView: 1,
     spaceBetween: 30,
-    autoplay: {
-    	delay:4000
-    },
     loop: true,
     pagination: {
       el: ".swiper-pagination",
