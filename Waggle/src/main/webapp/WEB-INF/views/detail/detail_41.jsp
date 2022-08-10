@@ -646,6 +646,99 @@ div#progress_percentage::after {
 	padding: 20px;
 }
 
+/* 꿀벌 css */
+
+.profile-photo-img {
+	width: 100px; 
+	height: 100px; 
+	border-radius: 50%;; 
+	padding: 16px;
+}
+
+.bubble-text {
+	display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0px 5px;
+}
+
+.bubble-text-inner {
+	display: inline-block;
+	font-weight: bold;
+}
+
+#bubble-user-intro {
+	padding: 0px 5px;
+	margin:0px;
+}
+
+.h3-font {
+	font-size: 20px;
+	margin: 0px 0px 25px 0px;
+	padding-top:10px;
+	border-top: 2px solid #e9ecef;
+}
+
+.bubble {
+  width: 420px;
+  line-height: 0.4em;
+  height:100px;
+  padding: 20px;
+  padding-top:0;
+  padding-bottom:0;
+  margin-top:18px;
+  background-color: rgb(250, 250, 250);
+  position: relative;
+  -webkit-border-radius: 8px;
+  -moz-border-radius: 8px;
+  -ms-border-radius: 8px;
+  -o-border-radius: 8px;
+  border-radius: 8px;
+  text-align: left;
+  display: inline-block; 
+  float:right;
+}
+
+.bubble:hover > .over-bubble {
+    opacity: 1; 
+}
+
+.over-bubble {
+	line-height: 1.4em;
+	background-color: rgba(236, 240, 241, 0.8);
+	position: relative;
+	-webkit-border-radius: 8px;
+	-moz-border-radius: 8px;
+	-ms-border-radius: 8px;
+	-o-border-radius: 8px;
+	border-radius: 8px;
+	text-align: center;
+	display: flex;
+	position: absolute !important;
+	justify-content: center;
+	align-items: center;
+	height: 100%;
+	width: 100%;
+	opacity: 0;
+	top: 0;
+	left: 0;
+	z-index: 999;
+	-webkit-transition-property: all;
+	-moz-transition-property: all;
+	-o-transition-property: all;
+	transition-property: all;
+	-webkit-transition-duration: 0.3s;
+	-moz-transition-duration: 0.3s;
+	-o-transition-duration: 0.3s;
+	transition-duration: 0.3s;
+	-webkit-transition-timing-function: ease-in;
+	-moz-transition-timing-function: ease-in;
+	-o-transition-timing-function: ease-in;
+	transition-timing-function: ease-in;
+	font-size: 16px;
+	font-weight: bold;
+	cursor: pointer;
+}
 </style>
 
 </head>
@@ -791,7 +884,30 @@ div#progress_percentage::after {
 								<div class="middle-tcontent">${req_dto.req_Detail }</div>
 							</div>
 						</div>
-
+						<div class="ongoing21-content-bottom">
+							<br> <br>
+							<h3 class="h3-font">일을 진행중인 꿀벌 정보</h3>
+							<c:choose>
+								<c:when test="${not empty bee_img }">
+									<img class="profile-photo-img" alt="프로필사진o" src="${bee_img }">
+								</c:when>
+								<c:otherwise>
+									<img class="profile-photo-img" alt="프로필사진x"
+										src="/images/importToJsp/profile_default.jpg">
+								</c:otherwise>
+							</c:choose>
+							<div class="bubble"
+								onclick="window.open('/mypage/other?ucode=${bee_dto.user_Code}')">
+								<div class="bubble-text">
+									<h4 class="bubble-text-inner" style="font-size: 16pt;">${bee_dto.user_Nm }
+										님</h4>
+									<P class="bubble-text-inner" style="font-size: 15px;">평점
+										${bee_dto.user_Grade }</P>
+								</div>
+								<P id="bubble-user-intro">${bee_dto.user_Intro }</P>
+								<div class="over-bubble">클릭 시 꿀벌의 프로필 창이 켜집니다.</div>
+							</div>
+						</div>
 					</div>
 					<div class="imp-flex">
 						<div class="imp-all" style="position: static;">
@@ -1392,11 +1508,12 @@ $(window).scroll(  function() {
 	 var nVScroll = document.documentElement.scrollTop || document.body.scrollTop;
 	 var currentPosition = parseInt($(".imp").css("top")); 
 	 
-	 if(nVScroll > 930 && nVScroll <= 1000) {
+	 if(nVScroll > 930 && nVScroll <=1250) {
 		 $(".imp").css("position", "fixed").css("top", "135" + "px")
-	}else if(nVScroll > 1000){
-		$(".imp").css("position", "relative").css("top", "150" + "px")
-	}else {
+	} else if(nVScroll > 1250){
+		$(".imp").css("position", "relative").css("top", "400" + "px")
+	}
+	else {
 		$(".imp").css("position", "relative").css("top", "40" + "px")
 	}
 }); 
