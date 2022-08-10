@@ -462,7 +462,7 @@ input {
 					<div id="my-res-list-text">
 						<div class="my-res-list-content-inner" id="my-res-list-stat"
 							onclick="location.href='/board/detail?req_No=${per.req_No}'">
-							<label id="res-stat">${per.req_Stat }</label>
+							<label id="res-stat">${per.res_Stat }</label>
 						</div>
 						<div class="my-res-list-content-inner" id="my-res-list-title"
 							onclick="location.href='/board/detail?req_No=${per.req_No}'">
