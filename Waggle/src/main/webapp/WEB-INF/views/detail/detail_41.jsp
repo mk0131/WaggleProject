@@ -742,6 +742,12 @@ div#progress_percentage::after {
 	font-weight: bold;
 	cursor: pointer;
 }
+
+/* blur */
+.blur {
+    filter: blur(30px);
+    -webkit-filter: blur(30px);
+}
 </style>
 
 </head>
@@ -804,13 +810,13 @@ div#progress_percentage::after {
 					  <c:choose>
 					   <c:when test="${dto.fi_Type eq 'img' }">
 			            <div class="swiper-slide">
-			             <img src="${dto.fi_Nm }" alt="방사진">
+			             <img class="blur" id="uploadedimg" src="${dto.fi_Nm }" alt="방사진">
 			            </div>
 					    </c:when>
 					   
 					  <c:otherwise>
 					  <div class="swiper-slide">
-					   <video controls width="600px"><source src="${dto.fi_Nm }"> </video>
+					   <video class="blur" id="uploadedvideo" width="600px"><source src="${dto.fi_Nm }"> </video>
 					  </div>
 					  </c:otherwise>
 					 </c:choose>
@@ -1453,6 +1459,12 @@ div#progress_percentage::after {
 		 	if(${req_dto.req_UCode} != ${user_Code} && ${res} != ${user_Code} && ${po} != ${user_Code} && ${user_Code} != 1){
 		 	 $("#hide-box").hide();
 		 	 $("#show-box").css("display","block");
+		 	}else{
+			 	 $("#uploadedimg").attr("style","filter:blur(0px) !important");
+			 	 $("#uploadedimg").attr("style","-webkit-filter: blur(0px) !important");
+			 	 $("#uploadedvideo").attr("style","filter:blur(0px) !important");
+			 	 $("#uploadedvideo").attr("style","-webkit-filter: blur(0px) !important");
+		 		 $("#uploadedvideo").attr("controls","controls");
 		 	}
 		}
 		
