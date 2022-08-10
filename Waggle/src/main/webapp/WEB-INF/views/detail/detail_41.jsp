@@ -8,6 +8,8 @@
 <head>
 <meta charset="UTF-8">
 <title>Waggle 요청글</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.css"/>
+<script src="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.js"></script>
 <link rel="icon" href="/images/importToJsp/favicon.png">
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <style type="text/css">
@@ -337,9 +339,15 @@ div#progress_percentage::after {
     color: white;
 }
 #modalbtn{
- 	width: 380px;
- 	height: 50px;
- 	border-radius: 8px;
+ 	width: 245px;
+    height: 50px;
+    background-color: #fff;
+    font-size: 15px;
+    color: #0078ff;
+    border: none;
+    background-color: #f9f9f9;
+    cursor: pointer;
+    font-weight: 500;
 }
  {
 	display: none;
@@ -592,6 +600,7 @@ div#progress_percentage::after {
 
 #show-box {
    display: none;
+   text-align: center;
 }
 
 /* 요청글 부분 */
@@ -623,6 +632,54 @@ div#progress_percentage::after {
 	margin:0 auto;
 	
 }
+
+/* 슬라이드 css */
+
+.swiper {
+	width: 800px;
+	height: 600px;
+}
+
+.swiper-slide {
+	 text-align: center;
+	 font-size: 18px;
+	 background: #fff;
+
+  /* Center slide text vertically */
+	display: -webkit-box;
+	display: -ms-flexbox;
+	display: -webkit-flex;
+	display: flex;
+	-webkit-box-pack: center;
+	-ms-flex-pack: center;
+	-webkit-justify-content: center;
+	justify-content: center;
+	-webkit-box-align: center;
+	-ms-flex-align: center;
+	-webkit-align-items: center;
+	align-items: center;
+}
+
+.swiper-slide img {
+	display: block;
+	width: 600px;
+	height: 600px;
+	object-fit: cover;
+}
+
+.swiper {
+	margin-left: auto;
+	margin-right: auto;
+}
+
+#view-more {
+	letter-spacing: 1px;
+}
+
+.time-box {
+	padding: 20px;
+}
+
 </style>
 
 </head>
@@ -648,18 +705,71 @@ div#progress_percentage::after {
 					<input type="hidden" name="req_dto.req_No"
 						value="${req_dto.req_No }">
 
-					<div class="ongoing21-content">
-						<c:if test="${req_dto.fi_Nm == null }">
-							<div id="ongoing21-img">
-								<img src="/images/importToJsp/detail_default_img.png">
-							</div>
-						</c:if>
-						<c:if test="${req_dto.fi_Nm != null}">
-							<div id="ongoing21-img">
-								<img src=${req_dto.fi_Nm }>
-							</div>
-						</c:if>
-					</div>
+					
+		  <%--  <div id="detail_container">
+		    <div id="file_container">
+		    <c:choose>
+		    	<c:when test="${file eq '[null]' }">
+		    		<div>디테일 사진이 존재하지 않습니다.</div>
+		    	</c:when>
+		    	<c:otherwise>
+				    <c:forEach items="${file }" var="dto">
+				   	 <c:choose>
+				   	  <c:when test="${dto.fi_Type eq 'img' }">
+				   	   <img src="${dto.fi_Nm }" alt="방사진">
+				   	  </c:when>
+				   	  <c:otherwise>
+				   	   <video controls width="400px"><source src="${dto.fi_Nm }"> </video>
+				   	  </c:otherwise>
+				   	 </c:choose>
+				    </c:forEach>		    	
+		    	</c:otherwise>
+		    </c:choose>
+		    </div>
+		   </div> --%>
+		   
+	<div class="swiper mySwiper">
+      <div class="swiper-wrapper">
+       <c:choose>
+		<c:when test="${file eq '[null]' }">
+         <div class="swiper-slide">
+        	<div>디테일 사진이 존재하지 않습니다.</div>
+         </div>
+        </c:when>
+        
+        <c:otherwise>
+		 <c:forEach items="${file }" var="dto">
+		  <c:choose>
+		   <c:when test="${dto.fi_Type eq 'img' }">
+            <div class="swiper-slide">
+             <img src="${dto.fi_Nm }" alt="방사진">
+            </div>
+		    </c:when>
+		   
+		  <c:otherwise>
+		  <div class="swiper-slide">
+		   <video controls width="600px"><source src="${dto.fi_Nm }"> </video>
+		  </div>
+		  </c:otherwise>
+		 </c:choose>
+		</c:forEach>		    	
+	   </c:otherwise>
+	  </c:choose>  
+		    
+      </div>
+      <div class="swiper-button-next"></div>
+      <div class="swiper-button-prev"></div>
+      <div class="swiper-pagination"></div>
+    </div>
+		   
+		  
+		
+
+		  
+		  
+		  
+		   
+		   
 				</div>
 				<div class="info-content" style="width: 1300px; margin: 0 auto;">
 					<div class="userinfo-left"
@@ -948,7 +1058,7 @@ div#progress_percentage::after {
 				<br>
 				<div class="modal-window">
 					<div class="title">
-						<h2>자세한 후기 내용 보기</h2>
+						<h2 id="view-more">자세한 후기 내용 보기</h2>
 					</div>
 
 					<div class="content">
@@ -1294,12 +1404,43 @@ div#progress_percentage::after {
 	     if(hour<10){hour="0"+hour;}
 	     if(min<10){min="0"+min;}
 	     if(sec<10){sec="0"+sec;}
-	      $('.time-box').html("<div style='font-size:15pt'>잠김 해제까지 시간: "+hour+"시간"+min+"분"+sec+"초</div>");
+	      $('.time-box').html("<div style='font-size:14pt'>잠김 해제까지 시간: "+hour+"시간"+min+"분"+sec+"초</div>");
 	};
 	
 	setInterval(remaindTime,1000);
 </script>
 <script>
+/* var swiper = new Swiper(".mySwiper", {
+    slidesPerView: 1,
+    spaceBetween: 30,
+    autoplay: {
+    	delay:4000
+    },
+    loop: true,
+    pagination: {
+      el: ".swiper-pagination",
+      clickable: true,
+    },
+    navigation: {
+      nextEl: ".swiper-button-next",
+      prevEl: ".swiper-button-prev",
+    },
+  }); */
+</script>
+<script>
+$(window).scroll(  function() {
+	 var nVScroll = document.documentElement.scrollTop || document.body.scrollTop;
+	 var currentPosition = parseInt($(".imp").css("top")); 
+	 
+	 if(nVScroll > 930 && nVScroll <= 1000) {
+		 $(".imp").css("position", "fixed").css("top", "135" + "px")
+	}else if(nVScroll > 1000){
+		$(".imp").css("position", "relative").css("top", "150" + "px")
+	}else {
+		$(".imp").css("position", "relative").css("top", "40" + "px")
+	}
+}); 
+
 var swiper = new Swiper(".mySwiper", {
     slidesPerView: 1,
     spaceBetween: 30,
@@ -1316,19 +1457,6 @@ var swiper = new Swiper(".mySwiper", {
       prevEl: ".swiper-button-prev",
     },
   });
-</script>
-<script>
-$(window).scroll(  function() {
-	 var nVScroll = document.documentElement.scrollTop || document.body.scrollTop;
-	 var currentPosition = parseInt($(".imp").css("top")); 
-	 
-	 if(nVScroll > 930 && nVScroll <= 1000) {
-		 $(".imp").css("position", "fixed").css("top", "135" + "px")
-	}else if(nVScroll > 1000){
-		$(".imp").css("position", "absolute").css("top", "150" + "px")
-	}else {
-		$(".imp").css("position", "absolute").css("top", "40" + "px")
-	}
-}); 
+
 </script>
 </html>
