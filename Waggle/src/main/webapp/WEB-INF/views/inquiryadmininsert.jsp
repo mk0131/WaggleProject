@@ -142,11 +142,11 @@ tr {
 					<table class="Inquiry-insert">
 						<tr>
 						<th>제목</th>
-						<td><input type="text" id="title" name="in_Title" ></td>
+						<td><input type="text" id="title" name="in_Title" value="${user_dto.user_Nm } 님, 답변드립니다."></td>
 						</tr>
 						<tr>
 						<th>작성자</th>
-						<td>${user_dto.user_Nm }</td>						
+						<td><input type="text" id="user_Nm" name="user_Nm" value="admin"></td>						
 						</tr>
 						<tr>
 						<th>내용</th>
