@@ -73,5 +73,10 @@ public class InquiryServiceImpl implements InquiryService {
 		return inquiryMapper.adminInsert(dto);
 	}
 
+	@Override
+	public int inquiryListStat() {
+		return inquiryMapper.inquiryListStat();
+	}
+
 
 }

@@ -49,7 +49,10 @@ public interface InquiryMapper {
 	@Update(" UPDATE INQUIRY SET originNo = in_Code ")
 	public int updateOriginNo(InquiryDto dto);
 	
-	@Insert(" insert into Inquiry(originNo, grpOrd, grpLayer, in_UCode, in_Title, in_Date, in_Content, in_Stat, in_Chk) VALUES(#{originNo}, #{grpOrd}+1, #{grpLayer}+1, #{in_UCode}, #{in_Title}, NOW(), #{in_Content}, '답변완료', 1) ")
+	@Insert(" insert into Inquiry(originNo, grpOrd, grpLayer, in_UCode, in_Title, in_Date, in_Content, in_Stat, in_Chk) VALUES(#{originNo}, #{grpOrd}+1, #{grpLayer}+1, #{in_UCode}, #{in_Title}, NOW(), #{in_Content}, null, 1) ")
 	public int adminInsert(InquiryDto dto);
+	
+	@Update(" update INQUIRY SET in_Stat = '답변완료' where originNo in(select * from (select originNo from inquiry GROUP BY originNo HAVING COUNT(*)>=2) as temp) and in_Type is not null ")
+	public int inquiryListStat();
 	
 }

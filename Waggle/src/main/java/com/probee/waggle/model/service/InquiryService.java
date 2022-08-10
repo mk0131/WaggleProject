@@ -19,5 +19,6 @@ public interface InquiryService {
 	public int inquiryallListCnt(String user_Nm);
 	public int updateOriginNo(InquiryDto dto);
 	public int admininsert(InquiryDto dto);
+	public int inquiryListStat();
 	
 }

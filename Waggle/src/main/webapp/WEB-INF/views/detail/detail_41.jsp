@@ -748,6 +748,7 @@ div#progress_percentage::after {
     filter: blur(30px);
     -webkit-filter: blur(30px);
 }
+
 </style>
 
 </head>
@@ -810,13 +811,13 @@ div#progress_percentage::after {
 					  <c:choose>
 					   <c:when test="${dto.fi_Type eq 'img' }">
 			            <div class="swiper-slide">
-			             <img class="blur" id="uploadedimg" src="${dto.fi_Nm }" alt="방사진">
+			             <img class="blur" src="${dto.fi_Nm }" alt="방사진">
 			            </div>
 					    </c:when>
 					   
 					  <c:otherwise>
 					  <div class="swiper-slide">
-					   <video class="blur" id="uploadedvideo" width="600px"><source src="${dto.fi_Nm }"> </video>
+					   <video class="blur" width="600px"><source src="${dto.fi_Nm }"> </video>
 					  </div>
 					  </c:otherwise>
 					 </c:choose>
@@ -1460,15 +1461,16 @@ div#progress_percentage::after {
 		 	 $("#hide-box").hide();
 		 	 $("#show-box").css("display","block");
 		 	}else{
-			 	 $("#uploadedimg").attr("style","filter:blur(0px) !important");
-			 	 $("#uploadedimg").attr("style","-webkit-filter: blur(0px) !important");
-			 	 $("#uploadedvideo").attr("style","filter:blur(0px) !important");
-			 	 $("#uploadedvideo").attr("style","-webkit-filter: blur(0px) !important");
-		 		 $("#uploadedvideo").attr("controls","controls");
+			 	 $(".blur").attr("style","filter:blur(0px) !important");
+			 	 $(".blur").attr("style","-webkit-filter: blur(0px) !important");
+			 	 $(".blur").attr("style","filter:blur(0px) !important");
+			 	 $(".blur").attr("style","-webkit-filter: blur(0px) !important");
+		 		 $(".blur").attr("controls","controls");
 		 	}
 		}
 		
 	});
+	
 	
 	function ask() {
 		if(confirm("1000포인트 지불하고 내용을 보시겠습니까?")) {

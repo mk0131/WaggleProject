@@ -217,6 +217,16 @@ img {
 	color: #878787;
 }
 
+.paging-a {
+	text-decoration: none;
+	padding: 8px;
+	color: #878787;
+}
+
+.paging-a:visited {
+	color: #878787;
+}
+
 .board-all img {
 	width: 310px;
     height: 300px;
@@ -474,8 +484,8 @@ img {
    </div>
 	<ul class="paging">
 			<c:if test="${paging.prev}">        
-				<li id="paging">
-					<a id="paging-a" href='<c:url value="/board/list?page=${paging.startPage-1}"/>'>이전</a>
+				<li class="paging">
+					<a class="paging-a" href='<c:url value="/board/list?page=${paging.startPage-1}"/>'>이전</a>
 				</li>    
 			</c:if>
 			<c:forEach begin="${paging.startPage}" end="${paging.endPage}" var="num">
@@ -485,7 +495,7 @@ img {
 			</c:forEach>
 			<c:if test="${paging.next && paging.endPage > 0}">        
 				<li>
-					<a id="paging-a" href='<c:url value="/inquiry/list?page=${paging.endPage+1}"/>'>다음</a>
+					<a class="paging-a" href='<c:url value="/inquiry/list?page=${paging.endPage+1}"/>'>다음</a>
 				</li>    
 	 	 	</c:if>
 		</ul>
