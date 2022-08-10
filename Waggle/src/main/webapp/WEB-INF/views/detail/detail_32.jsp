@@ -546,7 +546,7 @@ div#progress_percentage::after {
 	<%@ include file="../footer.jsp" %>
 </body>
 <script type="text/javascript">
-	var res_content = ${res_dto}
+	var res_content = ${res_dto};
 
 	$(function(){
 		// 내가본 집 링크 연결
