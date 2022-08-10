@@ -51,7 +51,7 @@ public interface MypageMapper {
 	public List<MypageFinishlistDto> SelectMyRequest(int ucode, @Param("cri") Criteria cri);
 	
 	//이용내역페이지 나의 수행 sql
-	@Select("select req_No, req_Title, req_EDate, req_Point, req_Stat, home_Addr, fi_Nm, RES_UCODE from request left outer join HOME on REQUEST.REQ_HCODE = HOME.home_Code left outer join FILE on REQUEST.REQ_FCODE = FILE.FI_CODE left outer JOIN RESULT ON REQUEST.REQ_NO = RESULT.RES_NO left outer JOIN USERS ON RESULT.RES_UCODE = USERS.USER_CODE WHERE RES_UCODE = #{ucode} order by req_No desc LIMIT #{cri.pageStart}, #{cri.perPageNum} ")
+	@Select("select req_No, req_Title, req_EDate, req_Point, res_Stat, home_Addr, fi_Nm, RES_UCODE from request left outer join HOME on REQUEST.REQ_HCODE = HOME.home_Code left outer join FILE on REQUEST.REQ_FCODE = FILE.FI_CODE left outer JOIN RESULT ON REQUEST.REQ_NO = RESULT.RES_NO left outer JOIN USERS ON RESULT.RES_UCODE = USERS.USER_CODE WHERE RES_UCODE = #{ucode} order by req_No desc LIMIT #{cri.pageStart}, #{cri.perPageNum} ")
 	public List<MypageFinishlistDto> SelectMyPerform(int ucode, @Param("cri") Criteria cri);
 
 	@Update(" UPDATE USERS SET User_PW = #{user_Pw} WHERE user_Code = #{user_Code} ")
