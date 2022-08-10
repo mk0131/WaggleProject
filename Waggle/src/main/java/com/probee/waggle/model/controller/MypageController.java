@@ -52,6 +52,7 @@ public class MypageController {
 		MypageUsageDto reqFinish = mypageService.reqFinish(ucode);
 		MypageUsageDto reqTotal = mypageService.reqTotal(ucode);
 		MypageUsageDto resCancel = mypageService.resCancel(ucode);
+		MypageUsageDto resCancelZero = mypageService.resCancelZero(ucode);
 		MypageUsageDto resFinish = mypageService.resFinish(ucode);
 		MypageUsageDto resTotal = mypageService.resTotal(ucode);
 		//이용횟수 3개월
@@ -59,6 +60,7 @@ public class MypageController {
 		MypageUsageDto reqFinish3M = mypageService.reqFinish3M(ucode);
 		MypageUsageDto reqTotal3M = mypageService.reqTotal3M(ucode);
 		MypageUsageDto resCancel3M = mypageService.resCancel3M(ucode);
+		MypageUsageDto resCancelZero3M = mypageService.resCancelZero3M(ucode);
 		MypageUsageDto resFinish3M = mypageService.resFinish3M(ucode);
 		MypageUsageDto resTotal3M = mypageService.resTotal3M(ucode);
 		
@@ -99,6 +101,7 @@ public class MypageController {
 		model.addAttribute("reqCancel", reqCancel.getReqCancel());
 		model.addAttribute("reqTotal", reqTotal.getReqTotal());
 		model.addAttribute("resCancel", resCancel.getResCancel());
+		model.addAttribute("resCancelZero", resCancelZero.getResCancelZero());
 		model.addAttribute("resTotal", resTotal.getResTotal());
 		model.addAttribute("reqFinish", reqFinish.getReqFinish());
 		model.addAttribute("resFinish", resFinish.getResFinish());
@@ -107,6 +110,7 @@ public class MypageController {
 		model.addAttribute("reqCancel3M", reqCancel3M.getReqCancel());
 		model.addAttribute("reqTotal3M", reqTotal3M.getReqTotal());
 		model.addAttribute("resCancel3M", resCancel3M.getResCancel());
+		model.addAttribute("resCancelZero3M", resCancelZero3M.getResCancelZero());
 		model.addAttribute("resTotal3M", resTotal3M.getResTotal());
 		model.addAttribute("reqFinish3M", reqFinish3M.getReqFinish());
 		model.addAttribute("resFinish3M", resFinish3M.getResFinish());
