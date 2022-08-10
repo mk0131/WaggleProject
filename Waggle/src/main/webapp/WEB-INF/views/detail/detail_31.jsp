@@ -708,6 +708,7 @@ input[type="radio"]:checked{
 	width: 600px;
 	height: 600px;
 	object-fit: cover;
+	border-radius:20px;
 }
 
 .swiper {
@@ -717,7 +718,7 @@ input[type="radio"]:checked{
 
 .swiper-button-next::after,
 .swiper-button-prev::after {
-  color: black;
+  color: #495057;
   padding: 100px;
 }
 
@@ -756,7 +757,7 @@ input[type="radio"]:checked{
 				       <c:choose>
 						<c:when test="${file eq '[null]' }">
 				         <div class="swiper-slide">
-				        	<div>디테일 사진이 존재하지 않습니다.</div>
+				        	<img src="/images/importToJsp/detail_default_img2.png" alt="방사진">
 				         </div>
 				        </c:when>
 				        
