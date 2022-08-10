@@ -173,6 +173,7 @@ input {
 		color : red;
 		display : none;
 	}
+	
 	.find_form_check{
 		color : red;
 		display : none;
@@ -187,6 +188,12 @@ input {
 		color : red;
 		display : none;
 	}
+	
+	.id_input_re_3{
+		color : red;
+		display : none;
+	}
+	
 	.id_form_check{
 		color : red;
 		display : none;
@@ -218,6 +225,10 @@ input {
 		color : red;
 		display : none;
 	}
+	.email_input_re_4{
+		color : red;
+		display : none;
+	}
 	.email_form_check{
 		color : red;
 		display : none;
@@ -228,6 +239,11 @@ input {
 	}
 	
 	.nm_input_re_2{
+		color : red;
+		display : none;
+	}
+	
+	.nm_input_re_3{
 		color : red;
 		display : none;
 	}
@@ -331,34 +347,54 @@ input {
 		})
 		$("#regist_in").on("click",function(){
 			$("#sign-up-content").hide();
-			
+			$(".regist-form").hide();
 			$("#regist").fadeIn();
+			
+			
 			$('.id_input_re_1').css("display", "none");
 			$('.id_input_re_2').css("display", "none");
+			$('.id_input_re_3').css("display", "none");
+			$('.final_id_ck').css("display","none");
+			$('.id_form_check').css("display","none");
+			$('#id_input2').val(null);
+			
 			$('.pw_input_re_1').css("display", "none");
 			$('.pw_input_re_2').css("display", "none");
+			$('.pw_form_check').css("display","none");
+			$('.final_pw_ck').css("display","none");
+			$('.final_pwck_ck').css("display","none");
+			$('.pw_form_check').css("display","none");
+			$('#pw_input').val(null);
+			$('#pw_chk').val(null);
+			
 			$('.email_input_re_1').css("display", "none");
 			$('.email_input_re_2').css("display", "none");
 			$('.email_input_re_3').css("display","none");
+			$('.email_input_re_4').css("display","none");
+			$('.final_mail_ck').css("display","none");
+			$('.email_form_check').css("display","none");
+			$('#user_Email').val(null);
+			
 			$('.nm_input_re_1').css("display", "none");
 			$('.nm_input_re_2').css("display", "none");
-			$('.id_form_check').css("display","none");
-			$('.pw_form_check').css("display","none");
-			$('.email_form_check').css("display","none");
+			$('.nm_input_re_3').css("display", "none");
+			$('.final_name_ck').css("display","none");
 			$('.nm_form_check').css("display","none");
-			$('.age_form_check').css("display","none");
-			$('#id_input2').val(null);
-			$('#pw_input').val(null);
-			$('#pw_chk').val(null);
-			$('#user_Email').val(null);
 			$('#chk_nm').val(null);
 			$('#nm_input').val(null);
+			
+			$('.age_form_check').css("display","none");
 			$('#age_input').val(null);
+		
+		
 			$('#post').val(null);
 			$('#addr').val(null);
 			$('#daddr').val(null);
+			$('.final_addr_ck').css("display","none");
 			
 			$("#terms").prop("checked",false);
+			$('.final_terms_ck').css("display","none");
+			
 			
 		})
 		$("#modal").on("click",function(){
@@ -801,6 +837,7 @@ input {
 							<br>
 							<span class="id_input_re_1">사용 가능한 아이디입니다.</span>
 							<span class="id_input_re_2">아이디가 이미 존재합니다.</span>
+							<span class="id_input_re_3">중복확인을 해주세요</span>
 							<span class="final_id_ck">아이디를 입력해주세요.</span>
 							<span class="id_form_check"></span> 
 						</div>
@@ -828,6 +865,7 @@ input {
 							<span class="email_input_re_1">인증번호가 일치합니다.</span>
 							<span class="email_input_re_2">인증번호를 다시 확인해주세요.</span>
 							<span class="email_input_re_3">이미 등록된 이메일 입니다.</span>
+							<span class="email_input_re_4">이메일 인증을 해주세요</span>
 							<span class="final_mail_ck">이메일을 입력해주세요.</span>
 							<span class="email_form_check"></span>
 						</div>
@@ -838,6 +876,7 @@ input {
 							<br>
 							<span class="nm_input_re_1">사용 가능한 닉네임입니니다.</span>
 							<span class="nm_input_re_2">닉네임이 이미 존재합니다.</span>
+							<span class="nm_input_re_3">중복확인을 해주세요</span>
 							<span class="final_name_ck">닉네임을 입력해주세요.</span>
 							<span class="nm_form_check"></span>
 						</div>
@@ -1167,6 +1206,7 @@ input {
 	
 	//아이디 중복검사
 	$('#id_chk').on("click", function(){ // 아이디 입력마다 값을 확인
+		$('.id_input_re_3').css('display','none');
 		let user_Id = $('#id_input2').val();
 		console.log(user_Id);
 		let warnMsg = $(".id_form_check"); 
@@ -1248,6 +1288,7 @@ input {
 	
 	// 인증번호 이메일 전송
 	$("#mail_chk").click(function(){
+		$('.email_input_re_4').css('display','none');
 		let user_Email = $("#email_input").val(); // 입력한 이메일
 		let checkBox = $("#chk_nm"); // 인증번호 입력란
 		let warnMsg = $(".email_form_check"); // 이메일 경고글
@@ -1305,6 +1346,7 @@ input {
 	})
 	//닉네임 중복검사
 	$('#nm_chk').on("click", function(){ // 버튼클릭 시
+		$('.nm_input_re_3').css('display','none');
 		let user_Nm = $('#nm_input').val();
 		let data = {user_Nm : user_Nm}
 		let warnMsg = $(".nm_form_check"); // 닉네임 경고글
@@ -1377,6 +1419,12 @@ input {
             idCheck = true;
         }
         
+        if(idckCheck == false){
+        	$('.id_input_re_3').css('display','block');
+        }else{
+        	$('.id_input_re_3').css('display','none');
+        }
+        
         if(pw == ""){
             $('.final_pw_ck').css('display','block');
             pwCheck = false;
@@ -1401,12 +1449,24 @@ input {
             nmCheck = true;
         }
         
+        if(nmCheck == false){
+        	$('.nm_input_re_3').css('display','block');
+        }else{
+        	$('.nm_input_re_3').css('display','none');
+        }
+        
         if(mail == ""){
             $('.final_mail_ck').css('display','block');
             emailCheck = false;
         }else{
             $('.final_mail_ck').css('display', 'none');
             emailCheck = true;
+        }
+        
+        if(emailCheck == false){
+        	$('.email_input_re_4').css('display','block');
+        }else{
+        	$('.email_input_re_4').css('display','none');
         }
         
         if(addr == ""){
@@ -1428,7 +1488,9 @@ input {
         if(idCheck&&idckCheck&&pwCheck&&pwckCheck&&pwckcorCheck&&nmCheck&&emailCheck&&emailnumCheck&&addressCheck&&termsCheck ){
         	 $("#regist_join").attr("action","/regist/join");
         	 $("#regist_join").submit();
+        	 
         }
+
         return false;
 	})
 	

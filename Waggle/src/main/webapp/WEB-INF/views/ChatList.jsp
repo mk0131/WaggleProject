@@ -522,7 +522,7 @@
                               $("#list").append('<div class="list'+(i+1)+'" onclick="clickBackground(\''+x+'\');" id="list_1"><input type="hidden" value="'+data[i].room_No+'" id="room">'
                                     +'<img id ="list_2" src="' + data[i].fi_Nm + '" onerror=this.src="/images/importToJsp/profile_default.jpg">'
                                     +'<div id ="list_5"><div id="list_3">'+data[i].user_Nm+'</div>'
-                                    +'<div id ="list_4">'+data[i].chat_Content+'</div></div>'
+                                    +'<div id ="list_4">&nbsp;'+data[i].chat_Content+'</div></div>'
                                     +'<div id="list_8"><div id ="list_6">'+data[i].chat_Date+'</div>'
                                     +'<div id ="list_7">'+data[i].chat_Chk+'</div></div></div>');
                            }
