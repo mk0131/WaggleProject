@@ -64,7 +64,7 @@
 .ongoing21-content2 {
   	align-items: center;
     padding: 5px;
-    border-spacing: 30px;
+    border-spacing: 15px;
     font-size: 16px;
     display:inline-block;
 }
@@ -109,8 +109,8 @@
 
 #choice-option-all {
 	display: flex;
-	padding: 15px;
-	padding-bottom:1px;
+	padding: 35px;
+	padding-top:0px;
 }
 
 #choice-option-all div {
@@ -140,7 +140,7 @@ button:active {
  background-color: #353535;
 }
 .my-hr {
-	width: 100%;
+	width: 90%;
 	height: 2px;
 	background: #e9ecef;
 	border: 0 none;
@@ -180,6 +180,7 @@ div#review_containser{
 	float: right;
 	margin-top: 20px;
 	display:inline-block;
+	margin-right:75px;
 }
 #revcontent {
 	margin-top: 10px;
@@ -562,6 +563,7 @@ div#progress_percentage::after {
 #hide-box{
 	width: 1200px;
 	margin:0 auto;
+	text-align:center;
 }
 
 .full-rating{
@@ -1152,7 +1154,7 @@ div#progress_percentage::after {
 				<br />
 				<hr class="my-hr">
 				<br>
-				<h2>꿀벌이 요청 매물을 이렇게 평가했어요!</h2>
+				<h2 style="margin-bottom:50px;">꿀벌이 요청 매물을 이렇게 평가했어요!</h2>
 				<table class="ongoing21-content2">
 					<tbody>
 						<tr id="choice-name">
