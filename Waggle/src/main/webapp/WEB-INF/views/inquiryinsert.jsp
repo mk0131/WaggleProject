@@ -99,6 +99,8 @@ tr {
     height: 30px;
     border: 0;
     border-bottom: 1px solid;
+    font-size: 15px;
+	letter-spacing: .55px;
 }
 
 #title:focus {
@@ -108,6 +110,13 @@ tr {
 #incontent {
 	border: 0;
 	resize: none;
+	padding: 10px;
+	font-size: 15px;
+	letter-spacing: .55px;
+}
+
+#incontent:focus {
+	outline: 1px solid #ebebeb;
 }
 
 
@@ -161,7 +170,7 @@ tr {
 						</tr>
 						<tr>
 						<th>내용</th>
-						<td><textarea id="incontent" rows="14" cols="70" name="in_Content" placeholder="문의할 내용을 입력해주세요."></textarea></td>
+						<td><textarea id="incontent" rows="10" cols="60" name="in_Content" placeholder="문의할 내용을 입력해주세요." style="font-family: 'Noto Sans KR', 'Helvetica Neue', Helvetica, Arial, sans-serif;"></textarea></td>
 						</tr>
 						<tr>         
 				         <td class="btn1" colspan="2" align="right">

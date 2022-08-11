@@ -61,11 +61,9 @@
 .ongoing21-content2 {
   	align-items: center;
     padding: 5px;
-    border-spacing: 30px;
+    border-spacing: 15px;
     font-size: 16px;
     display:inline-block;
-    margin-left:76px;
-    margin-top:20px;
 }
 
 .ongoing21-content2 div{
@@ -75,6 +73,7 @@
 
 .ongoing21-content2 td{
 	padding-left:50px;
+	padding-bottom:16px;
 }
 
 
@@ -103,6 +102,8 @@
 	box-shadow: rgba(67, 71, 85, 0.27) 0px 0px 0.25em, rgba(90, 125, 188, 0.05) 0px 0.25em 1em;
 	border: none;
 	padding: 10px;
+	letter-spacing: .55px;
+	font-size: 15px;
 }
 
 #userrealname {
@@ -191,6 +192,7 @@ div#review_containser{
 	width: 400px;
 	float: right;
 	margin-top: 20px;
+	margin-right:110px;
 }
 
 #revcontent {
@@ -706,6 +708,7 @@ div#progress_percentage::after {
 	width: 600px;
 	height: 600px;
 	object-fit: cover;
+	border-radius:20px;
 }
 
 .swiper {
@@ -715,7 +718,7 @@ div#progress_percentage::after {
 
 .swiper-button-next::after,
 .swiper-button-prev::after {
-  color: black;
+  color: #495057;
   padding: 100px;
 }
 
@@ -753,7 +756,7 @@ div#progress_percentage::after {
 				       <c:choose>
 						<c:when test="${file eq '[null]' }">
 				         <div class="swiper-slide">
-				        	<div>디테일 사진이 존재하지 않습니다.</div>
+				        	<img src="/images/importToJsp/detail_default_img2.png" alt="방사진">
 				         </div>
 				        </c:when>
 				        
@@ -909,7 +912,7 @@ div#progress_percentage::after {
 			<br /> <br />
 			<hr class="my-hr">
 			<br>
-			<h2>꿀벌이 요청 매물을 이렇게 평가했어요!</h2>
+			<h2 style="color:#868e96;">꿀벌이 요청 매물을 이렇게 평가했어요!</h2>
 			<table class="ongoing21-content2">
 				<tbody>
 					<tr id="choice-name">
@@ -1043,8 +1046,8 @@ div#progress_percentage::after {
 			<div id="review_containser">
 				<span style="font-size: 14pt; font-weight: bold">매물에 대한 자세한
 					설명</span><br>
-				<textarea id="revcontent" rows="30" cols="40"
-					placeholder="디테일 리뷰가 없습니다." readonly="readonly"></textarea>
+				<textarea id="revcontent" rows="18" cols="40"
+					placeholder="디테일 리뷰가 없습니다." readonly="readonly" style="font-family: 'Noto Sans KR', 'Helvetica Neue', Helvetica, Arial, sans-serif;"></textarea>
 			</div>
 			<br /> <br />
 			<div class="full-rating">
@@ -1352,8 +1355,8 @@ div#progress_percentage::after {
 		
 		
 	});
-	
-	// 버튼 클릭시 꿀벌 평가 게이지바 조정
+	공지
+	// 버경고튼 클릭시 꿀벌 평가 게이지바 조정
 	$(".rate_bee").click(function(){
 		var val1 = parseInt($("input[name='ur_Attr1']:checked").val());
 		var val2 = parseInt($("input[name='ur_Attr2']:checked").val());

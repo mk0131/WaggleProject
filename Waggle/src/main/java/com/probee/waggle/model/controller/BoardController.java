@@ -503,6 +503,30 @@ public class BoardController {
 		RequestDto2 req_dto = boardService.selectRequest(req_No);
 		model.addAttribute("req_dto", req_dto);
 		
+				
+		// 요청글 사용자 정보
+		UsersDto user_dto = boardService.selectUser(req_dto.getReq_UCode());
+		model.addAttribute("user_dto", user_dto);
+		
+		// 요청글 작성자 정보
+		int OtherUserPro = user_dto.getUser_Pro();
+		if(OtherUserPro !=0) {
+			FileDto ProfileFile = mypageService.SelectConfirmFile(OtherUserPro);
+			model.addAttribute("Pro_fi_Nm", ProfileFile.getFi_Nm());
+		}
+		
+		//수행자 정보
+		ResultDto result = boardService.selectResult(req_No);
+		int WorkUserCode = result.getRes_UCode();
+		UsersDto WorkUserDto = boardService.selectUser(WorkUserCode); 
+		int WorkUserPro = WorkUserDto.getUser_Pro();
+		if(WorkUserPro !=0) {
+			FileDto ProfileFile = mypageService.SelectConfirmFile(WorkUserPro);
+			model.addAttribute("bee_img", ProfileFile.getFi_Nm());
+		}
+		model.addAttribute("bee_dto", WorkUserDto);
+		//수행자 정보 끝
+		
 		List<FileDto> fi_list = boardService.selectResultFile(res_dto.getRes_Code());
 		
 		Gson gson = new Gson();
@@ -564,6 +588,18 @@ public class BoardController {
 		// 요청글 정보
 		RequestDto2 req_dto = boardService.selectRequest(req_No);
 		model.addAttribute("req_dto", req_dto);
+		
+		// 요청글 사용자 정보
+		UsersDto user_dto = boardService.selectUser(req_dto.getReq_UCode());
+		model.addAttribute("user_dto", user_dto);
+		
+		// 요청글 작성자 정보
+		int OtherUserPro = user_dto.getUser_Pro();
+		if(OtherUserPro !=0) {
+			FileDto ProfileFile = mypageService.SelectConfirmFile(OtherUserPro);
+			model.addAttribute("Pro_fi_Nm", ProfileFile.getFi_Nm());
+		}
+		
 		model.addAttribute("userName", userName);
 		
 		return "detail/completeform";
@@ -597,6 +633,17 @@ public class BoardController {
 		// 요청글 정보
 		RequestDto2 req_dto = boardService.selectRequest(req_No);
 		model.addAttribute("req_dto", req_dto);
+		
+		// 요청글 사용자 정보
+		UsersDto user_dto = boardService.selectUser(req_dto.getReq_UCode());
+		model.addAttribute("user_dto", user_dto);
+		
+		// 요청글 작성자 정보
+		int OtherUserPro = user_dto.getUser_Pro();
+		if(OtherUserPro !=0) {
+			FileDto ProfileFile = mypageService.SelectConfirmFile(OtherUserPro);
+			model.addAttribute("Pro_fi_Nm", ProfileFile.getFi_Nm());
+		}
 		model.addAttribute("userName", userName);
 		
 		ResultDto result = boardService.selectResult(req_No);

@@ -61,12 +61,10 @@
 
 .ongoing21-content2 {
   	align-items: center;
-    padding: 5px;
     border-spacing: 30px;
     font-size: 16px;
     display:inline-block;
-    margin-left:76px;
-    margin-top:20px;
+    margin-left:85px;
 }
 
 .ongoing21-content2 div{
@@ -104,6 +102,8 @@
 	box-shadow: rgba(67, 71, 85, 0.27) 0px 0px 0.25em, rgba(90, 125, 188, 0.05) 0px 0.25em 1em;
 	border: none;
 	padding: 10px;
+	letter-spacing: .55px;
+	font-size: 15px;
 }
 
 #userrealname {
@@ -714,6 +714,7 @@ input[type="radio"]:checked{
 	width: 600px;
 	height: 600px;
 	object-fit: cover;
+	border-radius:20px;
 }
 
 .swiper {
@@ -723,7 +724,7 @@ input[type="radio"]:checked{
 
 .swiper-button-next::after,
 .swiper-button-prev::after {
-  color: black;
+  color: #495057;
   padding: 100px;
 }
 
@@ -762,7 +763,7 @@ input[type="radio"]:checked{
 				       <c:choose>
 						<c:when test="${file eq '[null]' }">
 				         <div class="swiper-slide">
-				        	<div>디테일 사진이 존재하지 않습니다.</div>
+				        	<img src="/images/importToJsp/detail_default_img2.png" alt="방사진">
 				         </div>
 				        </c:when>
 				        
@@ -935,7 +936,7 @@ input[type="radio"]:checked{
 			<br /> <br />
 			<hr class="my-hr">
 			<br>
-			<h2>꿀벌이 요청 매물을 이렇게 평가했어요!</h2>
+			<h2 style="color:#868e96;">꿀벌이 요청 매물을 이렇게 평가했어요!</h2>
 			<table class="ongoing21-content2">
 				<tbody>
 					<tr id="choice-name">
@@ -1069,10 +1070,10 @@ input[type="radio"]:checked{
 			<div id="review_containser">
 				<span style="font-size: 14pt; font-weight: bold">매물에 대한 자세한
 					설명</span><br>
-				<textarea id="revcontent" rows="30" cols="40"
-					placeholder="디테일 리뷰가 없습니다." readonly="readonly"></textarea>
+				<textarea id="revcontent" rows="18" cols="40"
+					placeholder="디테일 리뷰가 없습니다." readonly="readonly" style="font-family: 'Noto Sans KR', 'Helvetica Neue', Helvetica, Arial, sans-serif;"></textarea>
 			</div>
-			<br /> <br />
+			<br /> <br /> <br/>
 			<div class="full-rating">
 				<h4>전체적인 집 평가는 이렇대요!</h4>
 				<div id="full-stars-example-two">
@@ -1105,16 +1106,7 @@ input[type="radio"]:checked{
 		</div>
 		<div class="last-content">
 			<hr class="my-hr">
-			<br />
-			<h4>꿀벌님을 평가해 주세요!</h4>
-			<div id="loader_container">
-				<div id="bar_container">
-					<div id="progress_bar">
-						<div id="progress_percentage" data-percentage="10"></div>
-					</div>
-				</div>
-			</div>
-
+			<h2 style="color:#868e96;">꿀벌님을 평가해 주세요!</h2>
 			<form action="/board/rating" method="post">
 				<input type="hidden" name="req_No" value="${req_dto.req_No }">
 				<input type="hidden" id="bee_rating" name="ur_Rate" value="0">
@@ -1164,9 +1156,15 @@ input[type="radio"]:checked{
 						</tr>
 					</tbody>
 				</table>
+				<div id="loader_container">
+					<div id="bar_container">
+						<div id="progress_bar">
+							<div id="progress_percentage" data-percentage="10"></div>
+						</div>
+					</div>
+				</div>
 
-
-				<br /> <br />
+				<br />
 				<div class="btn2" id="btn2">
 					<button type="submit" value="평가" style="margin-right: 70px;">꿀벌
 						평가 완료</button>

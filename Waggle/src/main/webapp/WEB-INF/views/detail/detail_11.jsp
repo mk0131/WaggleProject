@@ -96,7 +96,7 @@ button:active {
 
 .bubble {
   width: 450px;
-  line-height: 1.4em;
+  line-height: 0.4em;
   padding: 20px;
   background-color: rgb(250, 250, 250);
   position: relative;
