@@ -39,25 +39,25 @@
 	text-align: center;
 }
 
-button {
- font-weight: 600;
- color: #fff;
- background-color: #222;
- border-radius: 12px;
- border: none;
- font-size: 13px;
- font-family: inherit;
- letter-spacing: .14px;
- line-height: normal;
- padding: 11px 11px;
- cursor: pointer;
- margin: 1px;
+.btn1 button {
+	font-weight: 600;
+	color: #fff;
+	background-color: #222;
+	border-radius: 12px;
+	border: none;
+	font-size: 13px;
+	font-family: inherit;
+	letter-spacing: .14px;
+	line-height: normal;
+	padding: 11px 11px;
+	cursor: pointer;
+	margin: 1px;
 }
 
-button:active {
- outline: none;
- border: none;
- background-color: #353535;
+.btn1 button:active {
+	outline: none;
+	border: none;
+	background-color: #353535;
 }
 
 .Inquiry-detail {
