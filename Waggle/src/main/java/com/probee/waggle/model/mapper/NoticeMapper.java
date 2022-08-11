@@ -12,9 +12,9 @@ import com.probee.waggle.model.dto.NoticeDto;
 public interface NoticeMapper {
 
 	
-	@Insert(" insert into notice values(null, #{no_Type}, #{no_Title}, #{no_Content}, now() )")
+	@Insert(" insert into Notice values(null, #{no_Type}, #{no_Title}, #{no_Content}, now() )")
 	int insert(String no_Type, String no_Title, String no_Content);
 	
-	@Select(" select * from notice order by no_No desc ")
+	@Select(" select * from Notice order by no_No desc ")
 	List<NoticeDto> list();
 }

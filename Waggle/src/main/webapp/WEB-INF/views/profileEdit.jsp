@@ -826,8 +826,8 @@ $("#address").on("click",function(){
 	                
 	              //받은 주소값을 위도 경도로 바꿔서 input hidden 값에 value값으로 넣어주기
 	                var geocoder = new kakao.maps.services.Geocoder();
-	                var addr = $('#addr').val();
-	                geocoder.addressSearch(addr, function(result, status) {
+	                var addr2 = data.jibunAddress;
+	                geocoder.addressSearch(addr2, function(result, status) {
 	                	
 	        		    // 정상적으로 검색이 완료됐으면 
 	        		     if (status === kakao.maps.services.Status.OK) {
