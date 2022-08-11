@@ -304,6 +304,7 @@ button:active {
 	border-radius: 50%;
 	border: 1px solid #f7f9fa;
 	vertical-align:middle;
+	aspect-ratio:1;
 }
 
 .profile-img:hover{
@@ -428,7 +429,7 @@ button:active {
 						</c:if>
 						<c:if test="${req_dto.fi_Nm != null}">
 							<div id="ongoing21-img">
-								<img src=${req_dto.fi_Nm }>
+								<img src=${req_dto.fi_Nm } >
 							</div>
 						</c:if>
 					</div>
@@ -441,7 +442,7 @@ button:active {
 									class="profile-img" />
 							</c:if>
 							<c:if test="${user_dto.user_Pro != 0 }">
-								<img src="${Pro_fi_Nm }" class="profile-img" />
+								<img src="${Pro_fi_Nm }" class="profile-img" onerror=this.src="/images/importToJsp/profile_default.jpg"/>
 							</c:if>
 						</div>
 						<div class="userinfo-right" style="display: inline-block;">

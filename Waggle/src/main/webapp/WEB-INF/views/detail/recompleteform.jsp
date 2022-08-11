@@ -1219,7 +1219,7 @@ h4{
 	$("input[name=myfile]").off().on("change", function(){
 	
 		if (this.files && this.files[0]) {
-	
+			
 			var maxSize = 100 * 1024 * 1024;
 			var fileSize = this.files[0].size;
 	
@@ -1319,7 +1319,7 @@ class Upload{
 
 		this.obj.className = (e.type === 'dragover' ? 'hover' : '');
 	}
-
+		
 	__fileSelectHandler__ = (e) => {
 		var files = e.target.files || e.dataTransfer.files;
 		this.__fileDragHover__(e);
@@ -1327,7 +1327,6 @@ class Upload{
 		this.message.style.display = 'none';
 
 		var name;
-
 		for (var i = 0, file; file = files[i]; i++) {
 			name = this.__parseFile__(file);
 			if (name != undefined) {this.aboveLimit.push(name)}

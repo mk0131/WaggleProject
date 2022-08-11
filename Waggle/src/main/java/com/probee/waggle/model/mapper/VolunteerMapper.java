@@ -11,19 +11,19 @@ import com.probee.waggle.model.dto.VolunteerDto;
 @Mapper
 public interface VolunteerMapper {
 	
-	@Insert(" insert into volunteer values(#{user_Code},#{vo_No},false) ")
+	@Insert(" insert into Volunteer values(#{user_Code},#{vo_No},false) ")
 	int Submit(int user_Code, int vo_No);
 	
-	@Select(" select * from volunteer v where vo_No = #{vo_No} and vo_UCode = #{vo_UCode} ")
+	@Select(" select * from Volunteer v where vo_No = #{vo_No} and vo_UCode = #{vo_UCode} ")
 	VolunteerDto SelectOne(int vo_No, int vo_UCode);
 	
-	@Delete(" delete from volunteer where vo_No = #{vo_No} and vo_UCode = #{vo_UCode}")
+	@Delete(" delete from Volunteer where vo_No = #{vo_No} and vo_UCode = #{vo_UCode}")
 	int Cancel(int vo_No, int vo_UCode);
 	
-	@Delete(" delete from volunteer where  vo_No = #{req_No} ")
+	@Delete(" delete from Volunteer where  vo_No = #{req_No} ")
 	int delete(int vo_No);
 	
-	@Update(" update volunteer set vo_Block = true where vo_No = #{vo_No} and vo_UCode = #{vo_UCode} ")
+	@Update(" update Volunteer set vo_Block = true where vo_No = #{vo_No} and vo_UCode = #{vo_UCode} ")
 	int Block(int vo_No, int vo_UCode);
 	
 	@Update(" update Result set res_Stat = '취소(0)' where res_No = #{vo_No} and res_UCode = #{vo_UCode} ")
