@@ -355,7 +355,12 @@ button:active {
 
 #bubble-user-intro {
 	padding: 0px 5px;
-}
+	text-overflow: ellipsis;
+	overflow: hidden;
+	white-space: nowrap;
+	line-height: 1.4em;
+	}
+	
 
 .h3-font {
 	font-size: 20px;

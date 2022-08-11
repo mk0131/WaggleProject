@@ -607,6 +607,10 @@ input[type="radio"]:checked{
 #bubble-user-intro {
 	padding: 0px 5px;
 	margin:0px;
+	text-overflow: ellipsis;
+	overflow: hidden;
+	white-space: nowrap;
+	line-height: 1.4em;
 }
 
 .h3-font {
