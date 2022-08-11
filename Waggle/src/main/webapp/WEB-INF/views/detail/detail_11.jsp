@@ -338,6 +338,7 @@ button:active {
 	height: 80px; 
 	border-radius: 75px; 
 	padding: 16px;
+	aspect-ratio:1;
 }
 
 .bubble-text {
@@ -543,7 +544,7 @@ button:active {
 								class="profile-img" />
 						</c:if>
 						<c:if test="${user_dto.user_Pro != 0 }">
-							<img src="${Pro_fi_Nm }" class="profile-img" />
+							<img src="${Pro_fi_Nm }" class="profile-img" onerror=this.src="/images/importToJsp/profile_default.jpg">
 						</c:if>
 					</div>
 					<div class="userinfo-right" style="display: inline-block;">
@@ -609,7 +610,7 @@ button:active {
 									
 										<c:choose>
 											<c:when test="${not empty dto.fi_Nm }">
-												<img class="profile-photo-img" alt="프로필사진o" src="${dto.fi_Nm }">
+												<img class="profile-photo-img" alt="프로필사진o" src="${dto.fi_Nm }" onerror=this.src="/images/importToJsp/profile_default.jpg">
 											</c:when>
 											<c:otherwise>
 												<img class="profile-photo-img" alt="프로필사진x" src="/images/importToJsp/profile_default.jpg">
