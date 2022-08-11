@@ -423,10 +423,9 @@ button:active {
 	margin:0px;
 	text-overflow: ellipsis;
 	overflow: hidden;
-	word-break: break-word;
-	display: -webkit-box;
-    -webkit-line-clamp: 2;
-    -webkit-box-orient: vertical;
+	white-space: nowrap;
+	line-height: 1.4em;
+	
 }
 
 .h3-font {
