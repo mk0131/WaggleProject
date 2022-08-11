@@ -109,20 +109,27 @@ public class InquiryController {
 		InquiryDto inqdto = inquiryService.selectOne(in_Code);
 		model.addAttribute("dto", inqdto);
 		
+		System.out.println(inqdto);
+		
 		UsersDto user_dto = inquiryService.selectuser(inqdto.getIn_UCode());
 		model.addAttribute("user_dto", user_dto);
 		
 		request.setAttribute("originNo", Integer.parseInt(request.getParameter("in_Code")));
 		
+		System.out.println(user_dto);
+		
 		return "inquiryadmininsert";
 	}
 	
 	@RequestMapping("/admininsert")
-	public String admininsert(InquiryDto dto, int val, Model model, HttpServletRequest request, String user_Nm) {
+	public String admininsert(InquiryDto dto, int user_Code, Model model, HttpServletRequest request) {
 		
-		UsersDto user_dto = inquiryService.selectuser(val);
+		UsersDto user_dto = inquiryService.selectuser(user_Code);
 		
-		dto.setIn_UCode(val);
+		dto.setIn_UCode(user_Code);
+		
+		System.out.println(user_dto);
+		System.out.println(dto);
 		
 		if(inquiryService.admininsert(dto) > 0 ) {
 			inquiryService.inquiryListStat();

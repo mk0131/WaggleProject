@@ -181,8 +181,10 @@ tr {
 						</tr>
 						<tr>         
 				         <td class="btn1" colspan="2" align="right">
+				          <c:if test="${user_dto.user_Nm eq user_Nm && dto.in_Stat ne '답변완료' }">
 				         	<c:if test="${user_Nm ne 'admin' }">
 				         	<button type="button" value="수정" onclick="location.href='/inquiry/updateform?in_Code=${dto.in_Code}'">수정</button>
+				         	</c:if>
 				         	</c:if>
 				         	<c:if test="${user_Nm eq 'admin' }">
 				         	<button type="button" value="답변 작성" onclick="location.href='/inquiry/admininsertform?in_Code=${dto.in_Code}'">답변 작성</button>
