@@ -244,7 +244,7 @@ div#progress_percentage::before {
   /* used for the border of the arrow */
   content: "";
   position: absolute;
-  left: 14px;
+  left: 20px;
   bottom: -11px;
   border-top: 5px solid #999;
   border-right: 5px solid transparent;
@@ -751,6 +751,11 @@ div#progress_percentage::after {
     -webkit-filter: blur(30px);
 }
 
+/* 요청자 요약 정보 */
+.imp-line #choice-option-all{
+	padding:0px;
+	padding-top:20px;
+}
 </style>
 
 </head>
@@ -1530,7 +1535,7 @@ $(window).scroll(  function() {
 	 if(nVScroll > 930 && nVScroll <=1250) {
 		 $(".imp").css("position", "fixed").css("top", "135" + "px")
 	} else if(nVScroll > 1250){
-		$(".imp").css("position", "relative").css("top", "400" + "px")
+		$(".imp").css("position", "relative").css("top", "370" + "px")
 	}
 	else {
 		$(".imp").css("position", "relative").css("top", "40" + "px")

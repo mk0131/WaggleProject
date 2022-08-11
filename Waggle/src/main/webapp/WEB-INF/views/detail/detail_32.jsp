@@ -61,11 +61,9 @@
 .ongoing21-content2 {
   	align-items: center;
     padding: 5px;
-    border-spacing: 30px;
+    border-spacing: 15px;
     font-size: 16px;
     display:inline-block;
-    margin-left:76px;
-    margin-top:20px;
 }
 
 .ongoing21-content2 div{
@@ -75,6 +73,7 @@
 
 .ongoing21-content2 td{
 	padding-left:50px;
+	padding-bottom:16px;
 }
 
 
@@ -193,6 +192,7 @@ div#review_containser{
 	width: 400px;
 	float: right;
 	margin-top: 20px;
+	margin-right:110px;
 }
 
 #revcontent {
@@ -906,7 +906,7 @@ div#progress_percentage::after {
 			<br /> <br />
 			<hr class="my-hr">
 			<br>
-			<h2>꿀벌이 요청 매물을 이렇게 평가했어요!</h2>
+			<h2 style="color:#868e96;">꿀벌이 요청 매물을 이렇게 평가했어요!</h2>
 			<table class="ongoing21-content2">
 				<tbody>
 					<tr id="choice-name">
