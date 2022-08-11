@@ -598,6 +598,12 @@ div#progress_percentage::after {
 #bubble-user-intro {
 	padding: 0px 5px;
 	margin:0px;
+	text-overflow: ellipsis;
+	overflow: hidden;
+	word-break: break-word;
+	display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
 }
 
 .h3-font {
