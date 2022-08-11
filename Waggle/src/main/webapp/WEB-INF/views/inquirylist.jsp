@@ -8,7 +8,8 @@
 <meta charset="UTF-8">
 <title>Waggle 문의글 목록</title>
 <link rel="icon" href="/images/importToJsp/favicon.png">
-
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" 
+	rel="stylesheet"/>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
 <style type="text/css">
@@ -90,10 +91,8 @@ input[id="tab03"]:checked ~ .con3 {
 }
 
 .accordion {
-  font-size: 1rem;
-  width: 50vw;
+  width: 60vw;
   margin: 0 auto;
-  border-radius: 5px;
 }
 
 .accordion-all {
@@ -111,7 +110,7 @@ input[id="tab03"]:checked ~ .con3 {
   background: #fff;
   color: #151515;
   cursor: pointer;
-  font-size: .8em;
+  font-size: 15px;
   letter-spacing: .1em;
   transition: all .3s;
   text-transform: uppercase;
@@ -139,7 +138,7 @@ input[id="tab03"]:checked ~ .con3 {
 
 .accordion-body__contents {
   padding: 2.8em 2.8em;
-  font-size: .8em;
+  font-size: 15px;
   border-top: 1px solid;
 }
 
@@ -186,30 +185,23 @@ input[id="tab03"]:checked ~ .con3 {
 } */
 
 button {
- background-color: #151515;
- border-radius: 8px;
- border-style: none;
- box-shadow: rgba(0, 0, 0, .2) 0 3px 5px -1px,rgba(0, 0, 0, .14) 0 6px 10px 0,rgba(0, 0, 0, .12) 0 1px 18px 0;
- box-sizing: border-box;
+ font-weight: 600;
  color: #fff;
- font-size: 12px;
- font-weight: 500;
+ background-color: #222;
+ border-radius: 12px;
+ border: none;
+ font-size: 13px;
  font-family: inherit;
- letter-spacing: .25px;
+ letter-spacing: .14px;
  line-height: normal;
  padding: 11px 11px;
- transition: background box-shadow 280ms ease;
-}
-
-button:hover {
- background: #fff;
- color: #151515;
+ cursor: pointer;
 }
 
 button:active {
- box-shadow: 0 4px 4px 0 rgb(60 64 67 / 30%), 0 8px 12px 6px rgb(60 64 67 / 15%);
  outline: none;
- border: 1px solid #ffffff;
+ border: none;
+ background-color: #353535;
 }
 
 .Inquiry-category {
@@ -243,11 +235,15 @@ button:active {
 
 #Inquiry-title {
 	text-decoration: none;
-	color: #878787;
+	color: #222;
+	letter-spacing: .55px;
+	font-size: 15px;
 }
 
 #Inquiry-title:visited {
-	color: #878787;
+	color: #222;
+	letter-spacing: 1px;
+	font-size: 15px;
 }
 
 .paging {
@@ -285,8 +281,38 @@ button:active {
 }
 
 #create{
+	position: absolute;
+    right: 400px;
+}
+
+.question-q {
+	color: rgb(52, 106, 255);
+}
+
+.question-q-title {
+	width: 810px;
+    display: inline-block;
+}
+
+.question-icon1 {
+	display: inline-block;
+	transform: rotate(90deg);
+}
+
+.question-icon2 {
+	display: inline-block;
+	transform: rotate(270deg);
+}
+
+.notice-title {
+	display: inline-block;
+}
+
+.notice-ymd {
 	float: right;
 }
+
+
 
 </style>
 </head>
@@ -327,7 +353,9 @@ button:active {
 						  <c:forEach items="${list2 }" var="dto">
 						  <c:if test="${dto.no_Type == '공지' }">
 			                <div class="accordion__item js-accordion-item">
-						    <div class="accordion-header js-accordion-header">[공지] ${dto.no_Title } </div> 
+						    <div class="accordion-header js-accordion-header">
+						    <div class="notice-title">[공지] ${dto.no_Title } 
+						    </div><div class="notice-ymd"><fmt:formatDate value="${dto.no_Date}" pattern="yyyy-MM-dd"/></div></div> 
 						  <div class="accordion-body js-accordion-body">
 						    <div class="accordion-body__contents">
 						    <br/><br/>
@@ -352,10 +380,17 @@ button:active {
 						  <c:forEach items="${list2 }" var="dto">
 						  <c:if test="${dto.no_Type == '질문' }">
 			                <div class="accordion__item js-accordion-item">
-						    <div class="accordion-header js-accordion-header">Q. ${dto.no_Title } </div> 
+						    <div class="accordion-header js-accordion-header">
+						    
+						     <span class="question-q">Q</span>
+						     <div class="question-q-title">${dto.no_Title }</div>
+						      <div class="question-icon1"><i class="fa-solid fa-angle-right"></i></div>
+						      
+						      </div> 
 						  <div class="accordion-body js-accordion-body">
 						    <div class="accordion-body__contents">
 						    <br/><br/>
+						    <span class="question-q">A</span>
 						   	${dto.no_Content }
 							<br/><br/>
 						    </div>
@@ -418,7 +453,7 @@ button:active {
 			                              <td>${dto.in_Type }</td>
 			                              <td><a id="Inquiry-title" href="/inquiry/detail?in_Code=${dto.in_Code }">${dto.in_Title }</a></td>
 			                              <td>${dto.in_Date }</td>
-			                              <td>${dto.in_Stat }</td>
+			                              <td id="stat-btn">${dto.in_Stat }</td>
 			                           </tr>
 			                        </c:forEach>
 			                     </c:otherwise>
@@ -489,7 +524,7 @@ button:active {
 	  var $accordion = $('.js-accordion');
 	  var $accordion_header = $accordion.find('.js-accordion-header');
 	  var $accordion_item = $('.js-accordion-item');
-	 
+	  
 	  // default settings 
 	  var settings = {
 	    // animation speed
@@ -552,5 +587,8 @@ button:active {
 	  
 	  
 	});
+	
+	
+	
 </script>
 </html>

@@ -104,6 +104,8 @@
 	box-shadow: rgba(67, 71, 85, 0.27) 0px 0px 0.25em, rgba(90, 125, 188, 0.05) 0px 0.25em 1em;
 	border: none;
 	padding: 10px;
+	letter-spacing: .55px;
+	font-size: 15px;
 }
 
 #userrealname {
@@ -1064,8 +1066,8 @@ input[type="radio"]:checked{
 			<div id="review_containser">
 				<span style="font-size: 14pt; font-weight: bold">매물에 대한 자세한
 					설명</span><br>
-				<textarea id="revcontent" rows="30" cols="40"
-					placeholder="디테일 리뷰가 없습니다." readonly="readonly"></textarea>
+				<textarea id="revcontent" rows="18" cols="40"
+					placeholder="디테일 리뷰가 없습니다." readonly="readonly" style="font-family: 'Noto Sans KR', 'Helvetica Neue', Helvetica, Arial, sans-serif;"></textarea>
 			</div>
 			<br /> <br />
 			<div class="full-rating">

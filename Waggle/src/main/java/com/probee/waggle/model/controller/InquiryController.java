@@ -121,7 +121,6 @@ public class InquiryController {
 	public String admininsert(InquiryDto dto, int val, Model model, HttpServletRequest request, String user_Nm) {
 		
 		UsersDto user_dto = inquiryService.selectuser(val);
-		user_dto.setUser_Nm("admin");
 		
 		dto.setIn_UCode(val);
 		

@@ -107,6 +107,11 @@ tr {
 #incontent {
 	border: 0;
 	resize: none;
+	padding: 10px;
+}
+
+#incontent:focus {
+	outline: 1px solid #ebebeb;
 }
 
 
@@ -146,12 +151,12 @@ tr {
 						</tr>
 						<tr>
 						<th>작성자</th>
-						<td><input type="text" id="user_Nm" name="user_Nm" value="admin"></td>						
+						<td>admin</td>						
 						</tr>
 						<tr>
 						<th>내용</th>
 						
-						<td><textarea id="incontent" rows="14" cols="70" name="in_Content" placeholder="문의할 내용을 입력해주세요."></textarea></td>
+						<td><textarea id="incontent" rows="14" cols="70" name="in_Content">안녕하세요. ${user_dto.user_Nm } 님, 답변드립니다.</textarea></td>
 						
 						</tr>
 						<tr>         

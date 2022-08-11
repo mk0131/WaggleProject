@@ -411,7 +411,7 @@ div#review_containser{
 	      </tbody>
 	     </table>
 	     <div class="ongoing21-content-bottom">
-	       <textarea id="incontent" rows="12" cols="70" name="content" placeholder="요구사항을 입력해주세요" readonly="readonly">${req_dto.req_Detail }</textarea>
+	       <textarea id="incontent" rows="12" cols="70" name="content" placeholder="요구사항을 입력해주세요" readonly="readonly" style="font-family: 'Noto Sans KR', 'Helvetica Neue', Helvetica, Arial, sans-serif;">${req_dto.req_Detail }</textarea>
 	       <br/><br/><hr class="my-hr"><br>
 	       		      
 		   
