@@ -147,7 +147,7 @@ tr {
 					<table class="Inquiry-insert">
 						<tr>
 						<th>제목</th>
-						<td><input type="text" id="title" name="in_Title" value="${user_dto.user_Nm } 님, 답변드립니다."></td>
+						<td><input type="text" id="title" name="in_Title" value="* ${user_dto.user_Nm } 님, 답변드립니다."></td>
 						</tr>
 						<tr>
 						<th>작성자</th>
