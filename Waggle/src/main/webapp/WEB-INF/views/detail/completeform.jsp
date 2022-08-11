@@ -1295,4 +1295,9 @@ $(window).scroll(  function() {
 	}
 }); 
 </script>
+<script>
+$("#upload").click(function(){
+	$(".file-thumb").remove();
+})
+</script>
 </html>

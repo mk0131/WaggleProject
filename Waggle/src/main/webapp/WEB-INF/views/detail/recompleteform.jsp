@@ -1350,6 +1350,7 @@ class Upload{
 				this.upload.style.display = "none";
 			}
 		}
+		var obj2 = [];
 		if (isGood){
 			this.icon.style.display = "none";
 			this.message.style.display = "none";
@@ -1381,6 +1382,14 @@ class Upload{
 				file: file,
 				node: div,
 			};
+			/*
+		    console.log(obj);
+		    for(let index in obj){
+		    	if(obj.hasOwnProperty(index)){
+				    obj2.push(index);
+		    	}
+		    }
+		    */
 			//binding click event to close
 			i.addEventListener('click', (event) => {
 				event.stopPropagation();
@@ -1427,6 +1436,7 @@ class Upload{
 				file: file,
 				node: div,
 			};
+		    console.log(obj);
 			//binding click event to close
 			i.addEventListener('click', (event) => {
 				event.stopPropagation();
@@ -1438,6 +1448,7 @@ class Upload{
 				}
 				isEmpty();
 			}, false);
+		
 		}else{
 			var i = document.createElement('i');
 			i.setAttribute('class', 'fa fa-exclamation-circle');
@@ -1447,7 +1458,9 @@ class Upload{
 			this.error.style.display = "block";
 			isEmpty();
 		}
+		console.log(obj2);
 	}
+	
 
 	__upload__ = () => {
 		var xhr;
@@ -1524,6 +1537,7 @@ class Upload{
         //If backend requires use of csrf-token for POST
         // xhr.setRequestHeader("X-CSRFToken", CSRF_TOKEN);
         xhr.send(obj.file);
+
 	}
 }
 
@@ -1544,4 +1558,10 @@ $(window).scroll(  function() {
 	}
 }); 
 </script>
+<script>
+$("#upload").click(function(){
+	$(".file-thumb").remove();
+})
+</script>
+
 </html>
