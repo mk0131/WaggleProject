@@ -242,7 +242,7 @@ div#progress_percentage::before {
   /* used for the border of the arrow */
   content: "";
   position: absolute;
-  left: 14px;
+  left: 20px;
   bottom: -11px;
   border-top: 5px solid #999;
   border-right: 5px solid transparent;
