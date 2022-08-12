@@ -16,7 +16,7 @@ import com.probee.waggle.model.dto.UsersDto;
 @Mapper
 public interface InquiryMapper {
 	
-	@Select(" SELECT in_Code, originNo, grpOrd, in_RCode, in_UCode, in_Type, in_Title, in_Date, in_Content, in_Stat, in_CHK FROM Inquiry WHERE in_Code = ${user_Code} OR in_UCode = 1 AND in_RCode = ${user_Code} GROUP BY in_Code, originNo ORDER BY originNo DESC, grpOrd ASC LIMIT #{cri.pageStart}, #{cri.perPageNum} ")
+	@Select(" SELECT in_Code, originNo, grpOrd, in_RCode, in_UCode, in_Type, in_Title, in_Date, in_Content, in_Stat, in_CHK FROM Inquiry WHERE in_UCode = ${user_Code} OR in_UCode = 1 AND in_RCode = ${user_Code} GROUP BY in_Code, originNo ORDER BY originNo DESC, grpOrd ASC LIMIT #{cri.pageStart}, #{cri.perPageNum} ")
 	public List<InquiryDto> selectList(int user_Code, @Param("cri") Criteria cri);
 	
 	@Select( " SELECT * FROM Inquiry JOIN Users WHERE in_UCode = user_Code GROUP BY in_Code, originNo ORDER BY originNo DESC, grpOrd ASC LIMIT #{cri.pageStart}, #{cri.perPageNum} " )
