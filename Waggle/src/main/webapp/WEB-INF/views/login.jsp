@@ -45,7 +45,7 @@
 .tabs {
 	background-color: #ffffff;
 	width: 550px;
-	height: 1150px;
+	height: 1195px;
 	margin: 0 auto;
 }
 
@@ -106,11 +106,17 @@ input[name="tab_item"] {
 	padding: 20px 10px 20px 10px;
 }
 
-input {
+.inputstyle {
 	width: 500px;
 	height: 40px;
-	border-radius: 8px;
 	font-size: 14px;
+	border:none;
+	border-bottom: 1px solid #ebebeb;
+}
+
+.inputstyle:focus {
+	outline: none;
+	border-bottom: 2px solid;
 }
 
 .tab_content .field-wrap-submit {
@@ -120,8 +126,8 @@ input {
 }
 
 .tab_content .field-wrap-submit button {
-	width: 507px;
-	height: 45px;
+	width: 500px;
+	height: 52px;
 	border-radius: 8px;
 	cursor: pointer;
 	background-color: #151515;
@@ -294,28 +300,105 @@ input {
 	color: #8b8b8b !important;
 }
 
-#naver_id_login img{
-	width:350px !important;
-	margin: 0 auto;
-}
-
 .regist-form{
 	display:none;
 }
 
 .regist-button{
-	border: 2px outset #898989;
-	font-weight:bold;
-	color:#343434;
+	border: 1px solid #d3d3d3;
+    color: rgba(34,34,34,.8);
+    line-height: 30px;
+    border-radius: 12px;
+    font-size: 14px;
+    letter-spacing: -.14px;
+    background-color: #fff;
 }
 
 .regist-button:hover{
-	background-color:#cdcdcd;
+	background-color: #f6f6f6;
 	color:black;
 }
 
 .login-button{
 	font-weight:bold;
+}
+
+.id-pw-text {
+	font-size: 15px;
+    letter-spacing: -.07px;
+    line-height: 18px;
+    text-align: left;
+    padding: 0px 20px 0px 18px;
+}
+
+#naver-btn-img {
+	width: 35px;
+    height: 35px;
+    margin: 7px 0px 7px 20px;
+    padding: 4px;
+    float: left;
+}
+
+#naver_id_login_anchor {
+	width: 500px;
+    height: 52px;
+    display: block;
+    border: 1px solid #ebebeb;
+    border-radius: 12px;
+    color: #222;
+    margin-bottom: 20px;
+    text-decoration: none;
+}
+
+#chk_nm {
+	border:none;
+	height: 40px;
+}
+
+span {
+	padding: 0px 5px 0px 5px;
+	font-size: 15px;
+}
+
+.reg-gender input[type=radio] {
+	display: none;
+}
+
+.reg-gender input[type=radio] + label {
+	display: inline-block;
+	cursor: pointer;
+	height: 35px;
+	width: 60px;
+	border: 1px solid #d3d3d3;
+	border-radius: 10px;
+	line-height: 35px;
+	text-align: center;
+	font-weight: bold;
+	font-size: 13px;
+	margin: 3px;
+}
+
+.reg-gender input[type=radio]:checked+label{
+    background-color: #222;
+    color: #fff;
+}
+
+#naver-login-text {
+	line-height: 50px;
+    padding-right: 49px;
+}
+
+#kakao-login-text {
+	position: relative;
+}
+
+#kakao-login-text-inner {
+	position: absolute;
+    left: 36%;
+    bottom: 27%;
+    width: 157px;
+    background-color: #FEE500;
+    color: #222;
 }
 
 </style>
@@ -511,10 +594,10 @@ input {
 				<div class="tab_content" id="login-content">
 					<form action="/login/Normal" method="post">
 						<div class="field-wrap1">
-							<input type="text" name="user_Id" placeholder="아이디">
+							<input class="inputstyle" type="text" name="user_Id" placeholder="아이디">
 						</div>
 						<div class="field-wrap2">
-							<input type="password" name="user_Pw" placeholder="비밀번호">
+							<input class="inputstyle" type="password" name="user_Pw" placeholder="비밀번호">
 						</div>
 						<div class="field-wrap-submit">
 							<button class="login-button" type="submit">로그인</button>
@@ -526,9 +609,9 @@ input {
 					<div class="forgot-idpw">
 						<p class="forgot">
 							<!-- Button trigger modal -->
-					<a  class="find" data-toggle="modal" data-target="#staticBackdrop">
+					<a  class="find" data-toggle="modal" data-target="#staticBackdrop" style="margin-right:20px;">
   					아이디 찾기
-					</a>&nbsp;&nbsp;<a class="find" data-toggle="modal" data-target="#staticBackdrop2" style="margin-left:20px;">패스워드 찾기</a>
+					</a><b>|</b><a class="find" data-toggle="modal" data-target="#staticBackdrop2" style="margin-left:20px;">패스워드 찾기</a>
 					<!-- Modal -->
 	<div class="modal fade" id="staticBackdrop" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
   	<div class="modal-dialog">
@@ -544,7 +627,7 @@ input {
         			<form action="/regist/findId" method="get" id="getid"> 
 						<input type="text" id="find_id" name="user_Email" placeholder="  이메일"
 							style="width: 300px; margin-bottom:5px;"> 
-						<input class="regist-button" type="button" id="find_id_chk" value="이메일 인증" style="width: 100px;">
+						<input class="regist-button" type="button" id="find_id_chk" value="이메일 인증" style="width: 90px;">
 						<input type="text" id="chk_find" placeholder="인증번호를 입력해 주세요" disabled="disabled" style="width: 300px;">
 						<input type="submit" value="아이디 메일 받기" style="width: 150px;" disabled="disabled" id="id_submit"> 
 						<br>
@@ -574,7 +657,7 @@ input {
      	 <div class="modal-body">
      	 	<b style="text-align: left;">아이디</b> <br> 
 						<input type="text" id="id_input" name="user_Id" placeholder="  아이디" style="width: 300px;">
-						<input class="regist-button" type="button" id="find_pw" value="아이디 확인" style="width: 100px;">
+						<input class="regist-button" type="button" id="find_pw" value="아이디 확인" style="width: 80px;">
 						<br>
 						<span class="id_input_re_1">가입된 아이디 입니다.</span>
 						<span class="id_input_re_2">가입되지 않은 아이디 입니다.</span>
@@ -584,7 +667,7 @@ input {
         					<form action="/regist/findPw" method="get" id="getpw">
 						<input type="text" id="find_pw_input" name="user_Email" placeholder="  이메일"
 							style="width: 300px; margin-bottom:5px;">
-							<input class="regist-button" type="button" id="find_pw_chk" value="이메일 인증" style="width: 100px;">
+							<input class="regist-button" type="button" id="find_pw_chk" value="이메일 인증" style="width: 90px;">
 						
 						<input type="text" id="chk_find_pw" placeholder="인증번호를 입력해 주세요" disabled="disabled" style="width: 300px;">
 						<input type="submit" value="비밀번호 메일 받기" style="width: 150px;" disabled="disabled" id="pw_submit"> 
@@ -780,13 +863,12 @@ input {
 					})
 					
 					</script>
-					<h3 style="text-align: center;">SNS 간편 로그인</h3>
 					<div class="api-login">
                 	<div id="naver_id_login" style="display: none;"></div>
 					<div class="naver-button" style="display:inline-block">
 							<!-- 네이버 로그인 버튼 노출 영역 -->
 	                	<a href="https://nid.naver.com/oauth2.0/authorize?response_type=token&amp;client_id=JGPtZuIPhsS22_zSl6eT&amp;redirect_uri=http%3A%2F%2F15.164.3.37%3A8787%2Fhome&amp;state=466db6be-7f94-468e-8de9-de1c50a7589d" id="naver_id_login_anchor">
-	                	<img src="http://static.nid.naver.com/oauth/big_w.PNG" border="0" title="네이버 아이디로 로그인" width="277.5px" height="60px"></a>
+	                	<img id="naver-btn-img" src="/images/login/btnW1.png" border="0" title="네이버 아이디로 로그인"><b id="naver-login-text">네이버로 로그인</b></a>
 							<!-- //네이버 로그인 버튼 노출 영역 -->
 					</div>
 					<script type="text/javascript">
@@ -798,9 +880,11 @@ input {
 						naver_id_login.init_naver_id_login();
 					</script>
 					<div class="kakao-button" style="display:inline-block">
+					 <div id="kakao-login-text">
 						<a class="p-2" href="https://kauth.kakao.com/oauth/authorize?client_id=6271ae3b4283fa56e846863ed3a4f7be&redirect_uri=http://15.164.3.37:8787/home&response_type=code">
-							<img src="/images/login/kakao_login_large_wide.png" style="width:250px; height:50px;">
+							<img src="/images/login/kakao_login_large_wide.png" style="width:500px; height:52px; object-fit: cover; border-radius: 12px;"><b id="kakao-login-text-inner">카카오 로그인</b>
 							</a>
+					  </div>
 					</div>
 					</div>
 				</div>
@@ -831,7 +915,7 @@ input {
 						<div style="margin-bottom:15px;">
 							<br>
 							<b style="text-align: left;">아이디</b> <br> 
-							<input type="text" id="id_input2" name="user_Id" placeholder=" 5~20자의 영문,숫자,특수문자(._-)만 사용 가능합니다." style="width: 400px;">
+							<input class="inputstyle" type="text" id="id_input2" name="user_Id" placeholder=" 5~20자의 영문,숫자,특수문자(._-)만 사용 가능합니다." style="width: 415px;">
 							<input class="regist-button" type="button" id="id_chk" value="중복 확인" style="width: 80px;">
 							<br>
 							<span class="id_input_re_1">사용 가능한 아이디입니다.</span>
@@ -842,13 +926,13 @@ input {
 						</div>
 						<div style="margin-bottom:15px;">
 							<b style="text-align: left;">비밀번호</b> 
-							<input type="password" id="pw_input" placeholder="  8~16자 영문,숫자,특수문자를 최소 한가지씩 사용하세요."> <br>
+							<input class="inputstyle" type="password" id="pw_input" placeholder="  8~16자 영문,숫자,특수문자를 최소 한가지씩 사용하세요."> <br>
 							<span class="final_pw_ck">비밀번호를 입력해주세요.</span>
 							<span class="pw_form_check"></span>
 							<br> 
 							<b style="text-align: left;">비밀번호 확인</b>
 							<br> 
-							<input type="password" id="pw_chk" name="user_Pw" placeholder="  비밀번호 확인">
+							<input class="inputstyle" type="password" id="pw_chk" name="user_Pw" placeholder="  비밀번호 확인">
 								<br>
 							<span class="pw_input_re_1">비밀번호가 같습니다.</span>
 							<span class="pw_input_re_2">비밀번호가 다릅니다.</span>
@@ -856,8 +940,8 @@ input {
 						</div>
 						<div style="margin-bottom:15px;">
 							<b style="text-align: left;">이메일 인증</b> <br> 
-							<input type="text" id="email_input" name="user_Email" placeholder="  이메일"
-								style="width: 370px; margin-bottom:5px;"> 
+							<input class="inputstyle" type="text" id="email_input" name="user_Email" placeholder="  이메일"
+								style="width: 395px; margin-bottom:5px;"> 
 							<input  class="regist-button" type="button" id="mail_chk" value="이메일 인증" style="width: 100px;">
 							<input type="text" id="chk_nm" placeholder="인증번호를 입력해 주세요" disabled="disabled">
 							<br>
@@ -870,7 +954,7 @@ input {
 						</div>
 						<div style="margin-bottom:15px;">
 							<b style="text-align: left;">닉네임</b> <br> 
-							<input type="text" id="nm_input" name="user_Nm" placeholder="  2~10자의 영어,숫자,한글만 사용 가능합니다." style="width: 400px;">
+							<input class="inputstyle" type="text" id="nm_input" name="user_Nm" placeholder="  2~10자의 영어,숫자,한글만 사용 가능합니다." style="width: 415px;">
 							<input class="regist-button" type="button" id="nm_chk" value="중복 확인" style="width: 80px;">
 							<br>
 							<span class="nm_input_re_1">사용 가능한 닉네임입니니다.</span>
@@ -881,34 +965,38 @@ input {
 						</div>
 						<div style="margin-bottom: 15px;">
 							<b style="text-align: left;">나이</b> <br> 
-							<input type="text" id="age_input" name="user_Age" placeholder="  숫자만 입력해 주세요." style="width: 500px;">
+							<input class="inputstyle" type="text" id="age_input" name="user_Age" placeholder="  숫자만 입력해 주세요." style="width: 500px;">
 							<br>
 							<span class="age_form_check"></span>
 						</div>
 						<div>
 							<b style="text-align: left;">주소</b> <br> 
-							<input type="text" name="ua_Post" id="post" placeholder="  우편번호"
+							<input class="inputstyle" type="text" name="ua_Post" id="post" placeholder="  우편번호"
 								style="width: 200px; margin-bottom:5px;" readonly="readonly">
 								<input class="regist-button" type="button" id="address" value="주소찾기" style="width: 100px;">
-							<input type="text" name="ua_Addr" id="addr" placeholder="  주소"
+							<input class="inputstyle" type="text" name="ua_Addr" id="addr" placeholder="  주소"
 								style="width: 500px; margin-bottom:5px;" readonly="readonly"> 
 								<input type="hidden" name="ua_Lat" id="ua_Lat">
 								<input type="hidden" name="ua_Lng" id="ua_Lng">
-								<input type="text" name="ua_DAddr" id="daddr" placeholder="  상세주소"
-								style="width: 500px;" readonly="readonly">
+								<input class="inputstyle" type="text" name="ua_DAddr" id="daddr" placeholder="  상세주소"
+								style="width: 500px; margin-bottom: 5px;" readonly="readonly">
 								<br>
 								<span class="final_addr_ck">주소를 입력해주세요.</span>
 						</div>
-						<div>
+						<div class="reg-gender">
 							<br> <b style="text-align: left;">성별</b> <br> 
-							<input type="radio" name="user_Gender" value="M"
-								style="width: 50px; height: 20px;" checked="checked">남자 
-								<input type="radio" name="user_Gender" value="F" 
-								style="width: 50px; height: 20px;">여자
+							
+							<input type="radio" id="man" name="user_Gender" value="M"
+								style="width: 50px; height: 20px;" checked="checked">
+								<label for="man" >남자</label>
+								 
+								<input type="radio" id="women" name="user_Gender" value="F" 
+								style="width: 50px; height: 20px;">
+								<label for="women">여자</label>
+							
 							<br>
 						</div>
 					</div>
-					<hr>
 					<div class="text-center">
 						<div class="modal fade" id="myModal" data-backdrop="static"
 							data-keyboard="false">
