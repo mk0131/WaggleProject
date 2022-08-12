@@ -4,6 +4,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -24,15 +25,43 @@ public class LoginController {
 	LoginService loginService;
 	@Autowired
 	OAuthService oAuthService;
+	
+	@Autowired
+	private BCryptPasswordEncoder pEncoder;
+	
+	@RequestMapping("/page")
+	public String go() {
+		return "/login";
+	}
+		
+	
 
 	@RequestMapping(value = "/Normal", method = RequestMethod.POST)
 	public String LoginUser(HttpServletRequest request, Model model, UsersDto dto, RedirectAttributes rttr)
 			throws Exception {
 
 		HttpSession session = request.getSession(); // 세션 생성
-		UsersDto user = loginService.UserLogin(dto);
+		
+		String rawPw ="";
+		String encodePw = "";
+		UsersDto chk = loginService.UserId(dto);
+		
+		rawPw = dto.getUser_Pw();
+		encodePw = chk.getUser_Pw();
+		
+		
+		if(true == pEncoder.matches(rawPw, encodePw)) { // 입력한 pw가 db의 암호화된 pw와 일치하지 않으면 로그인 불가
+			System.out.println("비밀번호 일치");
+		} else {
+			int result = 0;
+			rttr.addFlashAttribute("result", result);
+			return "redirect:/login";
+		}
+		
+		
+		UsersDto user = loginService.UserId(dto);
 
-		if (user == null) { // id, pw 가 일치하지 않으면 user 값은 null 이고 null 값이면 로그인 페이지를 리다이렉트 한다.
+		if (user == null) { // id 일치하지 않으면 user 값은 null 이고 null 값이면 로그인 페이지를 리다이렉트 한다.
 			int result = 0;
 			rttr.addFlashAttribute("result", result);
 			return "redirect:/login";

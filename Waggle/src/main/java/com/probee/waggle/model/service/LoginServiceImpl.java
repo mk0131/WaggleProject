@@ -11,10 +11,7 @@ public class LoginServiceImpl  implements LoginService{
 	@Autowired
 	LoginMapper loginMapper;
 
-	@Override
-	public UsersDto UserLogin(UsersDto dto) {
-		return loginMapper.UserLogin(dto);
-	}
+	
 
 	@Override
 	public UsersDto Naver(UsersDto dto) {
@@ -29,6 +26,11 @@ public class LoginServiceImpl  implements LoginService{
 	@Override
 	public int KakaoRegist(UsersDto dto) {
 		return loginMapper.KakaoRegist(dto);
+	}
+
+	@Override
+	public UsersDto UserId(UsersDto dto) {
+		return loginMapper.UserId(dto);
 	}
 
 }

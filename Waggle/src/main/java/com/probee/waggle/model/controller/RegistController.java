@@ -9,6 +9,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -28,6 +29,9 @@ public class RegistController {
 
 	@Autowired
 	private JavaMailSender mailSender;
+	
+	@Autowired
+	private BCryptPasswordEncoder pEncoder;
 
 	@RequestMapping(value = "/idChk", method = RequestMethod.POST) // 중복아이디 확인
 	@ResponseBody
@@ -98,6 +102,13 @@ public class RegistController {
 
 	@RequestMapping(value = "/join", method = RequestMethod.POST) // 회원가입
 	public String Join(UsersDto dto, UserAddressDto dto2, String user_Email) { 
+		String rawPw ="";
+		String encodePw = "";
+		
+		rawPw = dto.getUser_Pw();
+		encodePw = pEncoder.encode(rawPw);
+		dto.setUser_Pw(encodePw);
+		
 		int regjoin = registService.Join(dto); // 회원정보 입력
 		if (regjoin > 0) {
 			UsersDto user = registService.SelectOne(user_Email); // 아이디로 코드 확인
