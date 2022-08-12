@@ -106,22 +106,23 @@ input[id="tab03"]:checked ~ .con3 {
 }
 
 .accordion-header {
-  padding: 2.5em 2.5em;
+  padding: 1em 2em;
   background: #fff;
   color: #151515;
   cursor: pointer;
-  font-size: 15px;
+  font-size: 16px;
   letter-spacing: .1em;
   transition: all .3s;
   text-transform: uppercase;
+  text-align:left;
 }
 
 .accordion__item {
-    border-bottom: 1px solid #151515;
+    border-bottom: 1px solid #dfdfdf;
 }
 
 .accordion__item .accordion__item {
-  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+  border-bottom: 1px solid #dfdfdf;
 }
 
 .accordion-header:hover {
@@ -131,15 +132,14 @@ input[id="tab03"]:checked ~ .con3 {
 }
 
 .accordion-body {
-  background: #fcfcfc;
+  background: #fafafa;
   color: #353535;
   display: none;
 }
 
 .accordion-body__contents {
-  padding: 2.8em 2.8em;
+  padding: 1em 2.3em;
   font-size: 15px;
-  border-top: 1px solid;
 }
 
 .accordion__item.active:last-child .accordion-header {
@@ -287,16 +287,34 @@ button:active {
 
 .question-q {
 	color: rgb(52, 106, 255);
+	display:inline-block;
+}
+
+.question-a{
+	zoom:1.2 !important;
+	float:left !important;
+	color:rgb(125, 157, 239);
+}
+
+.question-content{
+	display:inline-block;
+	margin-left:65px;
 }
 
 .question-q-title {
-	width: 810px;
     display: inline-block;
+    margin-left:50px;
+    margin-bottom:10px;
+    margin-top:10px;
 }
 
 .question-icon1 {
 	display: inline-block;
 	transform: rotate(90deg);
+	float:right;
+	line-height:2em;
+	zoom:1.5;
+	color:#888888;
 }
 
 .question-icon2 {
@@ -309,7 +327,8 @@ button:active {
 }
 
 .notice-ymd {
-	float: right;
+	font-size:13px;
+	color:#888888;
 }
 
 
@@ -325,7 +344,7 @@ button:active {
         		<li><a href="javascript:void(0)">
         		<i class="fa-solid fa-house"></i>
         		</a>
-        		<p>HOME > 공지사항</p>
+        		<p>HOME > 고객센터</p>
         		</li>	
         	</ul>
 		</div>
@@ -354,8 +373,11 @@ button:active {
 						  <c:if test="${dto.no_Type == '공지' }">
 			                <div class="accordion__item js-accordion-item">
 						    <div class="accordion-header js-accordion-header">
-						    <div class="notice-title">[공지] ${dto.no_Title } 
-						    </div><div class="notice-ymd"><fmt:formatDate value="${dto.no_Date}" pattern="yyyy-MM-dd"/></div></div> 
+						    <div class="notice-title">
+						    [공지] ${dto.no_Title } 
+						    </div>
+						    <div class="question-icon1"><i class="fa-solid fa-angle-right"></i></div> 
+						    <div class="notice-ymd"><fmt:formatDate value="${dto.no_Date}" pattern="yyyy-MM-dd"/></div></div>
 						  <div class="accordion-body js-accordion-body">
 						    <div class="accordion-body__contents">
 						    <br/><br/>
@@ -382,16 +404,18 @@ button:active {
 			                <div class="accordion__item js-accordion-item">
 						    <div class="accordion-header js-accordion-header">
 						    
-						     <span class="question-q">Q</span>
+						     <div class="question-q">Q</div>
 						     <div class="question-q-title">${dto.no_Title }</div>
 						      <div class="question-icon1"><i class="fa-solid fa-angle-right"></i></div>
 						      
 						      </div> 
 						  <div class="accordion-body js-accordion-body">
-						    <div class="accordion-body__contents">
+						    <div class="accordion-body__contents" style="text-align:left;">
 						    <br/><br/>
-						    <span class="question-q">A</span>
+						    <div class="question-q question-a" >A</div>
+						    <div class="question-content">
 						   	${dto.no_Content }
+						   	</div>
 							<br/><br/>
 						    </div>
 						    </div><!-- end of accordion body -->

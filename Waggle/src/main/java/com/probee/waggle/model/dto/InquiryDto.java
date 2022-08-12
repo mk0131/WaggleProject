@@ -10,19 +10,18 @@ public class InquiryDto {
 	private LocalDate in_Date;
 	private String in_Content;
 	private String in_Stat;
-	private String in_Answer;
 	private Boolean in_Chk;
 	
 	private int originNo;
 	private int grpOrd;
-	private int grpLayer;
+	private int in_RCode;
 	
 	public InquiryDto() {
 		super();
 	}
 
-	public InquiryDto(int in_Code, int originNo, int grpOrd, int grpLayer, int in_UCode, String in_Type, String in_Title, LocalDate in_Date, String in_Content,
-			String in_Stat, String in_Answer, Boolean in_Chk) {
+	public InquiryDto(int in_Code, int originNo, int grpOrd, int in_RCode, int in_UCode, String in_Type, String in_Title, LocalDate in_Date, String in_Content,
+			String in_Stat, Boolean in_Chk) {
 		super();
 		this.in_Code = in_Code;
 		this.in_UCode = in_UCode;
@@ -31,8 +30,10 @@ public class InquiryDto {
 		this.in_Date = in_Date;
 		this.in_Content = in_Content;
 		this.in_Stat = in_Stat;
-		this.in_Answer = in_Answer;
 		this.in_Chk = in_Chk;
+		this.originNo = originNo;
+		this.grpOrd = grpOrd;
+		this.in_RCode = in_RCode;
 	}
 
 	public int getIn_Code() {
@@ -91,14 +92,6 @@ public class InquiryDto {
 		this.in_Stat = in_Stat;
 	}
 
-	public String getIn_Answer() {
-		return in_Answer;
-	}
-
-	public void setIn_Answer(String in_Answer) {
-		this.in_Answer = in_Answer;
-	}
-
 	public Boolean getIn_Chk() {
 		return in_Chk;
 	}
@@ -122,22 +115,21 @@ public class InquiryDto {
 	public void setOriginNo(int originNo) {
 		this.originNo = originNo;
 	}
-
-	public int getGrpLayer() {
-		return grpLayer;
-	}
-
-	public void setGrpLayer(int grpLayer) {
-		this.grpLayer = grpLayer;
-	}
 	
+	public int getIn_RCode() {
+		return in_RCode;
+	}
+
+	public void setIn_RCode(int in_RCode) {
+		this.in_RCode = in_RCode;
+	}
+
 	@Override
 	public String toString() {
 		return "InquiryDto [in_Code=" + in_Code + ", in_UCode=" + in_UCode + ", in_Type=" + in_Type + ", in_Title="
 				+ in_Title + ", in_Date=" + in_Date + ", in_Content=" + in_Content + ", in_Stat=" + in_Stat
-				+ ", in_Answer=" + in_Answer + ", in_Chk=" + in_Chk + "]";
+				+ ", in_Chk=" + in_Chk + ", originNo=" + originNo + ", grpOrd=" + grpOrd + ", in_RCode=" + in_RCode
+				+ "]";
 	}
-
-	
 	
 }

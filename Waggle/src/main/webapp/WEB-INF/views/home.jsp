@@ -159,9 +159,9 @@
 		<div class="section">
 		 	<div class="swiper mySwiper">
 		      <div class="swiper-wrapper">
-		        <div class="swiper-slide"><img src="images/mainhome/frame 2.jpg"><div id="gopagebtn1" onclick="location.href='/board/requestform'"></div></div>
-		        <div class="swiper-slide"><img src="images/mainhome/frame 3.jpg"><div id="gopagebtn2" onclick="location.href='/board/list'"></div></div>
-				<div class="swiper-slide"><img src="images/mainhome/frame 12.png"></div>
+		        <div class="swiper-slide"><img src="/images/mainhome/Frame2.jpg"><div id="gopagebtn1" onclick="location.href='/board/requestform'"></div></div>
+		        <div class="swiper-slide"><img src="/images/mainhome/Frame3.jpg"><div id="gopagebtn2" onclick="location.href='/board/list'"></div></div>
+				<div class="swiper-slide"><img src="/images/mainhome/Frame12.png"></div>
 		      </div>
 		      <div class="swiper-button-next"></div>
 		      <div class="swiper-button-prev"></div>
@@ -172,9 +172,9 @@
 		   <div class="mainhome-bottom">
 		    <div class="homelist-all">
 		     <h3 id="homelist-title">오늘 올라온 완료목록</h3>
-		    	<img class="homelist" src="images/mainhome/frame 4.png" onclick="location.href='/board/list'">
-		    	<img class="homelist" src="images/mainhome/frame 5.png" onclick="location.href='/board/list'">
-		    	<img class="homelist" src="images/mainhome/frame 9.png" onclick="location.href='/board/list'">
+		    	<img class="homelist" src="/images/mainhome/Frame4.png" onclick="location.href='/board/list'">
+		    	<img class="homelist" src="/images/mainhome/Frame5.png" onclick="location.href='/board/list'">
+		    	<img class="homelist" src="/images/mainhome/Frame9.png" onclick="location.href='/board/list'">
 		    </div>
 		    
 			    <div class="inquiry-notice">

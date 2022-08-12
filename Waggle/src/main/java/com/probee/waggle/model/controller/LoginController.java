@@ -17,6 +17,7 @@ import com.probee.waggle.model.dto.UsersDto;
 import com.probee.waggle.model.service.LoginService;
 import com.probee.waggle.model.service.OAuthService;
 
+
 @Controller
 @RequestMapping("/login") // 일반 로그인
 public class LoginController {
@@ -26,6 +27,7 @@ public class LoginController {
 	@Autowired
 	OAuthService oAuthService;
 	
+
 	@Autowired
 	private BCryptPasswordEncoder pEncoder;
 	
@@ -35,6 +37,7 @@ public class LoginController {
 	}
 		
 	
+
 
 	@RequestMapping(value = "/Normal", method = RequestMethod.POST)
 	public String LoginUser(HttpServletRequest request, Model model, UsersDto dto, RedirectAttributes rttr)
