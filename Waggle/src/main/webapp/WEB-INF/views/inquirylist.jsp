@@ -138,7 +138,7 @@ input[id="tab03"]:checked ~ .con3 {
 }
 
 .accordion-body__contents {
-  padding: 2.8em 2.8em;
+  padding: 1em 2.3em;
   font-size: 15px;
 }
 
@@ -296,6 +296,11 @@ button:active {
 	color:rgb(125, 157, 239);
 }
 
+.question-content{
+	display:inline-block;
+	margin-left:65px;
+}
+
 .question-q-title {
     display: inline-block;
     margin-left:50px;
@@ -408,7 +413,7 @@ button:active {
 						    <div class="accordion-body__contents" style="text-align:left;">
 						    <br/><br/>
 						    <div class="question-q question-a" >A</div>
-						    <div style="display:inline-block; margin-left:50px;">
+						    <div class="question-content">
 						   	${dto.no_Content }
 						   	</div>
 							<br/><br/>
