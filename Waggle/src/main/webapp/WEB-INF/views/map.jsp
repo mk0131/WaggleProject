@@ -478,7 +478,7 @@ div {
 	var markers = [];
 	//검색한 주소 지도에 핀 설정
 	function searchLngLat(){
-		var gap = document.querySelector(".searchbar2").value;
+		var gap = document.querySelector("#var1").value;
 
 		// 주소-좌표 변환 객체를 생성합니다
 		var geocoder = new kakao.maps.services.Geocoder();

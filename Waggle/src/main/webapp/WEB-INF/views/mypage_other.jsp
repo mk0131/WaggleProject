@@ -525,7 +525,7 @@ textarea {
 							style="width: 200px; height: 200px">
 						</c:if>
 						<c:if test = "${dto.user_Pro != 0 }">
-						<img src="${Pro_fi_Nm }" style="width:200px; height: 200px; border-radius:100px">
+						<img src="${Pro_fi_Nm }" style="width:200px; height: 200px; border-radius:100px" onerror=this.src="/images/importToJsp/profile_default.jpg">
 						</c:if>
 					</div>
 					
@@ -651,7 +651,7 @@ textarea {
 						</c:if>
 						<c:if test="${dto.co_Confirm == '확인' }">
 						<div>
-							<span style="font-size: 11pt; color: #898989">${dto.user_Nm}은 인증 완료된 공인중개사입니다.</span>
+							<span style="font-size: 11pt; color: #898989">${dto.user_Nm}은 <span style="color:red">인증된 공인중개사</span>이십니다!</span>
 						</div>
 						</c:if>
 						<c:if test="${dto.co_Confirm == '반려' }">

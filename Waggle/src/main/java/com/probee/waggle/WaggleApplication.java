@@ -15,14 +15,27 @@ public class WaggleApplication {
 	
 	@RequestMapping("/")
 	public static String goindex() {
-		System.out.println("/");
 		return "home";
 	}
 	
 	@RequestMapping("/home")
 	public static String gohome() {
-		System.out.println("/home");
 		return "home";
+	}
+	
+	@RequestMapping("/login")
+	public static String gologin() {
+		return "login";
+	}
+
+	@RequestMapping("/inquiry")
+	public static String goinquiry() {
+		return "inquiry";
+	}
+	
+	@RequestMapping("/chatbot")
+	public static String gochatbot() {
+		return "chatbot";
 	}
 
 }

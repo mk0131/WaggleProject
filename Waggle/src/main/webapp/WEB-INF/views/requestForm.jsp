@@ -22,16 +22,14 @@
 	        	
 	        	 //받은 주소값을 위도 경도로 바꿔서 input hidden 값에 value값으로 넣어주기
                 var geocoder = new kakao.maps.services.Geocoder();
-                var addr = $('#home_Addr').val();
+                var addr = $('#ji_Addr').val();
                 geocoder.addressSearch(addr, function(result, status) {
-                	
         		    // 정상적으로 검색이 완료됐으면 
         		     if (status === kakao.maps.services.Status.OK) {
         				$("#home_Lat").attr('value',result[0].y);
         				$("#home_Lng").attr('value',result[0].x);
-        				
         		    } else {
-        		    	console.log("에러");
+        		    	console.log("주소 가져오기 에러");
         		    }
         		});  
                 

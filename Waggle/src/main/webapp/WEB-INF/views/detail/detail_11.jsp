@@ -96,7 +96,7 @@ button:active {
 
 .bubble {
   width: 450px;
-  line-height: 1.4em;
+  line-height: 0.4em;
   padding: 20px;
   background-color: rgb(250, 250, 250);
   position: relative;
@@ -338,6 +338,7 @@ button:active {
 	height: 80px; 
 	border-radius: 75px; 
 	padding: 16px;
+	aspect-ratio:1;
 }
 
 .bubble-text {
@@ -354,7 +355,12 @@ button:active {
 
 #bubble-user-intro {
 	padding: 0px 5px;
-}
+	text-overflow: ellipsis;
+	overflow: hidden;
+	white-space: nowrap;
+	line-height: 1.4em;
+	}
+	
 
 .h3-font {
 	font-size: 20px;
@@ -538,7 +544,7 @@ button:active {
 								class="profile-img" />
 						</c:if>
 						<c:if test="${user_dto.user_Pro != 0 }">
-							<img src="${Pro_fi_Nm }" class="profile-img" />
+							<img src="${Pro_fi_Nm }" class="profile-img" onerror=this.src="/images/importToJsp/profile_default.jpg">
 						</c:if>
 					</div>
 					<div class="userinfo-right" style="display: inline-block;">
@@ -604,7 +610,7 @@ button:active {
 									
 										<c:choose>
 											<c:when test="${not empty dto.fi_Nm }">
-												<img class="profile-photo-img" alt="프로필사진o" src="${dto.fi_Nm }">
+												<img class="profile-photo-img" alt="프로필사진o" src="${dto.fi_Nm }" onerror=this.src="/images/importToJsp/profile_default.jpg">
 											</c:when>
 											<c:otherwise>
 												<img class="profile-photo-img" alt="프로필사진x" src="/images/importToJsp/profile_default.jpg">
@@ -702,10 +708,10 @@ button:active {
 			 if(nVScroll > 930 && nVScroll <=1300) {
 				 $(".imp").css("position", "fixed").css("top", "135" + "px")
 			} else if(nVScroll > 1300){
-				$(".imp").css("position", "absolute").css("top", "400" + "px")
+				$(".imp").css("position", "relative").css("top", "400" + "px")
 			}
 			else {
-				$(".imp").css("position", "absolute").css("top", "40" + "px")
+				$(".imp").css("position", "relative").css("top", "40" + "px")
 			}
 		}); 
 		

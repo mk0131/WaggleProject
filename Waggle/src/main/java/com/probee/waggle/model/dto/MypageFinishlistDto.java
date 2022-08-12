@@ -7,6 +7,7 @@ public class MypageFinishlistDto {
 	private String req_Title;
 	private LocalDate req_EDate;
 	private int req_Point;
+	private String res_Stat;
 	private String req_Stat;
 	private String home_Addr;
 	private String fi_Nm;
@@ -17,13 +18,14 @@ public class MypageFinishlistDto {
 		// TODO Auto-generated constructor stub
 	}
 
-	public MypageFinishlistDto(int req_No, String req_Title, LocalDate req_EDate, int req_Point, String req_Stat,
-			String home_Addr, String fi_Nm, int res_UCode) {
+	public MypageFinishlistDto(int req_No, String req_Title, LocalDate req_EDate, int req_Point, String res_Stat,
+			String req_Stat, String home_Addr, String fi_Nm, int res_UCode) {
 		super();
 		this.req_No = req_No;
 		this.req_Title = req_Title;
 		this.req_EDate = req_EDate;
 		this.req_Point = req_Point;
+		this.res_Stat = res_Stat;
 		this.req_Stat = req_Stat;
 		this.home_Addr = home_Addr;
 		this.fi_Nm = fi_Nm;
@@ -62,6 +64,14 @@ public class MypageFinishlistDto {
 		this.req_Point = req_Point;
 	}
 
+	public String getRes_Stat() {
+		return res_Stat;
+	}
+
+	public void setRes_Stat(String res_Stat) {
+		this.res_Stat = res_Stat;
+	}
+
 	public String getReq_Stat() {
 		return req_Stat;
 	}
@@ -94,13 +104,5 @@ public class MypageFinishlistDto {
 		this.res_UCode = res_UCode;
 	}
 
-	@Override
-	public String toString() {
-		return "MypageFinishlistDto [req_No=" + req_No + ", req_Title=" + req_Title + ", req_EDate=" + req_EDate
-				+ ", req_Point=" + req_Point + ", req_Stat=" + req_Stat + ", home_Addr=" + home_Addr + ", fi_Nm="
-				+ fi_Nm + ", res_UCode=" + res_UCode + "]";
-	}
-
-	
 	
 }

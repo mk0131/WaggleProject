@@ -304,6 +304,7 @@ button:active {
 	border-radius: 50%;
 	border: 1px solid #f7f9fa;
 	vertical-align: middle;
+	aspect-ratio:1;
 }
 
 .profile-img:hover {
@@ -380,12 +381,12 @@ button:active {
 	bottom: -10px;
 }
 
-:root { -
-	-clr-white: rgb(255, 255, 255); -
-	-clr-black: rgb(0, 0, 0); -
-	-clr-light: rgb(245, 248, 255); -
-	-clr-light-gray: rgb(196, 195, 196); -
-	-clr-blue: rgb(63, 134, 255); -
+:root { 
+	-clr-white: rgb(255, 255, 255); 
+	-clr-black: rgb(0, 0, 0); 
+	-clr-light: rgb(245, 248, 255); 
+	-clr-light-gray: rgb(196, 195, 196); 
+	-clr-blue: rgb(63, 134, 255); 
 	-clr-light-blue: rgb(171, 202, 255);
 }
 
@@ -421,6 +422,11 @@ button:active {
 #bubble-user-intro {
 	padding: 0px 5px;
 	margin:0px;
+	text-overflow: ellipsis;
+	overflow: hidden;
+	white-space: nowrap;
+	line-height: 1.4em;
+	
 }
 
 .h3-font {
@@ -524,7 +530,7 @@ button:active {
 						</c:if>
 						<c:if test="${req_dto.fi_Nm != null}">
 							<div id="ongoing21-img">
-								<img src=${req_dto.fi_Nm }>
+								<img src=${req_dto.fi_Nm } onerror=this.src="/images/importToJsp/detail_default_img.png">
 							</div>
 						</c:if>
 					</div>
@@ -537,7 +543,7 @@ button:active {
 								class="profile-img" />
 						</c:if>
 						<c:if test="${user_dto.user_Pro != 0 }">
-							<img src="${Pro_fi_Nm }" class="profile-img" />
+							<img src="${Pro_fi_Nm }" class="profile-img" onerror=this.src="/images/importToJsp/profile_default.jpg"/>
 						</c:if>
 					</div>
 					<div class="userinfo-right" style="display: inline-block;">
@@ -607,7 +613,7 @@ button:active {
 	      				<h3 class="h3-font">일을 진행중인 꿀벌 정보</h3>
 						<c:choose>
 							<c:when test="${not empty bee_img }">
-								<img class="profile-photo-img" alt="프로필사진o" src="${bee_img }">
+								<img class="profile-photo-img" alt="프로필사진o" src="${bee_img }" onerror=this.src="/images/importToJsp/profile_default.jpg">
 							</c:when>
 							<c:otherwise>
 								<img class="profile-photo-img" alt="프로필사진x" src="/images/importToJsp/profile_default.jpg">
@@ -792,19 +798,19 @@ button:active {
 		}
 	</script>
 	<script type="text/javascript">
-		$(window).scroll(  function() {
-	        var nVScroll = document.documentElement.scrollTop || document.body.scrollTop;
-	        var currentPosition = parseInt($(".imp").css("top")); 
-	        
-	        if(nVScroll > 930 && nVScroll <=1300) {
-	           $(".imp").css("position", "fixed").css("top", "135" + "px")
-	       } else if(nVScroll > 1300){
-	          $(".imp").css("position", "absolute").css("top", "450" + "px")
-	       }
-	       else {
-	          $(".imp").css("position", "absolute").css("top", "40" + "px")
-	       }
-	    }); 
+		   $(window).scroll(  function() {
+			 var nVScroll = document.documentElement.scrollTop || document.body.scrollTop;
+			 var currentPosition = parseInt($(".imp").css("top")); 
+			 
+			 if(nVScroll > 930 && nVScroll <=1300) {
+				 $(".imp").css("position", "fixed").css("top", "135" + "px")
+			} else if(nVScroll > 1300){
+				$(".imp").css("position", "absolute").css("top", "450" + "px")
+			}
+			else {
+				$(".imp").css("position", "absolute").css("top", "40" + "px")
+			}
+		}); 
 		
 	</script>
 	<script>

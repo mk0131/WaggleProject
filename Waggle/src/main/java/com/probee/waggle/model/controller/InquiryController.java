@@ -114,10 +114,6 @@ public class InquiryController {
 		
 		request.setAttribute("originNo", Integer.parseInt(request.getParameter("in_Code")));
 		
-		user_dto.setUser_Nm("관리자");
-		
-		System.out.println(user_dto);
-		
 		return "inquiryadmininsert";
 	}
 	
@@ -125,11 +121,11 @@ public class InquiryController {
 	public String admininsert(InquiryDto dto, int val, Model model, HttpServletRequest request, String user_Nm) {
 		
 		UsersDto user_dto = inquiryService.selectuser(val);
-		user_dto.setUser_Nm("관리자");
 		
 		dto.setIn_UCode(val);
 		
 		if(inquiryService.admininsert(dto) > 0 ) {
+			inquiryService.inquiryListStat();
 			return "redirect:/inquiry/list?user_Code=" + dto.getIn_UCode();
 		} else {
 			return "redirect:/inquiry/admininsert";

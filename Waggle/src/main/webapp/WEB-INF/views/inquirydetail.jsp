@@ -7,7 +7,6 @@
 <meta charset="UTF-8">
 <title>Waggle 문의글 상세</title>
 <link rel="icon" href="/images/importToJsp/favicon.png">
-
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
 <style type="text/css">
@@ -40,31 +39,25 @@
 	text-align: center;
 }
 
-button {
- background-color: #151515;
- border-radius: 8px;
- border-style: none;
- box-shadow: rgba(0, 0, 0, .2) 0 3px 5px -1px,rgba(0, 0, 0, .14) 0 6px 10px 0,rgba(0, 0, 0, .12) 0 1px 18px 0;
- box-sizing: border-box;
- color: #fff;
- font-size: 12px;
- font-weight: 500;
- font-family: inherit;
- letter-spacing: .25px;
- line-height: normal;
- padding: 11px 11px;
- transition: background box-shadow 280ms ease;
+.btn1 button {
+	font-weight: 600;
+	color: #fff;
+	background-color: #222;
+	border-radius: 12px;
+	border: none;
+	font-size: 13px;
+	font-family: inherit;
+	letter-spacing: .14px;
+	line-height: normal;
+	padding: 11px 11px;
+	cursor: pointer;
+	margin: 1px;
 }
 
-button:hover {
- background: #fff;
- color: #151515;
-}
-
-button:active {
- box-shadow: 0 4px 4px 0 rgb(60 64 67 / 30%), 0 8px 12px 6px rgb(60 64 67 / 15%);
- outline: none;
- border: 1px solid #ffffff;
+.btn1 button:active {
+	outline: none;
+	border: none;
+	background-color: #353535;
 }
 
 .Inquiry-detail {
@@ -116,6 +109,23 @@ tr {
 	font-size: 13px;
 }
 
+#incontent {
+	resize: none;
+	padding: 20px;
+	border: 1px solid #d3d3d3;
+	font-size: 15px;
+	letter-spacing: .5px;
+}
+
+#incontent:focus {
+	resize: none;
+	padding: 20px;
+	outline: none;
+}
+
+.inq-detail-td {
+	letter-spacing: .55px;
+}
 
 </style>
 </head>
@@ -147,38 +157,38 @@ tr {
 					<table class="Inquiry-detail">
 						<tr>
 						<th>문의 유형</th>
-						<td>${dto.in_Type }</td>
-						</tr>
-						<tr>
-						<th>제목</th>
-						<td>${dto.in_Title }</td>
-						</tr>
-						<tr>
-						<th>작성자</th>
-						<td>${user_dto.user_Nm}</td>						
+						<td class="inq-detail-td">${dto.in_Type }</td>
 						</tr>
 						<tr>
 						<th>작성일</th>
-						<td>${dto.in_Date }</td>
+						<td class="inq-detail-td">${dto.in_Date }</td>
+						</tr>
+						<tr>
+						<th>제목</th>
+						<td class="inq-detail-td">${dto.in_Title }</td>
+						</tr>
+						<tr>
+						<th>작성자</th>
+						<td class="inq-detail-td">${user_dto.user_Nm}</td>						
 						</tr>
 						<tr>
 						<th>내용</th>
-						<td>${dto.in_Content }</td>
+						<td class="inq-detail-td"><textarea id="incontent" rows="10" cols="60" readonly="readonly" style="font-family: 'Noto Sans KR', 'Helvetica Neue', Helvetica, Arial, sans-serif;">${dto.in_Content }</textarea></td>
 						</tr>
 						<tr>
 						<th>답변상태</th>
-						<td>${dto.in_Stat }</td>
+						<td class="inq-detail-td">${dto.in_Stat }</td>
 						</tr>
 						<tr>         
 				         <td class="btn1" colspan="2" align="right">
-				         	<button type="button" value="목록" onclick='history.back();'>목록</button>
-				         	<c:if test="${user_Nm eq 'admin' }">
-				         	<button type="button" value="답변 작성" onclick="location.href='/inquiry/admininsertform?in_Code=${dto.in_Code}'">답변 작성</button>
-				         	</c:if>
 				         	<c:if test="${user_Nm ne 'admin' }">
 				         	<button type="button" value="수정" onclick="location.href='/inquiry/updateform?in_Code=${dto.in_Code}'">수정</button>
+				         	</c:if>
+				         	<c:if test="${user_Nm eq 'admin' }">
+				         	<button type="button" value="답변 작성" onclick="location.href='/inquiry/admininsertform?in_Code=${dto.in_Code}'">답변 작성</button>
 				         	<button type="button" value="삭제" onclick="location.href='/inquiry/delete?in_Code=${dto.in_Code}&user_Code=${user_Code }'">삭제</button>  
 				         	</c:if>
+				         	<button type="button" value="목록" onclick='history.back();'>목록</button>
 				         </td>   
 						</tr>
 					</table>

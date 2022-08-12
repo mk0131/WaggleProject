@@ -309,7 +309,12 @@ input {
 
 /* 탭 css 끝 */
 
+
 .paging1 {
+	text-align: center;
+}
+
+.paging2 {
 	text-align: center;
 }
 
@@ -318,15 +323,10 @@ input {
 	display: inline-block;
 }
 
-.paging2 {
-	text-align: center;
-}
-
 .paging2 li {
 	list-style: none;
 	display: inline-block;
 }
-
 
 .nowpage {
 	font-weight: bold;
@@ -343,6 +343,18 @@ input {
 	color: #878787;
 }
 
+.paging-a {
+	text-decoration: none;
+	padding: 8px;
+	color: #878787;
+}
+
+.paging-a:visited {
+	color: #878787;
+}
+
+
+
 .my-req-list-content-all:hover{
 	box-shadow: inset 0 0 0 15em #f7f9fa;
 }
@@ -353,15 +365,18 @@ input {
 	border-radius:30px;
 	transition: 1s;
 }
+
 .my-res-list-content-all:hover{
 	box-shadow: inset 0 0 0 15em #f7f9fa;
 }
+
 .my-res-list-content-all{
 	width:1020px;
 	margin:0 auto;
 	border-radius:30px;
 	transition: 1s;
 }
+
 </style>
 </head>
 <body>
@@ -428,8 +443,8 @@ input {
 				</c:forEach>
 					<ul class="paging1">
 					 <c:if test="${paging1.prev}">       
-					   <li id="paging">
-						 <a id="paging-a" href='<c:url value="/mypage/history?page=${paging1.startPage-1}&sub_page=${paging2.cri.page}"/>'>이전</a>
+					   <li class="paging">
+						 <a class="paging-a" href='<c:url value="/mypage/history?page=${paging1.startPage-1}&sub_page=${paging2.cri.page}"/>'>이전</a>
 					   </li>  
 					 </c:if>
 					  <c:forEach begin="${paging1.startPage}" end="${paging1.endPage}" var="num">
@@ -439,7 +454,7 @@ input {
 					  </c:forEach>
 					   <c:if test="${paging1.next && paging1.endPage > 0}">
 						<li>
-						 <a id="paging-a" href='<c:url value="/mypage/history?page=${paging1.endPage+1}&sub_page=${paging2.cri.page}"/>'>다음</a>
+						 <a class="paging-a" href='<c:url value="/mypage/history?page=${paging1.endPage+1}&sub_page=${paging2.cri.page}"/>'>다음</a>
 						</li>
 						</c:if>
 					 </ul>
@@ -462,7 +477,7 @@ input {
 					<div id="my-res-list-text">
 						<div class="my-res-list-content-inner" id="my-res-list-stat"
 							onclick="location.href='/board/detail?req_No=${per.req_No}'">
-							<label id="res-stat">${per.req_Stat }</label>
+							<label id="res-stat">${per.res_Stat }</label>
 						</div>
 						<div class="my-res-list-content-inner" id="my-res-list-title"
 							onclick="location.href='/board/detail?req_No=${per.req_No}'">
@@ -492,8 +507,8 @@ input {
 				</c:forEach>
 				<ul class="paging2">
 					 <c:if test="${paging2.prev}">       
-					   <li id="paging">
-						 <a id="paging-a" href='<c:url value="/mypage/history?page=${paging1.cri.page}&sub_page=${paging2.startPage-1}"/>'>이전</a>
+					   <li class="paging">
+						 <a class="paging-a" href='<c:url value="/mypage/history?page=${paging1.cri.page}&sub_page=${paging2.startPage-1}"/>'>이전</a>
 					   </li>  
 					 </c:if>
 					  <c:forEach begin="${paging2.startPage}" end="${paging2.endPage}" var="num">
@@ -503,7 +518,7 @@ input {
 					  </c:forEach>
 					   <c:if test="${paging2.next && paging2.endPage > 0}">
 						<li>
-						 <a id="paging-a" href='<c:url value="/mypage/history?page=${paging1.cri.page}&sub_page=${paging2.endPage+1}"/>'>다음</a>
+						 <a class="paging-a" href='<c:url value="/mypage/history?page=${paging1.cri.page}&sub_page=${paging2.endPage+1}"/>'>다음</a>
 						</li>
 						</c:if>
 					 </ul>

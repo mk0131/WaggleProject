@@ -812,7 +812,7 @@ textarea {
 							style="width: 100px; height: 100px">
 						</c:if>
 						<c:if test = "${dto.user_Pro != 0 }">
-						<img src="${Pro_fi_Nm }" style="width:200px; height: 200px; border-radius:200px">
+						<img src="${Pro_fi_Nm }" style="width:200px; height: 200px; border-radius:200px" onerror=this.src="/images/importToJsp/profile_default.jpg">
 						</c:if>
 						<div style="font-weight: bold; font-size: 20pt">${dto.user_Point } P</div>
 						<div>
