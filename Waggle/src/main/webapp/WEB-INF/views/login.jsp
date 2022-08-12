@@ -782,24 +782,25 @@ input {
 					</script>
 					<h3 style="text-align: center;">SNS 간편 로그인</h3>
 					<div class="api-login">
-                	<div id="naver_id_login" style="display: none;"></div>
+                	<div id="naver_id_login" ></div>
 					<div class="naver-button" style="display:inline-block">
 							<!-- 네이버 로그인 버튼 노출 영역 -->
-	                	
+	                	<!-- 
 	                	<a href="https://nid.naver.com/oauth2.0/authorize?response_type=token&amp;client_id=JGPtZuIPhsS22_zSl6eT&amp;redirect_uri=http%3A%2F%2Flocalhost%3A8787%2Fhome&amp;state=109291b6-428e-4335-8890-2c65ad0d44e4" id="naver_id_login_anchor">
 	                	<img src="http://static.nid.naver.com/oauth/big_w.PNG" border="0" title="네이버 아이디로 로그인" width="250px" height="50px"></a>
+	                	 -->
 							<!-- //네이버 로그인 버튼 노출 영역 -->
 					</div>
 					<script type="text/javascript">
-						var naver_id_login = new naver_id_login("JGPtZuIPhsS22_zSl6eT", "http://localhost:8787/home");
+						var naver_id_login = new naver_id_login("JGPtZuIPhsS22_zSl6eT", "http://15.164.3.37:8787/home");
 						var state = naver_id_login.getUniqState();
-						naver_id_login.setDomain("http://localhost:8787");
+						naver_id_login.setDomain("http://15.164.3.37:8787");
 						naver_id_login.setButton("white", 3,60);
 						naver_id_login.setState(state);
 						naver_id_login.init_naver_id_login();
 					</script>
 					<div class="kakao-button" style="display:inline-block">
-						<a class="p-2" href="https://kauth.kakao.com/oauth/authorize?client_id=6271ae3b4283fa56e846863ed3a4f7be&redirect_uri=http://localhost:8787/home&response_type=code">
+						<a class="p-2" href="https://kauth.kakao.com/oauth/authorize?client_id=6271ae3b4283fa56e846863ed3a4f7be&redirect_uri=http://15.164.3.37:8787/home&response_type=code">
 							<img src="/images/login/kakao_login_large_wide.png" style="width:250px; height:50px;">
 							</a>
 					</div>

@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -43,6 +44,9 @@ public class MypageController {
 	
 	@Autowired
 	FileSaver fileSaver;
+	
+	@Autowired
+	private BCryptPasswordEncoder pEncoder;
 	
 	@GetMapping("/other")
 	public String selectOtherInfo(int ucode, Model model) {
@@ -467,6 +471,13 @@ public class MypageController {
 	
 	@PostMapping("/pwchange") // 비밀번호 변경
 	public String PwChange(int user_Code, String user_Pw) {
+		
+		String rawPw ="";
+		String encodePw = "";
+		
+		rawPw = user_Pw;
+		encodePw = pEncoder.encode(rawPw);
+		user_Pw = encodePw;
 
 		mypageService.PwChange(user_Pw, user_Code);
 
