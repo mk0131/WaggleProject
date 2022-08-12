@@ -40,32 +40,25 @@
 }
 
 .btn1 input {
- background-color: #151515;
- border-radius: 8px;
- border-style: none;
- box-shadow: rgba(0, 0, 0, .2) 0 3px 5px -1px,rgba(0, 0, 0, .14) 0 6px 10px 0,rgba(0, 0, 0, .12) 0 1px 18px 0;
- box-sizing: border-box;
- color: #fff;
- font-size: 12px;
- font-weight: 500;
- font-family: inherit;
- letter-spacing: .25px;
- line-height: normal;
- padding: 11px 11px;
- transition: background box-shadow 280ms ease;
-}
-
-.btn1 input:hover {
- background: #fff;
- color: #151515;
+	font-weight: 600;
+	color: #fff;
+	background-color: #222;
+	border-radius: 12px;
+	border: none;
+	font-size: 13px;
+	font-family: inherit;
+	letter-spacing: .14px;
+	line-height: normal;
+	padding: 11px 11px;
+	cursor: pointer;
+	margin: 1px;
 }
 
 .btn1 input:active {
- box-shadow: 0 4px 4px 0 rgb(60 64 67 / 30%), 0 8px 12px 6px rgb(60 64 67 / 15%);
- outline: none;
- border: 1px solid #ffffff;
+	outline: none;
+	border: none;
+	background-color: #353535;
 }
-
 /* 
 th {
 	width:200px;
@@ -78,8 +71,8 @@ tr {
 } */
 
 .btn1 {
-	position: relative;
 	top: 150px;
+    padding: 45px 0px;
 }
 
 .Inquiry-insert {
