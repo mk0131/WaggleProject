@@ -381,12 +381,12 @@ button:active {
 	bottom: -10px;
 }
 
-:root { -
-	-clr-white: rgb(255, 255, 255); -
-	-clr-black: rgb(0, 0, 0); -
-	-clr-light: rgb(245, 248, 255); -
-	-clr-light-gray: rgb(196, 195, 196); -
-	-clr-blue: rgb(63, 134, 255); -
+:root { 
+	-clr-white: rgb(255, 255, 255); 
+	-clr-black: rgb(0, 0, 0); 
+	-clr-light: rgb(245, 248, 255); 
+	-clr-light-gray: rgb(196, 195, 196); 
+	-clr-blue: rgb(63, 134, 255); 
 	-clr-light-blue: rgb(171, 202, 255);
 }
 
