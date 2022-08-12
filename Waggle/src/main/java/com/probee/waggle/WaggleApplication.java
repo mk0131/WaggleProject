@@ -37,4 +37,5 @@ public class WaggleApplication {
 	public static String gochatbot() {
 		return "chatbot";
 	}
+
 }
