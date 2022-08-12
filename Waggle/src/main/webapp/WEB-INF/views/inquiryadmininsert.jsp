@@ -143,7 +143,7 @@ tr {
 	 			 <form action="/inquiry/admininsert" method="post">
 	 			<input type="hidden" name="user_Code" value="${user_Code }">
 	 			 <input type="hidden" name="originNo" value="${originNo}">
-	 			 <input type="hidden" name="val" value="${user_dto.user_Code}">
+	 			 <input type="hidden" name="in_RCode" value="${user_dto.user_Code}">
 					<table class="Inquiry-insert">
 						<tr>
 						<th>제목</th>
@@ -151,7 +151,7 @@ tr {
 						</tr>
 						<tr>
 						<th>작성자</th>
-						<td>admin</td>						
+						<td>${user_Nm}</td>						
 						</tr>
 						<tr>
 						<th>내용</th>
