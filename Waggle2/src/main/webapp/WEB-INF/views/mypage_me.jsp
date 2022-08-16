@@ -1319,9 +1319,7 @@ textarea {
 	const imagesTypes = [
 	  "jpeg",
 	  "png",
-	  "svg",
-	  "gif",
-	  "jfif"
+	  "jpg"
 	];
 
 	// Append Images Types Array Inisde Tooltip Data
@@ -1464,7 +1462,7 @@ textarea {
 	function fileValidate(fileType, fileSize) {
 	  // File Type Validation
 	  let isImage = imagesTypes.filter((type) => fileType.indexOf(`image/${type}`) !== -1);
-
+	  console.log(isImage);
 	  // If The Uploaded File Type Is 'jpeg'
 	  if (isImage[0] === 'jpeg') {
 	    // Add Inisde (uploadedFileIconText) The (jpg) Value
