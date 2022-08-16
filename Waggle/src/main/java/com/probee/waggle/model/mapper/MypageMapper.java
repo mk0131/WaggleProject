@@ -75,7 +75,7 @@ public interface MypageMapper {
 	@Select("SELECT * FROM File ORDER BY fi_Code DESC LIMIT 1")
 	public List<FileDto> SelectLastFiCode();
 	
-	@Insert("INSERT INTO File VALUES(NULL, 'img', CONCAT('/images/proFile/proFile_',#{fi_Code},'.',#{ext}))")
+	@Insert("INSERT INTO File VALUES(NULL, 'img', CONCAT('/images/profile/profile_',#{fi_Code},'.',#{ext}))")
 	public int ImageFileInsert(int fi_Code, String ext);
 	
 	@Update("UPDATE Users SET user_Pro = #{fi_Code} WHERE user_Code = #{ucode}")
@@ -130,10 +130,10 @@ public interface MypageMapper {
 	@Select("Select * from Confirm where co_UCode = #{ucode}")
 	public ConfirmDto SelectMyConfirm(int ucode);
 	
-	@Update("update File set fi_Nm = CONCAT('/images/Confirm/Confirm_',#{ucode},'.',#{ext}) where fi_Code=#{fi_Code}")
+	@Update("update File set fi_Nm = CONCAT('/images/confirm/confirm_',#{ucode},'.',#{ext}) where fi_Code=#{fi_Code}")
 	public int FileUpdate(int ucode, String ext, int fi_Code);
 	
-	@Insert("insert into File values(#{new_fi_Code},'img',concat('/images/Confirm/Confirm_',#{ucode},'.',#{ext}))")
+	@Insert("insert into File values(#{new_fi_Code},'img',concat('/images/confirm/confirm_',#{ucode},'.',#{ext}))")
 	public int InsertFileConfirm(int new_fi_Code, int ucode, String ext);
 	
 	@Insert("insert into Confirm values(#{ucode}, #{new_fi_Code}, '미확인', null, null)")
