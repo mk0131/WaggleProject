@@ -240,10 +240,18 @@
 		      	  </c:when>
 		      	  <c:otherwise>
 			       <c:forEach items="${list }" var="dto">
+			       <c:if test="${user_Code != null }">
 			        <div id="notice-inner1">
 			        <div class="inquiry-notice-inner-content"><a href="/inquiry/list?user_Code=${user_Code }">[공지] ${dto.no_Title }</a></div>
 			        <div><a id="inner-date" href="/inquiry/list?user_Code=${user_Code }"><fmt:formatDate value="${dto.no_Date}" pattern="yyyy-MM-dd"/></a></div>
 			        </div>
+			        </c:if>
+			        <c:if test="${user_Code == null }">
+			        <div id="notice-inner1">
+			        <div class="inquiry-notice-inner-content"><a href="/login">[공지] ${dto.no_Title }</a></div>
+			        <div><a id="inner-date"  href="/login"><fmt:formatDate value="${dto.no_Date}" pattern="yyyy-MM-dd"/></a></div>
+			        </div>
+			        </c:if>
 			       </c:forEach>
 			       </c:otherwise>
 			       </c:choose>

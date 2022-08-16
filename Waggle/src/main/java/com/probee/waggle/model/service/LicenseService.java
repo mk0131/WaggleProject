@@ -9,6 +9,7 @@ import com.probee.waggle.model.dto.ConfirmDto2;
 public interface LicenseService {
 	
 	public List<ConfirmDto2> selectAll();
+	public int notConfirm(int co_UCode);
 	public int permitConfirm(int co_UCode);
 	public int rejectConfirm(int co_UCode);
 	public int process(String list, HttpServletRequest request);
