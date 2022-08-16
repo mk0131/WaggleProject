@@ -355,7 +355,7 @@ input[name="tab_item"] {
 	height: 40px;
 }
 
-span {
+.regist-form span {
 	padding: 0px 5px 0px 5px;
 	font-size: 15px;
 }
