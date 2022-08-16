@@ -1,0 +1,23 @@
+@charset "UTF-8";
+.middle {
+   margin: 0;
+   padding: 0;
+}
+
+.guideline {
+   margin: 0 auto;
+   width: 1125px;
+}
+
+.guideline-all i {
+   display: inline-block;
+   color: #151515;
+}
+
+.guideline-all li {
+   display: inline-block;
+}
+
+.guideline-all p {
+   display: inline-block;
+}
