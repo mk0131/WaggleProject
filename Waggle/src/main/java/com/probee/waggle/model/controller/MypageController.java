@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -43,6 +44,9 @@ public class MypageController {
 	
 	@Autowired
 	FileSaver fileSaver;
+	
+	@Autowired
+	private BCryptPasswordEncoder pEncoder;
 	
 	@GetMapping("/other")
 	public String selectOtherInfo(int ucode, Model model) {
@@ -123,10 +127,9 @@ public class MypageController {
 	public String selectUsage(Model model, HttpServletRequest request) {
 		HttpSession session = request.getSession();
 		int ucode = (int)session.getAttribute("user_Code");
-		int user_Pro = (int)session.getAttribute("user_Pro");
-		System.out.println(user_Pro);
 		//마이페이지 유저 정보
 		UsersDto myinfo = mypageService.SelectMyInfo(ucode);
+		int user_Pro = myinfo.getUser_Pro();
 		//이용횟수 모든기간
 		MypageUsageDto reqCancel = mypageService.reqCancel(ucode);
 		MypageUsageDto reqFinish = mypageService.reqFinish(ucode);
@@ -467,6 +470,13 @@ public class MypageController {
 	
 	@PostMapping("/pwchange") // 비밀번호 변경
 	public String PwChange(int user_Code, String user_Pw) {
+		
+		String rawPw ="";
+		String encodePw = "";
+		
+		rawPw = user_Pw;
+		encodePw = pEncoder.encode(rawPw);
+		user_Pw = encodePw;
 
 		mypageService.PwChange(user_Pw, user_Code);
 

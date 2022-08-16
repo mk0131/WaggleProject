@@ -384,17 +384,17 @@ span {
 </head>
 <body>
    <%@ include file="header.jsp"%>
-   <div id="wrap">
-      <div class="middle">
-         <div class="guideline">
-            <ul class="guideline-all">
-               <li><a href="javascript:void(0)"> <i
-                     class="fa-solid fa-house"></i>
-               </a></li>
-               <p>HOME > 마이페이지 > 프로필 수정</p>
-            </ul>
-         </div>
-        </div>
+	<div id="wrap">
+		<div class="middle">
+			<div class="guideline">
+				<ul class="guideline-all">
+					<li><a href="javascript:void(0)"> <i
+							class="fa-solid fa-house"></i>
+					</a></li>
+					<p>HOME > 마이페이지 > 프로필 수정</p>
+				</ul>
+			</div>
+		</div>
 		<div class="edit-Title">
 			<h4 id="profile-title">회원정보 수정하기</h4>
 		</div>
@@ -404,10 +404,10 @@ span {
 				style="margin: 0 auto; width: 1000px; text-align: center">
 				<c:if test="${user_Pro == 0 }">
 					<div class="profile"
-						style="background-image: url(/images/importToJsp/profile_default.jpg)"></div>
+						style="background-image: url(/images/importToJsp/profile_default.jpg)">
 				</c:if>
 				<c:if test="${user_Pro != 0 }">
-					<div class="profile" style="background-image:url(${Pro_Fi_Nm})"></div>
+					<div class="profile" style="background-image:url(${Pro_Fi_Nm})">
 				</c:if>
 				<label class="edit"> <span id="pen">&#10002;</span> <input
 					type="file" name="myfile" data-max-file-size="10MB">
@@ -418,7 +418,7 @@ span {
 				id="img-edit-btn">
 		</form>
 	</div>
-         <div class="edit-profile-info">
+	<div class="edit-profile-info">
          	<form action="/mypage/nmchange" method="post">
             <div id="border-line">
             <h5>닉네임</h5>

@@ -22,6 +22,10 @@ html, body {
 
 body {
 	font-family: 'Noto Sans KR', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+	-webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
 }
 
 #wrap {
