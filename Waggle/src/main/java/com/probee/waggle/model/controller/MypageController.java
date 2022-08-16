@@ -127,10 +127,9 @@ public class MypageController {
 	public String selectUsage(Model model, HttpServletRequest request) {
 		HttpSession session = request.getSession();
 		int ucode = (int)session.getAttribute("user_Code");
-		int user_Pro = (int)session.getAttribute("user_Pro");
-		System.out.println(user_Pro);
 		//마이페이지 유저 정보
 		UsersDto myinfo = mypageService.SelectMyInfo(ucode);
+		int user_Pro = myinfo.getUser_Pro();
 		//이용횟수 모든기간
 		MypageUsageDto reqCancel = mypageService.reqCancel(ucode);
 		MypageUsageDto reqFinish = mypageService.reqFinish(ucode);
