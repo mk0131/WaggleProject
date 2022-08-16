@@ -49,13 +49,21 @@ public class LoginController {
 		String encodePw = "";
 		UsersDto chk = loginService.UserId(dto);
 		
-		rawPw = dto.getUser_Pw();
-		encodePw = chk.getUser_Pw();
+		if(chk == null) {
+			int result = 0;
+			rttr.addFlashAttribute("result", result);
+			return "redirect:/login";
+		} else {
+			rawPw = dto.getUser_Pw();
+			encodePw = chk.getUser_Pw();
+		}
+		
 		
 		
 		if(true == pEncoder.matches(rawPw, encodePw)) { // 입력한 pw가 db의 암호화된 pw와 일치하지 않으면 로그인 불가
 			System.out.println("비밀번호 일치");
 		} else {
+			System.out.println("비밀번호 일치x");
 			int result = 0;
 			rttr.addFlashAttribute("result", result);
 			return "redirect:/login";

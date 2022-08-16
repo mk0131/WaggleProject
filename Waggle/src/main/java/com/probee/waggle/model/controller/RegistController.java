@@ -1,9 +1,11 @@
 package com.probee.waggle.model.controller;
 
+import java.io.IOException;
 import java.util.Random;
 
 import javax.mail.internet.MimeMessage;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -178,16 +180,26 @@ public class RegistController {
 
 	}
 	@RequestMapping(value = "/findPw", method = RequestMethod.GET) // 이메일로 비밀번호 찾기
-	public String FindPw(String user_Email, Model model, HttpServletRequest request) {
-				System.out.println(user_Email);
+	public void FindPw(String user_Email, Model model, HttpServletRequest request,  HttpServletResponse response) throws IOException {
 				UsersDto user = registService.SelectOne(user_Email);
+				String rawPw ="";
+				String encodePw = "";
 				
-				String checkNum = user.getUser_Pw();
+				Random random = new Random(); // 인증번호 난수 생성
+				int checkNum = (random.nextInt(888888) + 111111);
+				
+				rawPw = Integer.toString(checkNum);
+				System.out.println(rawPw);
+				encodePw = pEncoder.encode(rawPw);
+				System.out.println(encodePw);
+				
+				registService.findpwandbc(encodePw, user_Email);
+				
 
 				String setFrom = "mulcamfinal@naver.com";
 				String toMail = user_Email;
 				String title = "Waggle 비밀번호 이메일 입니다.";
-				String content = "홈페이지를 방문해주셔서 감사합니다." + "<br><br>" + "비밀번호 는 " + checkNum + "입니다." + "<br>";
+				String content = "홈페이지를 방문해주셔서 감사합니다." + "<br><br>" + "임시 비밀번호 는 " + checkNum + "입니다." + "<br>";
 
 				try {
 					MimeMessage message = mailSender.createMimeMessage();
@@ -201,12 +213,14 @@ public class RegistController {
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
+				response.setContentType("text/html; charset=utf-8");
+				response.getWriter().print("<script>alert('임시 비밀번호가 이메일로 발송되었습니다.');history.back();</script>");
 
-				return "redirect:/login"; 
+				return ; 
 			}
 	
 	@RequestMapping(value = "/findId", method = RequestMethod.GET) // 이메일로 아이디 찾기
-	public String FindId(String user_Email, Model model, HttpServletRequest request) {
+	public void FindId(String user_Email, Model model, HttpServletRequest request, HttpServletResponse response) throws IOException {
 				System.out.println(user_Email);
 				UsersDto user = registService.SelectOne(user_Email);
 				
@@ -229,7 +243,9 @@ public class RegistController {
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
+				response.setContentType("text/html; charset=utf-8");
+				response.getWriter().print("<script>alert('아이디가 메일로 발급되었습니다.');history.back();</script>");
 
-				return "redirect:/login"; 
+				return ; 
 			}
 }

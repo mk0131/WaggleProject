@@ -44,5 +44,9 @@ public class RegistServiceImpl implements RegistService{
 	public UsersDto kakaoChk(String user_Email) {
 		return registMapper.kakaoChk(user_Email);
 	}
+	@Override
+	public int findpwandbc(String user_Pw, String user_Email) {
+		return registMapper.findpwandbc(user_Pw, user_Email);
+	}
 
 }

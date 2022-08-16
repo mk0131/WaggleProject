@@ -19,4 +19,6 @@ public interface RegistService {
 	public UsersDto naverChk(String user_Email);
 	
 	public UsersDto kakaoChk(String user_Email);
+	
+	public int findpwandbc(String user_Pw, String user_Email);
 }

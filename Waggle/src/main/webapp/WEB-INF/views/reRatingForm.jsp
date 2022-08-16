@@ -1127,7 +1127,7 @@ div#progress_percentage::after {
 					<span style="font-size: 14pt; font-weight: bold">매물에 대한 자세한
 						설명</span><br>
 					<textarea id="revcontent" rows="30" cols="40"
-						placeholder="디테일 리뷰가 없습니다." readonly="readonly"></textarea>
+						placeholder="디테일 리뷰가 없습니다." readonly="readonly" style="font-family: 'Noto Sans KR', 'Helvetica Neue', Helvetica, Arial, sans-serif;"></textarea>
 				</div>
 				<br /> <br /> <br>
 			</div>
