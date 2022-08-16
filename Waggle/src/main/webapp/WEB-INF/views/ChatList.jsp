@@ -577,6 +577,8 @@
                               var time = new Date(data[i].chat_Date).getHours();
                               var date = new Date(data[i].chat_Date).getDay();
                               var normal = data[i].chat_Date;
+                              
+                              console.log(time);
 
                               // Date 가 변하면 화면중앙에 출력
                               if (date != date2) {
