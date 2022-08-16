@@ -8,4 +8,5 @@ public interface NoticeService {
 
 	public int insert(String no_Type, String no_Title, String no_Content);
 	public List<NoticeDto> list();
+	public List<NoticeDto> homeList();
 }

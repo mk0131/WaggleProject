@@ -17,4 +17,8 @@ public interface NoticeMapper {
 	
 	@Select(" select * from Notice order by no_No desc ")
 	List<NoticeDto> list();
+	
+	@Select(" SELECT * FROM Notice WHERE no_Type = '공지' ORDER BY no_No DESC LIMIT 0, 5 ")
+	List<NoticeDto> homeList();
+	
 }

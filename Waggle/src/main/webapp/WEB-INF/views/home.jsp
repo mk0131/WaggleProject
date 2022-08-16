@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -113,6 +115,7 @@
 .inquiry-notice {
 	height: 352px;
 	padding-left: 20px;
+	width: 500px;
 }
 
 #inquiry-notice-title {
@@ -124,6 +127,41 @@
 	height: 32px;
 	padding: 10px 0px 10px 0px;
 	cursor: pointer;
+}
+
+.inquiry-notice-inner-content {
+	padding: 5px;
+	margin: 5px;
+	text-overflow: ellipsis;
+	overflow: hidden;
+	white-space: nowrap;
+}
+
+.inquiry-notice-inner-content a {
+	text-decoration: none;
+	color: #222;
+	letter-spacing: 1px;
+}
+
+.inquiry-notice-inner-content a:visited {
+	color: #222;
+}
+
+#inner-date {
+	display: inline-block;
+    width: 83px;
+    text-decoration: none;
+    color: #222;
+}
+
+#inner-date:visited {
+	color: #222;
+}
+
+#notice-inner1 {
+	display: flex;
+    align-items: center;
+    justify-content: space-between;
 }
 
 </style>
@@ -172,18 +210,45 @@
 		   <div class="mainhome-bottom">
 		    <div class="homelist-all">
 		     <h3 id="homelist-title">오늘 올라온 완료목록</h3>
-		    	<img class="homelist" src="/images/mainhome/Frame4.png" onclick="location.href='/board/list'">
-		    	<img class="homelist" src="/images/mainhome/Frame5.png" onclick="location.href='/board/list'">
-		    	<img class="homelist" src="/images/mainhome/Frame9.png" onclick="location.href='/board/list'">
+		     	<c:if test="${req1 != 0}">
+		     		<img class="homelist" src="/images/mainhome/Frame4.png" onclick="location.href='/board/detail?req_No=${req1}'">
+				</c:if>
+		     	<c:if test="${req1 == 0}">
+		     		<img class="homelist" src="/images/mainhome/Frame4.png" onclick="location.href='/board/list'">
+				</c:if>
+		     	<c:if test="${req2 != 0}">
+		     		<img class="homelist" src="/images/mainhome/Frame5.png" onclick="location.href='/board/detail?req_No=${req2}'">
+				</c:if>
+		     	<c:if test="${req2 == 0}">
+		     		<img class="homelist" src="/images/mainhome/Frame5.png" onclick="location.href='/board/list'">
+				</c:if>
+		     	<c:if test="${req3 != 0}">
+		     		<img class="homelist" src="/images/mainhome/Frame9.png" onclick="location.href='/board/detail?req_No=${req3}'">
+				</c:if>
+		     	<c:if test="${req3 == 0}">
+		     		<img class="homelist" src="/images/mainhome/Frame9.png" onclick="location.href='/board/list'">
+				</c:if>
 		    </div>
 		    
 			    <div class="inquiry-notice">
 			     <h3 id="inquiry-notice-title">공지사항</h3>
-			     <div class="notice-detail-title" onclick="location.href='/inquiry/list?user_Code=${user_Code}'">[공지] WAGGLE 카카오페이 결제 관련 안내</div>
-			     <div class="notice-detail-title" onclick="location.href='/inquiry/list?user_Code=${user_Code}'">[공지] WAGGLE 카카오페이 결제 관련 안내</div>
-			     <div class="notice-detail-title" onclick="location.href='/inquiry/list?user_Code=${user_Code}'">[공지] WAGGLE 개인정보 처리방침(2022/08/02) 개정 안내</div>
-			     <div class="notice-detail-title" onclick="location.href='/inquiry/list?user_Code=${user_Code}'">[공지] WAGGLE 개인정보 처리방침(2022/06/30) 개정 안내</div>
-			     <div class="notice-detail-title" onclick="location.href='/inquiry/list?user_Code=${user_Code}'">[공지] WAGGLE 개인정보 처리방침(2022/05/12) 개정 안내</div>
+		      	  <div class="inquiry-notice-inner">
+		      	  
+		      	  <c:choose>
+		      	  <c:when test="${empty list }">
+		      	  	<p>공지사항이 없습니다.</p>
+		      	  </c:when>
+		      	  <c:otherwise>
+			       <c:forEach items="${list }" var="dto">
+			        <div id="notice-inner1">
+			        <div class="inquiry-notice-inner-content"><a href="/inquiry/list?user_Code=${user_Code }">[공지] ${dto.no_Title }</a></div>
+			        <div><a id="inner-date" href="/inquiry/list?user_Code=${user_Code }"><fmt:formatDate value="${dto.no_Date}" pattern="yyyy-MM-dd"/></a></div>
+			        </div>
+			       </c:forEach>
+			       </c:otherwise>
+			       </c:choose>
+			       
+			       </div>
 			    </div>
 		    </div>
 		    	 	
