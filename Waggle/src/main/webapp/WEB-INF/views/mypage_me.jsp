@@ -1099,7 +1099,7 @@ textarea {
 						    <p class="drop-zoon__paragraph">Drop your file here or Click to browse</p>
 						    <span id="loadingText" class="drop-zoon__loading-text">Please Wait</span>
 						    <img src="" alt="Preview Image" id="previewImage" class="drop-zoon__preview-image" draggable="false">
-						    <input type="file" name="myfile" data-max-file-size="10MB" id="fileInput" class="drop-zoon__file-input" accept="image/*">
+						    <input type="file" name="myfile" data-max-file-size="10MB" id="fileInput" class="drop-zoon__file-input" accept=".jpeg, .jpg, .png">
 						  </div>
 						  <!-- End Drop Zoon -->
 						
@@ -1320,8 +1320,7 @@ textarea {
 	  "jpeg",
 	  "png",
 	  "svg",
-	  "gif",
-	  "jfif"
+	  "gif"
 	];
 
 	// Append Images Types Array Inisde Tooltip Data
@@ -1368,11 +1367,21 @@ textarea {
 	fileInput.addEventListener('change', function (event) {
 	  // Select The Chosen File
 	  const file = event.target.files[0];
-
+	  var filename = file.name;
+	  var ext = filename.substring(filename.lastIndexOf(".") + 1);
+	  switch (ext) {
+	    case 'jpeg':
+	    case 'jpg':
+	    case 'png':
+		uploadFile(file);
+		break;
+	    default:
+	      alert('jpeg,jpg,png 파일만 첨부하세요');
+	      file.value = '';
+	  }
+	  
 	  // Call Function uploadFile(), And Send To Her The Chosen File :)
-	  uploadFile(file);
 	});
-
 	// Upload File Function
 	function uploadFile(file) {
 	  // FileReader()
