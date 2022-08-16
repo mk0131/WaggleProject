@@ -9,11 +9,12 @@ import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.probee.waggle.model.dto.NoticeDto;
 import com.probee.waggle.model.dto.RequestDto;
 import com.probee.waggle.model.service.HomeService;
+import com.probee.waggle.model.service.NoticeService;
 
 @SpringBootApplication
 @Controller
@@ -21,6 +22,9 @@ public class WaggleApplication extends SpringBootServletInitializer{
 
 	@Autowired
 	HomeService homeService;
+	
+	@Autowired
+	NoticeService noticeService;
 	
 	@Override
 	protected SpringApplicationBuilder configure(SpringApplicationBuilder builder) {
@@ -34,6 +38,7 @@ public class WaggleApplication extends SpringBootServletInitializer{
 	@RequestMapping("/")
 	public String goindex(Model model) {
 		List<RequestDto> FinishReq = homeService.selectFinishReq();
+		List<NoticeDto> list = noticeService.homeList();
 		
 		int finishReqFirst = 0;
 		int finishReqSecond = 0;
@@ -60,6 +65,7 @@ public class WaggleApplication extends SpringBootServletInitializer{
 		model.addAttribute("req1", finishReqFirst);
 		model.addAttribute("req2", finishReqSecond);
 		model.addAttribute("req3", finishReqThird);
+		model.addAttribute("list", list);
 		
 		return "home";
 	}
@@ -67,6 +73,7 @@ public class WaggleApplication extends SpringBootServletInitializer{
 	@RequestMapping("/home")
 	public String gohome(Model model) {
 		List<RequestDto> FinishReq = homeService.selectFinishReq();
+		List<NoticeDto> list = noticeService.homeList();
 		
 		int finishReqFirst = 0;
 		int finishReqSecond = 0;
@@ -93,6 +100,7 @@ public class WaggleApplication extends SpringBootServletInitializer{
 		model.addAttribute("req1", finishReqFirst);
 		model.addAttribute("req2", finishReqSecond);
 		model.addAttribute("req3", finishReqThird);
+		model.addAttribute("list", list);
 		
 		return "home";
 	}

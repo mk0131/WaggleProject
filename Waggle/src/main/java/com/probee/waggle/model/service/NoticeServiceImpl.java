@@ -24,4 +24,9 @@ public class NoticeServiceImpl implements NoticeService{
 		return noticeMapper.list();
 	}
 
+	@Override
+	public List<NoticeDto> homeList() {
+		return noticeMapper.homeList();
+	}
+	
 }
