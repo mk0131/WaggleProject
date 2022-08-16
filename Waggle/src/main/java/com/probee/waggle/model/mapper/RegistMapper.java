@@ -3,6 +3,7 @@ package com.probee.waggle.model.mapper;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 
 import com.probee.waggle.model.dto.UserAddressDto;
 import com.probee.waggle.model.dto.UsersDto;
@@ -35,4 +36,7 @@ public interface RegistMapper {
 	
 	@Select("SELECT user_Kakao FROM Users Where user_Email = #{user_Email}")
 	UsersDto kakaoChk(String user_Email);
+	
+	@Update("UPDATE Users set User_Pw = #{user_Pw} where user_Email = #{user_Email}")
+	int findpwandbc(String user_Pw, String user_Email);
 }
