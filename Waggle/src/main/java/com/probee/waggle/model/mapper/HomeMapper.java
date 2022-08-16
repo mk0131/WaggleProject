@@ -1,10 +1,13 @@
 package com.probee.waggle.model.mapper;
 
+import java.util.List;
+
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 
 import com.probee.waggle.model.dto.HomeDto;
+import com.probee.waggle.model.dto.RequestDto;
 
 @Mapper
 public interface HomeMapper {
@@ -17,4 +20,7 @@ public interface HomeMapper {
 	
 	@Select(" select * from Home where home_Code=#{home_Code} ")
 	public HomeDto selectHome(int home_Code);
+	
+	@Select(" select * from Request WHERE req_Stat = '완료' order by req_WDate desc ")
+	public List<RequestDto> selectFinishReq();
 }
