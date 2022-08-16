@@ -23,7 +23,7 @@ public class OCR {
 	ResourceLoader resourceLoader;
 	
 	public ConfirmDto2 imgToString(String fi_Nm) throws IOException, ParseException {
-		String path = Path.of(resourceLoader.getResource("classpath:static").getURI()).toString().replace("\\", "/");
+		String path = "/var/lib/tomcat9/webapps/upload";
 		String jsonStr = ocrGeneral.doOCR(path + fi_Nm);
 		String longStr = jsonToString(jsonStr);
 		// 자격증번호, 이름
