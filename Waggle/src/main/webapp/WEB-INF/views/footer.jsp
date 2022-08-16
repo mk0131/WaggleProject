@@ -26,6 +26,7 @@ body {
     -moz-user-select: none;
     -ms-user-select: none;
     user-select: none;
+    box-sizing: content-box !important;
 }
 
 #wrap {
@@ -94,12 +95,15 @@ footer .footer-right i {
 footer .footer-right h4 {
   font-size: 13px;
   text-align: center;
+  margin: 17.29px 0px 17.29px 0px;
+  font-weight: bold;
 }
 
 footer .footer-right .follow-us  {
   display: inline-block;
   padding-right: 30px;
   vertical-align: top;
+  margin-top: 12px;
 }
 
 footer .footer-right .follow-us li {
@@ -109,6 +113,7 @@ footer .footer-right .follow-us li {
 
 footer .footer-right .service-center {
   	display: inline-block;
+  	margin-top: 12px;
 }
 
 footer .footer-right .service-center li {
