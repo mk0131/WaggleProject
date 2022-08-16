@@ -36,7 +36,8 @@ public class FileSaver {
 			
 			BufferedImage image = ImageIO.read(url);
 			
-			String staticpath = "./src/main/resources/static";
+			String staticpath = "file:///var/lib/tomcat9/webapps/upload";
+//			String staticpath = "./src/main/resources/static";
 			String new_path = staticpath + path;
 			
 			File file = new File(new_path);
@@ -47,18 +48,18 @@ public class FileSaver {
 			
 			ImageIO.write(image, "jpg", file);
 			
-			BufferedImage image2 = ImageIO.read(url);
-			
-			String staticpath2 = Path.of(resourceLoader.getResource("classpath:static").getURI()).toString().replace("\\", "/");
-			String new_path2 = staticpath2 + path;
-			
-			File file2 = new File(new_path2);
-			// 경로가 있는지 확인해서 없으면 경로 생성
-			if(!file2.exists()) {
-				file2.createNewFile();
-			}
-					
-			ImageIO.write(image2, "jpg", file2);
+//			BufferedImage image2 = ImageIO.read(url);
+//			
+//			String staticpath2 = Path.of(resourceLoader.getResource("classpath:static").getURI()).toString().replace("\\", "/");
+//			String new_path2 = staticpath2 + path;
+//			
+//			File file2 = new File(new_path2);
+//			// 경로가 있는지 확인해서 없으면 경로 생성
+//			if(!file2.exists()) {
+//				file2.createNewFile();
+//			}
+//					
+//			ImageIO.write(image2, "jpg", file2);
 			res = 1;
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -76,12 +77,13 @@ public class FileSaver {
 		
 		int cnt = 1;
 		
-		String staticpath1 = Path.of(resourceLoader.getResource("classpath:static").getURI()).toString().replace("\\", "/");
-		String staticpath2 = request.getSession().getServletContext().getRealPath("/").replace("\\", "/");
-
-		staticpath2 = staticpath2.substring(0, staticpath2.lastIndexOf("/"));
-		staticpath2 = staticpath2.substring(0, staticpath2.lastIndexOf("/"));
-		staticpath2 += "/resources/static";
+		String staticpath2 = "file:///var/lib/tomcat9/webapps/upload";
+//		String staticpath1 = Path.of(resourceLoader.getResource("classpath:static").getURI()).toString().replace("\\", "/");
+//		String staticpath2 = request.getSession().getServletContext().getRealPath("/").replace("\\", "/");
+//
+//		staticpath2 = staticpath2.substring(0, staticpath2.lastIndexOf("/"));
+//		staticpath2 = staticpath2.substring(0, staticpath2.lastIndexOf("/"));
+//		staticpath2 += "/resources/static";
 
 		for (MultipartFile file: files) {
 
@@ -99,15 +101,15 @@ public class FileSaver {
 			} 
 			file.transferTo(realFile2);
 			
-			// target 위치에 파일 복사
-			File realFile1 = new File(staticpath1 + path);
-
-			// 경로가 있는지 확인해서 없으면 경로 생성
-			if(!realFile1.exists()) {
-				realFile1.createNewFile();
-			}
-			
-			FileCopyUtils.copy(realFile2, realFile1);
+//			// target 위치에 파일 복사
+//			File realFile1 = new File(staticpath1 + path);
+//
+//			// 경로가 있는지 확인해서 없으면 경로 생성
+//			if(!realFile1.exists()) {
+//				realFile1.createNewFile();
+//			}
+//			
+//			FileCopyUtils.copy(realFile2, realFile1);
 			
 			// 성공하면 경로명 저장
 			answer.add(path);
@@ -123,12 +125,13 @@ public class FileSaver {
 		// 파일 각각 저장하고 path list를 리턴
 		String answer;
 		
-		String staticpath1 = Path.of(resourceLoader.getResource("classpath:static").getURI()).toString().replace("\\", "/");
-		String staticpath2 = request.getSession().getServletContext().getRealPath("/").replace("\\", "/");
+//		String staticpath1 = Path.of(resourceLoader.getResource("classpath:static").getURI()).toString().replace("\\", "/");
+//		String staticpath2 = request.getSession().getServletContext().getRealPath("/").replace("\\", "/");
+		String staticpath2 = "file:///var/lib/tomcat9/webapps/upload";
 
-		staticpath2 = staticpath2.substring(0, staticpath2.lastIndexOf("/"));
-		staticpath2 = staticpath2.substring(0, staticpath2.lastIndexOf("/"));
-		staticpath2 += "/resources/static";
+//		staticpath2 = staticpath2.substring(0, staticpath2.lastIndexOf("/"));
+//		staticpath2 = staticpath2.substring(0, staticpath2.lastIndexOf("/"));
+//		staticpath2 += "/resources/static";
 
 
 			String fileName = file.getOriginalFilename();
@@ -145,15 +148,15 @@ public class FileSaver {
 			} 
 			file.transferTo(realFile2);
 			
-			// target 위치에 파일 복사
-			File realFile1 = new File(staticpath1 + path);
-
-			// 경로가 있는지 확인해서 없으면 경로 생성
-			if(!realFile1.exists()) {
-				realFile1.createNewFile();
-			}
-			
-			FileCopyUtils.copy(realFile2, realFile1);
+//			// target 위치에 파일 복사
+//			File realFile1 = new File(staticpath1 + path);
+//
+//			// 경로가 있는지 확인해서 없으면 경로 생성
+//			if(!realFile1.exists()) {
+//				realFile1.createNewFile();
+//			}
+//			
+//			FileCopyUtils.copy(realFile2, realFile1);
 			
 			// 성공하면 경로명 저장
 			answer = path;
@@ -167,12 +170,13 @@ public class FileSaver {
 		// 파일 각각 저장하고 path list를 리턴
 		String answer;
 		
-		String staticpath1 = Path.of(resourceLoader.getResource("classpath:static").getURI()).toString().replace("\\", "/");
-		String staticpath2 = request.getSession().getServletContext().getRealPath("/").replace("\\", "/");
+//		String staticpath1 = Path.of(resourceLoader.getResource("classpath:static").getURI()).toString().replace("\\", "/");
+//		String staticpath2 = request.getSession().getServletContext().getRealPath("/").replace("\\", "/");
+		String staticpath2 = "file:///var/lib/tomcat9/webapps/upload";
 
-		staticpath2 = staticpath2.substring(0, staticpath2.lastIndexOf("/"));
-		staticpath2 = staticpath2.substring(0, staticpath2.lastIndexOf("/"));
-		staticpath2 += "/resources/static";
+//		staticpath2 = staticpath2.substring(0, staticpath2.lastIndexOf("/"));
+//		staticpath2 = staticpath2.substring(0, staticpath2.lastIndexOf("/"));
+//		staticpath2 += "/resources/static";
 
 
 			String fileName = file.getOriginalFilename();
@@ -194,18 +198,18 @@ public class FileSaver {
 			//파일을 경로에 저장시킴.
 			file.transferTo(realFile2);
 			
-			// target 위치에 파일 복사
-			File realFile1 = new File(staticpath1 + path);
-
-			// 경로가 있는지 확인해서 없으면 경로 생성
-			if(realFile1.exists()) {
-				realFile1.delete();
-				realFile1.createNewFile();
-			}else {
-				realFile1.createNewFile();
-			}
-			
-			FileCopyUtils.copy(realFile2, realFile1);
+//			// target 위치에 파일 복사
+//			File realFile1 = new File(staticpath1 + path);
+//
+//			// 경로가 있는지 확인해서 없으면 경로 생성
+//			if(realFile1.exists()) {
+//				realFile1.delete();
+//				realFile1.createNewFile();
+//			}else {
+//				realFile1.createNewFile();
+//			}
+//			
+//			FileCopyUtils.copy(realFile2, realFile1);
 			
 			// 성공하면 경로명 저장
 			answer = path;
@@ -224,10 +228,11 @@ public class FileSaver {
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyMMddHHmm");        
 		String formatedNow = now.format(formatter);
 		
-		String path = request.getSession().getServletContext().getRealPath("/").replace("\\", "/");
-		path = path.substring(0, path.lastIndexOf("/"));
-		path = path.substring(0, path.lastIndexOf("/"));
-		path += "/resources/static";
+		String path = "file:///var/lib/tomcat9/webapps/upload";
+//		String path = request.getSession().getServletContext().getRealPath("/").replace("\\", "/");
+//		path = path.substring(0, path.lastIndexOf("/"));
+//		path = path.substring(0, path.lastIndexOf("/"));
+//		path += "/resources/static";
 		
 		String file_name = "/csv/진위확인신청서_"+formatedNow+".csv";
 		
