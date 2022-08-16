@@ -173,6 +173,7 @@ input[type="date"] {
 	font-size:15px;
 	line-height: 150%;
 	padding: 10px;
+	border: none;
 }
 
 .link-guide {
@@ -312,7 +313,7 @@ input[type="date"] {
 		    	</table>
 				<div class="ongoing21-content-bottom">
 					<h4>자세하게 봐야 될 부분</h4>
-					<textarea id="incontent" rows="12" cols="70"  placeholder="요구사항을 입력해주세요&nbsp;ex.수압이나 바깥전망, 소음 등 원하는 사진이나 동영상이 필요한 부분을 적어주세요" name="req_Detail"></textarea>
+					<textarea id="incontent" rows="12" cols="70"  placeholder="요구사항을 입력해주세요&nbsp;ex.수압이나 바깥전망, 소음 등 원하는 사진이나 동영상이 필요한 부분을 적어주세요" name="req_Detail" style="font-family: 'Noto Sans KR', 'Helvetica Neue', Helvetica, Arial, sans-serif;"></textarea>
 					<br><br>
 					<div class="btn1" id="btn1">
 						<button id="submit-do" type="submit" value="작성">작성 완료</button>

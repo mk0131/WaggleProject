@@ -103,6 +103,7 @@
     resize: none;
     border-radius: 5px;
 	box-shadow: rgba(67, 71, 85, 0.27) 0px 0px 0.25em, rgba(90, 125, 188, 0.05) 0px 0.25em 1em;
+	border: none;
 }
 
 #userrealname {
@@ -237,7 +238,7 @@ input[type="date"] {
 		    	</table>
 				<div class="ongoing21-content-bottom">
 					<h4>디테일 요구사항</h4>
-					<textarea id="incontent" rows="12" cols="70"  placeholder="요구사항을 입력해주세요" name="req_Detail">${req_dto.req_Detail}</textarea>
+					<textarea id="incontent" rows="12" cols="70"  placeholder="요구사항을 입력해주세요" name="req_Detail" style="font-family: 'Noto Sans KR', 'Helvetica Neue', Helvetica, Arial, sans-serif;">${req_dto.req_Detail}</textarea>
 					<br><br>
 					<div class="btn1" id="btn1">
 						<button type="submit" value="수정">수정 완료</button>

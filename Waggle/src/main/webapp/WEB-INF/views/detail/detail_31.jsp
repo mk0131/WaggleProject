@@ -724,7 +724,7 @@ input[type="radio"]:checked{
 .swiper-button-next::after,
 .swiper-button-prev::after {
   color: #495057;
-  padding: 100px;
+  padding: 35px;
 }
 
 .swiper .swiper-pagination-bullet {

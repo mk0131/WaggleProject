@@ -718,7 +718,7 @@ div#progress_percentage::after {
 .swiper-button-next::after,
 .swiper-button-prev::after {
   color: #495057;
-  padding: 100px;
+  padding: 35px;
 }
 
 .swiper .swiper-pagination-bullet {
