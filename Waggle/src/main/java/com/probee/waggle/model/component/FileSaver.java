@@ -36,7 +36,7 @@ public class FileSaver {
 			
 			BufferedImage image = ImageIO.read(url);
 			
-			String staticpath = "file:///var/lib/tomcat9/webapps/upload";
+			String staticpath = "/var/lib/tomcat9/webapps/upload";
 //			String staticpath = "./src/main/resources/static";
 			String new_path = staticpath + path;
 			
@@ -77,7 +77,7 @@ public class FileSaver {
 		
 		int cnt = 1;
 		
-		String staticpath2 = "file:///var/lib/tomcat9/webapps/upload";
+		String staticpath2 = "/var/lib/tomcat9/webapps/upload";
 //		String staticpath1 = Path.of(resourceLoader.getResource("classpath:static").getURI()).toString().replace("\\", "/");
 //		String staticpath2 = request.getSession().getServletContext().getRealPath("/").replace("\\", "/");
 //
@@ -127,7 +127,7 @@ public class FileSaver {
 		
 //		String staticpath1 = Path.of(resourceLoader.getResource("classpath:static").getURI()).toString().replace("\\", "/");
 //		String staticpath2 = request.getSession().getServletContext().getRealPath("/").replace("\\", "/");
-		String staticpath2 = "file:///var/lib/tomcat9/webapps/upload";
+		String staticpath2 = "/var/lib/tomcat9/webapps/upload";
 
 //		staticpath2 = staticpath2.substring(0, staticpath2.lastIndexOf("/"));
 //		staticpath2 = staticpath2.substring(0, staticpath2.lastIndexOf("/"));
@@ -172,7 +172,7 @@ public class FileSaver {
 		
 //		String staticpath1 = Path.of(resourceLoader.getResource("classpath:static").getURI()).toString().replace("\\", "/");
 //		String staticpath2 = request.getSession().getServletContext().getRealPath("/").replace("\\", "/");
-		String staticpath2 = "file:///var/lib/tomcat9/webapps/upload";
+		String staticpath2 = "/var/lib/tomcat9/webapps/upload";
 
 //		staticpath2 = staticpath2.substring(0, staticpath2.lastIndexOf("/"));
 //		staticpath2 = staticpath2.substring(0, staticpath2.lastIndexOf("/"));
@@ -228,7 +228,7 @@ public class FileSaver {
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyMMddHHmm");        
 		String formatedNow = now.format(formatter);
 		
-		String path = "file:///var/lib/tomcat9/webapps/upload";
+		String path = "/var/lib/tomcat9/webapps/upload";
 //		String path = request.getSession().getServletContext().getRealPath("/").replace("\\", "/");
 //		path = path.substring(0, path.lastIndexOf("/"));
 //		path = path.substring(0, path.lastIndexOf("/"));
