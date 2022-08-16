@@ -29,6 +29,7 @@ import com.probee.waggle.model.dto.MypageUsageDto;
 import com.probee.waggle.model.dto.Paging;
 import com.probee.waggle.model.dto.UserAddressDto;
 import com.probee.waggle.model.dto.UsersDto;
+import com.probee.waggle.model.service.LicenseService;
 import com.probee.waggle.model.service.MypageService;
 import com.probee.waggle.model.service.RegistService;
 
@@ -41,6 +42,9 @@ public class MypageController {
 
 	@Autowired
 	RegistService registService;
+	
+	@Autowired
+	LicenseService licenseService;
 	
 	@Autowired
 	FileSaver fileSaver;
@@ -324,6 +328,10 @@ public class MypageController {
 					System.out.println("FI_NM 수정 성공");
 				}else {
 					System.out.println("FI_NM 수정 실패");
+				}
+				
+				if(MyConfirm.getCo_Confirm().equals("반려")) {
+					licenseService.notConfirm(user_Code);
 				}
 				
 			}else {

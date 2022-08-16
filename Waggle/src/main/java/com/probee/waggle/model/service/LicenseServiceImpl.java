@@ -33,6 +33,11 @@ public class LicenseServiceImpl implements LicenseService{
 	}
 
 	@Override
+	public int notConfirm(int co_UCode) {
+		return licenseMapper.notConfirm(co_UCode);
+	}
+	
+	@Override
 	public int permitConfirm(int co_UCode) {
 		return licenseMapper.permitConfirm(co_UCode);
 	}
@@ -82,5 +87,6 @@ public class LicenseServiceImpl implements LicenseService{
 		
 		return 1;
 	}
+
 
 }
