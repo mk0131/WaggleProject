@@ -872,7 +872,7 @@ input[name="tab_item"] {
 							<!-- //네이버 로그인 버튼 노출 영역 -->
 					</div>
 					<script type="text/javascript">
-						var naver_id_login = new naver_id_login("JGPtZuIPhsS22_zSl6eT", "http://15.164.3.37:8787/home");
+						var naver_id_login = new naver_id_login("JGPtZuIPhsS22_zSl6eT", "http://15.164.3.37:8787/");
 						var state = naver_id_login.getUniqState();
 						naver_id_login.setDomain("http://15.164.3.37:8787");
 						naver_id_login.setButton("white", 3,60);
@@ -881,7 +881,7 @@ input[name="tab_item"] {
 					</script>
 					<div class="kakao-button" style="display:inline-block">
 					 <div id="kakao-login-text">
-						<a class="p-2" href="https://kauth.kakao.com/oauth/authorize?client_id=6271ae3b4283fa56e846863ed3a4f7be&redirect_uri=http://15.164.3.37:8787/home&response_type=code">
+						<a class="p-2" href="https://kauth.kakao.com/oauth/authorize?client_id=6271ae3b4283fa56e846863ed3a4f7be&redirect_uri=http://15.164.3.37:8787/&response_type=code">
 							<img src="/images/login/kakao_login_large_wide.png" style="width:500px; height:52px; object-fit: cover; border-radius: 12px;"><b id="kakao-login-text-inner">카카오 로그인</b>
 							</a>
 					  </div>

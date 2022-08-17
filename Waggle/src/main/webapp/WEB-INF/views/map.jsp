@@ -590,7 +590,7 @@ div {
 											$(".horizontal-scroll-wrapper").append('<div><a href="/board/detail?req_No='+unique[i].req_No+'"><img class="detail_img" src='+unique[i].fi_Nm+'><div id="img-detail">업로드 날짜: '+unique[i].res_WDate.substr(0,10)+'</div></a></div>');
 									}else{ // 글이 24시가 넘지 않았을 경우 블러처리
 										//로그인한 회원이 글 작성자인경우 다 보여줌
-										if(${user_Code}==unique[i].res_UCode){
+										if(${user_Code}==unique[i].res_UCode || ${user_Code} == unique[i].req_UCode){
 											$(".horizontal-scroll-wrapper").append('<div><a href="/board/detail?req_No='+unique[i].req_No+'"><img class="detail_img" src='+unique[i].fi_Nm+'><div id="img-detail">업로드 날짜: '+unique[i].res_WDate.substr(0,10)+'</div></a></div>');
 										}else if(${user_Code}==1){//관리자 보여줌
 											$(".horizontal-scroll-wrapper").append('<div><a href="/board/detail?req_No='+unique[i].req_No+'"><img class="detail_img" src='+unique[i].fi_Nm+'><div id="img-detail">업로드 날짜: '+unique[i].res_WDate.substr(0,10)+'</div></a></div>');
@@ -603,7 +603,7 @@ div {
 										$(".horizontal-scroll-wrapper").append('<div><a href="/board/detail?req_No='+unique[i].req_No+'"><video class="detail_video" controls ><source src='+unique[i].fi_Nm+'></video><div id="img-detail">업로드 날짜: '+unique[i].res_WDate.substr(0,10)+'</div></a></div>');
 									}else{
 										//로그인한 회원이 글 작성자인경우 다 보여줌
-										if(${user_Code}==unique[i].res_UCode){
+										if(${user_Code}==unique[i].res_UCode || ${user_Code} == unique[i].req_UCode){
 											$(".horizontal-scroll-wrapper").append('<div><a href="/board/detail?req_No='+unique[i].req_No+'"><video class="detail_video" controls ><source src='+unique[i].fi_Nm+'></video><div id="img-detail">업로드 날짜: '+unique[i].res_WDate.substr(0,10)+'</div></a></div>');
 										}else if(${user_Code}==1){
 											$(".horizontal-scroll-wrapper").append('<div><a href="/board/detail?req_No='+unique[i].req_No+'"><video class="detail_video" controls ><source src='+unique[i].fi_Nm+'></video><div id="img-detail">업로드 날짜: '+unique[i].res_WDate.substr(0,10)+'</div></a></div>');
@@ -642,7 +642,7 @@ div {
 												$(".horizontal-scroll-wrapper").append('<div><a href="/board/detail?req_No='+result[i].req_No+'"><img class="detail_img" src='+result[i].fi_Nm+'><div id="img-detail">업로드 날짜: '+result[i].res_WDate.substr(0,10)+'</div></a></div>');
 										}else{ // 글이 24시가 넘지 않았을 경우 블러처리
 											//로그인한 회원이 글 작성자인경우 다 보여줌
-											if(${user_Code}==result[i].res_UCode){
+											if(${user_Code}==result[i].res_UCode || ${user_Code} == result[i].req_UCode){
 												$(".horizontal-scroll-wrapper").append('<div><a href="/board/detail?req_No='+result[i].req_No+'"><img class="detail_img" src='+result[i].fi_Nm+'><div id="img-detail">업로드 날짜: '+result[i].res_WDate.substr(0,10)+'</div></a></div>');
 											}else if(${user_Code}==1){//관리자 보여줌
 												$(".horizontal-scroll-wrapper").append('<div><a href="/board/detail?req_No='+result[i].req_No+'"><img class="detail_img" src='+result[i].fi_Nm+'><div id="img-detail">업로드 날짜: '+result[i].res_WDate.substr(0,10)+'</div></a></div>');
@@ -655,7 +655,7 @@ div {
 											$(".horizontal-scroll-wrapper").append('<div><a href="/board/detail?req_No='+result[i].req_No+'"><video class="detail_video" controls ><source src='+result[i].fi_Nm+'></video><div id="img-detail">업로드 날짜: '+result[i].res_WDate.substr(0,10)+'</div></a></div>');
 										}else{
 											//로그인한 회원이 글 작성자인경우 다 보여줌
-											if(${user_Code}==result[i].res_UCode){
+											if(${user_Code}==result[i].res_UCode || ${user_Code} == result[i].req_UCode){
 												$(".horizontal-scroll-wrapper").append('<div><a href="/board/detail?req_No='+result[i].req_No+'"><video class="detail_video" controls ><source src='+result[i].fi_Nm+'></video><div id="img-detail">업로드 날짜: '+result[i].res_WDate.substr(0,10)+'</div></a></div>');
 											}else if(${user_Code}==1){
 												$(".horizontal-scroll-wrapper").append('<div><a href="/board/detail?req_No='+result[i].req_No+'"><video class="detail_video" controls ><source src='+result[i].fi_Nm+'></video><div id="img-detail">업로드 날짜: '+result[i].res_WDate.substr(0,10)+'</div></a></div>');
@@ -782,7 +782,7 @@ div {
 									$(".horizontal-scroll-wrapper").append('<div><a href="/board/detail?req_No='+unique[i].req_No+'"><img class="detail_img" src='+unique[i].fi_Nm+'><div id="img-detail">업로드 날짜: '+unique[i].res_WDate.substr(0,10)+'</div></a></div>');
 							}else{ // 글이 24시가 넘지 않았을 경우 블러처리
 								//로그인한 회원이 글 작성자인경우 다 보여줌
-								if(${user_Code}==unique[i].res_UCode){
+								if(${user_Code}==unique[i].res_UCode || ${user_Code} == unique[i].req_UCode){
 									$(".horizontal-scroll-wrapper").append('<div><a href="/board/detail?req_No='+unique[i].req_No+'"><img class="detail_img" src='+unique[i].fi_Nm+'><div id="img-detail">업로드 날짜: '+unique[i].res_WDate.substr(0,10)+'</div></a></div>');
 								}else if(${user_Code}==1){//관리자 보여줌
 									$(".horizontal-scroll-wrapper").append('<div><a href="/board/detail?req_No='+unique[i].req_No+'"><img class="detail_img" src='+unique[i].fi_Nm+'><div id="img-detail">업로드 날짜: '+unique[i].res_WDate.substr(0,10)+'</div></a></div>');
@@ -795,7 +795,7 @@ div {
 								$(".horizontal-scroll-wrapper").append('<div><a href="/board/detail?req_No='+unique[i].req_No+'"><video class="detail_video" controls ><source src='+unique[i].fi_Nm+'></video><div id="img-detail">업로드 날짜: '+unique[i].res_WDate.substr(0,10)+'</div></a></div>');
 							}else{
 								//로그인한 회원이 글 작성자인경우 다 보여줌
-								if(${user_Code}==unique[i].res_UCode){
+								if(${user_Code}==unique[i].res_UCode || ${user_Code} == unique[i].req_UCode){
 									$(".horizontal-scroll-wrapper").append('<div><a href="/board/detail?req_No='+unique[i].req_No+'"><video class="detail_video" controls ><source src='+unique[i].fi_Nm+'></video><div id="img-detail">업로드 날짜: '+unique[i].res_WDate.substr(0,10)+'</div></a></div>');
 								}else if(${user_Code}==1){
 									$(".horizontal-scroll-wrapper").append('<div><a href="/board/detail?req_No='+unique[i].req_No+'"><video class="detail_video" controls ><source src='+unique[i].fi_Nm+'></video><div id="img-detail">업로드 날짜: '+unique[i].res_WDate.substr(0,10)+'</div></a></div>');
@@ -833,7 +833,7 @@ div {
 										$(".horizontal-scroll-wrapper").append('<div><a href="/board/detail?req_No='+result[i].req_No+'"><img class="detail_img" src='+result[i].fi_Nm+'><div id="img-detail">업로드 날짜: '+result[i].res_WDate.substr(0,10)+'</div></a></div>');
 								}else{ // 글이 24시가 넘지 않았을 경우 블러처리
 									//로그인한 회원이 글 작성자인경우 다 보여줌
-									if(${user_Code}==result[i].res_UCode){
+									if(${user_Code}==result[i].res_UCode || ${user_Code} == result[i].req_UCode){
 										$(".horizontal-scroll-wrapper").append('<div><a href="/board/detail?req_No='+result[i].req_No+'"><img class="detail_img" src='+result[i].fi_Nm+'><div id="img-detail">업로드 날짜: '+result[i].res_WDate.substr(0,10)+'</div></a></div>');
 									}else if(${user_Code}==1){//관리자 보여줌
 										$(".horizontal-scroll-wrapper").append('<div><a href="/board/detail?req_No='+result[i].req_No+'"><img class="detail_img" src='+result[i].fi_Nm+'><div id="img-detail">업로드 날짜: '+result[i].res_WDate.substr(0,10)+'</div></a></div>');
@@ -846,7 +846,7 @@ div {
 									$(".horizontal-scroll-wrapper").append('<div><a href="/board/detail?req_No='+result[i].req_No+'"><video class="detail_video" controls ><source src='+result[i].fi_Nm+'></video><div id="img-detail">업로드 날짜: '+result[i].res_WDate.substr(0,10)+'</div></a></div>');
 								}else{
 									//로그인한 회원이 글 작성자인경우 다 보여줌
-									if(${user_Code}==result[i].res_UCode){
+									if(${user_Code}==result[i].res_UCode || ${user_Code} == result[i].req_UCode){
 										$(".horizontal-scroll-wrapper").append('<div><a href="/board/detail?req_No='+result[i].req_No+'"><video class="detail_video" controls ><source src='+result[i].fi_Nm+'></video><div id="img-detail">업로드 날짜: '+result[i].res_WDate.substr(0,10)+'</div></a></div>');
 									}else if(${user_Code}==1){
 										$(".horizontal-scroll-wrapper").append('<div><a href="/board/detail?req_No='+result[i].req_No+'"><video class="detail_video" controls ><source src='+result[i].fi_Nm+'></video><div id="img-detail">업로드 날짜: '+result[i].res_WDate.substr(0,10)+'</div></a></div>');

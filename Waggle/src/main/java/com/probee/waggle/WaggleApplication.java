@@ -70,40 +70,6 @@ public class WaggleApplication extends SpringBootServletInitializer{
 		return "home";
 	}
 
-	@RequestMapping("/home")
-	public String gohome(Model model) {
-		List<RequestDto> FinishReq = homeService.selectFinishReq();
-		List<NoticeDto> list = noticeService.homeList();
-		
-		int finishReqFirst = 0;
-		int finishReqSecond = 0;
-		int finishReqThird = 0;
-		
-		if(FinishReq.size()==0) {
-			finishReqFirst = 0;
-			finishReqSecond = 0;
-			finishReqThird = 0;
-		}else if(FinishReq.size()==1) {
-			finishReqFirst = FinishReq.get(0).getReq_No();
-			finishReqSecond = 0;
-			finishReqThird = 0;
-		}else if(FinishReq.size()==2) {
-			finishReqFirst = FinishReq.get(0).getReq_No();
-			finishReqSecond = FinishReq.get(1).getReq_No();
-			finishReqThird = 0;
-		}else {
-			finishReqFirst = FinishReq.get(0).getReq_No();
-			finishReqSecond = FinishReq.get(1).getReq_No();
-			finishReqThird = FinishReq.get(2).getReq_No();
-		}
-		
-		model.addAttribute("req1", finishReqFirst);
-		model.addAttribute("req2", finishReqSecond);
-		model.addAttribute("req3", finishReqThird);
-		model.addAttribute("list", list);
-		
-		return "home";
-	}
 	
 	@RequestMapping("/login")
 	public static String gologin() {

@@ -11,6 +11,7 @@ public class MapDto {
 	private Date res_WDate;
 	private int res_UCode;
 	private int po_UCode;
+	private int req_UCode;
 	
 	public MapDto() {
 		super();
@@ -18,7 +19,7 @@ public class MapDto {
 	}
 
 	public MapDto(int home_Post, String home_Addr, String home_DAddr, int req_No, String fi_Nm, Date res_WDate,
-			int res_UCode, int po_UCode) {
+			int res_UCode, int po_UCode, int req_UCode) {
 		super();
 		this.home_Post = home_Post;
 		this.home_Addr = home_Addr;
@@ -28,6 +29,7 @@ public class MapDto {
 		this.res_WDate = res_WDate;
 		this.res_UCode = res_UCode;
 		this.po_UCode = po_UCode;
+		this.req_UCode = req_UCode;
 	}
 
 	public int getHome_Post() {
@@ -94,14 +96,14 @@ public class MapDto {
 		this.po_UCode = po_UCode;
 	}
 
-	@Override
-	public String toString() {
-		return "MapDto [home_Post=" + home_Post + ", home_Addr=" + home_Addr + ", home_DAddr=" + home_DAddr
-				+ ", req_No=" + req_No + ", fi_Nm=" + fi_Nm + ", res_WDate=" + res_WDate + ", res_UCode=" + res_UCode
-				+ ", po_UCode=" + po_UCode + "]";
+	public int getReq_UCode() {
+		return req_UCode;
 	}
 
-	
+	public void setReq_UCode(int req_UCode) {
+		this.req_UCode = req_UCode;
+	}
+
 	
 	
 

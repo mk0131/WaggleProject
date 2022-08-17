@@ -188,7 +188,7 @@ header {
 	  <div class="nav-bottom">
 	   <div class="nav-logo">
 	   <span class="nav-logo-img1">
-	    <a href="/home">
+	    <a href="/">
 	     <img src="/images/mainhome/nav-logo.png">
 	     </a>
 		</span>

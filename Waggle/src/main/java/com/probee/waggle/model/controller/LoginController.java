@@ -90,7 +90,7 @@ public class LoginController {
 		session.setAttribute("user_Pro", user.getUser_Pro());
 		session.setMaxInactiveInterval(-1); // 세션 시간 무한대
 
-		return "redirect:/home";
+		return "redirect:/";
 	}
 
 	@RequestMapping(value = "/logout", method = RequestMethod.GET) // 로그아웃
@@ -122,7 +122,7 @@ public class LoginController {
 			session.setAttribute("user_Point", naver.getUser_Point());
 			session.setAttribute("user_Pro", naver.getUser_Pro());
 			session.setMaxInactiveInterval(-1);
-			return "redirect:/home";
+			return "redirect:/";
 
 		} else { // 동일한 이메일이 있으면 회원정보 불러오기
 			session.setAttribute("user_Code", user.getUser_Code());
@@ -135,7 +135,7 @@ public class LoginController {
 			session.setAttribute("user_Point", user.getUser_Point());
 			session.setAttribute("user_Pro", user.getUser_Pro());
 			session.setMaxInactiveInterval(-1);
-			return "redirect:/home";
+			return "redirect:/";
 
 		}
 
@@ -179,7 +179,7 @@ public class LoginController {
 			session.setAttribute("user_Point", kakao.getUser_Point());
 			session.setAttribute("user_Pro", kakao.getUser_Pro());
 			session.setMaxInactiveInterval(-1);
-			return "redirect:/home";
+			return "redirect:/";
 		} else {
 			System.out.println(dto2);
 			session.setAttribute("user_Code", dto2.getUser_Code());
@@ -192,7 +192,7 @@ public class LoginController {
 			session.setAttribute("user_Point", dto2.getUser_Point());
 			session.setAttribute("user_Pro", dto2.getUser_Pro());
 			session.setMaxInactiveInterval(-1);
-			return "redirect:/home";
+			return "redirect:/";
 		}
 
 	}

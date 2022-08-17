@@ -867,12 +867,12 @@ span {
                 	<div id="naver_id_login" style="display: none;"></div>
 					<div class="naver-button" style="display:inline-block">
 							<!-- 네이버 로그인 버튼 노출 영역 -->
-	                	<a href="https://nid.naver.com/oauth2.0/authorize?response_type=token&amp;client_id=JGPtZuIPhsS22_zSl6eT&amp;redirect_uri=http%3A%2F%2F15.164.3.37%3A8787%2Fhome&amp;state=466db6be-7f94-468e-8de9-de1c50a7589d" id="naver_id_login_anchor">
+	                	<a href="https://nid.naver.com/oauth2.0/authorize?response_type=token&amp;client_id=JGPtZuIPhsS22_zSl6eT&amp;redirect_uri=http%3A%2F%2F15.164.3.37%3A8787%2F&amp;state=466db6be-7f94-468e-8de9-de1c50a7589d" id="naver_id_login_anchor">
 	                	<img id="naver-btn-img" src="/images/login/btnW1.png" border="0" title="네이버 아이디로 로그인"><b id="naver-login-text">네이버로 로그인</b></a>
 							<!-- //네이버 로그인 버튼 노출 영역 -->
 					</div>
 					<script type="text/javascript">
-						var naver_id_login = new naver_id_login("JGPtZuIPhsS22_zSl6eT", "http://15.164.3.37:8787/home");
+						var naver_id_login = new naver_id_login("JGPtZuIPhsS22_zSl6eT", "http://15.164.3.37:8787/");
 						var state = naver_id_login.getUniqState();
 						naver_id_login.setDomain("http://15.164.3.37:8787");
 						naver_id_login.setButton("white", 3,60);
@@ -881,7 +881,7 @@ span {
 					</script>
 					<div class="kakao-button" style="display:inline-block">
 					 <div id="kakao-login-text">
-						<a class="p-2" href="https://kauth.kakao.com/oauth/authorize?client_id=6271ae3b4283fa56e846863ed3a4f7be&redirect_uri=http://15.164.3.37:8787/home&response_type=code">
+						<a class="p-2" href="https://kauth.kakao.com/oauth/authorize?client_id=6271ae3b4283fa56e846863ed3a4f7be&redirect_uri=http://15.164.3.37:8787/&response_type=code">
 							<img src="/images/login/kakao_login_large_wide.png" style="width:500px; height:52px; object-fit: cover; border-radius: 12px;"><b id="kakao-login-text-inner">카카오 로그인</b>
 							</a>
 					  </div>

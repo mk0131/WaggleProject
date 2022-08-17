@@ -166,7 +166,7 @@
 
 </style>
 <script type="text/javascript">
-  var naver_id_login = new naver_id_login("xDkhcqAWvvHzWB6YfVIG", "http://15.164.3.37:8787/home");
+  var naver_id_login = new naver_id_login("xDkhcqAWvvHzWB6YfVIG", "http://15.164.3.37:8787/");
   // 접근 토큰 값 출력
   console.log(naver_id_login.oauthParams.access_token);
   // 네이버 사용자 프로필 조회
@@ -182,7 +182,7 @@
 		url : "/login/naver",
 		data : data,
 		success : function(result){
-			location.href ="/home";
+			location.href ="/";
 		}
 	})
     
@@ -291,7 +291,7 @@
 				url : "/login/kakao?code=" + data,
 				data : data,
 				success : function(result){
-					location.href ="/home";
+					location.href ="/";
 				}
 				
 			})

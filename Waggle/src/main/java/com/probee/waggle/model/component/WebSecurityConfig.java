@@ -27,7 +27,7 @@ public class WebSecurityConfig {
 		 http
 		.requestMatchers(matchers -> matchers.antMatchers("/resources/**")) // 로그인 안해도 불러옴
 	    .authorizeRequests()
-	    .antMatchers("/login/page", "/login","/","/home").permitAll()
+	    .antMatchers("/login/page", "/login","/").permitAll()
 	    .anyRequest().authenticated() // 나머지 페이지 권한 있어야 접속가능
 	    .and()
 
@@ -37,7 +37,7 @@ public class WebSecurityConfig {
         .loginProcessingUrl("/authenticate")
         .usernameParameter("user_Id")
         .passwordParameter("user_Pw")
-        .defaultSuccessUrl("/home")
+        .defaultSuccessUrl("/")
         .failureUrl("/login/page");
    
     return http.build();

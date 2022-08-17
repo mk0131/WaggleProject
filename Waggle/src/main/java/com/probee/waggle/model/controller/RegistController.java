@@ -121,7 +121,7 @@ public class RegistController {
 				return "redirect:/login"; // 성공시 로그인페이지
 			}
 		} 
-		return "redirect:/home"; // 실패시 홈페이지
+		return "redirect:/"; // 실패시 홈페이지
 
 	}
 	
