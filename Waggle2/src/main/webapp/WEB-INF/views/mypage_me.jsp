@@ -1099,7 +1099,7 @@ textarea {
 						    <p class="drop-zoon__paragraph">Drop your file here or Click to browse</p>
 						    <span id="loadingText" class="drop-zoon__loading-text">Please Wait</span>
 						    <img src="" alt="Preview Image" id="previewImage" class="drop-zoon__preview-image" draggable="false">
-						    <input type="file" name="myfile" data-max-file-size="10MB" id="fileInput" class="drop-zoon__file-input" accept=".jpeg, .jpg, .png">
+						    <input type="file" name="myfile" data-max-file-size="10MB" id="fileInput" class="drop-zoon__file-input" accept=".jpeg, .jpg">
 						  </div>
 						  <!-- End Drop Zoon -->
 						
@@ -1318,7 +1318,6 @@ textarea {
 	// Images Types
 	const imagesTypes = [
 	  "jpeg",
-	  "png",
 	  "jpg"
 	];
 
@@ -1371,11 +1370,10 @@ textarea {
 	  switch (ext) {
 	    case 'jpeg':
 	    case 'jpg':
-	    case 'png':
 		uploadFile(file);
 		break;
 	    default:
-	      alert('jpeg,jpg,png 파일만 첨부하세요');
+	      alert('jpeg,jpg 파일만 첨부하세요');
 	      file.value = '';
 	  }
 	  
