@@ -9,19 +9,19 @@ import com.probee.waggle.model.dto.NoticeDto;
 import com.probee.waggle.model.mapper.NoticeMapper;
 
 @Service
-public class NoticeServiceImpl implements NoticeService{
-	
-	@Autowired
-	NoticeMapper noticeMapper;
+public class NoticeServiceImpl implements NoticeService {
 
-	@Override
-	public int insert(String no_Type, String no_Title, String no_Content) {
-		return noticeMapper.insert(no_Type, no_Title, no_Content);
-	}
+    @Autowired
+    NoticeMapper noticeMapper;
 
-	@Override
-	public List<NoticeDto> list() {
-		return noticeMapper.list();
-	}
+    @Override
+    public int insert(String no_Type, String no_Title, String no_Content) {
+        return noticeMapper.insert(no_Type, no_Title, no_Content);
+    }
+
+    @Override
+    public List<NoticeDto> list() {
+        return noticeMapper.list();
+    }
 
 }

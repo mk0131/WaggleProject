@@ -23,27 +23,27 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
 public class ChatbotController {
-	
-	@GetMapping("/chatbot")
-	public String Chatbot() {
-		return "chatbot";
-	}
 
-	private static String secretKey = "V2xtWE9FaXdzT3RnZmJZRHZXRlNzSXVVV1hWZXV2S1k=";
+    @GetMapping("/chatbot")
+    public String Chatbot() {
+        return "chatbot";
+    }
+
+    private static String secretKey = "V2xtWE9FaXdzT3RnZmJZRHZXRlNzSXVVV1hWZXV2S1k=";
     private static String apiUrl = "https://2udht0boyu.apigw.ntruss.com/custom/v1/7343/97973071c34ba996597def31945148e5fef8e4649ad7507720b9701a07c3e416";
-    
-	  @MessageMapping("/sendMessage")
-	  @SendTo("/topic/public")
-	  public String sendMessage(@Payload String chatMessage) throws IOException {
-	    	{
+
+    @MessageMapping("/sendMessage")
+    @SendTo("/topic/public")
+    public String sendMessage(@Payload String chatMessage) throws IOException {
+        {
 
             URL url = new URL(apiUrl);
-            
 
-            String message =  getReqMessage(chatMessage);
+
+            String message = getReqMessage(chatMessage);
             String encodeBase64String = makeSignature(message, secretKey);
-            
-            HttpURLConnection con = (HttpURLConnection)url.openConnection();
+
+            HttpURLConnection con = (HttpURLConnection) url.openConnection();
             con.setRequestMethod("POST");
             con.setRequestProperty("Content-Type", "application/json;UTF-8");
             con.setRequestProperty("X-NCP-CHATBOT_SIGNATURE", encodeBase64String);
@@ -58,7 +58,7 @@ public class ChatbotController {
 
             BufferedReader br;
 
-            if(responseCode==200) { // Normal call
+            if (responseCode == 200) { // Normal call
                 System.out.println(con.getResponseMessage());
 
                 BufferedReader in = new BufferedReader(
@@ -67,34 +67,34 @@ public class ChatbotController {
                 String decodedString;
                 String jsonString = "";
                 while ((decodedString = in.readLine()) != null) {
-                	jsonString = decodedString;
-                	//chatMessage = decodedString;
+                    jsonString = decodedString;
+                    //chatMessage = decodedString;
                 }
                 //chatbotMessage = decodedString;
-                
+
                 JSONParser jsonparser = new JSONParser();
-    			try {
-    				System.out.println(jsonString);
-    				JSONObject json = (JSONObject)jsonparser.parse(jsonString);
-    				JSONArray bubblesArray = (JSONArray)json.get("bubbles");
-    				JSONObject bubbles = (JSONObject)bubblesArray.get(0);
-    				JSONObject data = (JSONObject)bubbles.get("data");
-    				String description = "";
-    				description = (String)data.get("description");
-    				chatMessage = description;
-    			} catch (Exception e) {
-    				System.out.println("error");
-    				e.printStackTrace();
-    				
-    			}
-    			
+                try {
+                    System.out.println(jsonString);
+                    JSONObject json = (JSONObject) jsonparser.parse(jsonString);
+                    JSONArray bubblesArray = (JSONArray) json.get("bubbles");
+                    JSONObject bubbles = (JSONObject) bubblesArray.get(0);
+                    JSONObject data = (JSONObject) bubbles.get("data");
+                    String description = "";
+                    description = (String) data.get("description");
+                    chatMessage = description;
+                } catch (Exception e) {
+                    System.out.println("error");
+                    e.printStackTrace();
+
+                }
+
                 in.close();
 
             } else {  // Error occurred
                 chatMessage = con.getResponseMessage();
             }
         }
-	    	
+
         return chatMessage;
     }
 
@@ -113,7 +113,7 @@ public class ChatbotController {
             encodeBase64String = Base64.encodeBase64String(rawHmac);
 
             return encodeBase64String;
-        } catch (Exception e){
+        } catch (Exception e) {
             System.out.println(e);
         }
 
@@ -127,22 +127,23 @@ public class ChatbotController {
 
         try {
 
-        	JSONObject obj = new JSONObject();
+            JSONObject obj = new JSONObject();
 
             long timestamp = new Date().getTime();
 
-        	obj.put("version", "v2");
+            obj.put("version", "v2");
             obj.put("userId", "U47b00b58c90f8e47428af8b7bddc1231heo2");
             obj.put("timestamp", timestamp);
 
 
             JSONObject data_obj = new JSONObject();
-            
-            if(voiceMessage.length()==2) {
-            	data_obj.put("description", "");
-            }else if(voiceMessage != "") {
-            	data_obj.put("description", voiceMessage);
-            };
+
+            if (voiceMessage.length() == 2) {
+                data_obj.put("description", "");
+            } else if (voiceMessage != "") {
+                data_obj.put("description", voiceMessage);
+            }
+            ;
 
             JSONObject bubbles_obj = new JSONObject();
             bubbles_obj.put("type", "text");
@@ -152,12 +153,13 @@ public class ChatbotController {
             bubbles_array.add(bubbles_obj);
 
             obj.put("bubbles", bubbles_array);
-            
-            if(voiceMessage.length()==2) {
-            	obj.put("event", "open");
-            }else if(voiceMessage != "") {
-            	obj.put("event", "send");
-            };
+
+            if (voiceMessage.length() == 2) {
+                obj.put("event", "open");
+            } else if (voiceMessage != "") {
+                obj.put("event", "send");
+            }
+            ;
 
             requestBody = obj.toString();
             
@@ -239,7 +241,7 @@ public class ChatbotController {
                 requestBody = obj.toString();
             
             */
-        } catch (Exception e){
+        } catch (Exception e) {
             System.out.println("## Exception : " + e);
         }
 

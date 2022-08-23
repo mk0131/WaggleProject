@@ -18,40 +18,40 @@ import com.probee.waggle.model.service.MapService;
 @Controller
 @RequestMapping("/map")
 public class MapController {
-	
-	@Autowired
-	private MapService mapService;
 
-	
-	@GetMapping("/user")
-	public String selectList(Model model) {
-		List<MapUserInfoDto> list = mapService.selectUserAddress();
-		model.addAttribute("uaddr", list);
-		return "map";
-	}
-	
-	
-	@RequestMapping(value="/search", method=RequestMethod.POST)
-	@ResponseBody
-	public List<MapDto> selectList(String jibunAddr, String roadAddr) {
-		List<MapDto> searchlist = mapService.selectSearchList(jibunAddr, roadAddr);
-		System.out.println(jibunAddr);
-		System.out.println(roadAddr);
-		System.out.println(searchlist);
-		
-		
-		return searchlist;
-		
-	}
-	
-	//클릭한 상세주소에 해당하는 결과 파일만 보여줌
-	@RequestMapping(value="/clickDAddr", method=RequestMethod.POST)
-	@ResponseBody
-	public List<MapDto> clickList(String jibunAddr, String roadAddr, String DAddr) {
-		List<MapDto> clicklist = mapService.selectClickList(jibunAddr, roadAddr, DAddr);
-		return clicklist;
-		
-	}
-	
-	
+    @Autowired
+    private MapService mapService;
+
+
+    @GetMapping("/user")
+    public String selectList(Model model) {
+        List<MapUserInfoDto> list = mapService.selectUserAddress();
+        model.addAttribute("uaddr", list);
+        return "map";
+    }
+
+
+    @RequestMapping(value = "/search", method = RequestMethod.POST)
+    @ResponseBody
+    public List<MapDto> selectList(String jibunAddr, String roadAddr) {
+        List<MapDto> searchlist = mapService.selectSearchList(jibunAddr, roadAddr);
+        System.out.println(jibunAddr);
+        System.out.println(roadAddr);
+        System.out.println(searchlist);
+
+
+        return searchlist;
+
+    }
+
+    //클릭한 상세주소에 해당하는 결과 파일만 보여줌
+    @RequestMapping(value = "/clickDAddr", method = RequestMethod.POST)
+    @ResponseBody
+    public List<MapDto> clickList(String jibunAddr, String roadAddr, String DAddr) {
+        List<MapDto> clicklist = mapService.selectClickList(jibunAddr, roadAddr, DAddr);
+        return clicklist;
+
+    }
+
+
 }

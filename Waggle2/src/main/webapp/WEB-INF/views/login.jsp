@@ -1,1016 +1,1065 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
-	<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+         pageEncoding="UTF-8" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
 <head>
 
-<meta charset="UTF-8">
-<title>로그인&회원가입</title>
-<link rel="icon" href="/images/importToJsp/favicon.png">
-<style type="text/css">
-.middle {
-	margin: 0;
-	padding: 0;
-}
+    <meta charset="UTF-8">
+    <title>로그인&회원가입</title>
+    <link rel="icon" href="/images/importToJsp/favicon.png">
+    <style type="text/css">
+        .middle {
+            margin: 0;
+            padding: 0;
+        }
 
-.guideline {
-	margin: 0 auto;
-	width: 1125px;
-}
+        .guideline {
+            margin: 0 auto;
+            width: 1125px;
+        }
 
-.guideline-all {
-	margin-top: 16px !important;
-}
+        .guideline-all {
+            margin-top: 16px !important;
+        }
 
-.guideline-all i {
-	display: inline-block;
-	color: #151515;
-}
+        .guideline-all i {
+            display: inline-block;
+            color: #151515;
+        }
 
-.guideline-all li {
-	display: inline-block;
-}
+        .guideline-all li {
+            display: inline-block;
+        }
 
-.guideline-all p {
-	display: inline-block;
-	font-size: 16px;
-}
+        .guideline-all p {
+            display: inline-block;
+            font-size: 16px;
+        }
 
-.login-form {
-	display: flex;
-	justify-content: center;
-}
+        .login-form {
+            display: flex;
+            justify-content: center;
+        }
 
-.tabs {
-	background-color: #ffffff;
-	width: 550px;
-	height: 1195px;
-	margin: 0 auto;
-}
+        .tabs {
+            background-color: #ffffff;
+            width: 550px;
+            height: 1195px;
+            margin: 0 auto;
+        }
 
-/* 탭 스타일 */
-.tab_item {
-	width: 20%;
-	height: 50px;
-	border-bottom: 3px solid #151515;
-	background-color: #f8f8f8;
-	line-height: 50px;
-	font-size: 16px;
-	color: #151515;
-	display: block;
-	float: left;
-	text-align: center;
-	font-weight: bold;
-	transition: all 0.2s ease;
-}
+        /* 탭 스타일 */
+        .tab_item {
+            width: 20%;
+            height: 50px;
+            border-bottom: 3px solid #151515;
+            background-color: #f8f8f8;
+            line-height: 50px;
+            font-size: 16px;
+            color: #151515;
+            display: block;
+            float: left;
+            text-align: center;
+            font-weight: bold;
+            transition: all 0.2s ease;
+        }
 
-.tab_item:hover {
-	opacity: 0.75;
-}
+        .tab_item:hover {
+            opacity: 0.75;
+        }
 
-/* 라디오 버튼 UI삭제*/
-input[name="tab_item"] {
-	display: none;
-}
+        /* 라디오 버튼 UI삭제*/
+        input[name="tab_item"] {
+            display: none;
+        }
 
-/* 탭 컨텐츠 스타일 */
-.tab_content {
-	display: none;
-	padding: 0px;
-	clear: both;
-	overflow: hidden;
-}
+        /* 탭 컨텐츠 스타일 */
+        .tab_content {
+            display: none;
+            padding: 0px;
+            clear: both;
+            overflow: hidden;
+        }
 
-/* 선택 된 탭 콘텐츠를 표시 */
-#login:checked ~ #login-content, #sign-up:checked ~ #sign-up-content,
-	#sign-up-form:checked ~ #sign-up-form-content {
-	display: block;
-}
+        /* 선택 된 탭 콘텐츠를 표시 */
+        #login:checked ~ #login-content, #sign-up:checked ~ #sign-up-content,
+        #sign-up-form:checked ~ #sign-up-form-content {
+            display: block;
+        }
 
-/* 선택된 탭 스타일 */
-.tabs input:checked+.tab_item {
-	background-color: #151515;
-	color: #fff;
-}
+        /* 선택된 탭 스타일 */
+        .tabs input:checked + .tab_item {
+            background-color: #151515;
+            color: #fff;
+        }
 
-.tab_content .field-wrap1 {
-	display: block;
-	text-align: center;
-	padding: 45px 10px 0px 10px;
-}
+        .tab_content .field-wrap1 {
+            display: block;
+            text-align: center;
+            padding: 45px 10px 0px 10px;
+        }
 
-.tab_content .field-wrap2 {
-	display: block;
-	text-align: center;
-	padding: 20px 10px 20px 10px;
-}
+        .tab_content .field-wrap2 {
+            display: block;
+            text-align: center;
+            padding: 20px 10px 20px 10px;
+        }
 
-.inputstyle {
-	width: 500px;
-	height: 40px;
-	font-size: 14px;
-	border:none;
-	border-bottom: 1px solid #ebebeb;
-}
+        .inputstyle {
+            width: 500px;
+            height: 40px;
+            font-size: 14px;
+            border: none;
+            border-bottom: 1px solid #ebebeb;
+        }
 
-.inputstyle:focus {
-	outline: none;
-	border-bottom: 2px solid;
-}
+        .inputstyle:focus {
+            outline: none;
+            border-bottom: 2px solid;
+        }
 
-.tab_content .field-wrap-submit {
-	display: block;
-	text-align: center;
-	padding: 20px 10px 20px 10px;
-}
+        .tab_content .field-wrap-submit {
+            display: block;
+            text-align: center;
+            padding: 20px 10px 20px 10px;
+        }
 
-.tab_content .field-wrap-submit button {
-	width: 500px;
-	height: 52px;
-	border-radius: 8px;
-	cursor: pointer;
-	background-color: #151515;
-	color: #ffffff;
-}
+        .tab_content .field-wrap-submit button {
+            width: 500px;
+            height: 52px;
+            border-radius: 8px;
+            cursor: pointer;
+            background-color: #151515;
+            color: #ffffff;
+        }
 
-.forgot-idpw .forgot {
-	display: block;
-	text-align: center;
-	border-bottom: 1px solid;
-	padding: 0px 10px 20px 10px;
-}
+        .forgot-idpw .forgot {
+            display: block;
+            text-align: center;
+            border-bottom: 1px solid;
+            padding: 0px 10px 20px 10px;
+        }
 
-.tab_content .api-login {
-	display: block;
-	text-align: center;
-	padding: 20px 10px 20px 10px;
-}
+        .tab_content .api-login {
+            display: block;
+            text-align: center;
+            padding: 20px 10px 20px 10px;
+        }
 
-.tab_content .api-login button {
-	width: 507px;
-	height: 63px;
-	border-radius: 8px;
-	cursor: pointer;
-	background-color: #151515;
-	color: #ffffff;
-	margin: 20px;
-}
+        .tab_content .api-login button {
+            width: 507px;
+            height: 63px;
+            border-radius: 8px;
+            cursor: pointer;
+            background-color: #151515;
+            color: #ffffff;
+            margin: 20px;
+        }
 
-.tab_content .sign-up-button button {
-	width: 507px;
-	height: 63px;
-	border-radius: 8px;
-	cursor: pointer;
-	background-color: #151515;
-	color: #ffffff;
-	margin: 20px;
-}
-	.find_input_re_1{
-		color : green;
-		display : none;
-	}
-	
-	.find_input_re_2{
-		color : red;
-		display : none;
-	}
-	.find_input_re_3{
-		color : red;
-		display : none;
-	}
-	
-	.find_form_check{
-		color : red;
-		display : none;
-	}
+        .tab_content .sign-up-button button {
+            width: 507px;
+            height: 63px;
+            border-radius: 8px;
+            cursor: pointer;
+            background-color: #151515;
+            color: #ffffff;
+            margin: 20px;
+        }
 
-	.id_input_re_1{
-		color : green;
-		display : none;
-	}
-	
-	.id_input_re_2{
-		color : red;
-		display : none;
-	}
-	
-	.id_input_re_3{
-		color : red;
-		display : none;
-	}
-	
-	.id_form_check{
-		color : red;
-		display : none;
-	}
-	
-	.pw_input_re_1{
-		color : green;
-		display : none;
-	}
-	
-	.pw_input_re_2{
-		color : red;
-		display : none;
-	}
-	.pw_form_check{
-		color : red;
-		display : none;
-	}
-	.email_input_re_1{
-		color : green;
-		display : none;
-	}
-	
-	.email_input_re_2{
-		color : red;
-		display : none;
-	}
-	.email_input_re_3{
-		color : red;
-		display : none;
-	}
-	.email_input_re_4{
-		color : red;
-		display : none;
-	}
-	.email_form_check{
-		color : red;
-		display : none;
-	}
-	.nm_input_re_1{
-		color : green;
-		display : none;
-	}
-	
-	.nm_input_re_2{
-		color : red;
-		display : none;
-	}
-	
-	.nm_input_re_3{
-		color : red;
-		display : none;
-	}
-	.nm_form_check{
-		color : red;
-		display : none;
-	}
-	.age_form_check{
-		color : red;
-		display : none;
-	}
-	.final_id_ck{
-    display: none;
-	}
-	.final_pw_ck{
-    display: none;
-	}
-	.final_pwck_ck{
-    display: none;
-	}
-	.final_name_ck{
-    display: none;
-	}
-	.final_mail_ck{
-    display: none;
-	}
-	.final_find_ck{
-    display: none;
-	}
-	.final_addr_ck{
-    display: none;
-	}
-	.final_terms_ck{
-	display: none;
-	}
-	.login_warn{
-    margin-top: 30px;
-    text-align: center;
-    color : red;
-}
-	
-.modal-dialog {
-	padding-top: 150px;
-}
- 
-.find:hover{
-	cursor: pointer;
-	color: #8b8b8b !important;
-}
+        .find_input_re_1 {
+            color: green;
+            display: none;
+        }
 
-.regist-form{
-	display:none;
-}
+        .find_input_re_2 {
+            color: red;
+            display: none;
+        }
 
-.regist-button{
-	border: 1px solid #d3d3d3;
-    color: rgba(34,34,34,.8);
-    line-height: 30px;
-    border-radius: 12px;
-    font-size: 14px;
-    letter-spacing: -.14px;
-    background-color: #fff;
-}
+        .find_input_re_3 {
+            color: red;
+            display: none;
+        }
 
-.regist-button:hover{
-	background-color: #f6f6f6;
-	color:black;
-}
+        .find_form_check {
+            color: red;
+            display: none;
+        }
 
-.login-button{
-	font-weight:bold;
-}
+        .id_input_re_1 {
+            color: green;
+            display: none;
+        }
 
-.id-pw-text {
-	font-size: 15px;
-    letter-spacing: -.07px;
-    line-height: 18px;
-    text-align: left;
-    padding: 0px 20px 0px 18px;
-}
+        .id_input_re_2 {
+            color: red;
+            display: none;
+        }
 
-#naver-btn-img {
-	width: 35px;
-    height: 35px;
-    margin: 7px 0px 7px 20px;
-    padding: 4px;
-    float: left;
-}
+        .id_input_re_3 {
+            color: red;
+            display: none;
+        }
 
-#naver_id_login_anchor {
-	width: 500px;
-    height: 52px;
-    display: block;
-    border: 1px solid #ebebeb;
-    border-radius: 12px;
-    color: #222;
-    margin-bottom: 20px;
-    text-decoration: none;
-}
+        .id_form_check {
+            color: red;
+            display: none;
+        }
 
-#chk_nm {
-	border:none;
-	height: 40px;
-}
+        .pw_input_re_1 {
+            color: green;
+            display: none;
+        }
 
-span {
-	padding: 0px 5px 0px 5px;
-	font-size: 15px;
-}
+        .pw_input_re_2 {
+            color: red;
+            display: none;
+        }
 
-.reg-gender input[type=radio] {
-	display: none;
-}
+        .pw_form_check {
+            color: red;
+            display: none;
+        }
 
-.reg-gender input[type=radio] + label {
-	display: inline-block;
-	cursor: pointer;
-	height: 35px;
-	width: 60px;
-	border: 1px solid #d3d3d3;
-	border-radius: 10px;
-	line-height: 35px;
-	text-align: center;
-	font-weight: bold;
-	font-size: 13px;
-	margin: 3px;
-}
+        .email_input_re_1 {
+            color: green;
+            display: none;
+        }
 
-.reg-gender input[type=radio]:checked+label{
-    background-color: #222;
-    color: #fff;
-}
+        .email_input_re_2 {
+            color: red;
+            display: none;
+        }
 
-#naver-login-text {
-	line-height: 50px;
-    padding-right: 49px;
-}
+        .email_input_re_3 {
+            color: red;
+            display: none;
+        }
 
-#kakao-login-text {
-	position: relative;
-}
+        .email_input_re_4 {
+            color: red;
+            display: none;
+        }
 
-#kakao-login-text-inner {
-	position: absolute;
-    left: 36%;
-    bottom: 27%;
-    width: 157px;
-    background-color: #FEE500;
-    color: #222;
-}
+        .email_form_check {
+            color: red;
+            display: none;
+        }
 
-</style>
-<script type="text/javascript"
-	src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css">
-<script
-	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"></script>
-<script
-	src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
-<script
-	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js"></script>
-	<script type="text/javascript" src="https://static.nid.naver.com/js/naverLogin_implicit-1.0.3.js" charset="utf-8"></script>
-	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=df487b49cd90a64d7305e577e300f2e4&libraries=services,clusterer,drawing"></script>
-<script type="text/javascript">
+        .nm_input_re_1 {
+            color: green;
+            display: none;
+        }
 
-	$(function(){
-		$("#sign-up").on("click",function(){
-			$("#title").html("회원가입");
-			$("#sign-up-content").fadeIn();
-			$("#regist").hide();
-		})
-		$("#login").on("click",function(){
-			$("#title").html("로그인");
-			$("#regist").hide();
-			$(".login_warn").css("display","none");
-			
-		})
-		$("#regist_in").on("click",function(){
-			$("#sign-up-content").hide();
-			$(".regist-form").hide();
-			$("#regist").fadeIn();
-			
-			
-			$('.id_input_re_1').css("display", "none");
-			$('.id_input_re_2').css("display", "none");
-			$('.id_input_re_3').css("display", "none");
-			$('.final_id_ck').css("display","none");
-			$('.id_form_check').css("display","none");
-			$('#id_input2').val(null);
-			
-			$('.pw_input_re_1').css("display", "none");
-			$('.pw_input_re_2').css("display", "none");
-			$('.pw_form_check').css("display","none");
-			$('.final_pw_ck').css("display","none");
-			$('.final_pwck_ck').css("display","none");
-			$('.pw_form_check').css("display","none");
-			$('#pw_input').val(null);
-			$('#pw_chk').val(null);
-			
-			$('.email_input_re_1').css("display", "none");
-			$('.email_input_re_2').css("display", "none");
-			$('.email_input_re_3').css("display","none");
-			$('.email_input_re_4').css("display","none");
-			$('.final_mail_ck').css("display","none");
-			$('.email_form_check').css("display","none");
-			$('#user_Email').val(null);
-			
-			$('.nm_input_re_1').css("display", "none");
-			$('.nm_input_re_2').css("display", "none");
-			$('.nm_input_re_3').css("display", "none");
-			$('.final_name_ck').css("display","none");
-			$('.nm_form_check').css("display","none");
-			$('#chk_nm').val(null);
-			$('#nm_input').val(null);
-			
-			$('.age_form_check').css("display","none");
-			$('#age_input').val(null);
-		
-		
-			$('#post').val(null);
-			$('#addr').val(null);
-			$('#daddr').val(null);
-			$('.final_addr_ck').css("display","none");
-			
-			$("#terms").prop("checked",false);
-			$('.final_terms_ck').css("display","none");
-			
-			
-		})
-		$("#modal").on("click",function(){
-			$("#terms").prop("checked",true);
-			$(".final_terms_ck").css("display","none");
-		})
-		/* 다음 주소 연동*/
-		$("#address").on("click",function(){
-			var width = 500; //팝업의 너비
-			var height = 600; //팝업의 높이
-			new daum.Postcode({
-		        oncomplete: function(data) {
-		        	// 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
+        .nm_input_re_2 {
+            color: red;
+            display: none;
+        }
 
-	                // 각 주소의 노출 규칙에 따라 주소를 조합한다.
-	                // 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
-	                var addr = ''; // 주소 변수
-	                var extraAddr = ''; // 참고항목 변수
+        .nm_input_re_3 {
+            color: red;
+            display: none;
+        }
 
-	                //사용자가 선택한 주소 타입에 따라 해당 주소 값을 가져온다.
-	                if (data.userSelectedType === 'R') { // 사용자가 도로명 주소를 선택했을 경우
-	                    addr = data.roadAddress;
-	                } else { // 사용자가 지번 주소를 선택했을 경우(J)
-	                    addr = data.jibunAddress;
-	                }
+        .nm_form_check {
+            color: red;
+            display: none;
+        }
 
-	                // 사용자가 선택한 주소가 도로명 타입일때 참고항목을 조합한다.
-	                if(data.userSelectedType === 'R'){
-	                    // 법정동명이 있을 경우 추가한다. (법정리는 제외)
-	                    // 법정동의 경우 마지막 문자가 "동/로/가"로 끝난다.
-	                    if(data.bname !== '' && /[동|로|가]$/g.test(data.bname)){
-	                        extraAddr += data.bname;
-	                    }
-	                    // 건물명이 있고, 공동주택일 경우 추가한다.
-	                    if(data.buildingName !== '' && data.apartment === 'Y'){
-	                        extraAddr += (extraAddr !== '' ? ', ' + data.buildingName : data.buildingName);
-	                    }
-	                    // 표시할 참고항목이 있을 경우, 괄호까지 추가한 최종 문자열을 만든다.
-	                    if(extraAddr !== ''){
-	                        extraAddr = ' (' + extraAddr + ')';
-	                    }
-	                    // 주소변수 문자열과 참고항목 문자열 합치기
-	                   addr += extraAddr;
-	                
-	                } else {
-	                    addr += ' ';
-	                }
+        .age_form_check {
+            color: red;
+            display: none;
+        }
 
-	                // 우편번호와 주소 정보를 해당 필드에 넣는다.
-	                $("#post").val(data.zonecode);
-	                $("#addr").val(addr);
-	                
-	                //받은 주소값을 위도 경도로 바꿔서 input hidden 값에 value값으로 넣어주기
-	                var geocoder = new kakao.maps.services.Geocoder();
-	                var addr2 = data.jibunAddress;
-	                geocoder.addressSearch(addr2, function(result, status) {
-	                	
-	        		    // 정상적으로 검색이 완료됐으면 
-	        		     if (status === kakao.maps.services.Status.OK) {
-	        				$("#ua_Lat").attr('value',result[0].y);
-	        				$("#ua_Lng").attr('value',result[0].x);
-	        				
-	        		    } else {
-	        		    	console.log("에러");
-	        		    }
-	        		});  
-	                
-	                // 커서를 상세주소 필드로 이동한다.
-	                $("#daddr").attr("readonly",false);
-	                $("#daddr").focus();
-		        }
-		    }).open({
-		    	left: (window.screen.width / 2) - (width / 2),
-	    	    top: (window.screen.height / 2) - (height / 2),
-	    		popupName: 'AddrSearch'
-		    });
-		})
-		
-		
-	})
-</script>
+        .final_id_ck {
+            display: none;
+        }
+
+        .final_pw_ck {
+            display: none;
+        }
+
+        .final_pwck_ck {
+            display: none;
+        }
+
+        .final_name_ck {
+            display: none;
+        }
+
+        .final_mail_ck {
+            display: none;
+        }
+
+        .final_find_ck {
+            display: none;
+        }
+
+        .final_addr_ck {
+            display: none;
+        }
+
+        .final_terms_ck {
+            display: none;
+        }
+
+        .login_warn {
+            margin-top: 30px;
+            text-align: center;
+            color: red;
+        }
+
+        .modal-dialog {
+            padding-top: 150px;
+        }
+
+        .find:hover {
+            cursor: pointer;
+            color: #8b8b8b !important;
+        }
+
+        .regist-form {
+            display: none;
+        }
+
+        .regist-button {
+            border: 1px solid #d3d3d3;
+            color: rgba(34, 34, 34, .8);
+            line-height: 30px;
+            border-radius: 12px;
+            font-size: 14px;
+            letter-spacing: -.14px;
+            background-color: #fff;
+        }
+
+        .regist-button:hover {
+            background-color: #f6f6f6;
+            color: black;
+        }
+
+        .login-button {
+            font-weight: bold;
+        }
+
+        .id-pw-text {
+            font-size: 15px;
+            letter-spacing: -.07px;
+            line-height: 18px;
+            text-align: left;
+            padding: 0px 20px 0px 18px;
+        }
+
+        #naver-btn-img {
+            width: 35px;
+            height: 35px;
+            margin: 7px 0px 7px 20px;
+            padding: 4px;
+            float: left;
+        }
+
+        #naver_id_login_anchor {
+            width: 500px;
+            height: 52px;
+            display: block;
+            border: 1px solid #ebebeb;
+            border-radius: 12px;
+            color: #222;
+            margin-bottom: 20px;
+            text-decoration: none;
+        }
+
+        #chk_nm {
+            border: none;
+            height: 40px;
+        }
+
+        span {
+            padding: 0px 5px 0px 5px;
+            font-size: 15px;
+        }
+
+        .reg-gender input[type=radio] {
+            display: none;
+        }
+
+        .reg-gender input[type=radio] + label {
+            display: inline-block;
+            cursor: pointer;
+            height: 35px;
+            width: 60px;
+            border: 1px solid #d3d3d3;
+            border-radius: 10px;
+            line-height: 35px;
+            text-align: center;
+            font-weight: bold;
+            font-size: 13px;
+            margin: 3px;
+        }
+
+        .reg-gender input[type=radio]:checked + label {
+            background-color: #222;
+            color: #fff;
+        }
+
+        #naver-login-text {
+            line-height: 50px;
+            padding-right: 49px;
+        }
+
+        #kakao-login-text {
+            position: relative;
+        }
+
+        #kakao-login-text-inner {
+            position: absolute;
+            left: 36%;
+            bottom: 27%;
+            width: 157px;
+            background-color: #FEE500;
+            color: #222;
+        }
+
+    </style>
+    <script type="text/javascript"
+            src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link rel="stylesheet"
+          href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css">
+    <script
+            src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"></script>
+    <script
+            src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+    <script
+            src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="https://static.nid.naver.com/js/naverLogin_implicit-1.0.3.js"
+            charset="utf-8"></script>
+    <script type="text/javascript"
+            src="//dapi.kakao.com/v2/maps/sdk.js?appkey=df487b49cd90a64d7305e577e300f2e4&libraries=services,clusterer,drawing"></script>
+    <script type="text/javascript">
+
+        $(function () {
+            $("#sign-up").on("click", function () {
+                $("#title").html("회원가입");
+                $("#sign-up-content").fadeIn();
+                $("#regist").hide();
+            })
+            $("#login").on("click", function () {
+                $("#title").html("로그인");
+                $("#regist").hide();
+                $(".login_warn").css("display", "none");
+
+            })
+            $("#regist_in").on("click", function () {
+                $("#sign-up-content").hide();
+                $(".regist-form").hide();
+                $("#regist").fadeIn();
+
+
+                $('.id_input_re_1').css("display", "none");
+                $('.id_input_re_2').css("display", "none");
+                $('.id_input_re_3').css("display", "none");
+                $('.final_id_ck').css("display", "none");
+                $('.id_form_check').css("display", "none");
+                $('#id_input2').val(null);
+
+                $('.pw_input_re_1').css("display", "none");
+                $('.pw_input_re_2').css("display", "none");
+                $('.pw_form_check').css("display", "none");
+                $('.final_pw_ck').css("display", "none");
+                $('.final_pwck_ck').css("display", "none");
+                $('.pw_form_check').css("display", "none");
+                $('#pw_input').val(null);
+                $('#pw_chk').val(null);
+
+                $('.email_input_re_1').css("display", "none");
+                $('.email_input_re_2').css("display", "none");
+                $('.email_input_re_3').css("display", "none");
+                $('.email_input_re_4').css("display", "none");
+                $('.final_mail_ck').css("display", "none");
+                $('.email_form_check').css("display", "none");
+                $('#user_Email').val(null);
+
+                $('.nm_input_re_1').css("display", "none");
+                $('.nm_input_re_2').css("display", "none");
+                $('.nm_input_re_3').css("display", "none");
+                $('.final_name_ck').css("display", "none");
+                $('.nm_form_check').css("display", "none");
+                $('#chk_nm').val(null);
+                $('#nm_input').val(null);
+
+                $('.age_form_check').css("display", "none");
+                $('#age_input').val(null);
+
+
+                $('#post').val(null);
+                $('#addr').val(null);
+                $('#daddr').val(null);
+                $('.final_addr_ck').css("display", "none");
+
+                $("#terms").prop("checked", false);
+                $('.final_terms_ck').css("display", "none");
+
+
+            })
+            $("#modal").on("click", function () {
+                $("#terms").prop("checked", true);
+                $(".final_terms_ck").css("display", "none");
+            })
+            /* 다음 주소 연동*/
+            $("#address").on("click", function () {
+                var width = 500; //팝업의 너비
+                var height = 600; //팝업의 높이
+                new daum.Postcode({
+                    oncomplete: function (data) {
+                        // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
+
+                        // 각 주소의 노출 규칙에 따라 주소를 조합한다.
+                        // 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
+                        var addr = ''; // 주소 변수
+                        var extraAddr = ''; // 참고항목 변수
+
+                        //사용자가 선택한 주소 타입에 따라 해당 주소 값을 가져온다.
+                        if (data.userSelectedType === 'R') { // 사용자가 도로명 주소를 선택했을 경우
+                            addr = data.roadAddress;
+                        } else { // 사용자가 지번 주소를 선택했을 경우(J)
+                            addr = data.jibunAddress;
+                        }
+
+                        // 사용자가 선택한 주소가 도로명 타입일때 참고항목을 조합한다.
+                        if (data.userSelectedType === 'R') {
+                            // 법정동명이 있을 경우 추가한다. (법정리는 제외)
+                            // 법정동의 경우 마지막 문자가 "동/로/가"로 끝난다.
+                            if (data.bname !== '' && /[동|로|가]$/g.test(data.bname)) {
+                                extraAddr += data.bname;
+                            }
+                            // 건물명이 있고, 공동주택일 경우 추가한다.
+                            if (data.buildingName !== '' && data.apartment === 'Y') {
+                                extraAddr += (extraAddr !== '' ? ', ' + data.buildingName : data.buildingName);
+                            }
+                            // 표시할 참고항목이 있을 경우, 괄호까지 추가한 최종 문자열을 만든다.
+                            if (extraAddr !== '') {
+                                extraAddr = ' (' + extraAddr + ')';
+                            }
+                            // 주소변수 문자열과 참고항목 문자열 합치기
+                            addr += extraAddr;
+
+                        } else {
+                            addr += ' ';
+                        }
+
+                        // 우편번호와 주소 정보를 해당 필드에 넣는다.
+                        $("#post").val(data.zonecode);
+                        $("#addr").val(addr);
+
+                        //받은 주소값을 위도 경도로 바꿔서 input hidden 값에 value값으로 넣어주기
+                        var geocoder = new kakao.maps.services.Geocoder();
+                        var addr2 = data.jibunAddress;
+                        geocoder.addressSearch(addr2, function (result, status) {
+
+                            // 정상적으로 검색이 완료됐으면
+                            if (status === kakao.maps.services.Status.OK) {
+                                $("#ua_Lat").attr('value', result[0].y);
+                                $("#ua_Lng").attr('value', result[0].x);
+
+                            } else {
+                                console.log("에러");
+                            }
+                        });
+
+                        // 커서를 상세주소 필드로 이동한다.
+                        $("#daddr").attr("readonly", false);
+                        $("#daddr").focus();
+                    }
+                }).open({
+                    left: (window.screen.width / 2) - (width / 2),
+                    top: (window.screen.height / 2) - (height / 2),
+                    popupName: 'AddrSearch'
+                });
+            })
+
+
+        })
+    </script>
 
 </head>
 
 <body>
 
-	<%@ include file="header.jsp"%>
-	<div id="wrap">
-		<div class="middle">
-			<div class="guideline">
-			<ul class="guideline-all">
-        		<li><a href="javascript:void(0)">
-        		<i class="fa-solid fa-house"></i>
-        		</a>
-        		<p>HOME > 로그인&회원가입</p>
-        		</li>	
-        	</ul>
-		</div>
-	</div>
-		
-		<br />
-		<section>
-			<div class="login-form">
-			  <img src="/images/login/login-logo.png">
-			</div>
+<%@ include file="header.jsp" %>
+<div id="wrap">
+    <div class="middle">
+        <div class="guideline">
+            <ul class="guideline-all">
+                <li><a href="javascript:void(0)">
+                    <i class="fa-solid fa-house"></i>
+                </a>
+                    <p>HOME > 로그인&회원가입</p>
+                </li>
+            </ul>
+        </div>
+    </div>
 
-			<br />
-			<br />
-			<div class="tabs">
-				<input id="login" type="radio" name="tab_item" checked> 
-				<label class="tab_item" for="login">로그인</label> 
-				<input id="sign-up" type="radio" name="tab_item"> 
-				<label class="tab_item" for="sign-up">회원가입</label>
-				<div class="tab_content" id="login-content">
-					<form action="/login/Normal" method="post">
-						<div class="field-wrap1">
-							<input class="inputstyle" type="text" name="user_Id" placeholder="아이디">
-						</div>
-						<div class="field-wrap2">
-							<input class="inputstyle" type="password" name="user_Pw" placeholder="비밀번호">
-						</div>
-						<div class="field-wrap-submit">
-							<button class="login-button" type="submit">로그인</button>
-							<c:if test = "${result == 0 }">
-								<div class = "login_warn">사용자 ID 또는 비밀번호를 잘못 입력하셨습니다.</div>
-							</c:if>
-						</div>
-					</form>
-					<div class="forgot-idpw">
-						<p class="forgot">
-							<!-- Button trigger modal -->
-					<a  class="find" data-toggle="modal" data-target="#staticBackdrop" style="margin-right:20px;">
-  					아이디 찾기
-					</a><b>|</b><a class="find" data-toggle="modal" data-target="#staticBackdrop2" style="margin-left:20px;">패스워드 찾기</a>
-					<!-- Modal -->
-	<div class="modal fade" id="staticBackdrop" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-  	<div class="modal-dialog">
-    	<div class="modal-content">
-      	<div class="modal-header">
-        	<h5 class="modal-title" id="staticBackdropLabel">아이디 찾기</h5>
-        	<button type="button" class="close" data-dismiss="modal" aria-label="Close" onclick="allclose()">
-          	<span aria-hidden="true">&times;</span>
-        	</button>
-      	</div>
-     	 <div class="modal-body">
-        	<b style="text-align: left;">이메일 인증</b> <br>
-        			<form action="/regist/findId" method="get" id="getid"> 
-						<input type="text" id="find_id" name="user_Email" placeholder="  이메일"
-							style="width: 300px; margin-bottom:5px;"> 
-						<input class="regist-button" type="button" id="find_id_chk" value="이메일 인증" style="width: 90px;">
-						<input type="text" id="chk_find" placeholder="인증번호를 입력해 주세요" disabled="disabled" style="width: 300px;">
-						<input type="submit" value="아이디 메일 받기" style="width: 150px;" disabled="disabled" id="id_submit"> 
-						<br>
-						<span class="find_input_re_1">인증번호가 일치합니다.</span>
-						<span class="find_input_re_2">인증번호를 다시 확인해주세요.</span>
-						<span class="find_input_re_3">등록이 되지않은 이메일 입니다.</span>
-						<span class="final_find_ck">이메일을 입력해주세요.</span>
-						<span class="find_form_check"></span>
-						<br>
-				</form>
-      	</div>
-      	<div class="modal-footer">
-        	<button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="allclose()">닫기</button>
-      	</div>
-    	</div>
-  	</div>
-	</div>
-	<div class="modal fade" id="staticBackdrop2" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-  	<div class="modal-dialog">
-    	<div class="modal-content">
-      	<div class="modal-header">
-        	<h5 class="modal-title" id="staticBackdropLabel">패스워드 찾기</h5>
-        	<button type="button" class="close" data-dismiss="modal" aria-label="Close" onclick="allclose()">
-          	<span aria-hidden="true">&times;</span>
-        	</button>
-      	</div>
-     	 <div class="modal-body">
-     	 	<b style="text-align: left;">아이디</b> <br> 
-						<input type="text" id="id_input" name="user_Id" placeholder="  아이디" style="width: 300px;">
-						<input class="regist-button" type="button" id="find_pw" value="아이디 확인" style="width: 80px;">
-						<br>
-						<span class="id_input_re_1">가입된 아이디 입니다.</span>
-						<span class="id_input_re_2">가입되지 않은 아이디 입니다.</span>
-						<span class="id_form_check"></span> 
-						<br>
-        	<b style="text-align: left;">이메일 인증</b> <br> 
-        					<form action="/regist/findPw" method="get" id="getpw">
-						<input type="text" id="find_pw_input" name="user_Email" placeholder="  이메일"
-							style="width: 300px; margin-bottom:5px;">
-							<input class="regist-button" type="button" id="find_pw_chk" value="이메일 인증" style="width: 90px;">
-						
-						<input type="text" id="chk_find_pw" placeholder="인증번호를 입력해 주세요" disabled="disabled" style="width: 300px;">
-						<input type="submit" value="비밀번호 메일 받기" style="width: 150px;" disabled="disabled" id="pw_submit"> 
-						<br>
-						<span class="find_input_re_1">인증번호가 일치합니다.</span>
-						<span class="find_input_re_2">인증번호를 다시 확인해주세요.</span>
-						<span class="find_input_re_3">등록이 되지않은 이메일 입니다.</span>
-						<span class="final_find_ck">이메일을 입력해주세요.</span>
-						<span class="find_form_check"></span>
-						<br>
-						</form>
-      	</div>
-      	<div class="modal-footer">
-        	<button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="allclose()">닫기</button>
-      	</div>
-    	</div>
-  	</div>
-	</div>
-					</div>
-					<script type="text/javascript">
-					 var code = "";
-					$("#find_id_chk").click(function(){
-						let user_Email = $("#find_id").val();
-						let checkBox = $("#chk_find");
-						let warnMsg = $(".find_form_check");
-						$('.final_find_ck').css('display', 'none');
-						
-						if(mailFormCheck(user_Email)){
-					        warnMsg.html("이메일이 전송 되었습니다. 이메일을 확인해주세요.");
-					        warnMsg.css("color","green");
-					        warnMsg.css("display", "inline-block");
-					    } else {
-					        warnMsg.html("올바르지 못한 이메일 형식입니다.");
-					        warnMsg.css("color","red");
-					        warnMsg.css("display", "inline-block");
-					        $("#find_id").val(null);
-					        return false;
-					    } 
-						$.ajax({
-							type : "GET",
-							url : "/regist/findEmail?user_Email=" + user_Email,
-							success:function(data){
-								
-								if(data == 'naver'){
-									warnMsg.html("네이버 아이디로 가입된 이메일 입니다. 네이버 간편 로그인 해주세요.");
-								} else if(data == 'kakao'){
-									warnMsg.html("카카오 아이디로 가입된 이메일 입니다. 카카오 간편 로그인 해주세요.");
-								} else if(data == 'fail'){
-									warnMsg.html("가입되지 않은 이메일 입니다.");
-									 warnMsg.css("color","red");
-									 $("#find_id").val(null);
-									
-								} else {
-									checkBox.attr("disabled", false);
-									code = data;
-									$('.find_input_re_3').css("display","none");
-								}
-								
-							}
-							
-						})
-						
-					})
-					
-					$("#chk_find").on("propertychange change keyup paste input",function(){ // 인증번호 입력할때 마다
-					let inputcode = $("#chk_find").val(); // 입력한 인증번호
-		
-					if(inputcode == code){
-					$('.find_input_re_1').css("display","inline-block");
-					$('.find_input_re_2').css("display", "none");
-					$(".find_form_check").css("display","none");
-					$("#id_submit").attr("disabled",false);
-					emailnumCheck = true;
-						} else{
-					$('.find_input_re_2').css("display","inline-block");
-					$('.find_input_re_1').css("display", "none");
-					$(".find_form_check").css("display","none");
-					emailnumCheck = false;
-			
-					}
-					})
-					
-					function mailFormCheck(email){
-					var form = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i;
-					return form.test(email);
-					}
-						
-					function allclose(){
-						$("#find_id").val(null);
-						$("#chk_find").val(null);
-						$(".find_inpur_re_1").css("display","none");
-						$(".find_inpur_re_2").css("display","none");
-						$(".find_inpur_re_3").css("display","none");
-						$(".final_find_ck").css("display","none");
-						$(".find_form_check").css("display","none");
-						$("#id_input").val(null);
-						$(".id_input_re_1").css("display","none");
-						$(".id_input_re_2").css("display","none");
-						$("#find_pw_input").val(null);
-						
-					}
-					
-					$('#find_pw').on("click", function(){ // 아이디 입력마다 값을 확인
-						let user_Id = $('#id_input').val();
-						let warnMsg = $(".id_form_check"); // 비밀번호 경고글
-						 $('.final_id_ck').css('display', 'none');
-						let data = {user_Id : user_Id}
-						
-						
-						$.ajax({
-							type : "post",
-							url : "/regist/idChk",
-							data : data,
-							success : function(result){
-								if(result != 'fail'){
-									$('.id_input_re_2').css("display","inline-block");
-									$('.id_input_re_1').css("display", "none");
-									warnMsg.css("display", "none");
-									$('#id_input').val(null);
-									idckCheck = false;
-								} else {
-									
-									$('.id_input_re_1').css("display","inline-block");
-									$('.id_input_re_2').css("display", "none");
-									warnMsg.css("display", "none");
-									idckCheck = true;
-								}
-							}
-						})
+    <br/>
+    <section>
+        <div class="login-form">
+            <img src="/images/login/login-logo.png">
+        </div>
 
-					});// function 종료
-					$("#find_pw_chk").click(function(){
-						let user_Email = $("#find_pw_input").val();
-						let checkBox = $("#chk_find_pw");
-						let warnMsg = $(".find_form_check");
-						$('.final_find_ck').css('display', 'none');
-						
-						if(mailFormCheck(user_Email)){
-					        warnMsg.html("이메일이 전송 되었습니다. 이메일을 확인해주세요.");
-					        warnMsg.css("color","green");
-					        warnMsg.css("display", "inline-block");
-					    } else {
-					        warnMsg.html("올바르지 못한 이메일 형식입니다.");
-					        warnMsg.css("color","red");
-					        warnMsg.css("display", "inline-block");
-					        $("#find_pw_input").val(null);
-					        return false;
-					    } 
-						$.ajax({
-							type : "GET",
-							url : "/regist/findEmail?user_Email=" + user_Email,
-							success:function(data){
-								
-								if(data == 'naver'){
-									warnMsg.html("네이버 아이디로 가입된 이메일 입니다. 네이버 간편 로그인 해주세요.");
-								} else if(data == 'kakao'){
-									warnMsg.html("카카오 아이디로 가입된 이메일 입니다. 카카오 간편 로그인 해주세요.");
-								} else if(data == 'fail'){
-									warnMsg.html("가입되지 않은 이메일 입니다.");
-									 warnMsg.css("color","red");
-									 $("#find_pw_input").val(null);
-									
-								} else {
-									checkBox.attr("disabled", false);
-									code = data;
-									$('.find_input_re_3').css("display","none");
-								}
-								
-							}
-							
-						})
-						
-					})
-					
-					$("#chk_find_pw").on("propertychange change keyup paste input",function(){ // 인증번호 입력할때 마다
-					let user_Email = $("#find_pw_input").val();
-					let inputcode = $("#chk_find_pw").val(); // 입력한 인증번호
-		
-					if(inputcode == code){
-					$('.find_input_re_1').css("display","inline-block");
-					$('.find_input_re_2').css("display", "none");
-					$(".find_form_check").css("display","none");
-					if($("#id_input").val() != null){
-						$("#pw_submit").attr("disabled",false);
-						}
-					} else{
-					$('.find_input_re_2').css("display","inline-block");
-					$('.find_input_re_1').css("display", "none");
-					$(".find_form_check").css("display","none");
-					emailnumCheck = false;
-			
-					}
-					})
-					
-					</script>
-					<div class="api-login">
-                	<div id="naver_id_login" style="display: none;"></div>
-					<div class="naver-button" style="display:inline-block">
-							<!-- 네이버 로그인 버튼 노출 영역 -->
-	                	<a href="https://nid.naver.com/oauth2.0/authorize?response_type=token&amp;client_id=JGPtZuIPhsS22_zSl6eT&amp;redirect_uri=http%3A%2F%2F15.164.3.37%3A8787%2F&amp;state=466db6be-7f94-468e-8de9-de1c50a7589d" id="naver_id_login_anchor">
-	                	<img id="naver-btn-img" src="/images/login/btnW1.png" border="0" title="네이버 아이디로 로그인"><b id="naver-login-text">네이버로 로그인</b></a>
-							<!-- //네이버 로그인 버튼 노출 영역 -->
-					</div>
-					<script type="text/javascript">
-						var naver_id_login = new naver_id_login("JGPtZuIPhsS22_zSl6eT", "http://15.164.3.37:8787/");
-						var state = naver_id_login.getUniqState();
-						naver_id_login.setDomain("http://15.164.3.37:8787");
-						naver_id_login.setButton("white", 3,60);
-						naver_id_login.setState(state);
-						naver_id_login.init_naver_id_login();
-					</script>
-					<div class="kakao-button" style="display:inline-block">
-					 <div id="kakao-login-text">
-						<a class="p-2" href="https://kauth.kakao.com/oauth/authorize?client_id=6271ae3b4283fa56e846863ed3a4f7be&redirect_uri=http://15.164.3.37:8787/&response_type=code">
-							<img src="/images/login/kakao_login_large_wide.png" style="width:500px; height:52px; object-fit: cover; border-radius: 12px;"><b id="kakao-login-text-inner">카카오 로그인</b>
-							</a>
-					  </div>
-					</div>
-					</div>
-				</div>
-				<div class="tab_content" id="sign-up-content">
-					<div class="sign-up-button">
-						<button type="button" id="regist_in">통합 회원 가입</button>
-						<div class="forgot-idpw">
-							<p class="forgot">
-								이미회원이신가요?&nbsp;|&nbsp;<a href="/login">로그인</a>
-							</p>
-						</div>
-						
-					</div>
-				</div>
-				<div class="tab_content" id="sign-up-form-content"></div>
-				<div id="regist" style="display: none; height: 100%;">
-					<br>
-					<br>
-					<form id="regist_join" method="post">
-					 
-					<div style="text-align:center;">
-					<br>
-						<a href="#" data-toggle="modal" data-target="#myModal"><b>[필수] 이용약관 보기</b></a>
-						<input type="checkbox" id="terms" style="width: 50px; height: 15px;" onclick="return false">
-						<span class="final_terms_ck">이용약관에 동의해주세요.</span>
-					</div>
-					<div class="regist-form">
-						<div style="margin-bottom:15px;">
-							<br>
-							<b style="text-align: left;">아이디</b> <br> 
-							<input class="inputstyle" type="text" id="id_input2" name="user_Id" placeholder=" 5~20자의 영문,숫자,특수문자(._-)만 사용 가능합니다." style="width: 415px;">
-							<input class="regist-button" type="button" id="id_chk" value="중복 확인" style="width: 80px;">
-							<br>
-							<span class="id_input_re_1">사용 가능한 아이디입니다.</span>
-							<span class="id_input_re_2">아이디가 이미 존재합니다.</span>
-							<span class="id_input_re_3">중복확인을 해주세요</span>
-							<span class="final_id_ck">아이디를 입력해주세요.</span>
-							<span class="id_form_check"></span> 
-						</div>
-						<div style="margin-bottom:15px;">
-							<b style="text-align: left;">비밀번호</b> 
-							<input class="inputstyle" type="password" id="pw_input" placeholder="  8~16자 영문,숫자,특수문자를 최소 한가지씩 사용하세요."> <br>
-							<span class="final_pw_ck">비밀번호를 입력해주세요.</span>
-							<span class="pw_form_check"></span>
-							<br> 
-							<b style="text-align: left;">비밀번호 확인</b>
-							<br> 
-							<input class="inputstyle" type="password" id="pw_chk" name="user_Pw" placeholder="  비밀번호 확인">
-								<br>
-							<span class="pw_input_re_1">비밀번호가 같습니다.</span>
-							<span class="pw_input_re_2">비밀번호가 다릅니다.</span>
-							<span class="final_pwck_ck">비밀번호 확인을 입력해주세요.</span>
-						</div>
-						<div style="margin-bottom:15px;">
-							<b style="text-align: left;">이메일 인증</b> <br> 
-							<input class="inputstyle" type="text" id="email_input" name="user_Email" placeholder="  이메일"
-								style="width: 395px; margin-bottom:5px;"> 
-							<input  class="regist-button" type="button" id="mail_chk" value="이메일 인증" style="width: 100px;">
-							<input type="text" id="chk_nm" placeholder="인증번호를 입력해 주세요" disabled="disabled">
-							<br>
-							<span class="email_input_re_1">인증번호가 일치합니다.</span>
-							<span class="email_input_re_2">인증번호를 다시 확인해주세요.</span>
-							<span class="email_input_re_3">이미 등록된 이메일 입니다.</span>
-							<span class="email_input_re_4">이메일 인증을 해주세요</span>
-							<span class="final_mail_ck">이메일을 입력해주세요.</span>
-							<span class="email_form_check"></span>
-						</div>
-						<div style="margin-bottom:15px;">
-							<b style="text-align: left;">닉네임</b> <br> 
-							<input class="inputstyle" type="text" id="nm_input" name="user_Nm" placeholder="  2~10자의 영어,숫자,한글만 사용 가능합니다." style="width: 415px;">
-							<input class="regist-button" type="button" id="nm_chk" value="중복 확인" style="width: 80px;">
-							<br>
-							<span class="nm_input_re_1">사용 가능한 닉네임입니니다.</span>
-							<span class="nm_input_re_2">닉네임이 이미 존재합니다.</span>
-							<span class="nm_input_re_3">중복확인을 해주세요</span>
-							<span class="final_name_ck">닉네임을 입력해주세요.</span>
-							<span class="nm_form_check"></span>
-						</div>
-						<div style="margin-bottom: 15px;">
-							<b style="text-align: left;">나이</b> <br> 
-							<input class="inputstyle" type="text" id="age_input" name="user_Age" placeholder="  숫자만 입력해 주세요." style="width: 500px;">
-							<br>
-							<span class="age_form_check"></span>
-						</div>
-						<div>
-							<b style="text-align: left;">주소</b> <br> 
-							<input class="inputstyle" type="text" name="ua_Post" id="post" placeholder="  우편번호"
-								style="width: 200px; margin-bottom:5px;" readonly="readonly">
-								<input class="regist-button" type="button" id="address" value="주소찾기" style="width: 100px;">
-							<input class="inputstyle" type="text" name="ua_Addr" id="addr" placeholder="  주소"
-								style="width: 500px; margin-bottom:5px;" readonly="readonly"> 
-								<input type="hidden" name="ua_Lat" id="ua_Lat">
-								<input type="hidden" name="ua_Lng" id="ua_Lng">
-								<input class="inputstyle" type="text" name="ua_DAddr" id="daddr" placeholder="  상세주소"
-								style="width: 500px; margin-bottom: 5px;" readonly="readonly">
-								<br>
-								<span class="final_addr_ck">주소를 입력해주세요.</span>
-						</div>
-						<div class="reg-gender">
-							<br> <b style="text-align: left;">성별</b> <br> 
-							
-							<input type="radio" id="man" name="user_Gender" value="M"
-								style="width: 50px; height: 20px;" checked="checked">
-								<label for="man" >남자</label>
-								 
-								<input type="radio" id="women" name="user_Gender" value="F" 
-								style="width: 50px; height: 20px;">
-								<label for="women">여자</label>
-							
-							<br>
-						</div>
-					</div>
-					<div class="text-center">
-						<div class="modal fade" id="myModal" data-backdrop="static"
-							data-keyboard="false">
-							<div class="modal-dialog modal-xl modal-dialog-centered">
-								<div class="modal-content">
+        <br/>
+        <br/>
+        <div class="tabs">
+            <input id="login" type="radio" name="tab_item" checked>
+            <label class="tab_item" for="login">로그인</label>
+            <input id="sign-up" type="radio" name="tab_item">
+            <label class="tab_item" for="sign-up">회원가입</label>
+            <div class="tab_content" id="login-content">
+                <form action="/login/Normal" method="post">
+                    <div class="field-wrap1">
+                        <input class="inputstyle" type="text" name="user_Id" placeholder="아이디">
+                    </div>
+                    <div class="field-wrap2">
+                        <input class="inputstyle" type="password" name="user_Pw" placeholder="비밀번호">
+                    </div>
+                    <div class="field-wrap-submit">
+                        <button class="login-button" type="submit">로그인</button>
+                        <c:if test="${result == 0 }">
+                            <div class="login_warn">사용자 ID 또는 비밀번호를 잘못 입력하셨습니다.</div>
+                        </c:if>
+                    </div>
+                </form>
+                <div class="forgot-idpw">
+                    <p class="forgot">
+                        <!-- Button trigger modal -->
+                        <a class="find" data-toggle="modal" data-target="#staticBackdrop" style="margin-right:20px;">
+                            아이디 찾기
+                        </a><b>|</b><a class="find" data-toggle="modal" data-target="#staticBackdrop2"
+                                       style="margin-left:20px;">패스워드 찾기</a>
+                        <!-- Modal -->
+                    <div class="modal fade" id="staticBackdrop" data-backdrop="static" data-keyboard="false"
+                         tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="staticBackdropLabel">아이디 찾기</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"
+                                            onclick="allclose()">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <b style="text-align: left;">이메일 인증</b> <br>
+                                    <form action="/regist/findId" method="get" id="getid">
+                                        <input type="text" id="find_id" name="user_Email" placeholder="  이메일"
+                                               style="width: 300px; margin-bottom:5px;">
+                                        <input class="regist-button" type="button" id="find_id_chk" value="이메일 인증"
+                                               style="width: 90px;">
+                                        <input type="text" id="chk_find" placeholder="인증번호를 입력해 주세요" disabled="disabled"
+                                               style="width: 300px;">
+                                        <input type="submit" value="아이디 메일 받기" style="width: 150px;" disabled="disabled"
+                                               id="id_submit">
+                                        <br>
+                                        <span class="find_input_re_1">인증번호가 일치합니다.</span>
+                                        <span class="find_input_re_2">인증번호를 다시 확인해주세요.</span>
+                                        <span class="find_input_re_3">등록이 되지않은 이메일 입니다.</span>
+                                        <span class="final_find_ck">이메일을 입력해주세요.</span>
+                                        <span class="find_form_check"></span>
+                                        <br>
+                                    </form>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal"
+                                            onclick="allclose()">닫기
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal fade" id="staticBackdrop2" data-backdrop="static" data-keyboard="false"
+                         tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="staticBackdropLabel">패스워드 찾기</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"
+                                            onclick="allclose()">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <b style="text-align: left;">아이디</b> <br>
+                                    <input type="text" id="id_input" name="user_Id" placeholder="  아이디"
+                                           style="width: 300px;">
+                                    <input class="regist-button" type="button" id="find_pw" value="아이디 확인"
+                                           style="width: 80px;">
+                                    <br>
+                                    <span class="id_input_re_1">가입된 아이디 입니다.</span>
+                                    <span class="id_input_re_2">가입되지 않은 아이디 입니다.</span>
+                                    <span class="id_form_check"></span>
+                                    <br>
+                                    <b style="text-align: left;">이메일 인증</b> <br>
+                                    <form action="/regist/findPw" method="get" id="getpw">
+                                        <input type="text" id="find_pw_input" name="user_Email" placeholder="  이메일"
+                                               style="width: 300px; margin-bottom:5px;">
+                                        <input class="regist-button" type="button" id="find_pw_chk" value="이메일 인증"
+                                               style="width: 90px;">
 
-									<!-- Modal Header -->
-									<div class="modal-header">
-										<h4 class="modal-title">이용약관</h4>
-										<button type="button" class="close" data-dismiss="modal">&times;</button>
-									</div>
+                                        <input type="text" id="chk_find_pw" placeholder="인증번호를 입력해 주세요"
+                                               disabled="disabled" style="width: 300px;">
+                                        <input type="submit" value="비밀번호 메일 받기" style="width: 150px;"
+                                               disabled="disabled" id="pw_submit">
+                                        <br>
+                                        <span class="find_input_re_1">인증번호가 일치합니다.</span>
+                                        <span class="find_input_re_2">인증번호를 다시 확인해주세요.</span>
+                                        <span class="find_input_re_3">등록이 되지않은 이메일 입니다.</span>
+                                        <span class="final_find_ck">이메일을 입력해주세요.</span>
+                                        <span class="find_form_check"></span>
+                                        <br>
+                                    </form>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal"
+                                            onclick="allclose()">닫기
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <script type="text/javascript">
+                    var code = "";
+                    $("#find_id_chk").click(function () {
+                        let user_Email = $("#find_id").val();
+                        let checkBox = $("#chk_find");
+                        let warnMsg = $(".find_form_check");
+                        $('.final_find_ck').css('display', 'none');
 
-									<!-- Modal body -->
-									<div class="modal-body">
+                        if (mailFormCheck(user_Email)) {
+                            warnMsg.html("이메일이 전송 되었습니다. 이메일을 확인해주세요.");
+                            warnMsg.css("color", "green");
+                            warnMsg.css("display", "inline-block");
+                        } else {
+                            warnMsg.html("올바르지 못한 이메일 형식입니다.");
+                            warnMsg.css("color", "red");
+                            warnMsg.css("display", "inline-block");
+                            $("#find_id").val(null);
+                            return false;
+                        }
+                        $.ajax({
+                            type: "GET",
+                            url: "/regist/findEmail?user_Email=" + user_Email,
+                            success: function (data) {
+
+                                if (data == 'naver') {
+                                    warnMsg.html("네이버 아이디로 가입된 이메일 입니다. 네이버 간편 로그인 해주세요.");
+                                } else if (data == 'kakao') {
+                                    warnMsg.html("카카오 아이디로 가입된 이메일 입니다. 카카오 간편 로그인 해주세요.");
+                                } else if (data == 'fail') {
+                                    warnMsg.html("가입되지 않은 이메일 입니다.");
+                                    warnMsg.css("color", "red");
+                                    $("#find_id").val(null);
+
+                                } else {
+                                    checkBox.attr("disabled", false);
+                                    code = data;
+                                    $('.find_input_re_3').css("display", "none");
+                                }
+
+                            }
+
+                        })
+
+                    })
+
+                    $("#chk_find").on("propertychange change keyup paste input", function () { // 인증번호 입력할때 마다
+                        let inputcode = $("#chk_find").val(); // 입력한 인증번호
+
+                        if (inputcode == code) {
+                            $('.find_input_re_1').css("display", "inline-block");
+                            $('.find_input_re_2').css("display", "none");
+                            $(".find_form_check").css("display", "none");
+                            $("#id_submit").attr("disabled", false);
+                            emailnumCheck = true;
+                        } else {
+                            $('.find_input_re_2').css("display", "inline-block");
+                            $('.find_input_re_1').css("display", "none");
+                            $(".find_form_check").css("display", "none");
+                            emailnumCheck = false;
+
+                        }
+                    })
+
+                    function mailFormCheck(email) {
+                        var form = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i;
+                        return form.test(email);
+                    }
+
+                    function allclose() {
+                        $("#find_id").val(null);
+                        $("#chk_find").val(null);
+                        $(".find_inpur_re_1").css("display", "none");
+                        $(".find_inpur_re_2").css("display", "none");
+                        $(".find_inpur_re_3").css("display", "none");
+                        $(".final_find_ck").css("display", "none");
+                        $(".find_form_check").css("display", "none");
+                        $("#id_input").val(null);
+                        $(".id_input_re_1").css("display", "none");
+                        $(".id_input_re_2").css("display", "none");
+                        $("#find_pw_input").val(null);
+
+                    }
+
+                    $('#find_pw').on("click", function () { // 아이디 입력마다 값을 확인
+                        let user_Id = $('#id_input').val();
+                        let warnMsg = $(".id_form_check"); // 비밀번호 경고글
+                        $('.final_id_ck').css('display', 'none');
+                        let data = {user_Id: user_Id}
+
+
+                        $.ajax({
+                            type: "post",
+                            url: "/regist/idChk",
+                            data: data,
+                            success: function (result) {
+                                if (result != 'fail') {
+                                    $('.id_input_re_2').css("display", "inline-block");
+                                    $('.id_input_re_1').css("display", "none");
+                                    warnMsg.css("display", "none");
+                                    $('#id_input').val(null);
+                                    idckCheck = false;
+                                } else {
+
+                                    $('.id_input_re_1').css("display", "inline-block");
+                                    $('.id_input_re_2').css("display", "none");
+                                    warnMsg.css("display", "none");
+                                    idckCheck = true;
+                                }
+                            }
+                        })
+
+                    });// function 종료
+                    $("#find_pw_chk").click(function () {
+                        let user_Email = $("#find_pw_input").val();
+                        let checkBox = $("#chk_find_pw");
+                        let warnMsg = $(".find_form_check");
+                        $('.final_find_ck').css('display', 'none');
+
+                        if (mailFormCheck(user_Email)) {
+                            warnMsg.html("이메일이 전송 되었습니다. 이메일을 확인해주세요.");
+                            warnMsg.css("color", "green");
+                            warnMsg.css("display", "inline-block");
+                        } else {
+                            warnMsg.html("올바르지 못한 이메일 형식입니다.");
+                            warnMsg.css("color", "red");
+                            warnMsg.css("display", "inline-block");
+                            $("#find_pw_input").val(null);
+                            return false;
+                        }
+                        $.ajax({
+                            type: "GET",
+                            url: "/regist/findEmail?user_Email=" + user_Email,
+                            success: function (data) {
+
+                                if (data == 'naver') {
+                                    warnMsg.html("네이버 아이디로 가입된 이메일 입니다. 네이버 간편 로그인 해주세요.");
+                                } else if (data == 'kakao') {
+                                    warnMsg.html("카카오 아이디로 가입된 이메일 입니다. 카카오 간편 로그인 해주세요.");
+                                } else if (data == 'fail') {
+                                    warnMsg.html("가입되지 않은 이메일 입니다.");
+                                    warnMsg.css("color", "red");
+                                    $("#find_pw_input").val(null);
+
+                                } else {
+                                    checkBox.attr("disabled", false);
+                                    code = data;
+                                    $('.find_input_re_3').css("display", "none");
+                                }
+
+                            }
+
+                        })
+
+                    })
+
+                    $("#chk_find_pw").on("propertychange change keyup paste input", function () { // 인증번호 입력할때 마다
+                        let user_Email = $("#find_pw_input").val();
+                        let inputcode = $("#chk_find_pw").val(); // 입력한 인증번호
+
+                        if (inputcode == code) {
+                            $('.find_input_re_1').css("display", "inline-block");
+                            $('.find_input_re_2').css("display", "none");
+                            $(".find_form_check").css("display", "none");
+                            if ($("#id_input").val() != null) {
+                                $("#pw_submit").attr("disabled", false);
+                            }
+                        } else {
+                            $('.find_input_re_2').css("display", "inline-block");
+                            $('.find_input_re_1').css("display", "none");
+                            $(".find_form_check").css("display", "none");
+                            emailnumCheck = false;
+
+                        }
+                    })
+
+                </script>
+                <div class="api-login">
+                    <div id="naver_id_login" style="display: none;"></div>
+                    <div class="naver-button" style="display:inline-block">
+                        <!-- 네이버 로그인 버튼 노출 영역 -->
+                        <a href="https://nid.naver.com/oauth2.0/authorize?response_type=token&amp;client_id=JGPtZuIPhsS22_zSl6eT&amp;redirect_uri=http%3A%2F%2F15.164.3.37%3A8787%2F&amp;state=466db6be-7f94-468e-8de9-de1c50a7589d"
+                           id="naver_id_login_anchor">
+                            <img id="naver-btn-img" src="/images/login/btnW1.png" border="0" title="네이버 아이디로 로그인"><b
+                                id="naver-login-text">네이버로 로그인</b></a>
+                        <!-- //네이버 로그인 버튼 노출 영역 -->
+                    </div>
+                    <script type="text/javascript">
+                        var naver_id_login = new naver_id_login("JGPtZuIPhsS22_zSl6eT", "http://15.164.3.37:8787/");
+                        var state = naver_id_login.getUniqState();
+                        naver_id_login.setDomain("http://15.164.3.37:8787");
+                        naver_id_login.setButton("white", 3, 60);
+                        naver_id_login.setState(state);
+                        naver_id_login.init_naver_id_login();
+                    </script>
+                    <div class="kakao-button" style="display:inline-block">
+                        <div id="kakao-login-text">
+                            <a class="p-2"
+                               href="https://kauth.kakao.com/oauth/authorize?client_id=6271ae3b4283fa56e846863ed3a4f7be&redirect_uri=http://localhost:8787/home&response_type=code">
+                                <img src="/images/login/kakao_login_large_wide.png"
+                                     style="width:500px; height:52px; object-fit: cover; border-radius: 12px;"><b
+                                    id="kakao-login-text-inner">카카오 로그인</b>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="tab_content" id="sign-up-content">
+                <div class="sign-up-button">
+                    <button type="button" id="regist_in">통합 회원 가입</button>
+                    <div class="forgot-idpw">
+                        <p class="forgot">
+                            이미회원이신가요?&nbsp;|&nbsp;<a href="/login">로그인</a>
+                        </p>
+                    </div>
+
+                </div>
+            </div>
+            <div class="tab_content" id="sign-up-form-content"></div>
+            <div id="regist" style="display: none; height: 100%;">
+                <br>
+                <br>
+                <form id="regist_join" method="post">
+
+                    <div style="text-align:center;">
+                        <br>
+                        <a href="#" data-toggle="modal" data-target="#myModal"><b>[필수] 이용약관 보기</b></a>
+                        <input type="checkbox" id="terms" style="width: 50px; height: 15px;" onclick="return false">
+                        <span class="final_terms_ck">이용약관에 동의해주세요.</span>
+                    </div>
+                    <div class="regist-form">
+                        <div style="margin-bottom:15px;">
+                            <br>
+                            <b style="text-align: left;">아이디</b> <br>
+                            <input class="inputstyle" type="text" id="id_input2" name="user_Id"
+                                   placeholder=" 5~20자의 영문,숫자,특수문자(._-)만 사용 가능합니다." style="width: 415px;">
+                            <input class="regist-button" type="button" id="id_chk" value="중복 확인" style="width: 80px;">
+                            <br>
+                            <span class="id_input_re_1">사용 가능한 아이디입니다.</span>
+                            <span class="id_input_re_2">아이디가 이미 존재합니다.</span>
+                            <span class="id_input_re_3">중복확인을 해주세요</span>
+                            <span class="final_id_ck">아이디를 입력해주세요.</span>
+                            <span class="id_form_check"></span>
+                        </div>
+                        <div style="margin-bottom:15px;">
+                            <b style="text-align: left;">비밀번호</b>
+                            <input class="inputstyle" type="password" id="pw_input"
+                                   placeholder="  8~16자 영문,숫자,특수문자를 최소 한가지씩 사용하세요."> <br>
+                            <span class="final_pw_ck">비밀번호를 입력해주세요.</span>
+                            <span class="pw_form_check"></span>
+                            <br>
+                            <b style="text-align: left;">비밀번호 확인</b>
+                            <br>
+                            <input class="inputstyle" type="password" id="pw_chk" name="user_Pw"
+                                   placeholder="  비밀번호 확인">
+                            <br>
+                            <span class="pw_input_re_1">비밀번호가 같습니다.</span>
+                            <span class="pw_input_re_2">비밀번호가 다릅니다.</span>
+                            <span class="final_pwck_ck">비밀번호 확인을 입력해주세요.</span>
+                        </div>
+                        <div style="margin-bottom:15px;">
+                            <b style="text-align: left;">이메일 인증</b> <br>
+                            <input class="inputstyle" type="text" id="email_input" name="user_Email" placeholder="  이메일"
+                                   style="width: 395px; margin-bottom:5px;">
+                            <input class="regist-button" type="button" id="mail_chk" value="이메일 인증"
+                                   style="width: 100px;">
+                            <input type="text" id="chk_nm" placeholder="인증번호를 입력해 주세요" disabled="disabled">
+                            <br>
+                            <span class="email_input_re_1">인증번호가 일치합니다.</span>
+                            <span class="email_input_re_2">인증번호를 다시 확인해주세요.</span>
+                            <span class="email_input_re_3">이미 등록된 이메일 입니다.</span>
+                            <span class="email_input_re_4">이메일 인증을 해주세요</span>
+                            <span class="final_mail_ck">이메일을 입력해주세요.</span>
+                            <span class="email_form_check"></span>
+                        </div>
+                        <div style="margin-bottom:15px;">
+                            <b style="text-align: left;">닉네임</b> <br>
+                            <input class="inputstyle" type="text" id="nm_input" name="user_Nm"
+                                   placeholder="  2~10자의 영어,숫자,한글만 사용 가능합니다." style="width: 415px;">
+                            <input class="regist-button" type="button" id="nm_chk" value="중복 확인" style="width: 80px;">
+                            <br>
+                            <span class="nm_input_re_1">사용 가능한 닉네임입니니다.</span>
+                            <span class="nm_input_re_2">닉네임이 이미 존재합니다.</span>
+                            <span class="nm_input_re_3">중복확인을 해주세요</span>
+                            <span class="final_name_ck">닉네임을 입력해주세요.</span>
+                            <span class="nm_form_check"></span>
+                        </div>
+                        <div style="margin-bottom: 15px;">
+                            <b style="text-align: left;">나이</b> <br>
+                            <input class="inputstyle" type="text" id="age_input" name="user_Age"
+                                   placeholder="  숫자만 입력해 주세요." style="width: 500px;">
+                            <br>
+                            <span class="age_form_check"></span>
+                        </div>
+                        <div>
+                            <b style="text-align: left;">주소</b> <br>
+                            <input class="inputstyle" type="text" name="ua_Post" id="post" placeholder="  우편번호"
+                                   style="width: 200px; margin-bottom:5px;" readonly="readonly">
+                            <input class="regist-button" type="button" id="address" value="주소찾기" style="width: 100px;">
+                            <input class="inputstyle" type="text" name="ua_Addr" id="addr" placeholder="  주소"
+                                   style="width: 500px; margin-bottom:5px;" readonly="readonly">
+                            <input type="hidden" name="ua_Lat" id="ua_Lat">
+                            <input type="hidden" name="ua_Lng" id="ua_Lng">
+                            <input class="inputstyle" type="text" name="ua_DAddr" id="daddr" placeholder="  상세주소"
+                                   style="width: 500px; margin-bottom: 5px;" readonly="readonly">
+                            <br>
+                            <span class="final_addr_ck">주소를 입력해주세요.</span>
+                        </div>
+                        <div class="reg-gender">
+                            <br> <b style="text-align: left;">성별</b> <br>
+
+                            <input type="radio" id="man" name="user_Gender" value="M"
+                                   style="width: 50px; height: 20px;" checked="checked">
+                            <label for="man">남자</label>
+
+                            <input type="radio" id="women" name="user_Gender" value="F"
+                                   style="width: 50px; height: 20px;">
+                            <label for="women">여자</label>
+
+                            <br>
+                        </div>
+                    </div>
+                    <div class="text-center">
+                        <div class="modal fade" id="myModal" data-backdrop="static"
+                             data-keyboard="false">
+                            <div class="modal-dialog modal-xl modal-dialog-centered">
+                                <div class="modal-content">
+
+                                    <!-- Modal Header -->
+                                    <div class="modal-header">
+                                        <h4 class="modal-title">이용약관</h4>
+                                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                    </div>
+
+                                    <!-- Modal body -->
+                                    <div class="modal-body">
 										<textarea rows="" cols="" style="width: 400px; height: 400px;">제1조(목적) 이 약관은 OO 회사(전자상거래 사업자)가 운영하는 OO 사이버 몰(이하 “몰”이라 한다)에서 제공하는 인터넷 관련 서비스(이하 “서비스”라 한다)를 이용함에 있어 사이버 몰과 이용자의 권리·의무 및 책임사항을 규정함을 목적으로 합니다.
 
   ※「PC통신, 무선 등을 이용하는 전자상거래에 대해서도 그 성질에 반하지 않는 한 이 약관을 준용합니다.」
@@ -1251,367 +1300,370 @@ span {
 
   ② “몰”과 이용자 간에 제기된 전자상거래 소송에는 한국법을 적용합니다.
 										</textarea>
-									</div>
+                                    </div>
 
-									<!-- Modal footer -->
-									<div class="modal-footer">
-									<button type="button" class="btn btn-secondary" data-dismiss="modal" id="modal">약관 동의</button>
-										<button type="button" class="btn btn-secondary"
-											data-dismiss="modal">취소</button>
-									</div>
+                                    <!-- Modal footer -->
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal" id="modal">
+                                            약관 동의
+                                        </button>
+                                        <button type="button" class="btn btn-secondary"
+                                                data-dismiss="modal">취소
+                                        </button>
+                                    </div>
 
-								</div>
-							</div>
-						</div>
-						<br><br><br><br>
-						 <input class="regist-button" type="button" value="회원가입" id="regist_com" 
-							style="width: 120px;"> 
-							
-					</div>
-					</form>
-				</div>
-			</div>
-		</section>
+                                </div>
+                            </div>
+                        </div>
+                        <br><br><br><br>
+                        <input class="regist-button" type="button" value="회원가입" id="regist_com"
+                               style="width: 120px;">
 
-	</div>
-	<!-- <div id="end"><br><br><br><br><br><br><br><br><br><br><br><br><br><br></div> -->
-	<%@ include file="footer.jsp"%>
-	<script type="text/javascript">
-	
-	$(function(){
-		 var code = "";
-		 var idCheck = false;            // 아이디
-		 var idckCheck = false;            // 아이디 중복 검사
-		 var pwCheck = false;            // 비번
-		 var pwckCheck = false;            // 비번 확인
-		 var pwckcorCheck = false;        // 비번 확인 일치 확인
-		 var nmCheck = false;            // 이름
-		 var emailCheck = false;            // 이메일
-		 var emailnumCheck = false;        // 이메일 인증번호 확인
-		 var addrCheck = false;         // 주소
-		 var termsCheck = false; 		// 이용약관
-	
-	//아이디 중복검사
-	$('#id_chk').on("click", function(){ // 아이디 입력마다 값을 확인
-		$('.id_input_re_3').css('display','none');
-		let user_Id = $('#id_input2').val();
-		console.log(user_Id);
-		let warnMsg = $(".id_form_check"); 
-		 $('.final_id_ck').css('display', 'none');
-		let data = {user_Id : user_Id}
-		
-		if(idFormCheck(user_Id)){
-	        
-	    } else {
-	        warnMsg.html("5 ~ 20자의 영문과 숫자와 일부 특수문자(._-)만 사용 가능합니다.");
-	        warnMsg.css("color","red");
-	        warnMsg.css("display", "inline-block");
-	        $('.id_input_re_1').css("display", "none");
-	        $('.id_input_re_2').css("display", "none");
-	        $("#id_input2").val(null);
-	        return false;
-	    } 
-		
-		$.ajax({
-			type : "post",
-			url : "/regist/idChk",
-			data : data,
-			success : function(result){
-				if(result != 'fail'){
-					$('.id_input_re_1').css("display","inline-block");
-					$('.id_input_re_2').css("display", "none");
-					warnMsg.css("display", "none");
-					idckCheck = true;
-				} else {
-					$('.id_input_re_2').css("display","inline-block");
-					$('.id_input_re_1').css("display", "none");
-					warnMsg.css("display", "none");
-					$('#id_input2').val(null);
-					idckCheck = false;
-				}
-			}
-		})
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
 
-	});// function 종료
-	
-	$('#pw_input').blur(function(){ // 비밀번호 유형 검사
-		let warnMsg = $(".pw_form_check"); // 비밀번호 경고글
-		let user_Pw = $("#pw_input").val();
-		 $('.final_pw_ck').css('display', 'none');
-		
-		if(pwFormCheck(user_Pw)){
-	        warnMsg.html("올바른 비밀번호 형식입니다.");
-	        warnMsg.css("color","green");
-	        warnMsg.css("display", "inline-block");
-	    } else {
-	        warnMsg.html("8 ~ 16자 영문, 숫자, 특수문자를 최소 한가지씩 사용하세요");
-	        warnMsg.css("color","red");
-	        warnMsg.css("display", "inline-block");
-	        $("#pw_input").val(null);
-	        return false;
-	    } 
-	})
-	
-	// 비밀번호 확인
-	$('#pw_chk').on("propertychange change keyup paste input", function(){ // 비밀번호 입력마다 값을 확인
-		let pw_input = $('#pw_input').val();
-		let pw_chk = $('#pw_chk').val();
-		$('.final_pwck_ck').css('display', 'none');
-		
-		
-		if(pw_input == pw_chk){
-			$('.pw_input_re_1').css("display","inline-block");
-			$('.pw_input_re_2').css("display", "none");
-			pwckcorCheck = true;
-		} else {
-			$('.pw_input_re_2').css("display","inline-block");
-			$('.pw_input_re_1').css("display", "none");
-			pwckcorCheck = false;
-			
-		}
-		
+</div>
+<!-- <div id="end"><br><br><br><br><br><br><br><br><br><br><br><br><br><br></div> -->
+<%@ include file="footer.jsp" %>
+<script type="text/javascript">
 
-	});// function 종료
-	
-	// 인증번호 이메일 전송
-	$("#mail_chk").click(function(){
-		$('.email_input_re_4').css('display','none');
-		let user_Email = $("#email_input").val(); // 입력한 이메일
-		let checkBox = $("#chk_nm"); // 인증번호 입력란
-		let warnMsg = $(".email_form_check"); // 이메일 경고글
-		 $('.final_mail_ck').css('display', 'none');
-		
-		if(mailFormCheck(user_Email)){
-	        warnMsg.html("이메일이 전송 되었습니다. 이메일을 확인해주세요.");
-	        warnMsg.css("color","green");
-	        warnMsg.css("display", "inline-block");
-	    } else {
-	        warnMsg.html("올바르지 못한 이메일 형식입니다.");
-	        warnMsg.css("color","red");
-	        warnMsg.css("display", "inline-block");
-	        $("#email_input").val(null);
-	        return false;
-	    } 
-		
-		$.ajax({
-			type : "GET",
-			url : "/regist/mailChk?user_Email=" + user_Email,
-			success:function(data){
-				
-				if(data != 'fail'){
-					checkBox.attr("disabled", false);
-					code = data;
-					$('.email_input_re_3').css("display","none");
-				} else {
-					$('.email_input_re_3').css("display","inline-block");
-					warnMsg.css("display", "none");
-				}
-				
-			}
-			
-		})
-	})
-	
-	// 인증번호 비교
-	$("#chk_nm").on("propertychange change keyup paste input",function(){ // 인증번호 입력후 다른곳 클릭하면
-		let inputcode = $("#chk_nm").val(); // 입력한 인증번호
-		
-		if(inputcode == code){
-			$('.email_input_re_1').css("display","inline-block");
-			$('.email_input_re_2').css("display", "none");
-			$(".email_form_check").css("display","none");
-			$("#email_input").attr("readonly",true);
-			$("#mail_chk").attr("disabled",true);
-			emailnumCheck = true;
-		} else{
-			$('.email_input_re_2').css("display","inline-block");
-			$('.email_input_re_1').css("display", "none");
-			$(".email_form_check").css("display","none");
-			emailnumCheck = false;
-			
-		}
-	})
-	//닉네임 중복검사
-	$('#nm_chk').on("click", function(){ // 버튼클릭 시
-		$('.nm_input_re_3').css('display','none');
-		let user_Nm = $('#nm_input').val();
-		let data = {user_Nm : user_Nm}
-		let warnMsg = $(".nm_form_check"); // 닉네임 경고글
-		$(".final_name_ck").css("display","none");
-		
-		if(nmFormCheck(user_Nm)){
-	        
-	    	} else {
-	        	warnMsg.html("2 ~ 10자의 영어, 숫자, 한글만 사용 가능합니다.");
-	        	warnMsg.css("color","red");
-	        	warnMsg.css("display", "inline-block");
-	        	$('.nm_input_re_1').css("display", "none");
-	        	$('.nm_input_re_2').css("display", "none");
-	        	$("#nm_input").val(null);
-	        	return false;
-	    	} 
-		
-		$.ajax({
-			type : "post",
-			url : "/regist/nmChk",
-			data : data,
-			success : function(result){
-				if(result != 'fail'){
-					$('.nm_input_re_1').css("display","inline-block");
-					$('.nm_input_re_2').css("display", "none");
-					warnMsg.css("display", "none");
-					nmCheck = true;
-				} else {
-					$('.nm_input_re_2').css("display","inline-block");
-					$('.nm_input_re_1').css("display", "none");
-					warnMsg.css("display", "none");
-					$('#nm_input').val(null);
-					nmCheck = false;
-				}
-			}
-		})
+    $(function () {
+        var code = "";
+        var idCheck = false;            // 아이디
+        var idckCheck = false;            // 아이디 중복 검사
+        var pwCheck = false;            // 비번
+        var pwckCheck = false;            // 비번 확인
+        var pwckcorCheck = false;        // 비번 확인 일치 확인
+        var nmCheck = false;            // 이름
+        var emailCheck = false;            // 이메일
+        var emailnumCheck = false;        // 이메일 인증번호 확인
+        var addrCheck = false;         // 주소
+        var termsCheck = false; 		// 이용약관
 
-	});// function 종료
-	
-	$('#age_input').blur(function(){ // 비밀번호 유형 검사
-		let warnMsg = $(".age_form_check"); // 비밀번호 경고글
-		let user_Age = $("#age_input").val();
-		
-		if(ageFormCheck(user_Age)){
-	        warnMsg.css("display", "none");
-	    } else {
-	        warnMsg.html("숫자만 입력해 주세요");
-	        warnMsg.css("color","red");
-	        warnMsg.css("display", "inline-block");
-	        $("#age_input").val(null);
-	        return false;
-	    } 
-	})
-	
-	$('#regist_com').on("click" , function(){ // 회원가입 버튼
-		var id = $('#id_input2').val();                 // id 입력란
-        var pw = $('#pw_input').val();                // 비밀번호 입력란
-        var pwck = $('#pw_chk').val();            // 비밀번호 확인 입력란
-        var name = $('#nm_input').val();            // 이름 입력란
-        var mail = $('#email_input').val();            // 이메일 입력란
-        var addr = $('#addr').val();        // 상세 주소 입력란
-        var age = $('#age_input').val();
-        
-        
-        if(id == ""){
-            $('.final_id_ck').css('display','block');
-            idCheck = false;
-        }else{
+        //아이디 중복검사
+        $('#id_chk').on("click", function () { // 아이디 입력마다 값을 확인
+            $('.id_input_re_3').css('display', 'none');
+            let user_Id = $('#id_input2').val();
+            console.log(user_Id);
+            let warnMsg = $(".id_form_check");
             $('.final_id_ck').css('display', 'none');
-            idCheck = true;
-        }
-        
-        if(idckCheck == false){
-        	$('.id_input_re_3').css('display','block');
-        }else{
-        	$('.id_input_re_3').css('display','none');
-        }
-        
-        if(pw == ""){
-            $('.final_pw_ck').css('display','block');
-            pwCheck = false;
-        }else{
+            let data = {user_Id: user_Id}
+
+            if (idFormCheck(user_Id)) {
+
+            } else {
+                warnMsg.html("5 ~ 20자의 영문과 숫자와 일부 특수문자(._-)만 사용 가능합니다.");
+                warnMsg.css("color", "red");
+                warnMsg.css("display", "inline-block");
+                $('.id_input_re_1').css("display", "none");
+                $('.id_input_re_2').css("display", "none");
+                $("#id_input2").val(null);
+                return false;
+            }
+
+            $.ajax({
+                type: "post",
+                url: "/regist/idChk",
+                data: data,
+                success: function (result) {
+                    if (result != 'fail') {
+                        $('.id_input_re_1').css("display", "inline-block");
+                        $('.id_input_re_2').css("display", "none");
+                        warnMsg.css("display", "none");
+                        idckCheck = true;
+                    } else {
+                        $('.id_input_re_2').css("display", "inline-block");
+                        $('.id_input_re_1').css("display", "none");
+                        warnMsg.css("display", "none");
+                        $('#id_input2').val(null);
+                        idckCheck = false;
+                    }
+                }
+            })
+
+        });// function 종료
+
+        $('#pw_input').blur(function () { // 비밀번호 유형 검사
+            let warnMsg = $(".pw_form_check"); // 비밀번호 경고글
+            let user_Pw = $("#pw_input").val();
             $('.final_pw_ck').css('display', 'none');
-            pwCheck = true;
-        }
-        
-        if(pwck == ""){
-            $('.final_pwck_ck').css('display','block');
-            pwckCheck = false;
-        }else{
+
+            if (pwFormCheck(user_Pw)) {
+                warnMsg.html("올바른 비밀번호 형식입니다.");
+                warnMsg.css("color", "green");
+                warnMsg.css("display", "inline-block");
+            } else {
+                warnMsg.html("8 ~ 16자 영문, 숫자, 특수문자를 최소 한가지씩 사용하세요");
+                warnMsg.css("color", "red");
+                warnMsg.css("display", "inline-block");
+                $("#pw_input").val(null);
+                return false;
+            }
+        })
+
+        // 비밀번호 확인
+        $('#pw_chk').on("propertychange change keyup paste input", function () { // 비밀번호 입력마다 값을 확인
+            let pw_input = $('#pw_input').val();
+            let pw_chk = $('#pw_chk').val();
             $('.final_pwck_ck').css('display', 'none');
-            pwckCheck = true;
-        }
-        
-        if(name == ""){
-            $('.final_name_ck').css('display','block');
-            nmCheck = false;
-        }else{
-            $('.final_name_ck').css('display', 'none');
-            nmCheck = true;
-        }
-        
-        if(nmCheck == false){
-        	$('.nm_input_re_3').css('display','block');
-        }else{
-        	$('.nm_input_re_3').css('display','none');
-        }
-        
-        if(mail == ""){
-            $('.final_mail_ck').css('display','block');
-            emailCheck = false;
-        }else{
+
+
+            if (pw_input == pw_chk) {
+                $('.pw_input_re_1').css("display", "inline-block");
+                $('.pw_input_re_2').css("display", "none");
+                pwckcorCheck = true;
+            } else {
+                $('.pw_input_re_2').css("display", "inline-block");
+                $('.pw_input_re_1').css("display", "none");
+                pwckcorCheck = false;
+
+            }
+
+
+        });// function 종료
+
+        // 인증번호 이메일 전송
+        $("#mail_chk").click(function () {
+            $('.email_input_re_4').css('display', 'none');
+            let user_Email = $("#email_input").val(); // 입력한 이메일
+            let checkBox = $("#chk_nm"); // 인증번호 입력란
+            let warnMsg = $(".email_form_check"); // 이메일 경고글
             $('.final_mail_ck').css('display', 'none');
-            emailCheck = true;
-        }
-        
-        if(emailCheck == false){
-        	$('.email_input_re_4').css('display','block');
-        }else{
-        	$('.email_input_re_4').css('display','none');
-        }
-        
-        if(addr == ""){
-            $('.final_addr_ck').css('display','block');
-            addressCheck = false;
-        }else{
-            $('.final_addr_ck').css('display', 'none');
-            addressCheck = true;
-        }
-        
-        if($("#terms").prop("checked") != true){
-        	$('.final_terms_ck').css('display','block');
-        	termsCheck = false;
-        } else {
-        	$('.final_terms_ck').css('display', 'none');
-        	termsCheck = true;
-        }
-        
-        if(idCheck&&idckCheck&&pwCheck&&pwckCheck&&pwckcorCheck&&nmCheck&&emailCheck&&emailnumCheck&&addressCheck&&termsCheck ){
-        	 $("#regist_join").attr("action","/regist/join");
-        	 $("#regist_join").submit();
-        	 
+
+            if (mailFormCheck(user_Email)) {
+                warnMsg.html("이메일이 전송 되었습니다. 이메일을 확인해주세요.");
+                warnMsg.css("color", "green");
+                warnMsg.css("display", "inline-block");
+            } else {
+                warnMsg.html("올바르지 못한 이메일 형식입니다.");
+                warnMsg.css("color", "red");
+                warnMsg.css("display", "inline-block");
+                $("#email_input").val(null);
+                return false;
+            }
+
+            $.ajax({
+                type: "GET",
+                url: "/regist/mailChk?user_Email=" + user_Email,
+                success: function (data) {
+
+                    if (data != 'fail') {
+                        checkBox.attr("disabled", false);
+                        code = data;
+                        $('.email_input_re_3').css("display", "none");
+                    } else {
+                        $('.email_input_re_3').css("display", "inline-block");
+                        warnMsg.css("display", "none");
+                    }
+
+                }
+
+            })
+        })
+
+        // 인증번호 비교
+        $("#chk_nm").on("propertychange change keyup paste input", function () { // 인증번호 입력후 다른곳 클릭하면
+            let inputcode = $("#chk_nm").val(); // 입력한 인증번호
+
+            if (inputcode == code) {
+                $('.email_input_re_1').css("display", "inline-block");
+                $('.email_input_re_2').css("display", "none");
+                $(".email_form_check").css("display", "none");
+                $("#email_input").attr("readonly", true);
+                $("#mail_chk").attr("disabled", true);
+                emailnumCheck = true;
+            } else {
+                $('.email_input_re_2').css("display", "inline-block");
+                $('.email_input_re_1').css("display", "none");
+                $(".email_form_check").css("display", "none");
+                emailnumCheck = false;
+
+            }
+        })
+        //닉네임 중복검사
+        $('#nm_chk').on("click", function () { // 버튼클릭 시
+            $('.nm_input_re_3').css('display', 'none');
+            let user_Nm = $('#nm_input').val();
+            let data = {user_Nm: user_Nm}
+            let warnMsg = $(".nm_form_check"); // 닉네임 경고글
+            $(".final_name_ck").css("display", "none");
+
+            if (nmFormCheck(user_Nm)) {
+
+            } else {
+                warnMsg.html("2 ~ 10자의 영어, 숫자, 한글만 사용 가능합니다.");
+                warnMsg.css("color", "red");
+                warnMsg.css("display", "inline-block");
+                $('.nm_input_re_1').css("display", "none");
+                $('.nm_input_re_2').css("display", "none");
+                $("#nm_input").val(null);
+                return false;
+            }
+
+            $.ajax({
+                type: "post",
+                url: "/regist/nmChk",
+                data: data,
+                success: function (result) {
+                    if (result != 'fail') {
+                        $('.nm_input_re_1').css("display", "inline-block");
+                        $('.nm_input_re_2').css("display", "none");
+                        warnMsg.css("display", "none");
+                        nmCheck = true;
+                    } else {
+                        $('.nm_input_re_2').css("display", "inline-block");
+                        $('.nm_input_re_1').css("display", "none");
+                        warnMsg.css("display", "none");
+                        $('#nm_input').val(null);
+                        nmCheck = false;
+                    }
+                }
+            })
+
+        });// function 종료
+
+        $('#age_input').blur(function () { // 비밀번호 유형 검사
+            let warnMsg = $(".age_form_check"); // 비밀번호 경고글
+            let user_Age = $("#age_input").val();
+
+            if (ageFormCheck(user_Age)) {
+                warnMsg.css("display", "none");
+            } else {
+                warnMsg.html("숫자만 입력해 주세요");
+                warnMsg.css("color", "red");
+                warnMsg.css("display", "inline-block");
+                $("#age_input").val(null);
+                return false;
+            }
+        })
+
+        $('#regist_com').on("click", function () { // 회원가입 버튼
+            var id = $('#id_input2').val();                 // id 입력란
+            var pw = $('#pw_input').val();                // 비밀번호 입력란
+            var pwck = $('#pw_chk').val();            // 비밀번호 확인 입력란
+            var name = $('#nm_input').val();            // 이름 입력란
+            var mail = $('#email_input').val();            // 이메일 입력란
+            var addr = $('#addr').val();        // 상세 주소 입력란
+            var age = $('#age_input').val();
+
+
+            if (id == "") {
+                $('.final_id_ck').css('display', 'block');
+                idCheck = false;
+            } else {
+                $('.final_id_ck').css('display', 'none');
+                idCheck = true;
+            }
+
+            if (idckCheck == false) {
+                $('.id_input_re_3').css('display', 'block');
+            } else {
+                $('.id_input_re_3').css('display', 'none');
+            }
+
+            if (pw == "") {
+                $('.final_pw_ck').css('display', 'block');
+                pwCheck = false;
+            } else {
+                $('.final_pw_ck').css('display', 'none');
+                pwCheck = true;
+            }
+
+            if (pwck == "") {
+                $('.final_pwck_ck').css('display', 'block');
+                pwckCheck = false;
+            } else {
+                $('.final_pwck_ck').css('display', 'none');
+                pwckCheck = true;
+            }
+
+            if (name == "") {
+                $('.final_name_ck').css('display', 'block');
+                nmCheck = false;
+            } else {
+                $('.final_name_ck').css('display', 'none');
+                nmCheck = true;
+            }
+
+            if (nmCheck == false) {
+                $('.nm_input_re_3').css('display', 'block');
+            } else {
+                $('.nm_input_re_3').css('display', 'none');
+            }
+
+            if (mail == "") {
+                $('.final_mail_ck').css('display', 'block');
+                emailCheck = false;
+            } else {
+                $('.final_mail_ck').css('display', 'none');
+                emailCheck = true;
+            }
+
+            if (emailCheck == false) {
+                $('.email_input_re_4').css('display', 'block');
+            } else {
+                $('.email_input_re_4').css('display', 'none');
+            }
+
+            if (addr == "") {
+                $('.final_addr_ck').css('display', 'block');
+                addressCheck = false;
+            } else {
+                $('.final_addr_ck').css('display', 'none');
+                addressCheck = true;
+            }
+
+            if ($("#terms").prop("checked") != true) {
+                $('.final_terms_ck').css('display', 'block');
+                termsCheck = false;
+            } else {
+                $('.final_terms_ck').css('display', 'none');
+                termsCheck = true;
+            }
+
+            if (idCheck && idckCheck && pwCheck && pwckCheck && pwckcorCheck && nmCheck && emailCheck && emailnumCheck && addressCheck && termsCheck) {
+                $("#regist_join").attr("action", "/regist/join");
+                $("#regist_join").submit();
+
+            }
+
+            return false;
+        })
+
+        function mailFormCheck(email) {
+            var form = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i;
+            return form.test(email);
         }
 
-        return false;
-	})
-	
-	function mailFormCheck(email){
-		var form = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i;
-		return form.test(email);
-	}
-	
-	function pwFormCheck(pw){
-		var form = /^(?=.*[a-zA-z])(?=.*[0-9])(?=.*[$`~!@$!%*#^?&\\(\\)\-_=+]).{8,16}$/;
-		return form.test(pw);
-	}
-	
-	function idFormCheck(id){
-		var form = /^(?=.*[a-zA-Z])[-a-zA-Z0-9_.]{5,20}$/;
-		return form.test(id);
-	}
-	
-	function nmFormCheck(nm){
-		var form = /^(?=.*[a-z0-9가-힣])[a-z0-9가-힣]{2,10}$/;
-		return form.test(nm);
-	}
-	
-	function ageFormCheck(age){
-		var form = /^([0-9]){2,3}$/;
-		return form.test(age);
-	}
-	
-})
+        function pwFormCheck(pw) {
+            var form = /^(?=.*[a-zA-z])(?=.*[0-9])(?=.*[$`~!@$!%*#^?&\\(\\)\-_=+]).{8,16}$/;
+            return form.test(pw);
+        }
 
-$("#modal").click(function(){
-	$(".regist-form").fadeIn(1000);
-});
+        function idFormCheck(id) {
+            var form = /^(?=.*[a-zA-Z])[-a-zA-Z0-9_.]{5,20}$/;
+            return form.test(id);
+        }
 
-	</script>
+        function nmFormCheck(nm) {
+            var form = /^(?=.*[a-z0-9가-힣])[a-z0-9가-힣]{2,10}$/;
+            return form.test(nm);
+        }
+
+        function ageFormCheck(age) {
+            var form = /^([0-9]){2,3}$/;
+            return form.test(age);
+        }
+
+    })
+
+    $("#modal").click(function () {
+        $(".regist-form").fadeIn(1000);
+    });
+
+</script>
 </body>
 </html>
